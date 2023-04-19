@@ -42,9 +42,8 @@ Runtime &#x4F1A;&#x5728;&#x7A0B;&#x5E8F;&#x542F;&#x52A8;&#x7684;&#x65F6;&#x5019;
 </ul>
 </li>
 </ol>
-<h2 id="&#x4F8B;&#x5B50;"><a href="#&#x4F8B;&#x5B50;"></a>&#x4F8B;&#x5B50;</h2>
-<p><a href="https://github.com/wizardpisces/dispatch-logic">go practice</a></p>
 <h2 id="Reference"><a href="#Reference"></a>Reference</h2>
+<p><a href="https://github.com/wizardpisces/dispatch-logic">go practice</a></p>
 <ul>
 <li>https://golangbot.com/goroutines/</li>
 <li>https://rakyll.org/scheduler/</li>
@@ -56,4 +55,4 @@ Runtime &#x4F1A;&#x5728;&#x7A0B;&#x5E8F;&#x542F;&#x52A8;&#x7684;&#x65F6;&#x5019;
 <li>https://golangbot.com/structs-instead-of-classes/</li>
 <li>https://zhuanlan.zhihu.com/p/80853548</li>
 </ul>
-`,e=[{level:1,title:"Goroutine",children:[{level:2,title:"Goroutine vs threads",children:[{level:3,title:"\u5185\u5B58\u5360\u7528",children:[]},{level:3,title:"\u521B\u5EFA\u548C\u9500\u6BC0",children:[]},{level:3,title:"\u5207\u6362",children:[]}]},{level:2,title:"scheduler (M:N\u6A21\u578B)",children:[{level:3,title:"\u4EC0\u4E48\u662Fscheduler\uFF1F",children:[]},{level:3,title:"scheduler\u65F6\u673A",children:[]}]},{level:2,title:"\u4F8B\u5B50",children:[]},{level:2,title:"Reference",children:[]}]}];export{x as attributes,F as html,e as nestedHeaders};
+`,e=[{level:1,title:"Goroutine",children:[{level:2,title:"Goroutine vs threads",children:[{level:3,title:"\u5185\u5B58\u5360\u7528",children:[]},{level:3,title:"\u521B\u5EFA\u548C\u9500\u6BC0",children:[]},{level:3,title:"\u5207\u6362",children:[]}]},{level:2,title:"scheduler (M:N\u6A21\u578B)",children:[{level:3,title:"\u4EC0\u4E48\u662Fscheduler\uFF1F",children:[]},{level:3,title:"scheduler\u65F6\u673A",children:[]}]},{level:2,title:"Reference",children:[]}]}];export{x as attributes,F as html,e as nestedHeaders};
