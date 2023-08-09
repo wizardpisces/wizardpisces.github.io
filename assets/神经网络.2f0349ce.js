@@ -20,28 +20,6 @@ const x={},F=`<h1 id="&#x795E;&#x7ECF;&#x7F51;&#x7EDC;"><a href="#&#x795E;&#x7EC
 <li><strong>&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x8BEF;&#x5DEE;</strong>&#xFF1A;&#x4ECE;&#x8F93;&#x51FA;&#x5C42;&#x5F00;&#x59CB;&#xFF0C;&#x9010;&#x5C42;&#x8BA1;&#x7B97;&#x635F;&#x5931;&#x51FD;&#x6570;&#x5BF9;&#x6BCF;&#x4E2A;&#x795E;&#x7ECF;&#x5143;&#x7684;&#x8F93;&#x51FA;&#x548C;&#x8F93;&#x5165;&#x7684;&#x504F;&#x5BFC;&#x6570;&#xFF0C;&#x5373;&#x8BEF;&#x5DEE;&#x4FE1;&#x53F7;&#x3002;&#x8FD9;&#x4E00;&#x6B65;&#x5229;&#x7528;&#x4E86;&#x5BFC;&#x6570;&#x94FE;&#x5F0F;&#x6CD5;&#x5219;&#xFF0C;&#x5373;&#x5982;&#x679C;Z = g(Y)&#x800C;Y = f(X)&#xFF0C;&#x90A3;&#x4E48;&#x2202;Z/&#x2202;X = (&#x2202;Z/&#x2202;Y)&#xB7;(&#x2202;Y/&#x2202;X)&#x3002;</li>
 <li><strong>&#x66F4;&#x65B0;&#x53C2;&#x6570;</strong>&#xFF1A;&#x6839;&#x636E;&#x635F;&#x5931;&#x51FD;&#x6570;&#x5BF9;&#x6BCF;&#x4E2A;&#x795E;&#x7ECF;&#x5143;&#x7684;&#x8F93;&#x5165;&#x7684;&#x504F;&#x5BFC;&#x6570;&#xFF0C;&#x5373;&#x8BEF;&#x5DEE;&#x4FE1;&#x53F7;&#x548C;&#x6FC0;&#x6D3B;&#x51FD;&#x6570;&#x7684;&#x5BFC;&#x6570;&#xFF0C;&#x8BA1;&#x7B97;&#x635F;&#x5931;&#x51FD;&#x6570;&#x5BF9;&#x6BCF;&#x4E2A;&#x6743;&#x91CD;&#x548C;&#x504F;&#x7F6E;&#x7684;&#x504F;&#x5BFC;&#x6570;&#xFF0C;&#x5373;&#x68AF;&#x5EA6;&#x3002;&#x7136;&#x540E;&#x6839;&#x636E;&#x68AF;&#x5EA6;&#x548C;&#x5B66;&#x4E60;&#x7387;&#xFF0C;&#x66F4;&#x65B0;&#x6BCF;&#x4E2A;&#x6743;&#x91CD;&#x548C;&#x504F;&#x7F6E;&#x7684;&#x503C;&#xFF0C;&#x4F7F;&#x635F;&#x5931;&#x51FD;&#x6570;&#x51CF;&#x5C0F;&#x3002;</li>
 </ol>
-<h2 id="TODO &#x6982;&#x5FF5;"><a href="#TODO &#x6982;&#x5FF5;"></a>TODO &#x6982;&#x5FF5;</h2>
-<ul>
-<li>[x] &#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x548C;&#x94FE;&#x5F0F;&#x6CD5;&#x5219;&#xFF1F;&#x524D;&#x5411;&#x4F20;&#x64AD;&#x8DDF;&#x53CD;&#x5411;&#x4F20;&#x64AD;&#xFF1F;RNN &#x4F1A;&#x6D89;&#x53CA;&#x5230;&#x68AF;&#x5EA6;&#x6D88;&#x5931;&#x8DDF;&#x68AF;&#x5EA6;&#x7206;&#x70B8;&#xFF1F;&#x6FC0;&#x6D3B;&#x51FD;&#x6570; sigmoid tanH&#xFF0C;LSTM &#x6A21;&#x578B;&#x80FD;&#x89E3;&#x51B3;&#x68AF;&#x5EA6;&#x6D88;&#x5931;&#x8DDF;&#x7206;&#x70B8;&#x95EE;&#x9898;</li>
-<li>[x] &#x611F;&#x77E5;&#x673A;&#x5B66;&#x4E60;&#x7B97;&#x6CD5;&#xFF1A;&#x611F;&#x77E5;&#x673A;&#x5B66;&#x4E60;&#x3001;&#x6700;&#x5C0F;&#x4E8C;&#x4E58;&#x6CD5;&#x548C;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x6CD5;</li>
-<li>[x] &#x4E3A;&#x4EC0;&#x4E48;&#x8BF4;&#x611F;&#x77E5;&#x673A;&#x4E3B;&#x8981;&#x7684;&#x672C;&#x8D28;&#x7F3A;&#x9677;&#x662F;&#x5B83;&#x4E0D;&#x80FD;&#x5904;&#x7406;&#x7EBF;&#x6027;&#x4E0D;&#x53EF;&#x5206;&#x95EE;&#x9898;</li>
-<li>[] &#x65E0;&#x68AF;&#x5EA6;&#x67B6;&#x6784;&#xFF1F;</li>
-<li>[] &#x591A;&#x9879;&#x7EBF;&#x6027;&#x5224;&#x522B;&#x5206;&#x6790;&#xFF0C;&#x6734;&#x7D20;&#x8D1D;&#x53F6;&#x65AF;&#x5206;&#x7C7B;&#x5668;&#x548C;&#x4EBA;&#x5DE5;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;</li>
-<li>[] &#x4FE1;&#x606F;&#x71B5;&#x8868;&#x8FBE;&#x5F0F;</li>
-<li>[] &#x6734;&#x7D20;&#x8D1D;&#x53F6;&#x65AF;&#x5206;&#x7C7B;&#x5668;&#x548C;&#x4EBA;&#x5DE5;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;</li>
-<li>[] NLP &#x7B97;&#x6CD5;</li>
-<li>[] NLP&#x56DB;&#x5927;&#x4EFB;&#x52A1;&#x7C7B;&#x578B;&#xFF1A;&#x5206;&#x7C7B;&#x3001;&#x5E8F;&#x5217;&#x6807;&#x6CE8;&#x3001;&#x6587;&#x672C;&#x5339;&#x914D;&#x3001;&#x6587;&#x672C;&#x751F;&#x6210;&#xFF0C;&#x90FD;&#x9700;&#x8981;&#x5B8C;&#x6574;&#x5B9E;&#x73B0;&#x4E00;&#x904D;&#x3002;</li>
-<li>[] &#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x6CD5;&#x7684;&#x4F18;&#x5316;</li>
-<li>[] GAN</li>
-<li>[] ResNet</li>
-<li>[] &#x62C9;&#x683C;&#x6717;&#x65E5;&#x51FD;&#x6570; &#x8DDF; &#x4E58;&#x6CD5;</li>
-</ul>
-<p>&#x635F;&#x5931;&#x51FD;&#x6570;</p>
-<ul>
-<li>[x] &#x6700;&#x5C0F;&#x4E8C;&#x4E58;&#x6CD5;</li>
-<li>[x] &#x6781;&#x5927;&#x4F3C;&#x7136;&#x4F30;&#x8BA1;</li>
-<li>[x] &#x4EA4;&#x53C9;&#x71B5;&#xFF1A;&#x71B5;&#x662F;&#x670D;&#x4ECE;&#x67D0;&#x4E00;&#x7279;&#x5B9A;&#x6982;&#x7387;&#x5206;&#x5E03;&#x4E8B;&#x4EF6;&#x7684;&#x7406;&#x8BBA;&#x6700;&#x5C0F;&#x5E73;&#x5747;&#x7F16;&#x7801;&#x957F;&#x5EA6;</li>
-</ul>
 <h2 id="Reference"><a href="#Reference"></a>Reference</h2>
 <ul>
 <li><a href="https://www.cnblogs.com/maybe2030/p/5597716.html">&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x57FA;&#x7840;</a></li>
@@ -54,4 +32,4 @@ const x={},F=`<h1 id="&#x795E;&#x7ECF;&#x7F51;&#x7EDC;"><a href="#&#x795E;&#x7EC
 <li><a href="https://www.matongxue.com/madocs/447/">&#x6781;&#x5927;&#x4F3C;&#x7136;&#x4F30;&#x8BA1;</a></li>
 <li><a href="https://zhuanlan.zhihu.com/p/149186719">&#x4EA4;&#x53C9;&#x71B5;</a></li>
 </ul>
-`,E=[{level:1,title:"\u795E\u7ECF\u7F51\u7EDC",children:[{level:2,title:"\u5E38\u89C1\u795E\u7ECF\u7F51\u7EDC",children:[]},{level:2,title:"\u6FC0\u6D3B\u51FD\u6570",children:[{level:3,title:"SoftMax \u51FD\u6570",children:[]}]},{level:2,title:"\u53CD\u5411\u4F20\u64AD\u4E0E\u8C03\u53C2",children:[]},{level:2,title:"TODO \u6982\u5FF5",children:[]},{level:2,title:"Reference",children:[]}]}];export{x as attributes,F as html,E as nestedHeaders};
+`,E=[{level:1,title:"\u795E\u7ECF\u7F51\u7EDC",children:[{level:2,title:"\u5E38\u89C1\u795E\u7ECF\u7F51\u7EDC",children:[]},{level:2,title:"\u6FC0\u6D3B\u51FD\u6570",children:[{level:3,title:"SoftMax \u51FD\u6570",children:[]}]},{level:2,title:"\u53CD\u5411\u4F20\u64AD\u4E0E\u8C03\u53C2",children:[]},{level:2,title:"Reference",children:[]}]}];export{x as attributes,F as html,E as nestedHeaders};

@@ -1,45 +1,30 @@
-const x={},F=`<h2 id="AI &#x524D;&#x540E;&#x6570;&#x636E;&#x7684;&#x8868;&#x73B0;&#x5F62;&#x5F0F;&#x7684;&#x4E00;&#x79CD;&#x731C;&#x60F3;"><a href="#AI &#x524D;&#x540E;&#x6570;&#x636E;&#x7684;&#x8868;&#x73B0;&#x5F62;&#x5F0F;&#x7684;&#x4E00;&#x79CD;&#x731C;&#x60F3;"></a>AI &#x524D;&#x540E;&#x6570;&#x636E;&#x7684;&#x8868;&#x73B0;&#x5F62;&#x5F0F;&#x7684;&#x4E00;&#x79CD;&#x731C;&#x60F3;</h2>
-<p>AI &#x524D;&#xFF1A;&#x8F93;&#x5165;&#xFF08;&#x5B57;&#x7B26;&#x6570;&#x636E;&#x5199;&#x5165;&#xFF09; -&gt; &#x5B58;&#x50A8;&#xFF08;MySQL &#x7B49;&#x4E8C;&#x7EF4;&#x8868;&#x5B58;&#x50A8;&#x5B57;&#x6BB5;&#xFF08;&#x5B57;&#x7B26;&#x4E32;&#xFF09;&#xFF09;-&gt; &#x8F93;&#x51FA;&#xFF08;1&#x7EF4;&#x6216;&#x8005;&#x51E0;&#x4E2A;&#x7EF4;&#x5EA6;&#x7684;&#x7D22;&#x5F15;&#x5339;&#x914D;&#x67E5;&#x8BE2;&#xFF09;</p>
-<p>AI &#x540E;&#xFF1A;&#x8F93;&#x5165;&#xFF08;&#x56FE;&#x7247;&#x7B49; &#x8F6C;&#x4E3A;&#x5411;&#x91CF;&#x6570;&#x7EC4;&#xFF09; -&gt; &#x5B58;&#x50A8;&#xFF08;&#x5411;&#x91CF;&#xFF08;&#x4E00;&#x7EF4;&#x6570;&#x7EC4;&#xFF09;&#x6570;&#x636E;&#x5E93;&#xFF09;-&gt; &#x8F93;&#x51FA;&#xFF08;N&#x7EF4;&#x7D22;&#x5F15;&#xFF0C;&#x5BFB;&#x627E;&#x76F8;&#x4F3C;&#x5EA6;&#x6BD4;&#x8F83;&#x9AD8;&#x7684;&#x7ED3;&#x679C;&#xFF09;</p>
-<h2 id="gpt &#x53EF;&#x80FD;&#x7684;&#x7814;&#x7A76;&#x65B9;&#x5411;"><a href="#gpt &#x53EF;&#x80FD;&#x7684;&#x7814;&#x7A76;&#x65B9;&#x5411;"></a>gpt &#x53EF;&#x80FD;&#x7684;&#x7814;&#x7A76;&#x65B9;&#x5411;</h2>
+const x={},F=`<h1 id="&#x5C1D;&#x8BD5;&#x7406;&#x89E3; ONNX &#xFF08;Open Neural Network Exchange&#xFF09;"><a href="#&#x5C1D;&#x8BD5;&#x7406;&#x89E3; ONNX &#xFF08;Open Neural Network Exchange&#xFF09;"></a>&#x5C1D;&#x8BD5;&#x7406;&#x89E3; ONNX &#xFF08;Open Neural Network Exchange&#xFF09;</h1>
 <ul>
-<li>&#x5EFA;&#x8BBE;&#x9AD8;&#x96BE;&#x5EA6;&#x7684;&#x7EFC;&#x5408;&#x4EFB;&#x52A1;&#x8BC4;&#x6D4B;&#x6570;&#x636E;&#x96C6;&#xFF08;LLM &#x7684;&#x6D4B;&#x8BD5;&#x7528;&#x4F8B;&#xFF0C;&#x8D8A;&#x5B8C;&#x5907; -&gt; &#x8D8A;&#x5F3A;&#x5927;&#xFF09;</li>
-<li>&#x9AD8;&#x8D28;&#x91CF;&#x6570;&#x636E;&#x5DE5;&#x7A0B;&#xFF08;&#x5BC6;&#x96C6;+&#x591A;&#x6837;&#x6027;&#xFF09;&#xFF1A;LLM &#x8FDB;&#x5316; = &#x66F4;&#x591A;&#x9AD8;&#x8D28;&#x91CF;&#x6570;&#x636E;
+<li>&#x662F;&#x4EC0;&#x4E48;&#xFF1F;ONNX = &#xFF08;&#x6A21;&#x578B;&#x672C;&#x8EAB; + &#x6A21;&#x578B;&#x8BAD;&#x7EC3;&#x597D;&#x7684;&#x6743;&#x91CD;&#x8DDF;&#x504F;&#x7F6E;&#xFF09;&#x7684;&#x4E00;&#x79CD;&#x66F4;&#x52A0;&#x62BD;&#x8C61;&#x7684;&#x8868;&#x8FBE;</li>
+<li>&#x5982;&#x4F55;&#x8868;&#x793A;&#xFF1F;&#x4F7F;&#x7528;&#x9884;&#x5B9A;&#x4E49;&#x7684; operator&#xFF08;&#x63CF;&#x8FF0;&#x8F93;&#x5165;&#x4E0E;&#x8F93;&#x51FA;&#x7684;&#x5173;&#x7CFB;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;add&#x7B97;&#x5B50;=  inputA + inputB = OutputC&#xFF0C;&#x53EF;&#x62D3;&#x5C55;&#xFF09;&#x6765;&#x63CF;&#x8FF0;&#x6A21;&#x578B;&#xFF0C;&#x7528;&#x5411;&#x91CF;&#x63CF;&#x8FF0;&#x8BAD;&#x7EC3;&#x597D;&#x7684;&#x53C2;&#x6570;</li>
+<li>&#x4F5C;&#x7528;&#xFF1F;&#x5B9E;&#x73B0;&#x4E0D;&#x540C;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x6846;&#x67B6;&#x548C;&#x5E73;&#x53F0;&#x4E4B;&#x95F4;&#x7684;&#x6A21;&#x578B;&#x4E92;&#x64CD;&#x4F5C;&#x6027;</li>
+</ul>
+<h1 id="Transformer &#x6A21;&#x578B;&#x7684;&#x81EA;&#x6CE8;&#x610F;&#x529B;&#x673A;&#x5236; - &#x5C1D;&#x8BD5;&#x7406;&#x89E3;"><a href="#Transformer &#x6A21;&#x578B;&#x7684;&#x81EA;&#x6CE8;&#x610F;&#x529B;&#x673A;&#x5236; - &#x5C1D;&#x8BD5;&#x7406;&#x89E3;"></a>Transformer &#x6A21;&#x578B;&#x7684;&#x81EA;&#x6CE8;&#x610F;&#x529B;&#x673A;&#x5236; - &#x5C1D;&#x8BD5;&#x7406;&#x89E3;</h1>
+<p>&#x8F93;&#x5165;&#x4E32; -&gt; &#x5206;&#x8BCD; -&gt; &#x67E5;&#x8BE2;&#x5411;&#x91CF;&#xFF08;&#x56FA;&#x5B9A;&#xFF09; -&gt; &#x8BA1;&#x7B97;&#x8BCD;&#x8BED;&#x95F4; - &#x76F8;&#x4F3C;&#x5EA6;&#x8868; -&gt; &#x66F4;&#x65B0;&#x5411;&#x91CF; -&gt; &#x52A0;&#x5165;&#x4F4D;&#x7F6E;&#x4FE1;&#x606F;&#xFF0C;&#x66F4;&#x65B0;&#x5411;&#x91CF;</p>
+<h1 id="&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x4E2D;&#x7684; Epoch &#x548C; Batch"><a href="#&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x4E2D;&#x7684; Epoch &#x548C; Batch"></a>&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x4E2D;&#x7684; Epoch &#x548C; Batch</h1>
+<ol>
+<li>Epoch &#x662F;&#x4EC0;&#x4E48;&#xFF1F;
+&#x4E00;&#x6B21; Epoch = &#x8BA9;&#x6240;&#x6709;&#x6570;&#x636E;&#x901A;&#x8FC7;&#x6A21;&#x578B;&#x6B63;&#x5411;+&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x4E00;&#x6B21; = &#x4E00;&#x4E2A;&#x5B8C;&#x6574;&#x7684;&#x5B66;&#x4E60;&#x5468;&#x671F;</li>
+<li>Epoch &#x8BBE;&#x7F6E;&#x591A;&#x5C11;&#x6B21;&#x5408;&#x9002;&#xFF1F;
+&#x65E0;&#x5B9A;&#x8BBA;&#xFF1A;
+&#x6B21;&#x6570;&#x5C11;&#x4F1A;&#x5BFC;&#x81F4;&#x6B20;&#x62DF;&#x5408;&#xFF1B;
+&#x6B21;&#x6570;&#x591A;&#x4F1A;&#x5BFC;&#x81F4;&#x8FC7;&#x62DF;&#x5408;&#xFF1B;</li>
+<li>&#x4EC0;&#x4E48;&#x662F; Batch&#xFF1F;
+Batch Size = &#x4E00;&#x6B21;&#x8BAD;&#x7EC3;&#x7684;&#x6837;&#x672C;&#x6570;
+&#x6BCF;&#x4E00;&#x6B21;&#x53C2;&#x6570;&#x7684;&#x66F4;&#x65B0;&#x6240;&#x9700;&#x8981;&#x635F;&#x5931;&#x51FD;&#x6570;&#x5E76;&#x4E0D;&#x662F;&#x7531;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x83B7;&#x5F97;&#x7684;&#xFF0C;&#x800C;&#x662F;&#x7531;&#x4E00;&#x6279;&#x6570;&#x636E;&#x52A0;&#x6743;&#x5F97;&#x5230;&#x7684;</li>
+<li>Batch &#x7684;&#x4F5C;&#x7528;&#xFF1F;</li>
+</ol>
 <ul>
-<li>&#x6570;&#x636E;&#x4F8B;&#x5B50;
-<ul>
-<li>&#x5BC6;&#x5EA6;&#x6781;&#x9AD8;&#x7684;&#x9AD8;&#x8D28;&#x91CF;&#x6570;&#x636E;&#xFF1A;wiki</li>
-<li>&#x9AD8;&#x8D28;&#x91CF;&#x95EE;&#x7B54;&#xFF1A;quora&#xFF0C;&#x77E5;&#x4E4E;</li>
-<li>&#x9AD8;&#x8D28;&#x91CF;&#x56FE;&#x7247;&#xFF1A;</li>
+<li>&#x6548;&#x7387;&#xFF1A;&#x5229;&#x7528;&#x77E9;&#x9635;&#x8BA1;&#x7B97;&#x52A0;&#x901F;&#xFF08;&#x76F8;&#x5BF9;&#x4E8E;&#x5355;&#x4E2A;&#x53BB;&#x8BAD;&#x7EC3;&#xFF09;</li>
+<li>&#x7A33;&#x5B9A;&#x6027;&#xFF1A;&#x5E73;&#x5747;&#x6BCF;&#x4E2A;&#x6570;&#x636E;&#x6837;&#x672C;&#x7684;&#x8D21;&#x732E;&#xFF0C;&#x51CF;&#x5C11;&#x68AF;&#x5EA6;&#x7684;&#x65B9;&#x5DEE;</li>
+<li>&#x591A;&#x5927;&#x5408;&#x9002;&#xFF1A;&#x770B;&#x60C5;&#x51B5;&#xFF0C;&#x592A;&#x5C0F;&#x4F1A;&#x5BFC;&#x81F4;&#x8BAD;&#x7EC3;&#x592A;&#x4E45;&#xFF1B;&#x592A;&#x5927;&#x4F1A;&#x5BFC;&#x81F4;&#x5185;&#x5B58;&#x53D7;&#x4E0D;&#x4E86;</li>
 </ul>
-</li>
-<li>&#x601D;&#x8003;
-<ul>
-<li>&#x9AD8;&#x8D28;&#x91CF;&#x6570;&#x636E;&#x6D88;&#x8017;&#x5B8C;&#x540E; gpt &#x5982;&#x4F55;&#x8FDB;&#x5316;&#xFF1F;</li>
-<li>&#x80FD;&#x5426;&#x81EA;&#x5DF1;&#x521B;&#x9020;&#x77E5;&#x8BC6;&#x81EA;&#x5DF1;&#x6D88;&#x8D39;&#xFF08;&#x7C7B;&#x4F3C; alpha-go &#x81EA;&#x6211;&#x5BF9;&#x5F08;&#x7684;&#x8FDB;&#x5316;&#xFF09;&#xFF1F;</li>
-<li>&#x5982;&#x679C; gpt &#x6210;&#x957F;&#x7684;&#x8D44;&#x6599;&#x6765;&#x6E90;&#x4E8E;&#x4EBA;&#x7C7B;&#xFF0C;&#x90A3;&#x80FD;&#x5426;&#x7A81;&#x7834;&#x4EBA;&#x7C7B;&#x77E5;&#x8BC6;&#x7684;&#x8FB9;&#x754C;&#xFF1F;</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>&#x63A2;&#x7D22; LLM &#x6A21;&#x578B;&#x7684;&#x89C4;&#x6A21;&#x5929;&#x82B1;&#x677F;&#xFF1A;&#x5927;&#x6A21;&#x578B;&#x5927;&#x6570;&#x636E;&#xFF0C;&#x80FD;&#x53C2;&#x4E0E;&#x7684;&#x73A9;&#x5BB6;&#x4E0D;&#x591A;
-<ul>
-<li>&#x601D;&#x8003;&#xFF1A;&#x662F;&#x5426;&#x4F1A;&#x51FA;&#x73B0;&#x5171;&#x5EFA;&#x8D85;&#x5927;&#x6A21;&#x578B;</li>
-</ul>
-</li>
-<li>&#x589E;&#x5F3A; LLM &#x7684;&#x590D;&#x6742;&#x63A8;&#x7406;&#x80FD;&#x529B;</li>
-<li>LLM &#x7EB3;&#x5165; NLP&#x4E4B;&#x5916;&#x66F4;&#x591A;&#x5176;&#x5B83;&#x7814;&#x7A76;&#x9886;&#x57DF;&#xFF1A;&#x591A;&#x6A21;&#x6001;&#xFF1F;
-<ul>
-<li>&#x5982;&#x4F55;&#x7A81;&#x7834;&#x7B26;&#x53F7;&#x9886;&#x57DF;&#xFF1F;&#x5982;&#x679C;&#x67D0;&#x4E2A;&#x9886;&#x57DF;&#x662F;&#x975E;&#x6210;&#x6587;&#x7684;&#xFF0C;&#x4E0D;&#x80FD;&#x7528;&#x7B26;&#x53F7;&#x8BB0;&#x5F55;&#x8868;&#x8FBE;&#xFF0C;&#x90A3;&#x4E48; GPT &#x662F;&#x5426;&#x5C31;&#x65E0;&#x80FD;&#x4E3A;&#x529B;&#x3002;&#x6BD4;&#x5982;&#xFF0C;&#x4EBA;&#x7C7B;&#x7684;&#x5F88;&#x591A;&#x5FC3;&#x7406;&#x6D3B;&#x52A8;&#x3001;&#x6F5C;&#x610F;&#x8BC6;&#x3001;&#x7075;&#x611F;&#x3001;&#x987F;&#x609F;&#x7B49;&#x7B49;&#xFF0C;GPT &#x5982;&#x4F55;&#x6A21;&#x62DF;&#x751F;&#x6210;&#x3002;</li>
-</ul>
-</li>
-<li>&#x66F4;&#x6613;&#x7528;&#x7684;&#x4EBA;&#x548C;LLM&#x7684;&#x4EA4;&#x4E92;&#x63A5;&#x53E3;&#xFF1A;&#x542C;&#x89C9;&#xFF1F;</li>
-<li>&#x8D85;&#x5927;LLM&#x6A21;&#x578B;Transformer&#x7684;&#x7A00;&#x758F;&#x5316;&#xFF1A;&#x76F8;&#x540C;&#x7B97;&#x529B;&#x4E0B;&#x63D0;&#x9AD8;&#x8BAD;&#x7EC3;&#x901F;&#x5EA6;</li>
-</ul>
-<p>&#x53C2;&#x8003;</p>
-<ul>
-<li><a href="https://zhuanlan.zhihu.com/p/597586623">&#x901A;&#x5411;AGI&#x4E4B;&#x8DEF;&#xFF1A;&#x5927;&#x578B;&#x8BED;&#x8A00;&#x6A21;&#x578B;&#xFF08;LLM&#xFF09;&#x6280;&#x672F;&#x7CBE;&#x8981;</a></li>
-</ul>
+<p>&#x53C2;&#x8003;&#xFF1A;<a href="https://towardsdatascience.com/epoch-vs-iterations-vs-batch-size-4dfb9c7ce9c9">epoch-vs-iterations-vs-batch-size</a></p>
 <h1 id="GPT &#x5C1D;&#x8BD5;"><a href="#GPT &#x5C1D;&#x8BD5;"></a>GPT &#x5C1D;&#x8BD5;</h1>
 <ol>
 <li>&#x4EE3;&#x7801;&#x5C1D;&#x8BD5;
@@ -602,4 +587,4 @@ s.push(<span class="hljs-number">3</span>)
 </ul>
 </li>
 </ul>
-`,n=[{level:2,title:"AI \u524D\u540E\u6570\u636E\u7684\u8868\u73B0\u5F62\u5F0F\u7684\u4E00\u79CD\u731C\u60F3",children:[]},{level:2,title:"gpt \u53EF\u80FD\u7684\u7814\u7A76\u65B9\u5411",children:[]},{level:1,title:"GPT \u5C1D\u8BD5",children:[]},{level:1,title:"\u5185\u5B58\u5BF9\u9F50",children:[]},{level:1,title:"\u7B26\u53F7\u8868 2023-3-6",children:[]},{level:1,title:"\u98CE\u63A7\u5F15\u64CE\u4F18\u5316 2023-3-2",children:[]},{level:1,title:"\u6269\u5BB9\u673A\u5236 2023-3-2",children:[]},{level:1,title:"AOP\uFF08\u9762\u5411\u5207\u9762\u7F16\u7A0B\uFF09 2023-3-1",children:[]},{level:1,title:"\u9003\u9038\u5206\u6790",children:[{level:2,title:"Reference",children:[]}]},{level:1,title:"\u6587\u7AE0\u7CBE\u8BFB\u4E4B\u8BBE\u8BA1\u539F\u5219/\u6A21\u5F0F",children:[{level:2,title:"\u8BBE\u8BA1\u539F\u5219\uFF1ASOLID\u539F\u5219",children:[]},{level:2,title:"\u8BBE\u8BA1\u6A21\u5F0F",children:[{level:3,title:"Creational Patterns",children:[]},{level:3,title:"Behavioral Patterns",children:[]},{level:3,title:"Structural Patterns",children:[]}]},{level:2,title:"\u8BBE\u8BA1\u539F\u5219 vs \u8BBE\u8BA1\u6A21\u5F0F",children:[]},{level:2,title:"Reference",children:[]}]},{level:1,title:"\u5173\u4E8E\u7EE7\u627F",children:[{level:3,title:"Reference",children:[]}]},{level:1,title:"\u5173\u4E8E\u9762\u5411\u5BF9\u8C61",children:[]},{level:1,title:"React\u72B6\u6001\u7BA1\u7406",children:[]},{level:1,title:"\u6587\u7AE0\u7CBE\u8BFB\u4E4B\u524D\u7AEF\u6846\u67B6\u8BBE\u8BA1",children:[{level:2,title:"\u7EC4\u4EF6\u7C7B\u578B",children:[]},{level:2,title:"\u72B6\u6001\u7BA1\u7406",children:[]},{level:2,title:"CSS\u65B9\u6848",children:[]},{level:2,title:"\u6784\u5EFA\u5DE5\u5177",children:[]},{level:2,title:"Reference",children:[]}]},{level:1,title:"CSS Animation,Transition \u539F\u7406",children:[{level:2,title:"\u603B\u7ED3",children:[]},{level:2,title:"Reference",children:[]}]},{level:1,title:"Vue\u8FD0\u884C\u65F6\u9519\u8BEF\u5904\u7406",children:[{level:2,title:"Reference",children:[]}]},{level:1,title:"\u63D2\u4EF6\u5BF9\u6BD4\uFF08Vue vs React\uFF09",children:[{level:2,title:"\u63D2\u4EF6",children:[{level:3,title:"\u63D2\u4EF6\u7684\u63D2\u4EF6\uFF08Vuex vs Redux\uFF09",children:[]},{level:3,title:"\u63D2\u4EF6\u7684\u63D2\u4EF6\u7684\u63D2\u4EF6",children:[]}]},{level:2,title:"\u603B\u7ED3",children:[]},{level:2,title:"Reference",children:[]}]},{level:1,title:"\u6A21\u62DFLRU\u7684\u6570\u636E\u7ED3\u6784\uFF08Set vs Array\uFF09",children:[]},{level:1,title:"ORM \u6A21\u5757\u7EC4\u6210",children:[]}];export{x as attributes,F as html,n as nestedHeaders};
+`,n=[{level:1,title:"\u5C1D\u8BD5\u7406\u89E3 ONNX \uFF08Open Neural Network Exchange\uFF09",children:[]},{level:1,title:"Transformer \u6A21\u578B\u7684\u81EA\u6CE8\u610F\u529B\u673A\u5236 - \u5C1D\u8BD5\u7406\u89E3",children:[]},{level:1,title:"\u6DF1\u5EA6\u5B66\u4E60\u4E2D\u7684 Epoch \u548C Batch",children:[]},{level:1,title:"GPT \u5C1D\u8BD5",children:[]},{level:1,title:"\u5185\u5B58\u5BF9\u9F50",children:[]},{level:1,title:"\u7B26\u53F7\u8868 2023-3-6",children:[]},{level:1,title:"\u98CE\u63A7\u5F15\u64CE\u4F18\u5316 2023-3-2",children:[]},{level:1,title:"\u6269\u5BB9\u673A\u5236 2023-3-2",children:[]},{level:1,title:"AOP\uFF08\u9762\u5411\u5207\u9762\u7F16\u7A0B\uFF09 2023-3-1",children:[]},{level:1,title:"\u9003\u9038\u5206\u6790",children:[{level:2,title:"Reference",children:[]}]},{level:1,title:"\u6587\u7AE0\u7CBE\u8BFB\u4E4B\u8BBE\u8BA1\u539F\u5219/\u6A21\u5F0F",children:[{level:2,title:"\u8BBE\u8BA1\u539F\u5219\uFF1ASOLID\u539F\u5219",children:[]},{level:2,title:"\u8BBE\u8BA1\u6A21\u5F0F",children:[{level:3,title:"Creational Patterns",children:[]},{level:3,title:"Behavioral Patterns",children:[]},{level:3,title:"Structural Patterns",children:[]}]},{level:2,title:"\u8BBE\u8BA1\u539F\u5219 vs \u8BBE\u8BA1\u6A21\u5F0F",children:[]},{level:2,title:"Reference",children:[]}]},{level:1,title:"\u5173\u4E8E\u7EE7\u627F",children:[{level:3,title:"Reference",children:[]}]},{level:1,title:"\u5173\u4E8E\u9762\u5411\u5BF9\u8C61",children:[]},{level:1,title:"React\u72B6\u6001\u7BA1\u7406",children:[]},{level:1,title:"\u6587\u7AE0\u7CBE\u8BFB\u4E4B\u524D\u7AEF\u6846\u67B6\u8BBE\u8BA1",children:[{level:2,title:"\u7EC4\u4EF6\u7C7B\u578B",children:[]},{level:2,title:"\u72B6\u6001\u7BA1\u7406",children:[]},{level:2,title:"CSS\u65B9\u6848",children:[]},{level:2,title:"\u6784\u5EFA\u5DE5\u5177",children:[]},{level:2,title:"Reference",children:[]}]},{level:1,title:"CSS Animation,Transition \u539F\u7406",children:[{level:2,title:"\u603B\u7ED3",children:[]},{level:2,title:"Reference",children:[]}]},{level:1,title:"Vue\u8FD0\u884C\u65F6\u9519\u8BEF\u5904\u7406",children:[{level:2,title:"Reference",children:[]}]},{level:1,title:"\u63D2\u4EF6\u5BF9\u6BD4\uFF08Vue vs React\uFF09",children:[{level:2,title:"\u63D2\u4EF6",children:[{level:3,title:"\u63D2\u4EF6\u7684\u63D2\u4EF6\uFF08Vuex vs Redux\uFF09",children:[]},{level:3,title:"\u63D2\u4EF6\u7684\u63D2\u4EF6\u7684\u63D2\u4EF6",children:[]}]},{level:2,title:"\u603B\u7ED3",children:[]},{level:2,title:"Reference",children:[]}]},{level:1,title:"\u6A21\u62DFLRU\u7684\u6570\u636E\u7ED3\u6784\uFF08Set vs Array\uFF09",children:[]},{level:1,title:"ORM \u6A21\u5757\u7EC4\u6210",children:[]}];export{x as attributes,F as html,n as nestedHeaders};

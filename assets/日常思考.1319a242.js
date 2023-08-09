@@ -1,4 +1,51 @@
-const x={},F=`<h1 id="&#x5173;&#x4E8E; chatGPT &#x5F15;&#x53D1;&#x7684;&#x4EBA;&#x5DE5;&#x667A;&#x80FD;&#x601D;&#x8003; 2023-3-1"><a href="#&#x5173;&#x4E8E; chatGPT &#x5F15;&#x53D1;&#x7684;&#x4EBA;&#x5DE5;&#x667A;&#x80FD;&#x601D;&#x8003; 2023-3-1"></a>&#x5173;&#x4E8E; chatGPT &#x5F15;&#x53D1;&#x7684;&#x4EBA;&#x5DE5;&#x667A;&#x80FD;&#x601D;&#x8003; 2023-3-1</h1>
+const x={},F=`<h2 id="AGI &#x7684;&#x4E00;&#x70B9;&#x7406;&#x89E3;"><a href="#AGI &#x7684;&#x4E00;&#x70B9;&#x7406;&#x89E3;"></a>AGI &#x7684;&#x4E00;&#x70B9;&#x7406;&#x89E3;</h2>
+<p>&#x673A;&#x5668;&#x5B66;&#x4E60;&#x8BAD;&#x7EC3;&#x4E86;&#x5F88;&#x591A;&#x6A21;&#x578B;&#xFF0C;&#x800C; LLM &#x53EA;&#x662F;&#x5176;&#x4E2D;&#x4E4B;&#x4E00;&#xFF1B;
+ChatGPT &#x4E4B;&#x6240;&#x4EE5;&#x8DDF; AGI &#x6700;&#x63A5;&#x8FD1;&#xFF0C;&#x662F;&#x56E0;&#x4E3A;&#x8BED;&#x8A00;&#x6A21;&#x578B;&#x7684;&#x901A;&#x7528;&#x6027;&#xFF1B;
+&#x5982;&#x679C;&#x80FD;&#x591F;&#x7406;&#x89E3;&#x81EA;&#x7136;&#x8BED;&#x8A00;&#xFF0C;&#x90A3;&#x5C31;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x6240;&#x6709;&#x6587;&#x5B57;&#x80FD;&#x591F;&#x63CF;&#x8FF0;&#x7684;&#x4EFB;&#x52A1;&#xFF1B;
+&#x5176;&#x4ED6; AI &#x4EFB;&#x52A1;&#xFF0C;&#x6BD4;&#x5982;&#x56FE;&#x7247;&#x8BC6;&#x522B;&#xFF0C;&#x5219;&#x53EA;&#x80FD;&#x505A;&#x5230;&#x56FE;&#x7247;&#x76F8;&#x4F3C;&#x5EA6;&#x80FD;&#x4EBA;&#x7269;&#x5904;&#x7406;&#xFF08;&#x63A8;&#x8350;&#xFF09;&#xFF0C;&#x65E0;&#x6CD5;&#x62D3;&#x5C55;&#x5230;&#x76F8;&#x5BF9;&#x901A;&#x7528;&#x7684;&#x4EFB;&#x52A1;&#xFF0C;&#x9664;&#x975E;&#x65E5;&#x5E38;&#x4EA4;&#x6D41;&#x80FD;&#x591F;&#x901A;&#x8FC7;&#x8868;&#x60C5;&#x5305;&#x5B8C;&#x6210;</p>
+<h2 id="AI &#x524D;&#x540E;&#x6570;&#x636E;&#x7684;&#x8868;&#x73B0;&#x5F62;&#x5F0F;&#x7684;&#x4E00;&#x79CD;&#x731C;&#x60F3;"><a href="#AI &#x524D;&#x540E;&#x6570;&#x636E;&#x7684;&#x8868;&#x73B0;&#x5F62;&#x5F0F;&#x7684;&#x4E00;&#x79CD;&#x731C;&#x60F3;"></a>AI &#x524D;&#x540E;&#x6570;&#x636E;&#x7684;&#x8868;&#x73B0;&#x5F62;&#x5F0F;&#x7684;&#x4E00;&#x79CD;&#x731C;&#x60F3;</h2>
+<p>AI &#x524D;&#xFF1A;&#x8F93;&#x5165;&#xFF08;&#x5B57;&#x7B26;&#x6570;&#x636E;&#x5199;&#x5165;&#xFF09; -&gt; &#x5B58;&#x50A8;&#xFF08;MySQL &#x7B49;&#x4E8C;&#x7EF4;&#x8868;&#x5B58;&#x50A8;&#x5B57;&#x6BB5;&#xFF08;&#x5B57;&#x7B26;&#x4E32;&#xFF09;&#xFF09;-&gt; &#x8F93;&#x51FA;&#xFF08;1&#x7EF4;&#x6216;&#x8005;&#x51E0;&#x4E2A;&#x7EF4;&#x5EA6;&#x7684;&#x7D22;&#x5F15;&#x5339;&#x914D;&#x67E5;&#x8BE2;&#xFF09;</p>
+<p>AI &#x540E;&#xFF1A;&#x8F93;&#x5165;&#xFF08;&#x56FE;&#x7247;&#x7B49; &#x8F6C;&#x4E3A;&#x5411;&#x91CF;&#x6570;&#x7EC4;&#xFF09; -&gt; &#x5B58;&#x50A8;&#xFF08;&#x5411;&#x91CF;&#xFF08;&#x4E00;&#x7EF4;&#x6570;&#x7EC4;&#xFF09;&#x6570;&#x636E;&#x5E93;&#xFF09;-&gt; &#x8F93;&#x51FA;&#xFF08;N&#x7EF4;&#x7D22;&#x5F15;&#xFF0C;&#x5BFB;&#x627E;&#x76F8;&#x4F3C;&#x5EA6;&#x6BD4;&#x8F83;&#x9AD8;&#x7684;&#x7ED3;&#x679C;&#xFF09;</p>
+<h2 id="gpt &#x53EF;&#x80FD;&#x7684;&#x7814;&#x7A76;&#x65B9;&#x5411;"><a href="#gpt &#x53EF;&#x80FD;&#x7684;&#x7814;&#x7A76;&#x65B9;&#x5411;"></a>gpt &#x53EF;&#x80FD;&#x7684;&#x7814;&#x7A76;&#x65B9;&#x5411;</h2>
+<ul>
+<li>&#x5EFA;&#x8BBE;&#x9AD8;&#x96BE;&#x5EA6;&#x7684;&#x7EFC;&#x5408;&#x4EFB;&#x52A1;&#x8BC4;&#x6D4B;&#x6570;&#x636E;&#x96C6;&#xFF08;LLM &#x7684;&#x6D4B;&#x8BD5;&#x7528;&#x4F8B;&#xFF0C;&#x8D8A;&#x5B8C;&#x5907; -&gt; &#x8D8A;&#x5F3A;&#x5927;&#xFF09;</li>
+<li>&#x9AD8;&#x8D28;&#x91CF;&#x6570;&#x636E;&#x5DE5;&#x7A0B;&#xFF08;&#x5BC6;&#x96C6;+&#x591A;&#x6837;&#x6027;&#xFF09;&#xFF1A;LLM &#x8FDB;&#x5316; = &#x66F4;&#x591A;&#x9AD8;&#x8D28;&#x91CF;&#x6570;&#x636E;
+<ul>
+<li>&#x6570;&#x636E;&#x4F8B;&#x5B50;
+<ul>
+<li>&#x5BC6;&#x5EA6;&#x6781;&#x9AD8;&#x7684;&#x9AD8;&#x8D28;&#x91CF;&#x6570;&#x636E;&#xFF1A;wiki</li>
+<li>&#x9AD8;&#x8D28;&#x91CF;&#x95EE;&#x7B54;&#xFF1A;quora&#xFF0C;&#x77E5;&#x4E4E;</li>
+<li>&#x9AD8;&#x8D28;&#x91CF;&#x56FE;&#x7247;&#xFF1A;</li>
+</ul>
+</li>
+<li>&#x601D;&#x8003;
+<ul>
+<li>&#x9AD8;&#x8D28;&#x91CF;&#x6570;&#x636E;&#x6D88;&#x8017;&#x5B8C;&#x540E; gpt &#x5982;&#x4F55;&#x8FDB;&#x5316;&#xFF1F;</li>
+<li>&#x80FD;&#x5426;&#x81EA;&#x5DF1;&#x521B;&#x9020;&#x77E5;&#x8BC6;&#x81EA;&#x5DF1;&#x6D88;&#x8D39;&#xFF08;&#x7C7B;&#x4F3C; alpha-go &#x81EA;&#x6211;&#x5BF9;&#x5F08;&#x7684;&#x8FDB;&#x5316;&#xFF09;&#xFF1F;</li>
+<li>&#x5982;&#x679C; gpt &#x6210;&#x957F;&#x7684;&#x8D44;&#x6599;&#x6765;&#x6E90;&#x4E8E;&#x4EBA;&#x7C7B;&#xFF0C;&#x90A3;&#x80FD;&#x5426;&#x7A81;&#x7834;&#x4EBA;&#x7C7B;&#x77E5;&#x8BC6;&#x7684;&#x8FB9;&#x754C;&#xFF1F;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>&#x63A2;&#x7D22; LLM &#x6A21;&#x578B;&#x7684;&#x89C4;&#x6A21;&#x5929;&#x82B1;&#x677F;&#xFF1A;&#x5927;&#x6A21;&#x578B;&#x5927;&#x6570;&#x636E;&#xFF0C;&#x80FD;&#x53C2;&#x4E0E;&#x7684;&#x73A9;&#x5BB6;&#x4E0D;&#x591A;
+<ul>
+<li>&#x601D;&#x8003;&#xFF1A;&#x662F;&#x5426;&#x4F1A;&#x51FA;&#x73B0;&#x5171;&#x5EFA;&#x8D85;&#x5927;&#x6A21;&#x578B;</li>
+</ul>
+</li>
+<li>&#x589E;&#x5F3A; LLM &#x7684;&#x590D;&#x6742;&#x63A8;&#x7406;&#x80FD;&#x529B;</li>
+<li>LLM &#x7EB3;&#x5165; NLP&#x4E4B;&#x5916;&#x66F4;&#x591A;&#x5176;&#x5B83;&#x7814;&#x7A76;&#x9886;&#x57DF;&#xFF1A;&#x591A;&#x6A21;&#x6001;&#xFF1F;
+<ul>
+<li>&#x5982;&#x4F55;&#x7A81;&#x7834;&#x7B26;&#x53F7;&#x9886;&#x57DF;&#xFF1F;&#x5982;&#x679C;&#x67D0;&#x4E2A;&#x9886;&#x57DF;&#x662F;&#x975E;&#x6210;&#x6587;&#x7684;&#xFF0C;&#x4E0D;&#x80FD;&#x7528;&#x7B26;&#x53F7;&#x8BB0;&#x5F55;&#x8868;&#x8FBE;&#xFF0C;&#x90A3;&#x4E48; GPT &#x662F;&#x5426;&#x5C31;&#x65E0;&#x80FD;&#x4E3A;&#x529B;&#x3002;&#x6BD4;&#x5982;&#xFF0C;&#x4EBA;&#x7C7B;&#x7684;&#x5F88;&#x591A;&#x5FC3;&#x7406;&#x6D3B;&#x52A8;&#x3001;&#x6F5C;&#x610F;&#x8BC6;&#x3001;&#x7075;&#x611F;&#x3001;&#x987F;&#x609F;&#x7B49;&#x7B49;&#xFF0C;GPT &#x5982;&#x4F55;&#x6A21;&#x62DF;&#x751F;&#x6210;&#x3002;</li>
+</ul>
+</li>
+<li>&#x66F4;&#x6613;&#x7528;&#x7684;&#x4EBA;&#x548C;LLM&#x7684;&#x4EA4;&#x4E92;&#x63A5;&#x53E3;&#xFF1A;&#x542C;&#x89C9;&#xFF1F;</li>
+<li>&#x8D85;&#x5927;LLM&#x6A21;&#x578B;Transformer&#x7684;&#x7A00;&#x758F;&#x5316;&#xFF1A;&#x76F8;&#x540C;&#x7B97;&#x529B;&#x4E0B;&#x63D0;&#x9AD8;&#x8BAD;&#x7EC3;&#x901F;&#x5EA6;</li>
+</ul>
+<p>&#x53C2;&#x8003;</p>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/597586623">&#x901A;&#x5411;AGI&#x4E4B;&#x8DEF;&#xFF1A;&#x5927;&#x578B;&#x8BED;&#x8A00;&#x6A21;&#x578B;&#xFF08;LLM&#xFF09;&#x6280;&#x672F;&#x7CBE;&#x8981;</a></li>
+</ul>
+<h1 id="&#x5173;&#x4E8E; chatGPT &#x5F15;&#x53D1;&#x7684;&#x4EBA;&#x5DE5;&#x667A;&#x80FD;&#x601D;&#x8003; 2023-3-1"><a href="#&#x5173;&#x4E8E; chatGPT &#x5F15;&#x53D1;&#x7684;&#x4EBA;&#x5DE5;&#x667A;&#x80FD;&#x601D;&#x8003; 2023-3-1"></a>&#x5173;&#x4E8E; chatGPT &#x5F15;&#x53D1;&#x7684;&#x4EBA;&#x5DE5;&#x667A;&#x80FD;&#x601D;&#x8003; 2023-3-1</h1>
 <ul>
 <li>&#x4EBA;&#x8DDF;AI&#x7684;&#x5173;&#x7CFB;&#xFF1A;&#x6DD8;&#x6C70;&#x8FD8;&#x662F;&#x4E92;&#x8865;&#xFF1F;
 <ul>
@@ -298,4 +345,4 @@ Why/What/How</p>
 <li>&#x6570;&#x636E;&#x7ED3;&#x6784;&#x4E4B;&#x95F4;&#x7684;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#xFF1A;&#x4F8B;&#x5982; golang map &#x4F9D;&#x8D56; hashmap &#xFF0C;hashmap&#x4F9D;&#x8D56; &#x6570;&#x7EC4; + &#x94FE;&#x8868;</li>
 </ul>
 <p><em><strong>&#x4E2A;&#x4EBA;&#x62D9;&#x89C1;&#xFF0C;&#x914C;&#x60C5;&#x89C2;&#x770B;</strong></em></p>
-`,E=[{level:1,title:"\u5173\u4E8E chatGPT \u5F15\u53D1\u7684\u4EBA\u5DE5\u667A\u80FD\u601D\u8003 2023-3-1",children:[{level:2,title:"chatGPT \u884D\u751F\u7684\u672A\u6765\u804C\u4E1A\uFF1F\uFF08\u66F4\u65B0 2023-3-13\uFF0C\u53C2\u8003\uFF09",children:[]}]},{level:1,title:"\u5173\u4E8E\u8BA4\u77E5 \u66F4\u6539\u65F6\u95F4\uFF082023-2-24\uFF09",children:[]},{level:1,title:"\u5173\u4E8E\u6C9F\u901A",children:[{level:2,title:"\u63D0\u7EB2\u6308\u9886",children:[{level:3,title:"\u524D\u7AEF",children:[]}]}]},{level:1,title:"\u5173\u4E8E\u81EA\u4E3E",children:[]},{level:1,title:"\u5173\u4E8E\u5FEB\u901F\u5B66\u4E60",children:[{level:2,title:"\u7F16\u7A0B\u7684\u4E16\u754C",children:[{level:3,title:"\u719F\u6089\u4E00\u95E8\u65B0\u8BED\u8A00",children:[]},{level:3,title:"\u65B0\u6846\u67B6",children:[]}]},{level:2,title:"\u5B66\u79D1",children:[]}]},{level:1,title:"\u5173\u4E8E\u65B0\u6280\u672F\u5E94\u7528",children:[]},{level:1,title:"\u5173\u4E8E\u52A8\u9759\u7ED3\u5408",children:[{level:2,title:"\u7F16\u7A0B\u8BED\u8A00\u5C42\u9762",children:[]},{level:2,title:"\u6027\u683C",children:[]}]},{level:1,title:"\u5173\u4E8E\u52A0\u73ED",children:[]},{level:1,title:"\u5173\u4E8E\u4E2D\u95F4\u5C42",children:[{level:2,title:"\u7F16\u7A0B\u4E16\u754C",children:[]},{level:2,title:"\u751F\u6D3B\u4E16\u754C",children:[]}]},{level:1,title:"\u5173\u4E8E\u8865\u6551\u65B9\u6848",children:[{level:2,title:"\u7F16\u7A0B",children:[]},{level:2,title:"\u4EBA\u7C7B",children:[]}]},{level:1,title:"\u5173\u4E8E\u8D8B\u52BF",children:[{level:2,title:"\u8BA1\u7B97\u673A\u76F8\u5173",children:[]}]},{level:1,title:"\u5173\u4E8Ejs\u539F\u578B\u94FE",children:[{level:2,title:"\u6709\u610F\u601D\u7684\u73B0\u8C61",children:[]}]},{level:1,title:"\u5173\u4E8EGC",children:[{level:2,title:"\u624B\u52A8",children:[]},{level:2,title:"\u81EA\u52A8",children:[]},{level:2,title:"\u65E0GC",children:[]},{level:2,title:"Reference",children:[]}]},{level:1,title:"React \u8E29\u5751\u4E4B\u8DEF\u7531\u52A8\u753B",children:[]},{level:1,title:"\u6570\u636E\u7ED3\u6784\u7591\u95EE",children:[]}];export{x as attributes,F as html,E as nestedHeaders};
+`,E=[{level:2,title:"AGI \u7684\u4E00\u70B9\u7406\u89E3",children:[]},{level:2,title:"AI \u524D\u540E\u6570\u636E\u7684\u8868\u73B0\u5F62\u5F0F\u7684\u4E00\u79CD\u731C\u60F3",children:[]},{level:2,title:"gpt \u53EF\u80FD\u7684\u7814\u7A76\u65B9\u5411",children:[]},{level:1,title:"\u5173\u4E8E chatGPT \u5F15\u53D1\u7684\u4EBA\u5DE5\u667A\u80FD\u601D\u8003 2023-3-1",children:[{level:2,title:"chatGPT \u884D\u751F\u7684\u672A\u6765\u804C\u4E1A\uFF1F\uFF08\u66F4\u65B0 2023-3-13\uFF0C\u53C2\u8003\uFF09",children:[]}]},{level:1,title:"\u5173\u4E8E\u8BA4\u77E5 \u66F4\u6539\u65F6\u95F4\uFF082023-2-24\uFF09",children:[]},{level:1,title:"\u5173\u4E8E\u6C9F\u901A",children:[{level:2,title:"\u63D0\u7EB2\u6308\u9886",children:[{level:3,title:"\u524D\u7AEF",children:[]}]}]},{level:1,title:"\u5173\u4E8E\u81EA\u4E3E",children:[]},{level:1,title:"\u5173\u4E8E\u5FEB\u901F\u5B66\u4E60",children:[{level:2,title:"\u7F16\u7A0B\u7684\u4E16\u754C",children:[{level:3,title:"\u719F\u6089\u4E00\u95E8\u65B0\u8BED\u8A00",children:[]},{level:3,title:"\u65B0\u6846\u67B6",children:[]}]},{level:2,title:"\u5B66\u79D1",children:[]}]},{level:1,title:"\u5173\u4E8E\u65B0\u6280\u672F\u5E94\u7528",children:[]},{level:1,title:"\u5173\u4E8E\u52A8\u9759\u7ED3\u5408",children:[{level:2,title:"\u7F16\u7A0B\u8BED\u8A00\u5C42\u9762",children:[]},{level:2,title:"\u6027\u683C",children:[]}]},{level:1,title:"\u5173\u4E8E\u52A0\u73ED",children:[]},{level:1,title:"\u5173\u4E8E\u4E2D\u95F4\u5C42",children:[{level:2,title:"\u7F16\u7A0B\u4E16\u754C",children:[]},{level:2,title:"\u751F\u6D3B\u4E16\u754C",children:[]}]},{level:1,title:"\u5173\u4E8E\u8865\u6551\u65B9\u6848",children:[{level:2,title:"\u7F16\u7A0B",children:[]},{level:2,title:"\u4EBA\u7C7B",children:[]}]},{level:1,title:"\u5173\u4E8E\u8D8B\u52BF",children:[{level:2,title:"\u8BA1\u7B97\u673A\u76F8\u5173",children:[]}]},{level:1,title:"\u5173\u4E8Ejs\u539F\u578B\u94FE",children:[{level:2,title:"\u6709\u610F\u601D\u7684\u73B0\u8C61",children:[]}]},{level:1,title:"\u5173\u4E8EGC",children:[{level:2,title:"\u624B\u52A8",children:[]},{level:2,title:"\u81EA\u52A8",children:[]},{level:2,title:"\u65E0GC",children:[]},{level:2,title:"Reference",children:[]}]},{level:1,title:"React \u8E29\u5751\u4E4B\u8DEF\u7531\u52A8\u753B",children:[]},{level:1,title:"\u6570\u636E\u7ED3\u6784\u7591\u95EE",children:[]}];export{x as attributes,F as html,E as nestedHeaders};

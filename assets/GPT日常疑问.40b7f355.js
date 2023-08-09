@@ -211,45 +211,5 @@ Q: &#x718A;&#x732B;&#x5403;&#x4EC0;&#x4E48;&#xFF1F; A: &#x718A;&#x732B;&#x5403;&
 </ul>
 <p>&#x6570;&#x636E;&#x589E;&#x5F3A;&#x7684;&#x793A;&#x4F8B;&#xFF1A;</p>
 <p>&#x539F;&#x59CB;&#x53E5;&#x5B50;&#xFF1A;&#x4F60;&#x559C;&#x6B22;&#x770B;&#x4EC0;&#x4E48;&#x7535;&#x5F71;&#xFF1F; &#x540C;&#x4E49;&#x8BCD;&#x66FF;&#x6362;&#xFF1A;&#x4F60;&#x7231;&#x770B;&#x54EA;&#x4E9B;&#x7535;&#x5F71;&#xFF1F; &#x53E5;&#x5B50;&#x91CD;&#x6392;&#xFF1A;&#x770B;&#x4EC0;&#x4E48;&#x7535;&#x5F71;&#x4F60;&#x559C;&#x6B22;&#xFF1F; &#x566A;&#x58F0;&#x6CE8;&#x5165;&#xFF1A;&#x4F60;&#x559C;&#x6B22;&#x770B;&#x4EC0;&#x4E48;&#x7535; &#x5F71;&#xFF1F; &#x56DE;&#x8BD1;&#xFF1A;&#x4F60;&#x559C;&#x6B22;&#x4EC0;&#x4E48;&#x6837;&#x7684;&#x7535;&#x5F71;&#xFF1F;</p>
-<h2 id="TODO &#x95EE;&#x9898;&#xFF1A;"><a href="#TODO &#x95EE;&#x9898;&#xFF1A;"></a>TODO &#x95EE;&#x9898;&#xFF1A;</h2>
-<ul>
-<li>&#x4E3A;&#x4EC0;&#x4E48; Prompt &#x81EA;&#x52A8;&#x6784;&#x9020;&#x53EF;&#x4EE5;&#x5229;&#x7528;&#x68AF;&#x5EA6;&#x548C;&#x6570;&#x636E;&#x9A71;&#x52A8;&#x6765;&#x8C03;&#x6574; Prompt &#x7684;&#x5411;&#x91CF;</li>
-<li>&#x5411;&#x91CF;&#x6570;&#x636E;&#x5E93;&#xFF1F;</li>
-<li>&#x4EC0;&#x4E48;&#x662F; AutoGPT&#xFF1F;&#x5982;&#x4F55;&#x5B89;&#x88C5;&#xFF1F;&#x770B;&#x8D77;&#x6765;&#x5F88;&#x80FD;&#x6D88;&#x8017; Token&#xFF1F;agentGPT/https://cognius.ai/&#xFF1F;&#x4F7F;&#x7528;&#x751F;&#x6210; fibonacci &#x4F8B;&#x5B50;</li>
-<li>&#x4EC0;&#x4E48;&#x662F;&#x635F;&#x5931;&#x51FD;&#x6570;&#xFF1F;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x6CD5;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;</li>
-<li>ML &#x4E3B;&#x9898;
-<ul>
-<li>Machine Learning 101</li>
-<li>Importance of data for ML</li>
-<li>CB &amp; CF Recall</li>
-<li>Model-Based Recall</li>
-<li>Graph Embedding</li>
-<li>General Ranking Model</li>
-<li>Multi-Task Learning</li>
-<li>Cross Network</li>
-<li>Sequential Behavior Modeling</li>
-<li>Delayed Feedback</li>
-<li>Rerank</li>
-<li>Knowledge Distillation</li>
-<li>Transfer Learning</li>
-<li>Causal Inference</li>
-<li>Federated Learning</li>
-<li>&#x56FE;&#x5F15;&#x64CE;&#x8BBE;&#x8BA1;&#x53CA;&#x5728;&#x63A8;&#x8350;&#x573A;&#x666F;&#x7684;&#x5E94;&#x7528;</li>
-<li>&#x5411;&#x91CF;&#x68C0;&#x7D22;&#x7B97;&#x6CD5;&#x4E0E;&#x7CFB;&#x7EDF;&#x67B6;&#x6784;</li>
-<li>&#x63A8;&#x8350;&#x7CFB;&#x7EDF;&#x5DE5;&#x5177;&#x94FE;&#x7684;&#x8BBE;&#x8BA1;&#x548C;&#x4F7F;&#x7528;</li>
-<li>&#x63A8;&#x8350;&#x573A;&#x666F;&#x7684;&#x6570;&#x636E;&#x6D41;&#x5EFA;&#x8BBE;</li>
-<li>&#x63A8;&#x8350;&#x573A;&#x666F;&#x4E0B;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x7684;&#x5DE5;&#x7A0B;&#x5B9E;&#x8DF5;</li>
-</ul>
-</li>
-</ul>
-<p>&#x767E;&#x4E07;&#x6838;K8s&#x96C6;&#x7FA4;&#x7BA1;&#x7406;&#x5B9E;&#x8DF5;</p>
-<ul>
-<li>&#x96C6;&#x7FA4;&#x7BA1;&#x7406;</li>
-<li>&#x7F16;&#x6392;&#x8C03;&#x5EA6;</li>
-<li>&#x9AD8;&#x7EA7;&#x7279;&#x6027;</li>
-</ul>
-<p>&#x6784;&#x5EFA;&#x9AD8;&#x6027;&#x80FD;&#x3001;&#x9AD8;&#x53EF;&#x9760;&#x3001;&#x9AD8;&#x53EF;&#x7528;&#x5206;&#x5E03;&#x5F0F;&#x5757;&#x5B58;&#x50A8;&#x670D;&#x52A1;
-&#x4EC0;&#x4E48;&#x662F;SPBS&#xFF1F; SPBS&#x9002;&#x5E94;&#x4EC0;&#x4E48;&#x4E1A;&#x52A1;? &#x4E3A;&#x4EC0;&#x4E48;&#x9700;&#x8981;SPBS&#xFF1F;
-&#x7406;&#x89E3;&#x9AD8;&#x6027;&#x80FD;&#x3001;&#x9AD8;&#x53EF;&#x9760;&#x3001;&#x9AD8;&#x53EF;&#x7528;&#x5206;&#x5E03;&#x5F0F;&#x5757;&#x5B58;&#x50A8;&#x7684;&#x6838;&#x5FC3;&#x8BBE;&#x8BA1;&#x539F;&#x7406;&#x4EE5;&#x53CA;&#x5728;&#x8BBE;&#x8BA1;&#x8FC7;&#x7A0B;&#x4E2D;&#x601D;&#x8003;&#x548C;&#x5B9E;&#x8DF5;&#xFF1F;</p>
 <p><em><strong>Mainly Reference GPT</strong></em></p>
-`,E=[{level:2,title:"\u4E3A\u4EC0\u4E48 AI \u753B\u624B\u7ECF\u5E38\u5D29\u574F\uFF1F",children:[]},{level:2,title:"\u4E3A\u4EC0\u4E48\u80FD\u505A\u5230\u5355\u8BED\u8A00\u5230\u591A\u8BED\u8A00\u7684\u6CDB\u5316\u80FD\u529B\uFF1F",children:[]},{level:2,title:"\u673A\u5668\u5B66\u4E60\u5230\u5E95\u8DDF\u4EBA\u7684\u5B66\u4E60\u54EA\u91CC\u4E0D\u540C\uFF1F",children:[]},{level:2,title:"\u5982\u4F55\u6DF1\u5165 Prompt Engineering",children:[]},{level:2,title:"tensorflow \u8DDF pytorch \u7684\u533A\u522B\uFF1F",children:[]},{level:2,title:"\u4EC0\u4E48\u662F\u5411\u91CF\u6570\u636E\u5E93\uFF1F",children:[]},{level:2,title:"\u79C1\u6709\u5316\u90E8\u7F72\uFF1F\u5B58\u50A8\u6570\u636E\uFF1F",children:[]},{level:2,title:"TODO \u95EE\u9898\uFF1A",children:[]}];export{x as attributes,F as html,E as nestedHeaders};
+`,E=[{level:2,title:"\u4E3A\u4EC0\u4E48 AI \u753B\u624B\u7ECF\u5E38\u5D29\u574F\uFF1F",children:[]},{level:2,title:"\u4E3A\u4EC0\u4E48\u80FD\u505A\u5230\u5355\u8BED\u8A00\u5230\u591A\u8BED\u8A00\u7684\u6CDB\u5316\u80FD\u529B\uFF1F",children:[]},{level:2,title:"\u673A\u5668\u5B66\u4E60\u5230\u5E95\u8DDF\u4EBA\u7684\u5B66\u4E60\u54EA\u91CC\u4E0D\u540C\uFF1F",children:[]},{level:2,title:"\u5982\u4F55\u6DF1\u5165 Prompt Engineering",children:[]},{level:2,title:"tensorflow \u8DDF pytorch \u7684\u533A\u522B\uFF1F",children:[]},{level:2,title:"\u4EC0\u4E48\u662F\u5411\u91CF\u6570\u636E\u5E93\uFF1F",children:[]},{level:2,title:"\u79C1\u6709\u5316\u90E8\u7F72\uFF1F\u5B58\u50A8\u6570\u636E\uFF1F",children:[]}];export{x as attributes,F as html,E as nestedHeaders};
