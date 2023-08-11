@@ -3,9 +3,15 @@ const x={},F=`<h1 id="&#x5C1D;&#x8BD5;&#x7406;&#x89E3; ONNX &#xFF08;Open Neural 
 <li>&#x662F;&#x4EC0;&#x4E48;&#xFF1F;ONNX = &#xFF08;&#x6A21;&#x578B;&#x672C;&#x8EAB; + &#x6A21;&#x578B;&#x8BAD;&#x7EC3;&#x597D;&#x7684;&#x6743;&#x91CD;&#x8DDF;&#x504F;&#x7F6E;&#xFF09;&#x7684;&#x4E00;&#x79CD;&#x66F4;&#x52A0;&#x62BD;&#x8C61;&#x7684;&#x8868;&#x8FBE;</li>
 <li>&#x5982;&#x4F55;&#x8868;&#x793A;&#xFF1F;&#x4F7F;&#x7528;&#x9884;&#x5B9A;&#x4E49;&#x7684; operator&#xFF08;&#x63CF;&#x8FF0;&#x8F93;&#x5165;&#x4E0E;&#x8F93;&#x51FA;&#x7684;&#x5173;&#x7CFB;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;add&#x7B97;&#x5B50;=  inputA + inputB = OutputC&#xFF0C;&#x53EF;&#x62D3;&#x5C55;&#xFF09;&#x6765;&#x63CF;&#x8FF0;&#x6A21;&#x578B;&#xFF0C;&#x7528;&#x5411;&#x91CF;&#x63CF;&#x8FF0;&#x8BAD;&#x7EC3;&#x597D;&#x7684;&#x53C2;&#x6570;</li>
 <li>&#x4F5C;&#x7528;&#xFF1F;&#x5B9E;&#x73B0;&#x4E0D;&#x540C;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x6846;&#x67B6;&#x548C;&#x5E73;&#x53F0;&#x4E4B;&#x95F4;&#x7684;&#x6A21;&#x578B;&#x4E92;&#x64CD;&#x4F5C;&#x6027;</li>
+<li>&#x4E3A;&#x4EC0;&#x4E48; pytorch &#x5728;&#x5BFC;&#x51FA; ONNX &#x7684;&#x65F6;&#x5019;&#x9700;&#x8981;&#x4F20;&#x5165;&#x4E00;&#x7EC4;&#x8F93;&#x5165;&#xFF1F;&#x539F;&#x56E0;&#xFF1A;
+<ul>
+<li>ONNX &#x5E76;&#x975E;&#x50CF;&#x7F16;&#x8BD1;&#x5668;&#x4E00;&#x6837;&#x5F7B;&#x5E95;&#x89E3;&#x6790;&#x539F;&#x6A21;&#x578B;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x8BB0;&#x5F55;&#x6240;&#x6709;&#x63A7;&#x5236;&#x6D41;&#xFF1B;&#x800C;&#x662F;&#x4E0D;&#x8003;&#x8651;&#x63A7;&#x5236;&#x6D41;&#x7684;&#x9759;&#x6001;&#x56FE;</li>
+<li>&#x800C;&#x662F;&#x5229;&#x7528; pytorch trace &#x673A;&#x5236;&#xFF0C;&#x5C06;&#x53C2;&#x6570;&#x4F20;&#x5165;&#x6A21;&#x578B;&#x6267;&#x884C;&#xFF0C;&#x5E76;&#x8BB0;&#x5F55;&#x6267;&#x884C;&#x8FD9;&#x7EC4;&#x8F93;&#x5165;&#x5BF9;&#x5E94;&#x7684;&#x8BA1;&#x7B97;&#x56FE;</li>
+</ul>
+</li>
 </ul>
 <h1 id="Transformer &#x6A21;&#x578B;&#x7684;&#x81EA;&#x6CE8;&#x610F;&#x529B;&#x673A;&#x5236; - &#x5C1D;&#x8BD5;&#x7406;&#x89E3;"><a href="#Transformer &#x6A21;&#x578B;&#x7684;&#x81EA;&#x6CE8;&#x610F;&#x529B;&#x673A;&#x5236; - &#x5C1D;&#x8BD5;&#x7406;&#x89E3;"></a>Transformer &#x6A21;&#x578B;&#x7684;&#x81EA;&#x6CE8;&#x610F;&#x529B;&#x673A;&#x5236; - &#x5C1D;&#x8BD5;&#x7406;&#x89E3;</h1>
-<p>&#x8F93;&#x5165;&#x4E32; -&gt; &#x5206;&#x8BCD; -&gt; &#x67E5;&#x8BE2;&#x5411;&#x91CF;&#xFF08;&#x56FA;&#x5B9A;&#xFF09; -&gt; &#x8BA1;&#x7B97;&#x8BCD;&#x8BED;&#x95F4; - &#x76F8;&#x4F3C;&#x5EA6;&#x8868; -&gt; &#x66F4;&#x65B0;&#x5411;&#x91CF; -&gt; &#x52A0;&#x5165;&#x4F4D;&#x7F6E;&#x4FE1;&#x606F;&#xFF0C;&#x66F4;&#x65B0;&#x5411;&#x91CF;</p>
+<p>&#x8F93;&#x5165;&#x4E32; -&gt; &#x5206;&#x8BCD; -&gt; &#x67E5;&#x8BE2;&#x5411;&#x91CF;&#xFF08;&#x56FA;&#x5B9A;&#xFF09; -&gt; &#x6839;&#x636E;&#x4F4D;&#x7F6E;&#x4FE1;&#x606F;&#x66F4;&#x65B0;&#x5411;&#x91CF;</p>
 <h1 id="&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x4E2D;&#x7684; Epoch &#x548C; Batch"><a href="#&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x4E2D;&#x7684; Epoch &#x548C; Batch"></a>&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x4E2D;&#x7684; Epoch &#x548C; Batch</h1>
 <ol>
 <li>Epoch &#x662F;&#x4EC0;&#x4E48;&#xFF1F;
