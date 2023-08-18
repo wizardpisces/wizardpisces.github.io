@@ -31,6 +31,13 @@ const x={},F=`<h2 id="AI &#x53D1;&#x5C55;&#x5386;&#x53F2;"><a href="#AI &#x53D1;
 <li>2022 chatGPT , Stable Diffusion</li>
 <li>2023 GPT-4</li>
 </ul>
+<h2 id="google &#x4E0E; AI"><a href="#google &#x4E0E; AI"></a>google &#x4E0E; AI</h2>
+<ul>
+<li>&#x57FA;&#x7840;&#x9886;&#x57DF;&#x7684;&#x7A81;&#x7834;&#x6027;&#x7814;&#x7A76;&#xFF1A;Transformers&#x3001;Word2Vec&#x3001;&#x5E8F;&#x5217;&#x5230;&#x5E8F;&#x5217;&#x5B66;&#x4E60;&#x3001;&#x8054;&#x90A6;&#x5B66;&#x4E60;&#x3001;&#x6A21;&#x578B;&#x84B8;&#x998F;&#x3001;&#x6269;&#x6563;&#x6A21;&#x578B;&#x3001;&#x6DF1;&#x5EA6;&#x5F3A;&#x5316;&#x5B66;&#x4E60;&#x3001;&#x5177;&#x6709;&#x6811;&#x641C;&#x7D22;&#x7684;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x3001;&#x81EA;&#x5B66;&#x4E60;-&#x5B66;&#x4E60;&#x7CFB;&#x7EDF;&#x3001;&#x795E;&#x7ECF;&#x67B6;&#x6784;&#x641C;&#x7D22;&#x3001;&#x81EA;&#x56DE;&#x5F52;&#x6A21;&#x578B;&#x3001;&#x5177;&#x6709;&#x5916;&#x90E8;&#x5B58;&#x50A8;&#x5668;&#x7684;&#x7F51;&#x7EDC;&#x3001;&#x5927;&#x89C4;&#x6A21;&#x5206;&#x5E03;&#x5F0F;&#x6DF1;&#x5EA6;&#x7F51;&#x7EDC;&#x3001;&#x5F20;&#x91CF;&#x5904;&#x7406;&#x5355;&#x5143;</li>
+<li>&#x79D1;&#x5B66;&#x8DDF;&#x5DE5;&#x7A0B;&#x9886;&#x57DF;&#xFF1A;&#x7ED8;&#x5236;&#x51E0;&#x4E4E;&#x6240;&#x6709;&#x5DF2;&#x77E5;&#x86CB;&#x767D;&#x8D28;&#x7684;&#x56FE;&#x8C31;&#x3001;&#x9884;&#x6D4B;&#x86CB;&#x767D;&#x8D28;&#x7684;&#x529F;&#x80FD;&#x3001;&#x5728;&#x795E;&#x7ECF;&#x79D1;&#x5B66;&#x7814;&#x7A76;&#x4E2D;&#x7ED8;&#x5236;&#x5927;&#x8111;&#x7684;&#x4E00;&#x90E8;&#x5206;&#x56FE;&#x8C31;&#x3001;&#x53D1;&#x73B0;&#x66F4;&#x5FEB;&#x7684;&#x7B97;&#x6CD5;&#x3001;&#x91CF;&#x5B50;&#x8BA1;&#x7B97;&#x7684;&#x8FDB;&#x6B65;&#x4EE5;&#x53CA;&#x7269;&#x7406;&#x5B66;&#xFF0C;&#x5305;&#x62EC;&#x6838;&#x805A;&#x53D8;&#x521B;&#x65B0;</li>
+<li>&#x4EBA;&#x5DE5;&#x667A;&#x80FD;&#x57FA;&#x7840;&#x8BBE;&#x65BD;&#xFF1A;&#x5305;&#x62EC;&#x8BA1;&#x7B97;&#xFF08;&#x4F8B;&#x5982;&#x5F20;&#x91CF;&#x5904;&#x7406;&#x5355;&#x5143;&#x3001;Google Tensor &#x548C; Colab&#xFF09;&#x548C;&#x5E7F;&#x6CDB;&#x4F7F;&#x7528;&#x7684;&#x8F6F;&#x4EF6;&#x6846;&#x67B6;&#xFF08;&#x4F8B;&#x5982; TensorFlow&#x3001;Jax&#x3001;Android ML &#x548C;&#x79C1;&#x6709;&#x8BA1;&#x7B97;&#xFF09;&#x3002;</li>
+</ul>
+<p><a href="https://ai.google/why-ai/">Reference</a></p>
 <h2 id="&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x95EE;&#x9898;"><a href="#&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x95EE;&#x9898;"></a>&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x95EE;&#x9898;</h2>
 <p>&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x95EE;&#x9898;&#x662F;&#x6307;&#x5728;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x4E2D;&#xFF0C;&#x4F7F;&#x7528;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x7B97;&#x6CD5;&#x6765;&#x4F18;&#x5316;&#x6A21;&#x578B;&#x53C2;&#x6570;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#x53EF;&#x80FD;&#x9047;&#x5230;&#x7684;&#x4E00;&#x4E9B;&#x95EE;&#x9898;&#x6216;&#x6311;&#x6218;&#x3002;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x7B97;&#x6CD5;&#x7684;&#x57FA;&#x672C;&#x601D;&#x60F3;&#x662F;&#xFF0C;&#x6839;&#x636E;&#x76EE;&#x6807;&#x51FD;&#x6570;&#xFF08;&#x5982;&#x635F;&#x5931;&#x51FD;&#x6570;&#xFF09;&#x7684;&#x68AF;&#x5EA6;&#xFF08;&#x5373;&#x5BFC;&#x6570;&#x6216;&#x659C;&#x7387;&#xFF09;&#x7684;&#x65B9;&#x5411;&#x548C;&#x5927;&#x5C0F;&#xFF0C;&#x6765;&#x4E0D;&#x65AD;&#x5730;&#x66F4;&#x65B0;&#x6A21;&#x578B;&#x53C2;&#x6570;&#xFF0C;&#x4F7F;&#x76EE;&#x6807;&#x51FD;&#x6570;&#x8FBE;&#x5230;&#x6700;&#x5C0F;&#x503C;&#x3002;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x95EE;&#x9898;&#x53EF;&#x4EE5;&#x5206;&#x4E3A;&#x4EE5;&#x4E0B;&#x51E0;&#x7C7B;&#xFF1A;</p>
 <ul>
@@ -115,16 +122,42 @@ $$</p>
 </ul>
 <h2 id="&#x591A;&#x7EF4;&#x6570;&#x636E;&#x964D;&#x7EF4;"><a href="#&#x591A;&#x7EF4;&#x6570;&#x636E;&#x964D;&#x7EF4;"></a>&#x591A;&#x7EF4;&#x6570;&#x636E;&#x964D;&#x7EF4;</h2>
 <ul>
-<li>PCA(Principal Component Analysis &#x4E3B;&#x6210;&#x5206;&#x5206;&#x6790;)<a href="http://blog.codinglabs.org/articles/pca-tutorial.html">PCA&#x7684;&#x6570;&#x5B66;&#x539F;&#x7406;</a>&#xFF0C;<a href="https://www.showmeai.tech/article-detail/198">&#x56FE;&#x89E3;</a>
+<li>
+<p>PCA(Principal Component Analysis &#x4E3B;&#x6210;&#x5206;&#x5206;&#x6790;)<a href="http://blog.codinglabs.org/articles/pca-tutorial.html">PCA&#x7684;&#x6570;&#x5B66;&#x539F;&#x7406;</a>&#xFF0C;<a href="https://www.showmeai.tech/article-detail/198">&#x56FE;&#x89E3;</a></p>
 <ul>
-<li>PCA&#x662F;&#x4E00;&#x79CD;&#x7EBF;&#x6027;&#x7684;&#x964D;&#x7EF4;&#x65B9;&#x6CD5;&#xFF0C;&#x5B83;&#x901A;&#x8FC7;&#x627E;&#x5230;&#x6570;&#x636E;&#x7684;&#x6700;&#x5927;&#x65B9;&#x5DEE;&#x65B9;&#x5411;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x4E3B;&#x6210;&#x5206;&#xFF0C;&#x6765;&#x4FDD;&#x7559;&#x6570;&#x636E;&#x7684;&#x6700;&#x5927;&#x4FE1;&#x606F;&#x91CF;&#x3002;PCA&#x7684;&#x4F18;&#x70B9;&#x662F;&#x901F;&#x5EA6;&#x5FEB;&#xFF0C;&#x7ED3;&#x679C;&#x552F;&#x4E00;&#xFF0C;&#x7F3A;&#x70B9;&#x662F;&#x4E0D;&#x80FD;&#x5904;&#x7406;&#x975E;&#x7EBF;&#x6027;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#xFF0C;&#x53EF;&#x80FD;&#x4F1A;&#x4E22;&#x5931;&#x4E00;&#x4E9B;&#x91CD;&#x8981;&#x7684;&#x7279;&#x5F81;</li>
+<li>&#x7B80;&#x4ECB;&#xFF1A;PCA&#x662F;&#x4E00;&#x79CD;&#x7EBF;&#x6027;&#x7684;&#x964D;&#x7EF4;&#x65B9;&#x6CD5;&#xFF08;&#x964D;&#x7EF4;&#x7EBF;&#x6027;&#x53EF;&#x5206;&#x6570;&#x636E;&#xFF09;&#xFF0C;&#x5B83;&#x901A;&#x8FC7;&#x627E;&#x5230;&#x6570;&#x636E;&#x7684;&#x6700;&#x5927;&#x65B9;&#x5DEE;&#x65B9;&#x5411;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x4E3B;&#x6210;&#x5206;&#xFF0C;&#x6765;&#x4FDD;&#x7559;&#x6570;&#x636E;&#x7684;&#x6700;&#x5927;&#x4FE1;&#x606F;&#x91CF;&#x3002;PCA&#x7684;&#x4F18;&#x70B9;&#x662F;&#x901F;&#x5EA6;&#x5FEB;&#xFF0C;&#x7ED3;&#x679C;&#x552F;&#x4E00;&#xFF0C;&#x7F3A;&#x70B9;&#x662F;&#x4E0D;&#x80FD;&#x5904;&#x7406;&#x975E;&#x7EBF;&#x6027;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#xFF0C;&#x53EF;&#x80FD;&#x4F1A;&#x4E22;&#x5931;&#x4E00;&#x4E9B;&#x91CD;&#x8981;&#x7684;&#x7279;&#x5F81;</li>
+<li>&#x6982;&#x5FF5;
+<ul>
 <li>&#x4E24;&#x4E2A;&#x77E9;&#x9635;&#x76F8;&#x4E58;&#x7684;&#x610F;&#x4E49;&#x662F;&#x5C06;&#x53F3;&#x8FB9;&#x77E9;&#x9635;&#x4E2D;&#x7684;&#x6BCF;&#x4E00;&#x5217;&#x5217;&#x5411;&#x91CF;&#x53D8;&#x6362;&#x5230;&#x5DE6;&#x8FB9;&#x77E9;&#x9635;&#x4E2D;&#x6BCF;&#x4E00;&#x884C;&#x884C;&#x5411;&#x91CF;&#x4E3A;&#x57FA;&#x6240;&#x8868;&#x793A;&#x7684;&#x7A7A;&#x95F4;&#x4E2D;&#x53BB;&#x3002;</li>
 <li>&#x5982;&#x679C;&#x6211;&#x4EEC;&#x8FD8;&#x662F;&#x5355;&#x7EAF;&#x53EA;&#x9009;&#x62E9;&#x65B9;&#x5DEE;&#x6700;&#x5927;&#x7684;&#x65B9;&#x5411;&#xFF0C;&#x5F88;&#x660E;&#x663E;&#xFF0C;&#x8FD9;&#x4E2A;&#x65B9;&#x5411;&#x4E0E;&#x7B2C;&#x4E00;&#x4E2A;&#x65B9;&#x5411;&#x5E94;&#x8BE5;&#x662F;&#x201C;&#x51E0;&#x4E4E;&#x91CD;&#x5408;&#x5728;&#x4E00;&#x8D77;&#x201D;&#xFF0C;&#x663E;&#x7136;&#x8FD9;&#x6837;&#x7684;&#x7EF4;&#x5EA6;&#x662F;&#x6CA1;&#x6709;&#x7528;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#xFF0C;&#x5E94;&#x8BE5;&#x6709;&#x5176;&#x4ED6;&#x7EA6;&#x675F;&#x6761;&#x4EF6;&#x3002;&#x4ECE;&#x76F4;&#x89C2;&#x4E0A;&#x8BF4;&#xFF0C;&#x8BA9;&#x4E24;&#x4E2A;&#x5B57;&#x6BB5;&#x5C3D;&#x53EF;&#x80FD;&#x8868;&#x793A;&#x66F4;&#x591A;&#x7684;&#x539F;&#x59CB;&#x4FE1;&#x606F;&#xFF0C;&#x6211;&#x4EEC;&#x662F;&#x4E0D;&#x5E0C;&#x671B;&#x5B83;&#x4EEC;&#x4E4B;&#x95F4;&#x5B58;&#x5728;&#xFF08;&#x7EBF;&#x6027;&#xFF09;&#x76F8;&#x5173;&#x6027;&#x7684;&#xFF0C;&#x56E0;&#x4E3A;&#x76F8;&#x5173;&#x6027;&#x610F;&#x5473;&#x7740;&#x4E24;&#x4E2A;&#x5B57;&#x6BB5;&#x4E0D;&#x662F;&#x5B8C;&#x5168;&#x72EC;&#x7ACB;&#xFF0C;&#x5FC5;&#x7136;&#x5B58;&#x5728;&#x91CD;&#x590D;&#x8868;&#x793A;&#x7684;&#x4FE1;&#x606F;&#x3002;&#x4E5F;&#x5C31;&#x662F;&#x671F;&#x671B;&#x534F;&#x65B9;&#x5DEE;&#x4E3A; 0&#xFF08;&#x8868;&#x793A;&#x6570;&#x636E;&#x7EF4;&#x5EA6;&#x4E4B;&#x95F4;&#x7684;&#x76F8;&#x5173;&#x6027;&#xFF0C;&#x4E3A;0&#x8868;&#x793A;&#x6CA1;&#x6709;&#x76F8;&#x5173;&#x6027;&#xFF09;</li>
 </ul>
 </li>
-<li>[T-SNE]
+<li>&#x4F18;&#x52BF;
 <ul>
-<li>t-SNE&#x662F;&#x4E00;&#x79CD;&#x975E;&#x7EBF;&#x6027;&#x7684;&#x964D;&#x7EF4;&#x65B9;&#x6CD5;&#xFF0C;&#x5B83;&#x901A;&#x8FC7;&#x8BA1;&#x7B97;&#x9AD8;&#x7EF4;&#x7A7A;&#x95F4;&#x548C;&#x4F4E;&#x7EF4;&#x7A7A;&#x95F4;&#x4E2D;&#x6570;&#x636E;&#x70B9;&#x4E4B;&#x95F4;&#x7684;&#x6761;&#x4EF6;&#x6982;&#x7387;&#x5206;&#x5E03;&#xFF0C;&#x5E76;&#x4F7F;&#x5B83;&#x4EEC;&#x5C3D;&#x53EF;&#x80FD;&#x76F8;&#x4F3C;&#xFF0C;&#x6765;&#x4FDD;&#x7559;&#x6570;&#x636E;&#x7684;&#x5C40;&#x90E8;&#x7ED3;&#x6784;&#x3002;t-SNE&#x7684;&#x4F18;&#x70B9;&#x662F;&#x80FD;&#x591F;&#x5904;&#x7406;&#x590D;&#x6742;&#x7684;&#x975E;&#x7EBF;&#x6027;&#x6570;&#x636E;&#xFF0C;&#x5C55;&#x793A;&#x6570;&#x636E;&#x7684;&#x805A;&#x7C7B;&#x60C5;&#x51B5;&#xFF0C;&#x7F3A;&#x70B9;&#x662F;&#x901F;&#x5EA6;&#x6162;&#xFF0C;&#x7ED3;&#x679C;&#x4E0D;&#x552F;&#x4E00;&#xFF0C;&#x53C2;&#x6570;&#x654F;&#x611F;</li>
+<li>&#x5FEB;</li>
+<li>&#x53EF;&#x590D;&#x7528;&#xFF1A;&#x5F97;&#x51FA;&#x7684;&#x534F;&#x65B9;&#x5DEE;&#x77E9;&#x9635;&#x53EF;&#x590D;&#x7528;&#x5230;&#x65B0;&#x7684;&#x4E00;&#x7EC4;&#x6570;&#x636E;</li>
+</ul>
+</li>
+<li>&#x52A3;&#x52BF;
+<ul>
+<li>&#x65E0;&#x6CD5;&#x5904;&#x7406;&#x975E;&#x7EBF;&#x6027;&#x6570;&#x636E;&#x7ED3;&#x6784;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="https://blog.csdn.net/xieshangxin/article/details/89682607">T-SNE</a></p>
+<ul>
+<li>&#x7B80;&#x4ECB;&#xFF1A;t-SNE&#x662F;&#x4E00;&#x79CD;&#x975E;&#x7EBF;&#x6027;&#x7684;&#x964D;&#x7EF4;&#x65B9;&#x6CD5;&#xFF08;&#x964D;&#x7EF4;&#x7EBF;&#x6027;&#x4E0D;&#x53EF;&#x5206;&#x6570;&#x636E;&#xFF09;&#xFF0C;&#x5B83;&#x901A;&#x8FC7;&#x8BA1;&#x7B97;&#x9AD8;&#x7EF4;&#x7A7A;&#x95F4;&#x548C;&#x4F4E;&#x7EF4;&#x7A7A;&#x95F4;&#x4E2D;&#x6570;&#x636E;&#x70B9;&#x4E4B;&#x95F4;&#x7684;&#x6761;&#x4EF6;&#x6982;&#x7387;&#x5206;&#x5E03;&#xFF0C;&#x5E76;&#x4F7F;&#x5B83;&#x4EEC;&#x5C3D;&#x53EF;&#x80FD;&#x76F8;&#x4F3C;&#xFF0C;&#x6765;&#x4FDD;&#x7559;&#x6570;&#x636E;&#x7684;&#x5C40;&#x90E8;&#x7ED3;&#x6784;&#x3002;t-SNE&#x7684;&#x4F18;&#x70B9;&#x662F;&#x80FD;&#x591F;&#x5904;&#x7406;&#x590D;&#x6742;&#x7684;&#x975E;&#x7EBF;&#x6027;&#x6570;&#x636E;&#xFF0C;&#x5C55;&#x793A;&#x6570;&#x636E;&#x7684;&#x805A;&#x7C7B;&#x60C5;&#x51B5;&#xFF0C;&#x7F3A;&#x70B9;&#x662F;&#x901F;&#x5EA6;&#x6162;&#xFF0C;&#x7ED3;&#x679C;&#x4E0D;&#x552F;&#x4E00;&#xFF0C;&#x53C2;&#x6570;&#x654F;&#x611F;</li>
+<li>&#x4F18;&#x52BF;
+*</li>
+<li>&#x52A3;&#x52BF;
+<ul>
+<li>&#x6162;</li>
+<li>&#x8FED;&#x4EE3;&#x7684;&#xFF0C;&#x4E0D;&#x53EF;&#x590D;&#x7528;&#x5230;&#x4E00;&#x7EC4;&#x65B0;&#x6570;&#x636E;</li>
+</ul>
+</li>
+<li>TODO&#xFF1A;&#x5982;&#x4F55;&#x8DDF; CNN &#x7ED3;&#x5408;&#x8FDB;&#x884C;&#x9690;&#x85CF;&#x5C42;&#x53EF;&#x89C6;&#x5316;&#xFF1F;</li>
 </ul>
 </li>
 </ul>
@@ -134,4 +167,4 @@ $$</p>
 <ul>
 <li>New Bing</li>
 </ul>
-`,E=[{level:2,title:"AI \u53D1\u5C55\u5386\u53F2",children:[]},{level:2,title:"\u68AF\u5EA6\u4E0B\u964D\u95EE\u9898",children:[]},{level:2,title:"\u89E3\u51B3\u95EE\u9898\u573A\u666F",children:[]},{level:2,title:"\u5165\u95E8 \u6DF1\u5EA6\u5B66\u4E60",children:[]},{level:2,title:"miniGPT vs nanoGPT",children:[]},{level:2,title:"\u673A\u5668\u5B66\u4E60\u8DDF\u6DF1\u5EA6\u5B66\u4E60\u7684\u533A\u522B",children:[]},{level:2,title:"\u6570\u5B66",children:[{level:3,title:"\u534F\u65B9\u5DEE",children:[]}]},{level:2,title:"\u6A21\u578B",children:[]},{level:2,title:"\u591A\u7EF4\u6570\u636E\u964D\u7EF4",children:[{level:3,title:"",children:[]}]},{level:2,title:"Reference",children:[]}];export{x as attributes,F as html,E as nestedHeaders};
+`,E=[{level:2,title:"AI \u53D1\u5C55\u5386\u53F2",children:[]},{level:2,title:"google \u4E0E AI",children:[]},{level:2,title:"\u68AF\u5EA6\u4E0B\u964D\u95EE\u9898",children:[]},{level:2,title:"\u89E3\u51B3\u95EE\u9898\u573A\u666F",children:[]},{level:2,title:"\u5165\u95E8 \u6DF1\u5EA6\u5B66\u4E60",children:[]},{level:2,title:"miniGPT vs nanoGPT",children:[]},{level:2,title:"\u673A\u5668\u5B66\u4E60\u8DDF\u6DF1\u5EA6\u5B66\u4E60\u7684\u533A\u522B",children:[]},{level:2,title:"\u6570\u5B66",children:[{level:3,title:"\u534F\u65B9\u5DEE",children:[]}]},{level:2,title:"\u6A21\u578B",children:[]},{level:2,title:"\u591A\u7EF4\u6570\u636E\u964D\u7EF4",children:[{level:3,title:"",children:[]}]},{level:2,title:"Reference",children:[]}];export{x as attributes,F as html,E as nestedHeaders};

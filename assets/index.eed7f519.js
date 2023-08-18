@@ -1,0 +1,1 @@
+import{_ as e,o as t,c as o,a as s}from"./index.9aa8357c.js";const n={},c={id:"mnist"},r=s("a",{href:"https://microsoft.github.io/onnxruntime-web-demo/#/mnist",target:"_blank"},"MNIST demo",-1),a=[r];function _(i,d){return t(),o("div",c,a)}var f=e(n,[["render",_]]);export{f as default};
