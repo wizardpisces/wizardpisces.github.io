@@ -1,4 +1,53 @@
-const x={},F=`<h1 id="one hot &#x7F16;&#x7801;"><a href="#one hot &#x7F16;&#x7801;"></a>one hot &#x7F16;&#x7801;</h1>
+const x={},F=`<h1 id="Transformer"><a href="#Transformer"></a>Transformer</h1>
+<h2 id="positional encoding"><a href="#positional encoding"></a>positional encoding</h2>
+<p>&#x4F4D;&#x7F6E;&#x7F16;&#x7801;&#x7684;&#x8981;&#x6C42;&#xFF1A;&#x9009;&#x62E9;&#x6B63;&#x5F26;&#x8DDF;&#x4F59;&#x5F26;&#x7EC4;&#x5408;&#x7F16;&#x7801;</p>
+<ul>
+<li>&#x6BCF;&#x4E2A;&#x4F4D;&#x7F6E;&#x90FD;&#x6709;&#x552F;&#x4E00;&#x7684;&#x7F16;&#x7801;&#x3002;</li>
+<li>&#x5728;&#x4E0D;&#x540C;&#x957F;&#x5EA6;&#x7684;&#x53E5;&#x5B50;&#x4E2D;&#xFF0C;&#x4E24;&#x4E2A;&#x65F6;&#x95F4;&#x6B65;&#x4E4B;&#x95F4;&#x7684;&#x8DDD;&#x79BB;&#x5E94;&#x8BE5;&#x4E00;&#x81F4;&#x3002;</li>
+<li>&#x6A21;&#x578B;&#x4E0D;&#x53D7;&#x53E5;&#x5B50;&#x957F;&#x77ED;&#x7684;&#x5F71;&#x54CD;&#xFF0C;&#x5E76;&#x4E14;&#x7F16;&#x7801;&#x8303;&#x56F4;&#x662F;&#x6709;&#x754C;&#x7684;&#x3002;&#xFF08;&#x4E0D;&#x4F1A;&#x968F;&#x7740;&#x53E5;&#x5B50;&#x52A0;&#x957F;&#x6570;&#x5B57;&#x5C31;&#x65E0;&#x9650;&#x589E;&#x5927;&#xFF09;</li>
+<li>&#x5FC5;&#x987B;&#x662F;&#x786E;&#x5B9A;&#x6027;&#x7684;&#x3002;</li>
+</ul>
+<p>&#x603B;&#x7ED3;</p>
+<ul>
+<li>&#x95EE;&#x9898;&#x53CA;&#x5176;&#x89E3;&#x7B54;&#xFF1A;
+<ul>
+<li>&#x4E3A;&#x4EC0;&#x4E48;&#x6CA1;&#x6709;&#x76F4;&#x63A5;&#x4F7F;&#x7528; 1,2,3...&#x8FD9;&#x79CD;&#x7EBF;&#x6027;&#x7F16;&#x7801;&#xFF1F;
+<ul>
+<li>&#x539F;&#x56E0;&#xFF1A;&#x5468;&#x671F;&#x6027;&#x6A21;&#x5F0F;&#x5728;&#x4F4D;&#x7F6E;&#x7F16;&#x7801;&#x4E2D;&#x7684;&#x4E0D;&#x540C;&#x7EF4;&#x5EA6;&#x4E0A;&#x5448;&#x73B0;&#x51FA;&#x4E0D;&#x540C;&#x7684;&#x53D8;&#x5316;&#x901F;&#x5EA6;&#x548C;&#x5468;&#x671F;&#xFF08;&#x4E0B;&#x9762;&#x4F8B;&#x5B50;&#x4F1A;&#x8BF4;&#x660E;&#xFF09;
+<ul>
+<li>&#x6355;&#x6349;&#x957F;&#x8DDD;&#x79BB;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#xFF08;&#x7EBF;&#x6027;&#x6A21;&#x5F0F;&#x4E5F;&#x80FD;&#x505A;&#x5230;&#xFF0C;&#x4F46;&#x662F;&#x4E0D;&#x591F;&#x7CBE;&#x7EC6;&#xFF09;</li>
+<li>&#x63D0;&#x4F9B;&#x66F4;&#x4E30;&#x5BCC;&#x7684;&#x8868;&#x793A;&#x80FD;&#x529B;&#xFF1A;&#x8F83;&#x4F4E;&#x9891;&#x7387;&#x7684;&#x7EF4;&#x5EA6;&#x5177;&#x6709;&#x8F83;&#x957F;&#x7684;&#x5468;&#x671F;&#xFF0C;&#x53EF;&#x4EE5;&#x6355;&#x6349;&#x5230;&#x5927;&#x8303;&#x56F4;&#x7684;&#x5E8F;&#x5217;&#x7ED3;&#x6784;&#xFF0C;&#x800C;&#x8F83;&#x9AD8;&#x9891;&#x7387;&#x7684;&#x7EF4;&#x5EA6;&#x53EF;&#x4EE5;&#x66F4;&#x7EC6;&#x81F4;&#x5730;&#x8868;&#x793A;&#x5C40;&#x90E8;&#x6A21;&#x5F0F;&#x548C;&#x77ED;&#x8DDD;&#x79BB;&#x7684;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#x3002;</li>
+<li>&#x907F;&#x514D;&#x8FC7;&#x62DF;&#x5408;&#xFF1A;&#x968F;&#x7740;&#x53E5;&#x5B50;&#x53D8;&#x957F;&#xFF0C;&#x8FD9;&#x4E9B;&#x503C;&#x53EF;&#x80FD;&#x4F1A;&#x53D8;&#x5F97;&#x7279;&#x522B;&#x5927;&#xFF0C;&#x5E76;&#x4E14;&#x6211;&#x4EEC;&#x7684;&#x6A21;&#x578B;&#x53EF;&#x80FD;&#x4F1A;&#x9047;&#x5230;&#x6BD4;&#x8BAD;&#x7EC3;&#x65F6;&#x66F4;&#x957F;&#x7684;&#x53E5;&#x5B50;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>&#x601D;&#x8003;&#x4F8B;&#x5B50;&#xFF1A;
+<ul>
+<li>&#x7B2C;&#x4E00;&#x4E2A;&#x8BCD;&#x7F16;&#x7801;&#x4E3A; [1,2,3]&#xFF0C; &#x5219;&#x4F4D;&#x7F6E;&#x53EF;&#x7528;&#x5411;&#x91CF; [&#x79D2;&#xFF0C;&#x5206;&#xFF0C;&#x65F6;]&#x6765;&#x8868;&#x793A;&#xFF1B;&#x7B2C;&#x4E8C;&#x4E2A;&#x8BCD;&#x7F16;&#x7801;&#x4E3A; [4,5,6]&#xFF0C; &#x5219;&#x4F4D;&#x7F6E;&#x53EF;&#x7528;&#x5411;&#x91CF; [&#x79D2; + 1&#xFF0C;&#x5206; + 1/60&#xFF0C;&#x65F6; + 1/360] &#x6765;&#x8868;&#x793A;</li>
+<li>&#x5468;&#x671F;&#xFF1A;&#x5728;&#x4E00;&#x4E2A;&#x8BCD;&#x5411;&#x91CF;&#x4E0A;&#x4F1A;&#x51FA;&#x73B0;&#x4E0D;&#x540C;&#x7684;&#x5468;&#x671F;&#x53D8;&#x5316;&#xFF0C;&#x80FD;&#x540C;&#x65F6;&#x8FFD;&#x8E2A;&#x8FD1;&#x8DDD;&#x79BB;&#x8DDF;&#x8FDC;&#x8DDD;&#x79BB;&#x7684;&#x8BCD;&#x5173;&#x7CFB;&#xFF1A;&#x79D2;&#x9488;&#x8D70;&#x4E00;&#x4E2A;&#x5468;&#x671F; 60 &#x79D2;&#xFF0C;&#x5206;&#x9488;&#x8D70;&#x4E00;&#x6B65;&#xFF1B;&#x5206;&#x8D70;&#x4E00;&#x4E2A;&#x5468;&#x671F; 60 &#x5206;&#xFF0C; &#x65F6;&#x9488;+1&#xFF1B;</li>
+<li>&#x5468;&#x671F;&#x8BBE;&#x5B9A;&#xFF1A;&#x901A;&#x8FC7;&#x8BBE;&#x5B9A; &#x79D2;&#xFF0C;&#x5206;&#xFF0C;&#x65F6;&#x4E4B;&#x95F4;&#x7684;&#x5468;&#x671F;&#x5173;&#x7CFB;&#xFF08;&#x6BD4;&#x5982;&#x53EF;&#x4EE5;&#x8BBE;&#x5B9A;600&#x79D2;&#xFF0C;&#x5206;&#x9488;&#x624D;&#x8D70;&#x4E00;&#x6B65;&#xFF0C;&#x5219;&#x4F1A;&#x62C9;&#x4E0A;&#x5468;&#x671F;&#x53D8;&#x5316;&#xFF0C;&#x8FFD;&#x8E2A;&#x66F4;&#x8FDC;&#x7684;&#x8BCD;&#x5173;&#x7CFB;&#xFF09;</li>
+</ul>
+</li>
+</ul>
+<p>Reference</p>
+<ul>
+<li><a href="https://kazemnejad.com/blog/transformer_architecture_positional_encoding/">positional encoding blog</a></li>
+<li><a href="https://datascience.stackexchange.com/questions/51065/what-is-the-positional-encoding-in-the-transformer-model">positional encoding stackexchange + youtube</a></li>
+</ul>
+<h2 id="self-attention"><a href="#self-attention"></a>self-attention</h2>
+<p>&#x601D;&#x8003;</p>
+<ul>
+<li>&#x591A;&#x5934;&#x6CE8;&#x610F;&#x529B;&#x673A;&#x5236;&#x4E0E;&#x5377;&#x79EF;&#x7684;&#x591A;&#x901A;&#x9053;&#xFF08;channel&#xFF09;&#x8FDB;&#x884C;&#x7C7B;&#x6BD4;&#x3002;&#x591A;&#x5934;&#x6CE8;&#x610F;&#x529B;&#x673A;&#x5236;&#x548C;&#x5377;&#x79EF;&#x7684;&#x591A;&#x901A;&#x9053;&#x90FD;&#x6D89;&#x53CA;&#x5E76;&#x884C;&#x5730;&#x5B66;&#x4E60;&#x4E0D;&#x540C;&#x7684;&#x7279;&#x5F81;&#x8868;&#x793A;&#x3002;&#x5B83;&#x4EEC;&#x90FD;&#x81F4;&#x529B;&#x4E8E;&#x63D0;&#x53D6;&#x8F93;&#x5165;&#x6570;&#x636E;&#x7684;&#x591A;&#x6837;&#x5316;&#x7279;&#x5F81;&#xFF0C;&#x5E76;&#x6355;&#x6349;&#x8F93;&#x5165;&#x4E2D;&#x7684;&#x4E0D;&#x540C;&#x6A21;&#x5F0F;&#x548C;&#x5173;&#x8054;&#x6027;&#x3002;</li>
+</ul>
+<p>Reference</p>
+<ul>
+<li><a href="https://medium.com/@geetkal67/attention-networks-a-simple-way-to-understand-self-attention-f5fb363c736d">self-attention</a></li>
+<li><a href="https://medium.com/@geetkal67/attention-networks-a-simple-way-to-understand-multi-head-attention-3bc3409c4312">multi-head attention in transformer</a>)</li>
+</ul>
+<h1 id="one hot &#x7F16;&#x7801;"><a href="#one hot &#x7F16;&#x7801;"></a>one hot &#x7F16;&#x7801;</h1>
 <p>one hot&#x7F16;&#x7801;&#xFF0C;&#x5C06;&#x79BB;&#x6563;&#x7684;&#x5206;&#x7C7B;&#x6570;&#x636E;&#x8F6C;&#x6362;&#x4E3A;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x7B49;&#x6A21;&#x578B;&#x53EF;&#x4EE5;&#x5904;&#x7406;&#x7684;&#x5411;&#x91CF;&#x8868;&#x793A;&#x3002;</p>
 <pre><code class="language-python"><span class="hljs-comment"># &#x5047;&#x8BBE; text &#x4E2D;&#x7684;&#x5B57;&#x7B26;&#x96C6;&#x662F;&#x7531;&#x5927;&#x5C0F;&#x5199;&#x5B57;&#x6BCD;&#x548C;&#x6570;&#x5B57;&#x7EC4;&#x6210;&#x7684;&#xFF0C;&#x5171;&#x6709; 62 &#x4E2A;&#x5B57;&#x7B26;&#xFF08;&#x4F8B;&#x5982;&#xFF0C;char_set = &quot;abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789&quot;&#xFF09;&#xFF0C;&#x5219; self.char_set_len &#x7684;&#x503C;&#x4E3A; 62&#x3002;&#x5BF9;&#x4E8E;&#x6BCF;&#x4E2A;&#x5B57;&#x7B26; ch&#xFF0C;&#x5B83;&#x5728;&#x5B57;&#x7B26;&#x96C6;&#x4E2D;&#x7684;&#x7D22;&#x5F15;&#x4F4D;&#x7F6E;&#x662F;&#x552F;&#x4E00;&#x7684;&#xFF0C;&#x56E0;&#x6B64; i * self.char_set_len + self.char_set.index(ch) &#x7684;&#x7ED3;&#x679C;&#x4E5F;&#x662F;&#x552F;&#x4E00;&#x7684;&#x3002;</span>
 vector = np.zeros(self.max_captcha * self.char_set_len) <span class="hljs-comment"># shape = [max_captcha*36]</span>
@@ -40,7 +89,7 @@ vector = np.zeros(self.max_captcha * self.char_set_len) <span class="hljs-commen
 </code></pre>
 <p>&#x7B26;&#x53F7;&#x56FE;&#xFF1A;<img src="https://raw.githubusercontent.com/dmlc/web-data/master/mxnet/prog_model/comp_graph.png" alt="&#x7B26;&#x53F7;&#x56FE;"></p>
 <p>&#x7C7B;&#x6BD4;&#xFF1A;&#x7C7B;&#x4F3C; react jsx&#x547D;&#x4EE4;&#x5F0F;&#xFF08;&#x76F4;&#x63A5;&#x96BE;&#x4F18;&#x5316;&#xFF09;&#x6A21;&#x677F;&#x8DDF; vue &#x7684;&#x58F0;&#x660E;&#x5F0F;&#xFF08;&#x771F;&#x6B63;&#x6267;&#x884C;&#x524D;&#x80FD;&#x505A;&#x5404;&#x79CD;&#x8FD0;&#x884C;&#x65F6;&#x4F18;&#x5316;&#xFF09;&#x6A21;&#x677F;&#xFF1F;</p>
-<p><a href="https://mxnet.apache.org/versions/1.9.1/api/architecture/program_model#:~:text=Symbolic%20Programs%20Tend%20to%20be,flow%20of%20a%20host%20language.">Reference</a></p>
+<p><a href="https://mxnet.apache.org/versions/1.9.1/api/architecture/program_model#:~:text=Symbolic%20Programs%20Tend%20to%20be,flow%20of%20a%20host%20language.">Reference blog</a></p>
 <h1 id="&#x673A;&#x5668;&#x5B66;&#x4E60;&#x5206;&#x7C7B;&#x7684;&#x4E00;&#x70B9;&#x6280;&#x5DE7;"><a href="#&#x673A;&#x5668;&#x5B66;&#x4E60;&#x5206;&#x7C7B;&#x7684;&#x4E00;&#x70B9;&#x6280;&#x5DE7;"></a>&#x673A;&#x5668;&#x5B66;&#x4E60;&#x5206;&#x7C7B;&#x7684;&#x4E00;&#x70B9;&#x6280;&#x5DE7;</h1>
 <ul>
 <li>&#x5BF9;&#x6570;&#x636E;&#x8FDB;&#x884C;&#x5206;&#x7C7B;
@@ -87,7 +136,10 @@ Batch Size = &#x4E00;&#x6B21;&#x8BAD;&#x7EC3;&#x7684;&#x6837;&#x672C;&#x6570;
 <li>&#x7A33;&#x5B9A;&#x6027;&#xFF1A;&#x5E73;&#x5747;&#x6BCF;&#x4E2A;&#x6570;&#x636E;&#x6837;&#x672C;&#x7684;&#x8D21;&#x732E;&#xFF0C;&#x51CF;&#x5C11;&#x68AF;&#x5EA6;&#x7684;&#x65B9;&#x5DEE;</li>
 <li>&#x591A;&#x5927;&#x5408;&#x9002;&#xFF1A;&#x770B;&#x60C5;&#x51B5;&#xFF0C;&#x592A;&#x5C0F;&#x4F1A;&#x5BFC;&#x81F4;&#x8BAD;&#x7EC3;&#x592A;&#x4E45;&#xFF1B;&#x592A;&#x5927;&#x4F1A;&#x5BFC;&#x81F4;&#x5185;&#x5B58;&#x53D7;&#x4E0D;&#x4E86;</li>
 </ul>
-<p>&#x53C2;&#x8003;&#xFF1A;<a href="https://towardsdatascience.com/epoch-vs-iterations-vs-batch-size-4dfb9c7ce9c9">epoch-vs-iterations-vs-batch-size</a></p>
+<p>Reference</p>
+<ul>
+<li><a href="https://towardsdatascience.com/epoch-vs-iterations-vs-batch-size-4dfb9c7ce9c9">epoch-vs-iterations-vs-batch-size</a></li>
+</ul>
 <h1 id="GPT &#x5C1D;&#x8BD5;"><a href="#GPT &#x5C1D;&#x8BD5;"></a>GPT &#x5C1D;&#x8BD5;</h1>
 <ol>
 <li>&#x4EE3;&#x7801;&#x5C1D;&#x8BD5;
@@ -650,4 +702,4 @@ s.push(<span class="hljs-number">3</span>)
 </ul>
 </li>
 </ul>
-`,n=[{level:1,title:"one hot \u7F16\u7801",children:[{level:2,title:"CRNN + CTC \u89E3\u51B3\u53D8\u957F\u6587\u672C\u8BC6\u522B",children:[]}]},{level:1,title:"\u6DF1\u5EA6\u5B66\u4E60\u7F16\u7A0B\u8303\u5F0F",children:[]},{level:1,title:"\u673A\u5668\u5B66\u4E60\u5206\u7C7B\u7684\u4E00\u70B9\u6280\u5DE7",children:[]},{level:1,title:"\u5C1D\u8BD5\u7406\u89E3 ONNX \uFF08Open Neural Network Exchange\uFF09",children:[]},{level:1,title:"Transformer \u6A21\u578B\u7684\u81EA\u6CE8\u610F\u529B\u673A\u5236 - \u5C1D\u8BD5\u7406\u89E3",children:[]},{level:1,title:"\u6DF1\u5EA6\u5B66\u4E60\u4E2D\u7684 Epoch \u548C Batch",children:[]},{level:1,title:"GPT \u5C1D\u8BD5",children:[]},{level:1,title:"\u5185\u5B58\u5BF9\u9F50",children:[]},{level:1,title:"\u7B26\u53F7\u8868 2023-3-6",children:[]},{level:1,title:"\u98CE\u63A7\u5F15\u64CE\u4F18\u5316 2023-3-2",children:[]},{level:1,title:"\u6269\u5BB9\u673A\u5236 2023-3-2",children:[]},{level:1,title:"AOP\uFF08\u9762\u5411\u5207\u9762\u7F16\u7A0B\uFF09 2023-3-1",children:[]},{level:1,title:"\u9003\u9038\u5206\u6790",children:[{level:2,title:"Reference",children:[]}]},{level:1,title:"\u6587\u7AE0\u7CBE\u8BFB\u4E4B\u8BBE\u8BA1\u539F\u5219/\u6A21\u5F0F",children:[{level:2,title:"\u8BBE\u8BA1\u539F\u5219\uFF1ASOLID\u539F\u5219",children:[]},{level:2,title:"\u8BBE\u8BA1\u6A21\u5F0F",children:[{level:3,title:"Creational Patterns",children:[]},{level:3,title:"Behavioral Patterns",children:[]},{level:3,title:"Structural Patterns",children:[]}]},{level:2,title:"\u8BBE\u8BA1\u539F\u5219 vs \u8BBE\u8BA1\u6A21\u5F0F",children:[]},{level:2,title:"Reference",children:[]}]},{level:1,title:"\u5173\u4E8E\u7EE7\u627F",children:[{level:3,title:"Reference",children:[]}]},{level:1,title:"\u5173\u4E8E\u9762\u5411\u5BF9\u8C61",children:[]},{level:1,title:"React\u72B6\u6001\u7BA1\u7406",children:[]},{level:1,title:"\u6587\u7AE0\u7CBE\u8BFB\u4E4B\u524D\u7AEF\u6846\u67B6\u8BBE\u8BA1",children:[{level:2,title:"\u7EC4\u4EF6\u7C7B\u578B",children:[]},{level:2,title:"\u72B6\u6001\u7BA1\u7406",children:[]},{level:2,title:"CSS\u65B9\u6848",children:[]},{level:2,title:"\u6784\u5EFA\u5DE5\u5177",children:[]},{level:2,title:"Reference",children:[]}]},{level:1,title:"CSS Animation,Transition \u539F\u7406",children:[{level:2,title:"\u603B\u7ED3",children:[]},{level:2,title:"Reference",children:[]}]},{level:1,title:"Vue\u8FD0\u884C\u65F6\u9519\u8BEF\u5904\u7406",children:[{level:2,title:"Reference",children:[]}]},{level:1,title:"\u63D2\u4EF6\u5BF9\u6BD4\uFF08Vue vs React\uFF09",children:[{level:2,title:"\u63D2\u4EF6",children:[{level:3,title:"\u63D2\u4EF6\u7684\u63D2\u4EF6\uFF08Vuex vs Redux\uFF09",children:[]},{level:3,title:"\u63D2\u4EF6\u7684\u63D2\u4EF6\u7684\u63D2\u4EF6",children:[]}]},{level:2,title:"\u603B\u7ED3",children:[]},{level:2,title:"Reference",children:[]}]},{level:1,title:"\u6A21\u62DFLRU\u7684\u6570\u636E\u7ED3\u6784\uFF08Set vs Array\uFF09",children:[]},{level:1,title:"ORM \u6A21\u5757\u7EC4\u6210",children:[]}];export{x as attributes,F as html,n as nestedHeaders};
+`,n=[{level:1,title:"Transformer",children:[{level:2,title:"positional encoding",children:[]},{level:2,title:"self-attention",children:[]}]},{level:1,title:"one hot \u7F16\u7801",children:[{level:2,title:"CRNN + CTC \u89E3\u51B3\u53D8\u957F\u6587\u672C\u8BC6\u522B",children:[]}]},{level:1,title:"\u6DF1\u5EA6\u5B66\u4E60\u7F16\u7A0B\u8303\u5F0F",children:[]},{level:1,title:"\u673A\u5668\u5B66\u4E60\u5206\u7C7B\u7684\u4E00\u70B9\u6280\u5DE7",children:[]},{level:1,title:"\u5C1D\u8BD5\u7406\u89E3 ONNX \uFF08Open Neural Network Exchange\uFF09",children:[]},{level:1,title:"Transformer \u6A21\u578B\u7684\u81EA\u6CE8\u610F\u529B\u673A\u5236 - \u5C1D\u8BD5\u7406\u89E3",children:[]},{level:1,title:"\u6DF1\u5EA6\u5B66\u4E60\u4E2D\u7684 Epoch \u548C Batch",children:[]},{level:1,title:"GPT \u5C1D\u8BD5",children:[]},{level:1,title:"\u5185\u5B58\u5BF9\u9F50",children:[]},{level:1,title:"\u7B26\u53F7\u8868 2023-3-6",children:[]},{level:1,title:"\u98CE\u63A7\u5F15\u64CE\u4F18\u5316 2023-3-2",children:[]},{level:1,title:"\u6269\u5BB9\u673A\u5236 2023-3-2",children:[]},{level:1,title:"AOP\uFF08\u9762\u5411\u5207\u9762\u7F16\u7A0B\uFF09 2023-3-1",children:[]},{level:1,title:"\u9003\u9038\u5206\u6790",children:[{level:2,title:"Reference",children:[]}]},{level:1,title:"\u6587\u7AE0\u7CBE\u8BFB\u4E4B\u8BBE\u8BA1\u539F\u5219/\u6A21\u5F0F",children:[{level:2,title:"\u8BBE\u8BA1\u539F\u5219\uFF1ASOLID\u539F\u5219",children:[]},{level:2,title:"\u8BBE\u8BA1\u6A21\u5F0F",children:[{level:3,title:"Creational Patterns",children:[]},{level:3,title:"Behavioral Patterns",children:[]},{level:3,title:"Structural Patterns",children:[]}]},{level:2,title:"\u8BBE\u8BA1\u539F\u5219 vs \u8BBE\u8BA1\u6A21\u5F0F",children:[]},{level:2,title:"Reference",children:[]}]},{level:1,title:"\u5173\u4E8E\u7EE7\u627F",children:[{level:3,title:"Reference",children:[]}]},{level:1,title:"\u5173\u4E8E\u9762\u5411\u5BF9\u8C61",children:[]},{level:1,title:"React\u72B6\u6001\u7BA1\u7406",children:[]},{level:1,title:"\u6587\u7AE0\u7CBE\u8BFB\u4E4B\u524D\u7AEF\u6846\u67B6\u8BBE\u8BA1",children:[{level:2,title:"\u7EC4\u4EF6\u7C7B\u578B",children:[]},{level:2,title:"\u72B6\u6001\u7BA1\u7406",children:[]},{level:2,title:"CSS\u65B9\u6848",children:[]},{level:2,title:"\u6784\u5EFA\u5DE5\u5177",children:[]},{level:2,title:"Reference",children:[]}]},{level:1,title:"CSS Animation,Transition \u539F\u7406",children:[{level:2,title:"\u603B\u7ED3",children:[]},{level:2,title:"Reference",children:[]}]},{level:1,title:"Vue\u8FD0\u884C\u65F6\u9519\u8BEF\u5904\u7406",children:[{level:2,title:"Reference",children:[]}]},{level:1,title:"\u63D2\u4EF6\u5BF9\u6BD4\uFF08Vue vs React\uFF09",children:[{level:2,title:"\u63D2\u4EF6",children:[{level:3,title:"\u63D2\u4EF6\u7684\u63D2\u4EF6\uFF08Vuex vs Redux\uFF09",children:[]},{level:3,title:"\u63D2\u4EF6\u7684\u63D2\u4EF6\u7684\u63D2\u4EF6",children:[]}]},{level:2,title:"\u603B\u7ED3",children:[]},{level:2,title:"Reference",children:[]}]},{level:1,title:"\u6A21\u62DFLRU\u7684\u6570\u636E\u7ED3\u6784\uFF08Set vs Array\uFF09",children:[]},{level:1,title:"ORM \u6A21\u5757\u7EC4\u6210",children:[]}];export{x as attributes,F as html,n as nestedHeaders};
