@@ -1,16 +1,17 @@
 const x={},F=`<h2 id="&#x7B80;&#x4ECB;"><a href="#&#x7B80;&#x4ECB;"></a>&#x7B80;&#x4ECB;</h2>
-<p>&#x4E1A;&#x52A1;&#x76EE;&#x6807;&#x662F;&#x89E3;&#x51B3;&#x964D;&#x672C;&#x589E;&#x6548;&#x81EA;&#x52A8;&#x5316;&#x573A;&#x666F;&#x6700;&#x540E;&#x7684;&#x62E6;&#x8DEF;&#x864E;&#xFF1A;&#x8BC6;&#x522B;&#x53D8;&#x957F;&#x4E0D;&#x89C4;&#x5219;&#x7684;&#x9A8C;&#x8BC1;&#x7801;&#xFF08;&#x5B57;&#x6BCD;&#x6216;&#x6570;&#x5B57;&#xFF09;</p>
-<p>&#x5206;&#x4EAB;&#x5185;&#x5BB9;&#xFF1A;&#x65B9;&#x6848;&#x8C03;&#x7814;&#x8FC7;&#x7A0B;&#x9047;&#x5230;&#x7684;&#x95EE;&#x9898;&#x53CA;&#x5176;&#x89E3;&#x51B3;&#x601D;&#x8DEF;&#xFF0C;&#x57FA;&#x7840;&#x7684;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x77E5;&#x8BC6;</p>
+<p>&#x4E1A;&#x52A1;&#x76EE;&#x6807;&#x662F;&#x89E3;&#x51B3;&#x81EA;&#x52A8;&#x5316;&#x573A;&#x666F;&#x9047;&#x5230;&#x7684;&#x9A8C;&#x8BC1;&#x7801;&#x8BC6;&#x522B;</p>
+<h2 id="&#x95EE;&#x9898;&#x5177;&#x4F53;&#x5316;"><a href="#&#x95EE;&#x9898;&#x5177;&#x4F53;&#x5316;"></a>&#x95EE;&#x9898;&#x5177;&#x4F53;&#x5316;</h2>
+<p>&#x8BC6;&#x522B;&#x53D8;&#x957F;&#x4E0D;&#x89C4;&#x5219;&#x7684;&#x56FE;&#x7247;&#x9A8C;&#x8BC1;&#x7801;&#xFF08;&#x5305;&#x542B;&#x5B57;&#x6BCD;&#x6216;&#x6570;&#x5B57;&#xFF09;</p>
 <h2 id="&#x7B2C;&#x4E09;&#x65B9;&#x5DE5;&#x5177;&#x8C03;&#x7814;"><a href="#&#x7B2C;&#x4E09;&#x65B9;&#x5DE5;&#x5177;&#x8C03;&#x7814;"></a>&#x7B2C;&#x4E09;&#x65B9;&#x5DE5;&#x5177;&#x8C03;&#x7814;</h2>
 <ul>
 <li>&#x9047;&#x5230;&#x7684;&#x95EE;&#x9898;
 <ul>
-<li>&#x4ED8;&#x8D39;&#x8DDF;&#x4E0D;&#x51C6;</li>
+<li>&#x4ED8;&#x8D39;&#x4E14;&#x4E0D;&#x51C6;</li>
 </ul>
 </li>
 <li>&#x539F;&#x56E0;&#xFF1A;&#x7ED3;&#x679C;&#x5F88;&#x4E0D;&#x51C6;&#xFF0C;&#x9700;&#x8981;&#x4ED8;&#x8D39;
 <ul>
-<li>&#x6210;&#x719F;&#x5F00;&#x6E90;&#x7684; OCR &#x53EA;&#x80FD;&#x8BC6;&#x522B;&#x6BD4;&#x8F83;&#x89C4;&#x6574;&#x7684;&#x5B57;&#x6BCD;</li>
+<li>&#x6210;&#x719F;&#x5F00;&#x6E90;&#x7684; OCR &#x53EA;&#x80FD;&#x8BC6;&#x522B;&#x6BD4;&#x8F83;&#x89C4;&#x6574;&#x7684;&#x5B57;&#x6BCD;&#x8DDF;&#x6570;&#x5B57;</li>
 </ul>
 </li>
 <li>&#x7ED3;&#x679C;&#xFF1A;&#x4E0D;&#x9009;&#x62E9;&#xFF0C;&#x51B3;&#x5B9A;&#x627E;&#x5F00;&#x6E90;&#x6A21;&#x578B;&#xFF0C;&#x81EA;&#x5DF1;&#x8BAD;&#x7EC3;
@@ -22,7 +23,7 @@ const x={},F=`<h2 id="&#x7B80;&#x4ECB;"><a href="#&#x7B80;&#x4ECB;"></a>&#x7B80;
 <h2 id="CNN &#x8C03;&#x7814;"><a href="#CNN &#x8C03;&#x7814;"></a>CNN &#x8C03;&#x7814;</h2>
 <p>&#x5BFB;&#x627E;&#x5230;&#x5E76;&#x8C03;&#x7814;&#x4E86;&#x7684;<a href="https://github.com/nickliqian/cnn_captcha">CNN &#x6A21;&#x578B;</a>&#xFF0C;&#x8D5E;&#x6570;&#x6BD4;&#x8F83;&#x591A;&#xFF0C;&#x5E94;&#x8BE5;&#x9760;&#x8C31;</p>
 <p>&#x9605;&#x8BFB;&#x6E90;&#x7801;&#x540E;&#x5224;&#x65AD;&#x53EA;&#x80FD;&#x505A;&#x5B9A;&#x957F;&#x8BC6;&#x522B;</p>
-<h3 id="&#x6280;&#x672F;"><a href="#&#x6280;&#x672F;"></a>&#x6280;&#x672F;</h3>
+<h3 id="&#x6280;&#x672F;&#x6808;"><a href="#&#x6280;&#x672F;&#x6808;"></a>&#x6280;&#x672F;&#x6808;</h3>
 <p>&#x6A21;&#x578B;&#x5B9E;&#x73B0;&#xFF1A;Tensorflow &#x6846;&#x67B6;&#x7684; CNN</p>
 <ul>
 <li>CNN&#xFF08;Convolutional Neural Network &#x5377;&#x79EF;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#xFF09; &#x505A;&#x56FE;&#x7247;&#x7279;&#x5F81;&#x63D0;&#x53D6;</li>
@@ -36,17 +37,17 @@ const x={},F=`<h2 id="&#x7B80;&#x4ECB;"><a href="#&#x7B80;&#x4ECB;"></a>&#x7B80;
 <ul>
 <li>&#x5904;&#x7406;&#x53D8;&#x957F;&#x53EF;&#x80FD;&#x65B9;&#x6848;&#xFF1A;&#x88C1;&#x526A;&#xFF0C;&#x5207;&#x5272;&#xFF0C;&#x5E76;&#x4E00;&#x4E2A;&#x4E2A;&#x8BC6;&#x522B;&#x6587;&#x672C;
 <ul>
-<li>&#x539F;&#x56E0;&#xFF1A;&#x56FE;&#x7247;&#x80CC;&#x666F;&#x6709;&#x566A;&#x58F0;&#xFF0C;&#x5BFC;&#x81F4;&#x5BF9;&#x56FE;&#x7247;&#x8FDB;&#x884C;&#x5207;&#x5272;&#x56F0;&#x96BE;&#xFF0C;&#x53EF;&#x80FD;&#x4F1A;&#x635F;&#x5931;&#x4E00;&#x4E9B;&#x6587;&#x672C;&#x7EC6;&#x8282;&#x5BFC;&#x81F4;&#x8BC6;&#x522B;&#x4E0D;&#x51C6;&#x3002;</li>
 <li>&#x7ED3;&#x679C;&#xFF1A;&#x653E;&#x5F03;&#x76F4;&#x63A5;&#x7684; CNN &#x6A21;&#x578B;&#xFF0C;&#x5BFB;&#x627E;&#x66F4;&#x5408;&#x9002;&#x7684;&#x6A21;&#x578B;</li>
+<li>&#x539F;&#x56E0;&#xFF1A;&#x56FE;&#x7247;&#x80CC;&#x666F;&#x6709;&#x566A;&#x58F0;&#xFF0C;&#x5BFC;&#x81F4;&#x5BF9;&#x56FE;&#x7247;&#x8FDB;&#x884C;&#x5207;&#x5272;&#x56F0;&#x96BE;&#xFF0C;&#x4F1A;&#x635F;&#x5931;&#x4E00;&#x4E9B;&#x6587;&#x672C;&#x7EC6;&#x8282;&#x5BFC;&#x81F4;&#x8BC6;&#x522B;&#x4E0D;&#x51C6;&#x3002;</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 <h2 id="CRNN &#x8C03;&#x7814;"><a href="#CRNN &#x8C03;&#x7814;"></a>CRNN &#x8C03;&#x7814;</h2>
-<p>&#x5BFB;&#x627E;&#x5230;&#x5E76;&#x8C03;&#x7814;&#x7684;<a href="https://github.com/GitYCC/crnn-pytorch">CRNN &#x6A21;&#x578B;</a>&#xFF0C;&#x8D5E;&#x6570;&#x76F8;&#x5BF9; CNN &#x5C11;&#x4E86;&#x4E00;&#x4E2A;&#x91CF;&#x7EA7;&#xFF0C;&#x4F46;&#x662F;&#x770B;&#x8D77;&#x6765;&#x5F88;&#x987A;&#x773C;</p>
+<p>&#x5BFB;&#x627E;&#x5230;&#x5E76;&#x8C03;&#x7814;&#x7684;<a href="https://github.com/GitYCC/crnn-pytorch">CRNN &#x6A21;&#x578B;</a>&#xFF0C;&#x8D5E;&#x6570;&#x76F8;&#x5BF9; CNN &#x5C11;&#x4E86;&#x4E00;&#x4E2A;&#x91CF;&#x7EA7;&#xFF0C;&#x770B;&#x8D77;&#x6765;&#x5F88;&#x987A;&#x773C;&#xFF0C;&#x6709;&#x8BBA;&#x6587;&#x652F;&#x6301;</p>
 <p>&#x9605;&#x8BFB;&#x6E90;&#x7801;&#x540E;&#x5224;&#x65AD;&#x53EF;&#x4EE5;&#x505A;&#x53D8;&#x957F;&#x5E8F;&#x5217;&#x8BC6;&#x522B;</p>
-<h3 id="&#x6280;&#x672F;"><a href="#&#x6280;&#x672F;"></a>&#x6280;&#x672F;</h3>
+<h3 id="&#x6280;&#x672F;&#x6808;"><a href="#&#x6280;&#x672F;&#x6808;"></a>&#x6280;&#x672F;&#x6808;</h3>
 <p>Pytorch &#x6846;&#x67B6;&#x7684; CRNN &#x6D41;&#x7A0B;
 <img src="https://raw.githubusercontent.com/GitYCC/crnn-pytorch/master/misc/crnn_structure.png" alt="CRNN &#x6D41;&#x7A0B;"></p>
 <ul>
@@ -137,7 +138,12 @@ const x={},F=`<h2 id="&#x7B80;&#x4ECB;"><a href="#&#x7B80;&#x4ECB;"></a>&#x7B80;
 <li>&#x6570;&#x636E;&#x96C6;&#x8F83;&#x5C0F;
 <ul>
 <li>&#x672C;&#x6B21;&#x5E94;&#x5BF9;&#xFF1A;&#x589E;&#x52A0;&#x771F;&#x5B9E;&#x6570;&#x636E;&#x91CF;&#x6807;&#x6CE8;</li>
-<li>&#x65B9;&#x6848;&#x6C47;&#x603B;&#xFF1A;&#x4F7F;&#x7528;&#x6570;&#x636E;&#x589E;&#x5F3A;&#x6280;&#x672F;&#xFF0C;&#x5982;&#x968F;&#x673A;&#x88C1;&#x526A;&#x3001;&#x65CB;&#x8F6C;&#x3001;&#x7FFB;&#x8F6C;&#x7B49;&#xFF0C;&#x6269;&#x5145;&#x8BAD;&#x7EC3;&#x6570;&#x636E;&#x7684;&#x591A;&#x6837;&#x6027;&#x3002;</li>
+<li>&#x65B9;&#x6848;&#x6C47;&#x603B;&#xFF1A;
+<ul>
+<li>&#x4F7F;&#x7528;&#x6570;&#x636E;&#x589E;&#x5F3A;&#x6280;&#x672F;&#xFF0C;&#x5982;&#x968F;&#x673A;&#x88C1;&#x526A;&#x3001;&#x65CB;&#x8F6C;&#x3001;&#x7FFB;&#x8F6C;&#x7B49;&#xFF0C;&#x6269;&#x5145;&#x8BAD;&#x7EC3;&#x6570;&#x636E;&#x7684;&#x591A;&#x6837;&#x6027;&#x3002;</li>
+<li>&#x4F7F;&#x7528; VAE&#xFF08;&#x53D8;&#x5206;&#x81EA;&#x7F16;&#x7801;&#x5668;&#xFF09; &#x6A21;&#x578B;&#x6839;&#x636E;&#x73B0;&#x6709;&#x6570;&#x636E;&#x751F;&#x6210;&#x65B0;&#x6570;&#x636E;</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>&#x6A21;&#x578B;&#x590D;&#x6742;&#x5EA6;&#x8FC7;&#x9AD8;&#xFF1A;&#x8FC7;&#x591A;&#x7684;&#x53C2;&#x6570;&#x548C;&#x590D;&#x6742;&#x7684;&#x6A21;&#x578B;&#x7ED3;&#x6784;&#x4F1A;&#x4F7F;&#x6A21;&#x578B;&#x5728;&#x8BAD;&#x7EC3;&#x6570;&#x636E;&#x4E0A;&#x8868;&#x73B0;&#x5F88;&#x597D;&#xFF0C;&#x4F46;&#x5728;&#x65B0;&#x6570;&#x636E;&#x4E0A;&#x6CDB;&#x5316;&#x80FD;&#x529B;&#x8F83;&#x5DEE;&#x3002;
@@ -170,10 +176,10 @@ const x={},F=`<h2 id="&#x7B80;&#x4ECB;"><a href="#&#x7B80;&#x4ECB;"></a>&#x7B80;
 <li><a href="https://wandb.ai/authors/text-recognition-crnn-ctc/reports/Text-Recognition-With-CRNN-CTC-Network--VmlldzoxNTI5NDI">Text-Recognition-With-CRNN-CTC-Network</a></li>
 <li><a href="https://towardsdatascience.com/epoch-vs-iterations-vs-batch-size-4dfb9c7ce9c9">epoch-vs-iterations-vs-batch-size</a></li>
 <li><a href="https://alanlee.fun/2017/12/29/understanding-lstms/">understanding lstm</a></li>
-<li>[convolutional-neural-network](https://www.mathworks.com/discovery/convolutional-neural-network-matlab.html#:~:text=A%20convolutional%20neural%20network%20(CNN,%2Dseries%2C%20and%20signal%20data.)</li>
+<li><a href="https://www.mathworks.com/discovery/convolutional-neural-network-matlab.html">convolutional-neural-network</a></li>
 <li><a href="https://github.com/nickliqian/cnn_captcha">CNN captcha</a></li>
 <li><a href="https://github.com/GitYCC/crnn-pytorch">CRNN pytorch</a></li>
 <li><a href="https://zhuanlan.zhihu.com/p/30844905">RNN&#x57FA;&#x7840;</a></li>
 <li><a href="https://blog.csdn.net/SongGu1996/article/details/99056721">&#x4EA4;&#x53C9;&#x71B5;&#x635F;&#x5931;&#x51FD;&#x6570;</a></li>
 </ul>
-`,E=[{level:2,title:"\u7B80\u4ECB",children:[]},{level:2,title:"\u7B2C\u4E09\u65B9\u5DE5\u5177\u8C03\u7814",children:[]},{level:2,title:"CNN \u8C03\u7814",children:[{level:3,title:"\u6280\u672F",children:[]},{level:3,title:"\u9047\u5230\u7684\u95EE\u9898",children:[]}]},{level:2,title:"CRNN \u8C03\u7814",children:[{level:3,title:"\u6280\u672F",children:[]},{level:3,title:"\u9047\u5230\u7684\u95EE\u9898",children:[]}]},{level:2,title:"\u601D\u8003",children:[{level:3,title:"\u54EA\u4E9B\u573A\u666F\u53EF\u80FD\u4F1A\u51FA\u73B0\u8FC7\u62DF\u5408\uFF1F",children:[]}]},{level:2,title:"References",children:[]}];export{x as attributes,F as html,E as nestedHeaders};
+`,E=[{level:2,title:"\u7B80\u4ECB",children:[]},{level:2,title:"\u95EE\u9898\u5177\u4F53\u5316",children:[]},{level:2,title:"\u7B2C\u4E09\u65B9\u5DE5\u5177\u8C03\u7814",children:[]},{level:2,title:"CNN \u8C03\u7814",children:[{level:3,title:"\u6280\u672F\u6808",children:[]},{level:3,title:"\u9047\u5230\u7684\u95EE\u9898",children:[]}]},{level:2,title:"CRNN \u8C03\u7814",children:[{level:3,title:"\u6280\u672F\u6808",children:[]},{level:3,title:"\u9047\u5230\u7684\u95EE\u9898",children:[]}]},{level:2,title:"\u601D\u8003",children:[{level:3,title:"\u54EA\u4E9B\u573A\u666F\u53EF\u80FD\u4F1A\u51FA\u73B0\u8FC7\u62DF\u5408\uFF1F",children:[]}]},{level:2,title:"References",children:[]}];export{x as attributes,F as html,E as nestedHeaders};
