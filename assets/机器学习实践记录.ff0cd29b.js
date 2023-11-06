@@ -138,11 +138,13 @@ const x={},F=`<h2 id="&#x7B80;&#x4ECB;"><a href="#&#x7B80;&#x4ECB;"></a>&#x7B80;
 <li>&#x6570;&#x636E;&#x96C6;&#x8F83;&#x5C0F;
 <ul>
 <li>&#x672C;&#x6B21;&#x5E94;&#x5BF9;&#xFF1A;&#x589E;&#x52A0;&#x771F;&#x5B9E;&#x6570;&#x636E;&#x91CF;&#x6807;&#x6CE8;</li>
-<li>&#x65B9;&#x6848;&#x6C47;&#x603B;&#xFF1A;
-<ul>
+<li>&#x540E;&#x7EED;&#x5C1D;&#x8BD5;&#xFF08;&#x635E;&#x51FA;&#x8BC6;&#x522B;&#x9519;&#x8BEF;&#x7684;&#x771F;&#x5B9E;&#x6837;&#x672C;&#x8FDB;&#x884C;&#x589E;&#x5F3A;&#xFF0C;&#x7136;&#x540E;&#x9488;&#x5BF9;&#x6027;&#x201D;&#x523B;&#x610F;&#x7EC3;&#x4E60;&#x201C;&#xFF09;&#xFF1A;
+<ol>
 <li>&#x4F7F;&#x7528;&#x6570;&#x636E;&#x589E;&#x5F3A;&#x6280;&#x672F;&#xFF0C;&#x5982;&#x968F;&#x673A;&#x88C1;&#x526A;&#x3001;&#x65CB;&#x8F6C;&#x3001;&#x7FFB;&#x8F6C;&#x7B49;&#xFF0C;&#x6269;&#x5145;&#x8BAD;&#x7EC3;&#x6570;&#x636E;&#x7684;&#x591A;&#x6837;&#x6027;&#x3002;</li>
-<li>&#x4F7F;&#x7528; VAE&#xFF08;&#x53D8;&#x5206;&#x81EA;&#x7F16;&#x7801;&#x5668;&#xFF09; &#x6A21;&#x578B;&#x6839;&#x636E;&#x73B0;&#x6709;&#x6570;&#x636E;&#x751F;&#x6210;&#x65B0;&#x6570;&#x636E;</li>
-</ul>
+<li>&#x4F7F;&#x7528; VAE&#xFF08;&#x53D8;&#x5206;&#x81EA;&#x7F16;&#x7801;&#x5668;&#xFF09; &#x6A21;&#x578B;&#x6839;&#x636E;&#x73B0;&#x6709;&#x6570;&#x636E;&#x751F;&#x6210;&#x7C7B;&#x4F3C;&#x6837;&#x672C;&#xFF08;&#x56E0;&#x4E3A;&#x8BAD;&#x7EC3; VAE &#x672C;&#x8EAB;&#x5C31;&#x9700;&#x8981;&#x6BD4;&#x8F83;&#x591A;&#x7684;&#x6837;&#x672C;&#x6570;&#x636E;&#xFF0C;&#x5E76;&#x4E14; VAE &#x4E5F;&#x9700;&#x8981;&#x77E5;&#x9053;&#x751F;&#x6210;&#x6837;&#x672C;&#x7684;Label&#xFF09;</li>
+<li>GAN?<a href="https://machinelearningmastery.com/how-to-develop-a-generative-adversarial-network-for-an-mnist-handwritten-digits-from-scratch-in-keras/">&#x5F00;&#x53D1;&#x57FA;&#x4E8E; mnist &#x6570;&#x636E;&#x96C6;&#x7684; GAN &#x7F51;&#x7EDC;</a></li>
+<li>stable diffusion &#x56FE;&#x751F;&#x56FE;&#xFF1F;</li>
+</ol>
 </li>
 </ul>
 </li>
