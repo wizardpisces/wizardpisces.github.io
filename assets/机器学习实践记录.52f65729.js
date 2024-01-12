@@ -145,8 +145,8 @@ const x={},F=`<h2 id="&#x7B80;&#x4ECB;"><a href="#&#x7B80;&#x4ECB;"></a>&#x7B80;
 <li>&#x4F7F;&#x7528; VAE&#xFF08;&#x53D8;&#x5206;&#x81EA;&#x7F16;&#x7801;&#x5668;&#xFF09; &#x6A21;&#x578B;&#x6839;&#x636E;&#x73B0;&#x6709;&#x6570;&#x636E;&#x751F;&#x6210;&#x7C7B;&#x4F3C;&#x6837;&#x672C;&#xFF08;&#x56E0;&#x4E3A;&#x8BAD;&#x7EC3; VAE &#x672C;&#x8EAB;&#x5C31;&#x9700;&#x8981;&#x6BD4;&#x8F83;&#x591A;&#x7684;&#x6837;&#x672C;&#x6570;&#x636E;&#xFF0C;&#x5E76;&#x4E14; VAE &#x4E5F;&#x9700;&#x8981;&#x77E5;&#x9053;&#x751F;&#x6210;&#x6837;&#x672C;&#x7684;Label&#xFF09;</li>
 <li>GAN?<a href="https://machinelearningmastery.com/how-to-develop-a-generative-adversarial-network-for-an-mnist-handwritten-digits-from-scratch-in-keras/">&#x5F00;&#x53D1;&#x57FA;&#x4E8E; mnist &#x6570;&#x636E;&#x96C6;&#x7684; GAN &#x7F51;&#x7EDC;</a>
 <ol>
-<li>&#x5C1D;&#x8BD5;&#x4E86;&#x4E00;&#x822C; cgan &#xFF0C;3k &#x5F20;&#x56FE;&#x8BAD;&#x7EC3;&#x4E0D;&#x51FA;&#x6548;&#x679C;</li>
-<li>&#x540E;&#x7EED;&#x5C1D;&#x8BD5; wgan&#xFF08;&#x8BAD;&#x7EC3;&#x66F4;&#x5E73;&#x6ED1;&#xFF09;</li>
+<li>&#x5C1D;&#x8BD5;&#x4E86;&#x4E00;&#x822C; cgan &#xFF0C;3k &#x5F20;&#x56FE;&#x8BAD;&#x7EC3;&#xFF0C;&#x6548;&#x679C;&#x4E0D;&#x4F73;&#xFF08;LOSS &#x4F1A;&#x9707;&#x8361;&#xFF0C;&#x4F7F;&#x7528; Adam &#x4F18;&#x5316;&#x5668;&#xFF09;</li>
+<li>&#x540E;&#x7EED;&#x5C1D;&#x8BD5; wgan&#xFF08;&#x8BAD;&#x7EC3;&#x66F4;&#x5E73;&#x6ED1;&#xFF0C;&#x4F7F;&#x7528; RMSprop &#x4F18;&#x5316;&#x5668;&#xFF09;</li>
 </ol>
 </li>
 <li>stable diffusion &#x56FE;&#x751F;&#x56FE;&#xFF1F;</li>
