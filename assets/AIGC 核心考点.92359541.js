@@ -1,47 +1,70 @@
-const x={},F=`<h1 id="Spatial Transformer Networks (STNs) &#x795E;&#x7ECF;&#x7F51;&#x7EDC;"><a href="#Spatial Transformer Networks (STNs) &#x795E;&#x7ECF;&#x7F51;&#x7EDC;"></a>Spatial Transformer Networks (STNs) &#x795E;&#x7ECF;&#x7F51;&#x7EDC;</h1>
-<p>STN&#x53EF;&#x4EE5;&#x7B80;&#x5355;&#x7406;&#x89E3;&#x4E3A;&#x901A;&#x8FC7;CNN&#x6765;&#x81EA;&#x52A8;&#x5B66;&#x4E60;&#x8F6C;&#x6362;&#x77E9;&#x9635;&#xFF08;&#x53C2;&#x8003;&#x4E0B;&#x9762;<strong>&#x9F50;&#x6B21;&#x5750;&#x6807;</strong>&#xFF09;&#xFF0C;&#x4F7F;&#x5F97;&#x539F;&#x56FE;&#x548C;&#x8F6C;&#x6362;&#x77E9;&#x9635;&#x8FD0;&#x7B97;&#x540E;&#xFF0C;&#x80FD;&#x591F;&#x88AB;&#x63B0;&#x6B63;&#x3002;</p>
-<p><a href="https://pytorch.org/tutorials/intermediate/spatial_transformer_tutorial.html#spatial-transformer-networks-tutorial">STNs &#x7F51;&#x7EDC;&#x6E90;&#x7801;</a></p>
-<h1 id="&#x9F50;&#x6B21;&#x5750;&#x6807;"><a href="#&#x9F50;&#x6B21;&#x5750;&#x6807;"></a>&#x9F50;&#x6B21;&#x5750;&#x6807;</h1>
-<p>&#x5728;&#x9F50;&#x6B21;&#x5750;&#x6807;&#x7CFB;&#x7EDF;&#x4E2D;&#xFF0C;&#x4E00;&#x4E2A; n &#x7EF4;&#x7A7A;&#x95F4;&#x7684;&#x70B9;&#x7528; n+1 &#x7EF4;&#x7684;&#x5750;&#x6807;&#x6765;&#x8868;&#x793A;&#x3002;&#x5728;&#x7B1B;&#x5361;&#x5C14;&#x5750;&#x6807;&#x7CFB;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x7528;&#x4E24;&#x4E2A;&#x5750;&#x6807; (x, y) &#x6765;&#x8868;&#x793A;&#x8FD9;&#x4E2A;&#x70B9;&#x3002;&#x4F46;&#x662F;&#x5728;&#x9F50;&#x6B21;&#x5750;&#x6807;&#x7CFB;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x4F1A;&#x7528;&#x4E09;&#x4E2A;&#x5750;&#x6807; (x, y, z) &#x6765;&#x8868;&#x793A;&#x8FD9;&#x4E2A;&#x70B9;&#x3002;&#x8FD9;&#x91CC;&#x7684; z &#x5750;&#x6807;&#x901A;&#x5E38;&#x88AB;&#x79F0;&#x4E3A;&#x201C;&#x9F50;&#x6B21;&#x5750;&#x6807;&#x201D;&#x3002;</p>
+const x={},F=`<h1 id="&#x7279;&#x65AF;&#x62C9;&#x7684; FSD &#x7684;&#x6280;&#x672F;&#x6808;"><a href="#&#x7279;&#x65AF;&#x62C9;&#x7684; FSD &#x7684;&#x6280;&#x672F;&#x6808;"></a>&#x7279;&#x65AF;&#x62C9;&#x7684; FSD &#x7684;&#x6280;&#x672F;&#x6808;</h1>
 <ul>
-<li>&#x5C5E;&#x6027;&#xFF1A;&#x9F50;&#x6B21;&#x5750;&#x6807;&#x7684;&#x4E00;&#x4E2A;&#x5173;&#x952E;&#x5C5E;&#x6027;&#x662F;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x5C06;&#x6240;&#x6709;&#x5750;&#x6807;&#x90FD;&#x4E58;&#x4EE5;&#x540C;&#x4E00;&#x4E2A;&#x975E;&#x96F6;&#x7684;&#x5B9E;&#x6570;&#xFF0C;&#x90A3;&#x4E48;&#x8FD9;&#x4E2A;&#x70B9;&#x7684;&#x4F4D;&#x7F6E;&#x5E76;&#x4E0D;&#x4F1A;&#x6539;&#x53D8;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5728;&#x9F50;&#x6B21;&#x5750;&#x6807;&#x7CFB;&#x4E2D;&#xFF0C;(2, 4, 2) &#x548C; (1, 2, 1) &#x5B9E;&#x9645;&#x4E0A;&#x8868;&#x793A;&#x7684;&#x662F;&#x540C;&#x4E00;&#x4E2A;&#x70B9;&#x3002;</li>
-<li>&#x5E94;&#x7528;&#xFF1A;&#x975E;&#x5E38;&#x9002;&#x5408;&#x7528;&#x6765;&#x8868;&#x793A;&#x51E0;&#x4F55;&#x53D8;&#x6362;&#xFF0C;&#x5982;&#x5E73;&#x79FB;&#x3001;&#x65CB;&#x8F6C;&#x548C;&#x7F29;&#x653E;&#x3002;</li>
+<li>RegNet</li>
 </ul>
-<h2 id="&#x4E3E;&#x4F8B;&#x8BF4;&#x660E;"><a href="#&#x4E3E;&#x4F8B;&#x8BF4;&#x660E;"></a>&#x4E3E;&#x4F8B;&#x8BF4;&#x660E;</h2>
-<p><a href="https://img-blog.csdnimg.cn/20210715201056712.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwMjQzNzUw,size_16,color_FFFFFF,t_70">&#x5E38;&#x89C1;&#x53D8;&#x6362;&#x77E9;&#x9635;</a></p>
-<pre><code>&#x5047;&#x8BBE;&#x6211;&#x4EEC;&#x6709;&#x4E00;&#x4E2A;&#x4E8C;&#x7EF4;&#x7A7A;&#x95F4;&#x4E2D;&#x7684;&#x70B9; P&#xFF0C;&#x5176;&#x7B1B;&#x5361;&#x5C14;&#x5750;&#x6807;&#x662F; (x, y)&#x3002;&#x6211;&#x4EEC;&#x60F3;&#x5C06;&#x8FD9;&#x4E2A;&#x70B9;&#x5728;&#x5C4F;&#x5E55;&#x4E0A;&#x5411;&#x53F3;&#x79FB;&#x52A8; 5 &#x4E2A;&#x5355;&#x4F4D;&#xFF0C;&#x5E76;&#x5411;&#x4E0A;&#x79FB;&#x52A8; 3 &#x4E2A;&#x5355;&#x4F4D;&#x3002;&#x5728;&#x7B1B;&#x5361;&#x5C14;&#x5750;&#x6807;&#x7CFB;&#x4E2D;&#xFF0C;&#x8FD9;&#x4E2A;&#x64CD;&#x4F5C;&#x4F1A;&#x662F;&#xFF1A;
-
-P&apos; = (x + 5, y + 3)
-
-&#x4F46;&#x662F;&#xFF0C;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x60F3;&#x901A;&#x8FC7;&#x77E9;&#x9635;&#x4E58;&#x6CD5;&#x6765;&#x5E94;&#x7528;&#x8FD9;&#x4E2A;&#x5E73;&#x79FB;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x4E0D;&#x80FD;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x4E8C;&#x7EF4;&#x5750;&#x6807;&#xFF0C;&#x56E0;&#x4E3A;&#x77E9;&#x9635;&#x4E58;&#x6CD5;&#x4E0D;&#x652F;&#x6301;&#x76F4;&#x63A5;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x5E38;&#x6570;&#xFF08;&#x5982;&#x5E73;&#x79FB;&#x5411;&#x91CF;&#xFF09;&#x3002;&#x8FD9;&#x5C31;&#x662F;&#x9F50;&#x6B21;&#x5750;&#x6807;&#x53D1;&#x6325;&#x4F5C;&#x7528;&#x7684;&#x5730;&#x65B9;&#x3002;
-
-&#x6211;&#x4EEC;&#x9996;&#x5148;&#x5C06;&#x70B9; P &#x8F6C;&#x6362;&#x4E3A;&#x9F50;&#x6B21;&#x5750;&#x6807;&#xFF0C;&#x589E;&#x52A0;&#x4E00;&#x4E2A;&#x989D;&#x5916;&#x7684;&#x7EF4;&#x5EA6;&#xFF1A;
-
-P_homogeneous = (x, y, 1)
-
-&#x73B0;&#x5728;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4E00;&#x4E2A; 3x3 &#x7684;&#x53D8;&#x6362;&#x77E9;&#x9635;&#x6765;&#x8868;&#x793A;&#x5E73;&#x79FB;&#xFF1A;
-
-T = | 1 0 5 |
-    | 0 1 3 |
-    | 0 0 1 |
-
-&#x5C06;&#x53D8;&#x6362;&#x77E9;&#x9635; T &#x4E58;&#x4EE5;&#x9F50;&#x6B21;&#x5750;&#x6807; P_homogeneous&#xFF0C;&#x6211;&#x4EEC;&#x5F97;&#x5230;&#xFF1A;
-
-P&apos;_homogeneous = T * P_homogeneous
-               = | 1 0 5 |   | x |
-                 | 0 1 3 | * | y |
-                 | 0 0 1 |   | 1 |
-
-               = | x + 5 |
-                 | y + 3 |
-                 |   1   |
-
-&#x8FD9;&#x4E2A;&#x7ED3;&#x679C;&#x7684;&#x524D;&#x4E24;&#x4E2A;&#x5750;&#x6807; (x + 5, y + 3) &#x5C31;&#x662F;&#x5E94;&#x7528;&#x5E73;&#x79FB;&#x540E;&#x7684;&#x65B0;&#x4F4D;&#x7F6E;&#xFF0C;&#x4E0E;&#x6211;&#x4EEC;&#x76F4;&#x63A5;&#x5728;&#x7B1B;&#x5361;&#x5C14;&#x5750;&#x6807;&#x7CFB;&#x4E2D;&#x8BA1;&#x7B97;&#x7684;&#x7ED3;&#x679C;&#x76F8;&#x540C;&#x3002;&#x4F46;&#x662F;&#xFF0C;&#x4F7F;&#x7528;&#x9F50;&#x6B21;&#x5750;&#x6807;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x77E9;&#x9635;&#x4E58;&#x6CD5;&#x6765;&#x5B9E;&#x73B0;&#x8FD9;&#x4E2A;&#x53D8;&#x6362;&#xFF0C;&#x8FD9;&#x5BF9;&#x4E8E;&#x8BA1;&#x7B97;&#x673A;&#x56FE;&#x5F62;&#x5B66;&#x7684;&#x5E94;&#x7528;&#x975E;&#x5E38;&#x91CD;&#x8981;&#xFF0C;&#x56E0;&#x4E3A;&#x786C;&#x4EF6;&#x901A;&#x5E38;&#x9488;&#x5BF9;&#x77E9;&#x9635;&#x8FD0;&#x7B97;&#x8FDB;&#x884C;&#x4E86;&#x4F18;&#x5316;&#x3002;
-
-&#x6700;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5C06;&#x9F50;&#x6B21;&#x5750;&#x6807;&#x8F6C;&#x6362;&#x56DE;&#x7B1B;&#x5361;&#x5C14;&#x5750;&#x6807;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x7B80;&#x5355;&#x5730;&#x5FFD;&#x7565;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x5750;&#x6807;&#xFF08;&#x5728;&#x8FD9;&#x4E2A;&#x4F8B;&#x5B50;&#x4E2D;&#x662F; 1&#xFF09;&#x5373;&#x53EF;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x70B9; P &#x5728;&#x5E73;&#x79FB;&#x53D8;&#x6362;&#x540E;&#x7684;&#x7B1B;&#x5361;&#x5C14;&#x5750;&#x6807;&#x662F; (x + 5, y + 3)&#x3002;
-
-&#x8FD9;&#x4E2A;&#x4F8B;&#x5B50;&#x5C55;&#x793A;&#x4E86;&#x9F50;&#x6B21;&#x5750;&#x6807;&#x5982;&#x4F55;&#x7B80;&#x5316;&#x548C;&#x7EDF;&#x4E00;&#x51E0;&#x4F55;&#x53D8;&#x6362;&#x7684;&#x8868;&#x793A;&#x548C;&#x8BA1;&#x7B97;&#xFF0C;&#x7279;&#x522B;&#x662F;&#x5728;&#x9700;&#x8981;&#x8FDE;&#x7EED;&#x5E94;&#x7528;&#x591A;&#x4E2A;&#x53D8;&#x6362;&#x65F6;&#x3002;&#x901A;&#x8FC7;&#x4F7F;&#x7528;&#x9F50;&#x6B21;&#x5750;&#x6807;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5C06;&#x591A;&#x4E2A;&#x53D8;&#x6362;&#x5408;&#x5E76;&#x5230;&#x4E00;&#x4E2A;&#x77E9;&#x9635;&#x4E2D;&#xFF0C;&#x7136;&#x540E;&#x4E00;&#x6B21;&#x6027;&#x5E94;&#x7528;&#x5230;&#x70B9;&#x4E0A;&#xFF0C;&#x8FD9;&#x5728;&#x4E09;&#x7EF4;&#x56FE;&#x5F62;&#x6E32;&#x67D3;&#x4E2D;&#x5C24;&#x4E3A;&#x91CD;&#x8981;&#x3002;
+<h1 id="CLIP &#x6A21;&#x578B;"><a href="#CLIP &#x6A21;&#x578B;"></a>CLIP &#x6A21;&#x578B;</h1>
+<p>CLIP&#xFF08;Contrastive Language-Image Pretraining&#xFF09;&#x662F;&#x4E00;&#x79CD;&#x57FA;&#x4E8E;&#x5BF9;&#x6BD4;&#x5B66;&#x4E60;&#x7684;&#x591A;&#x6A21;&#x6001;&#x6A21;&#x578B;&#xFF0C;&#x65E8;&#x5728;&#x5C06;&#x8BA1;&#x7B97;&#x673A;&#x89C6;&#x89C9;&#x548C;&#x81EA;&#x7136;&#x8BED;&#x8A00;&#x5904;&#x7406;&#x9886;&#x57DF;&#x7ED3;&#x5408;&#x8D77;&#x6765;&#x3002;</p>
+<p>CLIP&#x6210;&#x4E3A;&#x4E86;&#x8BA1;&#x7B97;&#x673A;&#x89C6;&#x89C9;&#x548C;&#x81EA;&#x7136;&#x8BED;&#x8A00;&#x5904;&#x7406;&#x8FD9;&#x4E24;&#x5927;AI&#x65B9;&#x5411;&#x7684;&#x201C;&#x6865;&#x6881;&#x201D;&#xFF0C;AI&#x9886;&#x57DF;&#x7684;&#x591A;&#x6A21;&#x6001;&#x5E94;&#x7528;&#x6709;&#x4E86;&#x7ECF;&#x5178;&#x7684;&#x57FA;&#x77F3;&#x6A21;&#x578B;&#x3002;</p>
+<h1 id="&#x6A21;&#x578B;&#x5DE5;&#x5382;"><a href="#&#x6A21;&#x578B;&#x5DE5;&#x5382;"></a>&#x6A21;&#x578B;&#x5DE5;&#x5382;</h1>
+<p>gpt &#x636E;&#x8BF4;&#x662F;&#x4E00;&#x6B21;&#x8BAD;&#x7EC3;&#x6210;&#x529F;&#xFF0C;&#x8BF4;&#x660E;&#x80CC;&#x540E;&#x7684;&#x6A21;&#x578B;&#x5DE5;&#x5382;&#x6D41;&#x6C34;&#x7EBF;&#x5F88;&#x7A33;&#x5B9A;&#xFF08;&#x80FD;&#x591F;&#x901A;&#x8FC7;&#x6539;&#x53D8;&#x53C2;&#x6570;&#x5C31;&#x5F97;&#x51FA;&#x9884;&#x671F;&#x7684;&#x8BAD;&#x7EC3;&#x7ED3;&#x679C;&#xFF0C;&#x5BF9;&#x4E8E;&#x6A21;&#x578B;&#x7684;&#x63A7;&#x5236;&#x5F88;&#x7A33;&#x5B9A;&#xFF09;
+&#x6A21;&#x578B;&#x6D41;&#x6C34;&#x7EBF;</p>
+<h1 id="STNs &#x795E;&#x7ECF;&#x7F51;&#x7EDC;"><a href="#STNs &#x795E;&#x7ECF;&#x7F51;&#x7EDC;"></a>STNs &#x795E;&#x7ECF;&#x7F51;&#x7EDC;</h1>
+<p>STN&#xFF08;Spatial Transformer Networks&#xFF09;&#x53EF;&#x4EE5;&#x7B80;&#x5355;&#x7406;&#x89E3;&#x4E3A;&#x901A;&#x8FC7;CNN&#x6765;&#x81EA;&#x52A8;&#x5B66;&#x4E60;&#x8F6C;&#x6362;&#x77E9;&#x9635;&#xFF08;&#x53C2;&#x8003;&#x4E0B;&#x9762;<strong>&#x9F50;&#x6B21;&#x5750;&#x6807;</strong>&#xFF09;&#xFF0C;&#x4F7F;&#x5F97;&#x539F;&#x56FE;&#x548C;&#x8F6C;&#x6362;&#x77E9;&#x9635;&#x8FD0;&#x7B97;&#x540E;&#xFF0C;&#x80FD;&#x591F;&#x88AB;&#x63B0;&#x6B63;&#x3002;&#x53EF;&#x63D2;&#x5165;&#x5230;&#x6DF1;&#x5EA6;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x4E2D;&#x7684;&#x6A21;&#x5757;&#xFF0C;&#x5B83;&#x53EF;&#x4EE5;&#x81EA;&#x4E3B;&#x5B66;&#x4E60;&#x5982;&#x4F55;&#x6267;&#x884C;&#x7A7A;&#x95F4;&#x53D8;&#x6362;&#x4EE5;&#x589E;&#x5F3A;&#x6A21;&#x578B;&#x7684;&#x6027;&#x80FD;&#x3002;</p>
+<p>STN&#x5305;&#x62EC;&#x4E09;&#x4E2A;&#x4E3B;&#x8981;&#x7684;&#x90E8;&#x5206;&#xFF1A;</p>
+<ul>
+<li>
+<p>Localisation Network&#xFF1A;&#x8FD9;&#x662F;STN&#x7684;&#x7B2C;&#x4E00;&#x90E8;&#x5206;&#xFF0C;&#x8D1F;&#x8D23;&#x5B66;&#x4E60;&#x5982;&#x4F55;&#x6267;&#x884C;&#x6700;&#x4F18;&#x7684;&#x53D8;&#x6362;&#x3002;&#x57FA;&#x672C;&#x4E0A;&#xFF0C;&#x5B83;&#x662F;&#x4E00;&#x4E2A;&#x5377;&#x79EF;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#xFF0C;&#x53EF;&#x4EE5;&#x8F93;&#x5165;&#x56FE;&#x50CF;&#x5E76;&#x901A;&#x8FC7;&#x81EA;&#x5DF1;&#x7684;&#x5C42;&#x6765;&#x9884;&#x6D4B;&#x53D8;&#x6362;&#x7684;&#x53C2;&#x6570;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x8981;&#x6267;&#x884C;&#x4EFF;&#x5C04;&#x53D8;&#x6362;&#xFF0C;Localisation Network&#x53EF;&#x80FD;&#x4F1A;&#x8F93;&#x51FA;&#x516D;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x5B9A;&#x4E49;&#x4E86;&#x9700;&#x8981;&#x8FDB;&#x884C;&#x7684;&#x5E73;&#x79FB;&#x3001;&#x7F29;&#x653E;&#x3001;&#x65CB;&#x8F6C;&#x548C;&#x9519;&#x5207; &#x7684;&#x4EFF;&#x5C04;&#x77E9;&#x9635;&#x3002;</p>
+</li>
+<li>
+<p>Parameterised Grid Generator&#xFF1A;&#x8FD9;&#x4E00;&#x90E8;&#x5206;&#x4F1A;&#x63A5;&#x6536;Localisation Network&#x8F93;&#x51FA;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x5E76;&#x4F7F;&#x7528;&#x8FD9;&#x4E9B;&#x53C2;&#x6570;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x5BF9;&#x6BCF;&#x4E2A;&#x50CF;&#x7D20;&#x8FDB;&#x884C;&#x53D8;&#x6362;&#x7684;&#x5750;&#x6807;&#x7F51;&#x683C;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5982;&#x679C;&#x8F93;&#x5165;&#x56FE;&#x50CF;&#x9700;&#x8981;&#x65CB;&#x8F6C;&#xFF0C;&#x5219;&#x7F51;&#x683C;&#x4F1A;&#x751F;&#x6210;&#x65CB;&#x8F6C;&#x540E;&#x6BCF;&#x4E2A;&#x50CF;&#x7D20;&#x7684;&#x65B0;&#x4F4D;&#x7F6E;&#x3002;</p>
+<ul>
+<li>&#x4F8B;&#x5982;
+grid = F.affine_grid(theta, x.size())</li>
+</ul>
+<pre><code>&#x56FE;&#x7247;&#x50CF;&#x7D20;&#xFF1A;
+[(0,0), (0,1), (0,2),
 </code></pre>
+</li>
+</ul>
+<p>(1,0), (1,1), (1,2),
+(2,0), (2,1), (2,2)]</p>
+<p>-&gt; &#x4F7F;&#x7528;&#x53F3;&#x79FB;&#x4E00;&#x4F4D;&#x7684;&#x4EFF;&#x5C04;&#x53D8;&#x6362;&#x77E9;&#x9635;&#x751F;&#x6210;&#x7684;&#x4EFF;&#x5C04;&#x53D8;&#x6362;&#x7F51;&#x683C;&#xFF1A;</p>
+<p>[(0,1), (0,2), (0,3),
+(1,1), (1,2), (1,3),
+(2,1), (2,2), (2,3)]</p>
+<pre><code>
+* Sampler&#xFF1A;F.grid_sample(x, grid) &#x90E8;&#x5206;&#x4F7F;&#x7528;&#x7F51;&#x683C;&#x751F;&#x6210;&#x7684;&#x65B0;&#x5750;&#x6807;&#x53BB;&#x7D22;&#x5F15;&#x8F93;&#x5165;&#x56FE;&#x50CF;&#xFF0C;&#x751F;&#x6210;&#x53D8;&#x6362;&#x540E;&#x7684;&#x8F93;&#x51FA;&#x56FE;&#x50CF;&#x3002;&#x5982;&#x679C;&#x65B0;&#x5750;&#x6807;&#x70B9;&#x4E0D;&#x5728;&#x50CF;&#x7D20;&#x70B9;&#x7684;&#x7CBE;&#x786E;&#x4F4D;&#x7F6E;&#x4E0A;&#xFF0C;&#x5219;&#x4F1A;&#x4F7F;&#x7528;&#x4E00;&#x4E9B;&#x63D2;&#x503C;&#x65B9;&#x6CD5;&#x6765;&#x4F30;&#x8BA1;&#x65B0;&#x5750;&#x6807;&#x5BF9;&#x5E94;&#x7684;&#x50CF;&#x7D20;&#x503C;&#x3002;
+
+
+[STNs &#x7F51;&#x7EDC;&#x6E90;&#x7801;](https://pytorch.org/tutorials/intermediate/spatial_transformer_tutorial.html#spatial-transformer-networks-tutorial)
+# &#x9F50;&#x6B21;&#x5750;&#x6807;
+&#x5728;&#x9F50;&#x6B21;&#x5750;&#x6807;&#x7CFB;&#x7EDF;&#x4E2D;&#xFF0C;&#x4E00;&#x4E2A; n &#x7EF4;&#x7A7A;&#x95F4;&#x7684;&#x70B9;&#x7528; n+1 &#x7EF4;&#x7684;&#x5750;&#x6807;&#x6765;&#x8868;&#x793A;&#x3002;&#x5728;&#x7B1B;&#x5361;&#x5C14;&#x5750;&#x6807;&#x7CFB;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x7528;&#x4E24;&#x4E2A;&#x5750;&#x6807; (x, y) &#x6765;&#x8868;&#x793A;&#x8FD9;&#x4E2A;&#x70B9;&#x3002;&#x4F46;&#x662F;&#x5728;&#x9F50;&#x6B21;&#x5750;&#x6807;&#x7CFB;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x4F1A;&#x7528;&#x4E09;&#x4E2A;&#x5750;&#x6807; (x, y, z) &#x6765;&#x8868;&#x793A;&#x8FD9;&#x4E2A;&#x70B9;&#x3002;&#x8FD9;&#x91CC;&#x7684; z &#x5750;&#x6807;&#x901A;&#x5E38;&#x88AB;&#x79F0;&#x4E3A;&#x201C;&#x9F50;&#x6B21;&#x5750;&#x6807;&#x201D;&#x3002;
+* &#x5C5E;&#x6027;&#xFF1A;&#x9F50;&#x6B21;&#x5750;&#x6807;&#x7684;&#x4E00;&#x4E2A;&#x5173;&#x952E;&#x5C5E;&#x6027;&#x662F;&#xFF0C;&#x5982;&#x679C;&#x4F60;&#x5C06;&#x6240;&#x6709;&#x5750;&#x6807;&#x90FD;&#x4E58;&#x4EE5;&#x540C;&#x4E00;&#x4E2A;&#x975E;&#x96F6;&#x7684;&#x5B9E;&#x6570;&#xFF0C;&#x90A3;&#x4E48;&#x8FD9;&#x4E2A;&#x70B9;&#x7684;&#x4F4D;&#x7F6E;&#x5E76;&#x4E0D;&#x4F1A;&#x6539;&#x53D8;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5728;&#x9F50;&#x6B21;&#x5750;&#x6807;&#x7CFB;&#x4E2D;&#xFF0C;(2, 4, 2) &#x548C; (1, 2, 1) &#x5B9E;&#x9645;&#x4E0A;&#x8868;&#x793A;&#x7684;&#x662F;&#x540C;&#x4E00;&#x4E2A;&#x70B9;&#x3002;
+* &#x5E94;&#x7528;&#xFF1A;&#x975E;&#x5E38;&#x9002;&#x5408;&#x7528;&#x6765;&#x8868;&#x793A;&#x51E0;&#x4F55;&#x53D8;&#x6362;&#xFF0C;&#x5982;&#x5E73;&#x79FB;&#x3001;&#x65CB;&#x8F6C;&#x548C;&#x7F29;&#x653E;&#x3002;
+## &#x4E3E;&#x4F8B;&#x8BF4;&#x660E;
+[&#x5E38;&#x89C1;&#x53D8;&#x6362;&#x77E9;&#x9635;](https://img-blog.csdnimg.cn/20210715201056712.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwMjQzNzUw,size_16,color_FFFFFF,t_70)
+</code></pre>
+<p>&#x5047;&#x8BBE;&#x6211;&#x4EEC;&#x6709;&#x4E00;&#x4E2A;&#x4E8C;&#x7EF4;&#x7A7A;&#x95F4;&#x4E2D;&#x7684;&#x70B9; P&#xFF0C;&#x5176;&#x7B1B;&#x5361;&#x5C14;&#x5750;&#x6807;&#x662F; (x, y)&#x3002;&#x6211;&#x4EEC;&#x60F3;&#x5C06;&#x8FD9;&#x4E2A;&#x70B9;&#x5728;&#x5C4F;&#x5E55;&#x4E0A;&#x5411;&#x53F3;&#x79FB;&#x52A8; 5 &#x4E2A;&#x5355;&#x4F4D;&#xFF0C;&#x5E76;&#x5411;&#x4E0A;&#x79FB;&#x52A8; 3 &#x4E2A;&#x5355;&#x4F4D;&#x3002;&#x5728;&#x7B1B;&#x5361;&#x5C14;&#x5750;&#x6807;&#x7CFB;&#x4E2D;&#xFF0C;&#x8FD9;&#x4E2A;&#x64CD;&#x4F5C;&#x4F1A;&#x662F;&#xFF1A;</p>
+<p>P&apos; = (x + 5, y + 3)</p>
+<p>&#x4F46;&#x662F;&#xFF0C;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x60F3;&#x901A;&#x8FC7;&#x77E9;&#x9635;&#x4E58;&#x6CD5;&#x6765;&#x5E94;&#x7528;&#x8FD9;&#x4E2A;&#x5E73;&#x79FB;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x4E0D;&#x80FD;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x4E8C;&#x7EF4;&#x5750;&#x6807;&#xFF0C;&#x56E0;&#x4E3A;&#x77E9;&#x9635;&#x4E58;&#x6CD5;&#x4E0D;&#x652F;&#x6301;&#x76F4;&#x63A5;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x5E38;&#x6570;&#xFF08;&#x5982;&#x5E73;&#x79FB;&#x5411;&#x91CF;&#xFF09;&#x3002;&#x8FD9;&#x5C31;&#x662F;&#x9F50;&#x6B21;&#x5750;&#x6807;&#x53D1;&#x6325;&#x4F5C;&#x7528;&#x7684;&#x5730;&#x65B9;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x9996;&#x5148;&#x5C06;&#x70B9; P &#x8F6C;&#x6362;&#x4E3A;&#x9F50;&#x6B21;&#x5750;&#x6807;&#xFF0C;&#x589E;&#x52A0;&#x4E00;&#x4E2A;&#x989D;&#x5916;&#x7684;&#x7EF4;&#x5EA6;&#xFF1A;</p>
+<p>P_homogeneous = (x, y, 1)</p>
+<p>&#x73B0;&#x5728;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4E00;&#x4E2A; 3x3 &#x7684;&#x53D8;&#x6362;&#x77E9;&#x9635;&#x6765;&#x8868;&#x793A;&#x5E73;&#x79FB;&#xFF1A;</p>
+<p>T = | 1 0 5 |
+| 0 1 3 |
+| 0 0 1 |</p>
+<p>&#x5C06;&#x53D8;&#x6362;&#x77E9;&#x9635; T &#x4E58;&#x4EE5;&#x9F50;&#x6B21;&#x5750;&#x6807; P_homogeneous&#xFF0C;&#x6211;&#x4EEC;&#x5F97;&#x5230;&#xFF1A;</p>
+<p>P&apos;_homogeneous = T * P_homogeneous
+= | 1 0 5 |   | x |
+| 0 1 3 | * | y |
+| 0 0 1 |   | 1 |</p>
+<pre><code>           = | x + 5 |
+             | y + 3 |
+             |   1   |
+</code></pre>
+<p>&#x8FD9;&#x4E2A;&#x7ED3;&#x679C;&#x7684;&#x524D;&#x4E24;&#x4E2A;&#x5750;&#x6807; (x + 5, y + 3) &#x5C31;&#x662F;&#x5E94;&#x7528;&#x5E73;&#x79FB;&#x540E;&#x7684;&#x65B0;&#x4F4D;&#x7F6E;&#xFF0C;&#x4E0E;&#x6211;&#x4EEC;&#x76F4;&#x63A5;&#x5728;&#x7B1B;&#x5361;&#x5C14;&#x5750;&#x6807;&#x7CFB;&#x4E2D;&#x8BA1;&#x7B97;&#x7684;&#x7ED3;&#x679C;&#x76F8;&#x540C;&#x3002;&#x4F46;&#x662F;&#xFF0C;&#x4F7F;&#x7528;&#x9F50;&#x6B21;&#x5750;&#x6807;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x77E9;&#x9635;&#x4E58;&#x6CD5;&#x6765;&#x5B9E;&#x73B0;&#x8FD9;&#x4E2A;&#x53D8;&#x6362;&#xFF0C;&#x8FD9;&#x5BF9;&#x4E8E;&#x8BA1;&#x7B97;&#x673A;&#x56FE;&#x5F62;&#x5B66;&#x7684;&#x5E94;&#x7528;&#x975E;&#x5E38;&#x91CD;&#x8981;&#xFF0C;&#x56E0;&#x4E3A;&#x786C;&#x4EF6;&#x901A;&#x5E38;&#x9488;&#x5BF9;&#x77E9;&#x9635;&#x8FD0;&#x7B97;&#x8FDB;&#x884C;&#x4E86;&#x4F18;&#x5316;&#x3002;</p>
+<p>&#x6700;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5C06;&#x9F50;&#x6B21;&#x5750;&#x6807;&#x8F6C;&#x6362;&#x56DE;&#x7B1B;&#x5361;&#x5C14;&#x5750;&#x6807;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x7B80;&#x5355;&#x5730;&#x5FFD;&#x7565;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x5750;&#x6807;&#xFF08;&#x5728;&#x8FD9;&#x4E2A;&#x4F8B;&#x5B50;&#x4E2D;&#x662F; 1&#xFF09;&#x5373;&#x53EF;&#x3002;&#x6240;&#x4EE5;&#xFF0C;&#x70B9; P &#x5728;&#x5E73;&#x79FB;&#x53D8;&#x6362;&#x540E;&#x7684;&#x7B1B;&#x5361;&#x5C14;&#x5750;&#x6807;&#x662F; (x + 5, y + 3)&#x3002;</p>
+<p>&#x8FD9;&#x4E2A;&#x4F8B;&#x5B50;&#x5C55;&#x793A;&#x4E86;&#x9F50;&#x6B21;&#x5750;&#x6807;&#x5982;&#x4F55;&#x7B80;&#x5316;&#x548C;&#x7EDF;&#x4E00;&#x51E0;&#x4F55;&#x53D8;&#x6362;&#x7684;&#x8868;&#x793A;&#x548C;&#x8BA1;&#x7B97;&#xFF0C;&#x7279;&#x522B;&#x662F;&#x5728;&#x9700;&#x8981;&#x8FDE;&#x7EED;&#x5E94;&#x7528;&#x591A;&#x4E2A;&#x53D8;&#x6362;&#x65F6;&#x3002;&#x901A;&#x8FC7;&#x4F7F;&#x7528;&#x9F50;&#x6B21;&#x5750;&#x6807;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5C06;&#x591A;&#x4E2A;&#x53D8;&#x6362;&#x5408;&#x5E76;&#x5230;&#x4E00;&#x4E2A;&#x77E9;&#x9635;&#x4E2D;&#xFF0C;&#x7136;&#x540E;&#x4E00;&#x6B21;&#x6027;&#x5E94;&#x7528;&#x5230;&#x70B9;&#x4E0A;&#xFF0C;&#x8FD9;&#x5728;&#x4E09;&#x7EF4;&#x56FE;&#x5F62;&#x6E32;&#x67D3;&#x4E2D;&#x5C24;&#x4E3A;&#x91CD;&#x8981;&#x3002;</p>
 <h2 id="&#x4E3A;&#x4EC0;&#x4E48;&#x9F50;&#x6B21;&#x5750;&#x6807;&#x6709;&#x8FD9;&#x4E2A;&#x7279;&#x6027;"><a href="#&#x4E3A;&#x4EC0;&#x4E48;&#x9F50;&#x6B21;&#x5750;&#x6807;&#x6709;&#x8FD9;&#x4E2A;&#x7279;&#x6027;"></a>&#x4E3A;&#x4EC0;&#x4E48;&#x9F50;&#x6B21;&#x5750;&#x6807;&#x6709;&#x8FD9;&#x4E2A;&#x7279;&#x6027;</h2>
 <p>&#x9F50;&#x6B21;&#x5750;&#x6807;&#x6709;&#x8FD9;&#x4E2A;&#x7279;&#x6027;&#x662F;&#x56E0;&#x4E3A;&#x5B83;&#x4EEC;&#x5F15;&#x5165;&#x4E86;&#x4E00;&#x4E2A;&#x989D;&#x5916;&#x7684;&#x7EF4;&#x5EA6;&#x6765;&#x4EE3;&#x8868;&#x70B9;&#x7684;&#x201C;&#x6743;&#x91CD;&#x201D;&#xFF0C;&#x8FD9;&#x5141;&#x8BB8;&#x5750;&#x6807;&#x8868;&#x793A;&#x5728;&#x5C3A;&#x5EA6;&#x4E0A;&#x4E0D;&#x662F;&#x552F;&#x4E00;&#x7684;&#x3002;&#x5728;&#x9F50;&#x6B21;&#x5750;&#x6807;&#x7CFB;&#x7EDF;&#x4E2D;&#xFF0C;&#x4E00;&#x4E2A;&#x70B9;&#x7684;&#x4F4D;&#x7F6E;&#x7531;&#x6BD4;&#x4F8B;&#x800C;&#x975E;&#x7EDD;&#x5BF9;&#x503C;&#x786E;&#x5B9A;&#xFF0C;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x53EA;&#x6709;&#x5750;&#x6807;&#x7684;&#x6BD4;&#x4F8B;&#xFF08;&#x6216;&#x6BD4;&#x4F8B;&#x5173;&#x7CFB;&#xFF09;&#x662F;&#x91CD;&#x8981;&#x7684;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x5B83;&#x4EEC;&#x7684;&#x5B9E;&#x9645;&#x6570;&#x503C;&#x3002;</p>
 <p>&#x8FD9;&#x4E2A;&#x7279;&#x6027;&#x7684;&#x6570;&#x5B66;&#x57FA;&#x7840;&#x662F;&#x5C04;&#x5F71;&#x51E0;&#x4F55;&#x4E2D;&#x7684;&#x6982;&#x5FF5;&#xFF0C;&#x5C04;&#x5F71;&#x51E0;&#x4F55;&#x7814;&#x7A76;&#x7684;&#x662F;&#x5BF9;&#x8C61;&#x7684;&#x51E0;&#x4F55;&#x5C5E;&#x6027;&#x5728;&#x6295;&#x5F71;&#x53D8;&#x6362;&#x4E0B;&#x7684;&#x4E0D;&#x53D8;&#x6027;&#x3002;&#x5728;&#x5C04;&#x5F71;&#x7A7A;&#x95F4;&#x4E2D;&#xFF0C;&#x4E00;&#x4E2A;&#x70B9;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4E0D;&#x540C;&#x7684;&#x9F50;&#x6B21;&#x5750;&#x6807;&#x6765;&#x8868;&#x793A;&#xFF0C;&#x53EA;&#x8981;&#x8FD9;&#x4E9B;&#x5750;&#x6807;&#x662F;&#x6210;&#x6BD4;&#x4F8B;&#x7684;&#x3002;&#x8FD9;&#x662F;&#x56E0;&#x4E3A;&#x5C04;&#x5F71;&#x7A7A;&#x95F4;&#x4E2D;&#x7684;&#x70B9;&#x662F;&#x901A;&#x8FC7;&#x4ECE;&#x539F;&#x70B9;&#x51FA;&#x53D1;&#x7684;&#x5C04;&#x7EBF;&#x6765;&#x5B9A;&#x4E49;&#x7684;&#xFF0C;&#x800C;&#x6BCF;&#x4E2A;&#x5C04;&#x7EBF;&#x4E0E;&#x7ED9;&#x5B9A;&#x7684;&#x8D85;&#x5E73;&#x9762;&#xFF08;&#x4F8B;&#x5982;&#xFF0C;&#x4E8C;&#x7EF4;&#x7A7A;&#x95F4;&#x4E2D;&#x7684;&#x7EBF;&#x6216;&#x4E09;&#x7EF4;&#x7A7A;&#x95F4;&#x4E2D;&#x7684;&#x5E73;&#x9762;&#xFF09;&#x76F8;&#x4EA4;&#x4E8E;&#x4E00;&#x70B9;&#x3002;&#x9F50;&#x6B21;&#x5750;&#x6807;&#x4E2D;&#x7684;&#x989D;&#x5916;&#x7EF4;&#x5EA6;&#x5141;&#x8BB8;&#x6211;&#x4EEC;&#x8868;&#x793A;&#x8FD9;&#x6837;&#x7684;&#x5C04;&#x7EBF;&#xFF0C;&#x5E76;&#x901A;&#x8FC7;&#x4EA4;&#x70B9;&#x6765;&#x786E;&#x5B9A;&#x539F;&#x59CB;&#x7A7A;&#x95F4;&#x4E2D;&#x7684;&#x70B9;&#x3002;</p>
@@ -126,8 +149,9 @@ P&apos;_homogeneous = T * P_homogeneous
 </li>
 </ul>
 <p><a href="https://www.zhihu.com/question/424149824/answer/2296707462">&#x4F55;&#x607A;&#x660E;&#x76EE;&#x524D;&#x7684;&#x5B66;&#x672F;&#x6210;&#x679C;&#x662F;&#x5426;&#x591F;&#x5F97;&#x4E0A;&#x8BA1;&#x7B97;&#x673A;&#x89C6;&#x89C9;&#x9886;&#x57DF;&#x5386;&#x53F2;&#x7B2C;&#x4E00;&#x4EBA;&#xFF1F;</a></p>
-<h1 id="Reference"><a href="#Reference"></a>Reference</h1>
+<h1 id="Resource"><a href="#Resource"></a>Resource</h1>
 <ul>
 <li><a href="https://zhuanlan.zhihu.com/p/632809634">SD &#x8BE6;&#x89E3;</a></li>
+<li><a href="https://github.com/315386775/DeepLearing-Interview-Awesome-2024">DeepLearing-Interview-Awesome-2024</a></li>
 </ul>
-`,E=[{level:1,title:"Spatial Transformer Networks (STNs) \u795E\u7ECF\u7F51\u7EDC",children:[]},{level:1,title:"\u9F50\u6B21\u5750\u6807",children:[{level:2,title:"\u4E3E\u4F8B\u8BF4\u660E",children:[]},{level:2,title:"\u4E3A\u4EC0\u4E48\u9F50\u6B21\u5750\u6807\u6709\u8FD9\u4E2A\u7279\u6027",children:[]}]},{level:1,title:"SD U-Net\u7684\u6574\u4F53\u67B6\u6784",children:[]},{level:1,title:"ResNet",children:[]},{level:1,title:"\u6DF1\u5EA6\u5B66\u4E60\u6210\u5C31\u4EBA\u7269",children:[]},{level:1,title:"Reference",children:[]}];export{x as attributes,F as html,E as nestedHeaders};
+`,E=[{level:1,title:"\u7279\u65AF\u62C9\u7684 FSD \u7684\u6280\u672F\u6808",children:[]},{level:1,title:"CLIP \u6A21\u578B",children:[]},{level:1,title:"\u6A21\u578B\u5DE5\u5382",children:[]},{level:1,title:"STNs \u795E\u7ECF\u7F51\u7EDC",children:[{level:2,title:"\u4E3A\u4EC0\u4E48\u9F50\u6B21\u5750\u6807\u6709\u8FD9\u4E2A\u7279\u6027",children:[]}]},{level:1,title:"SD U-Net\u7684\u6574\u4F53\u67B6\u6784",children:[]},{level:1,title:"ResNet",children:[]},{level:1,title:"\u6DF1\u5EA6\u5B66\u4E60\u6210\u5C31\u4EBA\u7269",children:[]},{level:1,title:"Resource",children:[]}];export{x as attributes,F as html,E as nestedHeaders};
