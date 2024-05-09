@@ -1,4 +1,68 @@
-const x={},F=`<h1 id="&#x7279;&#x65AF;&#x62C9;&#x7684; FSD &#x7684;&#x6280;&#x672F;&#x6808;"><a href="#&#x7279;&#x65AF;&#x62C9;&#x7684; FSD &#x7684;&#x6280;&#x672F;&#x6808;"></a>&#x7279;&#x65AF;&#x62C9;&#x7684; FSD &#x7684;&#x6280;&#x672F;&#x6808;</h1>
+const x={},F=`<h1 id="&#x4EBA;&#x8138;&#x8BC6;&#x522B;&#x4EFB;&#x52A1;&#x4E2D;&#xFF0C;ArcFace&#x4E3A;&#x4EC0;&#x4E48;&#x6BD4;CosFace&#x6548;&#x679C;&#x597D;"><a href="#&#x4EBA;&#x8138;&#x8BC6;&#x522B;&#x4EFB;&#x52A1;&#x4E2D;&#xFF0C;ArcFace&#x4E3A;&#x4EC0;&#x4E48;&#x6BD4;CosFace&#x6548;&#x679C;&#x597D;"></a>&#x4EBA;&#x8138;&#x8BC6;&#x522B;&#x4EFB;&#x52A1;&#x4E2D;&#xFF0C;ArcFace&#x4E3A;&#x4EC0;&#x4E48;&#x6BD4;CosFace&#x6548;&#x679C;&#x597D;</h1>
+<h2 id="softmax loss &#x4E0E;&#x4EA4;&#x53C9;&#x71B5;"><a href="#softmax loss &#x4E0E;&#x4EA4;&#x53C9;&#x71B5;"></a>softmax loss &#x4E0E;&#x4EA4;&#x53C9;&#x71B5;</h2>
+<p>Softmax Loss&#xFF08;Softmax&#x635F;&#x5931;&#xFF09;&#x4E00;&#x822C;&#x6307;&#x7684;&#x5C31;&#x662F;&#x5728;&#x591A;&#x5206;&#x7C7B;&#x95EE;&#x9898;&#x4E2D;&#x4F7F;&#x7528;&#x7684;&#x4EA4;&#x53C9;&#x71B5;&#x635F;&#x5931;&#x51FD;&#x6570;&#xFF0C;&#x4F46;&#x5728;&#x8BA1;&#x7B97;&#x4EA4;&#x53C9;&#x71B5;&#x524D;&#xFF0C;&#x5148;&#x5728;&#x7B54;&#x6848;&#x9884;&#x6D4B;&#xFF08;logits&#xFF09;&#x4E0A;&#x6267;&#x884C;&#x4E86;&#x4E00;&#x6B21; Softmax &#x64CD;&#x4F5C;&#x3002;&#x4EA4;&#x53C9;&#x71B5;&#x4F5C;&#x4E3A;&#x635F;&#x5931;&#x51FD;&#x6570;&#x8FD8;&#x6709;&#x4E00;&#x4E2A;&#x597D;&#x5904;&#x662F;&#x4F7F;&#x7528;sigmoid&#x51FD;&#x6570;&#x5728;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x65F6;&#x80FD;&#x907F;&#x514D;&#x5747;&#x65B9;&#x8BEF;&#x5DEE;&#x635F;&#x5931;&#x51FD;&#x6570;&#x5B66;&#x4E60;&#x901F;&#x7387;&#x964D;&#x4F4E;&#x7684;&#x95EE;&#x9898;</p>
+<p><a href="https://blog.csdn.net/gbz3300255/article/details/108470972">reference</a></p>
+<h2 id="&#x4EBA;&#x8138;&#x8BC6;&#x522B;&#x7684;&#x53D1;&#x5C55;"><a href="#&#x4EBA;&#x8138;&#x8BC6;&#x522B;&#x7684;&#x53D1;&#x5C55;"></a>&#x4EBA;&#x8138;&#x8BC6;&#x522B;&#x7684;&#x53D1;&#x5C55;</h2>
+<p>SphereFace -&gt; CosFace -&gt; ArcFace</p>
+<p>&#x6B27;&#x6C0F;&#x8DDD;&#x79BB; -&gt; &#x89D2;&#x5EA6;&#x7A7A;&#x95F4;</p>
+<h2 id="SphereFace"><a href="#SphereFace"></a>SphereFace</h2>
+<ul>
+<li>
+<p>&#x635F;&#x5931;&#x51FD;&#x6570; A-Softmax Loss &#x901A;&#x8FC7;&#x5F15;&#x5165;&#x4E00;&#x4E2A;&#x89D2;&#x5EA6;&#x95F4;&#x9694;&#xFF08;Angular Margin&#xFF09;&#x6765;&#x589E;&#x5F3A;&#x7279;&#x5F81;&#x7684;&#x533A;&#x5206;&#x5EA6;&#xFF0C;&#x6B27;&#x51E0;&#x91CC;&#x5F97;&#x7A7A;&#x95F4; -&gt; &#x89D2;&#x7A7A;&#x95F4;&#x3002;&#x5728;&#x591A;&#x5206;&#x7C7B;&#x95EE;&#x9898;&#x4E2D;&#xFF0C;Softmax Loss&#x4F18;&#x5316;&#x7C7B;&#x95F4;&#x8DDD;&#x79BB;&#xFF0C;&#x4F46;&#x5BF9;&#x4E8E;&#x7C7B;&#x5185;&#x8DDD;&#x79BB;&#x7684;&#x4F18;&#x5316;&#x8F83;&#x5F31;&#x3002;&#x539F;&#x56E0;</p>
+<ul>
+<li>&#x76EE;&#x6807;&#x51FD;&#x6570;&#x8BBE;&#x8BA1;&#xFF1A;&#x5F52;&#x4E00;&#x5316;&#x5904;&#x7406;&#x4F1A;&#x5BFC;&#x81F4;&#x7C7B;&#x5185;&#x6837;&#x672C;&#x7684;&#x7279;&#x5F81;&#x8868;&#x793A;&#x5728;&#x6982;&#x7387;&#x7A7A;&#x95F4;&#x4E2D;&#x88AB;&#x62C9;&#x8FD1;&#xFF0C;&#x4ECE;&#x800C;&#x51CF;&#x5C0F;&#x4E86;&#x7C7B;&#x5185;&#x8DDD;&#x79BB;&#x3002;</li>
+</ul>
+</li>
+<li>
+<p>&#x5FAE;&#x5C0F;&#x7684;&#x9762;&#x90E8;&#x7279;&#x5F81;&#x5DEE;&#x5F02;&#x53EF;&#x80FD;&#x5728;&#x89D2;&#x5EA6;&#x4E0A;&#x4EA7;&#x751F;&#x66F4;&#x5927;&#x7684;&#x5F71;&#x54CD;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x6B27;&#x51E0;&#x91CC;&#x5F97;&#x7A7A;&#x95F4;&#xFF1B;&#x8FD9;&#x53E5;&#x7ED3;&#x8BBA;&#x662F;&#x5982;&#x4F55;&#x5F97;&#x51FA;&#x7684;&#xFF1F;</p>
+<ul>
+<li>&#x8FD9;&#x4E2A;&#x7ED3;&#x8BBA;&#x6765;&#x81EA;&#x4E8E;&#x5BF9;&#x9AD8;&#x7EF4;&#x6216;&#x7A00;&#x758F;&#x7279;&#x5F81;&#x7A7A;&#x95F4;&#x7684;&#x89C2;&#x5BDF;&#xFF0C;&#x5B83;&#x6BD4;&#x8F83;&#x5FAE;&#x5999;&#xFF1B;&#x5F53;&#x540C;&#x4E00;&#x5F20;&#x4EBA;&#x8138;&#x51FA;&#x73B0;&#x8868;&#x60C5;&#x6216;&#x8005;&#x5149;&#x7EBF;&#x6539;&#x53D8;&#x65F6;&#xFF0C;&#x7279;&#x5F81;&#x5411;&#x91CF;&#x7684;&#x6B27;&#x51E0;&#x91CC;&#x5F97;&#x8DDD;&#x79BB;&#x53EF;&#x80FD;&#x53D1;&#x751F;&#x663E;&#x8457;&#x53D8;&#x5316;&#xFF0C;&#x56E0;&#x4E3A;&#x8FD9;&#x4E9B;&#x6539;&#x53D8;&#x53EF;&#x80FD;&#x5F71;&#x54CD;&#x5230;&#x7279;&#x5F81;&#x5411;&#x91CF;&#x7684;&#x957F;&#x5EA6;&#x548C;&#x65B9;&#x5411;&#x3002;&#x5F53;&#x6BD4;&#x8F83;&#x4E0D;&#x540C;&#x4EBA;&#x7684;&#x9762;&#x5B54;&#x65F6;&#xFF0C;&#x54EA;&#x6015;&#x4ED6;&#x4EEC;&#x4E4B;&#x95F4;&#x7684;&#x5916;&#x89C2;&#x5DEE;&#x5F02;&#x5F88;&#x5C0F;&#xFF0C;&#x4ED6;&#x4EEC;&#x7279;&#x5F81;&#x5411;&#x91CF;&#x7684;&#x65B9;&#x5411;&#x4E5F;&#x53EF;&#x80FD;&#x6709;&#x76F8;&#x5F53;&#x5927;&#x7684;&#x5DEE;&#x5F02;&#x3002;&#x5373;&#x4F7F;&#x4ED6;&#x4EEC;&#x5728;&#x6B27;&#x51E0;&#x91CC;&#x5F97;&#x8DDD;&#x79BB;&#x4E0A;&#x63A5;&#x8FD1;&#xFF0C;&#x4ED6;&#x4EEC;&#x4E4B;&#x95F4;&#x7684;&#x89D2;&#x5EA6;&#x4ECD;&#x7136;&#x53EF;&#x80FD;&#x5F88;&#x5927;&#x3002;</li>
+</ul>
+</li>
+<li>
+<p>CosFace</p>
+</li>
+<li>
+<p>ArcFace</p>
+</li>
+</ul>
+<p>&#x4F8B;&#x5B50;&#xFF1A;</p>
+<pre><code>&#x5047;&#x8BBE;&#x6211;&#x4EEC;&#x6709;&#x4E24;&#x5F20;&#x4EBA;&#x8138;&#x56FE;&#x50CF; A &#x548C; B&#xFF0C;&#x5404;&#x6709;&#x4E24;&#x4E2A;&#x7279;&#x5F81;&#x3002;&#x5728;&#x4E00;&#x4E2A;&#x4E8C;&#x7EF4;&#x7A7A;&#x95F4;&#x4E2D;&#xFF08;&#x6BCF;&#x4E00;&#x7EF4;&#x4EE3;&#x8868;&#x4E00;&#x4E2A;&#x7279;&#x5F81;&#xFF09;&#xFF1A;
+
+&#x5411;&#x91CF; A = (2, 4)&#xFF0C;&#x4EE3;&#x8868;&#x8138;&#x90E8;&#x56FE;&#x50CF; A &#x7684;&#x4E24;&#x4E2A;&#x7279;&#x5F81;&#x503C;&#x3002;
+&#x5411;&#x91CF; B = (4, 8)&#xFF0C;&#x4EE3;&#x8868;&#x8138;&#x90E8;&#x56FE;&#x50CF; B &#x7684;&#x4E24;&#x4E2A;&#x7279;&#x5F81;&#x503C;&#x3002;
+&#x5728;&#x6B27;&#x51E0;&#x91CC;&#x5F97;&#x7A7A;&#x95F4;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x4F1A;&#x6BD4;&#x8F83; A &#x548C; B &#x4E4B;&#x95F4;&#x7684;&#x4E8C;&#x7EF4;&#x7A7A;&#x95F4;&#x8DDD;&#x79BB;&#x3002;&#x8DDD;&#x79BB;&#x503C; sqrt((4 - 2)&#xB2; + (8 - 4)&#xB2;) = 2.8&#xFF08;&#x7EA6;&#x7B49;&#x4E8E;&#xFF09;&#x3002;&#x8FD9;&#x610F;&#x5473;&#x7740;&#x56FE;&#x50CF; A &#x548C;B &#x5728;&#x6B27;&#x51E0;&#x91CC;&#x5FB7;&#x7A7A;&#x95F4;&#x4E2D;&#x662F;&#x4E0D;&#x5C3D;&#x76F8;&#x540C;&#x7684;&#x3002;
+
+&#x7136;&#x800C;&#xFF0C;&#x4E8B;&#x5B9E;&#x4E0A;&#xFF0C;&#x56FE;&#x50CF; A &#x548C; B &#x53EF;&#x80FD;&#x6765;&#x81EA;&#x540C;&#x4E00;&#x4E2A;&#x4EBA;&#xFF0C;&#x4F46;&#x4E0D;&#x540C;&#x7684;&#x5149;&#x7167;&#x6761;&#x4EF6;&#x3001;&#x76F8;&#x673A;&#x53C2;&#x6570;&#x7B49;&#x53EF;&#x80FD;&#x5F71;&#x54CD;&#x7279;&#x5F81;&#x7684;&#x7EDD;&#x5BF9;&#x503C;&#xFF0C;&#x4F46;&#x4E0D;&#x4F1A;&#x660E;&#x663E;&#x6539;&#x53D8;&#x7279;&#x5F81;&#x4E4B;&#x95F4;&#x7684;&#x76F8;&#x5BF9;&#x5173;&#x7CFB;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x4ECE;&#x7279;&#x5F81;&#x7684;&#x89D2;&#x5EA6;&#x6765;&#x770B;&#xFF0C;&#x56FE;&#x50CF; A &#x548C;&#x56FE;&#x50CF; B &#x53EF;&#x80FD;&#x66F4;&#x52A0;&#x7C7B;&#x4F3C;&#x3002;
+
+&#x5728;&#x89D2;&#x5EA6;&#x7A7A;&#x95F4;&#x4E2D;&#xFF0C;A &#x548C; B &#x7684;&#x89D2;&#x5EA6;&#x662F; 0&#xFF0C;&#x6211;&#x95E8;&#x4F1A;&#x8BA4;&#x4E3A; A &#x548C; B &#x662F;&#x76F8;&#x540C;&#x7684;&#x3002;
+
+&#x8FD9;&#x4E5F;&#x51F8;&#x663E;&#x4E86;&#x5728;&#x5904;&#x7406;&#x67D0;&#x4E9B;&#x95EE;&#x9898;&#xFF08;&#x5982;&#x4EBA;&#x8138;&#x8BC6;&#x522B;&#xFF0C;&#x6587;&#x672C;&#x76F8;&#x4F3C;&#x6027;&#xFF09;&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x5E94;&#x5F53;&#x66F4;&#x5177;&#x91CD;&#x89C6;&#x6570;&#x636E;&#x70B9;&#x4E4B;&#x95F4;&#x7684;&#x89D2;&#x5EA6;&#xFF08;&#x76F8;&#x5BF9;&#x503C;&#xFF09;&#x800C;&#x975E;&#x8DDD;&#x79BB;&#xFF08;&#x7EDD;&#x5BF9;&#x503C;&#xFF09;&#x3002;&#x8FD9;&#x5C31;&#x662F;&#x4E3A;&#x4F55;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x4E2D;&#x7ECF;&#x5E38;&#x4F7F;&#x7528;&#x89D2;&#x5EA6;&#x7A7A;&#x95F4;&#x4E2D;&#x7684;&#x4F59;&#x5F26;&#x76F8;&#x4F3C;&#x6027;&#x5EA6;&#x91CF;&#x3002;
+</code></pre>
+<ul>
+<li>Reference
+<ul>
+<li><a href="https://blog.csdn.net/weixin_42111770/article/details/80665419">&#x4EBA;&#x8138;&#x8BC6;&#x522B;&#x4E4B;SphereFace</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="LLM &#x6982;&#x8981;"><a href="#LLM &#x6982;&#x8981;"></a>LLM &#x6982;&#x8981;</h1>
+<p><img src="https://llmbook-zh.github.io/List.png" alt="roadmap"></p>
+<h1 id="Towhee &#x7684; pipeline &#x8BBE;&#x8BA1;&#x7406;&#x5FF5;"><a href="#Towhee &#x7684; pipeline &#x8BBE;&#x8BA1;&#x7406;&#x5FF5;"></a>Towhee &#x7684; pipeline &#x8BBE;&#x8BA1;&#x7406;&#x5FF5;</h1>
+<p>Towhee &#x7684; pipeline &#x673A;&#x5236;&#x7684;&#x8BBE;&#x8BA1;&#x7406;&#x5FF5;&#x662F;&#x4E3A;&#x4E86;&#x7B80;&#x5316;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x4EFB;&#x52A1;&#x4E2D;&#x7684; embedding &#x8FC7;&#x7A0B;&#x3002;&#x5B83;&#x65E8;&#x5728;&#x5E2E;&#x52A9;&#x7528;&#x6237;&#x901A;&#x8FC7;&#x51E0;&#x884C;&#x4EE3;&#x7801;&#x5C06;&#x975E;&#x7ED3;&#x6784;&#x5316;&#x6570;&#x636E;&#x8F6C;&#x6362;&#x4E3A;&#x6613;&#x4E8E;&#x7BA1;&#x7406;&#x548C;&#x68C0;&#x7D22;&#x7684;&#x7ED3;&#x6784;&#x5316;&#x6570;&#x636E;&#xFF0C;&#x5373; embeddings&#x3002;</p>
+<p>&#x6838;&#x5FC3;&#x7EC4;&#x4EF6;&#x5305;&#x62EC;&#xFF1A;</p>
+<ol>
+<li>
+<p><strong>Operator</strong>&#xFF1A;&#x8FD9;&#x662F; Towhee &#x4E2D;&#x7684;&#x6700;&#x5C0F;&#x529F;&#x80FD;&#x5355;&#x5143;&#xFF0C;&#x6BCF;&#x4E2A; Operator &#x90FD;&#x6709;&#x5176;&#x7279;&#x5B9A;&#x529F;&#x80FD;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x4E00;&#x4E2A; Operator &#x53EF;&#x80FD;&#x8D1F;&#x8D23;&#x56FE;&#x50CF;&#x9884;&#x5904;&#x7406;&#xFF0C;&#x800C;&#x53E6;&#x4E00;&#x4E2A;&#x5219;&#x8D1F;&#x8D23;&#x4F7F;&#x7528;&#x6A21;&#x578B;&#x5C06;&#x56FE;&#x50CF;&#x8F6C;&#x6362;&#x4E3A; embeddings&#x3002;</p>
+</li>
+<li>
+<p><strong>Pipeline</strong>&#xFF1A;Pipeline &#x662F;&#x4E00;&#x5957;&#x5DE5;&#x4F5C;&#x6D41;&#x7A0B;&#xFF0C;&#x53EF;&#x4EE5;&#x7531;&#x4E00;&#x4E2A;&#x6709;&#x5411;&#x65E0;&#x73AF;&#x56FE; (DAG) &#x6765;&#x63CF;&#x8FF0;&#xFF0C;&#x5176;&#x4E2D;&#x6BCF;&#x4E2A;&#x8282;&#x70B9;&#x90FD;&#x662F;&#x4E00;&#x4E2A; Operator&#x3002;&#x5728; Towhee &#x4E2D;&#xFF0C;&#x6BCF;&#x4E2A; pipeline &#x901A;&#x8FC7;&#x4E00;&#x7CFB;&#x5217;&#x7684;&#x6D41;&#x7A0B;&#x5904;&#x7406;&#x67D0;&#x4E00;&#x7C7B;&#x4EFB;&#x52A1;&#xFF0C;&#x4F8B;&#x5982;&#x751F;&#x6210;&#x56FE;&#x50CF;&#x7684; embeddings&#x3002;&#x8FD9;&#x4E2A; pipeline &#x53EF;&#x80FD;&#x7531;&#x56FE;&#x50CF;&#x9884;&#x5904;&#x7406; Operator &#x548C; embedding &#x6A21;&#x578B; Operator &#x7EC4;&#x6210;&#x3002;</p>
+</li>
+<li>
+<p><strong>Hub</strong>&#xFF1A;Towhee &#x5DF2;&#x7ECF;&#x5EFA;&#x7ACB;&#x4E86;&#x4E00;&#x4E2A; Hub&#xFF0C;&#x5B58;&#x50A8;&#x4E86;&#x7528;&#x6237;&#x7F16;&#x5199;&#x5E76;&#x4E0A;&#x4F20;&#x7684; pipeline&#x3001;operator&#x3001;dataset&#x3002;&#x7528;&#x6237;&#x53EF;&#x4EE5;&#x5728; Hub &#x521B;&#x5EFA; repository&#xFF0C;&#x5E76;&#x5C06;&#x4ED6;&#x4EEC;&#x7684; pipeline &#x548C; operator &#x4E0A;&#x4F20;&#x5230; Hub&#xFF0C;&#x4F7F;&#x5F97; Towhee &#x793E;&#x533A;&#x4E2D;&#x7684;&#x6BCF;&#x4E2A;&#x4EBA;&#x90FD;&#x53EF;&#x4EE5;&#x4E92;&#x76F8;&#x501F;&#x9274;&#x548C;&#x4F7F;&#x7528;&#x4ED6;&#x4EBA;&#x8BBE;&#x8BA1;&#x7684; pipeline &#x548C; operator&#x3002;</p>
+</li>
+</ol>
+<h1 id="&#x7279;&#x65AF;&#x62C9;&#x7684; FSD &#x7684;&#x6280;&#x672F;&#x6808;"><a href="#&#x7279;&#x65AF;&#x62C9;&#x7684; FSD &#x7684;&#x6280;&#x672F;&#x6808;"></a>&#x7279;&#x65AF;&#x62C9;&#x7684; FSD &#x7684;&#x6280;&#x672F;&#x6808;</h1>
 <ul>
 <li>RegNet</li>
 </ul>
@@ -154,4 +218,4 @@ grid = F.affine_grid(theta, x.size())</li>
 <li><a href="https://zhuanlan.zhihu.com/p/632809634">SD &#x8BE6;&#x89E3;</a></li>
 <li><a href="https://github.com/315386775/DeepLearing-Interview-Awesome-2024">DeepLearing-Interview-Awesome-2024</a></li>
 </ul>
-`,E=[{level:1,title:"\u7279\u65AF\u62C9\u7684 FSD \u7684\u6280\u672F\u6808",children:[]},{level:1,title:"CLIP \u6A21\u578B",children:[]},{level:1,title:"\u6A21\u578B\u5DE5\u5382",children:[]},{level:1,title:"STNs \u795E\u7ECF\u7F51\u7EDC",children:[{level:2,title:"\u4E3A\u4EC0\u4E48\u9F50\u6B21\u5750\u6807\u6709\u8FD9\u4E2A\u7279\u6027",children:[]}]},{level:1,title:"SD U-Net\u7684\u6574\u4F53\u67B6\u6784",children:[]},{level:1,title:"ResNet",children:[]},{level:1,title:"\u6DF1\u5EA6\u5B66\u4E60\u6210\u5C31\u4EBA\u7269",children:[]},{level:1,title:"Resource",children:[]}];export{x as attributes,F as html,E as nestedHeaders};
+`,E=[{level:1,title:"\u4EBA\u8138\u8BC6\u522B\u4EFB\u52A1\u4E2D\uFF0CArcFace\u4E3A\u4EC0\u4E48\u6BD4CosFace\u6548\u679C\u597D",children:[{level:2,title:"softmax loss \u4E0E\u4EA4\u53C9\u71B5",children:[]},{level:2,title:"\u4EBA\u8138\u8BC6\u522B\u7684\u53D1\u5C55",children:[]},{level:2,title:"SphereFace",children:[]}]},{level:1,title:"LLM \u6982\u8981",children:[]},{level:1,title:"Towhee \u7684 pipeline \u8BBE\u8BA1\u7406\u5FF5",children:[]},{level:1,title:"\u7279\u65AF\u62C9\u7684 FSD \u7684\u6280\u672F\u6808",children:[]},{level:1,title:"CLIP \u6A21\u578B",children:[]},{level:1,title:"\u6A21\u578B\u5DE5\u5382",children:[]},{level:1,title:"STNs \u795E\u7ECF\u7F51\u7EDC",children:[{level:2,title:"\u4E3A\u4EC0\u4E48\u9F50\u6B21\u5750\u6807\u6709\u8FD9\u4E2A\u7279\u6027",children:[]}]},{level:1,title:"SD U-Net\u7684\u6574\u4F53\u67B6\u6784",children:[]},{level:1,title:"ResNet",children:[]},{level:1,title:"\u6DF1\u5EA6\u5B66\u4E60\u6210\u5C31\u4EBA\u7269",children:[]},{level:1,title:"Resource",children:[]}];export{x as attributes,F as html,E as nestedHeaders};

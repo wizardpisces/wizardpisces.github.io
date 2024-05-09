@@ -32,4 +32,10 @@ y&apos; = x sin&#x3B8; + y cos&#x3B8;
 </code></pre>
 <p>&#x7ED3;&#x679C;&#x5C31;&#x662F;&#x70B9;P&#x5728;&#x9006;&#x65F6;&#x9488;&#x65CB;&#x8F6C;&#x3B8;&#x5EA6;&#x4E4B;&#x540E;&#x7684;&#x5750;&#x6807; (x&apos;, y&apos;) &#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x539F;&#x5750;&#x6807; (x, y) &#x4E0E;&#x65CB;&#x8F6C;&#x77E9;&#x9635;&#x76F8;&#x4E58;&#x5F97;&#x5230;&#x3002;</p>
 <p>&#xFF08;&#x4F7F;&#x7528;&#x4E86;&#x57FA;&#x672C;&#x7684;&#x4E09;&#x89D2;&#x6052;&#x7B49;&#x5F0F;&#x548C;&#x6781;&#x5750;&#x6807;&#x7684;&#x8F6C;&#x6362;&#x3002;&#xFF09;</p>
-`,B=[{level:1,title:"\u65CB\u8F6C\u77E9\u9635\u7684\u8BC1\u660E",children:[]}];export{x as attributes,F as html,B as nestedHeaders};
+<h2 id="&#x5411;&#x91CF;&#x4E0E;&#x89D2;&#x5EA6;&#x7684;&#x5173;&#x7CFB;"><a href="#&#x5411;&#x91CF;&#x4E0E;&#x89D2;&#x5EA6;&#x7684;&#x5173;&#x7CFB;"></a>&#x5411;&#x91CF;&#x4E0E;&#x89D2;&#x5EA6;&#x7684;&#x5173;&#x7CFB;</h2>
+<pre><code>||C||&#xB2; = ||A||&#xB2; + ||B||&#xB2; - 2*||A||*||B||*cos(&#x3B8;)
+||C||&#xB2; = C &#xB7; C = (a1 - b1)&#xB2; + (a2 - b2)&#xB2;
+&#x53EF;&#x5F97;&#x51FA;&#xFF1A;cos(&#x3B8;) = A&#xB7;B / (||A|| * ||B||)
+&#x53EF;&#x5F97;&#x51FA;&#xFF1A;A &#x2022; B= a1b1 + a2b2=||A|| * ||B|| * cos(&#x3B8;)
+</code></pre>
+`,B=[{level:1,title:"\u65CB\u8F6C\u77E9\u9635\u7684\u8BC1\u660E",children:[{level:2,title:"\u5411\u91CF\u4E0E\u89D2\u5EA6\u7684\u5173\u7CFB",children:[]}]}];export{x as attributes,F as html,B as nestedHeaders};
