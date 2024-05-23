@@ -86,6 +86,7 @@ const x={},F=`<h1 id="UNet"><a href="#UNet"></a>UNet</h1>
 <p>UNet &#x8DDF; SAM &#x7684;&#x533A;&#x522B;&#xFF1F;</p>
 </li>
 </ul>
+<p><a href="https://ai.meta.com/blog/segment-anything-foundation-model-image-segmentation/">SAM &#x6A21;&#x578B;&#x4ECB;&#x7ECD;</a></p>
 <h1 id="Reference"><a href="#Reference"></a>Reference</h1>
 <ul>
 <li><a href="https://blog.csdn.net/weixin_45074568/article/details/114901600">UNet&#x8BE6;&#x89E3;</a></li>

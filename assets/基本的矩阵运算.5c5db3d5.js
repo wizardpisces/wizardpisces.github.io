@@ -38,4 +38,37 @@ y&apos; = x sin&#x3B8; + y cos&#x3B8;
 &#x53EF;&#x5F97;&#x51FA;&#xFF1A;cos(&#x3B8;) = A&#xB7;B / (||A|| * ||B||)
 &#x53EF;&#x5F97;&#x51FA;&#xFF1A;A &#x2022; B= a1b1 + a2b2=||A|| * ||B|| * cos(&#x3B8;)
 </code></pre>
-`,B=[{level:1,title:"\u65CB\u8F6C\u77E9\u9635\u7684\u8BC1\u660E",children:[{level:2,title:"\u5411\u91CF\u4E0E\u89D2\u5EA6\u7684\u5173\u7CFB",children:[]}]}];export{x as attributes,F as html,B as nestedHeaders};
+<h1 id="&#x91CD;&#x5FC3;&#x5750;&#x6807;&#x8BA1;&#x7B97;&#x516C;&#x5F0F;"><a href="#&#x91CD;&#x5FC3;&#x5750;&#x6807;&#x8BA1;&#x7B97;&#x516C;&#x5F0F;"></a>&#x91CD;&#x5FC3;&#x5750;&#x6807;&#x8BA1;&#x7B97;&#x516C;&#x5F0F;</h1>
+<p>&#x8BA1;&#x7B97;&#x70B9;&#x7684;&#x91CD;&#x5FC3;&#x5750;&#x6807;&#x901A;&#x5E38;&#x6D89;&#x53CA;&#x5230;&#x89E3;&#x4E00;&#x4E2A;&#x7EBF;&#x6027;&#x65B9;&#x7A0B;&#x7EC4;&#x3002;&#x5BF9;&#x4E8E;&#x4E09;&#x89D2;&#x5F62; ( ABC ) &#x4E2D;&#x7684;&#x70B9; ( P )&#xFF0C;&#x5176;&#x91CD;&#x5FC3;&#x5750;&#x6807; $(\\lambda_1, \\lambda_2, \\lambda_3)$ &#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4EE5;&#x4E0B;&#x6B65;&#x9AA4;&#x8BA1;&#x7B97;&#x5F97;&#x51FA;&#xFF1A;</p>
+<ol>
+<li>
+<p><strong>&#x786E;&#x5B9A;&#x4E09;&#x89D2;&#x5F62;&#x9876;&#x70B9;&#x7684;&#x5750;&#x6807;</strong>&#xFF1A;</p>
+<ul>
+<li>&#x5047;&#x8BBE;&#x4E09;&#x89D2;&#x5F62; ( ABC ) &#x7684;&#x9876;&#x70B9;&#x5750;&#x6807;&#x5206;&#x522B;&#x4E3A; ( A(x_1, y_1) )&#xFF0C;( B(x_2, y_2) )&#xFF0C;( C(x_3, y_3) )&#x3002;</li>
+</ul>
+</li>
+<li>
+<p><strong>&#x8BA1;&#x7B97;&#x9762;&#x79EF;</strong>&#xFF1A;</p>
+<ul>
+<li>&#x4F7F;&#x7528;&#x53C9;&#x4E58;&#x8BA1;&#x7B97;&#x4E09;&#x89D2;&#x5F62; ( ABC ) &#x7684;&#x9762;&#x79EF; ( S_{ABC} )&#x3002;</li>
+<li>&#x8BA1;&#x7B97;&#x70B9; ( P ) &#x4E0E;&#x4E09;&#x89D2;&#x5F62;&#x9876;&#x70B9;&#x5F62;&#x6210;&#x7684;&#x5B50;&#x4E09;&#x89D2;&#x5F62;&#x7684;&#x9762;&#x79EF;&#xFF0C;&#x4F8B;&#x5982; ( S_{PBC} )&#xFF0C;( S_{PCA} )&#xFF0C;( S_{PAB} )&#x3002;</li>
+</ul>
+</li>
+<li>
+<p><strong>&#x5229;&#x7528;&#x9762;&#x79EF;&#x6BD4;&#x6C42;&#x89E3;&#x91CD;&#x5FC3;&#x5750;&#x6807;</strong>&#xFF1A;</p>
+<ul>
+<li>&#x91CD;&#x5FC3;&#x5750;&#x6807; ( $\\lambda_1$ )&#xFF0C;( $\\lambda_2$ )&#xFF0C;( $\\lambda_3$ ) &#x5206;&#x522B;&#x7B49;&#x4E8E;&#x70B9; ( P ) &#x5BF9;&#x5E94;&#x7684;&#x5B50;&#x4E09;&#x89D2;&#x5F62;&#x9762;&#x79EF;&#x4E0E;&#x4E09;&#x89D2;&#x5F62; ( ABC ) &#x9762;&#x79EF;&#x7684;&#x6BD4;&#x4F8B;&#x3002;&#x4F8B;&#x5982;&#xFF1A;
+$$ \\lambda_1 = \\frac{S_{PBC}}{S_{ABC}} $$
+$$ \\lambda_2 = \\frac{S_{PCA}}{S_{ABC}} $$
+$$ \\lambda_3 = \\frac{S_{PAB}}{S_{ABC}} $$</li>
+</ul>
+</li>
+<li>
+<p><strong>&#x786E;&#x4FDD;&#x91CD;&#x5FC3;&#x5750;&#x6807;&#x4E4B;&#x548C;&#x4E3A;1</strong>&#xFF1A;</p>
+<ul>
+<li>&#x9A8C;&#x8BC1; ( $\\lambda_1 + \\lambda_2 + \\lambda_3$ = 1 )&#x3002;</li>
+</ul>
+</li>
+</ol>
+<p>Reference&#xFF1A;<a href="https://zhuanlan.zhihu.com/p/58199366">&#x91CD;&#x5FC3;&#x5750;&#x6807;</a></p>
+`,B=[{level:1,title:"\u65CB\u8F6C\u77E9\u9635\u7684\u8BC1\u660E",children:[{level:2,title:"\u5411\u91CF\u4E0E\u89D2\u5EA6\u7684\u5173\u7CFB",children:[]}]},{level:1,title:"\u91CD\u5FC3\u5750\u6807\u8BA1\u7B97\u516C\u5F0F",children:[]}];export{x as attributes,F as html,B as nestedHeaders};
