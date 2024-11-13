@@ -14,6 +14,7 @@ const x={},F=`<h1 id="&#x590D;&#x6742;"><a href="#&#x590D;&#x6742;"></a>&#x590D;
 <h1 id="References"><a href="#References"></a>References</h1>
 <ul>
 <li><a href="https://www.psyxel.com/mitchell-complexity-guided-tour/">&#x6885;&#x62C9;&#x59AE;&#xB7;&#x7C73;&#x6B47;&#x5C14;&#x300A;&#x590D;&#x6742;&#x300B;&#x5BFC;&#x8BFB;</a></li>
+<li>&#x6587;&#x4E2D;&#x6CA1;&#x6709;&#x63D0;&#x5230;&#x7684;&#x5185;&#x5BB9;&#xFF1A;&#x6BD4;&#x5982;&#x7F51;&#x7EDC;&#x548C;&#x56FE;&#x8BBA;&#x3001;&#x751F;&#x7269;&#x4EE3;&#x8C22;&#x7684;&#x6BD4;&#x4F8B;&#x4E4B;&#x8C1C;&#x3001;&#x8BA1;&#x7B97;&#x673A;&#x9886;&#x57DF;&#x7684;&#x54E5;&#x5FB7;&#x5C14;&#x4E0D;&#x5B8C;&#x5907;&#x6027;&#x5B9A;&#x7406;&#x548C;&#x81EA;&#x590D;&#x5236;&#x56FE;&#x7075;&#x673A;&#x3001;&#x4EE5;&#x53CA;&#x4F5C;&#x8005;&#x81EA;&#x5DF1;&#x5728;&#x535A;&#x58EB;&#x8BBA;&#x6587;&#x4E2D;&#x8BBE;&#x8BA1;&#x7684;&#x7C7B;&#x6BD4;&#x7A0B;&#x5E8F;</li>
 <li>gpt</li>
 </ul>
 `,E=[{level:1,title:"\u590D\u6742",children:[]},{level:1,title:"References",children:[]}];export{x as attributes,F as html,E as nestedHeaders};
