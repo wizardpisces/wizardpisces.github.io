@@ -14,7 +14,7 @@ const x={},F=`<h1 id="&#x5173;&#x4E8E;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x7684;&#
 <li>&#x7279;&#x5F81;&#xFF1A;&#x81EA;&#x52A8;&#x7684;&#x5783;&#x573E;&#x6536;&#x96C6;&#xFF0C;&#x7C7B;&#x578B;&#x5B89;&#x5168;&#x7B49;</li>
 <li>&#x8BED;&#x8A00;
 <ul>
-<li>Java&#xFF08;C++ -FP +OOP, JVM&#xFF09;-&gt; Scala&#xFF08;Java +FP, JVM)</li>
+<li>Java&#xFF08;C++ -FP +OOP, JVM&#xFF09;-&gt; Scala&#xFF08;Java +FP, JVM&#xFF09;</li>
 </ul>
 </li>
 </ul>
@@ -24,6 +24,7 @@ const x={},F=`<h1 id="&#x5173;&#x4E8E;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x7684;&#
 <ul>
 <li>&#x7279;&#x5F81;&#xFF1A;&#x505A;&#x4EC0;&#x4E48;&#xFF08;What&#xFF09; + &#x5982;&#x4F55;&#xFF08;How&#xFF09;&#xFF08;&#x6700;&#x7EC8;&#x76EE;&#x7684;&#x8DDF;&#x5982;&#x4F55;&#x8FBE;&#x6210;&#x6DF7;&#x5728;&#x4E00;&#x8D77;&#xFF09;</li>
 <li>&#x4F8B;&#x5B50;&#xFF1A;for&#x5FAA;&#x73AF;&#xFF0C;i += 1&#x7B49;&#x7B49;&#xFF0C;&#x90E8;&#x5206;&#x7EC6;&#x8282;&#x4F1A;&#x63A9;&#x76D6;&#x4E86;&#x201C;&#x6700;&#x7EC8;&#x76EE;&#x6807;&#x201D;&#xFF0C;&#x540E;&#x9762;&#x53EF;&#x80FD;&#x591A;&#x5F80;What&#x65B9;&#x5411;&#x6F14;&#x8FDB;</li>
+<li>&#x4F18;&#x52BF;&#xFF1A;&#x66F4;&#x52A0;&#x7CBE;&#x7EC6;&#x5316;&#x63A7;&#x5236;&#xFF0C;&#x4F46;&#x9700;&#x8981;&#x624B;&#x52A8;</li>
 <li>&#x95EE;&#x9898;&#xFF1A;&#x5E76;&#x884C;&#x6267;&#x884C;&#x7A0B;&#x5E8F;&#x53D8;&#x5F97;&#x56F0;&#x96BE;&#xFF0C;&#x56E0;&#x4E3A;&#x50CF;&#x201C;&#x6267;&#x884C;&#x76EE;&#x7684;&#x201D;&#x8FD9;&#x6837;&#x66F4;&#x9AD8;&#x5C42;&#x6B21;&#x7684;&#x4FE1;&#x606F;&#x5DF2;&#x7ECF;&#x4E22;&#x5931;</li>
 </ul>
 </li>

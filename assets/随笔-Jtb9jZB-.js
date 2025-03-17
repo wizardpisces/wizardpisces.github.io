@@ -399,7 +399,7 @@ vector = np.zeros(self.max_captcha * self.char_set_len) <span class="hljs-commen
 <a href="https://wandb.ai/authors/text-recognition-crnn-ctc/reports/Text-Recognition-With-CRNN-CTC-Network--VmlldzoxNTI5NDI">Reference</a></li>
 </ol>
 <h1 id="&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x7F16;&#x7A0B;&#x8303;&#x5F0F;"><a href="#&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x7F16;&#x7A0B;&#x8303;&#x5F0F;"></a>&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x7F16;&#x7A0B;&#x8303;&#x5F0F;</h1>
-<p>Tensorflow vs Pytorch&#xFF08;&#x7B26;&#x53F7;&#x5F0F;&#x4E0E;&#x547D;&#x4EE4;&#x5F0F;&#x7A0B;&#x5E8F;&#xFF09;
+<p>Tensorflow vs Pytorch&#xFF08;&#x7B26;&#x53F7;&#x5F0F;&#xFF08;&#x4E5F;&#x53EB;&#x58F0;&#x660E;&#x5F0F;&#xFF09;&#x4E0E;&#x547D;&#x4EE4;&#x5F0F;&#x7A0B;&#x5E8F;&#xFF09;
 &#x547D;&#x4EE4;&#x5F0F;</p>
 <ul>
 <li>&#x66F4;&#x52A0;&#x7075;&#x6D3B;&#xFF1A;&#x539F;&#x751F;&#x8BED;&#x8A00;&#x7684;&#x7075;&#x6D3B;&#x6027;&#x8DDF;&#x8FD0;&#x884C;&#x65F6;&#x65AD;&#x70B9;</li>
