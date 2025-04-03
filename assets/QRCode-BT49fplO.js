@@ -172,41 +172,6 @@ f(x) = 1 + 2x + x^2
 <li>&#x5C06;&#x6062;&#x590D;&#x540E;&#x7684;&#x56FE;&#x50CF;&#x5212;&#x5206;&#x4E3A;&#x6807;&#x51C6;&#x7684;&#x7F51;&#x683C;&#x77E9;&#x9635;&#xFF0C;&#x51C6;&#x5907;&#x89E3;&#x7801;&#x3002;</li>
 </ul>
 <hr>
-<h3 id="4. &#x5B9E;&#x9645;&#x5E94;&#x7528;&#x4E3E;&#x4F8B;"><a href="#4. &#x5B9E;&#x9645;&#x5E94;&#x7528;&#x4E3E;&#x4F8B;"></a><strong>4. &#x5B9E;&#x9645;&#x5E94;&#x7528;&#x4E3E;&#x4F8B;</strong></h3>
-<h4 id="&#x5F62;&#x53D8;&#x6821;&#x6B63;&#x516C;&#x5F0F;"><a href="#&#x5F62;&#x53D8;&#x6821;&#x6B63;&#x516C;&#x5F0F;"></a><strong>&#x5F62;&#x53D8;&#x6821;&#x6B63;&#x516C;&#x5F0F;</strong></h4>
-<h1 id="&#x8BBE;&#x53D8;&#x5F62;&#x540E;&#x7684;&#x70B9;&#x4E3A; ((x&apos;, y&apos;))&#xFF0C;&#x6807;&#x51C6;&#x77E9;&#x9635;&#x4E2D;&#x7684;&#x70B9;&#x4E3A; ((x, y))&#x3002;&#x900F;&#x89C6;&#x53D8;&#x6362;&#x77E9;&#x9635; ( M ) &#x5C06; ((x, y)) &#x8F6C;&#x6362;&#x4E3A; ((x&apos;, y&apos;))&#xFF0C;&#x516C;&#x5F0F;&#x5982;&#x4E0B;&#xFF1A;
-[
-\\begin{bmatrix}
-x&apos; \\ y&apos; \\ w
-\\end{bmatrix}"><a href="#&#x8BBE;&#x53D8;&#x5F62;&#x540E;&#x7684;&#x70B9;&#x4E3A; ((x&apos;, y&apos;))&#xFF0C;&#x6807;&#x51C6;&#x77E9;&#x9635;&#x4E2D;&#x7684;&#x70B9;&#x4E3A; ((x, y))&#x3002;&#x900F;&#x89C6;&#x53D8;&#x6362;&#x77E9;&#x9635; ( M ) &#x5C06; ((x, y)) &#x8F6C;&#x6362;&#x4E3A; ((x&apos;, y&apos;))&#xFF0C;&#x516C;&#x5F0F;&#x5982;&#x4E0B;&#xFF1A;
-[
-\\begin{bmatrix}
-x&apos; \\ y&apos; \\ w
-\\end{bmatrix}"></a>&#x8BBE;&#x53D8;&#x5F62;&#x540E;&#x7684;&#x70B9;&#x4E3A; ((x&apos;, y&apos;))&#xFF0C;&#x6807;&#x51C6;&#x77E9;&#x9635;&#x4E2D;&#x7684;&#x70B9;&#x4E3A; ((x, y))&#x3002;&#x900F;&#x89C6;&#x53D8;&#x6362;&#x77E9;&#x9635; ( M ) &#x5C06; ((x, y)) &#x8F6C;&#x6362;&#x4E3A; ((x&apos;, y&apos;))&#xFF0C;&#x516C;&#x5F0F;&#x5982;&#x4E0B;&#xFF1A;
-[
-\\begin{bmatrix}
-x&apos; \\ y&apos; \\ w
-\\end{bmatrix}</h1>
-<p>M
-\\begin{bmatrix}
-x \\ y \\ 1
-\\end{bmatrix}
-]
-&#x901A;&#x8FC7;&#x5F52;&#x4E00;&#x5316;&#xFF08;( w ) &#x5F52;&#x4E00;&#x4E3A; 1&#xFF09;&#xFF0C;&#x53EF;&#x4EE5;&#x5F97;&#x5230;&#x53D8;&#x6362;&#x540E;&#x7684;&#x56FE;&#x50CF;&#x5750;&#x6807;&#x3002;</p>
-<h4 id="&#x900F;&#x89C6;&#x53D8;&#x6362;&#x77E9;&#x9635;&#x7684;&#x63A8;&#x5BFC;"><a href="#&#x900F;&#x89C6;&#x53D8;&#x6362;&#x77E9;&#x9635;&#x7684;&#x63A8;&#x5BFC;"></a><strong>&#x900F;&#x89C6;&#x53D8;&#x6362;&#x77E9;&#x9635;&#x7684;&#x63A8;&#x5BFC;</strong></h4>
-<p>&#x900F;&#x89C6;&#x53D8;&#x6362;&#x77E9;&#x9635; ( M ) &#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x56DB;&#x7EC4;&#x5BF9;&#x5E94;&#x70B9;&#xFF08;&#x539F;&#x59CB;&#x70B9;&#x4E0E;&#x76EE;&#x6807;&#x70B9;&#xFF09;&#x89E3;&#x7B97;&#xFF1A;</p>
-<ul>
-<li>&#x539F;&#x59CB;&#x70B9;&#xFF1A;&#x4E8C;&#x7EF4;&#x7801;&#x56DB;&#x4E2A;&#x9876;&#x70B9;&#x7684;&#x5B9E;&#x9645;&#x4F4D;&#x7F6E;&#x3002;</li>
-<li>&#x76EE;&#x6807;&#x70B9;&#xFF1A;&#x6807;&#x51C6;&#x4E8C;&#x7EF4;&#x7801;&#x7684;&#x56DB;&#x4E2A;&#x9876;&#x70B9;&#x3002;
-&#x4F7F;&#x7528;&#x8FD9;&#x4E9B;&#x70B9;&#xFF0C;&#x901A;&#x8FC7;&#x77E9;&#x9635;&#x8FD0;&#x7B97;&#x8BA1;&#x7B97;&#x51FA; ( M )&#x3002;</li>
-</ul>
-<hr>
-<h3 id="5. &#x7279;&#x6B8A;&#x573A;&#x666F;&#x6821;&#x6B63;"><a href="#5. &#x7279;&#x6B8A;&#x573A;&#x666F;&#x6821;&#x6B63;"></a><strong>5. &#x7279;&#x6B8A;&#x573A;&#x666F;&#x6821;&#x6B63;</strong></h3>
-<ul>
-<li><strong>&#x90E8;&#x5206;&#x906E;&#x6321;&#xFF1A;</strong> &#x5982;&#x679C;&#x5B9A;&#x4F4D;&#x56FE;&#x5F62;&#x90E8;&#x5206;&#x88AB;&#x906E;&#x6321;&#xFF0C;&#x89E3;&#x7801;&#x5668;&#x4F1A;&#x5C1D;&#x8BD5;&#x5229;&#x7528;&#x5269;&#x4F59;&#x7684;&#x529F;&#x80FD;&#x533A;&#x57DF;&#xFF08;&#x5982;&#x5BF9;&#x9F50;&#x56FE;&#x5F62;&#xFF09;&#x8FDB;&#x884C;&#x8865;&#x507F;&#x3002;</li>
-<li><strong>&#x5F2F;&#x66F2;&#x4E8C;&#x7EF4;&#x7801;&#xFF1A;</strong> &#x4F7F;&#x7528;&#x591A;&#x4E2A;&#x5BF9;&#x9F50;&#x56FE;&#x5F62;&#xFF0C;&#x7ED3;&#x5408;&#x63D2;&#x503C;&#x7B97;&#x6CD5;&#x6821;&#x6B63;&#x66F2;&#x9762;&#x4E0A;&#x7684;&#x5F62;&#x53D8;&#x3002;</li>
-</ul>
-<hr>
 <h3 id="6. &#x603B;&#x7ED3;"><a href="#6. &#x603B;&#x7ED3;"></a><strong>6. &#x603B;&#x7ED3;</strong></h3>
 <p>&#x4E8C;&#x7EF4;&#x7801;&#x5F62;&#x53D8;&#x6062;&#x590D;&#x7684;&#x6838;&#x5FC3;&#x662F;&#xFF1A;</p>
 <ul>
@@ -214,8 +179,4 @@ x \\ y \\ 1
 <li>&#x8BA1;&#x7B97;&#x900F;&#x89C6;&#x53D8;&#x6362;&#x77E9;&#x9635;&#xFF0C;&#x5C06;&#x5F62;&#x53D8;&#x4E8C;&#x7EF4;&#x7801;&#x6062;&#x590D;&#x4E3A;&#x6807;&#x51C6;&#x77E9;&#x5F62;&#x3002;</li>
 <li>&#x7EC6;&#x5316;&#x6821;&#x6B63;&#xFF0C;&#x786E;&#x4FDD;&#x5185;&#x90E8;&#x6570;&#x636E;&#x6A21;&#x5757;&#x7684;&#x4F4D;&#x7F6E;&#x7CBE;&#x786E;&#x65E0;&#x8BEF;&#x3002;</li>
 </ul>
-`,E=[{level:1,title:"二维码的纠错原理",children:[]},{level:1,title:"Reed-Solomon 算法简介",children:[{level:2,title:"一、基本概念",children:[]},{level:2,title:"二、简单例子",children:[{level:3,title:"场景描述",children:[]},{level:3,title:"1. 构造多项式",children:[]},{level:3,title:"2. 生成校验点",children:[]},{level:3,title:"3. 数据损坏",children:[]},{level:3,title:"4. 数据恢复（多项式插值）",children:[{level:4,title:"已知：",children:[]},{level:4,title:"插值恢复：",children:[]}]}]},{level:2,title:"三、应用场景",children:[]},{level:2,title:"四、总结",children:[]}]},{level:1,title:"二维码的形变恢复",children:[{level:3,title:"1. 形变类型",children:[]},{level:3,title:"2. 功能区域的作用",children:[]},{level:3,title:"3. 校正形变的步骤",children:[{level:4,title:"步骤 1：检测定位图形",children:[]},{level:4,title:"步骤 2：估计透视变换矩阵",children:[]},{level:4,title:"步骤 3：应用透视变换",children:[]},{level:4,title:"步骤 4：细化校正",children:[]},{level:4,title:"步骤 5：提取网格",children:[]}]},{level:3,title:"4. 实际应用举例",children:[{level:4,title:"形变校正公式",children:[]}]}]},{level:1,title:`设变形后的点为 ((x', y'))，标准矩阵中的点为 ((x, y))。透视变换矩阵 ( M ) 将 ((x, y)) 转换为 ((x', y'))，公式如下：
-[
-\\begin{bmatrix}
-x' \\ y' \\ w
-\\end{bmatrix}`,children:[{level:4,title:"透视变换矩阵的推导",children:[]},{level:3,title:"5. 特殊场景校正",children:[]},{level:3,title:"6. 总结",children:[]}]}];export{x as attributes,F as html,E as nestedHeaders};
+`,E=[{level:1,title:"二维码的纠错原理",children:[]},{level:1,title:"Reed-Solomon 算法简介",children:[{level:2,title:"一、基本概念",children:[]},{level:2,title:"二、简单例子",children:[{level:3,title:"场景描述",children:[]},{level:3,title:"1. 构造多项式",children:[]},{level:3,title:"2. 生成校验点",children:[]},{level:3,title:"3. 数据损坏",children:[]},{level:3,title:"4. 数据恢复（多项式插值）",children:[{level:4,title:"已知：",children:[]},{level:4,title:"插值恢复：",children:[]}]}]},{level:2,title:"三、应用场景",children:[]},{level:2,title:"四、总结",children:[]}]},{level:1,title:"二维码的形变恢复",children:[{level:3,title:"1. 形变类型",children:[]},{level:3,title:"2. 功能区域的作用",children:[]},{level:3,title:"3. 校正形变的步骤",children:[{level:4,title:"步骤 1：检测定位图形",children:[]},{level:4,title:"步骤 2：估计透视变换矩阵",children:[]},{level:4,title:"步骤 3：应用透视变换",children:[]},{level:4,title:"步骤 4：细化校正",children:[]},{level:4,title:"步骤 5：提取网格",children:[]}]},{level:3,title:"6. 总结",children:[]}]}];export{x as attributes,F as html,E as nestedHeaders};
