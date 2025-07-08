@@ -1,4 +1,70 @@
-const x={},F=`<h1 id="Thinking Mode"><a href="#Thinking Mode"></a>Thinking Mode</h1>
+const x={},F=`<h1 id="LlamaIndex + LangChain"><a href="#LlamaIndex + LangChain"></a>LlamaIndex + LangChain</h1>
+<pre><code> &#x539F;&#x59CB;&#x6570;&#x636E;             &#x7528;&#x6237;&#x63D0;&#x95EE;
+   &#x2193;                    &#x2193;
+ LlamaIndex         LangChain
+(&#x5207;&#x5206; + &#x5411;&#x91CF;&#x53EC;&#x56DE;)     (Prompt &#x6784;&#x9020; + &#x591A;&#x6B65;&#x8C03;&#x7528; + Tool &#x8C03;&#x5EA6;)
+   &#x2193;                    &#x2193;
+&#x3010;&#x9AD8;&#x8D28;&#x91CF;&#x77E5;&#x8BC6;&#x7247;&#x6BB5;&#x3011; &#x2192; &#x62FC;&#x63A5; &#x2192; &#x6A21;&#x578B;&#x8F93;&#x5165; &#x2192; &#x6A21;&#x578B;&#x8F93;&#x51FA;
+</code></pre>
+<h1 id="LLM&#x5BF9;&#x6559;&#x80B2;&#x7684;&#x98A0;&#x8986;&#x5230;&#x5E95;&#x6709;&#x591A;&#x5927;?"><a href="#LLM&#x5BF9;&#x6559;&#x80B2;&#x7684;&#x98A0;&#x8986;&#x5230;&#x5E95;&#x6709;&#x591A;&#x5927;?"></a>LLM&#x5BF9;&#x6559;&#x80B2;&#x7684;&#x98A0;&#x8986;&#x5230;&#x5E95;&#x6709;&#x591A;&#x5927;?</h1>
+<p>LLM&#x5BF9;&#x6559;&#x80B2;&#x7684;&#x98A0;&#x8986;&#xFF0C;&#x4E0D;&#x662F;&#x201C;&#x5DE5;&#x5177;&#x5C42;&#x201D;&#x7684;&#x63D0;&#x5347;&#xFF0C;&#x800C;&#x662F;&#x201C;&#x8303;&#x5F0F;&#x7EA7;&#x201D;&#x7684;&#x6539;&#x53D8;&#x3002;&#x5B83;&#x4F1A;&#x5F7B;&#x5E95;&#x6539;&#x53D8;&#x201C;&#x5B66;&#x4EC0;&#x4E48;&#x3001;&#x600E;&#x4E48;&#x5B66;&#x3001;&#x8C01;&#x6765;&#x6559;&#x3001;&#x5B66;&#x5230;&#x54EA;&#x4E3A;&#x6B62;&#x201D;&#x8FD9;&#x56DB;&#x4E2A;&#x6559;&#x80B2;&#x6839;&#x57FA;&#x3002;</p>
+<table>
+<thead>
+<tr>
+<th>&#x7EF4;&#x5EA6;</th>
+<th>&#x4F20;&#x7EDF;&#x8303;&#x5F0F;</th>
+<th>&#x88AB;LLM&#x98A0;&#x8986;&#x540E;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&#x5B66;&#x4EC0;&#x4E48;</td>
+<td>&#x77E5;&#x8BC6;&#x4E3A;&#x4E3B;</td>
+<td>&#x80FD;&#x529B;&#x4E0E;&#x63D0;&#x95EE;&#x4E3A;&#x4E3B;</td>
+</tr>
+<tr>
+<td>&#x8C01;&#x6765;&#x6559;</td>
+<td>&#x8001;&#x5E08;&#x4E2D;&#x5FC3;</td>
+<td>&#x591A;AI&#x534F;&#x540C;+&#x4EBA;&#x7C7B;&#x5F15;&#x5BFC;</td>
+</tr>
+<tr>
+<td>&#x600E;&#x4E48;&#x5B66;</td>
+<td>&#x6559;&#x6750;+&#x8003;&#x8BD5;</td>
+<td>&#x5BF9;&#x8BDD;+&#x5171;&#x521B;+&#x5B9A;&#x5236;&#x53CD;&#x9988;</td>
+</tr>
+<tr>
+<td>&#x5B66;&#x5230;&#x54EA;</td>
+<td>&#x5B66;&#x5386;&#x4E3A;&#x7EC8;&#x70B9;</td>
+<td>&#x7EC8;&#x8EAB;&#x5B66;&#x4E60;+AI&#x4F34;&#x5B66;</td>
+</tr>
+</tbody>
+</table>
+<h1 id="&#x201C;&#x6697;&#x77E5;&#x8BC6;&#x201D;&#xFF08;Dark Knowledge&#xFF09;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;"><a href="#&#x201C;&#x6697;&#x77E5;&#x8BC6;&#x201D;&#xFF08;Dark Knowledge&#xFF09;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;"></a>&#x201C;&#x6697;&#x77E5;&#x8BC6;&#x201D;&#xFF08;Dark Knowledge&#xFF09;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;</h1>
+<p>&#x201C;&#x6697;&#x77E5;&#x8BC6;&#x201D;&#x662F;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x4E2D;&#x4E00;&#x4E2A;&#x975E;&#x5E38;&#x91CD;&#x8981;&#x4F46;&#x4E0D;&#x76F4;&#x89C2;&#x7684;&#x6982;&#x5FF5;&#xFF0C;&#x6700;&#x65E9;&#x7531; Geoffrey Hinton &#x63D0;&#x51FA;&#x3002;&#x5B83;&#x6307;&#x7684;&#x662F;&#xFF1A;&#x6A21;&#x578B;&#x4E2D;&#x201C;&#x6CA1;&#x6709;&#x660E;&#x786E;&#x6807;&#x7B7E;&#x201D;&#x7684;&#x90A3;&#x4E9B;&#x77E5;&#x8BC6;&#x3002;</p>
+<p>&#x5177;&#x4F53;&#x800C;&#x8A00;&#xFF1A;</p>
+<p>&#x4E00;&#x4E2A;&#x5206;&#x7C7B;&#x6A21;&#x578B;&#x5B66;&#x5230;&#x7684;&#x4E0D;&#x53EA;&#x662F;&#x201C;&#x7B54;&#x6848;&#x5BF9;&#x4E0D;&#x5BF9;&#x201D;&#xFF0C;&#x8FD8;&#x5B66;&#x5230;&#x4E86;&#x5176;&#x4ED6;&#x7C7B;&#x4E4B;&#x95F4;&#x7684;&#x201C;&#x76F8;&#x4F3C;&#x6027;&#x7ED3;&#x6784;&#x201D;&#x3002;</p>
+<p>&#x8FD9;&#x4E9B;&#x77E5;&#x8BC6;&#x4E0D;&#x4F1A;&#x663E;&#x5F0F;&#x4F53;&#x73B0;&#x5728;&#x8BAD;&#x7EC3;&#x6807;&#x7B7E;&#x4E2D;&#xFF0C;&#x4F46;&#x5374;&#x4FDD;&#x7559;&#x5728;&#x6A21;&#x578B;&#x7684;&#x5185;&#x90E8;&#x6743;&#x91CD;&#x4E2D;&#x3002;</p>
+<p>&#x4F8B;&#x5982;&#xFF1A;</p>
+<p>&#x4E00;&#x4E2A;&#x732B; vs &#x72D7;&#x7684;&#x6A21;&#x578B;&#xFF0C;&#x867D;&#x7136;&#x53EA;&#x8F93;&#x51FA;0/1&#xFF0C;&#x4F46;&#x5B83;&#x5728;&#x5185;&#x90E8;&#x53EF;&#x80FD;&#x77E5;&#x9053;&#x201C;&#x72D0;&#x72F8;&#x957F;&#x5F97;&#x4E5F;&#x50CF;&#x72D7;&#x201D;&#x3002;</p>
+<p>&#x5B83;&#x6CA1;&#x6709;&#x5B66;&#x8FC7;&#x201C;&#x72D0;&#x72F8;&#x201D;&#xFF0C;&#x4F46;&#x201C;&#x611F;&#x77E5;&#x5230;&#x4E86;&#x7C7B;&#x4F3C;&#x6027;&#x201D;&#x2014;&#x2014;&#x8FD9;&#x5C31;&#x662F;&#x6697;&#x77E5;&#x8BC6;&#x3002;</p>
+<h1 id="AIGC&#x4EA7;&#x751F;&#x7684;&#x5185;&#x5BB9;&#x201C;&#x53CD;&#x54FA;&#x201D;&#x6A21;&#x578B;&#x8BAD;&#x7EC3;&#x4F1A;&#x53D1;&#x751F;&#x4EC0;&#x4E48;?"><a href="#AIGC&#x4EA7;&#x751F;&#x7684;&#x5185;&#x5BB9;&#x201C;&#x53CD;&#x54FA;&#x201D;&#x6A21;&#x578B;&#x8BAD;&#x7EC3;&#x4F1A;&#x53D1;&#x751F;&#x4EC0;&#x4E48;?"></a>AIGC&#x4EA7;&#x751F;&#x7684;&#x5185;&#x5BB9;&#x201C;&#x53CD;&#x54FA;&#x201D;&#x6A21;&#x578B;&#x8BAD;&#x7EC3;&#x4F1A;&#x53D1;&#x751F;&#x4EC0;&#x4E48;?</h1>
+<p>&#x2248; AI&#x7684;&#x201C;&#x8FD1;&#x4EB2;&#x7E41;&#x6B96;&#x201D;
+&#x5C31;&#x50CF;&#x57FA;&#x56E0;&#x591A;&#x6837;&#x6027;&#x4E27;&#x5931;&#x4F1A;&#x5BFC;&#x81F4;&#x5BB6;&#x65CF;&#x9000;&#x5316;&#xFF0C;&#x8BED;&#x8A00;&#x6A21;&#x578B;&#x53EA;&#x4ECE;&#x81EA;&#x5DF1;&#x8EAB;&#x4E0A;&#x5B66;&#x4E1C;&#x897F;&#x4E5F;&#x4F1A;&#x53D8;&#x5F97;&#x201C;&#x5C01;&#x95ED;&#x201D;&#x3001;&#x201C;&#x9000;&#x5316;&#x201D;&#x3001;&#x201C;&#x5931;&#x771F;&#x201D;&#x3002;</p>
+<p>&#x4E00;&#x4E2A;&#x66F4;&#x54F2;&#x5B66;&#x7684;&#x95EE;&#x9898;&#xFF1A;&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x201C;&#x81EA;&#x6211;&#x8FDB;&#x5316;&#x201D;&#xFF1F;</p>
+<ul>
+<li>&#x5982;&#x679C;AI&#x8DB3;&#x591F;&#x5F3A;&#x5927;&#xFF0C;&#x5E76;&#x5177;&#x5907;&#x81EA;&#x6211;&#x6821;&#x6B63;&#x3001;&#x4E8B;&#x5B9E;&#x9A8C;&#x8BC1;&#x3001;&#x77E5;&#x8BC6;&#x8FC1;&#x79FB;&#x80FD;&#x529B;&#xFF0C;&#x7406;&#x8BBA;&#x4E0A;&#x662F;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x67D0;&#x79CD;&#x201C;&#x81EA;&#x6211;&#x6210;&#x957F;&#x95ED;&#x73AF;&#x201D;&#x7684;</li>
+<li>&#x4F46;&#x5F53;&#x524D;&#x9636;&#x6BB5;&#xFF0C;&#x6CA1;&#x6709;&#x5916;&#x90E8;&#x4EBA;&#x7C7B;&#x6821;&#x6B63;&#x548C;&#x76D1;&#x7763;&#x7684; AI&#xFF0C;&#x65E0;&#x6CD5;&#x957F;&#x671F;&#x7A33;&#x5B9A;&#x8FDB;&#x6B65;&#xFF08;&#x8FD9;&#x548C;&#x4EBA;&#x7C7B;&#x6587;&#x660E;&#x6F14;&#x5316;&#x4E2D;&#x201C;&#x5BF9;&#x7167;&#x73B0;&#x5B9E;&#x3001;&#x8BD5;&#x9519;&#x8FED;&#x4EE3;&#x201D;&#x7684;&#x65B9;&#x5F0F;&#x7C7B;&#x4F3C;&#xFF09;</li>
+</ul>
+<h1 id="&#x6263;&#x5B50;"><a href="#&#x6263;&#x5B50;"></a>&#x6263;&#x5B50;</h1>
+<ul>
+<li>&#x6263;&#x5B50;&#x672C;&#x8D28;&#x4E0A;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x5B9A;&#x4F4D;&#x5728;&#x201C;&#x4E1A;&#x52A1;&#x53CB;&#x597D;&#x578B;&#x201D;&#x7684;&#x4F4E;&#x4EE3;&#x7801;&#x5E73;&#x53F0;&#xFF0C;&#x5176;&#x6838;&#x5FC3;&#x80FD;&#x529B;&#x66F4;&#x504F;&#x5411;&#x4F20;&#x7EDF;&#x524D;&#x7AEF; low-code&#xFF0C;&#x800C;&#x975E;&#x771F;&#x6B63;&#x610F;&#x4E49;&#x4E0A;&#x7684; AI-native &#x67B6;&#x6784;&#x5DE5;&#x5177;&#x3002;
+<ul>
+<li>&#x5BF9;&#x5F00;&#x53D1;&#x8005;&#x6765;&#x8BF4;&#xFF0C;&#x6263;&#x5B50;&#x5BB9;&#x6613;&#x201C;&#x9E21;&#x808B;&#x201D;&#xFF1A;&#x7B80;&#x5355;&#x573A;&#x666F;&#x5ACC;&#x5B83;&#x591A;&#x4F59;&#xFF0C;&#x590D;&#x6742;&#x573A;&#x666F;&#x53C8;&#x5BB9;&#x6613;&#x8E29;&#x5751;&#x3002;</li>
+<li>&#x5B83;&#x66F4;&#x9002;&#x5408;&#x90A3;&#x4E9B;&#x201C;&#x9700;&#x6C42;&#x660E;&#x786E; + &#x5FEB;&#x901F;&#x4E0A;&#x7EBF; + &#x4E0D;&#x8003;&#x8651;&#x6269;&#x5C55;&#x6027;&#x201D;&#x7684;&#x8F7B;&#x91CF;&#x5185;&#x90E8;&#x573A;&#x666F;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x6784;&#x5EFA;&#x771F;&#x6B63;&#x9700;&#x8981;&#x6301;&#x7EED;&#x6F14;&#x8FDB;&#x7684;&#x7CFB;&#x7EDF;&#x3002;</li>
+</ul>
+</li>
+</ul>
+<h1 id="Thinking Mode"><a href="#Thinking Mode"></a>Thinking Mode</h1>
 <ul>
 <li>&#x6309;&#x6B65;&#x9AA4;&#x601D;&#x8003;&#xFF08;step-by-step reasoning&#xFF09;</li>
 <li>&#x601D;&#x7EF4;&#x94FE;&#x6761;&#xFF08;Chain-of-Thought&#xFF09;</li>
@@ -737,4 +803,4 @@ ChatGPT &#x4E4B;&#x6240;&#x4EE5;&#x8DDF; AGI &#x6700;&#x63A5;&#x8FD1;&#xFF0C;&#x
 <li>&#x5185;&#x5BB9;&#x8FD0;&#x8425;&#x5E08;&#xFF1A;&#x5185;&#x5BB9;&#x8FD0;&#x8425;&#x5E08;&#x662F;&#x5229;&#x7528;GPT-4&#x4E3A;&#x5404;&#x79CD;&#x5E73;&#x53F0;&#x548C;&#x6E20;&#x9053;&#x63D0;&#x4F9B;&#x4F18;&#x8D28;&#x5185;&#x5BB9;&#x670D;&#x52A1;&#x7684;&#x4EBA;&#x5458;&#xFF0C;&#x4ED6;&#x4EEC;&#x9700;&#x8981;&#x6839;&#x636E;&#x76EE;&#x6807;&#x53D7;&#x4F17;&#x548C;&#x5E02;&#x573A;&#x9700;&#x6C42;&#xFF0C;&#x9009;&#x62E9;&#x5408;&#x9002;&#x7684;&#x63D0;&#x793A;&#x548C;&#x53C2;&#x6570;&#x6765;&#x8C03;&#x7528;GPT-4&#x751F;&#x6210;&#x76F8;&#x5E94;&#x7C7B;&#x578B;&#x548C;&#x98CE;&#x683C;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x5E76;&#x8FDB;&#x884C;&#x7F16;&#x8F91;&#x3001;&#x4F18;&#x5316;&#x548C;&#x53D1;&#x5E03;&#x3002;&#x5185;&#x5BB9;&#x8FD0;&#x8425;&#x5E08;&#x9700;&#x8981;&#x5177;&#x5907;&#x4E00;&#x5B9A;&#x7684;&#x521B;&#x610F;&#x601D;&#x7EF4;&#x548C;&#x6587;&#x6848;&#x80FD;&#x529B;&#xFF0C;&#x4EE5;&#x53CA;&#x5BF9;&#x5404;&#x79CD;&#x5A92;&#x4F53;&#x5E73;&#x53F0;&#x548C;&#x884C;&#x4E1A;&#x52A8;&#x6001;&#x6709;&#x4E00;&#x5B9A;&#x4E86;&#x89E3;&#x3002;</li>
 <li>&#x5185;&#x5BB9;&#x521B;&#x4F5C;&#x8005;&#xFF1A;&#x5185;&#x5BB9;&#x521B;&#x4F5C;&#x8005;&#x662F;&#x5229;&#x7528;GPT-4&#x8F85;&#x52A9;&#x81EA;&#x5DF1;&#x8FDB;&#x884C;&#x521B;&#x4F5C;&#x6D3B;&#x52A8;&#x7684;&#x4EBA;&#x5458;&#xFF0C;&#x4ED6;&#x4EEC;&#x53EF;&#x4EE5;&#x5C06;&#x81EA;&#x5DF1;&#x60F3;&#x8981;&#x8868;&#x8FBE;&#x6216;&#x4F20;&#x8FBE;&#x7ED9;&#x7528;&#x6237;</li>
 </ul>
-`,E=[{level:1,title:"Thinking Mode",children:[]},{level:1,title:"LLM AS a judge",children:[]},{level:1,title:"单/双编码器",children:[]},{level:1,title:"AI 客户端端的发展趋势",children:[]},{level:1,title:"AIGC 发展的一些难点",children:[]},{level:1,title:"SWE-bench 评估",children:[]},{level:1,title:"AI Agent",children:[]},{level:1,title:"LangGraph 是为了自主可控",children:[]},{level:1,title:"chatGPT vs Gemini",children:[]},{level:1,title:"AI CodeReview 感悟",children:[]},{level:1,title:"ChatGPT 图像-安全性-出处查询",children:[]},{level:1,title:"知识图谱原理",children:[]},{level:1,title:"大模型反编译代码",children:[]},{level:1,title:"AI 对技术传播的双重影响",children:[]},{level:1,title:"world labs 图片生成 3D 视频",children:[]},{level:1,title:"supervision",children:[]},{level:1,title:"AI 图片识别中的视觉注入(visual-prompt-injections)",children:[]},{level:1,title:"奇异值分解",children:[]},{level:1,title:"AI DOOM",children:[]},{level:1,title:"人工智能的现状，任务，架构 与统一",children:[]},{level:1,title:"视频生成训练的演化?",children:[]},{level:1,title:"一种快速理解模型的方法",children:[]},{level:1,title:"边界框回归损失",children:[]},{level:1,title:"机器学习基础数据集",children:[]},{level:1,title:"神经网络逐步取代 SVM 原因",children:[]},{level:1,title:"人脸识别与普通图像识别的训练区别",children:[]},{level:1,title:"scaling law",children:[]},{level:1,title:"Towhee 框架",children:[]},{level:1,title:"VGG 网络",children:[]},{level:1,title:"感知损失（perceptual loss）",children:[]},{level:1,title:"stable diffusion",children:[]},{level:1,title:"神经网络可解释性",children:[]},{level:1,title:"增量学习",children:[]},{level:1,title:"data-centric AI",children:[]},{level:1,title:"核函数",children:[]},{level:1,title:"嵌入层",children:[]},{level:1,title:"机器学习与英语学习",children:[]},{level:1,title:"GAN，VAE，Diffusion 生成模型理解",children:[{level:2,title:"潜空间",children:[]},{level:2,title:"Diffusion vs GAN",children:[]}]},{level:1,title:"Diffusion 模型过程",children:[]},{level:1,title:"理解 VAE",children:[]},{level:1,title:"深度学习优化器",children:[]},{level:1,title:"反向传播",children:[]},{level:1,title:"CGAN MNIST 训练步骤",children:[]},{level:1,title:"预处理",children:[]},{level:1,title:"损失函数",children:[{level:2,title:"交叉熵",children:[{level:3,title:"问题",children:[]}]}]},{level:1,title:"Transformer",children:[{level:2,title:"positional encoding",children:[]},{level:2,title:"self-attention",children:[]}]},{level:1,title:"one hot 编码",children:[{level:2,title:"例子",children:[]},{level:2,title:"实现",children:[]},{level:2,title:"CRNN + CTC 解决变长文本识别",children:[{level:3,title:"CTC 如何计算预测序列跟目标序列的相识度？",children:[]}]}]},{level:1,title:"深度学习编程范式",children:[]},{level:1,title:"机器学习分类的一点技巧",children:[]},{level:1,title:"尝试理解 ONNX （Open Neural Network Exchange）",children:[]},{level:1,title:"深度学习中的 Epoch 和 Batch",children:[]},{level:1,title:"GPT 尝试",children:[]},{level:1,title:"CNN 的简单理解",children:[]},{level:1,title:"一句话信息",children:[]},{level:1,title:"AGI 的一点理解",children:[]},{level:1,title:"gpt 可能的研究方向",children:[]},{level:1,title:"关于 chatGPT 引发的人工智能思考 2023-3-1",children:[]},{level:1,title:"chatGPT 衍生的未来职业？（更新 2023-3-13，参考）",children:[]}];export{x as attributes,F as html,E as nestedHeaders};
+`,E=[{level:1,title:"LlamaIndex + LangChain",children:[]},{level:1,title:"LLM对教育的颠覆到底有多大?",children:[]},{level:1,title:"“暗知识”（Dark Knowledge）是什么？",children:[]},{level:1,title:"AIGC产生的内容“反哺”模型训练会发生什么?",children:[]},{level:1,title:"扣子",children:[]},{level:1,title:"Thinking Mode",children:[]},{level:1,title:"LLM AS a judge",children:[]},{level:1,title:"单/双编码器",children:[]},{level:1,title:"AI 客户端端的发展趋势",children:[]},{level:1,title:"AIGC 发展的一些难点",children:[]},{level:1,title:"SWE-bench 评估",children:[]},{level:1,title:"AI Agent",children:[]},{level:1,title:"LangGraph 是为了自主可控",children:[]},{level:1,title:"chatGPT vs Gemini",children:[]},{level:1,title:"AI CodeReview 感悟",children:[]},{level:1,title:"ChatGPT 图像-安全性-出处查询",children:[]},{level:1,title:"知识图谱原理",children:[]},{level:1,title:"大模型反编译代码",children:[]},{level:1,title:"AI 对技术传播的双重影响",children:[]},{level:1,title:"world labs 图片生成 3D 视频",children:[]},{level:1,title:"supervision",children:[]},{level:1,title:"AI 图片识别中的视觉注入(visual-prompt-injections)",children:[]},{level:1,title:"奇异值分解",children:[]},{level:1,title:"AI DOOM",children:[]},{level:1,title:"人工智能的现状，任务，架构 与统一",children:[]},{level:1,title:"视频生成训练的演化?",children:[]},{level:1,title:"一种快速理解模型的方法",children:[]},{level:1,title:"边界框回归损失",children:[]},{level:1,title:"机器学习基础数据集",children:[]},{level:1,title:"神经网络逐步取代 SVM 原因",children:[]},{level:1,title:"人脸识别与普通图像识别的训练区别",children:[]},{level:1,title:"scaling law",children:[]},{level:1,title:"Towhee 框架",children:[]},{level:1,title:"VGG 网络",children:[]},{level:1,title:"感知损失（perceptual loss）",children:[]},{level:1,title:"stable diffusion",children:[]},{level:1,title:"神经网络可解释性",children:[]},{level:1,title:"增量学习",children:[]},{level:1,title:"data-centric AI",children:[]},{level:1,title:"核函数",children:[]},{level:1,title:"嵌入层",children:[]},{level:1,title:"机器学习与英语学习",children:[]},{level:1,title:"GAN，VAE，Diffusion 生成模型理解",children:[{level:2,title:"潜空间",children:[]},{level:2,title:"Diffusion vs GAN",children:[]}]},{level:1,title:"Diffusion 模型过程",children:[]},{level:1,title:"理解 VAE",children:[]},{level:1,title:"深度学习优化器",children:[]},{level:1,title:"反向传播",children:[]},{level:1,title:"CGAN MNIST 训练步骤",children:[]},{level:1,title:"预处理",children:[]},{level:1,title:"损失函数",children:[{level:2,title:"交叉熵",children:[{level:3,title:"问题",children:[]}]}]},{level:1,title:"Transformer",children:[{level:2,title:"positional encoding",children:[]},{level:2,title:"self-attention",children:[]}]},{level:1,title:"one hot 编码",children:[{level:2,title:"例子",children:[]},{level:2,title:"实现",children:[]},{level:2,title:"CRNN + CTC 解决变长文本识别",children:[{level:3,title:"CTC 如何计算预测序列跟目标序列的相识度？",children:[]}]}]},{level:1,title:"深度学习编程范式",children:[]},{level:1,title:"机器学习分类的一点技巧",children:[]},{level:1,title:"尝试理解 ONNX （Open Neural Network Exchange）",children:[]},{level:1,title:"深度学习中的 Epoch 和 Batch",children:[]},{level:1,title:"GPT 尝试",children:[]},{level:1,title:"CNN 的简单理解",children:[]},{level:1,title:"一句话信息",children:[]},{level:1,title:"AGI 的一点理解",children:[]},{level:1,title:"gpt 可能的研究方向",children:[]},{level:1,title:"关于 chatGPT 引发的人工智能思考 2023-3-1",children:[]},{level:1,title:"chatGPT 衍生的未来职业？（更新 2023-3-13，参考）",children:[]}];export{x as attributes,F as html,E as nestedHeaders};
