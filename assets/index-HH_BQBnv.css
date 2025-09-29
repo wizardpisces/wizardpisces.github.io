@@ -1,1 +1,0 @@
-.home{padding:10px 24px}.home .desc{font-weight:500;font-size:20px}.home .desc-feature{font-weight:400;font-size:18px}.home .desc-feature a{font-size:18px;color:#000;position:relative}.home .desc-feature a:after{content:"";position:absolute;z-index:-1;inset:60% 0 0;transition:top .2s cubic-bezier(0,.8,.13,1);background-color:#f29d8280}.home .desc-feature a:hover:after{top:0}
