@@ -1,0 +1,147 @@
+const x={},F=`<p><em>&#x8BBA;&#x6587;&#x53D1;&#x5E03;&#x65F6;&#x95F4;&#xFF1A;2025-05-09</em></p>
+<p>&#x963F;&#x91CC;&#x5DF4;&#x5DF4; Qwen &#x56E2;&#x961F;&#x53D1;&#x5E03;&#x7684; <strong>Gated Attention</strong>&#xFF08;&#x8BBA;&#x6587;&#x6807;&#x9898;&#x4E3A;&#x300A;<a href="https://arxiv.org/pdf/2505.06708">Gated Attention for Large Language Models: Non-linearity, Sparsity, and Attention-Sink-Free</a>&#x300B;&#xFF09;&#x63D0;&#x51FA;&#x4E86;&#x4E00;&#x79CD;**&#x201C;&#x5927;&#x9053;&#x81F3;&#x7B80;&#x201D;**&#x7684;&#x67B6;&#x6784;&#x6539;&#x8FDB;&#x3002;</p>
+<p>&#x7B80;&#x5355;&#x6765;&#x8BF4;&#xFF0C;&#x8FD9;&#x7BC7;&#x8BBA;&#x6587;&#x7ED9;&#x6807;&#x51C6; Transformer &#x7684;&#x6CE8;&#x610F;&#x529B;&#x673A;&#x5236;&#xFF08;Softmax Attention&#xFF09;&#x52A0;&#x4E86;&#x4E00;&#x4E2A;**&#x201C;&#x603B;&#x97F3;&#x91CF;&#x65CB;&#x94AE;&#x201D;&#xFF08;Gate&#xFF09;**&#x3002;&#x8FD9;&#x4E2A;&#x770B;&#x4F3C;&#x7B80;&#x5355;&#x7684;&#x6539;&#x52A8;&#xFF0C;&#x4E0D;&#x4EC5;&#x8BA9; AI &#x5B66;&#x4F1A;&#x4E86;&#x5728;&#x65E0;&#x5173;&#x4FE1;&#x606F;&#x9762;&#x524D;&#x201C;&#x95ED;&#x5634;&#x201D;&#xFF08;&#x89E3;&#x51B3;&#x6CE8;&#x610F;&#x529B;&#x9ED1;&#x6D1E;&#xFF09;&#xFF0C;&#x8FD8;&#x901A;&#x8FC7;&#x5F15;&#x5165;&#x975E;&#x7EBF;&#x6027;&#x663E;&#x8457;&#x63D0;&#x5347;&#x4E86;&#x6A21;&#x578B;&#x7684;&#x201C;&#x667A;&#x5546;&#x201D;&#x548C;&#x8BAD;&#x7EC3;&#x7A33;&#x5B9A;&#x6027;&#x3002;</p>
+<h2 id="Gated Attention &#x89E3;&#x51B3;&#x4E86;&#x4EC0;&#x4E48;&#x95EE;&#x9898;&#xFF1F;"><a href="#Gated Attention &#x89E3;&#x51B3;&#x4E86;&#x4EC0;&#x4E48;&#x95EE;&#x9898;&#xFF1F;"></a>Gated Attention &#x89E3;&#x51B3;&#x4E86;&#x4EC0;&#x4E48;&#x95EE;&#x9898;&#xFF1F;</h2>
+<p><strong>&#x6838;&#x5FC3;&#x95EE;&#x9898;&#xFF1A;&#x6807;&#x51C6; Transformer &#x7684;&#x6CE8;&#x610F;&#x529B;&#x673A;&#x5236;&#x60A3;&#x6709;&#x201C;&#x5F3A;&#x8FEB;&#x75C7;&#x201D;&#xFF0C;&#x7F3A;&#x4E4F;&#x201C;&#x975E;&#x7EBF;&#x6027;&#x201D;&#x548C;&#x201C;&#x7A00;&#x758F;&#x6027;&#x201D;&#x3002;</strong></p>
+<p>&#x60F3;&#x8C61;&#x4F60;&#x5728;&#x5F00;&#x4E00;&#x4E2A;&#x6F2B;&#x957F;&#x7684;&#x4F1A;&#x8BAE;&#xFF08;&#x5904;&#x7406;&#x957F;&#x6587;&#x672C;&#xFF09;&#xFF0C;&#x76EE;&#x524D;&#x7684; Transformer &#x67B6;&#x6784;&#x5B58;&#x5728;&#x4E24;&#x4E2A;&#x8FDD;&#x53CD;&#x76F4;&#x89C9;&#x7684;&#x8BBE;&#x8BA1;&#x7F3A;&#x9677;&#xFF1A;</p>
+<ul>
+<li><strong>&#x88AB;&#x8FEB;&#x5173;&#x6CE8;&#xFF08;&#x6CE8;&#x610F;&#x529B;&#x9ED1;&#x6D1E;&#xFF09;&#xFF1A;</strong> &#x6807;&#x51C6;&#x7684; <strong>Softmax</strong> &#x673A;&#x5236;&#x8981;&#x6C42;&#x6CE8;&#x610F;&#x529B;&#x7684;&#x603B;&#x548C;&#x5FC5;&#x987B;&#x4E3A; 1&#x3002;&#x8FD9;&#x610F;&#x5473;&#x7740;&#xFF0C;<strong>&#x54EA;&#x6015;&#x5F53;&#x524D;&#x5168;&#x662F;&#x5E9F;&#x8BDD;&#xFF0C;&#x6A21;&#x578B;&#x4E5F;&#x4E0D;&#x5F97;&#x4E0D;&#x628A;&#x6CE8;&#x610F;&#x529B;&#x5206;&#x914D;&#x7ED9;&#x67D0;&#x4E2A;&#x4EBA;</strong>&#x3002;&#x8FD9;&#x5C31;&#x50CF;&#x662F;&#x4E00;&#x5757;&#x5FC5;&#x987B;&#x5206;&#x5B8C;&#x7684;&#x86CB;&#x7CD5;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x4EBA;&#x503C;&#x5F97;&#x7ED9;&#xFF0C;&#x6A21;&#x578B;&#x5C31;&#x4F1A;&#x5C34;&#x5C2C;&#x5730;&#x628A;&#x86CB;&#x7CD5;&#x5168;&#x585E;&#x7ED9;&#x5750;&#x5728;&#x95E8;&#x53E3;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x4EBA;&#xFF08;First Token&#xFF09;&#x3002;&#x8FD9;&#x5C31;&#x9020;&#x6210;&#x4E86;&#x8457;&#x540D;&#x7684; <strong>Attention Sink&#xFF08;&#x6CE8;&#x610F;&#x529B;&#x9ED1;&#x6D1E;&#xFF09;</strong> &#x73B0;&#x8C61;&#xFF0C;&#x6D6A;&#x8D39;&#x4E86;&#x5B9D;&#x8D35;&#x7684;&#x6CE8;&#x610F;&#x529B;&#x5E26;&#x5BBD;&#x3002;</li>
+<li><strong>&#x7EBF;&#x6027;&#x74F6;&#x9888;&#xFF08;Linearity Bottleneck&#xFF09;&#xFF1A;</strong> &#x5728;&#x6570;&#x5B66;&#x4E0A;&#xFF0C;Attention &#x8F93;&#x51FA;&#x5176;&#x5B9E;&#x662F; Value &#x5411;&#x91CF;&#x7684;&#x7EBF;&#x6027;&#x7EC4;&#x5408;&#x3002;&#x5982;&#x679C;&#x628A;&#x6295;&#x5F71;&#x5C42;&#x4E5F;&#x7B97;&#x4E0A;&#xFF0C;$W_V$&#xFF08;Value &#x6295;&#x5F71;&#xFF09;&#x548C; $W_O$&#xFF08;&#x8F93;&#x51FA;&#x6295;&#x5F71;&#xFF09;&#x672C;&#x8D28;&#x4E0A;&#x662F;&#x8FDE;&#x7EED;&#x7684;&#x7EBF;&#x6027;&#x53D8;&#x6362;&#x3002;&#x8FD9;&#x9650;&#x5236;&#x4E86;&#x6A21;&#x578B;&#x5904;&#x7406;&#x590D;&#x6742;&#x903B;&#x8F91;&#x7684;&#x80FD;&#x529B;&#xFF0C;&#x5C31;&#x50CF;&#x4E24;&#x6761;&#x76F4;&#x7BA1;&#x5B50;&#x8FDE;&#x5728;&#x4E00;&#x8D77;&#xFF0C;&#x4F9D;&#x7136;&#x53EA;&#x662F;&#x4E00;&#x6761;&#x76F4;&#x7BA1;&#x5B50;&#x3002;</li>
+</ul>
+<p><strong>Gated Attention &#x7684;&#x4F5C;&#x7528;&#xFF1A;</strong> &#x5B83;&#x5728;<strong>&#x8BA1;&#x7B97;&#x5B8C; Softmax &#x6CE8;&#x610F;&#x529B;&#x4E4B;&#x540E;</strong>&#xFF0C;&#x5F15;&#x5165;&#x4E86;&#x4E00;&#x4E2A;<strong>&#x72EC;&#x7ACB;&#x4E8E;&#x6CE8;&#x610F;&#x529B;&#x5206;&#x6570;&#x7684;&#x201C;&#x95E8;&#x63A7;&#x201D;</strong>&#x3002;</p>
+<ul>
+<li><strong>&#x4EE5;&#x524D;&#xFF1A;</strong> &#x6A21;&#x578B;&#x53EA;&#x80FD;&#x51B3;&#x5B9A;&#x201C;&#x542C;&#x8C01;&#x7684;&#x66F4;&#x591A;&#x4E00;&#x70B9;&#x201D;&#xFF08;&#x76F8;&#x5BF9;&#x6743;&#x91CD;&#xFF09;&#x3002;</li>
+<li><strong>&#x73B0;&#x5728;&#xFF1A;</strong> &#x6A21;&#x578B;&#x53EF;&#x4EE5;&#x51B3;&#x5B9A;&#x201C;&#x8FD9;&#x53E5;&#x8BDD;&#x5230;&#x5E95;&#x8981;&#x4E0D;&#x8981;&#x542C;&#x201D;&#xFF08;&#x7EDD;&#x5BF9;&#x6743;&#x91CD;&#xFF09;&#x3002;&#x5982;&#x679C;&#x5224;&#x5B9A;&#x5F53;&#x524D;&#x4FE1;&#x606F;&#x65E0;&#x6548;&#xFF0C;&#x76F4;&#x63A5;&#x628A;&#x201C;&#x97F3;&#x91CF;&#x201D;&#x5173;&#x5230; 0&#xFF0C;&#x5F7B;&#x5E95;&#x963B;&#x65AD;&#x566A;&#x97F3;&#x3002;</li>
+</ul>
+<h2 id="&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x771F;&#x5B9E;&#x5B58;&#x5728;&#x5417;&#xFF1F;"><a href="#&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x771F;&#x5B9E;&#x5B58;&#x5728;&#x5417;&#xFF1F;"></a>&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x771F;&#x5B9E;&#x5B58;&#x5728;&#x5417;&#xFF1F;</h2>
+<p><strong>&#x975E;&#x5E38;&#x771F;&#x5B9E;&#xFF0C;&#x5B83;&#x662F;&#x5236;&#x7EA6;&#x5927;&#x6A21;&#x578B;&#x5904;&#x7406;&#x8D85;&#x957F;&#x4E0A;&#x4E0B;&#x6587;&#xFF08;Long Context&#xFF09;&#x7684;&#x6838;&#x5FC3;&#x963B;&#x788D;&#x3002;</strong></p>
+<ul>
+<li><strong>&#x957F;&#x6587;&#x672C;&#x53D8;&#x7B28;&#xFF1A;</strong> &#x968F;&#x7740;&#x5BF9;&#x8BDD;&#x53D8;&#x957F;&#xFF0C;&#x7531;&#x4E8E;&#x6A21;&#x578B;&#x88AB;&#x8FEB;&#x79EF;&#x7D2F;&#x65E0;&#x6548;&#x7684;&#x6CE8;&#x610F;&#x529B;&#xFF08;Sink&#xFF09;&#xFF0C;&#x566A;&#x97F3;&#x4F1A;&#x6DF9;&#x6CA1;&#x6709;&#x6548;&#x4FE1;&#x606F;&#xFF0C;&#x5BFC;&#x81F4;&#x6A21;&#x578B;&#x201C;&#x5916;&#x63A8;&#x201D;&#x80FD;&#x529B;&#x6781;&#x5DEE;&#x3002;</li>
+<li><strong>&#x8BAD;&#x7EC3;&#x70B8; Loss&#xFF1A;</strong> &#x5728;&#x8BAD;&#x7EC3;&#x8D85;&#x5927;&#x6A21;&#x578B;&#x65F6;&#xFF0C;&#x8FD9;&#x79CD;&#x5F3A;&#x5236;&#x5173;&#x6CE8;&#x673A;&#x5236;&#x5BB9;&#x6613;&#x5BFC;&#x81F4;&#x68AF;&#x5EA6;&#x5F02;&#x5E38;&#x3002;&#x4E3A;&#x4E86;&#x7EF4;&#x7A33;&#xFF0C;&#x5DE5;&#x7A0B;&#x5E08;&#x901A;&#x5E38;&#x88AB;&#x8FEB;&#x964D;&#x4F4E;&#x5B66;&#x4E60;&#x7387;&#xFF0C;&#x727A;&#x7272;&#x4E86;&#x8BAD;&#x7EC3;&#x6548;&#x7387;&#x3002;</li>
+</ul>
+<h2 id="&#x4E3A;&#x4EC0;&#x4E48;&#x73B0;&#x5728;&#x624D;&#x6709;&#x4EBA;&#x53BB;&#x89E3;&#x51B3;&#xFF1F;"><a href="#&#x4E3A;&#x4EC0;&#x4E48;&#x73B0;&#x5728;&#x624D;&#x6709;&#x4EBA;&#x53BB;&#x89E3;&#x51B3;&#xFF1F;"></a>&#x4E3A;&#x4EC0;&#x4E48;&#x73B0;&#x5728;&#x624D;&#x6709;&#x4EBA;&#x53BB;&#x89E3;&#x51B3;&#xFF1F;</h2>
+<p>&#x5176;&#x5B9E;&#x201C;&#x95E8;&#x63A7;&#x201D;&#xFF08;Gating&#xFF09;&#x5728; LSTM &#x548C; Mamba (SSM) &#x4E2D;&#x5F88;&#x5E38;&#x89C1;&#xFF0C;&#x4F46; Gated Attention &#x7684;&#x8D21;&#x732E;&#x5728;&#x4E8E;<strong>&#x7CBE;&#x786E;&#x5B9A;&#x4F4D;&#x4E86;&#x201C;&#x75C5;&#x7076;&#x201D;</strong>&#xFF1A;</p>
+<ol>
+<li><strong>&#x53BB;&#x4F2A;&#x5B58;&#x771F;&#xFF08;&#x6D88;&#x878D;&#x5B9E;&#x9A8C;&#xFF09;&#xFF1A;</strong> &#x4E4B;&#x524D;&#x7684;&#x5C1D;&#x8BD5;&#xFF08;&#x5982; Switch Head&#xFF09;&#x5F80;&#x5F80;&#x628A;&#x201C;&#x95E8;&#x63A7;&#x201D;&#x548C;&#x201C;&#x8DEF;&#x7531;&#xFF08;Routing&#xFF09;&#x201D;&#x6DF7;&#x5728;&#x4E00;&#x8D77;&#x3002;&#x963F;&#x91CC;&#x56E2;&#x961F;&#x901A;&#x8FC7;&#x5927;&#x89C4;&#x6A21;**&#x6D88;&#x878D;&#x5B9E;&#x9A8C;&#xFF08;Ablation Study&#xFF0C;&#x5373;&#x63A7;&#x5236;&#x53D8;&#x91CF;&#x6CD5;&#xFF09;**&#x8BC1;&#x660E;&#xFF1A;
+<ul>
+<li>&#x62C6;&#x6389;&#x8DEF;&#x7531;&#xFF0C;&#x53EA;&#x7559;&#x95E8;&#x63A7; -&gt; &#x6548;&#x679C;&#x4F9D;&#x7136;&#x5F88;&#x597D;&#x3002;</li>
+<li>&#x62C6;&#x6389;&#x95E8;&#x63A7;&#xFF0C;&#x53EA;&#x7559;&#x8DEF;&#x7531; -&gt; &#x6548;&#x679C;&#x53D8;&#x5DEE;&#x3002;</li>
+<li>&#x7ED3;&#x8BBA;&#xFF1A;<strong>&#x4E0D;&#x9700;&#x8981;&#x590D;&#x6742;&#x7684;&#x8DEF;&#x7531;&#xFF0C;&#x5355;&#x7EAF;&#x7684;&#x201C;&#x95E8;&#x63A7;&#x201D;&#x672C;&#x8EAB;&#x5C31;&#x662F;&#x63D0;&#x5347;&#x6027;&#x80FD;&#x7684;&#x5173;&#x952E;</strong>&#x3002;</li>
+</ul>
+</li>
+<li><strong>&#x4F4D;&#x7F6E;&#x7684;&#x827A;&#x672F;&#xFF1A;</strong> &#x8BBA;&#x6587;&#x5C1D;&#x8BD5;&#x4E86; 5 &#x4E2A;&#x4E0D;&#x540C;&#x7684;&#x63D2;&#x5165;&#x4F4D;&#x7F6E;&#xFF08;Q/K/V &#x6295;&#x5F71;&#x540E;&#x3001;FFN &#x540E;&#x7B49;&#xFF09;&#xFF0C;&#x6700;&#x7EC8;&#x53D1;&#x73B0;<strong>&#x5728; SDPA&#xFF08;&#x6CE8;&#x610F;&#x529B;&#x8BA1;&#x7B97;&#x5B8C;&#xFF09;&#x4E4B;&#x540E;&#x52A0;&#x95E8;</strong>&#x6548;&#x679C;&#x6700;&#x597D;&#x3002;&#x8FD9;&#x5C31;&#x50CF;&#x662F;&#x5728;&#x6DF7;&#x5408;&#x597D;&#x6240;&#x6709;&#x58F0;&#x97F3;&#x540E;&#xFF0C;&#x518D;&#x51B3;&#x5B9A;&#x662F;&#x5426;&#x64AD;&#x653E;&#xFF0C;&#x6700;&#x7B26;&#x5408;&#x76F4;&#x89C9;&#x3002;</li>
+</ol>
+<h2 id="&#x5B83;&#x662F;&#x5982;&#x4F55;&#x89E3;&#x51B3;&#x7684;&#xFF1F;"><a href="#&#x5B83;&#x662F;&#x5982;&#x4F55;&#x89E3;&#x51B3;&#x7684;&#xFF1F;"></a>&#x5B83;&#x662F;&#x5982;&#x4F55;&#x89E3;&#x51B3;&#x7684;&#xFF1F;</h2>
+<p>Gated Attention &#x7684;&#x5B9E;&#x73B0;&#x6781;&#x5176;&#x4F18;&#x96C5;&#xFF0C;&#x6838;&#x5FC3;&#x6539;&#x52A8;&#x53EA;&#x6709;&#x4E00;&#x884C;&#x516C;&#x5F0F;&#xFF0C;&#x5374;&#x8574;&#x542B;&#x4E86;&#x6DF1;&#x523B;&#x7684;&#x76F4;&#x89C9;&#x3002;</p>
+<h3 id="1. &#x7269;&#x7406;&#x4F4D;&#x7F6E;&#xFF1A;&#x53D1;&#x751F;&#x5728; Attention &#x5C42;&#x5185;&#x90E8;"><a href="#1. &#x7269;&#x7406;&#x4F4D;&#x7F6E;&#xFF1A;&#x53D1;&#x751F;&#x5728; Attention &#x5C42;&#x5185;&#x90E8;"></a>1. &#x7269;&#x7406;&#x4F4D;&#x7F6E;&#xFF1A;&#x53D1;&#x751F;&#x5728; Attention &#x5C42;&#x5185;&#x90E8;</h3>
+<p>&#x9996;&#x5148;&#x6F84;&#x6E05;&#x4E00;&#x4E2A;&#x5173;&#x952E;&#x70B9;&#xFF1A;<strong>Gated Attention &#x662F;&#x5BF9; Attention &#x5C42;&#x7684;&#x6539;&#x9020;&#xFF0C;&#x800C;&#x4E0D;&#x662F; FFN &#x5C42;&#x3002;</strong></p>
+<ul>
+<li>
+<p><strong>&#x6807;&#x51C6; Transformer Layer:</strong>
+$$ x = \\text{LayerNorm}(x + \\text{Attention}(x)) $$
+$$ x = \\text{LayerNorm}(x + \\text{FFN}(x)) $$</p>
+</li>
+<li>
+<p><strong>Gated Attention:</strong> &#x4FEE;&#x6539;&#x7684;&#x662F;&#x4E0A;&#x9762;&#x7684; <code>Attention(x)</code> &#x90E8;&#x5206;&#x3002;
+&#x5B83;&#x5E76;&#x6CA1;&#x6709;&#x52A8; FFN&#xFF08;FFN &#x672C;&#x8EAB;&#x5C31;&#x6709;&#x6FC0;&#x6D3B;&#x51FD;&#x6570;&#xFF0C;&#x5929;&#x7136;&#x5177;&#x5907;&#x4E00;&#x5B9A;&#x7684;&#x95E8;&#x63A7;&#x80FD;&#x529B;&#xFF09;&#x3002;&#x5B83;&#x89E3;&#x51B3;&#x7684;&#x662F; Attention &#x673A;&#x5236;<strong>&#x5929;&#x751F;&#x7F3A;&#x4E4F;&#x975E;&#x7EBF;&#x6027;&#x63A7;&#x5236;</strong>&#x7684;&#x95EE;&#x9898;&#x3002;</p>
+</li>
+</ul>
+<h3 id="2. &#x6838;&#x5FC3;&#x516C;&#x5F0F;&#x5BF9;&#x6BD4;"><a href="#2. &#x6838;&#x5FC3;&#x516C;&#x5F0F;&#x5BF9;&#x6BD4;"></a>2. &#x6838;&#x5FC3;&#x516C;&#x5F0F;&#x5BF9;&#x6BD4;</h3>
+<ul>
+<li><strong>&#x6807;&#x51C6;&#x7248;&#xFF1A;</strong> $Output = \\text{Softmax}(\\frac{QK^T}{\\sqrt{d}})V$
+<ul>
+<li><em>&#x6F5C;&#x53F0;&#x8BCD;&#xFF1A;&#x65E0;&#x8BBA;&#x5982;&#x4F55;&#xFF0C;&#x6211;&#x90FD;&#x8981;&#x8F93;&#x51FA;&#x70B9;&#x4EC0;&#x4E48;&#x3002;</em></li>
+</ul>
+</li>
+<li><strong>Gated &#x7248;&#xFF1A;</strong> $Output = (\\text{Softmax}(\\frac{QK^T}{\\sqrt{d}})V) \\odot \\sigma(X W_G)$
+<ul>
+<li><em>&#x6F5C;&#x53F0;&#x8BCD;&#xFF1A;&#x5148;&#x542C;&#x542C;&#x5927;&#x5BB6;&#x8BF4;&#x4EC0;&#x4E48;&#xFF0C;&#x518D;&#x6839;&#x636E; $W_G$ &#x7B97;&#x51FA;&#x7684;&#x4FE1;&#x53F7;&#x51B3;&#x5B9A;&#x662F;&#x5426;&#x628A;&#x8FD9;&#x6BB5;&#x58F0;&#x97F3;&#x653E;&#x51FA;&#x53BB;&#x3002;</em></li>
+</ul>
+</li>
+</ul>
+<p><strong>&#x6838;&#x5FC3;&#x7EC4;&#x4EF6;&#x89E3;&#x6790;&#xFF1A;</strong></p>
+<ul>
+<li><strong>&#x5934;&#x4E13;&#x5C5E;&#x95E8;&#x63A7; (Head-Specific Gating)&#xFF1A;</strong>
+&#x6BCF;&#x4E2A;&#x6CE8;&#x610F;&#x529B;&#x5934;&#xFF08;Head&#xFF09;&#x90FD;&#x6709;&#x81EA;&#x5DF1;&#x72EC;&#x7ACB;&#x7684;&#x95E8;&#x3002;&#x8FD9;&#x5C31;&#x50CF;&#x6BCF;&#x4E2A;&#x8033;&#x6735;&#x90FD;&#x6709;&#x72EC;&#x7ACB;&#x7684;&#x97F3;&#x91CF;&#x65CB;&#x94AE;&#xFF0C;&#x6A21;&#x578B;&#x53EF;&#x4EE5;&#x5DE6;&#x8033;&#x8FDB;&#xFF08;&#x542C;&#x5230;&#x4E86;&#xFF09;&#xFF0C;&#x53F3;&#x8033;&#x51FA;&#xFF08;&#x8FC7;&#x6EE4;&#x6389;&#xFF09;&#x3002;</li>
+<li><strong>Sigmoid &#x6FC0;&#x6D3B; ($\\sigma$)&#xFF1A;</strong>
+&#x4F7F;&#x7528; Sigmoid &#x51FD;&#x6570;&#x5C06;&#x95E8;&#x63A7;&#x503C;&#x9650;&#x5236;&#x5728; $0$ &#x5230; $1$ &#x4E4B;&#x95F4;&#x3002;
+<ul>
+<li><strong>$1$ (&#x5F00;&#x542F;)&#xFF1A;</strong> &#x4FE1;&#x606F;&#x5B8C;&#x5168;&#x901A;&#x8FC7;&#x3002;</li>
+<li><strong>$0$ (&#x5173;&#x95ED;)&#xFF1A;</strong> &#x5F7B;&#x5E95;&#x6291;&#x5236;&#x8F93;&#x51FA;&#xFF0C;&#x5B9E;&#x73B0;<strong>&#x96F6;&#x6CE8;&#x610F;&#x529B;</strong>&#x3002;</li>
+</ul>
+</li>
+<li><strong>SDPA &#x540E;&#x7F6E;&#x4F4D;&#xFF1A;</strong>
+&#x95E8;&#x63A7;&#x662F;&#x52A0;&#x5728; Softmax &#x52A0;&#x6743;&#x6C42;&#x548C;&#x4E4B;&#x540E;&#x7684;&#x3002;&#x5373;&#x4FBF; Softmax &#x5185;&#x90E8;&#x7B97;&#x5F97;&#x70ED;&#x706B;&#x671D;&#x5929;&#xFF0C;&#x53EA;&#x8981;&#x51FA;&#x95E8;&#x65F6;&#x88AB; Gate &#x62E6;&#x622A;&#xFF08;&#x4E58;&#x4EE5; 0&#xFF09;&#xFF0C;&#x6574;&#x4E2A;&#x8F93;&#x51FA;&#x5C31;&#x4F1A;&#x53D8;&#x4E3A;&#x7A00;&#x758F;&#x7684; 0&#x3002;</li>
+</ul>
+<h2 id="&#x8FD8;&#x6709;&#x66F4;&#x597D;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x5417;&#xFF1F;"><a href="#&#x8FD8;&#x6709;&#x66F4;&#x597D;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x5417;&#xFF1F;"></a>&#x8FD8;&#x6709;&#x66F4;&#x597D;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x5417;&#xFF1F;</h2>
+<p>&#x76F8;&#x6BD4;&#x5176;&#x4ED6;&#x65B9;&#x6848;&#xFF0C;Gated Attention &#x80DC;&#x5728;**&#x201C;&#x5DE5;&#x7A0B;&#x7F8E;&#x5B66;&#x201D;**&#xFF1A;</p>
+<ul>
+<li><strong>vs. Switch Head / MoE&#xFF1A;</strong> &#x90A3;&#x4E9B;&#x65B9;&#x6848;&#x8BD5;&#x56FE;&#x901A;&#x8FC7;&#x590D;&#x6742;&#x7684;&#x201C;&#x8DEF;&#x7531;&#x201D;&#x627E;&#x4E13;&#x5BB6;&#xFF0C;&#x589E;&#x52A0;&#x4E86;&#x901A;&#x4FE1;&#x5F00;&#x9500;&#x3002;Gated Attention &#x8BC1;&#x660E;&#xFF1A;&#x53EA;&#x8981;&#x80FD;&#x201C;&#x62D2;&#x6536;&#x201D;&#x5783;&#x573E;&#x4FE1;&#x606F;&#xFF0C;&#x5373;&#x4F7F;&#x4E0D;&#x627E;&#x4E13;&#x5BB6;&#xFF0C;&#x6548;&#x679C;&#x4E5F;&#x4E00;&#x6837;&#x597D;&#x3002;</li>
+<li><strong>vs. Sliding Window&#xFF08;&#x6ED1;&#x7A97;&#xFF09;&#xFF1A;</strong> &#x6ED1;&#x7A97;&#x5F3A;&#x884C;&#x5207;&#x65AD;&#x8FDC;&#x7AEF;&#x8054;&#x7CFB;&#x3002;Gated Attention &#x5219;&#x662F;<strong>&#x8F6F;&#x6027;&#x8FC7;&#x6EE4;</strong>&#xFF0C;&#x65E2;&#x80FD;&#x770B;&#x5168;&#xFF0C;&#x53C8;&#x80FD;&#x4E0D;&#x770B;&#x3002;</li>
+<li><strong>vs. Softmax-off-1&#xFF1A;</strong> &#x8BD5;&#x56FE;&#x4FEE;&#x6539; Softmax &#x6982;&#x7387;&#x516C;&#x5F0F;&#x6765;&#x5141;&#x8BB8;&#x603B;&#x548C;&#x5C0F;&#x4E8E; 1&#x3002;Gated Attention &#x7684;&#x505A;&#x6CD5;&#x66F4;&#x76F4;&#x63A5;&#x2014;&#x2014;&#x5728; Softmax &#x5916;&#x9762;&#x52A0;&#x9600;&#x95E8;&#xFF0C;&#x89E3;&#x8026;&#x4E86;&#x201C;&#x5206;&#x5E03;&#x201D;&#x548C;&#x201C;&#x5E45;&#x5EA6;&#x201D;&#x3002;</li>
+</ul>
+<h2 id="&#x5173;&#x952E;&#x8BCD;&#x89E3;&#x6790;"><a href="#&#x5173;&#x952E;&#x8BCD;&#x89E3;&#x6790;"></a>&#x5173;&#x952E;&#x8BCD;&#x89E3;&#x6790;</h2>
+<h3 id="1. &#x6CE8;&#x610F;&#x529B;&#x9ED1;&#x6D1E; (Attention Sink) &#x2014;&#x2014; &#x201C;&#x88AB;&#x8FEB;&#x7684;&#x6CE8;&#x89C6;&#x201D;"><a href="#1. &#x6CE8;&#x610F;&#x529B;&#x9ED1;&#x6D1E; (Attention Sink) &#x2014;&#x2014; &#x201C;&#x88AB;&#x8FEB;&#x7684;&#x6CE8;&#x89C6;&#x201D;"></a>1. &#x6CE8;&#x610F;&#x529B;&#x9ED1;&#x6D1E; (Attention Sink) &#x2014;&#x2014; &#x201C;&#x88AB;&#x8FEB;&#x7684;&#x6CE8;&#x89C6;&#x201D;</h3>
+<ul>
+<li><strong>&#x73B0;&#x8C61;&#xFF1A;</strong> &#x5728;&#x6807;&#x51C6; LLM &#x4E2D;&#xFF0C;&#x7B2C;&#x4E00;&#x5C42;&#x7684;&#x7B2C;&#x4E00;&#x4E2A; Token&#xFF08;&#x901A;&#x5E38;&#x662F; Start Token&#xFF09;&#x5F80;&#x5F80;&#x62E5;&#x6709;&#x6781;&#x9AD8;&#x7684;&#x6CE8;&#x610F;&#x529B;&#x5206;&#x6570;&#x3002;</li>
+<li><strong>&#x6280;&#x672F;&#x5F52;&#x56E0;&#xFF1A;</strong> Softmax &#x7684;&#x5F52;&#x4E00;&#x5316;&#x7279;&#x6027;&#xFF08;$\\sum P_i = 1$&#xFF09;&#x3002;
+<ul>
+<li>&#x5F53; Query &#x5728; Key &#x4E2D;&#x627E;&#x4E0D;&#x5230;&#x5339;&#x914D;&#x9879;&#x65F6;&#xFF08;&#x6BD4;&#x5982;&#x5F53;&#x524D;&#x8FD9;&#x53E5;&#x8BDD;&#x8DDF;&#x524D;&#x6587;&#x6CA1;&#x5565;&#x5173;&#x7CFB;&#xFF09;&#xFF0C;Softmax &#x7684;&#x6570;&#x5B66;&#x6027;&#x8D28;&#x8FEB;&#x4F7F;&#x5B83;&#x5FC5;&#x987B;&#x627E;&#x4E2A;&#x5730;&#x65B9;&#x628A;&#x6982;&#x7387;&#x5206;&#x51FA;&#x53BB;&#x3002;</li>
+<li>&#x7531;&#x4E8E;&#x7B2C;&#x4E00;&#x4E2A; Token &#x5BF9;&#x6240;&#x6709;&#x540E;&#x7EED; Token &#x53EF;&#x89C1;&#xFF0C;&#x5B83;&#x5C31;&#x6210;&#x4E86;&#x6700;&#x65B9;&#x4FBF;&#x7684;&#x201C;&#x5783;&#x573E;&#x6876;&#x201D;&#x3002;</li>
+</ul>
+</li>
+<li><strong>Gated &#x7684;&#x89E3;&#x6CD5;&#xFF1A;</strong> &#x95E8;&#x63A7;&#x673A;&#x5236;&#x5141;&#x8BB8; $Output \\approx 0$&#x3002;
+<ul>
+<li>&#x6A21;&#x578B;&#x4E0D;&#x9700;&#x8981;&#x518D;&#x627E;&#x5783;&#x573E;&#x6876;&#x4E86;&#x3002;&#x5982;&#x679C;&#x6CA1;&#x5173;&#x7CFB;&#xFF0C;&#x76F4;&#x63A5;&#x628A;&#x95E8;&#x5173;&#x4E0A;&#xFF08;Multiply by 0&#xFF09;&#x3002;</li>
+<li>&#x8FD9;&#x8BA9;&#x6A21;&#x578B;&#x5B66;&#x4F1A;&#x4E86;&#x771F;&#x6B63;&#x7684;**&#x201C;&#x5FFD;&#x7565;&#x201D;<strong>&#xFF0C;&#x800C;&#x975E;</strong>&#x201C;&#x5047;&#x88C5;&#x5728;&#x770B;&#x201D;**&#x3002;</li>
+</ul>
+</li>
+</ul>
+<h3 id="2. &#x4E3A;&#x4EC0;&#x4E48; Q/K &#x81EA;&#x5DF1;&#x505A;&#x4E0D;&#x5230;&#xFF1F;(Relative vs. Absolute)"><a href="#2. &#x4E3A;&#x4EC0;&#x4E48; Q/K &#x81EA;&#x5DF1;&#x505A;&#x4E0D;&#x5230;&#xFF1F;(Relative vs. Absolute)"></a>2. &#x4E3A;&#x4EC0;&#x4E48; Q/K &#x81EA;&#x5DF1;&#x505A;&#x4E0D;&#x5230;&#xFF1F;(Relative vs. Absolute)</h3>
+<ul>
+<li><strong>Softmax &#x7684;&#x76F8;&#x5BF9;&#x6027;&#x7F3A;&#x9677;&#xFF1A;</strong>
+<ul>
+<li>Softmax &#x53EA;&#x770B;<strong>&#x76F8;&#x5BF9;&#x5927;&#x5C0F;</strong>&#xFF0C;&#x4E0D;&#x770B;&#x7EDD;&#x5BF9;&#x5927;&#x5C0F;&#x3002;</li>
+<li>&#x5206;&#x6570;&#x662F; <code>[100, 90, 80]</code>&#xFF0C;Softmax &#x540E;&#x53EF;&#x80FD;&#x662F; <code>[0.7, 0.2, 0.1]</code>&#x3002;</li>
+<li>&#x5206;&#x6570;&#x662F; <code>[-100, -110, -120]</code>&#xFF08;&#x5373;&#x4FBF;&#x5DF2;&#x7ECF;&#x975E;&#x5E38;&#x4E0D;&#x76F8;&#x5173;&#xFF09;&#xFF0C;Softmax &#x540E;<strong>&#x4F9D;&#x7136;&#x662F;</strong> <code>[0.7, 0.2, 0.1]</code>&#xFF01;</li>
+<li>&#x8FD9;&#x5C31;&#x662F;&#x4E3A;&#x4EC0;&#x4E48; Q/K &#x65E0;&#x8BBA;&#x600E;&#x4E48;&#x52AA;&#x529B;&#x538B;&#x4F4E;&#x5206;&#x6570;&#xFF0C;&#x6700;&#x540E;&#x90FD;&#x5FC5;&#x987B;&#x8F93;&#x51FA;&#x4E00;&#x4E2A;&#x6982;&#x7387;&#x5206;&#x5E03;&#x3002;</li>
+</ul>
+</li>
+<li><strong>Gated &#x7684;&#x7EDD;&#x5BF9;&#x6027;&#xFF1A;</strong>
+<ul>
+<li>Sigmoid &#x95E8;&#x63A7;&#x662F;&#x4E00;&#x4E2A;<strong>&#x7EDD;&#x5BF9;&#x5F00;&#x5173;</strong>&#x3002;</li>
+<li>&#x5B83;&#x4E0D;&#x7BA1; Softmax &#x5185;&#x90E8;&#x600E;&#x4E48;&#x5206;&#xFF0C;&#x53EA;&#x8981; Gate &#x503C;&#x5C0F;&#x4E8E; 0&#xFF0C;&#x5C31;&#x662F;&#x7EDD;&#x5BF9;&#x7684;&#x201C;&#x5173;&#x201D;&#x3002;&#x8FD9;&#x8D4B;&#x4E88;&#x4E86;&#x6A21;&#x578B;&#x8DF3;&#x51FA; Softmax &#x76F8;&#x5BF9;&#x8BBA;&#x7684;&#x80FD;&#x529B;&#x3002;</li>
+</ul>
+</li>
+</ul>
+<h3 id="3. &#x53CD;&#x76F4;&#x89C9;&#x7684;&#x201C;&#x6613;&#x8BAD;&#x7EC3;&#x6027;&#x201D; (Training Stability)"><a href="#3. &#x53CD;&#x76F4;&#x89C9;&#x7684;&#x201C;&#x6613;&#x8BAD;&#x7EC3;&#x6027;&#x201D; (Training Stability)"></a>3. &#x53CD;&#x76F4;&#x89C9;&#x7684;&#x201C;&#x6613;&#x8BAD;&#x7EC3;&#x6027;&#x201D; (Training Stability)</h3>
+<ul>
+<li><strong>&#x7A33;&#x538B;&#x5668;&#x4F5C;&#x7528;&#xFF1A;</strong> &#x5927;&#x6A21;&#x578B;&#x8BAD;&#x7EC3;&#x6700;&#x6015; Loss &#x7A81;&#x523A;&#xFF08;Spike&#xFF09;&#xFF0C;&#x901A;&#x5E38;&#x662F;&#x56E0;&#x4E3A;&#x67D0;&#x5C42;&#x6FC0;&#x6D3B;&#x503C;&#x7A81;&#x7136;&#x8FC7;&#x5927;&#xFF08;Massive Activation&#xFF09;&#x5BFC;&#x81F4;&#x68AF;&#x5EA6;&#x7206;&#x70B8;&#x3002;</li>
+<li><strong>Gated &#x538B;&#x5236;&#xFF1A;</strong> Sigmoid &#x5929;&#x7136;&#x628A;&#x8F93;&#x51FA;&#x9650;&#x5236;&#x5728; $(0, 1)$ &#x4E4B;&#x95F4;&#x3002;&#x5373;&#x4FBF;&#x5185;&#x90E8;&#x8BA1;&#x7B97;&#x51FA;&#x4E86;&#x5DE8;&#x5927;&#x7684;&#x5F02;&#x5E38;&#x503C;&#xFF0C;&#x7ECF;&#x8FC7;&#x95E8;&#x63A7;&#x4E00;&#x4E58;&#xFF0C;&#x4E5F;&#x88AB;&#x5F3A;&#x884C;&#x538B;&#x56DE;&#x4E86;&#x5B89;&#x5168;&#x8303;&#x56F4;&#x3002;</li>
+<li><strong>&#x7ED3;&#x679C;&#xFF1A;</strong> &#x8FD9;&#x79CD;&#x673A;&#x5236;&#x6291;&#x5236;&#x4E86;&#x5F02;&#x5E38;&#x68AF;&#x5EA6;&#x7684;&#x4F20;&#x64AD;&#xFF0C;&#x8BA9;&#x8BAD;&#x7EC3;&#x66F2;&#x7EBF;&#x5F02;&#x5E38;&#x5E73;&#x6ED1;&#x3002;&#x5DE5;&#x7A0B;&#x5E08;&#x751A;&#x81F3;&#x53EF;&#x4EE5;<strong>&#x4F7F;&#x7528;&#x66F4;&#x5927;&#x7684;&#x5B66;&#x4E60;&#x7387;</strong>&#xFF0C;&#x8BA9;&#x6A21;&#x578B;&#x6536;&#x655B;&#x5F97;&#x66F4;&#x5FEB;&#x3001;&#x66F4;&#x7A33;&#x3002;</li>
+</ul>
+<h3 id="4. &#x4E3A;&#x4EC0;&#x4E48;&#x9009;&#x62E9; Sigmoid&#xFF1F;"><a href="#4. &#x4E3A;&#x4EC0;&#x4E48;&#x9009;&#x62E9; Sigmoid&#xFF1F;"></a>4. &#x4E3A;&#x4EC0;&#x4E48;&#x9009;&#x62E9; Sigmoid&#xFF1F;</h3>
+<ul>
+<li><strong>&#x53CC;&#x5411;&#x63A7;&#x5236;&#xFF1A;</strong> Sigmoid &#x51FD;&#x6570;&#x7684;&#x8F93;&#x51FA;&#x533A;&#x95F4;&#x662F; $(0, 1)$&#x3002;
+<ul>
+<li>&#x5F53;&#x8F93;&#x5165;&#x4E3A;&#x6B63;&#x6570;&#x65F6;&#xFF0C;&#x8F93;&#x51FA;&#x63A5;&#x8FD1; 1&#xFF08;&#x4FDD;&#x7559;&#x4FE1;&#x606F;&#xFF09;&#x3002;</li>
+<li>&#x5F53;&#x8F93;&#x5165;&#x4E3A;&#x8D1F;&#x6570;&#x65F6;&#xFF0C;&#x8F93;&#x51FA;&#x63A5;&#x8FD1; 0&#xFF08;&#x5C4F;&#x853D;&#x4FE1;&#x606F;&#xFF09;&#x3002;</li>
+</ul>
+</li>
+<li><strong>&#x5B66;&#x4E60;&#x673A;&#x5236;&#xFF1A;</strong> &#x8FD9;&#x91CC;&#x7684;&#x8F93;&#x5165;&#x662F; $X \\times W_G$&#xFF08;&#x7EBF;&#x6027;&#x6295;&#x5F71;&#xFF09;&#xFF0C;&#x5176;&#x7ED3;&#x679C;&#x5929;&#x7136;&#x5305;&#x542B;&#x6B63;&#x8D1F;&#x503C;&#x3002;&#x6A21;&#x578B;&#x901A;&#x8FC7;&#x8BAD;&#x7EC3; $W_G$ &#x53C2;&#x6570;&#xFF0C;&#x5B66;&#x4F1A;&#x5C06;&#x65E0;&#x5173;&#x4FE1;&#x606F;&#x7684; Logits &#x6620;&#x5C04;&#x5230;<strong>&#x8D1F;&#x6570;&#x533A;&#x95F4;</strong>&#xFF0C;&#x4ECE;&#x800C;&#x89E6;&#x53D1; Sigmoid &#x7684;&#x201C;&#x5173;&#x95ED;&#x201D;&#x529F;&#x80FD;&#x3002;</li>
+<li><strong>&#x5BF9;&#x6BD4; ReLU&#xFF1A;</strong> &#x76F8;&#x6BD4;&#x4E8E; ReLU ($[0, \\infty)$)&#xFF0C;Sigmoid &#x63D0;&#x4F9B;&#x4E86;&#x4E25;&#x683C;&#x7684;<strong>&#x4E0A;&#x9650;&#x7EA6;&#x675F; (Upper Bound)</strong>&#xFF0C;&#x9632;&#x6B62;&#x4E86;&#x6570;&#x503C;&#x653E;&#x5927;&#xFF0C;&#x8FD9;&#x4E5F;&#x89E3;&#x91CA;&#x4E86;&#x5176;&#x5BF9;&#x8BAD;&#x7EC3;&#x7A33;&#x5B9A;&#x6027;&#x7684;&#x8D21;&#x732E;&#x3002;</li>
+</ul>
+<hr>
+<h3 id="&#x603B;&#x7ED3;"><a href="#&#x603B;&#x7ED3;"></a>&#x603B;&#x7ED3;</h3>
+<p>Gated Attention &#x7684;&#x672C;&#x8D28;&#x662F;**&#x201C;&#x7ED9;&#x6CE8;&#x610F;&#x529B;&#x673A;&#x5236;&#x8D4B;&#x4E88;&#x4E86;&#x2018;&#x62D2;&#x7EDD;&#x2019;&#x7684;&#x6743;&#x5229;&#x201D;**&#xFF1A;</p>
+<ol>
+<li><strong>&#x4ECE;&#x673A;&#x5236;&#x4E0A;&#xFF1A;</strong> &#x7528;&#x4E58;&#x6CD5;&#x95E8;&#x63A7;&#xFF08;Multiplicative Gating&#xFF09;&#x89E3;&#x8026;&#x4E86;&#x201C;&#x5173;&#x6CE8;&#x5206;&#x5E03;&#x201D;&#xFF08;Softmax&#xFF09;&#x548C;&#x201C;&#x4FE1;&#x606F;&#x5E45;&#x5EA6;&#x201D;&#xFF08;Sigmoid&#xFF09;&#x3002;</li>
+<li><strong>&#x4ECE;&#x6548;&#x679C;&#x4E0A;&#xFF1A;</strong> &#x6D88;&#x706D;&#x4E86;&#x201C;&#x6CE8;&#x610F;&#x529B;&#x9ED1;&#x6D1E;&#x201D;&#xFF0C;&#x8BA9;&#x957F;&#x6587;&#x672C;&#x5904;&#x7406;&#x66F4;&#x52A0;&#x6E05;&#x723D;&#x805A;&#x7126;&#x3002;</li>
+<li><strong>&#x4ECE;&#x54F2;&#x5B66;&#x4E0A;&#xFF1A;</strong> &#x8BC1;&#x660E;&#x4E86;&#x5728;&#x5927;&#x6A21;&#x578B;&#x4E2D;&#xFF0C;<strong>&#x201C;&#x5B66;&#x4F1A;&#x5FFD;&#x7565;&#x201D;&#x548C;&#x201C;&#x5B66;&#x4F1A;&#x5173;&#x6CE8;&#x201D;&#x4E00;&#x6837;&#x91CD;&#x8981;</strong>&#x3002;</li>
+</ol>
+<h1 id="&#x53C2;&#x8003;&#x8D44;&#x6599;"><a href="#&#x53C2;&#x8003;&#x8D44;&#x6599;"></a>&#x53C2;&#x8003;&#x8D44;&#x6599;</h1>
+<ul>
+<li><a href="https://arxiv.org/pdf/2505.06708">&#x8BBA;&#x6587;&#x5730;&#x5740;</a></li>
+</ul>
+<p><em>&#x7F16;&#x8F91;&#xFF1A;2026-01-22</em></p>
+`,E=[{level:2,title:"Gated Attention 解决了什么问题？",children:[]},{level:2,title:"这个问题真实存在吗？",children:[]},{level:2,title:"为什么现在才有人去解决？",children:[]},{level:2,title:"它是如何解决的？",children:[{level:3,title:"1. 物理位置：发生在 Attention 层内部",children:[]},{level:3,title:"2. 核心公式对比",children:[]}]},{level:2,title:"还有更好的解决方案吗？",children:[]},{level:2,title:"关键词解析",children:[{level:3,title:"1. 注意力黑洞 (Attention Sink) —— “被迫的注视”",children:[]},{level:3,title:"2. 为什么 Q/K 自己做不到？(Relative vs. Absolute)",children:[]},{level:3,title:"3. 反直觉的“易训练性” (Training Stability)",children:[]},{level:3,title:"4. 为什么选择 Sigmoid？",children:[]},{level:3,title:"总结",children:[]}]},{level:1,title:"参考资料",children:[]}];export{x as attributes,F as html,E as nestedHeaders};
