@@ -3525,7 +3525,7 @@
     "content": "*论文发布时间：2024-12-27*\nDeepSeek 团队发布的 **DeepSeek-V3**（论文标题为《DeepSeek-V3 Technical Report》）是开源大模型领域的一枚重磅炸弹。\n简单来说，这是一个拥有 **6710 亿参数**（激活参数 370 亿）的混合专家（MoE）模型。它在性能上对齐了 GPT-4 和 Claude 3.5 Sonnet 等顶尖闭源模型，但其训练成本仅为 557.6 万美元，且**推理成本极低**。它的核心突破在于通过架构创新（MLA + DeepSeekMoE）把“大模型”做到了极致的“轻量化”和“高效化”。\nDeepSeek-V3 解决了什么问题？\n**核心问题：传统大模型在“高性能”与“低成本”之间的矛盾。**",
     "url": "/blog/DeepSeek - DeepSeek-V3",
     "chunkIndex": 0,
-    "totalChunks": 17,
+    "totalChunks": 11,
     "startPos": 0,
     "endPos": 339,
     "originalTitle": "参考资料"
@@ -3536,7 +3536,7 @@
     "content": "...心问题：传统大模型在“高性能”与“低成本”之间的矛盾。** 在 DeepSeek-V3 出现之前，开源社区面临着两个“不可能三角”般的困境：\n**显存墙（Memory Wall）：** 想要性能好，模型就得大，上下文就得长。但这会导致 KV Cache（推理时的显存占用）爆炸，推理速度变慢，服务成本极高。\n**训练贵（Training Cost）：** 训练一个千亿参数模型动辄需要数万张 H100 跑几个月，对于绝大多数机构来说是天价。\n**DeepSeek-V3 的作用：** 它通过 **MLA（多头潜在注意力）** 将推理时的 KV Cache 压缩了 90% 以上，并通过 **DeepSeekMoE** 和 **FP8 训练** 大幅降低了计算量和显存占用，证明了**“最强的性能”并不需要“最贵的算力”**。\n这个问题真实存在吗？",
     "url": "/blog/DeepSeek - DeepSeek-V3",
     "chunkIndex": 1,
-    "totalChunks": 17,
+    "totalChunks": 11,
     "startPos": 339,
     "endPos": 683,
     "originalTitle": "参考资料"
@@ -3547,7 +3547,7 @@
     "content": "...的性能”并不需要“最贵的算力”**。\n这个问题真实存在吗？ **极其真实，是制约大模型落地和普及的死穴。**\n**推理侧：** 对于长文本应用，KV Cache 往往比模型权重本身还要大。这限制了并发量（Batch Size），使得 API 价格居高不下。\n**训练侧：** 算力短缺是全球性问题。如果不能在有限算力下训练出更强的模型，开源模型将永远落后于拥有无限资源的闭源巨头。\n为什么现在才有人去解决？\n1.  **MoE 技术的成熟：** 混合专家模型（Mixture of Experts）从 GPT-4 开始进入主流视野，但传统的 MoE（如 Switch Transformer 或 Mixtral）存在专家冗余和知识混合不均的问题。",
     "url": "/blog/DeepSeek - DeepSeek-V3",
     "chunkIndex": 2,
-    "totalChunks": 17,
+    "totalChunks": 11,
     "startPos": 683,
     "endPos": 977,
     "originalTitle": "参考资料"
@@ -3558,7 +3558,7 @@
     "content": "...r 或 Mixtral）存在专家冗余和知识混合不均的问题。 2.  **Attention 的瓶颈日益凸显：** 随着上下文长度从 4k 卷到 128k 甚至 1M，标准的 Multi-Head Attention (MHA) 甚至 Grouped-Query Attention (GQA) 都显得太“重”了。\n它是如何解决的？\nDeepSeek-V3 的架构可以概括为两个核心“手术”：\n**手术一：DeepSeekMoE（极致的专家细分）**：\n**传统 MoE：** 只有几个大专家（比如 8 个），每次选 2 个。就像把活儿分给几个全能工匠。",
     "url": "/blog/DeepSeek - DeepSeek-V3",
     "chunkIndex": 3,
-    "totalChunks": 17,
+    "totalChunks": 11,
     "startPos": 977,
     "endPos": 1224,
     "originalTitle": "参考资料"
@@ -3569,7 +3569,7 @@
     "content": "...如 8 个），每次选 2 个。就像把活儿分给几个全能工匠。 **DeepSeekMoE：** 把专家切得非常细（256 个），每次选 64 个，并且还有“共享专家”（Shared Experts）。这就像把活儿拆解，分给几十个专门拧螺丝、专门刷漆的流水线工人，同时还有几个“工头”负责统筹通用知识。\n**结果：** 知识掌握更精准，计算效率更高。**不仅推理快，训练时的计算量（FLOPs）也仅为同规模稠密模型的 1/10，让超大模型训练成为可能。**\n**手术二：MLA（多头潜在注意力）**：\n**传统 Attention：** 要存巨大的 KV Cache。",
     "url": "/blog/DeepSeek - DeepSeek-V3",
     "chunkIndex": 4,
-    "totalChunks": 17,
+    "totalChunks": 11,
     "startPos": 1224,
     "endPos": 1477,
     "originalTitle": "参考资料"
@@ -3580,7 +3580,7 @@
     "content": "...Attention：** 要存巨大的 KV Cache。 **MLA：** 对 KV 进行**低秩压缩（Low-Rank Compression）**。模型不再存储完整的“试卷”（Key/Value），而是只存储压缩后的“知识点摘要”（Latent Vector）。\n**结果：** 在保持性能几乎不降的前提下，显存占用极大降低。**这不仅让推理速度起飞，也让训练时能塞下更大的 Batch Size 和更长的上下文。**\n**手术三：FP8 混合精度训练**：\n全链路使用 FP8（8位浮点数）进行计算和存储，让同样的显卡算力翻倍，显存占用减半。**通过精细的量化策略确保了训练精度不降。**\n还有更好的解决方案吗？\nDeepSeek-V3 代表了当前 **Transformer + MoE** 架构的巅峰优化。",
     "url": "/blog/DeepSeek - DeepSeek-V3",
     "chunkIndex": 5,
-    "totalChunks": 17,
+    "totalChunks": 11,
     "startPos": 1477,
     "endPos": 1807,
     "originalTitle": "参考资料"
@@ -3591,7 +3591,7 @@
     "content": "...*Transformer + MoE** 架构的巅峰优化。 **对比 Llama 3.1 (Dense)：** Llama 3.1 405B 是稠密模型，每次推理都要激活所有参数，成本极高。DeepSeek-V3 参数量更大（671B），但每次只激活 37B，速度快得多。\n**对比 GPT-4o / Claude 3.5：** DeepSeek-V3 在数学、代码等硬核任务上已实现超越或持平，但训练和推理成本可能只有它们的几十分之一。\n**DeepSeek-V3 的优势在于...** 它不仅仅是堆料，而是通过**算法层面的极致优化**，榨干了硬件的每一滴性能。\n关键词解析\n1. MLA (Multi-Head Latent Attention)\n[这是 V3 最核心的创新，解决了 KV Cache 显存爆炸的问题]",
     "url": "/blog/DeepSeek - DeepSeek-V3",
     "chunkIndex": 6,
-    "totalChunks": 17,
+    "totalChunks": 11,
     "startPos": 1807,
     "endPos": 2140,
     "originalTitle": "参考资料"
@@ -3602,7 +3602,7 @@
     "content": "...最核心的创新，解决了 KV Cache 显存爆炸的问题] **传统模型 (MHA/GQA)：** 就像每个人来考试，考官都要把他的整份履历（KV）存进档案柜。人多了，档案柜就爆了。\n**MLA：** 考官在存履历前，先把它**压缩**成一张小卡片（Latent Vector）。\n**压缩 (Compression)：** 把高维的 Key 和 Value 投影到一个低维空间。\n**还原 (Absorb)：** 在计算注意力时，通过矩阵变换，让 Query 能够直接理解这张小卡片，而不需要把卡片还原成原始履历。\n**通俗理解：** **“把书读薄”**。以前要背整本书（Full KV），现在只需要记几个核心公式（Latent KV），依然能考满分。\n2. DeepSeekMoE (细粒度混合专家)\n[解决了专家模型的“知识混杂”和“路由坍缩”问题]",
     "url": "/blog/DeepSeek - DeepSeek-V3",
     "chunkIndex": 7,
-    "totalChunks": 17,
+    "totalChunks": 11,
     "startPos": 2140,
     "endPos": 2490,
     "originalTitle": "参考资料"
@@ -3613,7 +3613,7 @@
     "content": "...专家)\n[解决了专家模型的“知识混杂”和“路由坍缩”问题] **细粒度专家 (Fine-grained Experts)：** 将专家切分得更细。V3 有 256 个路由专家。\n**共享专家 (Shared Experts)：** 设置一部分专家**永远被激活**。\n**为什么？** 有些知识（比如语法、逻辑词）是通用的，不需要路由，应该让所有输入都经过它们。\n**无辅助损失负载均衡 (Auxiliary-Loss-Free Balancing)：**\n传统 MoE 为了防止所有任务都涌向同一个专家（导致那个专家累死，其他专家闲死），会加一个“惩罚项”（Auxiliary Loss）强行分配。但这会干扰模型学习。\nV3 改用**动态偏置 (Bias)** 来调整路由，既保证了负载均衡，又不影响模型的主任务表现。",
     "url": "/blog/DeepSeek - DeepSeek-V3",
     "chunkIndex": 8,
-    "totalChunks": 17,
+    "totalChunks": 11,
     "startPos": 2490,
     "endPos": 2821,
     "originalTitle": "参考资料"
@@ -3624,7 +3624,7 @@
     "content": "...来调整路由，既保证了负载均衡，又不影响模型的主任务表现。 3. FP8 训练 (8-bit Floating Point)\n**定义：** 以前训练用 FP16/BF16（16位），现在用 FP8（8位）。\n**难度：** 8位表示的数字范围很窄，稍微大一点就溢出，小一点就变成 0，容易导致模型练“傻”了。\n**DeepSeek 的解法：** 把大锅饭改成“开小灶”。\n**精细化量化 (Tile-wise Scaling)：** 不再是整层共用一个缩放比例，而是每 128x128 的小块单独计算。这样即使有异常大值（Outlier），也只会影响局部，不会拖累整体精度。\n**高精度累加：** 算乘法用 FP8（快），但算加法（Accumulation）时临时用 FP32，防止误差累积。",
     "url": "/blog/DeepSeek - DeepSeek-V3",
     "chunkIndex": 9,
-    "totalChunks": 17,
+    "totalChunks": 11,
     "startPos": 2821,
     "endPos": 3139,
     "originalTitle": "参考资料"
@@ -3635,75 +3635,9 @@
     "content": "...ccumulation）时临时用 FP32，防止误差累积。 **结果：** 训练全程没有出现 Loss Spike（损失尖峰），效果与高精度训练几乎无异。\n---\n总结\nDeepSeek-V3 的本质是**“算法与工程的极致协奏”**：\n1.  **MLA** 解决了**“存不下”**的问题（KV Cache）。\n2.  **DeepSeekMoE** 解决了**“算得慢”**的问题（计算量）。\n3.  **FP8** 解决了**“训不起”**的问题（显存与算力）。\n它向世界证明：**开源模型不需要拼财力，拼智力照样能赢。**\n参考资料\n论文地址\nGitHub 项目\n*编辑：2026-01-28*",
     "url": "/blog/DeepSeek - DeepSeek-V3",
     "chunkIndex": 10,
-    "totalChunks": 17,
+    "totalChunks": 11,
     "startPos": 3139,
-    "endPos": 3412,
-    "originalTitle": "参考资料"
-  },
-  {
-    "chunkId": "/blog/DeepSeek - DeepSeek-V3#chunk-11",
-    "title": "参考资料 (第12段)",
-    "content": "...文地址\nGitHub 项目\n*编辑：2026-01-28* 这是一个非常棒的直觉！你的担心是有道理的：**矩阵乘法（Matrix Multiplication）确实是行与列的整体运算，如果随便把矩阵切碎了，它们之间的联系不就断了吗？**\n但实际上，**Block-wise（分块）量化完全符合数学逻辑**，它利用的是矩阵乘法中**“累加求和”的可拆分性**。\n我用一个通俗的例子和一段简单的数学公式来解释它是怎么做到的。\n1. 核心逻辑：加法是可以分组的\n不管是算 $W_q$ 还是 $W_v$，矩阵乘法的本质就是**“点积”（Dot Product）**。\n假设我们要算一个简单的结果 $Y$，它是输入 $X$ 和权重 $W$ 的乘积。",
-    "url": "/blog/DeepSeek - DeepSeek-V3",
-    "chunkIndex": 11,
-    "totalChunks": 17,
-    "startPos": 3412,
-    "endPos": 3702,
-    "originalTitle": "参考资料"
-  },
-  {
-    "chunkId": "/blog/DeepSeek - DeepSeek-V3#chunk-12",
-    "title": "参考资料 (第13段)",
-    "content": "...的结果 $Y$，它是输入 $X$ 和权重 $W$ 的乘积。 $$Y = x_1 \\cdot w_1 + x_2 \\cdot w_2 + x_3 \\cdot w_3 + x_4 \\cdot w_4$$\n传统量化（Per-Tensor）\n就像大家共用一个缩放比例 $S$（比如 $S=0.1$）。\n$$Y = (x_1' \\cdot w_1' + x_2' \\cdot w_2' + ... ) \\times S_{全局}$$\n**问题**：如果 $x_1$ 特别大，为了容纳它，$S$ 必须很大，导致 $x_2, x_3$ 这些小数字变为了 0。\n分块量化（Block-wise / Tile-wise）\n我们把上面的公式**切成两半**来看（比如每 2 个数一组）：",
-    "url": "/blog/DeepSeek - DeepSeek-V3",
-    "chunkIndex": 12,
-    "totalChunks": 17,
-    "startPos": 3702,
-    "endPos": 4006,
-    "originalTitle": "参考资料"
-  },
-  {
-    "chunkId": "/blog/DeepSeek - DeepSeek-V3#chunk-13",
-    "title": "参考资料 (第14段)",
-    "content": "...把上面的公式**切成两半**来看（比如每 2 个数一组）： $$Y = \\underbrace{(x_1 \\cdot w_1 + x_2 \\cdot w_2)}_{\\text{第1组}} + \\underbrace{(x_3 \\cdot w_3 + x_4 \\cdot w_4)}_{\\text{第2组}}$$\n既然是加法，我们可以**给每一组单独配一个缩放比例**：\n第 1 组数值大，用 $S_1$。\n第 2 组数值小，用 $S_2$。\n计算过程变成了：\n1.  **算第 1 块**：用 FP8 算出 $(x_1'w_1' + x_2'w_2')$，然后立刻乘以 $S_1$ 还原回高精度。\n2.  **算第 2 块**：用 FP8 算出 $(x_3'w_3' + x_4'w_4')$，然后立刻乘以 $S_2$ 还原回高精度。",
-    "url": "/blog/DeepSeek - DeepSeek-V3",
-    "chunkIndex": 13,
-    "totalChunks": 17,
-    "startPos": 4006,
-    "endPos": 4344,
-    "originalTitle": "参考资料"
-  },
-  {
-    "chunkId": "/blog/DeepSeek - DeepSeek-V3#chunk-14",
-    "title": "参考资料 (第15段)",
-    "content": "...4'w_4')$，然后立刻乘以 $S_2$ 还原回高精度。 3.  **最后加起来**：$Result = \\text{部分和}_1 + \\text{部分和}_2$。\n**结论**：因为矩阵乘法本质是**累加和**，所以你可以先把它们切成小块，**分块算完、还原精度、最后再加在一起**。数学结果是完全等价的（甚至更准，因为每块的精度都更高）。\n2. 通俗比喻：外币兑换\n想象你要计算你手里的“总资产”（$Y$），你手里的钱（$X$）和汇率（$W$）混在一起。\n**传统量化（一刀切）**：\n    把你手里所有的美元、日元、津巴布韦币都先混在一起，用一个**“全球平均汇率”**去算。\n*后果*：津巴布韦币面值太大（异常值），导致你的美元在平均汇率下显得微不足道，被忽略计为 0 了。\n**分块量化（分账算）**：\n    你把钱分成几个信封（Block）。",
-    "url": "/blog/DeepSeek - DeepSeek-V3",
-    "chunkIndex": 14,
-    "totalChunks": 17,
-    "startPos": 4344,
-    "endPos": 4695,
-    "originalTitle": "参考资料"
-  },
-  {
-    "chunkId": "/blog/DeepSeek - DeepSeek-V3#chunk-15",
-    "title": "参考资料 (第16段)",
-    "content": "...分账算）**：\n    你把钱分成几个信封（Block）。 **信封 A（美元）**：用“美元汇率”算一下，记下来。\n**信封 B（日元）**：用“日元汇率”算一下，记下来。\n**最后**：把信封 A 的结果 + 信封 B 的结果。\n这样，无论津巴布韦币怎么膨胀，都不会影响你算美元的精度。\n3. 在 GPU 上是怎么发生的？\n你提到的 $W_q, W_k, W_v$ 都是巨大的矩阵。在 H800 这种 GPU 上，计算不是一次性把整个大矩阵算完的，而是本来就是切成无数个小块（Tile）扔进 Tensor Core 计算的。\nDeepSeek 的做法是：\n1.  **存储时**：把权重 $W$ 切成 $128 \\times 128$ 的小块。每一块附带一个 FP32 格式的缩放因子（Scale）。\n2.  **计算时**：",
-    "url": "/blog/DeepSeek - DeepSeek-V3",
-    "chunkIndex": 15,
-    "totalChunks": 17,
-    "startPos": 4695,
-    "endPos": 5031,
-    "originalTitle": "参考资料"
-  },
-  {
-    "chunkId": "/blog/DeepSeek - DeepSeek-V3#chunk-16",
-    "title": "参考资料 (第17段)",
-    "content": "...格式的缩放因子（Scale）。\n2.  **计算时**： GPU 读取一个小块的 FP8 权重和 FP8 激活值。\n在 Tensor Core 内部极速完成乘法和累加。\n**立刻**乘以该块对应的缩放因子，变回高精度（FP32/BF16）。\n把这个高精度的结果加到总和（Accumulator）里。\n所以，**“拆开”不仅没有破坏整体性，反而是利用了 GPU 并行计算的物理特性，在微观层面“更精准地”完成了整体运算。**",
-    "url": "/blog/DeepSeek - DeepSeek-V3",
-    "chunkIndex": 16,
-    "totalChunks": 17,
-    "startPos": 5031,
-    "endPos": 5213,
+    "endPos": 3411,
     "originalTitle": "参考资料"
   },
   {
