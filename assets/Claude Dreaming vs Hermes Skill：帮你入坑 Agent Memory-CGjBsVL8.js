@@ -387,12 +387,12 @@ Memory Store  Skill Library
 </blockquote>
 <h2 id="References"><a href="#References"></a>References</h2>
 <ol>
-<li><a href="https://claude.com/blog/new-in-claude-managed-agents">Anthropic: New in Claude Managed Agents: dreaming, outcomes, and multiagent orchestration</a></li>
-<li><a href="https://platform.claude.com/docs/en/managed-agents/dreams">Anthropic Docs: Dreams</a></li>
-<li><a href="https://platform.claude.com/docs/en/managed-agents/skills">Anthropic Docs: Agent Skills</a></li>
-<li><a href="https://github.com/NousResearch/hermes-agent/blob/main/README.md">NousResearch/hermes-agent README</a></li>
-<li><a href="https://hermes-agent.nousresearch.com/docs/user-guide/features/skills">Hermes Agent Docs: Skills System</a></li>
-<li><a href="https://hermes-agent.nousresearch.com/docs/user-guide/features/memory">Hermes Agent Docs: Persistent Memory</a></li>
-<li><a href="https://arxiv.org/abs/2606.15017">Are Online Skill and Memory Modules Always Worth Their Tokens? A Budget-Constrained Study of Web Agents</a></li>
+<li>https://claude.com/blog/new-in-claude-managed-agents</li>
+<li>https://platform.claude.com/docs/en/managed-agents/dreams</li>
+<li>https://platform.claude.com/docs/en/managed-agents/skills</li>
+<li>https://github.com/NousResearch/hermes-agent/blob/main/README.md</li>
+<li>https://hermes-agent.nousresearch.com/docs/user-guide/features/skills</li>
+<li>https://hermes-agent.nousresearch.com/docs/user-guide/features/memory</li>
+<li>https://arxiv.org/abs/2606.15017</li>
 </ol>
 `,E=[{level:1,title:"Claude Dreaming vs Hermes Skill：帮你入坑 Agent Memory",children:[{level:2,title:"为什么 Dreaming 和 Skill 容易被混在一起？",children:[]},{level:2,title:"Memory vs Capability",children:[]},{level:2,title:"Dreaming：把经验压缩成更好的事实",children:[]},{level:2,title:"Skill：把经验固化成可复用能力",children:[]},{level:2,title:"为什么 Claude 不直接做 Skill？",children:[]},{level:2,title:"为什么 Hermes 要强调 Skill？",children:[]},{level:2,title:"两种 Memory 的风险也不一样",children:[]},{level:2,title:"它们不是竞争关系",children:[]},{level:2,title:"结论",children:[]},{level:2,title:"References",children:[]}]}];export{x as attributes,F as html,E as nestedHeaders};

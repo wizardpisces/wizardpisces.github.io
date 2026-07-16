@@ -11431,23 +11431,23 @@
   {
     "chunkId": "/blog/Claude Dreaming vs Hermes Skill：帮你入坑 Agent Memory#chunk-10",
     "title": "Claude Dreaming vs Hermes Skill：帮你入坑 Agent Memory (第11段)",
-    "content": "...Skill 代表的是一种激进选择：\n把稳定流程变成能力。 真正成熟的 Agent，不是把所有过去都记下来，也不是把所有经验都固化成流程。\n它要学会区分：\n什么只是事实；\n什么才值得变成行动规则。\nReferences\n1. Anthropic: New in Claude Managed Agents: dreaming, outcomes, and multiagent orchestration\n2. Anthropic Docs: Dreams\n3. Anthropic Docs: Agent Skills\n4. NousResearch/hermes-agent README\n5. Hermes Agent Docs: Skills System\n6. Hermes Agent Docs: Persistent Memory",
+    "content": "...Skill 代表的是一种激进选择：\n把稳定流程变成能力。 真正成熟的 Agent，不是把所有过去都记下来，也不是把所有经验都固化成流程。\n它要学会区分：\n什么只是事实；\n什么才值得变成行动规则。\nReferences\n1. https://claude.com/blog/new-in-claude-managed-agents\n2. https://platform.claude.com/docs/en/managed-agents/dreams\n3. https://platform.claude.com/docs/en/managed-agents/skills\n4. https://github.com/NousResearch/hermes-agent/blob/main/README.md",
     "url": "/blog/Claude Dreaming vs Hermes Skill：帮你入坑 Agent Memory",
     "chunkIndex": 10,
     "totalChunks": 12,
     "startPos": 3314,
-    "endPos": 3657,
+    "endPos": 3640,
     "originalTitle": "Claude Dreaming vs Hermes Skill：帮你入坑 Agent Memory"
   },
   {
     "chunkId": "/blog/Claude Dreaming vs Hermes Skill：帮你入坑 Agent Memory#chunk-11",
     "title": "Claude Dreaming vs Hermes Skill：帮你入坑 Agent Memory (第12段)",
-    "content": "...Agent Docs: Persistent Memory 7. Are Online Skill and Memory Modules Always Worth Their Tokens? A Budget-Constrained Study of Web Agents",
+    "content": "...mes-agent/blob/main/README.md 5. https://hermes-agent.nousresearch.com/docs/user-guide/features/skills\n6. https://hermes-agent.nousresearch.com/docs/user-guide/features/memory\n7. https://arxiv.org/abs/2606.15017",
     "url": "/blog/Claude Dreaming vs Hermes Skill：帮你入坑 Agent Memory",
     "chunkIndex": 11,
     "totalChunks": 12,
-    "startPos": 3657,
-    "endPos": 3763,
+    "startPos": 3640,
+    "endPos": 3821,
     "originalTitle": "Claude Dreaming vs Hermes Skill：帮你入坑 Agent Memory"
   },
   {
