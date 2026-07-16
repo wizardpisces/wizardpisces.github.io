@@ -224,7 +224,7 @@ Reuse
 <p>&#x8FD9;&#x4E9B;&#x77E5;&#x8BC6;&#x5982;&#x679C;&#x53EA;&#x4EE5;&#x201C;&#x4E8B;&#x5B9E;&#x201D;&#x7684;&#x5F62;&#x5F0F;&#x5B58;&#x7740;&#xFF0C;Agent &#x4ECD;&#x7136;&#x8981;&#x6BCF;&#x6B21;&#x91CD;&#x65B0;&#x7EC4;&#x7EC7;&#x52A8;&#x4F5C;&#x3002;</p>
 <p>&#x800C; Skill &#x7684;&#x4EF7;&#x503C;&#xFF0C;&#x5C31;&#x662F;&#x628A;&#x8FD9;&#x4E9B;&#x53CD;&#x590D;&#x51FA;&#x73B0;&#x7684;&#x52A8;&#x4F5C;&#x7EC4;&#x7EC7;&#x6210;&#x80FD;&#x529B;&#x3002;</p>
 <h2 id="&#x4E3A;&#x4EC0;&#x4E48; Claude &#x4E0D;&#x76F4;&#x63A5;&#x505A; Skill&#xFF1F;"><a href="#&#x4E3A;&#x4EC0;&#x4E48; Claude &#x4E0D;&#x76F4;&#x63A5;&#x505A; Skill&#xFF1F;"></a>&#x4E3A;&#x4EC0;&#x4E48; Claude &#x4E0D;&#x76F4;&#x63A5;&#x505A; Skill&#xFF1F;</h2>
-<p>Anthropic &#x7684;&#x8BBE;&#x8BA1;&#x54F2;&#x5B66;&#x5176;&#x5B9E;&#x504F;&#xFF1A;&#x76F8;&#x4FE1;&#x6A21;&#x578B;&#x80FD;&#x529B;&#x8D8A;&#x6765;&#x8D8A;&#x5F3A;&#xFF0C;Workflow &#x4E0D;&#x5E94;&#x8BE5;&#x56FA;&#x5316;&#x3002;</p>
+<p>Anthropic &#x7684;&#x8BBE;&#x8BA1;&#x54F2;&#x5B66;&#xFF1A;&#x76F8;&#x4FE1;&#x6A21;&#x578B;&#x80FD;&#x529B;&#x8D8A;&#x6765;&#x8D8A;&#x5F3A;&#xFF0C;Workflow &#x4E0D;&#x5E94;&#x8BE5;&#x56FA;&#x5316;&#x3002;</p>
 <p>&#x5B83;&#x9ED8;&#x8BA4;&#x6A21;&#x578B;&#x672C;&#x8EAB;&#x6709;&#x8F83;&#x5F3A;&#x7684; planning &#x80FD;&#x529B;&#xFF0C;&#x56E0;&#x6B64;&#x957F;&#x671F;&#x7CFB;&#x7EDF;&#x6700;&#x9700;&#x8981;&#x7EF4;&#x62A4;&#x7684;&#x662F;&#xFF1A;</p>
 <blockquote>
 <p>&#x5E72;&#x51C0;&#x3001;&#x51C6;&#x786E;&#x3001;&#x4E0D;&#x8FC7;&#x5EA6;&#x5E72;&#x9884;&#x63A8;&#x7406;&#x7684; Memory&#x3002;</p>
@@ -276,7 +276,7 @@ approval
 <pre><code>&#x8FD9;&#x4E2A;&#x56E2;&#x961F;&#x90E8;&#x7F72; Kubernetes &#x670D;&#x52A1;&#x65F6;&#xFF0C;&#x901A;&#x5E38;&#x8981;&#x6309;&#x4EE5;&#x4E0B;&#x6D41;&#x7A0B;&#x6267;&#x884C;&#x3002;
 </code></pre>
 <p>&#x8FD9;&#x5C31;&#x662F; Skill &#x8981;&#x89E3;&#x51B3;&#x7684;&#x95EE;&#x9898;&#x3002;</p>
-<p>&#x6240;&#x4EE5; Hermes &#x66F4;&#x6FC0;&#x8FDB;&#x5730;&#x628A;&#x7ECF;&#x9A8C;&#x8F6C;&#x6210;&#x80FD;&#x529B;&#x3002;</p>
+<p>&#x6240;&#x4EE5; Hermes &#x7684; Skill &#x5C42;&#x66F4;&#x6FC0;&#x8FDB;&#x5730;&#x628A;&#x4E00;&#x90E8;&#x5206;&#x7ECF;&#x9A8C;&#x8F6C;&#x6210;&#x80FD;&#x529B;&#x3002;</p>
 <p>&#x5B83;&#x76F8;&#x4FE1;&#xFF1A;</p>
 <blockquote>
 <p>&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x6D41;&#x7A0B;&#x5DF2;&#x7ECF;&#x591A;&#x6B21;&#x6210;&#x529F;&#xFF0C;&#x5C31;&#x4E0D;&#x5E94;&#x8BE5;&#x6BCF;&#x6B21;&#x90FD;&#x8BA9; Agent &#x4ECE;&#x96F6;&#x5F00;&#x59CB;&#x6478;&#x7D22;&#x3002;</p>
@@ -355,78 +355,44 @@ Memory Store  Skill Library
 4. &#x521B;&#x5EFA; tag
 5. &#x751F;&#x6210;&#x53D1;&#x5E03;&#x8BF4;&#x660E;
 </code></pre>
-<p>&#x524D;&#x8005;&#x8BA9; Agent &#x7406;&#x89E3;&#x4E0A;&#x4E0B;&#x6587;&#x3002;</p>
-<p>&#x540E;&#x8005;&#x8BA9; Agent &#x6267;&#x884C;&#x52A8;&#x4F5C;&#x3002;</p>
-<p>&#x771F;&#x6B63;&#x5F3A;&#x7684; Agent &#x9700;&#x8981;&#x4E24;&#x8005;&#x3002;</p>
-<hr>
-<h2 id="&#x66F4;&#x5173;&#x952E;&#x7684;&#x95EE;&#x9898;&#xFF1A;Memory &#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x5E94;&#x8BE5;&#x5347;&#x7EA7;&#x6210; Skill&#xFF1F;"><a href="#&#x66F4;&#x5173;&#x952E;&#x7684;&#x95EE;&#x9898;&#xFF1A;Memory &#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x5E94;&#x8BE5;&#x5347;&#x7EA7;&#x6210; Skill&#xFF1F;"></a>&#x66F4;&#x5173;&#x952E;&#x7684;&#x95EE;&#x9898;&#xFF1A;Memory &#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x5E94;&#x8BE5;&#x5347;&#x7EA7;&#x6210; Skill&#xFF1F;</h2>
-<p>&#x6240;&#x4EE5;&#xFF0C;Dreaming &#x548C; Skill &#x771F;&#x6B63;&#x6709;&#x610F;&#x601D;&#x7684;&#x8FDE;&#x63A5;&#x70B9;&#xFF0C;&#x5E76;&#x4E0D;&#x662F;&#x7B80;&#x5355;&#x5730;&#x628A;&#x4E24;&#x8005;&#x653E;&#x5728;&#x4E00;&#x8D77;&#x3002;</p>
-<p>&#x66F4;&#x503C;&#x5F97;&#x95EE;&#x7684;&#x662F;&#xFF1A;</p>
-<blockquote>
-<p>&#x4E00;&#x6BB5; Memory&#xFF0C;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x5E94;&#x8BE5;&#x5347;&#x7EA7;&#x6210; Skill&#xFF1F;</p>
-</blockquote>
-<p>&#x6BD4;&#x5982;&#xFF1A;</p>
-<pre><code>&#x7528;&#x6237;&#x559C;&#x6B22; Rust&#x3002;
-</code></pre>
-<p>&#x8FD9;&#x5E94;&#x8BE5;&#x53EA;&#x662F; Memory&#x3002;</p>
-<p>&#x5B83;&#x63CF;&#x8FF0;&#x7684;&#x662F;&#x504F;&#x597D;&#xFF0C;&#x4E0D;&#x662F;&#x6D41;&#x7A0B;&#x3002;</p>
-<p>&#x4F46;&#x5982;&#x679C;&#x7CFB;&#x7EDF;&#x89C2;&#x5BDF;&#x5230;&#xFF1A;</p>
-<pre><code>&#x7528;&#x6237;&#x8FDE;&#x7EED; 20 &#x6B21;&#x90FD;&#x7528;&#x540C;&#x4E00;&#x5957; release &#x6D41;&#x7A0B;&#x3002;
-&#x6BCF;&#x6B21;&#x6B65;&#x9AA4;&#x90FD;&#x9AD8;&#x5EA6;&#x76F8;&#x4F3C;&#x3002;
-&#x6BCF;&#x6B21;&#x4EBA;&#x5DE5;&#x7EA0;&#x6B63;&#x70B9;&#x4E5F;&#x9AD8;&#x5EA6;&#x76F8;&#x4F3C;&#x3002;
-&#x8FD9;&#x5957;&#x6D41;&#x7A0B;&#x5728;&#x591A;&#x4E2A;&#x9879;&#x76EE;&#x91CC;&#x90FD;&#x6210;&#x529F;&#x590D;&#x7528;&#x3002;
-</code></pre>
-<p>&#x90A3;&#x5B83;&#x5C31;&#x4E0D;&#x518D;&#x53EA;&#x662F;&#x666E;&#x901A; Memory&#x3002;</p>
-<p>&#x5B83;&#x5E94;&#x8BE5;&#x8FDB;&#x5165;&#x53E6;&#x4E00;&#x4E2A;&#x751F;&#x547D;&#x5468;&#x671F;&#xFF1A;</p>
-<pre><code>Memory
-   &#x2502;
-   &#x25BC;
-Candidate Skill
-   &#x2502;
-   &#x25BC;
-Review
-   &#x2502;
-   &#x25BC;
-Installed Skill
-   &#x2502;
-   &#x25BC;
-Versioned Maintenance
-</code></pre>
-<p>&#x8FD9;&#x53EF;&#x80FD;&#x624D;&#x662F; Agent Memory &#x7CFB;&#x7EDF;&#x771F;&#x6B63;&#x56F0;&#x96BE;&#x7684;&#x5730;&#x65B9;&#x3002;</p>
-<p>&#x4E0D;&#x662F;&#x6240;&#x6709;&#x7ECF;&#x9A8C;&#x90FD;&#x5E94;&#x8BE5;&#x7559;&#x4E0B;&#x3002;</p>
-<p>&#x4E5F;&#x4E0D;&#x662F;&#x6240;&#x6709;&#x957F;&#x671F;&#x8BB0;&#x5FC6;&#x90FD;&#x5E94;&#x8BE5;&#x53D8;&#x6210; Skill&#x3002;</p>
-<p>&#x5224;&#x65AD;&#x6807;&#x51C6;&#x53EF;&#x80FD;&#x5305;&#x62EC;&#xFF1A;</p>
-<ul>
-<li>&#x8FD9;&#x4E2A;&#x6D41;&#x7A0B;&#x662F;&#x5426;&#x9AD8;&#x9891;&#x51FA;&#x73B0;&#xFF1F;</li>
-<li>&#x662F;&#x5426;&#x8DE8;&#x4EFB;&#x52A1;&#x7A33;&#x5B9A;&#x590D;&#x7528;&#xFF1F;</li>
-<li>&#x662F;&#x5426;&#x6709;&#x660E;&#x786E;&#x6210;&#x529F;&#x6807;&#x51C6;&#xFF1F;</li>
-<li>&#x662F;&#x5426;&#x80FD;&#x88AB;&#x4EBA;&#x7C7B; review&#xFF1F;</li>
-<li>&#x8FC7;&#x671F;&#x540E;&#x662F;&#x5426;&#x5BB9;&#x6613;&#x68C0;&#x6D4B;&#x548C;&#x66F4;&#x65B0;&#xFF1F;</li>
-<li>&#x9519;&#x8BEF;&#x8C03;&#x7528;&#x7684;&#x4EE3;&#x4EF7;&#x662F;&#x5426;&#x53EF;&#x63A7;&#xFF1F;</li>
-</ul>
-<p>&#x5982;&#x679C;&#x8FD9;&#x4E9B;&#x6761;&#x4EF6;&#x6EE1;&#x8DB3;&#xFF0C;Memory &#x624D;&#x6709;&#x8D44;&#x683C;&#x5347;&#x7EA7;&#x6210; Skill&#x3002;</p>
-<p>&#x5426;&#x5219;&#xFF0C;&#x5B83;&#x6700;&#x597D;&#x7EE7;&#x7EED;&#x505C;&#x7559;&#x5728; Semantic Memory &#x91CC;&#xFF0C;&#x4F5C;&#x4E3A;&#x4E0A;&#x4E0B;&#x6587;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x53D8;&#x6210;&#x884C;&#x52A8;&#x89C4;&#x5219;&#x3002;</p>
-<hr>
 <h2 id="&#x7ED3;&#x8BBA;"><a href="#&#x7ED3;&#x8BBA;"></a>&#x7ED3;&#x8BBA;</h2>
-<p>&#x6240;&#x4EE5;&#xFF0C;Dreaming &#x548C; Skill &#x771F;&#x6B63;&#x6709;&#x610F;&#x601D;&#x7684;&#x5730;&#x65B9;&#xFF0C;&#x5E76;&#x4E0D;&#x662F;&#x8C01;&#x66FF;&#x4EE3;&#x8C01;&#x3002;</p>
-<p>&#x5B83;&#x4EEC;&#x5171;&#x540C;&#x6307;&#x5411;&#x4E86;&#x4E0B;&#x4E00;&#x4EE3; Agent &#x7684;&#x4E00;&#x4E2A;&#x6838;&#x5FC3;&#x95EE;&#x9898;&#xFF1A;</p>
+<p>Dreaming &#x548C; Skill &#x5171;&#x540C;&#x6307;&#x5411; Agent &#x7684;&#x4E00;&#x4E2A;&#x6838;&#x5FC3;&#x95EE;&#x9898;&#xFF1A;</p>
 <blockquote>
-<p>&#x7ECF;&#x9A8C;&#x5982;&#x4F55;&#x5B8C;&#x6210;&#x5206;&#x5C42;&#xFF1F;</p>
+<p>&#x7ECF;&#x9A8C;&#x5E94;&#x8BE5;&#x88AB;&#x8BB0;&#x4F4F;&#xFF0C;&#x8FD8;&#x662F;&#x88AB;&#x56FA;&#x5316;&#xFF1F;</p>
 </blockquote>
 <p>&#x6709;&#x4E9B;&#x7ECF;&#x9A8C;&#x53EA;&#x5E94;&#x8BE5;&#x88AB;&#x8BB0;&#x4F4F;&#x3002;</p>
 <p>&#x6BD4;&#x5982;&#x504F;&#x597D;&#x3001;&#x80CC;&#x666F;&#x3001;&#x7EA6;&#x675F;&#x3001;&#x9879;&#x76EE;&#x72B6;&#x6001;&#x3002;</p>
 <p>&#x5B83;&#x4EEC;&#x5E94;&#x8BE5;&#x7559;&#x5728; Semantic Memory &#x91CC;&#xFF0C;&#x5E2E;&#x52A9; Agent &#x66F4;&#x51C6;&#x786E;&#x5730;&#x7406;&#x89E3;&#x4E16;&#x754C;&#x3002;</p>
-<p>&#x4F46;&#x6709;&#x4E9B;&#x7ECF;&#x9A8C;&#x4E0D;&#x5E94;&#x8BE5;&#x6C38;&#x8FDC;&#x505C;&#x7559;&#x5728;&#x201C;&#x8BB0;&#x4F4F;&#x201D;&#x8FD9;&#x4E00;&#x5C42;&#x3002;</p>
-<p>&#x5F53;&#x4E00;&#x4E2A;&#x6D41;&#x7A0B;&#x88AB;&#x53CD;&#x590D;&#x9A8C;&#x8BC1;&#x3001;&#x7A33;&#x5B9A;&#x590D;&#x7528;&#xFF0C;&#x5E76;&#x4E14;&#x6709;&#x6E05;&#x6670;&#x7684;&#x6210;&#x529F;&#x6807;&#x51C6;&#x65F6;&#xFF0C;&#x5B83;&#x5C31;&#x5E94;&#x8BE5;&#x4ECE; Memory &#x91CC;&#x957F;&#x51FA;&#x6765;&#xFF0C;&#x53D8;&#x6210; Skill&#x3002;</p>
+<p>&#x4F46;&#x6709;&#x4E9B;&#x7ECF;&#x9A8C;&#x4E0D;&#x9002;&#x5408;&#x53EA;&#x505C;&#x7559;&#x5728;&#x201C;&#x8BB0;&#x4F4F;&#x201D;&#x8FD9;&#x4E00;&#x5C42;&#x3002;</p>
+<p>&#x5F53;&#x4E00;&#x4E2A;&#x6D41;&#x7A0B;&#x88AB;&#x53CD;&#x590D;&#x9A8C;&#x8BC1;&#x3001;&#x7A33;&#x5B9A;&#x590D;&#x7528;&#xFF0C;&#x5E76;&#x4E14;&#x6709;&#x6E05;&#x6670;&#x7684;&#x6210;&#x529F;&#x6807;&#x51C6;&#x65F6;&#xFF0C;&#x5B83;&#x53EF;&#x4EE5;&#x88AB;&#x505A;&#x6210; Skill&#x3002;</p>
+<p>&#x8FD9;&#x662F;&#x4E00;&#x79CD;&#x5DE5;&#x7A0B;&#x6743;&#x8861;&#x3002;</p>
+<p>Skill &#x7684;&#x6536;&#x76CA;&#x662F;&#x590D;&#x7528;&#xFF0C;&#x4EE3;&#x4EF7;&#x662F;&#x56FA;&#x5316;&#x3002;</p>
 <p>&#x8FD9;&#x624D;&#x662F;&#x957F;&#x671F;&#x5B66;&#x4E60;&#x771F;&#x6B63;&#x56F0;&#x96BE;&#x7684;&#x5730;&#x65B9;&#xFF1A;</p>
 <blockquote>
-<p>&#x4E0D;&#x662F;&#x4FDD;&#x5B58;&#x7ECF;&#x9A8C;&#xFF0C;&#x800C;&#x662F;&#x5224;&#x65AD;&#x7ECF;&#x9A8C;&#x5E94;&#x8BE5;&#x505C;&#x5728;&#x54EA;&#x4E00;&#x5C42;&#x3002;</p>
+<p>&#x4E0D;&#x662F;&#x4FDD;&#x5B58;&#x66F4;&#x591A;&#x7ECF;&#x9A8C;&#xFF0C;&#x800C;&#x662F;&#x5224;&#x65AD;&#x7ECF;&#x9A8C;&#x5E94;&#x8BE5;&#x4EE5;&#x4EC0;&#x4E48;&#x5F62;&#x6001;&#x7559;&#x4E0B;&#x3002;</p>
 </blockquote>
-<p>Dreaming &#x8BA9; Agent &#x5B66;&#x4F1A;&#x6574;&#x7406;&#x8FC7;&#x53BB;&#x3002;</p>
-<p>Skill &#x8BA9; Agent &#x5B66;&#x4F1A;&#x590D;&#x7528;&#x8FC7;&#x53BB;&#x3002;</p>
-<p>&#x800C;&#x66F4;&#x6210;&#x719F;&#x7684; Agent&#xFF0C;&#x8FD8;&#x9700;&#x8981;&#x5B66;&#x4F1A;&#x5224;&#x65AD;&#xFF1A;</p>
+<p>Dreaming &#x4EE3;&#x8868;&#x7684;&#x662F;&#x4E00;&#x79CD;&#x4FDD;&#x5B88;&#x9009;&#x62E9;&#xFF1A;</p>
 <blockquote>
-<p>&#x54EA;&#x4E9B;&#x8FC7;&#x53BB;&#xFF0C;&#x53EA;&#x503C;&#x5F97;&#x8BB0;&#x4F4F;&#xFF1B;</p>
-<p>&#x54EA;&#x4E9B;&#x8FC7;&#x53BB;&#xFF0C;&#x5E94;&#x8BE5;&#x53D8;&#x6210;&#x672A;&#x6765;&#x7684;&#x80FD;&#x529B;&#x3002;</p>
+<p>&#x5148;&#x628A; Memory &#x53D8;&#x5E72;&#x51C0;&#x3002;</p>
 </blockquote>
-`,E=[{level:1,title:"Claude Dreaming vs Hermes Skill：帮你入坑 Agent Memory",children:[{level:2,title:"为什么 Dreaming 和 Skill 容易被混在一起？",children:[]},{level:2,title:"Memory vs Capability",children:[]},{level:2,title:"Dreaming：把经验压缩成更好的事实",children:[]},{level:2,title:"Skill：把经验固化成可复用能力",children:[]},{level:2,title:"为什么 Claude 不直接做 Skill？",children:[]},{level:2,title:"为什么 Hermes 要强调 Skill？",children:[]},{level:2,title:"两种 Memory 的风险也不一样",children:[]},{level:2,title:"它们不是竞争关系",children:[]},{level:2,title:"更关键的问题：Memory 什么时候应该升级成 Skill？",children:[]},{level:2,title:"结论",children:[]}]}];export{x as attributes,F as html,E as nestedHeaders};
+<p>Skill &#x4EE3;&#x8868;&#x7684;&#x662F;&#x4E00;&#x79CD;&#x6FC0;&#x8FDB;&#x9009;&#x62E9;&#xFF1A;</p>
+<blockquote>
+<p>&#x628A;&#x7A33;&#x5B9A;&#x6D41;&#x7A0B;&#x53D8;&#x6210;&#x80FD;&#x529B;&#x3002;</p>
+</blockquote>
+<p>&#x771F;&#x6B63;&#x6210;&#x719F;&#x7684; Agent&#xFF0C;&#x4E0D;&#x662F;&#x628A;&#x6240;&#x6709;&#x8FC7;&#x53BB;&#x90FD;&#x8BB0;&#x4E0B;&#x6765;&#xFF0C;&#x4E5F;&#x4E0D;&#x662F;&#x628A;&#x6240;&#x6709;&#x7ECF;&#x9A8C;&#x90FD;&#x56FA;&#x5316;&#x6210;&#x6D41;&#x7A0B;&#x3002;</p>
+<p>&#x5B83;&#x8981;&#x5B66;&#x4F1A;&#x533A;&#x5206;&#xFF1A;</p>
+<blockquote>
+<p>&#x4EC0;&#x4E48;&#x53EA;&#x662F;&#x4E8B;&#x5B9E;&#xFF1B;</p>
+<p>&#x4EC0;&#x4E48;&#x624D;&#x503C;&#x5F97;&#x53D8;&#x6210;&#x884C;&#x52A8;&#x89C4;&#x5219;&#x3002;</p>
+</blockquote>
+<h2 id="References"><a href="#References"></a>References</h2>
+<ol>
+<li><a href="https://claude.com/blog/new-in-claude-managed-agents">Anthropic: New in Claude Managed Agents: dreaming, outcomes, and multiagent orchestration</a></li>
+<li><a href="https://platform.claude.com/docs/en/managed-agents/dreams">Anthropic Docs: Dreams</a></li>
+<li><a href="https://platform.claude.com/docs/en/managed-agents/skills">Anthropic Docs: Agent Skills</a></li>
+<li><a href="https://github.com/NousResearch/hermes-agent/blob/main/README.md">NousResearch/hermes-agent README</a></li>
+<li><a href="https://hermes-agent.nousresearch.com/docs/user-guide/features/skills">Hermes Agent Docs: Skills System</a></li>
+<li><a href="https://hermes-agent.nousresearch.com/docs/user-guide/features/memory">Hermes Agent Docs: Persistent Memory</a></li>
+<li><a href="https://arxiv.org/abs/2606.15017">Are Online Skill and Memory Modules Always Worth Their Tokens? A Budget-Constrained Study of Web Agents</a></li>
+</ol>
+`,E=[{level:1,title:"Claude Dreaming vs Hermes Skill：帮你入坑 Agent Memory",children:[{level:2,title:"为什么 Dreaming 和 Skill 容易被混在一起？",children:[]},{level:2,title:"Memory vs Capability",children:[]},{level:2,title:"Dreaming：把经验压缩成更好的事实",children:[]},{level:2,title:"Skill：把经验固化成可复用能力",children:[]},{level:2,title:"为什么 Claude 不直接做 Skill？",children:[]},{level:2,title:"为什么 Hermes 要强调 Skill？",children:[]},{level:2,title:"两种 Memory 的风险也不一样",children:[]},{level:2,title:"它们不是竞争关系",children:[]},{level:2,title:"结论",children:[]},{level:2,title:"References",children:[]}]}];export{x as attributes,F as html,E as nestedHeaders};
