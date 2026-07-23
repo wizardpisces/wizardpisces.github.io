@@ -7,6 +7,7 @@ const e={title:"Introduction",description:"this is wizardpisces blog introductio
 <h2 id="AI Related"><a href="#AI Related"></a>AI Related</h2>
 <p>Blog</p>
 <ul>
+<li><a href="https://claude.com/blog">https://claude.com/blog</a></li>
 <li><a href="https://www.anthropic.com/research#overview">https://www.anthropic.com/research#overview</a></li>
 <li><a href="https://www.anthropic.com/engineering">https://www.anthropic.com/engineering</a></li>
 <li><a href="https://www.anthropic.com/news">https://www.anthropic.com/news</a></li>
