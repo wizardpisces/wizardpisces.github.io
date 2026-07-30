@@ -12980,6 +12980,61 @@
     "originalTitle": "LLM的智能来源：核心概念与扩展"
   },
   {
+    "chunkId": "/blog/tech%2Fai-%E7%AC%94%E8%AE%B0%2FMCP%20%E5%8D%87%E7%BA%A7%E5%90%8E%EF%BC%8CAI%20%E4%BA%A7%E5%93%81%E8%83%BD%E7%9C%9F%E6%AD%A3%E8%B5%B0%E5%87%BA%E8%81%8A%E5%A4%A9%E6%A1%86%E5%90%97%EF%BC%9F#chunk-0",
+    "title": "MCP 升级后，AI 产品如何走出聊天框？",
+    "content": "MCP 升级后，AI 产品如何走出聊天框？\nMCP 在 2026 年 7 月 28 日发布了新版规范。核心变化是：协议从双向、有状态的交互，转为无状态的请求/响应。\n这次升级更像一次架构纠偏：MCP 把原本可选的无状态实践变成协议默认，并补齐了无状态情况下向客户端索取输入的标准流程。\n特别关注点：\nSession 消失：每个请求都要把话说清楚\n假设你对 AI 助手说：\n点一杯冰美式，无糖，付款前让我确认。\n旧版的 Streamable HTTP 模式里，服务器会在初始化时签发 ：\n服务端通过这个 ID 知道请求来自同一段 MCP 协议会话，也能找回先前协商的能力和上下文。\n新版取消了初始化握手和 。协议版本、客户端信息与能力改为由每个请求通过  提供。",
+    "url": "/blog/tech%2Fai-%E7%AC%94%E8%AE%B0%2FMCP%20%E5%8D%87%E7%BA%A7%E5%90%8E%EF%BC%8CAI%20%E4%BA%A7%E5%93%81%E8%83%BD%E7%9C%9F%E6%AD%A3%E8%B5%B0%E5%87%BA%E8%81%8A%E5%A4%A9%E6%A1%86%E5%90%97%EF%BC%9F",
+    "chunkIndex": 0,
+    "totalChunks": 5,
+    "startPos": 0,
+    "endPos": 331,
+    "originalTitle": "MCP 升级后，AI 产品如何走出聊天框？"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E7%AC%94%E8%AE%B0%2FMCP%20%E5%8D%87%E7%BA%A7%E5%90%8E%EF%BC%8CAI%20%E4%BA%A7%E5%93%81%E8%83%BD%E7%9C%9F%E6%AD%A3%E8%B5%B0%E5%87%BA%E8%81%8A%E5%A4%A9%E6%A1%86%E5%90%97%EF%BC%9F#chunk-1",
+    "title": "MCP 升级后，AI 产品如何走出聊天框？ (第2段)",
+    "content": "...。协议版本、客户端信息与能力改为由每个请求通过  提供。 但订单并不会因此消失。跨多个工具处理同一笔业务时，仍然需要业务 ID：\n 并不是新版才有的设计。区别在于：旧版可以借助协议 Session 找回部分隐含上下文；新版要求请求自己带足信息，或者通过明确的业务查询方式找到状态。\n这只解决了“多次请求如何关联同一笔业务”。如果工具执行到一半需要用户确认，还需要另一套机制。\nMRTR：先结束请求，再带着回答继续\n旧版支持用户确认，通常使用 ：\n这里的关键是： 还没有结束。服务端内存里保留着这次调用执行到哪里、在等什么，以及收到答案后该如何继续。\n新版仍用  描述“需要向用户收集什么”，但它不再以服务端主动发起的 JSON-RPC 请求出现，而是放进  结果里：\n第一次返回的内容大致如下：",
+    "url": "/blog/tech%2Fai-%E7%AC%94%E8%AE%B0%2FMCP%20%E5%8D%87%E7%BA%A7%E5%90%8E%EF%BC%8CAI%20%E4%BA%A7%E5%93%81%E8%83%BD%E7%9C%9F%E6%AD%A3%E8%B5%B0%E5%87%BA%E8%81%8A%E5%A4%A9%E6%A1%86%E5%90%97%EF%BC%9F",
+    "chunkIndex": 1,
+    "totalChunks": 5,
+    "startPos": 331,
+    "endPos": 650,
+    "originalTitle": "MCP 升级后，AI 产品如何走出聊天框？"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E7%AC%94%E8%AE%B0%2FMCP%20%E5%8D%87%E7%BA%A7%E5%90%8E%EF%BC%8CAI%20%E4%BA%A7%E5%93%81%E8%83%BD%E7%9C%9F%E6%AD%A3%E8%B5%B0%E5%87%BA%E8%81%8A%E5%A4%A9%E6%A1%86%E5%90%97%EF%BC%9F#chunk-2",
+    "title": "MCP 升级后，AI 产品如何走出聊天框？ (第3段)",
+    "content": "...请求出现，而是放进  结果里：\n第一次返回的内容大致如下： 客户端根据  展示确认界面。用户作答后，客户端用新的 JSON-RPC 请求 ID 再次调用 ，并带回：\n它真正改变的是：继续执行所需的条件，不再只能放在服务器内存里那段未结束的调用中。它们可以随下一次请求传回，也可以由外部业务存储保存。\n两者的职责也更清楚：\n为什么只删除 Session 还不够？\n如果只删除 Session，却保留旧式 ，服务端还是得挂着一次调用等用户。请求依旧绑定在某个正在运行的实例上。\n新版分别处理了两类状态：\n这样，服务端不再需要共享 MCP Session 或依赖粘性路由。用户想几分钟、几小时，原实例都可以释放资源；后续请求落到另一台实例，也能继续。\n无状态的收益与代价",
+    "url": "/blog/tech%2Fai-%E7%AC%94%E8%AE%B0%2FMCP%20%E5%8D%87%E7%BA%A7%E5%90%8E%EF%BC%8CAI%20%E4%BA%A7%E5%93%81%E8%83%BD%E7%9C%9F%E6%AD%A3%E8%B5%B0%E5%87%BA%E8%81%8A%E5%A4%A9%E6%A1%86%E5%90%97%EF%BC%9F",
+    "chunkIndex": 2,
+    "totalChunks": 5,
+    "startPos": 650,
+    "endPos": 953,
+    "originalTitle": "MCP 升级后，AI 产品如何走出聊天框？"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E7%AC%94%E8%AE%B0%2FMCP%20%E5%8D%87%E7%BA%A7%E5%90%8E%EF%BC%8CAI%20%E4%BA%A7%E5%93%81%E8%83%BD%E7%9C%9F%E6%AD%A3%E8%B5%B0%E5%87%BA%E8%81%8A%E5%A4%A9%E6%A1%86%E5%90%97%EF%BC%9F#chunk-3",
+    "title": "MCP 升级后，AI 产品如何走出聊天框？ (第4段)",
+    "content": "...源；后续请求落到另一台实例，也能继续。\n无状态的收益与代价 最直接的收益是扩容与故障恢复更简单。第一次请求结束后，服务器不必保留连接和执行栈；只要恢复信息完整，后续请求可以交给另一台实例。\n产品层也更灵活：\n服务端只需说明“还缺一次确认”。至于由聊天卡片、推送通知还是审批页面来收集答案，交给客户端和产品流程决定。\n代价也是有的：\n 还应绑定用户和原始请求，设置过期时间，并防止被篡改。MCP 不会自动完成跨入口接力：产品仍要解决身份统一与业务状态的安全传递。\n新版并没有消除状态，只是把它们放回各自该负责的位置：\n对产品而言，更有价值的变化是：AI 任务可以先结束当前请求，等用户在合适的入口做决定，再继续完成任务，而不必始终占着一段没有挂断的会话窗口。\n**参考文档**",
+    "url": "/blog/tech%2Fai-%E7%AC%94%E8%AE%B0%2FMCP%20%E5%8D%87%E7%BA%A7%E5%90%8E%EF%BC%8CAI%20%E4%BA%A7%E5%93%81%E8%83%BD%E7%9C%9F%E6%AD%A3%E8%B5%B0%E5%87%BA%E8%81%8A%E5%A4%A9%E6%A1%86%E5%90%97%EF%BC%9F",
+    "chunkIndex": 3,
+    "totalChunks": 5,
+    "startPos": 953,
+    "endPos": 1261,
+    "originalTitle": "MCP 升级后，AI 产品如何走出聊天框？"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E7%AC%94%E8%AE%B0%2FMCP%20%E5%8D%87%E7%BA%A7%E5%90%8E%EF%BC%8CAI%20%E4%BA%A7%E5%93%81%E8%83%BD%E7%9C%9F%E6%AD%A3%E8%B5%B0%E5%87%BA%E8%81%8A%E5%A4%A9%E6%A1%86%E5%90%97%EF%BC%9F#chunk-4",
+    "title": "MCP 升级后，AI 产品如何走出聊天框？ (第5段)",
+    "content": "...，而不必始终占着一段没有挂断的会话窗口。\n**参考文档** https://blog.modelcontextprotocol.io/posts/2026-07-28/\nhttps://modelcontextprotocol.io/specification/2026-07-28/basic/patterns/mrtr\nhttps://modelcontextprotocol.io/specification/2026-07-28/client/elicitation\nhttps://modelcontextprotocol.io/specification/2025-11-25/client/elicitation",
+    "url": "/blog/tech%2Fai-%E7%AC%94%E8%AE%B0%2FMCP%20%E5%8D%87%E7%BA%A7%E5%90%8E%EF%BC%8CAI%20%E4%BA%A7%E5%93%81%E8%83%BD%E7%9C%9F%E6%AD%A3%E8%B5%B0%E5%87%BA%E8%81%8A%E5%A4%A9%E6%A1%86%E5%90%97%EF%BC%9F",
+    "chunkIndex": 4,
+    "totalChunks": 5,
+    "startPos": 1261,
+    "endPos": 1544,
+    "originalTitle": "MCP 升级后，AI 产品如何走出聊天框？"
+  },
+  {
     "chunkId": "/blog/tech%2Fai-%E7%AC%94%E8%AE%B0%2FManus%20-%20Context%20Engineering%20for%20AI%20Agents#chunk-0",
     "title": "[Context Engineering for AI Agents: Lessons from Building Manus](https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus)",
     "content": "Context Engineering for AI Agents: Lessons from Building Manus\n这篇文章是 Manus 团队基于构建通用 AI Agent（Manus）的实战经验，分享关于**上下文工程（Context Engineering）**的深度技术文章。\n**核心思想**：\n在构建复杂的 Agent 系统时，**Context Engineering（上下文工程）比 Prompt Engineering 更重要**。不仅仅是“写好提示词”，而是要像管理内存一样，精心设计上下文的结构、存储和生命周期。",
