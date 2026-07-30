@@ -1,9 +1,8 @@
-const e={title:"Introduction",description:"this is wizardpisces blog introduction"},t=`<h2 id="If you&apos;re not sure which to read, try these"><a href="#If you&apos;re not sure which to read, try these"></a>If you&apos;re not sure which to read, try these</h2>
-<ul>
-<li><a href="/blog/TechNotes">Tech Notes</a></li>
-<li><a href="/blog/DailyReflections">Daily Reflections</a></li>
-<li><a href="/blog/AiNotes">AI Notes</a></li>
-</ul>
+const e={title:"Introduction",description:"LZ AI NOTE"},t=`<pre>
+LZ AI Note
+&#x8BB0;&#x5F55;&#x73B0;&#x8C61;&#xFF0C;&#x8FFD;&#x95EE;&#x672C;&#x8D28;
+&#x5206;&#x4EAB; AI &#x4E00;&#x7EBF;&#x5B9E;&#x8DF5;&#xFF0C;&#x601D;&#x8003;&#x4E0E;&#x6D1E;&#x5BDF;
+</pre>
 <h2 id="AI Related"><a href="#AI Related"></a>AI Related</h2>
 <p>Blog</p>
 <ul>
@@ -21,4 +20,4 @@ const e={title:"Introduction",description:"this is wizardpisces blog introductio
 <ul>
 <li><a href="https://huggingface.co/papers/trending">trending papers homepage</a></li>
 </ul>
-`,o=[{level:2,title:"If you're not sure which to read, try these",children:[]},{level:2,title:"AI Related",children:[]}];export{e as attributes,t as html,o as nestedHeaders};
+`,n=[{level:2,title:"AI Related",children:[]}];export{e as attributes,t as html,n as nestedHeaders};
