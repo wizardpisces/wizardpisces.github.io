@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>Source-Map原理及其应用 | LZ AI NOTE</title>
+  <meta name="description" content="原理及其应用">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/other/Source-Map%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="Source-Map原理及其应用 | LZ AI NOTE">
+  <meta property="og:description" content="原理及其应用">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/other/Source-Map%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Source-Map原理及其应用","description":"原理及其应用","url":"https://wizardpisces.github.io/blog/tech/other/Source-Map%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/other/Source-Map%E5%8E%9F%E7%90%86%E5%8F%8A%E5%85%B6%E5%BA%94%E7%94%A8","dateModified":"2025-06-20","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Source-Map原理及其应用</h1><h2>什么是 source-map?</h2>
+<h3>广义解释：</h3>
+<p>溯源</p>
+<h3>前端开发</h3>
+<p>“A source map provides a way of mapping code within a compressed file back to it’s original position in a source file”</p>
+<h3>V3 spec example:</h3>
+<pre><code class="language-json">{
+    version : 3,
+    file: &quot;out.js&quot;,
+    sourceRoot : &quot;&quot;,
+    sources: [&quot;foo.js&quot;, &quot;bar.js&quot;],
+    names: [&quot;src&quot;, &quot;maps&quot;, &quot;are&quot;, &quot;fun&quot;],
+    mappings: &quot;AAgBC,SAAQ,CAAEA&quot;
+}
+</code></pre>
+<h2>为什么使用 source-map?(debug)</h2>
+<p>前端模块打包发布基本流程：</p>
+<p>Modules -&gt; compilers -&gt; assets</p>
+<p>代码转换类型：</p>
+<ul>
+<li>编译（TypeScript)</li>
+<li>转译（Babel）</li>
+<li>压缩混淆（UglifyJS）</li>
+<li>合并多个文件，减少带宽请求。(Webpack, Rollup)</li>
+</ul>
+<ol>
+<li>dev 环境如何定位调试？</li>
+<li>产线出错如何定位调试？</li>
+</ol>
+<h2>source-map 如何映射</h2>
+<p>mappings: “输出文件列位置|输入文件名|输入文件行号|输入文件列号,…”</p>
+<h3>优化措施：</h3>
+<ul>
+<li>文件名提取</li>
+<li>可符号化字符的提取</li>
+<li>记录相对位置</li>
+<li>VLQ编码</li>
+</ul>
+<p><a href="https://juejin.im/post/6844903869928079373">详细参考</a></p>
+<h2>souce-map 生成基本步骤</h2>
+<ol>
+<li>
+<p>Transform code and note the new generated source location</p>
+</li>
+<li>
+<p>Check for a difference in location between the original and generated code</p>
+</li>
+<li>
+<p>Using these mapping build a source map</p>
+</li>
+</ol>
+<p><a href="https://indepth.dev/source-maps-from-top-to-bottom/">具体参照这里</a></p>
+<h2>source-map 映射可视化</h2>
+<p><a href="https://sokra.github.io/source-map-visualization/#sass">online source-map visualization</a></p>
+<h2>source-map test case 写法</h2>
+<p><a href="https://github.com/wizardpisces/tiny-sass-compiler/blob/master/src/__tests__/compile.spec.ts">一种写法</a></p>
+<h2>参考资料</h2>
+<ol>
+<li><a href="https://indepth.dev/source-maps-from-top-to-bottom/">https://indepth.dev/source-maps-from-top-to-bottom/</a></li>
+<li><a href="https://juejin.im/post/6844903869928079373">https://juejin.im/post/6844903869928079373</a></li>
+<li><a href="https://www.npmjs.com/package/source-map">https://www.npmjs.com/package/source-map</a></li>
+<li><a href="https://www.html5rocks.com/en/tutorials/developertools/sourcemaps/">https://www.html5rocks.com/en/tutorials/developertools/sourcemaps/</a></li>
+</ol>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

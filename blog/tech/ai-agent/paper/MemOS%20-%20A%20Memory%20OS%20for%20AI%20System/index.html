@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>参考资料 | LZ AI NOTE</title>
+  <meta name="description" content="论文发布时间：2025 12 03 [MemOS: A Memory OS for AI System] 由上海交通大学、复旦大学等机构联合发布。简单来说，这篇论文提出了一种 “AI 记忆操作系统” 的概念，试图通过像管理电脑内存一样管理大模型的记忆，让 AI 拥有可进化、可迁移的长期记忆能力。 [MemOS 系统架构总览：将记忆视为可管理的系统资源，统一…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-agent/paper/MemOS%20-%20A%20Memory%20OS%20for%20AI%20System">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="参考资料 | LZ AI NOTE">
+  <meta property="og:description" content="论文发布时间：2025 12 03 [MemOS: A Memory OS for AI System] 由上海交通大学、复旦大学等机构联合发布。简单来说，这篇论文提出了一种 “AI 记忆操作系统” 的概念，试图通过像管理电脑内存一样管理大模型的记忆，让 AI 拥有可进化、可迁移的长期记忆能力。 [MemOS 系统架构总览：将记忆视为可管理的系统资源，统一…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-agent/paper/MemOS%20-%20A%20Memory%20OS%20for%20AI%20System">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"参考资料","description":"论文发布时间：2025 12 03 [MemOS: A Memory OS for AI System] 由上海交通大学、复旦大学等机构联合发布。简单来说，这篇论文提出了一种 “AI 记忆操作系统” 的概念，试图通过像管理电脑内存一样管理大模型的记忆，让 AI 拥有可进化、可迁移的长期记忆能力。 [MemOS 系统架构总览：将记忆视为可管理的系统资源，统一…","url":"https://wizardpisces.github.io/blog/tech/ai-agent/paper/MemOS%20-%20A%20Memory%20OS%20for%20AI%20System","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-agent/paper/MemOS%20-%20A%20Memory%20OS%20for%20AI%20System","dateModified":"2026-03-03","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>参考资料</h1><p><em>论文发布时间：2025-12-03</em></p>
+<p><a href="https://arxiv.org/abs/2507.03724">MemOS: A Memory OS for AI System</a> 由上海交通大学、复旦大学等机构联合发布。简单来说，这篇论文提出了一种**“AI 记忆操作系统”**的概念，试图通过像管理电脑内存一样管理大模型的记忆，让 AI 拥有可进化、可迁移的长期记忆能力。</p>
+<p><img src="https://arxiv.org/html/2507.03724v1/x1.png" alt="MemOS 系统架构总览：将记忆视为可管理的系统资源，统一管理参数、激活和明文三种记忆形式"></p>
+<h2>MemOS 解决了什么问题？</h2>
+<p><strong>核心问题：当前的大模型缺乏一个统一的“记忆管理系统”。</strong></p>
+<p>目前主流的大语言模型（LLM）在处理记忆时存在明显的割裂和低效：</p>
+<ul>
+<li><strong>静态参数的局限：</strong> 模型训练完后权重就固定了，无法记住新知识，重新训练成本太高。</li>
+<li><strong>上下文窗口的限制：</strong> 虽然上下文越来越长，但依然有限且昂贵，无法真正记住用户的长期偏好。</li>
+<li><strong>RAG 的无状态性：</strong> 检索增强生成（RAG）虽然能查资料，但它是“用完即走”的，缺乏生命周期管理，无法融合新旧知识。</li>
+</ul>
+<p><strong>MemOS 的作用：</strong> 它将记忆（Memory）视为一种可管理的系统资源，统一了从简单的文本检索到复杂的参数记忆的各种形式，让 AI 能够像操作系统管理内存一样，灵活地创建、迁移、融合和遗忘记忆。</p>
+<h2>这个问题真实存在吗？</h2>
+<p><strong>真实存在，且是 AI 通往通用人工智能（AGI）的必经之路。</strong></p>
+<p>如果不解决记忆管理问题，AI 永远只能是一个“健忘的学霸”：</p>
+<ul>
+<li><strong>无法持续学习：</strong> 今天教给它的东西，明天换个对话窗口就忘了。</li>
+<li><strong>个性化成本极高：</strong> 要让模型记住每个用户的习惯，目前的做法（全量微调或超长上下文）成本不仅高昂，而且难以维护。</li>
+<li><strong>知识碎片化：</strong> 外部检索的知识（文档）和内部参数的知识（权重）是割裂的，无法有机融合。</li>
+</ul>
+<h2>为什么现在才有人去解决？</h2>
+<p>主要得益于对“记忆层次”理解的深入和系统架构的需求：</p>
+<ol>
+<li><strong>记忆层次理论的成熟：</strong> 现在的研究开始将大模型的存储划分为不同层次（参数内存、激活内存、外部检索），这为统一管理提供了理论基础。</li>
+<li><strong>长上下文和 Agent 的爆发：</strong> 随着 AI Agent 需要处理的任务越来越复杂，单纯靠“堆上下文长度”已经难以为继，必须引入更高效的记忆管理机制。</li>
+<li><strong>计算与存储分离的趋势：</strong> 类似于计算机架构中 CPU 和硬盘的分离，AI 也需要将“思考（计算）”和“记忆（存储）”解耦，以降低成本。</li>
+</ol>
+<h2>它是如何解决的？</h2>
+<p>MemOS 的架构包含几个核心组件，就像一个真正的操作系统：</p>
+<ul>
+<li><strong>MemCube（记忆立方）：</strong> 这是 MemOS 的基本单元。它不仅存储内容（Content），还包含元数据（Metadata），如来源、版本、访问频率等。这使得记忆可以被追踪和管理。</li>
+<li><strong>分层记忆体系：</strong> MemOS 统一管理三种类型的记忆：
+<ul>
+<li><strong>明文记忆 (Plaintext)：</strong> 类似 RAG 的外部文档库，成本低，易更新。</li>
+<li><strong>激活记忆 (Activation)：</strong> 模型推理过程中的中间状态（KV Cache），响应快但易失。</li>
+<li><strong>参数记忆 (Parameter)：</strong> 模型的权重，最稳定但更新难。</li>
+</ul>
+</li>
+<li><strong>操作原语 (Operations)：</strong> 就像文件系统有复制粘贴一样，MemOS 定义了记忆的操作：
+<ul>
+<li><strong>组合 (Composition)：</strong> 将不同来源的记忆拼在一起。</li>
+<li><strong>迁移 (Migration)：</strong> 将短期记忆（如激活态）转存为长期记忆（如明文或参数）。</li>
+<li><strong>融合 (Fusion)：</strong> 将碎片化的记忆整合成新的、更高效的形式。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://arxiv.org/html/2507.03724v1/extracted/6596874/img/memory_circuitry_theory_updated.png" alt="MemOS 记忆电路理论：分层记忆体系与操作原语的协同工作流程"></p>
+<h2>还有更好的解决方案吗？</h2>
+<p>MemOS 提出的是一个系统级的框架，与之竞争或互补的方案包括：</p>
+<ul>
+<li><strong>RAG (检索增强生成)：</strong> 专注于“查资料”，优点是现成可用，缺点是缺乏对知识的深度融合和生命周期管理。</li>
+<li><strong>Long Context (超长上下文)：</strong> 试图把所有东西都塞进 Prompt 里，优点是简单粗暴，缺点是推理成本随长度二次方增长，且容易“迷失中间”。</li>
+<li><strong>Continual Learning (持续学习)：</strong> 试图直接更新模型参数，优点是彻底，缺点是容易出现“灾难性遗忘”。</li>
+</ul>
+<p><strong>MemOS 的优势在于“系统化思维”：</strong> 它不执着于某一种特定的记忆技术，而是建立了一套标准（OS），让不同的记忆技术可以在同一个框架下协同工作，实现成本和效果的最优平衡。</p>
+<h2>关键词解析</h2>
+<h3>1. MemCube (记忆立方)</h3>
+<p>[这是 MemOS 发明的核心概念，是记忆的容器]</p>
+<ul>
+<li><strong>传统模型：</strong> 记忆就是一段文本向量或者一堆参数权重，没有“身份证”。</li>
+<li><strong>MemOS：</strong> 每一个 MemCube 都有完整的“户口本”。它记录了这段记忆是谁产生的（Provenance）、是什么时候产生的（Timestamp）、被用过多少次（Access Frequency）。</li>
+<li><strong>通俗理解：</strong> 以前的记忆像是一堆散乱的便利贴；MemCube 像是整理好的档案盒，上面贴满了标签，随时可以归档、调阅或销毁。</li>
+</ul>
+<h3>2. 记忆可塑性 (Memory Plasticity)</h3>
+<p>[指记忆可以随时间变化和适应的能力]</p>
+<ul>
+<li><strong>静态记忆：</strong> 书本上的知识，印上去就改不了。</li>
+<li><strong>可塑性记忆：</strong> 像人类的大脑一样，MemOS 允许记忆在不同层级间流动。比如你刚认识一个新朋友，名字记在“短期记忆（激活态）”里；相处久了，他的喜好就刻进了“长期记忆（参数或明文）”里，甚至改变了你对某类人的看法（记忆融合）。</li>
+</ul>
+<hr>
+<h3>总结</h3>
+<p>MemOS 的本质是**“给 AI 装一个文件系统”**：</p>
+<ol>
+<li><strong>统一标准：</strong> 用 MemCube 统一了各种乱七八糟的记忆形式。</li>
+<li><strong>生命周期：</strong> 让记忆有了“生老病死”，可以被创建、优化和淘汰。</li>
+<li><strong>分层管理：</strong> 像电脑的 L1/L2 缓存和硬盘一样，智能调度记忆，让 AI 越用越聪明，而不是越用越慢。</li>
+</ol>
+<h1>参考资料</h1>
+<ul>
+<li><a href="https://arxiv.org/abs/2507.03724">论文地址</a></li>
+<li><a href="https://arxiv.org/abs/2507.03724">arXiv 页面</a></li>
+</ul>
+<p><em>编辑：2026-01-21</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

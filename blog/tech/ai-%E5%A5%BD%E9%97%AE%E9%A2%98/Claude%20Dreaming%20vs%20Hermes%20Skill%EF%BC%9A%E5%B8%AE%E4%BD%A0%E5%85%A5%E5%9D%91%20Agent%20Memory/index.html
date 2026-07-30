@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>Claude Dreaming vs Hermes Skill：帮你入坑 Agent Memory | LZ AI NOTE</title>
+  <meta name="description" content="Claude Dreaming vs Hermes Skill：帮你入坑 Agent Memory Claude 有 Dreaming，Hermes 有 Skill。 看着都在做同一件事： 让 AI 从经验中学习。 从 Agent Architecture 来看，它们其实属于两个完全不同的层级： Dreaming 关心的是：哪些经验值得长期记住？ Skil…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Claude%20Dreaming%20vs%20Hermes%20Skill%EF%BC%9A%E5%B8%AE%E4%BD%A0%E5%85%A5%E5%9D%91%20Agent%20Memory">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="Claude Dreaming vs Hermes Skill：帮你入坑 Agent Memory | LZ AI NOTE">
+  <meta property="og:description" content="Claude Dreaming vs Hermes Skill：帮你入坑 Agent Memory Claude 有 Dreaming，Hermes 有 Skill。 看着都在做同一件事： 让 AI 从经验中学习。 从 Agent Architecture 来看，它们其实属于两个完全不同的层级： Dreaming 关心的是：哪些经验值得长期记住？ Skil…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Claude%20Dreaming%20vs%20Hermes%20Skill%EF%BC%9A%E5%B8%AE%E4%BD%A0%E5%85%A5%E5%9D%91%20Agent%20Memory">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Claude Dreaming vs Hermes Skill：帮你入坑 Agent Memory","description":"Claude Dreaming vs Hermes Skill：帮你入坑 Agent Memory Claude 有 Dreaming，Hermes 有 Skill。 看着都在做同一件事： 让 AI 从经验中学习。 从 Agent Architecture 来看，它们其实属于两个完全不同的层级： Dreaming 关心的是：哪些经验值得长期记住？ Skil…","url":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Claude%20Dreaming%20vs%20Hermes%20Skill%EF%BC%9A%E5%B8%AE%E4%BD%A0%E5%85%A5%E5%9D%91%20Agent%20Memory","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Claude%20Dreaming%20vs%20Hermes%20Skill%EF%BC%9A%E5%B8%AE%E4%BD%A0%E5%85%A5%E5%9D%91%20Agent%20Memory","dateModified":"2026-07-16","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Claude Dreaming vs Hermes Skill：帮你入坑 Agent Memory</h1><h1>Claude Dreaming vs Hermes Skill：帮你入坑 Agent Memory</h1>
+<p>Claude 有 Dreaming，Hermes 有 Skill。</p>
+<p>看着都在做同一件事：</p>
+<blockquote>
+<p>让 AI 从经验中学习。</p>
+</blockquote>
+<p>从 Agent Architecture 来看，它们其实属于两个完全不同的层级：</p>
+<ul>
+<li><strong>Dreaming 关心的是：哪些经验值得长期记住？</strong></li>
+<li><strong>Skill 关心的是：哪些经验值得固化成能力？</strong></li>
+</ul>
+<p>换句话说，一个优化的是 <strong>Memory</strong>，另一个优化的是 <strong>Capability</strong>。</p>
+<p>更准确一点说：</p>
+<ul>
+<li>Claude Dreaming 更接近 <strong>Semantic Memory</strong>，也就是“知道什么”。</li>
+<li>Hermes Skill 更接近 <strong>Procedural Memory</strong>，也就是“知道怎么做”。</li>
+</ul>
+<p>这篇文章真正想讨论的不是 Claude 和 Hermes 哪个更好，而是：</p>
+<blockquote>
+<p>一个长期运行的 Agent，为什么不能只靠一种 Memory？</p>
+</blockquote>
+<h2>为什么 Dreaming 和 Skill 容易被混在一起？</h2>
+<p>因为它们的起点看起来非常像。</p>
+<p>两者都从历史经验出发：</p>
+<pre><code>Experience
+     │
+     ▼
+Reflection
+     │
+     ▼
+Something reusable
+</code></pre>
+<p>也就是说，它们都不是只处理当前对话，而是试图从过去的 Session、任务和失败里提炼出未来可复用的东西。</p>
+<p>这也是它们容易被归到同一类功能里的原因。</p>
+<p>但真正关键的问题是：</p>
+<blockquote>
+<p>Reflection 之后，到底抽取什么？</p>
+</blockquote>
+<p>Claude Dreaming 抽取的是事实、偏好、项目背景、长期规律。</p>
+<p>Hermes Skill 抽取的是步骤、流程、操作顺序、工具使用经验。</p>
+<p>如果画成更具体的结构：</p>
+<p>Claude Dreaming：</p>
+<pre><code>Experience
+     │
+     ▼
+Extract Facts
+     │
+     ▼
+Better Memory
+</code></pre>
+<p>Hermes Skill：</p>
+<pre><code>Experience
+     │
+     ▼
+Extract Procedure
+     │
+     ▼
+Reusable Skill
+</code></pre>
+<p>两者都在做 Reflection，但 Reflection 的对象完全不同。</p>
+<h2>Memory vs Capability</h2>
+<p>很多 Agent 文章会把长期记忆统一叫 Memory。</p>
+<p>但这个说法其实太粗了。</p>
+<p>“用户喜欢中文”是一种 Memory。</p>
+<p>“如何按这个团队的流程发布一个版本”也是一种 Memory。</p>
+<p>可它们显然不是同一种东西。</p>
+<p>前者描述的是事实：</p>
+<pre><code>用户偏好中文回答。
+这个项目使用 Vite。
+这个团队不喜欢引入重型依赖。
+</code></pre>
+<p>后者描述的是做法：</p>
+<pre><code>先跑 lint。
+再跑 type-check。
+再更新 changelog。
+最后创建 release tag。
+</code></pre>
+<p>如果都塞进同一个 Memory Store，系统很快就会变得混乱。</p>
+<p>因为事实和流程有不同的生命周期：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>关心的问题</th>
+<th>变化速度</th>
+<th>失败方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Semantic Memory</td>
+<td>什么是真的？</td>
+<td>相对慢</td>
+<td>记错、冲突、过时</td>
+</tr>
+<tr>
+<td>Procedural Memory</td>
+<td>应该怎么做？</td>
+<td>相对快</td>
+<td>流程失效、过度固化</td>
+</tr>
+</tbody>
+</table>
+<p>这也是为什么 Dreaming 和 Skill 看起来都像“长期记忆”，但其实应该分层管理。</p>
+<p>Dreaming 更像是在维护一个更干净的世界模型。</p>
+<p>Skill 更像是在沉淀一组可复用的行为模板。</p>
+<p>一个帮助 Agent 更好地理解上下文。</p>
+<p>一个帮助 Agent 更快地完成任务。</p>
+<hr>
+<h2>Dreaming：把经验压缩成更好的事实</h2>
+<p>Claude Dreaming 的重点不是训练模型，也不是把一次成功任务变成固定流程。</p>
+<p>它更像一个后台的 <strong>Memory Consolidation</strong> 过程。</p>
+<p>大致流程是：</p>
+<pre><code>历史 Session
+     +
+当前 Memory Store
+     │
+     ▼
+Dream Job
+     │
+     ▼
+新的 Memory Store
+</code></pre>
+<p>它会重新审视已有记忆和历史上下文，做几类事情：</p>
+<ul>
+<li>删除重复内容；</li>
+<li>合并相似事实；</li>
+<li>处理冲突信息；</li>
+<li>更新已经过时的描述；</li>
+<li>抽取更高层的长期规律。</li>
+</ul>
+<p>比如原来的 Memory 里可能有这些碎片：</p>
+<pre><code>John 喜欢 Python。
+John 最近开始写 Rust。
+John 不喜欢 Java。
+John 现在主要写 Rust。
+</code></pre>
+<p>Dreaming 后，更合理的表达可能是：</p>
+<pre><code>用户目前主要使用 Rust。
+用户熟悉 Python。
+Java 不是首选语言。
+</code></pre>
+<p>这里发生的不是 workflow learning，而是 knowledge consolidation。</p>
+<p>也就是说，Dreaming 关心的是：</p>
+<blockquote>
+<p>关于这个用户、这个项目、这个长期上下文，到底哪些事实值得留下？</p>
+</blockquote>
+<p>所以它的价值不是让 Agent 立刻执行得更快，而是让 Agent 不再被低质量记忆拖累。</p>
+<p>Memory 越干净，后续推理越稳定。</p>
+<p>这也是 Dreaming 很适合处理偏好、背景、约束、项目状态的原因。</p>
+<p>例如：</p>
+<pre><code>用户经常要求中文回答。
+用户在 Python 项目里偏好 uv。
+这个项目不希望随便引入新框架。
+用户更在意工程可维护性，而不是炫技实现。
+</code></pre>
+<p>这些东西不一定会直接变成某个固定动作。</p>
+<p>但它们会影响 Agent 每一次判断。</p>
+<hr>
+<h2>Skill：把经验固化成可复用能力</h2>
+<p>Hermes Skill 解决的是另一个问题。</p>
+<p>Agent 最大的浪费之一，不是“不知道”，而是“每次都重新探索”。</p>
+<p>比如第一次部署 Kubernetes 服务时，Agent 可能经历了这样的过程：</p>
+<pre><code>kubectl apply
+     │
+     ▼
+发现配置缺失
+     │
+     ▼
+修复 values
+     │
+     ▼
+helm install
+     │
+     ▼
+等待 rollout
+     │
+     ▼
+health check
+</code></pre>
+<p>如果第二次部署类似服务时还从头探索一遍，就很低效。</p>
+<p>Skill 的思路是把成功路径提炼出来：</p>
+<pre><code>Experience
+     │
+     ▼
+Workflow Extraction
+     │
+     ▼
+Skill Library
+     │
+     ▼
+Retrieval
+     │
+     ▼
+Reuse
+</code></pre>
+<p>也就是说，它沉淀的不是“用户部署过 Kubernetes”这个事实，而是“遇到类似部署任务时应该怎么做”。</p>
+<p>这就是 Procedural Memory。</p>
+<p>它更像一个可加载的操作手册：</p>
+<pre><code>Deploy Kubernetes Service
+
+1. 检查 values 配置
+2. 执行 helm install / upgrade
+3. 等待 rollout
+4. 运行 health check
+5. 根据错误日志修复常见问题
+</code></pre>
+<p>以后遇到类似任务，Agent 可以通过语义检索找到这个 Skill，再按需加载到上下文里。</p>
+<p>这类机制的收益非常直接：</p>
+<ul>
+<li>少走弯路；</li>
+<li>减少重复规划；</li>
+<li>复用已经验证过的步骤；</li>
+<li>把个人或团队的隐性流程显性化。</li>
+</ul>
+<p>对于复杂 Agent 来说，这非常重要。</p>
+<p>因为很多任务的难点并不是单步推理，而是知道一套稳定流程：</p>
+<pre><code>如何发布版本？
+如何排查线上告警？
+如何迁移数据库？
+如何审查一类 PR？
+如何配置某个内部工具？
+</code></pre>
+<p>这些知识如果只以“事实”的形式存着，Agent 仍然要每次重新组织动作。</p>
+<p>而 Skill 的价值，就是把这些反复出现的动作组织成能力。</p>
+<h2>为什么 Claude 不直接做 Skill？</h2>
+<p>Anthropic 的设计哲学：相信模型能力越来越强，Workflow 不应该固化。</p>
+<p>它默认模型本身有较强的 planning 能力，因此长期系统最需要维护的是：</p>
+<blockquote>
+<p>干净、准确、不过度干预推理的 Memory。</p>
+</blockquote>
+<p>所以 Dreaming 固化的是事实，而不是流程。</p>
+<p>这有一个明显好处：</p>
+<blockquote>
+<p>不容易把旧方法写死。</p>
+</blockquote>
+<p>Workflow 的变化速度通常比事实更快。</p>
+<p>今天一个团队的发布流程可能是：</p>
+<pre><code>lint
+type-check
+build
+tag
+deploy
+</code></pre>
+<p>过一段时间可能加入：</p>
+<pre><code>security scan
+canary
+approval
+</code></pre>
+<p>如果 Agent 过早把旧流程固化成 Skill，就可能在未来持续调用一套已经不合适的方法。</p>
+<p>Dreaming 避开了这个风险。</p>
+<p>它只记住更稳定的部分：</p>
+<pre><code>这个团队发布前重视检查。
+这个项目使用某套 CI。
+用户倾向于先验证再部署。
+</code></pre>
+<p>然后让模型在每次任务里重新规划具体步骤。</p>
+<p>这也是 Dreaming 更稳的地方。</p>
+<h2>为什么 Hermes 要强调 Skill？</h2>
+<p>因为如果 Agent 只靠每次重新规划，长期效率会很差。</p>
+<p>尤其是工具调用型任务。</p>
+<p>模型可以理解“部署服务”是什么意思，但真正完成任务时，往往需要掌握很多具体细节：</p>
+<pre><code>命令顺序
+配置位置
+失败重试
+日志入口
+验证标准
+团队约定
+</code></pre>
+<p>这些东西只靠 Semantic Memory 不够。</p>
+<p>比如 Memory 里写着：</p>
+<pre><code>这个团队使用 Kubernetes。
+</code></pre>
+<p>这当然有用，但不足以指导一次高质量部署。</p>
+<p>真正能提高效率的是：</p>
+<pre><code>这个团队部署 Kubernetes 服务时，通常要按以下流程执行。
+</code></pre>
+<p>这就是 Skill 要解决的问题。</p>
+<p>所以 Hermes 的 Skill 层更激进地把一部分经验转成能力。</p>
+<p>它相信：</p>
+<blockquote>
+<p>如果一个流程已经多次成功，就不应该每次都让 Agent 从零开始摸索。</p>
+</blockquote>
+<p>这类 Skill 对高频任务尤其有价值。</p>
+<p>第一次也许花 20 分钟。</p>
+<p>第二次可能只要 2 分钟。</p>
+<hr>
+<h2>两种 Memory 的风险也不一样</h2>
+<p>Dreaming 的主要风险，是记忆质量问题。</p>
+<p>比如：</p>
+<ul>
+<li>把临时偏好当成长期偏好；</li>
+<li>把偶然事实总结成稳定规律；</li>
+<li>在冲突信息中选错版本；</li>
+<li>压缩后丢掉重要上下文。</li>
+</ul>
+<p>这些问题会影响 Agent 的判断，但通常不会直接把某个操作流程写死。</p>
+<p>Skill 的风险更像工程资产的风险。</p>
+<p>它一旦被调用，影响的是实际行为。</p>
+<p>典型问题包括：</p>
+<ul>
+<li>API 变了，Skill 还在调用旧接口；</li>
+<li>团队流程变了，Skill 还按旧步骤执行；</li>
+<li>Skill 写得太大，加载后挤占上下文；</li>
+<li>Skill 过于武断，让模型不再重新评估更好的方案。</li>
+</ul>
+<p>比如一个旧 Skill 写着：</p>
+<pre><code>Always use pandas.
+</code></pre>
+<p>但在新的数据任务里，polars 可能更合适。</p>
+<p>这时 Skill 就不再是经验，而是惯性。</p>
+<p>所以 Skill 的收益更直接，维护成本也更高。</p>
+<p>Dreaming 更容易保持系统稳定。</p>
+<p>Skill 更容易带来效率提升。</p>
+<hr>
+<h2>它们不是竞争关系</h2>
+<p>更合理的方向不是二选一，而是分层协作。</p>
+<pre><code>Experience
+     │
+     ▼
+Reflection
+     │
+ ┌───┴───────────┐
+ │               │
+ ▼               ▼
+Facts        Procedures
+ │               │
+ ▼               ▼
+Memory Store  Skill Library
+ │               │
+ └───────┬───────┘
+         ▼
+ Retrieval + Planning
+</code></pre>
+<p>Dreaming 负责回答：</p>
+<blockquote>
+<p>这个用户、项目、团队、环境里，什么长期为真？</p>
+</blockquote>
+<p>Skill 负责回答：</p>
+<blockquote>
+<p>遇到某类任务时，哪些步骤已经被验证过，可以复用？</p>
+</blockquote>
+<p>推理阶段再结合检索和规划，决定什么时候引用事实，什么时候加载 Skill。</p>
+<p>比如同样是“发布一个版本”：</p>
+<p>Semantic Memory 可能提供：</p>
+<pre><code>用户偏好中文总结。
+这个项目用 pnpm。
+这个团队发布前必须跑 type-check。
+</code></pre>
+<p>Procedural Memory 可能提供：</p>
+<pre><code>Release Skill:
+1. 检查工作区状态
+2. 跑 lint 和 type-check
+3. 更新 changelog
+4. 创建 tag
+5. 生成发布说明
+</code></pre>
+<h2>结论</h2>
+<p>Dreaming 和 Skill 共同指向 Agent 的一个核心问题：</p>
+<blockquote>
+<p>经验应该被记住，还是被固化？</p>
+</blockquote>
+<p>有些经验只应该被记住。</p>
+<p>比如偏好、背景、约束、项目状态。</p>
+<p>它们应该留在 Semantic Memory 里，帮助 Agent 更准确地理解世界。</p>
+<p>但有些经验不适合只停留在“记住”这一层。</p>
+<p>当一个流程被反复验证、稳定复用，并且有清晰的成功标准时，它可以被做成 Skill。</p>
+<p>这是一种工程权衡。</p>
+<p>Skill 的收益是复用，代价是固化。</p>
+<p>这才是长期学习真正困难的地方：</p>
+<blockquote>
+<p>不是保存更多经验，而是判断经验应该以什么形态留下。</p>
+</blockquote>
+<p>Dreaming 代表的是一种保守选择：</p>
+<blockquote>
+<p>先把 Memory 变干净。</p>
+</blockquote>
+<p>Skill 代表的是一种激进选择：</p>
+<blockquote>
+<p>把稳定流程变成能力。</p>
+</blockquote>
+<p>真正成熟的 Agent，不是把所有过去都记下来，也不是把所有经验都固化成流程。</p>
+<p>它要学会区分：</p>
+<blockquote>
+<p>什么只是事实；</p>
+<p>什么才值得变成行动规则。</p>
+</blockquote>
+<h2>References</h2>
+<ol>
+<li><a href="https://claude.com/blog/new-in-claude-managed-agents">https://claude.com/blog/new-in-claude-managed-agents</a></li>
+<li><a href="https://platform.claude.com/docs/en/managed-agents/dreams">https://platform.claude.com/docs/en/managed-agents/dreams</a></li>
+<li><a href="https://platform.claude.com/docs/en/managed-agents/skills">https://platform.claude.com/docs/en/managed-agents/skills</a></li>
+<li><a href="https://github.com/NousResearch/hermes-agent/blob/main/README.md">https://github.com/NousResearch/hermes-agent/blob/main/README.md</a></li>
+<li><a href="https://hermes-agent.nousresearch.com/docs/user-guide/features/skills">https://hermes-agent.nousresearch.com/docs/user-guide/features/skills</a></li>
+<li><a href="https://hermes-agent.nousresearch.com/docs/user-guide/features/memory">https://hermes-agent.nousresearch.com/docs/user-guide/features/memory</a></li>
+<li><a href="https://arxiv.org/abs/2606.15017">https://arxiv.org/abs/2606.15017</a></li>
+</ol>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

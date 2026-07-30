@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>理解 rust 无 GC | LZ AI NOTE</title>
+  <meta name="description" content="自己的理解： rust 无 GC应该指的是没有集中式的 GC，而是分散式的，随着代码的执行而自动的 回收？ Rust 中没有传统意义上的 集中式垃圾回收（Garbage Collector, GC） ，而是通过 分散式的、编译时静态分析和运行时的引用计数机制 来管理内存。这种方式避免了传统 GC 的集中式工作方式，回收是随着代码逻辑执行自然发生的。 Rus…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/backend/%E7%90%86%E8%A7%A3%20rust%20%E6%97%A0%20GC">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="理解 rust 无 GC | LZ AI NOTE">
+  <meta property="og:description" content="自己的理解： rust 无 GC应该指的是没有集中式的 GC，而是分散式的，随着代码的执行而自动的 回收？ Rust 中没有传统意义上的 集中式垃圾回收（Garbage Collector, GC） ，而是通过 分散式的、编译时静态分析和运行时的引用计数机制 来管理内存。这种方式避免了传统 GC 的集中式工作方式，回收是随着代码逻辑执行自然发生的。 Rus…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/backend/%E7%90%86%E8%A7%A3%20rust%20%E6%97%A0%20GC">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"理解 rust 无 GC","description":"自己的理解： rust 无 GC应该指的是没有集中式的 GC，而是分散式的，随着代码的执行而自动的 回收？ Rust 中没有传统意义上的 集中式垃圾回收（Garbage Collector, GC） ，而是通过 分散式的、编译时静态分析和运行时的引用计数机制 来管理内存。这种方式避免了传统 GC 的集中式工作方式，回收是随着代码逻辑执行自然发生的。 Rus…","url":"https://wizardpisces.github.io/blog/tech/backend/%E7%90%86%E8%A7%A3%20rust%20%E6%97%A0%20GC","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/backend/%E7%90%86%E8%A7%A3%20rust%20%E6%97%A0%20GC","dateModified":"2025-06-20","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>理解 rust 无 GC</h1><p>自己的理解：<strong>rust 无 GC应该指的是没有集中式的 GC，而是分散式的，随着代码的执行而自动的 回收？</strong></p>
+<p>Rust 中没有传统意义上的 <strong>集中式垃圾回收（Garbage Collector, GC）</strong>，而是通过 <strong>分散式的、编译时静态分析和运行时的引用计数机制</strong> 来管理内存。这种方式避免了传统 GC 的集中式工作方式，回收是随着代码逻辑执行自然发生的。</p>
+<hr>
+<h3><strong>Rust 的内存管理特点</strong></h3>
+<ol>
+<li>
+<p><strong>所有权系统（Ownership System）</strong><br>
+Rust 的内存管理依赖 <strong>所有权机制</strong>，在编译时完成内存分配和释放的分析。</p>
+<ul>
+<li>每个值都有一个所有者（<code>owner</code>）。</li>
+<li>当值的所有者超出作用域时，内存会立即释放。</li>
+<li>在编译时，Rust 检查所有权转移、借用和生命周期，确保内存安全。</li>
+</ul>
+<p><strong>例子：</strong></p>
+<pre><code class="language-rust">{
+    let s = String::from(&quot;hello&quot;); // s 拥有字符串
+    println!(&quot;{}&quot;, s);             // 使用 s
+} // 作用域结束，s 被释放，内存回收
+</code></pre>
+</li>
+<li>
+<p><strong>借用和引用</strong></p>
+<ul>
+<li>借用（<code>&amp;T</code> 和 <code>&amp;mut T</code>）允许多个地方访问一个值，而不改变所有权。</li>
+<li>Rust 编译器通过借用检查器确保没有数据竞争（数据同时被修改和读取）。</li>
+</ul>
+<p><strong>例子：</strong></p>
+<pre><code class="language-rust">fn main() {
+    let s = String::from(&quot;hello&quot;);
+    let len = calculate_length(&amp;s); // 借用 s，不转移所有权
+    println!(&quot;Length of '{}': {}&quot;, s, len);
+}
+
+fn calculate_length(s: &amp;String) -&gt; usize {
+    s.len()
+}
+</code></pre>
+</li>
+<li>
+<p><strong>引用计数（<code>Rc</code> 和 <code>Arc</code>）</strong></p>
+<ul>
+<li>对于需要多个所有者的场景，可以使用引用计数（<code>Rc&lt;T&gt;</code> 或 <code>Arc&lt;T&gt;</code>）。</li>
+<li>运行时跟踪引用计数，所有引用都被丢弃时，内存会被自动释放。</li>
+</ul>
+<p><strong>例子：</strong></p>
+<pre><code class="language-rust">use std::rc::Rc;
+
+fn main() {
+    let shared_data = Rc::new(String::from(&quot;shared&quot;));
+    let clone1 = Rc::clone(&amp;shared_data);
+    let clone2 = Rc::clone(&amp;shared_data);
+
+    println!(&quot;Count: {}&quot;, Rc::strong_count(&amp;shared_data)); // 输出 3
+} // 所有 Rc 被释放后，数据才会释放
+</code></pre>
+</li>
+<li>
+<p><strong>线程安全的引用计数（<code>Arc</code>）</strong></p>
+<ul>
+<li><code>Arc</code> 是 <code>Rc</code> 的线程安全版本，用于多线程环境。</li>
+<li>依赖原子操作管理引用计数。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3><strong>没有集中式 GC 的好处</strong></h3>
+<ul>
+<li>
+<p><strong>性能更高</strong>：</p>
+<ul>
+<li>没有 GC 暂停（GC Pause），因此实时性较好。</li>
+<li>在作用域结束时立即释放内存，不需要等待垃圾回收器触发。</li>
+</ul>
+</li>
+<li>
+<p><strong>内存管理可控</strong>：</p>
+<ul>
+<li>开发者通过所有权和借用机制对内存管理有更多的明确控制。</li>
+</ul>
+</li>
+<li>
+<p><strong>更小的运行时开销</strong>：</p>
+<ul>
+<li>Rust 没有语言级别的垃圾回收器，这减少了程序运行时的内存和 CPU 开销。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3><strong>分散式回收</strong></h3>
+<ul>
+<li>Rust 的内存回收不是集中管理，而是随着代码执行逐步完成的：
+<ul>
+<li>编译时：分析作用域和所有权，静态确定释放时机。</li>
+<li>运行时：通过引用计数（如 <code>Rc</code> 和 <code>Arc</code>）动态管理共享数据。</li>
+</ul>
+</li>
+</ul>
+<p><strong>例子：</strong></p>
+<pre><code class="language-rust">fn main() {
+    {
+        let data = Rc::new(String::from(&quot;hello&quot;)); // 分配内存
+        let cloned = Rc::clone(&amp;data);            // 引用计数 +1
+        println!(&quot;{}&quot;, cloned);                   // 使用数据
+    } // 引用计数减为 0，内存立即释放
+}
+</code></pre>
+<hr>
+<h3><strong>与传统 GC 的对比</strong></h3>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>Rust</th>
+<th>传统 GC (如 Java, Go)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>回收触发时机</strong></td>
+<td>编译时分析，运行时即时回收</td>
+<td>运行时批量回收（触发时暂停）</td>
+</tr>
+<tr>
+<td><strong>运行时开销</strong></td>
+<td>无集中管理，开销更小</td>
+<td>需跟踪对象、回收开销较高</td>
+</tr>
+<tr>
+<td><strong>暂停问题</strong></td>
+<td>无 GC 暂停，实时性更好</td>
+<td>存在 GC 暂停问题</td>
+</tr>
+<tr>
+<td><strong>内存安全性</strong></td>
+<td>编译时强保证</td>
+<td>运行时依赖语言特性和检查机制</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3><strong>总结</strong></h3>
+<p>Rust 的内存管理依赖 <strong>所有权机制</strong> 和 <strong>引用计数（如果需要）</strong>，在代码执行的同时完成内存的分散式回收，不依赖集中式 GC。它避免了传统 GC 的性能问题，同时提供了强大的内存安全性。</p>
+<h2>Reference</h2>
+<ul>
+<li>gpt</li>
+</ul>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

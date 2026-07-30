@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>Vue SSR 经验 | LZ AI NOTE</title>
+  <meta name="description" content="Vue SSR ssr hydrate 原理 基本猜想： 1. 按照层级匹配，只在不匹配的时候报错，层次正确即可 2. 只在data server rendered=&quot;true&quot;的时候hydrate，随后移除data server rendered server.html will match client but not match client 协同的…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/frontend/SSR%E5%8E%9F%E7%90%86%E6%B5%85%E6%9E%90">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="Vue SSR 经验 | LZ AI NOTE">
+  <meta property="og:description" content="Vue SSR ssr hydrate 原理 基本猜想： 1. 按照层级匹配，只在不匹配的时候报错，层次正确即可 2. 只在data server rendered=&quot;true&quot;的时候hydrate，随后移除data server rendered server.html will match client but not match client 协同的…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/frontend/SSR%E5%8E%9F%E7%90%86%E6%B5%85%E6%9E%90">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Vue SSR 经验","description":"Vue SSR ssr hydrate 原理 基本猜想： 1. 按照层级匹配，只在不匹配的时候报错，层次正确即可 2. 只在data server rendered=\"true\"的时候hydrate，随后移除data server rendered server.html will match client but not match client 协同的…","url":"https://wizardpisces.github.io/blog/tech/frontend/SSR%E5%8E%9F%E7%90%86%E6%B5%85%E6%9E%90","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/frontend/SSR%E5%8E%9F%E7%90%86%E6%B5%85%E6%9E%90","dateModified":"2025-06-20","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Vue SSR 经验</h1><h1>Vue SSR</h1>
+<h2>ssr hydrate 原理</h2>
+<p>基本猜想：</p>
+<ol>
+<li>按照层级匹配，只在不匹配的时候报错，层次正确即可</li>
+<li>只在data-server-rendered=&quot;true&quot;的时候hydrate，随后移除data-server-rendered
+server.html</li>
+</ol>
+<pre><code class="language-html">&lt;div&gt;&lt;button&gt;&lt;a&gt;&lt;/a&gt;&lt;/button&gt;&lt;/div&gt;
+</code></pre>
+<p>will match client</p>
+<pre><code class="language-html">&lt;div&gt;&lt;/div&gt;
+</code></pre>
+<p>but not match client</p>
+<pre><code class="language-html">&lt;div&gt;&lt;a&gt;&lt;/a&gt;&lt;/div&gt;
+</code></pre>
+<h2>协同的库</h2>
+<h3><a href="https://github.com/maoberlehner/vue-lazy-hydration">vue-lazy-hydrate</a>原理</h3>
+<ul>
+<li>服务端：</li>
+</ul>
+<ol>
+<li>hydrate=true -&gt; 根据component 渲染出来的正常 html</li>
+</ol>
+<ul>
+<li>客户端：</li>
+</ul>
+<p>将组件封装成 async component，在条件成熟的时候resolve（浏览器空闲/dom可见/事件触发）</p>
+<pre><code class="language-js">export function makeNonce({ component, hydrationPromise }) {
+  if (isServer) return component;
+
+  return () =&gt; hydrationPromise.then(() =&gt; resolveComponent(component));
+}
+</code></pre>
+<h4>结论</h4>
+<p>原理上不是真实意义上的hydrate，而是异步组件的渲染；
+所以如果一个组件在转换成 async的时候会出问题（例如：会有跟激活的组件的交互），那就不适用这个package</p>
+<h3>vue-client-only原理</h3>
+<p>原理：vue-client-only 组件的 render 函数简单封装</p>
+<ul>
+<li>服务端返回h(false) 占位</li>
+<li>客户端：根据parent._isMounted 返回正常组件 （在浏览器mounted的时候）</li>
+</ul>
+<h2>坑</h2>
+<h3>in NuxtJs框架</h3>
+<ul>
+<li>in dev : true(代表plugin middleware等文件会在每个请求进入的时候重新载入)</li>
+<li>in production: false （代表不会重新载入plugin，只会反复执行返回的函数）</li>
+</ul>
+<h3>SSR runInNewContext demo</h3>
+<ol>
+<li>bundle code</li>
+</ol>
+<p>./vue-ssr.js</p>
+<h3>reference</h3>
+<ul>
+<li><a href="https://nodejs.org/api/vm.html">node vm</a></li>
+<li><a href="https://nodejs.org/api/modules.html#modules_the_module_wrapper">node module</a></li>
+<li><a href="https://segmentfault.com/a/1190000008587112">node require解析</a></li>
+<li><a href="https://harttle.land/2020/02/10/deep-into-vue-ssr.html">vue ssr in depth</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/61348429">vue ssr in depth2</a></li>
+</ul>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>参考 | LZ AI NOTE</title>
+  <meta name="description" content="Rust 的智能指针是一种封装了指针行为的数据结构，它不仅能像普通指针那样访问数据，还附加了更多的功能，比如所有权管理、引用计数或内存自动回收。常见的智能指针有 Box 、 Rc 、 Arc 和 RefCell 。下面通过具体例子讲解这些智能指针及其使用场景。 智能指针 1. Box&lt;T : 堆上存储数据的智能指针 Box 是最简单的智能指针，用于将数据存…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/backend/rust%20%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%E4%B8%8E%E5%8F%AF%E5%8F%98%E6%80%A7">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="参考 | LZ AI NOTE">
+  <meta property="og:description" content="Rust 的智能指针是一种封装了指针行为的数据结构，它不仅能像普通指针那样访问数据，还附加了更多的功能，比如所有权管理、引用计数或内存自动回收。常见的智能指针有 Box 、 Rc 、 Arc 和 RefCell 。下面通过具体例子讲解这些智能指针及其使用场景。 智能指针 1. Box&lt;T : 堆上存储数据的智能指针 Box 是最简单的智能指针，用于将数据存…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/backend/rust%20%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%E4%B8%8E%E5%8F%AF%E5%8F%98%E6%80%A7">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"参考","description":"Rust 的智能指针是一种封装了指针行为的数据结构，它不仅能像普通指针那样访问数据，还附加了更多的功能，比如所有权管理、引用计数或内存自动回收。常见的智能指针有 Box 、 Rc 、 Arc 和 RefCell 。下面通过具体例子讲解这些智能指针及其使用场景。 智能指针 1. Box\u003cT : 堆上存储数据的智能指针 Box 是最简单的智能指针，用于将数据存…","url":"https://wizardpisces.github.io/blog/tech/backend/rust%20%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%E4%B8%8E%E5%8F%AF%E5%8F%98%E6%80%A7","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/backend/rust%20%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%E4%B8%8E%E5%8F%AF%E5%8F%98%E6%80%A7","dateModified":"2025-06-20","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>参考</h1><p>Rust 的智能指针是一种封装了指针行为的数据结构，它不仅能像普通指针那样访问数据，还附加了更多的功能，比如所有权管理、引用计数或内存自动回收。常见的智能指针有 <code>Box</code>、<code>Rc</code>、<code>Arc</code> 和 <code>RefCell</code>。下面通过具体例子讲解这些智能指针及其使用场景。</p>
+<h2>智能指针</h2>
+<hr>
+<h3>1. <code>Box&lt;T&gt;</code>: 堆上存储数据的智能指针</h3>
+<p><code>Box</code> 是最简单的智能指针，用于将数据存储在堆上而不是栈上。</p>
+<p><strong>使用场景</strong>：</p>
+<ul>
+<li>当数据的大小在编译时不确定，或者需要递归数据结构（如链表、树等）。</li>
+</ul>
+<pre><code class="language-rust">fn main() {
+    let boxed_value = Box::new(42); // 将值存储在堆上
+    println!(&quot;Boxed value: {}&quot;, boxed_value);
+}
+</code></pre>
+<hr>
+<h3>2. <code>Rc&lt;T&gt;</code>: 单线程下的引用计数智能指针</h3>
+<p><code>Rc</code>（Reference Counted）允许在单线程中多个所有者共享数据。它通过引用计数来跟踪数据的所有权。</p>
+<p><strong>使用场景</strong>：</p>
+<ul>
+<li>当需要共享不可变数据，且数据的生命周期不明确时（如在图或树结构中多个节点共享数据）。</li>
+</ul>
+<pre><code class="language-rust">use std::rc::Rc;
+
+fn main() {
+    let rc_value = Rc::new(42);
+    let rc_clone1 = Rc::clone(&amp;rc_value);
+    let rc_clone2 = Rc::clone(&amp;rc_value);
+
+    println!(&quot;Rc value: {}&quot;, rc_value);
+    println!(&quot;Rc clone1: {}&quot;, rc_clone1);
+    println!(&quot;Rc clone2: {}&quot;, rc_clone2);
+
+    // 引用计数增加
+    println!(&quot;Reference count: {}&quot;, Rc::strong_count(&amp;rc_value));
+}
+</code></pre>
+<hr>
+<h3>3. <code>Arc&lt;T&gt;</code>: 多线程下的引用计数智能指针</h3>
+<p><code>Arc</code>（Atomic Reference Counted）是线程安全的引用计数智能指针，适合多线程环境。</p>
+<p><strong>使用场景</strong>：</p>
+<ul>
+<li>当需要在多线程之间共享数据时使用。</li>
+</ul>
+<pre><code class="language-rust">use std::sync::Arc;
+use std::thread;
+
+fn main() {
+    let arc_value = Arc::new(42);
+
+    let handles: Vec&lt;_&gt; = (0..4).map(|_| {
+        let arc_clone = Arc::clone(&amp;arc_value);
+        thread::spawn(move || {
+            println!(&quot;Value in thread: {}&quot;, arc_clone);
+        })
+    }).collect();
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+}
+</code></pre>
+<hr>
+<h3>4. <code>RefCell&lt;T&gt;</code>: 单线程下的内部可变性</h3>
+<p><code>RefCell</code> 提供了一种“内部可变性”机制，即即使外部不可变，也能在运行时借用可变引用（动态检查）。</p>
+<p><strong>使用场景</strong>：</p>
+<ul>
+<li>当你需要在不可变数据结构中修改数据，但无法使用可变引用时。</li>
+</ul>
+<pre><code class="language-rust">use std::cell::RefCell;
+
+fn main() {
+    let ref_cell_value = RefCell::new(42);
+
+    // 可变借用
+    *ref_cell_value.borrow_mut() += 1;
+
+    // 不可变借用
+    println!(&quot;RefCell value: {}&quot;, ref_cell_value.borrow());
+}
+</code></pre>
+<p><strong>注意</strong>：<code>RefCell</code> 只适用于单线程，且在运行时借用规则违反时会触发 panic。</p>
+<hr>
+<h3>组合使用示例</h3>
+<p>在实际项目中，常常需要将这些智能指针组合使用。例如，使用 <code>Rc&lt;RefCell&lt;T&gt;&gt;</code> 创建一个共享的、可变的树节点。</p>
+<pre><code class="language-rust">use std::rc::Rc;
+use std::cell::RefCell;
+
+#[derive(Debug)]
+struct Node {
+    value: i32,
+    children: Vec&lt;Rc&lt;RefCell&lt;Node&gt;&gt;&gt;,
+}
+
+fn main() {
+    let root = Rc::new(RefCell::new(Node {
+        value: 1,
+        children: vec![],
+    }));
+
+    let child1 = Rc::new(RefCell::new(Node {
+        value: 2,
+        children: vec![],
+    }));
+
+    let child2 = Rc::new(RefCell::new(Node {
+        value: 3,
+        children: vec![],
+    }));
+
+    root.borrow_mut().children.push(child1.clone());
+    root.borrow_mut().children.push(child2.clone());
+
+    println!(&quot;Root node: {:?}&quot;, root);
+}
+</code></pre>
+<hr>
+<h3>总结</h3>
+<ul>
+<li><strong><code>Box</code></strong>：堆上存储单一所有者的数据。</li>
+<li><strong><code>Rc</code></strong>：单线程下共享不可变数据。</li>
+<li><strong><code>Arc</code></strong>：多线程下共享不可变数据。</li>
+<li><strong><code>RefCell</code></strong>：单线程中提供内部可变性。</li>
+<li><strong>组合使用</strong>：例如 <code>Rc&lt;RefCell&lt;T&gt;&gt;</code> 用于共享和修改数据。</li>
+</ul>
+<p>选择合适的智能指针取决于具体的需求：是否需要多线程支持？是否需要可变性？是否需要共享？根据这些因素进行决策即可。</p>
+<h1>参考</h1>
+<ul>
+<li>gpt</li>
+</ul>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

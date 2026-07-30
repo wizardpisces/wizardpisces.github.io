@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>rust 的泛型 | LZ AI NOTE</title>
+  <meta name="description" content="Rust 泛型的核心思想是 “编写与类型无关的代码，同时保留类型的安全性和性能” 。通过泛型，我们可以实现代码复用，而不用牺牲 Rust 的零成本抽象原则。 下面通过几个例子深入讲解这一思想。 核心思想 1： 泛型是一种类型参数化机制 泛型允许我们定义一个逻辑，能够处理多种类型。以一个简单的栈（ Stack ）为例： 示例：泛型栈的实现 使用泛型栈 核心思…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/backend/rust%20%E7%9A%84%E6%B3%9B%E5%9E%8B">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="rust 的泛型 | LZ AI NOTE">
+  <meta property="og:description" content="Rust 泛型的核心思想是 “编写与类型无关的代码，同时保留类型的安全性和性能” 。通过泛型，我们可以实现代码复用，而不用牺牲 Rust 的零成本抽象原则。 下面通过几个例子深入讲解这一思想。 核心思想 1： 泛型是一种类型参数化机制 泛型允许我们定义一个逻辑，能够处理多种类型。以一个简单的栈（ Stack ）为例： 示例：泛型栈的实现 使用泛型栈 核心思…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/backend/rust%20%E7%9A%84%E6%B3%9B%E5%9E%8B">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"rust 的泛型","description":"Rust 泛型的核心思想是 “编写与类型无关的代码，同时保留类型的安全性和性能” 。通过泛型，我们可以实现代码复用，而不用牺牲 Rust 的零成本抽象原则。 下面通过几个例子深入讲解这一思想。 核心思想 1： 泛型是一种类型参数化机制 泛型允许我们定义一个逻辑，能够处理多种类型。以一个简单的栈（ Stack ）为例： 示例：泛型栈的实现 使用泛型栈 核心思…","url":"https://wizardpisces.github.io/blog/tech/backend/rust%20%E7%9A%84%E6%B3%9B%E5%9E%8B","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/backend/rust%20%E7%9A%84%E6%B3%9B%E5%9E%8B","dateModified":"2025-06-20","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>rust 的泛型</h1><p>Rust 泛型的核心思想是 <strong>“编写与类型无关的代码，同时保留类型的安全性和性能”</strong>。通过泛型，我们可以实现代码复用，而不用牺牲 Rust 的零成本抽象原则。</p>
+<p>下面通过几个例子深入讲解这一思想。</p>
+<hr>
+<h3>核心思想 1：<strong>泛型是一种类型参数化机制</strong></h3>
+<p>泛型允许我们定义一个逻辑，能够处理多种类型。以一个简单的栈（<code>Stack</code>）为例：</p>
+<h4>示例：泛型栈的实现</h4>
+<pre><code class="language-rust">struct Stack&lt;T&gt; {
+    items: Vec&lt;T&gt;, // 使用泛型 T，表示可以存储任意类型的元素
+}
+
+impl&lt;T&gt; Stack&lt;T&gt; {
+    fn new() -&gt; Self {
+        Stack { items: Vec::new() }
+    }
+
+    fn push(&amp;mut self, item: T) {
+        self.items.push(item);
+    }
+
+    fn pop(&amp;mut self) -&gt; Option&lt;T&gt; {
+        self.items.pop()
+    }
+}
+</code></pre>
+<h4>使用泛型栈</h4>
+<pre><code class="language-rust">fn main() {
+    let mut stack_i32 = Stack::new(); // i32 类型的栈
+    stack_i32.push(1);
+    stack_i32.push(2);
+    println!(&quot;Popped: {:?}&quot;, stack_i32.pop()); // 输出: Popped: Some(2)
+
+    let mut stack_str = Stack::new(); // 字符串类型的栈
+    stack_str.push(&quot;Hello&quot;);
+    stack_str.push(&quot;Rust&quot;);
+    println!(&quot;Popped: {:?}&quot;, stack_str.pop()); // 输出: Popped: Some(&quot;Rust&quot;)
+}
+</code></pre>
+<h4><strong>核心思想体现</strong>：</h4>
+<ul>
+<li><strong>逻辑独立于具体类型</strong>：栈的功能代码 <code>push</code> 和 <code>pop</code> 与具体类型无关，只需定义一次。</li>
+<li><strong>类型安全</strong>：泛型 <code>T</code> 确保 <code>Stack&lt;i32&gt;</code> 只能存储 <code>i32</code>，<code>Stack&lt;&amp;str&gt;</code> 只能存储字符串，防止类型混淆。</li>
+<li><strong>性能无损</strong>：Rust 在编译时会为每种类型生成具体实现（<strong>单态化</strong>），无运行时开销。</li>
+</ul>
+<hr>
+<h3>核心思想 2：<strong>泛型 + trait 约束</strong></h3>
+<p>泛型不仅可以表示任意类型，还可以通过<strong>trait 约束</strong>限定类型的行为。例如，我们可以要求某些泛型类型必须实现特定的接口。</p>
+<h4>示例：实现一个比较函数</h4>
+<p>我们定义一个函数，接受两个参数并返回较大的那个值。这个函数需要比较操作，只有实现了 <code>PartialOrd</code>（支持比较操作）的类型才能使用它：</p>
+<pre><code class="language-rust">fn max&lt;T: PartialOrd&gt;(a: T, b: T) -&gt; T {
+    if a &gt; b {
+        a
+    } else {
+        b
+    }
+}
+
+fn main() {
+    println!(&quot;Max of 5 and 10: {}&quot;, max(5, 10)); // i32 类型
+    println!(&quot;Max of 3.14 and 2.71: {}&quot;, max(3.14, 2.71)); // f64 类型
+    println!(&quot;Max of 'a' and 'z': {}&quot;, max('a', 'z')); // char 类型
+}
+</code></pre>
+<h4><strong>核心思想体现</strong>：</h4>
+<ul>
+<li><strong>泛型与行为绑定</strong>：<code>T: PartialOrd</code> 表示泛型 <code>T</code> 必须实现 <code>PartialOrd</code>，这样函数中才可以安全地使用比较操作。</li>
+<li><strong>灵活性和安全性兼顾</strong>：虽然 <code>max</code> 函数适用于任意类型，但通过 <code>PartialOrd</code> 限制，避免了不支持比较的类型（如复杂对象）导致编译错误。</li>
+</ul>
+<hr>
+<h3>核心思想 3：<strong>零成本抽象</strong></h3>
+<p>Rust 的泛型通过<strong>单态化</strong>，在编译时为每种具体类型生成特定实现，从而消除运行时的类型检查或多态分派。</p>
+<h4>示例：通过反汇编观察泛型的单态化</h4>
+<pre><code class="language-rust">fn identity&lt;T&gt;(x: T) -&gt; T {
+    x
+}
+
+fn main() {
+    println!(&quot;{}&quot;, identity(5)); // i32 类型
+    println!(&quot;{}&quot;, identity(3.14)); // f64 类型
+}
+</code></pre>
+<p>如果查看生成的汇编代码，会发现编译器生成了两个独立的实现：</p>
+<ul>
+<li>一个处理 <code>i32</code> 的 <code>identity</code> 函数。</li>
+<li>一个处理 <code>f64</code> 的 <code>identity</code> 函数。</li>
+</ul>
+<p><strong>结果</strong>：</p>
+<ul>
+<li>泛型函数的性能等同于手动为每种类型编写函数。</li>
+<li>泛型提供了零成本的灵活性，无需运行时的开销。</li>
+</ul>
+<hr>
+<h3>核心思想 4：<strong>组合与复用</strong></h3>
+<p>泛型可以与其他 Rust 特性（如枚举、trait 等）结合，创建高度抽象、灵活的代码。</p>
+<h4>示例：泛型与 <code>Option</code></h4>
+<p>Rust 标准库的 <code>Option&lt;T&gt;</code> 就是一个泛型枚举，用于表示一个可能有值或无值的类型：</p>
+<pre><code class="language-rust">enum Option&lt;T&gt; {
+    Some(T),
+    None,
+}
+
+fn main() {
+    let some_number: Option&lt;i32&gt; = Some(5);
+    let some_text: Option&lt;&amp;str&gt; = Some(&quot;hello&quot;);
+    let no_value: Option&lt;i32&gt; = None;
+
+    println!(&quot;{:?}, {:?}, {:?}&quot;, some_number, some_text, no_value);
+}
+</code></pre>
+<h4><strong>核心思想体现</strong>：</h4>
+<ul>
+<li><code>Option&lt;T&gt;</code> 使用泛型 <code>T</code>，可以适用于任意类型。</li>
+<li>通过 <code>Option</code>，我们可以表达 “值可能为空”的语义，而无需每种类型都重新设计逻辑。</li>
+</ul>
+<hr>
+<h3>总结</h3>
+<p>Rust 泛型的核心思想在于：</p>
+<ol>
+<li><strong>参数化类型</strong>：将类型作为参数，使代码逻辑独立于具体类型。</li>
+<li><strong>类型安全</strong>：通过 trait 约束明确泛型的行为边界。</li>
+<li><strong>零成本抽象</strong>：在编译时单态化，既保留灵活性又无运行时开销。</li>
+<li><strong>高效复用</strong>：与 Rust 的其他特性结合，简化常见模式的实现。</li>
+</ol>
+<p>泛型使 Rust 在灵活性、类型安全和性能之间取得了很好的平衡。</p>
+<h2>参考</h2>
+<ul>
+<li>gpt</li>
+</ul>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

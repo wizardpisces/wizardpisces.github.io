@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>参考资料 | LZ AI NOTE</title>
+  <meta name="description" content="论文发布时间：2026 01 12 DeepSeek 发布的 Engram （论文标题为《[Conditional Memory via Scalable Lookup: A New Axis of Sparsity for Large Language Models]》）在 AI 圈引起了很大关注。 简单来说，这篇论文提出了一种 &quot;条件存储&quot;（Condi…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-LLM/paper-transformer/DeepSeek%20-%20Engram%20-%20Conditional%20Memory%20via%20Scalable%20Lookup">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="参考资料 | LZ AI NOTE">
+  <meta property="og:description" content="论文发布时间：2026 01 12 DeepSeek 发布的 Engram （论文标题为《[Conditional Memory via Scalable Lookup: A New Axis of Sparsity for Large Language Models]》）在 AI 圈引起了很大关注。 简单来说，这篇论文提出了一种 &quot;条件存储&quot;（Condi…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-LLM/paper-transformer/DeepSeek%20-%20Engram%20-%20Conditional%20Memory%20via%20Scalable%20Lookup">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"参考资料","description":"论文发布时间：2026 01 12 DeepSeek 发布的 Engram （论文标题为《[Conditional Memory via Scalable Lookup: A New Axis of Sparsity for Large Language Models]》）在 AI 圈引起了很大关注。 简单来说，这篇论文提出了一种 \"条件存储\"（Condi…","url":"https://wizardpisces.github.io/blog/tech/ai-LLM/paper-transformer/DeepSeek%20-%20Engram%20-%20Conditional%20Memory%20via%20Scalable%20Lookup","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-LLM/paper-transformer/DeepSeek%20-%20Engram%20-%20Conditional%20Memory%20via%20Scalable%20Lookup","dateModified":"2026-03-03","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>参考资料</h1><p><em>论文发布时间：2026-01-12</em></p>
+<p>DeepSeek 发布的 <strong>Engram</strong>（论文标题为《<a href="https://arxiv.org/abs/2601.07372">Conditional Memory via Scalable Lookup: A New Axis of Sparsity for Large Language Models</a>》）在 AI 圈引起了很大关注。
+简单来说，这篇论文提出了一种**“条件存储”（Conditional Memory）**机制，旨在为大语言模型（LLM）增加一个像&quot;词典&quot;或&quot;百科全书&quot;一样的外部查询模块，让模型不再需要把所有知识都死记硬背在神经元的权重里。</p>
+<h2>Engram 解决了什么问题？</h2>
+<p><strong>核心问题：Transformer 模型在处理&quot;静态知识&quot;时极度低效。</strong></p>
+<p>目前主流的 Transformer（包括 GPT-4 和 DeepSeek-V3 这种 MoE 模型）存在一个根本缺陷：<strong>它们缺乏原生的&quot;查询&quot;能力。</strong></p>
+<ul>
+<li><strong>计算浪费：</strong> 当模型遇到一个常见的短语或事实（比如&quot;巴黎的首都是…&quot;）时，它依然需要动用昂贵的注意力机制（Attention）和全连接层（FFN）去进行复杂的矩阵运算，从权重中&quot;重新计算&quot;出答案。</li>
+<li><strong>存储压力：</strong> 为了记住海量事实，模型必须不断增加参数量。这导致显存（HBM）需求激增，计算成本极高。</li>
+</ul>
+<p><strong>Engram 的作用：</strong> 它引入了一个  复杂度的查找表。模型在处理文本时，可以通过哈希（Hashing）直接从一个海量的 N-gram 嵌入表中&quot;提取&quot;相关知识，而不需要经过层层神经网络的重度计算。</p>
+<h2>这个问题真实存在吗？</h2>
+<p><strong>真实存在且是目前大模型进一步扩展（Scaling）的头号瓶颈。</strong></p>
+<ul>
+<li><strong>机械记忆 vs. 逻辑推理：</strong> 研究发现，模型的前几层往往在做&quot;低级&quot;的模式识别和事实提取，后几层才在做真正的&quot;思考&quot;。把事实和逻辑混在一起处理，导致神经元的有效深度被浪费了。</li>
+<li><strong>硬件瓶颈：</strong> GPU 的显存（HBM）贵且稀缺，但内存（DRAM）和硬盘（NVMe）相对便宜。如果能把&quot;知识&quot;从 GPU 显存里剥离出来，放到 CPU 内存里随用随取，AI 的成本将大幅下降。</li>
+</ul>
+<h2>为什么现在才有人去解决？</h2>
+<p>其实&quot;检索增强&quot;或&quot;外部存储&quot;的概念一直有（比如 RAG、KNN-LM），但 Engram 解决得更底层、更高效，现在爆发主要有三个原因：</p>
+<ol>
+<li><strong>MoE 技术的成熟：</strong> 现在的模型已经通过混合专家（MoE）实现了&quot;条件计算&quot;（只激活部分神经元）。DeepSeek 认为除了计算可以&quot;稀疏化&quot;，<strong>存储也应该&quot;稀疏化&quot;</strong>。</li>
+<li><strong>PCIe 带宽的进步：</strong> 过去通过 CPU 内存读取数据太慢。但 Engram 采用了<strong>确定性寻址</strong>和<strong>异步预取</strong>技术，可以在模型计算的同时把知识从内存拉到 GPU，几乎零延迟。</li>
+<li><strong>大模型 Scaling Law 的瓶颈：</strong> 盲目堆参数已经边际效应递减了。DeepSeek 发现了一种新的 <strong>U 型比例定律（U-shaped scaling law）</strong>：将 20%-25% 的参数分配给 Engram（存储），剩下的给计算，性能远好于纯计算模型。</li>
+</ol>
+<h2>它是如何解决的？</h2>
+<p>Engram 的架构包含几个核心组件。为了理解它的实现细节，我们需要同时看清 <strong>Transformer 的软件结构</strong>和<strong>服务器的硬件存储层级</strong>，因为 Engram 的核心就是把两者桥接起来。</p>
+<h3>1. 物理位置：插入在哪里？（软件 × 硬件全景）</h3>
+<p><img src="https://arxiv.org/html/2601.07372v1/x1.png" alt="Figure 1: Engram 架构总览。模块通过检索静态 N-gram 记忆并借助上下文感知门控将其与动态隐藏状态融合来增强骨干网络。仅应用于特定层以解耦存储与计算。"></p>
+<blockquote>
+<p><strong>图中关键路径解读（三个阶段）：</strong></p>
+<p><strong>阶段 ①　查表：</strong> 图的左半部分——N-gram 经多头哈希查 DRAM 嵌入表，子向量 Concat 拼接为 $e_t$（1280 维）。</p>
+<p><strong>阶段 ②　门控决策：</strong> Concat 之后的两个 Linear 分别是 $\mathbf{W}_K$ 和 $\mathbf{W}_V$，但它们的输出<strong>并不直接交互</strong>——</p>
+<ul>
+<li><strong>$\mathbf{W}_K$（Linear → Key）</strong>：将 $e_t$ 投影为 $k_t$（2560 维），作为记忆的&quot;签名&quot;。$k_t$ 唯一的用途是与当前隐藏状态 $h_t$ 做<strong>点积</strong>，经 sigmoid 算出一个<strong>标量</strong>门控值 $\alpha_t \in (0,1)$——这就是&quot;这条记忆整体要不要用&quot;的开关。$k_t$ 算完就&quot;用完即弃&quot;。</li>
+<li><strong>$\mathbf{W}_V$（Linear → Value）</strong>：将 $e_t$ 投影为 $v_t$（2560 维），作为记忆的&quot;内容&quot;。$v_t$ 本身不参与门控计算，它只是等着被门控值加权。</li>
+</ul>
+<p>图中两个 Linear 输出之间的 <strong>⊗</strong> 符号，实际上是 $\alpha_t$（标量）$\times$ $v_t$（向量）＝ $\tilde{v}_t$。因为 $\alpha_t$ 是一个<strong>单个数字</strong>，所以 $v_t$ 的每个维度都乘以<strong>同一个系数</strong>——这是对记忆<strong>整体</strong>的&quot;音量旋钮&quot;，不是逐维度的独立开关。</p>
+<p><strong>阶段 ③　卷积精炼：</strong> 门控后的 $\tilde{v}_t$ 经过 Conv1D（因果深度卷积）让相邻位置的 Engram 输出做一点局部交流，再通过残差连接得到最终输出 $Y_t$，注入到 $H^{(\ell)}$ 中。</p>
+<p>这两个 Linear 是 Engram 中<strong>仅有的</strong>两个大型可学习投影矩阵（各 2560×1280），详见后文<a href="#C-%E9%97%A8%E6%8E%A7%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3%E4%B8%80%E4%B8%AA%E5%BE%AE%E5%9E%8B-Attention">门控机制详解（C 节）</a>。</p>
+</blockquote>
+<p>Engram 模块被插入在 Transformer 的 <strong>FFN</strong> 旁边，作为一个<strong>并行</strong>的分支。但关键是——Engram 的查找表<strong>不住在 GPU 显存（HBM）里</strong>，而是住在便宜得多的 CPU 主内存（DRAM）中。这正是它能&quot;降本&quot;的核心：</p>
+<pre><code>┌──────────────────── 硬件视角 ─────────────────────────────┐
+│                                                            │
+│  ┌─── GPU (HBM 显存，~80GB，贵) ──────────────────┐       │
+│  │                                                 │       │
+│  │  Layer 1:  Attention → FFN                      │       │
+│  │  Layer 2:  Attention → FFN + α·Engram(x) ◄──┐  │       │
+│  │  Layer 3:  Attention → FFN + α·Engram(x) ◄──┤  │       │
+│  │  Layer 4:  Attention → FFN                   │  │       │
+│  │  ...                                         │  │       │
+│  │  Layer N:  Attention → FFN                   │  │       │
+│  │                                              │  │       │
+│  │  模型权重、激活值、KV-Cache 都在这里          │  │       │
+│  └──────────────────────────────────────────────┘  │       │
+│                                             PCIe   │       │
+│                                             总线   │       │
+│  ┌─── CPU (DRAM 主内存，~1TB，便宜) ───┐    ▲     │       │
+│  │                                      │    │     │       │
+│  │  ┌────────────────────────────────┐  │    │     │       │
+│  │  │ Engram 查找表（N-gram 嵌入表）  │──┼────┘     │       │
+│  │  │ 数十亿条向量，占数十 GB         │  │          │       │
+│  │  │ 每次只取出极小一部分送到 GPU    │  │          │       │
+│  │  └────────────────────────────────┘  │          │       │
+│  └──────────────────────────────────────┘          │       │
+└────────────────────────────────────────────────────────────┘
+</code></pre>
+<p>对比标准 Transformer Block 和 Engram 增强 Block 的数据流：</p>
+<pre><code>【标准 Transformer Block — 全部在 GPU HBM 内完成】
+
+  输入 x → Attention → (+) → FFN → (+) → 输出
+                        ↑           ↑
+                        x           x
+
+【Engram 增强 Block（Layer 2 或 15）— Engram 在 Attention 之前执行】
+
+                    ┌── Engram 模块 ──────────────────────┐
+                    │ 哈希查 DRAM → 门控 → 卷积 → Y       │
+                    └──────────────────┬─────────────────┘
+                                      │ (通过 PCIe 从 DRAM 取数据)
+                                      ▼
+  输入 x ───────────────────────→ (+) 残差 → Attention → (+) → MoE/FFN → (+) → 输出
+                                  ↑                      ↑               ↑
+                                  x                      x               x
+</code></pre>
+<p>DeepSeek 的研究发现，最佳的插入位置在模型的<strong>浅层（如第 2-4 层）</strong>，而非深层：</p>
+<p><img src="https://arxiv.org/html/2601.07372v1/x5.png" alt="Figure 5: 架构消融实验。深蓝色曲线为层敏感性扫描（单层 Engram 在不同层插入的效果），确认 Layer 2 最优，越深越差。右侧标记为组件消融，展示了多分支集成、Tokenizer 压缩和上下文感知门控的重要性。"></p>
+<ul>
+<li><strong>软件视角：</strong> 事实回忆（如&quot;巴黎在法国&quot;）是一种**“低级反射”<strong>，而非高级推理。让浅层通过 Engram 快速查表解决死记硬背的任务，可以</strong>解放深层网络**去专注于复杂的逻辑推演。</li>
+<li><strong>硬件视角：</strong> Engram 只在浅层触发 DRAM → GPU 的数据搬运，深层完全不涉及外部存储访问，最大限度减少了 PCIe 带宽压力。</li>
+</ul>
+<h3>2. 核心机制：三步走</h3>
+<p>输入 token 经过 Engram 的完整数据流如下：</p>
+<pre><code>输入 token: [&quot;白&quot;, &quot;日&quot;, &quot;依&quot;, &quot;山&quot;, &quot;尽&quot;]
+                    │
+       ┌────────────▼────────────┐
+  步骤①│  Tokenizer 压缩          │  &quot;The&quot;/&quot;the&quot;/&quot;THE&quot; → 同一个 ID
+       │  合并大小写、变体等      │  减少查找表冗余
+       └────────────┬────────────┘
+                    │  压缩后的 token ID
+       ┌────────────▼────────────┐
+  步骤②│  构造后缀 N-gram          │  以当前 token 为结尾
+       │  + 多头哈希（Multi-Head） │  对每种阶数（2,3）
+       │  Hash₁(x), Hash₂(x)... │  × 每个头，共 16 次查表
+       └────────────┬────────────┘
+                    │  16 个地址
+       ┌────────────▼────────────────────────────┐
+  步骤③│  查表 + 上下文感知门控                    │
+       │                                         │
+       │  DRAM 查找表 ──→ 取出 H 个嵌入向量       │
+       │         ↓                                │
+       │  Gate(当前语境 x) ──→ 权重 0~1           │
+       │         ↓                                │
+       │  输出 = Gate(x) · Lookup(x)              │
+       │  (语境不符则 Gate≈0，自动忽略)             │
+       └──────────────────────────────────────────┘
+                    │
+                    ▼
+          残差注入到 H^(l)，再送入 Attention → MoE/FFN
+</code></pre>
+<ul>
+<li><strong>Tokenizer 压缩：</strong> 把意义相近的词合并（比如 “Hello” 和 “hello”），减少查找表的冗余。</li>
+<li><strong>构造后缀 N-gram + 多头哈希（Multi-Head Hashing）：</strong> 对每个 token 位置，先构造<strong>所有阶数</strong>的后缀 N-gram（Engram-27B 使用 {2,3} 两种阶数），再对每种阶数分别用 K=8 个独立哈希函数查表——<strong>不预判哪条有用，全部查完后交给门控决定取舍</strong>。所有阶数、所有头的结果拼接成一个完整的记忆向量 $e_t$。多头设计同时也缓解了哈希冲突（如&quot;苹果&quot;作为水果 vs 公司，不同头大概率映射到不同槽位）。</li>
+<li><strong>上下文感知门控（Context-Aware Gating）：</strong> 查出来的知识不是盲目相加，而是通过一个可训练的门控网络 $\text{Gate}(x)$ 结合当前语境决定权重。如果查出的内容与语境不符，门控会将其权重置为 0，防止噪音干扰。</li>
+</ul>
+<h3>2.5 Engram 模型设计详解</h3>
+<p>上面的三步走是概念层面的描述。现在我们钻进去看<strong>实际的网络结构</strong>——每一个张量的形状、每一步计算的具体操作。以下以 Engram-27B（论文主力模型）的配置为例。</p>
+<h4>A. 参数预算重分配：FFN 的参数是怎么&quot;割&quot;给 Engram 的？</h4>
+<p>首先澄清一个常见误解：Engram <strong>不是</strong>把 FFN 的权重矩阵物理拆开，而是在<strong>总参数预算</strong>层面进行重新分配——减少 MoE 路由专家的数量，把省下来的参数额度给 Engram 嵌入表：</p>
+<pre><code>总参数 P_total = 26.7B（与纯 MoE-27B 完全相同）
+激活参数 P_active = 3.8B（每个 token 实际参与计算的参数，也完全相同）
+
+┌─────────────────────────────────────────────────────┐
+│  MoE-27B（纯 MoE 基线）                               │
+│                                                       │
+│  共享骨干（Attention + 2 个共享专家 + ...）              │
+│  + 72 个路由专家（top-6 激活）                          │
+│    └─ 所有稀疏参数都给了 MoE                           │
+│                                          总计 26.7B   │
+└─────────────────────────────────────────────────────┘
+                       │  重新分配 ↓
+┌─────────────────────────────────────────────────────┐
+│  Engram-27B（混合分配，ρ ≈ 74.3%）                     │
+│                                                       │
+│  共享骨干（Attention + 2 个共享专家 + ...） ← 完全不变   │
+│  + 55 个路由专家（top-6 激活）  ← 减少 17 个专家        │
+│  + Engram 嵌入表                ← 省下的预算给了 Engram  │
+│    └─ 5.7B 参数（2 层 × ~2.85B/层）                   │
+│                                          总计 26.7B   │
+└─────────────────────────────────────────────────────┘
+</code></pre>
+<p>分配比例 ρ 控制稀疏参数的去向：</p>
+<pre><code>  稀疏参数 P_sparse = P_total - P_active = 22.9B
+
+  MoE 专家分得:  ρ × P_sparse     (ρ=74.3% → ~17B 给路由专家)
+  Engram 分得:   (1-ρ) × P_sparse (25.7%   → ~5.7B 给嵌入表)
+
+  论文发现的最优区间: ρ ≈ 75%-80%
+</code></pre>
+<p>关键点：<strong>每个 token 的实际计算量（FLOPs）完全不变</strong>。MoE 依然只激活 top-6 个专家，Engram 只做 O(1) 查表。改变的只是&quot;仓库里的存货分配&quot;。</p>
+<h4>B. 多头哈希网络的内部结构</h4>
+<p>Engram 的核心就是这张巨大的哈希查找表。Engram-27B 的配置：d_mem=1280, K=8 个哈希头, N-gram 阶数={2,3}。</p>
+<pre><code>输入 token 序列（压缩后）: [..., x₃', x₄', x₅']
+                                    │
+                        构造后缀 N-gram（以位置 t=5 为例）：
+                        ┌───────────────────────────┐
+                        │ 2-gram: (x₄', x₅')        │
+                        │ 3-gram: (x₃', x₄', x₅')   │
+                        └────────────┬──────────────┘
+                                     │
+          ┌──────────────────────────┴──────────────────────────┐
+          │                                                     │
+    ═══ 2-gram 分支 ═══                                 ═══ 3-gram 分支 ═══
+          │                                                     │
+  ┌───┬───┼───┬───┐                                   ┌───┬───┬───┬───┐
+  H₁  H₂  ...  H₇  H₈                                H₁  H₂  ...  H₇  H₈
+  │   │       │   │                                   │   │       │   │
+  φ₂,₁ φ₂,₂  φ₂,₇ φ₂,₈    ← 乘法-异或哈希 →        φ₃,₁ φ₃,₂  φ₃,₇ φ₃,₈
+  │   │       │   │           (O(1)确定性)             │   │       │   │
+  ▼   ▼       ▼   ▼                                   ▼   ▼       ▼   ▼
+┌───┐┌───┐ ┌───┐┌───┐                              ┌───┐┌───┐ ┌───┐┌───┐
+│E₂₁││E₂₂│ │E₂₇││E₂₈│    ← DRAM 中的子表 →        │E₃₁││E₃₂│ │E₃₇││E₃₈│
+│M×d││M×d│ │M×d││M×d│      (M≈226万 × d维)         │M×d││M×d│ │M×d││M×d│
+└─┬─┘└─┬─┘ └─┬─┘└─┬─┘                              └─┬─┘└─┬─┘ └─┬─┘└─┬─┘
+  │    │      │    │                                   │    │      │    │
+  ▼    ▼      ▼    ▼                                   ▼    ▼      ▼    ▼
+ [d维] [d维] [d维] [d维]                               [d维] [d维] [d维] [d维]
+  │    │      │    │                                   │    │      │    │
+  └────┴──────┴────┴───────────────────────────────────┴────┴──────┴────┘
+                                     │
+                              Concatenate 拼接
+                                     │
+                                     ▼
+                             e_t ∈ ℝ^1280
+                          (16 个子向量拼成 1280 维)
+</code></pre>
+<p>每个哈希函数 $\varphi_{n,k}$ 的具体实现：</p>
+<ul>
+<li><strong>类型：</strong> 乘法-异或（multiplicative-XOR）哈希——不是神经网络，是纯数学函数</li>
+<li><strong>输入：</strong> N-gram 中各 token 的压缩 ID 序列</li>
+<li><strong>输出：</strong> 一个整数索引（对质数 M 取模，减少冲突）</li>
+<li><strong>复杂度：</strong> 严格 O(1)，无需矩阵乘法</li>
+</ul>
+<h5>哈希多头 ≠ Attention 多头：什么是学的，什么不是？</h5>
+<p>一个容易产生的误解是把 Engram 的&quot;多头哈希&quot;类比成 Attention 的&quot;多头 Q/K/V&quot;。实际上两者完全不同——<strong>哈希函数是固定的，不参与训练</strong>。每个 $\varphi_{n,k}$ 的随机常数在初始化时选定后就不再改变，训练和推理使用<strong>完全相同</strong>的哈希函数和寻址机制。训练和推理的唯一区别是嵌入表的物理位置（训练时在 GPU 上接收梯度更新，推理时迁移到 DRAM 变为只读）。</p>
+<pre><code>┌─────────────────┬──────────────┬────────────────────────────────┐
+│  组件            │  是否可学习？  │  说明                          │
+├─────────────────┼──────────────┼────────────────────────────────┤
+│  哈希函数 φ      │  ✗ 固定       │  随机常数，初始化后永不改变      │
+│  嵌入表向量      │  ✓ 可学习     │  梯度下降优化（Adam，5倍学习率） │
+│  W_K, W_V       │  ✓ 可学习     │  门控投影矩阵（后续 C 节详解）  │
+│  Conv1D         │  ✓ 可学习     │  零初始化，逐渐学出非零权重      │
+└─────────────────┴──────────────┴────────────────────────────────┘
+</code></pre>
+<p>两种&quot;多头&quot;的本质区别：</p>
+<pre><code>Attention 多头（可学习的矩阵乘法）：
+  Q = W_Q · x,  K = W_K · x,  V = W_V · x
+  → 每个头有独立的可学习权重矩阵
+  → 通过矩阵乘法从输入中&quot;提取&quot;不同维度的语义特征
+
+Engram 哈希多头（固定的整数运算）：
+  idx = (id₁ × A₁ ⊕ id₂ × A₂) mod M
+  → 每个头只是一组不同的随机整数常数 A₁, A₂
+  → 通过异或和取模&quot;定位&quot;不同子表中的条目
+  → 可学习的部分不在哈希函数本身，而在被查到的那些嵌入向量
+</code></pre>
+<p>整个 Engram 模块的数据流因此清晰地分为两个阶段：</p>
+<pre><code>阶段 1（查表）：N-gram → 固定哈希函数 → 16 个子向量 → Concatenate → e_t ∈ ℝ^1280
+                ↑ 哈希函数无可学习参数（但表中的向量是训练学出来的）
+
+阶段 2（门控）：e_t 经 1 套 W_K/W_V 投影 → 与 h_t 点积 → 1 个标量门控 α_t → 卷积 → Y_t
+                ↑ W_K, W_V, Conv1D 都是可学习的（详见 C 节）
+
+→ 16 个子向量先拼接成 1 个 e_t，然后只经过 1 套 W_K + 1 套 W_V，
+  产生 1 个标量门控值——不存在&quot;每个头单独门控&quot;的操作。
+</code></pre>
+<p>表的规模（Engram-27B）：</p>
+<ul>
+<li>每层 Engram 的总词汇量 ≈ 226 万个 N-gram 条目</li>
+<li>分布在 16 张子表中（2 阶 × 8 头）</li>
+<li>两层 Engram（Layer 2 和 Layer 15）各有独立的一整套表</li>
+<li>总参数：≈ 5.7B，<strong>全部驻留在 DRAM 中</strong></li>
+</ul>
+<h5>每个位置都查所有阶数，无意义的 N-gram 怎么办？</h5>
+<p>一个自然的疑问是：对每个 token 位置都无差别地构造所有阶数的 N-gram，那<strong>跨句、跨段落的拼凑岂不是大概率毫无意义？</strong> 确实如此。比如输入 “今天天气真好。白日依山尽”，处理 token “白” 时构造的 2-gram 是 (“。”,“白”)、3-gram 是 (“好”,“。”,“白”)——这些跨句组合完全没有语义价值。但 Engram 的设计本身就预期了这种情况，通过三层机制逐级过滤噪声：</p>
+<pre><code>三层防御机制：
+
+  第 1 层：训练频率淘汰（向量质量）
+  ─────────────────────────────────
+  训练 262B tokens 后：
+    hash(&quot;of&quot;,&quot;the&quot;)          → [充分优化的向量]  （出现了数百万次）
+    hash(&quot;好&quot;,&quot;。&quot;,&quot;白&quot;)       → [接近随机噪声]    （可能从未出现过）
+  → 低频/未见 N-gram 的向量质量很差，本身就很难产生有效信息
+
+  第 2 层：上下文门控（α_t）
+  ─────────────────────────────────
+  即使查出了向量，门控会计算它与当前语境的匹配度：
+    有意义的 (&quot;白&quot;,&quot;日&quot;) + 古诗语境 → α_t ≈ 0.9 → 采纳
+    无意义的 (&quot;好&quot;,&quot;。&quot;,&quot;白&quot;) + 古诗语境 → α_t ≈ 0.05 → 忽略
+  → 门控不需要&quot;知道&quot;N-gram 有没有意义，只看查出来的东西合不合语境
+
+  第 3 层：多头稀释
+  ─────────────────────────────────
+  即使某个头碰巧查到了误导性向量：
+    16 个子向量中只有 1 个出问题 → 只影响 80/1280 = 6.25% 的维度
+  → 多头拼接天然稀释了单个头的噪声
+</code></pre>
+<p>这种&quot;<strong>全查 + 事后过滤</strong>&quot;的哲学和 Attention 完全一致——Attention 也是对所有位置都算相似度，然后 softmax 自动把不相关的位置权重压到接近 0，而不是事先决定&quot;该看哪些位置&quot;。Engram 的门控 $\alpha_t$ 就是同样的逻辑，只不过作用在&quot;查表结果&quot;上。</p>
+<h5>与 TF-IDF 的设计同构</h5>
+<p>这套&quot;训练频率决定质量 + 语境决定权重&quot;的机制，和经典信息检索中的 <strong>TF-IDF</strong>（词频-逆文档频率）有着深层的设计同构：</p>
+<pre><code>┌──────────────┬─────────────────────────────────────────────────┐
+│  TF-IDF      │  Engram                                         │
+├──────────────┼─────────────────────────────────────────────────┤
+│  TF          │  训练频率驱动的向量质量                           │
+│  (词频)      │  高频 N-gram 被查数百万次 → 向量充分优化           │
+│              │  低频 N-gram 接近随机噪声 → 几乎无效              │
+├──────────────┼─────────────────────────────────────────────────┤
+│  IDF         │  上下文门控 α_t                                  │
+│  (逆文档频率) │  即使向量质量高，若与当前语境不匹配               │
+│              │  门控也会将权重压到 ≈ 0                           │
+├──────────────┼─────────────────────────────────────────────────┤
+│  TF × IDF    │  向量质量 × 门控权重                              │
+│  = 最终权重   │  = Engram 的有效输出                             │
+│              │  只有&quot;高频且语境相关&quot;的 N-gram 才能真正贡献信息    │
+└──────────────┴─────────────────────────────────────────────────┘
+</code></pre>
+<p>关键区别在于：TF-IDF 的权重是<strong>人工定义的统计公式</strong>（词频和逆文档频率都有明确的数学定义），而 Engram 的&quot;频率效应&quot;和&quot;语境相关性&quot;都是通过端到端训练<strong>隐式涌现</strong>的——模型自动学会了哪些 N-gram 模式值得存储、在什么语境下该调用它们。可以说，<strong>Engram 是 TF-IDF 精神在神经网络时代的&quot;可微分进化&quot;</strong>：从离散的统计计数升级为连续的梯度优化，从人工定义的公式升级为数据驱动的自适应权重。</p>
+<h4>B+. 知识是怎么存的？又是怎么取的？</h4>
+<p>上面讲了表的结构，但一个根本问题还没回答：<strong>表里每一格到底存了什么？取数据的操作在系统层面到底长什么样？</strong></p>
+<h5>存储形态：不是文本，是浮点向量</h5>
+<p>Engram 嵌入表里存的<strong>不是</strong>人类可读的事实（比如&quot;巴黎是法国首都&quot;这种文字），而是一组<strong>浮点数向量</strong>——和 word2vec / Transformer 的 token embedding 是同一类东西：</p>
+<pre><code>┌────────────────────────────────────────────────────────────────┐
+│  子表 E₂,₁（以 2-gram + Head 1 为例）                          │
+│                                                                │
+│  在 DRAM 中的物理布局：一个连续的二维浮点数组                    │
+│  float table[M][d]    （M ≈ 226万行, d ≈ 80列）                │
+│                                                                │
+│  索引    │       80 个 float32 数值（每行 320 字节）             │
+│  ────────┼──────────────────────────────────────────            │
+│  [0]     │  0.023, -0.871, 0.445, ..., 0.112                  │
+│  [1]     │ -0.334,  0.209, 0.087, ..., -0.561                 │
+│  [2]     │  0.756, -0.002, 0.933, ..., 0.418                  │
+│  ...     │  ...                                                │
+│  [198432]│  0.641, -0.378, 0.155, ..., 0.892   ← hash(&quot;of Wales&quot;) │
+│  ...     │  ...                                                │
+│  [M-1]   │ -0.127,  0.564, 0.231, ..., 0.047                 │
+│                                                                │
+│  每一行就是一条&quot;记忆&quot;——一个 80 维的语义坐标点                    │
+│  这些数值是训练时通过梯度下降学出来的，不是人工写入的              │
+└────────────────────────────────────────────────────────────────┘
+</code></pre>
+<p>关键理解：</p>
+<ul>
+<li><strong>向量是&quot;学&quot;出来的：</strong> 如前文<a href="#%E5%93%88%E5%B8%8C%E5%A4%9A%E5%A4%B4--attention-%E5%A4%9A%E5%A4%B4%E4%BB%80%E4%B9%88%E6%98%AF%E5%AD%A6%E7%9A%84%E4%BB%80%E4%B9%88%E4%B8%8D%E6%98%AF">哈希多头 ≠ Attention 多头</a>一节所述，哈希函数本身是固定的，但表中的向量参与反向传播。模型通过梯度下降自动决定在每个槽位存什么信息。</li>
+<li><strong>不可直接解读：</strong> 你无法看着 <code>[0.641, -0.378, ...]</code> 就知道它编码了&quot;威尔士王妃&quot;。但当这个向量被 $\mathbf{W}_V$ 投影到模型的 2560 维隐藏空间后，它会在正确的维度上激活正确的语义特征。</li>
+<li><strong>哈希冲突是容忍的：</strong> 不同的 N-gram 可能哈希到同一个槽位（冲突）。这就像两本不同的书被放到图书馆的同一个格子里——单个哈希头可能混淆，但 16 个头同时冲突的概率极低，多头拼接后仍能区分。</li>
+</ul>
+<h5>检索操作：本质就是数组下标访问</h5>
+<p>你类比&quot;堆内存 + 页查询&quot;的直觉非常对，但 Engram 的检索比页查询还要简单——它就是<strong>数组的下标直接寻址</strong>，没有搜索、没有比较、没有树遍历：</p>
+<pre><code>【对比：几种&quot;查知识&quot;的方式】
+
+  数据库查询（如 RAG）:
+    SELECT embedding FROM knowledge WHERE text LIKE '%Princess of Wales%'
+    → 需要索引遍历、字符串匹配、排序   → O(log N) ~ O(N)
+
+  哈希表查询（如 Python dict）:
+    dict[hash(&quot;Princess of Wales&quot;)]
+    → 计算哈希 → 定位桶 → 处理冲突链   → 平均 O(1)，但有冲突处理开销
+
+  Engram 查询:
+    table[hash(&quot;Princess&quot;, &quot;of&quot;, &quot;Wales&quot;) % M]
+    → 计算哈希 → 直接用整数做数组下标   → 严格 O(1)，无冲突处理（冲突由多头设计容忍）
+</code></pre>
+<p>在系统层面，一次 Engram 检索的完整操作是：</p>
+<pre><code>━━ 阶段 1: 计算地址（CPU 上，纳秒级）━━
+
+  输入 N-gram: (&quot;Princess&quot;, &quot;of&quot;, &quot;Wales&quot;)
+  压缩 ID:     (38012, 7201, 41556)
+
+  对 16 个 (阶, 头) 组合分别计算哈希：
+    idx = (id₁ × A₁ ⊕ id₂ × A₂ ⊕ id₃ × A₃) mod M
+                                          ↑
+                            A₁, A₂, A₃ 是每个头的固定随机常数
+                            ⊕ 是异或操作
+                            M 是质数（表大小），取模避免越界
+
+  得到 16 个整数索引: [198432, 67201, ..., 421098]
+
+━━ 阶段 2: 从 DRAM 读取数据（PCIe DMA，微秒级）━━
+
+  每个索引直接定位到 DRAM 中的物理地址：
+    address = base_ptr + idx × 80 × sizeof(float)
+            = base_ptr + 198432 × 320 字节
+            = 某个确定的内存地址
+
+  CPU 发起 16 次内存读取（或批量 DMA）：
+    memcpy(gpu_buffer, address, 320 bytes)   ← 每次只读 320 字节
+
+  通过 PCIe 总线传输到 GPU 显存
+
+━━ 阶段 3: GPU 上拼接（纳秒级）━━
+
+  16 个 80 维向量 → Concatenate → e_t ∈ ℝ^1280
+  后续进入 W_K/W_V 投影和门控...
+</code></pre>
+<p>你的类比其实很准确——如果对应到程序员熟悉的概念：</p>
+<pre><code>┌──────────────┬─────────────────────────────────────────────┐
+│  程序概念     │  Engram 中的对应                             │
+├──────────────┼─────────────────────────────────────────────┤
+│  堆（Heap）   │  DRAM 中的嵌入表就是一块巨大的堆内存          │
+│              │  （连续分配的 float 数组）                    │
+├──────────────┼─────────────────────────────────────────────┤
+│  malloc/new  │  训练开始前分配：M × d × sizeof(float) 字节   │
+│              │  Engram-27B 单层 ≈ 226万 × 1280 × 4 ≈ 11 GB │
+├──────────────┼─────────────────────────────────────────────┤
+│  指针 + 偏移  │  base_ptr + hash(n_gram) × entry_size       │
+│  (寻址)      │  直接算出物理地址，无需搜索                    │
+├──────────────┼─────────────────────────────────────────────┤
+│  页缓存      │  论文的多级缓存层次：                         │
+│  (Page Cache) │  热门 N-gram → GPU HBM（L1 缓存）           │
+│              │  温热 N-gram → Host DRAM（L2 缓存）           │
+│              │  冷门 N-gram → NVMe SSD（L3 缓存）            │
+│              │  这部分和 OS 的页缓存思路完全一致！             │
+├──────────────┼─────────────────────────────────────────────┤
+│  DMA 传输    │  CPU 通过 PCIe 发起异步 DMA，                 │
+│              │  把数据从 DRAM 搬到 GPU 显存                  │
+│              │  （不走 CPU 缓存，直接总线传输）               │
+└──────────────┴─────────────────────────────────────────────┘
+</code></pre>
+<p>一句话总结：<strong>Engram 的查表本质上就是 <code>float_array[hash(n_gram)]</code>——堆上分配一个巨大的浮点数组，用哈希值当下标直接取。</strong> 没有搜索引擎、没有树索引、没有键值比较。正是这种&quot;笨办法&quot;保证了严格 O(1) 和确定性地址（从而支持异步预取）。</p>
+<h5>知识是怎么训练进去的？从空白到沉淀</h5>
+<p>一个关键区分：<strong>训练时，嵌入表不在 DRAM 里——它在 GPU 上。</strong> 只有推理部署时才迁移到 DRAM。整个知识沉淀的过程分三个阶段：</p>
+<pre><code>━━ 阶段 1: 初始化（训练开始前）━━
+
+  226 万 × 80 维的浮点数组 → 随机初始化
+  (就像一本字典，每一页写满了随机数字，完全没有意义)
+
+  表被切片（Shard）分布到多块 GPU 上：
+  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐
+  │  GPU 0   │  │  GPU 1   │  │  GPU 2   │  │  GPU 3   │
+  │ 第0~56万 │  │第57~113万│  │第114~170万│ │第171~226万│
+  │  行的向量 │  │  行的向量 │  │  行的向量 │  │  行的向量 │
+  └─────────┘  └─────────┘  └─────────┘  └─────────┘
+  (通过 All-to-All 通信，任何 GPU 都能访问任何切片)
+</code></pre>
+<pre><code>━━ 阶段 2: 训练中（262B token，~50000 步）━━
+
+  每一步训练的数据流：
+
+  输入文本 &quot;Diana, Princess of Wales was born in...&quot;
+      │
+      ├── 前向传播（Forward）:
+      │     hash(&quot;of&quot;, &quot;Wales&quot;) → idx=198432
+      │     取出 table[198432] = [0.023, -0.871, ...] (当前的随机向量)
+      │     → 门控 → 卷积 → 注入残差流
+      │     → Attention → MoE → ... → 预测下一个 token
+      │     → 计算 Loss（预测错了 → Loss 大）
+      │
+      └── 反向传播（Backward）:
+            梯度从 Loss 一路回传：
+            Loss → ... → MoE → Attention → 门控 → W_V → table[198432]
+                                                          ↑
+                                          梯度告诉这个向量：
+                                          &quot;你应该往这个方向调整，
+                                           才能让模型更好地预测&quot;
+
+  关键：只有被查到的那几行会收到梯度（稀疏更新）
+  ┌────────────────────────────────────────────────────┐
+  │  table[0]:       没被查到 → 梯度=0 → 不更新        │
+  │  table[1]:       没被查到 → 梯度=0 → 不更新        │
+  │  ...                                               │
+  │  table[198432]:  被查到了 → 收到梯度 → Adam 更新!   │
+  │  ...                                               │
+  │  table[M-1]:     没被查到 → 梯度=0 → 不更新        │
+  └────────────────────────────────────────────────────┘
+
+  经过 262B token 的训练：
+  高频 N-gram（&quot;of the&quot;, &quot;in a&quot;）→ 被查了千百万次 → 向量充分优化
+  低频 N-gram（罕见人名）→ 被查了几十次 → 向量大致有用
+  从未出现的 N-gram → 向量仍是接近随机的噪声
+</code></pre>
+<pre><code>━━ 阶段 3: 部署迁移（训练完成后）━━
+
+  训练完毕，嵌入表的向量已经&quot;长好了&quot;
+
+  GPU 上的切片 → 合并 → 整体搬到 DRAM
+  ┌─────────┐┌─────────┐┌─────────┐┌─────────┐
+  │  GPU 0   ││  GPU 1   ││  GPU 2   ││  GPU 3   │
+  └────┬─────┘└────┬─────┘└────┬─────┘└────┬─────┘
+       │           │           │           │
+       └───────────┴───────────┴───────────┘
+                       │
+                 合并为完整的表
+                       │
+                       ▼
+  ┌─────────────────────────────────────────────┐
+  │  Host DRAM（推理服务器的主内存）               │
+  │  完整的嵌入表：226万 × 80 × float32           │
+  │                                              │
+  │  此后表是只读的（推理不更新权重）               │
+  │  推理时通过 PCIe 异步预取到 GPU               │
+  └─────────────────────────────────────────────┘
+</code></pre>
+<h5>等等——所有模块一起训练，梯度不会&quot;分不清&quot;吗？</h5>
+<p>⚠️ 重要澄清：<strong>Engram-27B 不是在冻结的模型上微调 Engram，而是所有模块（Attention、MoE/FFN、Engram 嵌入表、门控 $\mathbf{W}_K$/$\mathbf{W}_V$、Conv）从零开始、在同一批 262B token 上联合训练。</strong></p>
+<p>那问题来了：反向传播时，梯度怎么知道&quot;这个预测错误该怪 Engram 查表不准，还是该怪 Attention 没关注到关键位置，还是该怪 MoE 推理能力不够&quot;？</p>
+<p>答案是：<strong>不需要&quot;判断&quot;，链式法则会把梯度同时分发给每一个参与过前向计算的参数。</strong></p>
+<pre><code>前向传播（一个 token 的计算路径）：
+
+  输入 → Engram(hash查表 → 门控 → Conv) → (+残差)
+                                              │
+                                         Attention
+                                              │
+                                          MoE/FFN
+                                              │
+                                         预测 → Loss = 2.3
+
+反向传播（梯度沿所有路径同时回流）：
+
+  Loss = 2.3
+      │
+      ├──→ MoE/FFN 的每个专家权重     ← 收到梯度 → 用 Muon 更新
+      │
+      ├──→ Attention 的 Q/K/V 权重    ← 收到梯度 → 用 Muon 更新
+      │
+      ├──→ 门控 W_K, W_V 矩阵         ← 收到梯度 → 用 Muon 更新
+      │
+      └──→ Engram table[198432]       ← 收到梯度 → 用 Adam 更新
+           (只有被查到的这一行)                     (5倍学习率)
+
+  每个参数收到的梯度 = ∂Loss/∂该参数
+  就是&quot;如果只微调你一个人，Loss 会怎么变&quot;的方向
+</code></pre>
+<p>这和你熟悉的 Transformer 训练完全一样——在标准 Transformer 里，你也不需要手动判断&quot;这次预测错了是 Attention 的问题还是 FFN 的问题&quot;，反向传播的链式法则自动把梯度按照每个参数对 Loss 的贡献大小分配下去。Engram 只是多了一条从 DRAM 查表的路径，但它同样是可微分的计算图的一部分。</p>
+<p><strong>那模型怎么自动学会&quot;Engram 存事实、FFN 做推理&quot;这种分工？</strong></p>
+<p>这不是人为指定的，而是**架构的归纳偏置（Inductive Bias）**自然涌现出来的：</p>
+<pre><code>┌─────────────────────────────────────────────────────────────┐
+│                    架构特性决定了能力边界                      │
+├────────────────┬────────────────────────────────────────────┤
+│  Engram 查找表  │ 输入 = 固定的 N-gram 哈希                  │
+│                │ → 只能捕获局部的、静态的、与上下文无关的模式  │
+│                │ → 天然适合: &quot;Princess of Wales&quot;, &quot;of the&quot;   │
+│                │ → 天然不适合: 需要长距离推理的任务            │
+├────────────────┼────────────────────────────────────────────┤
+│  Attention     │ 输入 = 所有位置的 Q/K/V                     │
+│                │ → 能建模任意长距离依赖                       │
+│                │ → 天然适合: 指代消解、远距离逻辑关联          │
+├────────────────┼────────────────────────────────────────────┤
+│  MoE/FFN       │ 输入 = 当前位置的隐藏状态                    │
+│                │ → 强大的非线性变换能力                       │
+│                │ → 天然适合: 复杂推理、数学计算、代码逻辑      │
+└────────────────┴────────────────────────────────────────────┘
+
+训练过程中自然发生的事情：
+
+  &quot;巴黎是法国首都&quot; 这类知识：
+  → Engram 查表就能搞定（O(1)，梯度让嵌入向量存好这条知识）
+  → Attention 和 FFN 发现&quot;不用我出力&quot;→ 它们的梯度在这类任务上变小
+  → 结果：FFN 的容量被释放出来做更难的事
+
+  &quot;如果 A &gt; B 且 B &gt; C，那么 A &gt; C&quot; 这类推理：
+  → Engram 的哈希查表根本无法表达这种逻辑（它没有全局上下文）
+  → 门控 α_t ≈ 0，自动屏蔽 Engram 的输出
+  → Attention + FFN 承担全部工作
+</code></pre>
+<p>这就像给一个学生<strong>同时发一本词典和一个计算器</strong>——你不需要告诉他&quot;查事实用词典、做数学用计算器&quot;，训练（考试）过程中他自然会摸索出最高效的分工。论文中的 Sensitivity Analysis 实验也验证了这一点：<strong>关闭 Engram 后，事实类任务暴跌到 29%，但阅读理解仅下降到 93%</strong>——说明模型确实学会了让 Engram 主攻事实、骨干主攻推理。</p>
+<p><img src="https://arxiv.org/html/2601.07372v1/x6.png" alt="Figure 6: Engram 消融后的保留性能。事实知识严重依赖 Engram（TriviaQA 仅保留 29%），而阅读理解主要由骨干网络支撑（C3 保留 93%）。"></p>
+<p>训练的几个重要工程细节：</p>
+<ul>
+<li><strong>优化器：</strong> 嵌入表用 Adam（不是骨干网络用的 Muon），学习率是骨干的 <strong>5 倍</strong>——因为每个向量只有被哈希命中时才能更新，需要更大步长来弥补更新频率低的问题。</li>
+<li><strong>无权重衰减：</strong> 嵌入表不做 weight decay，防止低频 N-gram 的知识被逐渐&quot;遗忘&quot;回零。</li>
+<li><strong>卷积零初始化：</strong> 门控后面的 Conv1D 权重初始化为全零，确保训练刚开始时 Engram 的输出恒等于零（$\mathbf{Y}=0$），不会破坏预训练骨干的稳定性。随着训练推进，卷积权重逐渐学出非零值，Engram 的贡献平滑地从 0 增长。</li>
+</ul>
+<h4>C. 门控机制详解：一个微型 Attention</h4>
+<p>查表拿到 $e_t$ 之后，核心问题是：这条记忆<strong>要不要用、用多少</strong>？</p>
+<p>Engram 用了一个非常精巧的设计——<strong>类似 Attention 的 QKV 机制</strong>，但输出的是一个标量门控值而非向量：</p>
+<pre><code>当前隐藏状态 h_t ∈ ℝ^2560              从 DRAM 查出的记忆 e_t ∈ ℝ^1280
+(来自上一层的输出，                      (N-gram 哈希查表结果)
+ 已经过 Attention                                │
+ 聚合了全局上下文)                         ┌──────┴──────┐
+       │                                  │             │
+       │  作为 Query                     W_K           W_V
+       │                              (2560×1280)   (2560×1280)
+       │                                  │             │
+       │                                  ▼             ▼
+       │                           k_t ∈ ℝ^2560   v_t ∈ ℝ^2560
+       │                            (记忆的&quot;签名&quot;)   (记忆的&quot;内容&quot;)
+       │                                  │             │
+       ▼                                  ▼             │
+   RMSNorm(h_t)                     RMSNorm(k_t)        │
+       │                                  │             │
+       └───── 点积 / √d ────────────────┘             │
+                    │                                   │
+                  σ(·) sigmoid                          │
+                    │                                   │
+              α_t ∈ (0, 1)                              │
+              ┌─ 标量门控值 ─┐                          │
+              │              │                          │
+              │   α_t ≈ 1:  记忆与语境匹配 → 大量采纳  │
+              │   α_t ≈ 0:  记忆与语境矛盾 → 自动忽略  │
+              └──────────────┘                          │
+                    │                                   │
+                    └───────── α_t × v_t ──────────────┘
+                                   │
+                            ṽ_t = α_t · v_t
+                            (门控后的值向量)
+
+  ⚠ 注意 α_t 是单个标量（一个数字），不是向量。
+  v_t 的 2560 个维度全部乘以同一个 α_t——
+  这是对记忆整体的&quot;音量旋钮&quot;，不是逐维度的独立开关。
+  图中 ⊗ 符号就是这步：标量 × 向量。
+
+                                   │
+                             ┌─────┴─────┐
+                             │ RMSNorm   │
+                             │     ↓     │
+                             │ Conv1D    │  ← 因果深度卷积 (kernel=4, dilation=3)
+                             │ (depthwise│     扩展感受野，增强非线性
+                             │  causal)  │
+                             │     ↓     │
+                             │   SiLU    │  ← 激活函数
+                             │     ↓     │
+                             │ (+) ← ṽ_t │  ← 残差连接
+                             └─────┬─────┘
+                                   │
+                                   ▼
+                            Y_t ∈ ℝ^2560
+                           (Engram 最终输出)
+</code></pre>
+<p>这个公式的数学表达：</p>
+<p>$$\alpha_t = \sigma!\left(\frac{\text{RMSNorm}(\mathbf{h}_t)^\top , \text{RMSNorm}(\mathbf{W}_K \mathbf{e}_t)}{\sqrt{d}}\right)$$
+$$\tilde{\mathbf{v}}_t = \alpha_t \cdot (\mathbf{W}_V \mathbf{e}_t)$$
+$$\mathbf{Y} = \text{SiLU}!\left(\text{Conv1D}(\text{RMSNorm}(\tilde{\mathbf{V}}))\right) + \tilde{\mathbf{V}}$$</p>
+<h5>维度对齐：记忆是怎么&quot;拼&quot;回输入序列的？</h5>
+<p>上面的图展示了单个位置 $t$ 的计算。但实际输入是一个长度为 $T$ 的序列，Engram 的输出怎么和它对齐？</p>
+<p>关键：<strong>Engram 在每个 token 位置独立运算，不存在长度不对称问题。</strong> 下图展示了完整的序列维度数据流：</p>
+<pre><code>输入序列 H^(l) ∈ ℝ^{T × 2560}（T 个 token，每个 2560 维）
+
+  位置 1: h₁    位置 2: h₂    位置 3: h₃   ...  位置 T: h_T
+   │              │              │                  │
+   ▼              ▼              ▼                  ▼
+  hash(1-gram)  hash(2-gram)  hash(3-gram)       hash(N-gram)
+   │              │              │                  │
+   ▼              ▼              ▼                  ▼
+  e₁ ∈ ℝ^1280  e₂ ∈ ℝ^1280  e₃ ∈ ℝ^1280       e_T ∈ ℝ^1280
+   │              │              │                  │
+   ▼              ▼              ▼                  ▼
+  W_V 投影       W_V 投影       W_V 投影           W_V 投影
+  (1280→2560)   (1280→2560)   (1280→2560)        (1280→2560)
+   │              │              │                  │
+   ▼              ▼              ▼                  ▼
+  v₁ ∈ ℝ^2560  v₂ ∈ ℝ^2560  v₃ ∈ ℝ^2560       v_T ∈ ℝ^2560
+   │              │              │                  │
+   ▼              ▼              ▼                  ▼
+  α₁·v₁         α₂·v₂         α₃·v₃              α_T·v_T
+  (门控)         (门控)         (门控)              (门控)
+   │              │              │                  │
+   └──────────────┴──────────────┴──────────────────┘
+                              │
+                       堆叠为 Ṽ ∈ ℝ^{T × 2560}
+                       （和 H^(l) 形状完全一致！）
+                              │
+                       Conv1D（沿时间轴 T 做因果卷积）
+                       （不改变形状，只做相邻位置间的局部混合）
+                              │
+                       Y ∈ ℝ^{T × 2560}
+                              │
+                              ▼
+                 H^(l) = H^(l) + Y    ← 逐位置相加（残差连接）
+                 ┌──────────────────────────────────────┐
+                 │  h₁+Y₁,  h₂+Y₂,  h₃+Y₃, ..., h_T+Y_T │
+                 │  每个位置的隐藏状态被对应的记忆&quot;增强&quot;了  │
+                 └──────────────────────────────────────┘
+                              │
+                              ▼
+                    送入 Attention 作为输入
+</code></pre>
+<p>所以回答你的问题：</p>
+<ol>
+<li><strong>“长度不对称”？</strong> — 不存在。每个 token 位置独立触发一次 N-gram 查表，T 个位置产生 T 个输出，和输入序列等长。</li>
+<li><strong>“维度不对称”？</strong> — 由 $\mathbf{W}_V$（2560×1280）投影解决：查表得到的 1280 维向量被线性映射为 2560 维，与隐藏状态维度一致。</li>
+<li><strong>“卷积做了什么”？</strong> — Conv1D 不改变形状（same-padding，因果），它只是沿时间轴让<strong>相邻位置的 Engram 输出之间做局部混合</strong>（kernel=4, dilation=3 意味着往回看最多 9 个位置），增加一点非线性和局部感知。</li>
+<li><strong>“怎么拼到输入的”？</strong> — <strong>直接逐位置相加</strong>（残差连接），不是拼接（concatenate）。$h_t$ 被 $Y_t$ &quot;增强&quot;后，就成为 Attention 的输入——Attention 看到的每个位置的向量里，已经包含了 Engram 查表注入的静态知识。</li>
+</ol>
+<h5>多分支集成（mHC, M=4）— 这是骨干网络的改进，不是 Engram 的</h5>
+<p>先说清楚这一节在讲什么：<strong>mHC 和 N-gram、层数都无关</strong>，它是 DeepSeek 在另一篇论文《<a href="https://arxiv.org/abs/2512.24880">mHC: Manifold-Constrained Hyper-Connections</a>》（2025.12）中提出的<strong>骨干网络架构改进</strong>，Engram 论文只是拿它当默认骨干。</p>
+<p><strong>mHC 解决的问题：</strong> 标准 Transformer 的残差连接（<code>output = x + F(x)</code>）只有一条信息通道，容量有限。前人提出了 Hyper-Connections（HC）把残差流扩展为多条并行分支来增大容量，但破坏了恒等映射（identity mapping）特性，导致训练不稳定、无法 Scale Up。mHC 通过将连接权重约束到<strong>双随机矩阵流形</strong>（Sinkhorn-Knopp 算法）上，恢复了恒等映射特性，从而同时获得多分支的表达力和单残差流的训练稳定性。</p>
+<p><strong>实际效果：</strong> mHC 已被用于 DeepSeek 的多个生产级模型（包括 Engram-27B/40B），实验证明在同等参数量下有显著的性能提升和更好的扩展性，额外计算开销可忽略。</p>
+<p><strong>标准 Transformer 的残差流 vs mHC 的多分支残差流：</strong></p>
+<pre><code>【标准 Transformer —— 单条残差流】
+
+  Token Embedding（每个 token 1 个向量）
+         │
+         ▼
+       h_t ∈ ℝ^2560       ← 每个位置始终只有 1 个向量
+         │
+     [Layer 1: Attention → FFN]
+         │
+     [Layer 2: Attention → FFN]
+         │
+       ...30 层...
+         │
+     [LM Head] → 预测下一个 token
+
+
+【mHC (M=4) —— 4 条并行残差流】
+
+  Token Embedding（每个 token 仍然只有 1 个向量）
+         │
+         ▼
+       h_t ∈ ℝ^2560       ← 输入时确实只有 1 个
+         │
+    ┌────┴────┐
+    │ 扩展映射 │  ← 可学习的线性变换，把 1 个向量扩展为 4 个
+    └────┬────┘
+         │
+    ┌────┼────┬────┐
+    ▼    ▼    ▼    ▼
+  h^(1) h^(2) h^(3) h^(4)   ← 现在每个位置有 4 个隐藏向量
+    │    │    │    │
+    │  [Layer 1: Attention → FFN]  ← 4 条流并行通过每一层
+    │    │    │    │
+    │  [Layer 2: Attention → FFN]
+    │    │    │    │
+    │  ...30 层...
+    │    │    │    │
+    └────┼────┴────┘
+    ┌────┴────┐
+    │ 收缩映射 │  ← 把 4 个向量合并回 1 个
+    └────┬────┘
+         │
+         ▼
+       h_t ∈ ℝ^2560       ← 输出时又变回 1 个
+         │
+     [LM Head] → 预测下一个 token
+</code></pre>
+<p>所以关键点是：<strong>embedding 确实只有 1 个，但进入 Transformer 层之前会被线性扩展为 4 份，最后输出前再收缩回 1 份。</strong> 中间的 30 层都在 4 条并行流上运算。这类似于多头 Attention 把 Q/K/V 拆成多个头——只是 mHC 在残差流层面做了类似的事情，让不同&quot;车道&quot;可以承载不同维度的表征。这是骨干网络层面的优化，和 Engram 的查表逻辑无关。</p>
+<p><strong>Engram 需要适配这 4 条分支：</strong></p>
+<p>既然骨干是 4 分支的，那 Engram 查表出来的记忆该怎么分配给这 4 条流？论文的设计是——<strong>查表共享，门控独立</strong>：</p>
+<pre><code>             查表结果 e_t ∈ ℝ^1280（4 条分支共用同一个查表结果）
+                          │
+                    ┌─────┴─────┐
+                    │           │
+                   W_V         W_K^(1)  W_K^(2)  W_K^(3)  W_K^(4)
+                 (共享1个)      (每条分支各自 1 个)
+                    │           │        │        │        │
+                    ▼           ▼        ▼        ▼        ▼
+               v_t (共享)    k_t^(1)  k_t^(2)  k_t^(3)  k_t^(4)
+                    │           │        │        │        │
+                    │           └── 各自与本分支的 h_t^(m) 做点积 ──┐
+                    │                                              │
+                    │         α_t^(1)   α_t^(2)  α_t^(3)  α_t^(4) │
+                    │         (0.9)     (0.3)    (0.1)    (0.7)    │
+                    │           │        │        │        │       │
+                    └───────→ α^(m) × v_t（每条分支独立决定采纳多少）│
+                              │        │        │        │        │
+                              ▼        ▼        ▼        ▼        │
+                          分支1:    分支2:    分支3:   分支4:      │
+                          大量     少量      几乎     较多        │
+                          采纳     采纳      忽略     采纳        │
+</code></pre>
+<p>设计思路：</p>
+<ul>
+<li><strong>共享嵌入表 + 共享 $\mathbf{W}_V$</strong>：4 条分支从同一条记忆中提取同一份&quot;内容&quot;（$\mathbf{v}_t$），避免参数浪费（不需要 4 套嵌入表）</li>
+<li><strong>独立 $\mathbf{W}_K^{(m)}$</strong>：每条分支用自己的 Key 投影计算门控值 $\alpha_t^{(m)}$，可以独立决定&quot;要不要采纳这条记忆&quot;</li>
+<li><strong>效果</strong>：同一条 N-gram 记忆，分支 1 可能大量采纳（$\alpha^{(1)}=0.9$），分支 3 可能忽略（$\alpha^{(3)}=0.1$）——各取所需</li>
+<li><strong>工程优化</strong>：1 个 $\mathbf{W}_V$ + 4 个 $\mathbf{W}_K^{(m)}$ 可以合并为一次 FP8 矩阵乘法，充分利用 GPU 算力</li>
+</ul>
+<p>如果你不关注 mHC 这种骨干改进，可以把这一节理解为：<strong>标准单残差流的 Engram（上面 C 节讲的）就是完整的核心设计，mHC 只是工程上的进一步适配。</strong></p>
+<h4>D. 在 Transformer Block 中的真实处理顺序</h4>
+<p>⚠️ <strong>重要澄清</strong>：Engram 模块<strong>不是</strong>与 FFN/MoE 并行执行，而是位于整个 Attention + MoE <strong>之前</strong>。这是论文原文的明确表述：$\mathbf{H}^{(\ell)} \leftarrow \mathbf{H}^{(\ell)} + \mathbf{Y}$，然后才进入标准的 Attention 和 MoE。</p>
+<pre><code>┌────────────────────────────────────────────────────────────────┐
+│            Engram 增强 Transformer Block（Layer 2 或 15）        │
+│                                                                │
+│  输入 H^(l)                                                    │
+│      │                                                         │
+│      │        ┌──────────────────────────────────┐             │
+│      ├──────→ │  ① Engram 模块                    │             │
+│      │        │  哈希查 DRAM → W_K/W_V 投影       │             │
+│      │        │  → 门控 α_t → 卷积精炼 → Y        │             │
+│      │        └──────────────┬───────────────────┘             │
+│      │                       │                                 │
+│      └───────→ (+) ◄─────────┘   H^(l) = H^(l) + Y            │
+│                │                                               │
+│                ▼                                               │
+│         ② Attention（标准 MLA，32 头）                          │
+│                │          ↑ 现在 Attention 的输入已经包含了      │
+│                │            Engram 查表注入的静态知识            │
+│                ▼                                               │
+│         ③ MoE / FFN（55 个路由专家，top-6 激活）                │
+│                │                                               │
+│                ▼                                               │
+│  输出 H^(l+1)                                                  │
+└────────────────────────────────────────────────────────────────┘
+
+对比：普通 Transformer Block（30 层中的其他 28 层）
+
+  输入 H^(l) → Attention → MoE/FFN → 输出 H^(l+1)
+  （无 Engram，全部在 GPU HBM 内完成）
+</code></pre>
+<p>这个位置选择有两个约束条件的<strong>联合优化</strong>：</p>
+<ul>
+<li><strong>模型角度（越早越好）：</strong> 论文的 Layer Sweep 实验证明 Layer 2 是单层最优。越早注入，越能在 Attention 之前就把静态知识&quot;塞&quot;进残差流，让后续的 Attention 和 MoE 不用浪费计算去重构实体（如 “Diana, Princess of Wales” 原本需要 6 层逐步拼装，Engram 在 Layer 2 一次查表搞定）。</li>
+<li><strong>系统角度（不能太早）：</strong> Layer 1 太早了——门控机制需要 $\mathbf{h}_t$ 已经聚合了一定的上下文信息（至少过一轮 Attention）。同时，Layer 1 的计算时间是 DRAM → GPU 数据搬运通过 PCIe 的时间窗口。</li>
+</ul>
+<h4>E. 端到端完整数据流</h4>
+<p>最后，把所有模块串起来，看一个 token 从输入到 Engram 增强的完整旅程：</p>
+<pre><code>输入 token: &quot;Diana, Princess of Wales&quot; 中的最后一个 token &quot;Wales&quot;
+
+━━ 步骤 1: Tokenizer 压缩 ━━
+  &quot;Wales&quot; → token_id = 42195 → 压缩后 id = 38012
+  (合并大小写变体：&quot;Wales&quot;/&quot;wales&quot;/&quot;WALES&quot; → 同一个 ID)
+
+━━ 步骤 2: 构造后缀 N-gram ━━
+  2-gram: (of', Wales')
+  3-gram: (Princess', of', Wales')
+
+━━ 步骤 3: 多头哈希查表（从 DRAM 中取数据）━━
+  2-gram 经 8 个哈希头 → 8 个地址 → 从 DRAM 取出 8 个子向量
+  3-gram 经 8 个哈希头 → 8 个地址 → 从 DRAM 取出 8 个子向量
+  Concatenate → e_t ∈ ℝ^1280（编码了 &quot;Princess of Wales&quot; 的静态知识）
+
+━━ 步骤 4: 上下文感知门控 ━━
+  h_t = Layer 1 输出的隐藏状态（已包含 &quot;Diana&quot; 等上下文）
+  k_t = W_K · e_t       → 记忆的&quot;签名&quot;  ∈ ℝ^2560
+  v_t = W_V · e_t       → 记忆的&quot;内容&quot;  ∈ ℝ^2560
+  α_t = sigmoid(RMSNorm(h_t)ᵀ · RMSNorm(k_t) / √2560)
+      = 0.92             → &quot;Princess of Wales&quot; 与上下文高度匹配
+
+━━ 步骤 5: 门控 + 卷积精炼 ━━
+  ṽ_t = 0.92 × v_t                → 几乎全量采纳这条记忆
+  Y_t = SiLU(Conv1D(RMSNorm(ṽ_t))) + ṽ_t   → 卷积扩展感受野
+
+━━ 步骤 6: 残差注入 ━━
+  H^(2) = H^(2) + Y_t              → 注入到 Layer 2 的残差流
+
+━━ 后续：标准 Transformer 继续 ━━
+  → Attention（输入已包含 Engram 注入的实体知识,
+              现在可以专注于长距离依赖和推理）
+  → MoE/FFN （55 个专家处理复杂逻辑）
+  → ... 后续 Layer 3-30 ...
+</code></pre>
+<p>这就是为什么论文中发现，加了 Engram 后 <strong>Layer 5 的表征质量等价于纯 MoE 模型 Layer 12</strong>——Engram 在浅层就把&quot;死记硬背&quot;的工作做完了，相当于给模型白送了好几层的有效深度。</p>
+<h3>3. U 型比例定律 (U-shaped Scaling Law)与权重分配</h3>
+<p>DeepSeek 重新定义了模型性能与参数分配的关系，发现了一个反直觉的 <strong>U 型曲线</strong>。</p>
+<ul>
+<li><strong>占用了谁的权重？</strong> 主要是 <strong>FFN</strong>。
+<ul>
+<li>正如我们之前讨论的，FFN 占据了模型约 2/3 的参数，主要负责存储静态知识。</li>
+<li>Engram 的本质是用廉价的<strong>存储参数（Memory Parameters，存在 DRAM 里）<strong>去替代昂贵的</strong>计算参数（Compute Parameters，即 FFN 权重，存在 HBM 里）</strong>。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://arxiv.org/html/2601.07372v1/x3.png" alt="Figure 3: 稀疏分配与 Engram 缩放。左图：不同分配比例 ρ 下的验证损失（两个计算预算均呈 U 型，混合分配优于纯 MoE）。右图：无限存储体制下的缩放行为（验证损失与嵌入数量呈对数线性关系）。"></p>
+<ul>
+<li><strong>U 型发现：</strong> 在<strong>固定总预算</strong>（计算成本 + 存储成本）的情况下：
+<ul>
+<li><strong>纯计算（100% FFN）：</strong> 成本高，且容易遗忘长尾知识。</li>
+<li><strong>纯存储（100% N-gram）：</strong> 泛化能力差，只能复读。</li>
+<li><strong>混合最优（~75% FFN + ~25% Engram）：</strong> 曲线的<strong>最低点（Sweet Spot）</strong>。这意味着将约 25% 的 FFN 参数&quot;割让&quot;给 Engram 存储表，能获得最佳的 Scaling 效果。</li>
+</ul>
+</li>
+</ul>
+<p>这背后的统计学原理是 <strong>Zipf 定律</strong>：语言中 20% 的高频静态模式（适合查表）覆盖了 80% 的日常表达，而剩下的长尾逻辑（需要推理）则交给昂贵的 FFN 处理。</p>
+<h2>还有更好的解决方案吗？</h2>
+<p>Engram 是目前最前沿的方向之一，但确实存在其他竞争路线：</p>
+<ul>
+<li><strong>RAG（检索增强生成）：</strong> 这种是在模型外面挂个搜索引擎。优点是知识可以实时更新，缺点是速度慢、推理成本高，且无法改变模型底座的效率。</li>
+<li><strong>K-NN LM：</strong> 类似思路，但通常计算成本巨大，难以在超大规模预训练中使用。</li>
+<li><strong>Infini-transformer：</strong> 谷歌提出的方案，试图通过特殊的注意力机制实现无限长记忆，但工程实现难度极大。</li>
+</ul>
+<p><strong>Engram 的优势在于&quot;工程美学&quot;：</strong> 它非常符合硬件（CPU/GPU 分层存储）的现状，且能直接集成进预训练过程中。</p>
+<p>要深入理解 DeepSeek Engram，我们需要把这些硬核的技术名词拆解成直观的模型。Engram 的核心逻辑其实就是：<strong>既然模型记不住那么多东西，那就给它一套高效的&quot;查词典&quot;系统。</strong></p>
+<h2>关键词解析</h2>
+<h3>1. 存储&quot;稀疏化&quot; (Storage Sparsity)</h3>
+<p>这是相对于**计算稀疏化（MoE）**提出的概念。三种模式的对比：</p>
+<pre><code>【稠密模型（Dense）— 全量计算，全量存储】
+
+  输入 token → [所有神经元全部激活] → 输出
+                 ↑
+            所有权重都在 HBM 里，全部参与计算
+
+【MoE 模型 — 计算稀疏，但存储仍然全量】
+
+  输入 token → [路由器] → 只激活 2/8 个专家
+                           ↑
+            所有 8 个专家的权重仍然在 HBM 里（只是没被计算）
+
+【Engram 模型 — 计算稀疏 + 存储稀疏】
+
+  输入 token → [路由器] → 只激活 2/8 个专家（计算稀疏）
+       │
+       └→ [哈希] → 从 DRAM 中只取出对应的几条向量（存储稀疏）
+                    ↑
+            数十亿条向量在 DRAM 里，99.9% 不动
+</code></pre>
+<ul>
+<li><strong>通俗理解：</strong> 以前是考试前把整本书背下来（稠密），现在是允许你带一本巨大的字典进考场，但你每次只翻开那一页（稀疏）。</li>
+</ul>
+<h3>2. 确定性寻址和异步预取 (Deterministic Addressing &amp; Asynchronous Prefetching)</h3>
+<p><img src="https://arxiv.org/html/2601.07372v1/x2.png" alt="Figure 2: Engram 系统实现。(a) 训练阶段：嵌入表分片到多块 GPU，通过 All-to-All 通信检索活跃行。(b) 推理阶段：嵌入表卸载到主机内存，利用确定性寻址异步预取，与前层计算重叠隐藏延迟。"></p>
+<p>这是解决**“查找表在 DRAM 里，GPU 读它会不会太慢？”**的工程方案。</p>
+<ul>
+<li><strong>确定性寻址：</strong> Engram 使用固定的哈希函数来计算知识存放在 DRAM 的哪个地址。模型看到&quot;苹果&quot;两个字，不需要搜索，直接根据公式算出地址，复杂度是 O(1)。</li>
+<li><strong>异步预取：</strong> DRAM 读取速度（~500 GB/s）远慢于 HBM（~3 TB/s）。为了不让 GPU 闲着等数据，Engram 采用了<strong>逐层流水线</strong>——在计算当前层的同时，提前把下一层需要的数据从 DRAM 搬到 GPU：</li>
+</ul>
+<pre><code>时间 ──────────────────────────────────────────────────────→
+
+GPU 计算:  ┌─Layer 1─┐  ┌─Layer 2─────┐  ┌─Layer 3─────┐
+           │Attn+FFN │  │Attn+FFN     │  │Attn+FFN     │
+           │(无Engram)│  │+Engram查表  │  │+Engram查表  │
+           └─────────┘  └─────────────┘  └─────────────┘
+
+PCIe 搬运: ──────────── ┌搬Layer2数据┐  ┌搬Layer3数据┐
+(DRAM→GPU)              └───────────┘  └───────────┘
+                         ↑                ↑
+                    计算Layer1时         计算Layer2时
+                    就开始搬Layer2      就开始搬Layer3
+                    的查表数据          的查表数据
+
+                    → 等到要用时，数据已经在 GPU 里了！
+</code></pre>
+<ul>
+<li>当模型在计算第 1 层时，它已经算好了第 2 层需要查哪些知识的地址。</li>
+<li>通过 PCIe 总线<strong>异步</strong>地把数据从 DRAM 搬往 GPU。</li>
+<li>等第 2 层开算时，数据已经在那等着了，几乎实现了&quot;零成本&quot;查询。</li>
+</ul>
+<h3>3. U 型比例定律 (U-shaped Scaling Law)</h3>
+<p>这是该论文最重大的理论发现。DeepSeek 重新定义了模型性能与参数分配的关系。</p>
+<ul>
+<li><strong>传统认识：</strong> 增加参数就能变强，曲线是单调下降的。</li>
+<li><strong>Engram 的发现：</strong> 在<strong>固定总参数</strong>（计算参数 + 存储参数）的情况下，如果把存储参数比例从 0% 逐渐增加，模型损失（Loss）会先下降后上升。</li>
+<li><strong>结论：</strong> 存在一个<strong>最优配比</strong>（通常在 20%-25% 左右）。这意味着如果你有 100 亿参数的预算，全给计算（模型权重）不是最优的；给 80 亿计算，20 亿做 Engram 存储，效果最好。这个最优点的凹陷处就是&quot;U 型&quot;的底部。</li>
+<li><strong>深层原因（Zipf 定律）：</strong> 这个比例并非偶然，而是对应了自然语言和代码中的<strong>Zipf 分布（长尾分布）</strong>。
+<ul>
+<li>语言中少量的<strong>高频静态模式</strong>（如常见短语、固定搭配）占据了大部分出现频率，适合用 Engram 这种低成本的&quot;查表&quot;方式<strong>死记硬背</strong>。</li>
+<li>而剩下的<strong>长尾复杂逻辑</strong>（需要推理的部分）则交给昂贵的 MoE 计算参数去处理。</li>
+<li>20% 的存储参数解决了 80% 的常见模式查找，这就是&quot;好钢用在刀刃上&quot;的统计学体现。</li>
+</ul>
+</li>
+</ul>
+<h3>4. 多头哈希 (Multi-Head Hashing)</h3>
+<p>灵感来源于 Transformer 的&quot;多头注意力机制&quot;（具体的张量形状和计算细节见上文 <a href="#B-%E5%A4%9A%E5%A4%B4%E5%93%88%E5%B8%8C%E7%BD%91%E7%BB%9C%E7%9A%84%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84">2.5 B 节</a>）。</p>
+<ul>
+<li><strong>问题：</strong> 哈希会有&quot;冲突&quot;。比如&quot;苹果&quot;既是水果也是公司，如果只用一个哈希函数，可能会把这两个含义混在一起。</li>
+<li><strong>解决方案：</strong> 像 Attention 有 8 个头一样，Engram 也用 K=8 个独立的乘法-异或哈希函数，再乘以 N-gram 阶数（{2,3}），共 16 个子表。
+<ul>
+<li>不同头+不同阶的哈希函数从不同维度定位知识</li>
+<li>每个子表返回一个子向量，16 个拼接成完整的记忆向量 $e_t$</li>
+</ul>
+</li>
+<li><strong>效果：</strong> 通过多个维度进行查询，模型能更精准地从海量表里勾勒出它现在最需要的那部分知识，极大地减少了查询误差。</li>
+</ul>
+<h3>5. 上下文感知门控 (Context-Aware Gating)</h3>
+<p>防止模型&quot;查字典查傻了&quot;（具体的 QKV 机制和公式见上文 <a href="#C-%E9%97%A8%E6%8E%A7%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3%E4%B8%80%E4%B8%AA%E5%BE%AE%E5%9E%8B-Attention">2.5 C 节</a>）。</p>
+<ul>
+<li><strong>本质：</strong> 一个微型 Attention 机制。当前隐藏状态 $\mathbf{h}_t$ 作为 Query，查表结果 $\mathbf{e}_t$ 经过 $\mathbf{W}_K$/$\mathbf{W}_V$ 投影生成 Key 和 Value。</li>
+<li><strong>门控值：</strong> $\alpha_t = \sigma(\text{RMSNorm}(\mathbf{h}_t)^\top \text{RMSNorm}(\mathbf{k}_t) / \sqrt{d})$，是一个 (0,1) 之间的<strong>标量</strong>。</li>
+<li><strong>应用逻辑：</strong>
+<ul>
+<li>语境匹配 → $\alpha_t \to 1$ → 大量采纳记忆</li>
+<li>语境矛盾 → $\alpha_t \to 0$ → 自动忽略，模型靠自己的推理</li>
+</ul>
+</li>
+<li><strong>融合方式：</strong> Engram 的输出通过<strong>残差连接</strong>加到 Attention 之前（不是加到 FFN 输出上）：$\mathbf{H}^{(\ell)} \leftarrow \mathbf{H}^{(\ell)} + \mathbf{Y}$，然后才进入 Attention → MoE/FFN。</li>
+</ul>
+<p>下图是论文中对 Engram-27B 门控值 $\alpha_t$ 的实际可视化。可以看到门控在完成静态模式（如多 token 实体名 “Alexander the Great”、习语 “四大发明”）时强烈激活（红色），而在普通 token 上保持低值：</p>
+<p><img src="https://arxiv.org/html/2601.07372v1/x7.png" alt="Figure 7: 门控机制可视化。热力图强度对应门控标量 α_t ∈ [0,1]，深红色表示强激活。高激活出现在静态模式完成时（如命名实体、固定搭配），说明 Engram 成功识别并检索了定型化的语言依赖。"></p>
+<h2>还有哪些值得深挖的洞察？</h2>
+<p>除了 Zipf 定律，Engram 还有几个非常反直觉但深刻的架构洞察，值得深入思考：</p>
+<h3>1. 位置的哲学：记忆是&quot;低级&quot;认知</h3>
+<p>论文中一个有趣的细节是 Engram 模块的最佳插入位置通常在模型的<strong>浅层（如第 2-4 层）</strong>。</p>
+<ul>
+<li><strong>反直觉：</strong> 我们通常认为&quot;知识&quot;是高级的，应该在深层处理。</li>
+<li><strong>深层解释：</strong> 事实回忆其实是一种**“反射”<strong>，而非</strong>&quot;思考&quot;**。
+<ul>
+<li>当你看到&quot;白日依山&quot;，大脑瞬间弹出&quot;尽&quot;，这不需要复杂的逻辑推理。</li>
+<li>Engram 在浅层把这些&quot;死记硬背&quot;的工作做完了，<strong>解放了深层网络</strong>。</li>
+<li>结果：深层的 Attention 和 FFN 不再需要浪费算力去重构&quot;巴黎在法国&quot;这种简单事实，而是可以全心全意进行复杂的逻辑推演（Reasoning）。这也解释了为什么加了 Engram 后，模型的<strong>推理能力</strong>（如数学、代码）反而提升了。</li>
+</ul>
+</li>
+</ul>
+<h4>实验验证：LogitLens 和 CKA 分析</h4>
+<p>上面的&quot;解放深层&quot;不只是直觉，论文用了两个可解释性分析工具来严格验证。</p>
+<p><strong>工具 1: LogitLens（逐层预测收敛分析）</strong></p>
+<p>LogitLens 的原理是：把模型每一层的中间隐藏状态直接接到最终的 LM Head（输出层）上，看它能不能&quot;提前&quot;做出正确预测。用 KL 散度衡量中间层输出分布与最终层输出分布的距离——越小说明这一层就已经&quot;想明白了&quot;。</p>
+<p><strong>工具 2: CKA（跨模型表征对齐分析）</strong></p>
+<p>CKA（Centered Kernel Alignment）衡量的是两组表征的<strong>结构相似度</strong>——不看绝对数值，而是看&quot;信息的组织方式是否一致&quot;。论文用它来对比 Engram 模型和 MoE 模型在不同层的表征：</p>
+<p>$$\text{CKA}(K, L) = \frac{\text{HSIC}(K, L)}{\sqrt{\text{HSIC}(K, K) \cdot \text{HSIC}(L, L)}}$$</p>
+<p>其中 $K = XX^\top$, $L = YY^\top$ 是两组表征的 Gram 矩阵，HSIC 是 Hilbert-Schmidt 独立性准则。</p>
+<p><strong>论文原图（Figure 4）：</strong></p>
+<p><img src="https://arxiv.org/html/2601.07372v1/x4.png" alt="Figure 4: LogitLens KL 散度分析（左）和 CKA 表征对齐热力图（中、右）"></p>
+<blockquote>
+<p>图 (a): <strong>LogitLens 逐层 KL 散度</strong>。Engram 模型（红/橙线）在浅层的 KL 散度显著低于 MoE 基线（蓝线），说明 Engram 更早完成特征组装。差距在 Layer 2-5 最大，深层趋于一致。</p>
+<p>图 (b)©: <strong>CKA 相似度热力图</strong>。白色虚线为&quot;软对齐曲线&quot;——如果 Engram 和 MoE 每层表征相同，这条线应该贴着对角线。但实际曲线明显<strong>偏移到对角线上方</strong>，意味着 Engram 的第 $j$ 层表征等价于 MoE 的第 $j + \Delta$ 层（$\Delta &gt; 0$）。最显著的发现：<strong>Engram Layer 5 ≈ MoE Layer 12</strong>。</p>
+</blockquote>
+<p>结论：Engram 通过在浅层查表注入事实知识，相当于给模型&quot;白送&quot;了约 7 层的有效深度，让真正用于复杂推理的&quot;有效网络&quot;更深了。</p>
+<p>这两个分析工具的一致结论：<strong>Engram 不只是一个&quot;查字典&quot;的辅助模块，它从根本上改变了模型的信息处理流程——把浅层从&quot;死记硬背&quot;中解放出来，让整个网络的有效深度大幅增加。</strong></p>
+<h3>2. 内化的 RAG：模糊了&quot;模型&quot;与&quot;数据&quot;的界限</h3>
+<p>Engram 经常被拿来和 RAG（检索增强生成）做对比，但它们有一个本质区别：<strong>可微性（Differentiability）</strong>。</p>
+<ul>
+<li><strong>RAG 是&quot;外挂&quot;：</strong> 数据库是冻结的，检索器通常是独立训练的。模型发现检索错了，很难直接通过反向传播去&quot;修正&quot;数据库的索引策略。</li>
+<li><strong>Engram 是&quot;器官&quot;：</strong> 它是**端到端训练（End-to-End Trained）**的。
+<ul>
+<li>Engram 的查表过程、门控机制、甚至存储的向量（在训练时），都是参与梯度下降的。</li>
+<li>这意味着模型不仅学会了&quot;怎么查&quot;，还学会了&quot;存什么&quot;以及&quot;什么时候信，什么时候不信&quot;。这是一个<strong>有自我意识的知识库</strong>。</li>
+</ul>
+</li>
+</ul>
+<h3>3. 信息熵的极限压缩</h3>
+<p>Engram 在构建查找表时做了一个 <strong>Tokenizer Compression（词表压缩）</strong> 的操作，比如把 “The”, “the”, &quot; THE&quot; 映射到同一个键值。</p>
+<ul>
+<li><strong>表面看：</strong> 这是一个节省空间的工程技巧。</li>
+<li><strong>深层看：</strong> 这是对<strong>语义空间</strong>的再定义。
+<ul>
+<li>传统 Transformer 对大小写敏感，是因为它们是不同的 token ID。</li>
+<li>Engram 强迫模型在存储层面进行<strong>语义归一化</strong>。这实际上是在降低信息的<strong>熵（Entropy）</strong>，让有限的存储空间（RAM）能装下更高密度的&quot;概念&quot;，而非&quot;字符串&quot;。这是对 Scaling Law 中数据质量的一种隐式提升。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3>总结</h3>
+<p>Engram 的本质是 <strong>“知识的降本增效”</strong>：</p>
+<ol>
+<li><strong>存储稀疏化</strong>让知识不再占用昂贵的 GPU 神经元。</li>
+<li><strong>多头哈希和确定性寻址</strong>让找知识变得极快。</li>
+<li><strong>门控</strong>确保知识用得对。</li>
+<li><strong>U 型定律</strong>指导我们如何科学地分配大脑容量。</li>
+</ol>
+<h1>参考资料</h1>
+<ul>
+<li><a href="https://github.com/deepseek-ai/Engram">项目地址</a></li>
+</ul>
+<p><em>创建：2026-01-19</em>
+<em>更新：2026-02-27</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

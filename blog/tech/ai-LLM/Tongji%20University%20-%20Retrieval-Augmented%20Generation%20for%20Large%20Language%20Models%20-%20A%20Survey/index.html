@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>参考资料 | LZ AI NOTE</title>
+  <meta name="description" content="论文发布时间：2023 12 18 同济大学、复旦大学联合发布的 《Retrieval Augmented Generation for Large Language Models: A Survey》 （[arXiv:2312.10997]）是 RAG 领域最具影响力的综述之一，系统梳理了 100+ 篇 RAG 研究。 但这篇文章不打算复述综述本身——而…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-LLM/Tongji%20University%20-%20Retrieval-Augmented%20Generation%20for%20Large%20Language%20Models%20-%20A%20Survey">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="参考资料 | LZ AI NOTE">
+  <meta property="og:description" content="论文发布时间：2023 12 18 同济大学、复旦大学联合发布的 《Retrieval Augmented Generation for Large Language Models: A Survey》 （[arXiv:2312.10997]）是 RAG 领域最具影响力的综述之一，系统梳理了 100+ 篇 RAG 研究。 但这篇文章不打算复述综述本身——而…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-LLM/Tongji%20University%20-%20Retrieval-Augmented%20Generation%20for%20Large%20Language%20Models%20-%20A%20Survey">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"参考资料","description":"论文发布时间：2023 12 18 同济大学、复旦大学联合发布的 《Retrieval Augmented Generation for Large Language Models: A Survey》 （[arXiv:2312.10997]）是 RAG 领域最具影响力的综述之一，系统梳理了 100+ 篇 RAG 研究。 但这篇文章不打算复述综述本身——而…","url":"https://wizardpisces.github.io/blog/tech/ai-LLM/Tongji%20University%20-%20Retrieval-Augmented%20Generation%20for%20Large%20Language%20Models%20-%20A%20Survey","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-LLM/Tongji%20University%20-%20Retrieval-Augmented%20Generation%20for%20Large%20Language%20Models%20-%20A%20Survey","dateModified":"2026-03-10","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>参考资料</h1><p><em>论文发布时间：2023-12-18</em></p>
+<p>同济大学、复旦大学联合发布的 <strong>《Retrieval-Augmented Generation for Large Language Models: A Survey》</strong>（<a href="https://arxiv.org/abs/2312.10997">arXiv:2312.10997</a>）是 RAG 领域最具影响力的综述之一，系统梳理了 100+ 篇 RAG 研究。</p>
+<p>但这篇文章不打算复述综述本身——而是提炼其中<strong>真正有启发性的洞察</strong>：那些改变你对 RAG 认知的观点、反直觉的实验发现、以及对工程实践有直接指导意义的设计原则。</p>
+<h2>洞察一：RAG 的三代演进，本质是软件工程的&quot;解耦史&quot;</h2>
+<p>论文将 RAG 划分为三个范式：<strong>Naive RAG → Advanced RAG → Modular RAG</strong>。</p>
+<p>表面上看，这是功能的丰富化。但如果你从软件工程视角审视，会发现一个更深层的规律：<strong>RAG 的演进轨迹，完美复刻了软件架构从单体到微服务的解耦历程。</strong></p>
+<table>
+<thead>
+<tr>
+<th>范式</th>
+<th>架构隐喻</th>
+<th>核心特征</th>
+<th>致命缺陷</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Naive RAG</td>
+<td>单体应用</td>
+<td>固定的 Retrieve-Read 管道</td>
+<td>检索质量差时无兜底，垃圾进垃圾出</td>
+</tr>
+<tr>
+<td>Advanced RAG</td>
+<td>分层架构</td>
+<td>加入 Pre/Post-Retrieval 处理层</td>
+<td>仍是链式结构，无法跳过或回退</td>
+</tr>
+<tr>
+<td>Modular RAG</td>
+<td>微服务/插件化</td>
+<td>模块可替换、可编排、可跳过</td>
+<td>编排复杂度上升，需要&quot;调度智能&quot;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键启示：</strong> Modular RAG 的真正突破不在于&quot;模块多&quot;，而在于<strong>流程可以不是线性的</strong>。Self-RAG 可以决定&quot;这个问题不需要检索&quot;，FLARE 可以在生成到一半时触发检索——这种<strong>自适应控制流</strong>才是从 Advanced 到 Modular 的质变。</p>
+<h2>洞察二：噪声文档反而提升准确率 30%——检索的&quot;有益污染&quot;</h2>
+<p>论文引用了 Cuconasu et al. 的一个极其反直觉的实验发现：</p>
+<blockquote>
+<p><strong>在检索结果中加入不相关的文档，准确率反而提升了超过 30%。</strong></p>
+</blockquote>
+<p>这完全违背了&quot;检索越精准越好&quot;的直觉。为什么？</p>
+<p>可能的解释：<strong>噪声文档充当了一种隐式的&quot;正则化&quot;</strong>。当上下文中只有高度相关的文档时，模型容易过度依赖检索内容、丧失自身推理能力（论文称之为&quot;过度依赖增强信息&quot;）。而适量噪声迫使模型在检索内容和自身知识之间做权衡——就像 Dropout 之于神经网络。</p>
+<p><strong>实践启示：</strong> 不要把全部精力放在提升检索精度上。在某些场景下，“稍微宽松&quot;的检索策略可能比&quot;极致精准&quot;表现更好。关键在于让 LLM 保持&quot;批判性地使用检索结果&quot;的能力，而不是&quot;无脑信任”。</p>
+<h2>洞察三：“生成替代检索”——LLM 自己编的上下文比搜到的更好</h2>
+<p>GenRead 方法提出了一个大胆的替换：<strong>用 LLM 生成的文档替代外部检索</strong>。实验表明，LLM 生成的上下文往往包含比真实检索结果更准确的答案。</p>
+<p>这看似荒谬——如果 LLM 自己就知道答案，为什么还需要 RAG？但论文给出了精妙的解释：</p>
+<blockquote>
+<p>LLM 生成的上下文之所以更有效，是因为它与 LLM 的<strong>因果语言建模（Causal Language Modeling）预训练目标高度对齐</strong>——模型更擅长从&quot;自己风格&quot;的文本中提取信息。</p>
+</blockquote>
+<p><strong>深层含义：</strong> 检索的目的不仅是提供&quot;正确信息&quot;，更是提供&quot;模型能高效消化的信息格式&quot;。一段完美正确但表述晦涩的维基百科文本，可能不如一段 LLM 自己组织的、稍有不准确但逻辑清晰的文本有用。这揭示了 RAG 的一个隐藏维度：<strong>Retriever 和 Generator 之间存在&quot;语言风格对齐&quot;的需求。</strong></p>
+<h2>洞察四：Lost in the Middle——LLM 的&quot;注意力沙漏&quot;</h2>
+<p>论文引用了一个重要发现：<strong>LLM 倾向于只关注长上下文的开头和结尾，遗忘中间部分</strong>（“Lost in the Middle” 问题）。</p>
+<p>这对 RAG 的工程实践有直接影响：</p>
+<ul>
+<li><strong>Reranking 不只是&quot;排质量&quot;，更是&quot;排位置&quot;：</strong> 最相关的文档应该放在 Prompt 的开头或结尾，而不是中间。LlamaIndex 和 LangChain 的 <code>LostInTheMiddleReranker</code> 正是基于此原理。</li>
+<li><strong>检索数量不是越多越好：</strong> 塞入过多文档不仅增加 token 消耗，还会把关键信息推到&quot;遗忘区&quot;。这在本质上与人类阅读的&quot;认知负荷&quot;高度相似——给你 3 篇论文和 30 篇论文，前者你反而记得更牢。</li>
+</ul>
+<p><strong>实践启示：</strong> RAG 系统的上下文管理是一个被严重低估的工程问题。与其无脑增加 Top-K，不如在固定 K 的前提下优化文档的排列策略。</p>
+<h2>洞察五：自适应检索——最强的能力是&quot;知道何时不检索&quot;</h2>
+<p>论文重点分析了 <strong>FLARE</strong> 和 <strong>Self-RAG</strong> 两种自适应检索方案：</p>
+<ul>
+<li><strong>FLARE：</strong> 监控生成过程中 token 的概率。当概率低于阈值（模型&quot;不确定&quot;时），自动触发检索。</li>
+<li><strong>Self-RAG：</strong> 引入&quot;反思 token&quot;（Reflection Token），让模型在推理过程中自主决定是否需要检索、检索结果是否可靠。</li>
+</ul>
+<p><strong>核心洞察：</strong> 传统 RAG 的问题不在于&quot;检索做得不好&quot;，而在于&quot;总是在检索&quot;。很多简单问题（如&quot;中国的首都是哪里&quot;），模型自身的参数知识就足以回答，强制检索反而引入延迟和噪声。</p>
+<blockquote>
+<p><strong>真正智能的 RAG 系统，不是在检索上做到极致，而是能精准判断&quot;这个问题需不需要检索&quot;。</strong></p>
+</blockquote>
+<p>这与人类专家的工作方式一致——你不会每回答一个问题都去查 Google，只有在不确定时才查。</p>
+<h2>洞察六：RAG vs Fine-tuning——不是二选一，而是各管一层</h2>
+<p>论文用一个二维象限图（外部知识需求 × 模型适配需求）清晰地划分了 RAG 和 Fine-tuning 的适用场景：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>推荐方案</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>知识频繁更新（新闻、实时数据）</td>
+<td><strong>RAG</strong></td>
+<td>Fine-tuning 需要重新训练，RAG 只需更新知识库</td>
+</tr>
+<tr>
+<td>需要复制特定风格/格式</td>
+<td><strong>Fine-tuning</strong></td>
+<td>RAG 无法改变模型的&quot;写作风格&quot;</td>
+</tr>
+<tr>
+<td>专业领域 + 实时性</td>
+<td><strong>两者结合</strong></td>
+<td>Fine-tuning 学领域&quot;语言&quot;，RAG 提供实时&quot;知识&quot;</td>
+</tr>
+<tr>
+<td>全新事实知识</td>
+<td><strong>RAG</strong></td>
+<td>实验证明 LLM 通过 fine-tuning 很难学习新的事实信息</td>
+</tr>
+</tbody>
+</table>
+<p>论文引用的一个关键实验结论尤其值得重视：<strong>无监督 fine-tuning 在注入新事实知识方面几乎无效，RAG 在所有知识注入任务上一致地优于 fine-tuning。</strong></p>
+<p><strong>深层含义：</strong> Fine-tuning 改变的是模型的&quot;行为模式&quot;（怎么说），RAG 改变的是模型的&quot;信息源&quot;（说什么）。两者作用于不同层面，组合使用时是互补的。</p>
+<h2>洞察七：RAG 评估的&quot;三角困境&quot;</h2>
+<p>论文梳理了 RAG 评估的三个质量维度——<strong>上下文相关性（Context Relevance）、答案忠实度（Faithfulness）、答案相关性（Answer Relevance）</strong>——并揭示了它们之间的内在张力：</p>
+<ul>
+<li>追求<strong>上下文相关性</strong>→ 倾向于检索更多文档 → 可能稀释关键信息 → 损害<strong>答案忠实度</strong></li>
+<li>追求<strong>答案忠实度</strong>→ 严格限制只用检索内容 → 可能丢失模型自身的有效知识 → 损害<strong>答案相关性</strong></li>
+<li>追求<strong>答案相关性</strong>→ 模型可能自由发挥 → 脱离检索内容 → 损害<strong>答案忠实度</strong></li>
+</ul>
+<p><strong>这是一个不可能三角：你很难同时最大化三个维度。</strong> 工程实践中，必须根据具体场景做取舍——医疗问答应侧重忠实度，客服对话应侧重相关性，搜索应侧重上下文相关性。</p>
+<h2>洞察八：长上下文时代，RAG 依然不可替代</h2>
+<p>随着 LLM 上下文窗口突破 200K tokens，一个自然的问题是：还需要 RAG 吗？</p>
+<p>论文给出了三个 RAG 不可替代的理由：</p>
+<ol>
+<li><strong>推理效率：</strong> 把整本书塞进 Prompt 的推理成本远高于按需检索几个段落。</li>
+<li><strong>可追溯性：</strong> RAG 可以明确标注&quot;这段回答来自哪个文档的哪个段落&quot;，长上下文生成则是黑盒。</li>
+<li><strong>新的可能性：</strong> 超长上下文反而为 RAG 开辟了新空间——可以检索更多候选文档，在长上下文窗口内做更深度的对比、综合和推理。</li>
+</ol>
+<p><strong>核心观点：</strong> 长上下文不是 RAG 的终结者，而是 RAG 的升级器。两者的关系从&quot;互斥&quot;变成了&quot;互补&quot;。</p>
+<hr>
+<h2>延伸思考：RAG 的终极形态是什么？</h2>
+<p>纵观论文梳理的演进轨迹，RAG 的发展方向可以归纳为一句话：</p>
+<blockquote>
+<p><strong>从&quot;固定管道&quot;到&quot;智能体&quot;——RAG 正在从一个工程流程，演化为一种认知能力。</strong></p>
+</blockquote>
+<p>具体而言：</p>
+<ol>
+<li><strong>检索从&quot;被动触发&quot;走向&quot;主动判断&quot;</strong>（Self-RAG、FLARE），模型学会了&quot;什么时候该查资料&quot;。</li>
+<li><strong>检索源从&quot;单一文本&quot;走向&quot;异构多源&quot;</strong>（文本 + KG + 代码 + 数据库），模型学会了&quot;去哪里查资料&quot;。</li>
+<li><strong>检索过程从&quot;一次性&quot;走向&quot;迭代式/递归式&quot;</strong>（ITER-RETGEN、IRCoT），模型学会了&quot;一次查不到就换个方式再查&quot;。</li>
+<li><strong>RAG 与 Fine-tuning 从&quot;二选一&quot;走向&quot;协同训练&quot;</strong>（RA-DIT），模型的参数知识和外部知识不再割裂。</li>
+</ol>
+<p>当这四个方向成熟融合时，RAG 将不再是一个独立的技术组件，而是 LLM 认知架构的内建能力——就像人类不会把&quot;查字典&quot;和&quot;思考&quot;看作两个独立过程一样。</p>
+<h2>总结</h2>
+<p>这篇综述的真正价值，不在于列举了多少种 RAG 方法，而在于揭示了以下关键认知：</p>
+<ol>
+<li><strong>RAG 的核心瓶颈不在检索，而在编排：</strong> 什么时候检索、检索多少、怎么用检索结果——这些&quot;元决策&quot;比检索本身更重要。</li>
+<li><strong>精准不等于最优：</strong> 噪声文档可能有益，过多文档可能有害，LLM 自己编的上下文可能比搜到的更好。</li>
+<li><strong>RAG 和 Fine-tuning 作用于不同层面：</strong> 一个管&quot;说什么&quot;，一个管&quot;怎么说&quot;，不是竞争关系。</li>
+<li><strong>评估决定方向：</strong> 没有好的 RAG 评估体系，就不可能有好的 RAG 系统。三维质量评估框架（相关性、忠实度、答案质量）是当前最佳实践。</li>
+<li><strong>长上下文是 RAG 的盟友，不是敌人：</strong> 更大的窗口 = RAG 可以做更深度的推理，而非被淘汰。</li>
+</ol>
+<h1>参考资料</h1>
+<ul>
+<li><a href="https://arxiv.org/abs/2312.10997">arXiv 论文链接</a></li>
+<li><a href="https://github.com/Tongji-KGLLM/RAG-Survey">GitHub 资源汇总</a></li>
+<li><a href="https://arxiv.org/abs/2310.11511">Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection</a></li>
+<li><a href="https://arxiv.org/abs/2305.06983">FLARE: Active Retrieval Augmented Generation</a></li>
+<li><a href="https://arxiv.org/abs/2307.03172">Lost in the Middle: How Language Models Use Long Contexts</a></li>
+</ul>
+<p><em>编辑：2026-03-10</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

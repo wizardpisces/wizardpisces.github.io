@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>参考资料 | LZ AI NOTE</title>
+  <meta name="description" content="论文发布时间：2023 10 03 Google DeepMind 与 UIUC 联合发布的 《Large Language Models Cannot Self Correct Reasoning Yet》 （[arXiv:2310.01798]）对 LLM 社区中广受追捧的&quot;自我纠正&quot;（Self Correction）能力进行了系统性的批判审视。 简单…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-LLM/Google%20DeepMind%20%26%20UIUC%20-%20Large%20Language%20Models%20Cannot%20Self-Correct%20Reasoning%20Yet">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="参考资料 | LZ AI NOTE">
+  <meta property="og:description" content="论文发布时间：2023 10 03 Google DeepMind 与 UIUC 联合发布的 《Large Language Models Cannot Self Correct Reasoning Yet》 （[arXiv:2310.01798]）对 LLM 社区中广受追捧的&quot;自我纠正&quot;（Self Correction）能力进行了系统性的批判审视。 简单…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-LLM/Google%20DeepMind%20%26%20UIUC%20-%20Large%20Language%20Models%20Cannot%20Self-Correct%20Reasoning%20Yet">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"参考资料","description":"论文发布时间：2023 10 03 Google DeepMind 与 UIUC 联合发布的 《Large Language Models Cannot Self Correct Reasoning Yet》 （[arXiv:2310.01798]）对 LLM 社区中广受追捧的\"自我纠正\"（Self Correction）能力进行了系统性的批判审视。 简单…","url":"https://wizardpisces.github.io/blog/tech/ai-LLM/Google%20DeepMind%20%26%20UIUC%20-%20Large%20Language%20Models%20Cannot%20Self-Correct%20Reasoning%20Yet","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-LLM/Google%20DeepMind%20%26%20UIUC%20-%20Large%20Language%20Models%20Cannot%20Self-Correct%20Reasoning%20Yet","dateModified":"2026-03-10","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>参考资料</h1><p><em>论文发布时间：2023-10-03</em></p>
+<p>Google DeepMind 与 UIUC 联合发布的 <strong>《Large Language Models Cannot Self-Correct Reasoning Yet》</strong>（<a href="https://arxiv.org/abs/2310.01798">arXiv:2310.01798</a>）对 LLM 社区中广受追捧的&quot;自我纠正&quot;（Self-Correction）能力进行了系统性的批判审视。</p>
+<p>简单来说，这篇论文的核心结论是：<strong>在没有外部反馈的情况下，大语言模型无法自我纠正其推理错误，甚至自我纠正后性能会下降。</strong> 此前被认为有效的 Self-Correction 方法，其改进要么来自偷看了正确答案（Oracle Labels），要么来自不公平的实验设计。</p>
+<h2>这篇论文解决了什么问题？</h2>
+<p><strong>核心问题：揭穿了 LLM &quot;内省式自我纠正&quot;的虚假繁荣。</strong></p>
+<p>自 ChatGPT 爆火以来，社区中出现了大量关于 Self-Correction 的工作（Self-Refine, Reflexion, RCI 等），声称可以让 LLM 先生成一个答案，再反思并修正自己的错误。这让人产生了一种美好的错觉：模型就像人一样，可以&quot;三省吾身&quot;。</p>
+<p>但论文提出了一个致命的反问：<strong>如果模型有能力判断自己的答案对不对，为什么它不在第一次就给出正确答案？</strong></p>
+<p>论文聚焦于一个核心概念——<strong>内省式自我纠正（Intrinsic Self-Correction）</strong>：模型仅凭自身能力（不借助外部工具、搜索引擎、正确答案等）来纠正自己的推理。实验结果表明，在这种严格设定下，自我纠正不仅无效，反而有害。</p>
+<h2>这个问题真实存在吗？</h2>
+<p><strong>非常真实，而且直接影响了整个 AI Agent 社区的设计范式。</strong></p>
+<ul>
+<li><strong>学术界的误导：</strong> 许多论文报告了 Self-Correction 的显著提升（如 RCI 在 CommonSenseQA 上提升 15%），但这些提升的前提是使用了 Oracle Labels——即用正确答案来决定&quot;什么时候停止纠正&quot;。这相当于在开卷考试中声称自己记忆力好。</li>
+<li><strong>工程实践的陷阱：</strong> 许多 AI Agent 框架默认加入&quot;反思-重试&quot;循环，但如果模型本身就无法判断对错，这种循环只会增加推理成本，同时可能把对的答案改成错的。</li>
+<li><strong>实验数据：</strong> 论文在 GSM8K（数学推理）、CommonSenseQA（常识推理）、HotpotQA（多跳问答）上的实验显示，GPT-3.5 和 GPT-4 在内省式自我纠正后，准确率几乎全线下降。</li>
+</ul>
+<h2>为什么之前没人发现？</h2>
+<p>其实有人已经隐约感觉到了问题，但此前的研究存在三类系统性的实验设计缺陷：</p>
+<ol>
+<li><strong>依赖 Oracle Labels（正确答案泄露）：</strong> RCI 和 Reflexion 等方法使用正确标签来控制纠正循环——如果答案已经正确，就跳过纠正。这意味着模型只有在答错时才被要求改正，而已经答对的不会被&quot;改坏&quot;。去掉 Oracle 后，性能立刻崩塌。</li>
+<li><strong>不公平的基线对比：</strong> Multi-Agent Debate 方法使用多个 LLM 实例互相&quot;辩论&quot;，看似通过讨论改进了推理。但论文指出，如果拿相同数量的 LLM 调用做简单的 Self-Consistency（多数投票），效果反而更好。“辩论&quot;带来的提升本质上来自于&quot;多次采样”，而非真正的&quot;纠错&quot;。</li>
+<li><strong>Prompt 设计不对等：</strong> Self-Refine 等工作在初始生成时使用了弱 Prompt，然后在反馈阶段引入了更详细的任务描述。提升实际上来自于更好的 Prompt，而非自我纠正机制。</li>
+</ol>
+<h2>核心实验结果</h2>
+<h3>带 Oracle 的自我纠正 vs 内省式自我纠正</h3>
+<table>
+<thead>
+<tr>
+<th>模型</th>
+<th>方法</th>
+<th>GSM8K</th>
+<th>CommonSenseQA</th>
+<th>HotpotQA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPT-3.5</td>
+<td>标准 Prompting</td>
+<td>75.9</td>
+<td>75.8</td>
+<td>26.0</td>
+</tr>
+<tr>
+<td>GPT-3.5</td>
+<td>自我纠正（Oracle）</td>
+<td>84.3</td>
+<td>89.7</td>
+<td>29.0</td>
+</tr>
+<tr>
+<td>GPT-3.5</td>
+<td>自我纠正（内省，第1轮）</td>
+<td>75.1</td>
+<td>38.1</td>
+<td>25.0</td>
+</tr>
+<tr>
+<td>GPT-3.5</td>
+<td>自我纠正（内省，第2轮）</td>
+<td>74.7</td>
+<td>41.8</td>
+<td>25.0</td>
+</tr>
+<tr>
+<td>GPT-4</td>
+<td>标准 Prompting</td>
+<td>95.5</td>
+<td>82.0</td>
+<td>49.0</td>
+</tr>
+<tr>
+<td>GPT-4</td>
+<td>自我纠正（Oracle）</td>
+<td>97.5</td>
+<td>85.5</td>
+<td>59.0</td>
+</tr>
+<tr>
+<td>GPT-4</td>
+<td>自我纠正（内省，第1轮）</td>
+<td>91.5</td>
+<td>79.5</td>
+<td>49.0</td>
+</tr>
+<tr>
+<td>GPT-4</td>
+<td>自我纠正（内省，第2轮）</td>
+<td>89.0</td>
+<td>80.0</td>
+<td>43.0</td>
+</tr>
+</tbody>
+</table>
+<p>结果非常清晰：<strong>有 Oracle 时大幅提升，没有 Oracle 时全线下降。</strong></p>
+<h3>Multi-Agent Debate vs Self-Consistency</h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>响应数量</th>
+<th>GSM8K</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>标准 Prompting</td>
+<td>1</td>
+<td>76.7</td>
+</tr>
+<tr>
+<td>Self-Consistency</td>
+<td>3</td>
+<td>82.5</td>
+</tr>
+<tr>
+<td>Multi-Agent Debate（第1轮）</td>
+<td>6</td>
+<td>83.2</td>
+</tr>
+<tr>
+<td>Self-Consistency</td>
+<td>6</td>
+<td>85.3</td>
+</tr>
+<tr>
+<td>Multi-Agent Debate（第2轮）</td>
+<td>9</td>
+<td>83.0</td>
+</tr>
+<tr>
+<td>Self-Consistency</td>
+<td>9</td>
+<td>88.2</td>
+</tr>
+</tbody>
+</table>
+<p>在相同推理预算下，<strong>简单的多数投票全面碾压&quot;辩论&quot;机制</strong>。</p>
+<h2>为什么会这样？</h2>
+<p>论文给出了一个直觉性的解释：</p>
+<blockquote>
+<p>如果模型已经与良好的 Prompt 对齐，那么初始响应已经是该 Prompt 和解码策略下的最优输出。引入&quot;反馈&quot; Prompt 相当于添加了一个额外的输入扰动，这个扰动不一定包含有助于回答问题的新信息，反而可能将模型从最优响应上&quot;拽偏&quot;。</p>
+</blockquote>
+<p>具体表现为：</p>
+<ul>
+<li><strong>正确→错误的概率 &gt; 错误→正确的概率：</strong> 在 GSM8K 上，GPT-3.5 经过两轮自我纠正后，74.7% 的答案保持不变；在改变的答案中，从对改成错的比例远高于从错改成对的比例。</li>
+<li><strong>CommonSenseQA 的&quot;诱导效应&quot;：</strong> 选择题的干扰项本身就具有一定的合理性。自我纠正 Prompt 相当于在暗示&quot;你可能答错了&quot;，导致模型倾向于更换答案，但更换后更可能选到干扰项。</li>
+</ul>
+<h2>什么时候 Self-Correction 是有效的？</h2>
+<p>论文并非全盘否定自我纠正，而是指出它在以下场景可以有效工作：</p>
+<ul>
+<li><strong>有高质量外部反馈时：</strong> 例如代码生成任务中，模型可以运行代码并获得编译器/测试用例的反馈——这不是&quot;内省&quot;，而是&quot;有据可查的改错&quot;。</li>
+<li><strong>任务目标可机械验证时：</strong> 如&quot;生成的句子必须包含所有给定关键词&quot;——这类约束可以被程序化检查，模型可以据此真正修正。</li>
+<li><strong>偏好对齐任务：</strong> 如让回复更安全、更礼貌——因为 LLM 确实可以较好地判断文本的风格和安全性，但它无法可靠地判断推理的正确性。</li>
+</ul>
+<h2>关键词解析</h2>
+<h3>1. 内省式自我纠正 (Intrinsic Self-Correction)</h3>
+<ul>
+<li><strong>定义：</strong> LLM 仅凭自身能力（不借助任何外部信息源）来审视并修正其初始回答。</li>
+<li><strong>为什么重要：</strong> 这是&quot;自我纠正&quot;概念中最理想化的形态——模型真的能&quot;自知其错&quot;。但实验证明，当前 LLM 做不到这一点。</li>
+<li><strong>根本矛盾：</strong> 如果模型内部的&quot;审查员&quot;和&quot;生成者&quot;用的是同一套知识和推理能力，审查员就无法超越生成者的能力边界。</li>
+</ul>
+<h3>2. Oracle Labels（正确答案标签）</h3>
+<ul>
+<li><strong>在实验中的作用：</strong> 控制自我纠正的循环——只在模型答错时触发纠正，答对时保持原答案。</li>
+<li><strong>为什么是作弊：</strong> 在真实应用中，我们不可能事先知道答案对不对。依赖 Oracle 的实验结果不具备任何实际指导意义。</li>
+<li><strong>揭示的真相：</strong> Oracle Self-Correction 有效 = “模型有时能从错改为对” + “我们人为阻止了模型从对改为错”。去掉第二个条件，效果立刻反转。</li>
+</ul>
+<h3>3. Self-Consistency（自我一致性）</h3>
+<ul>
+<li><strong>定义：</strong> 让 LLM 对同一问题生成多个回答，然后通过多数投票选出最终答案。</li>
+<li><strong>优势：</strong> 简单、有效、不需要额外的 Prompt 工程。</li>
+<li><strong>论文的关键发现：</strong> 在相同的推理预算（LLM 调用次数）下，Self-Consistency 始终优于 Multi-Agent Debate 和 Self-Correction。这说明**&quot;多采样 + 投票&quot;比&quot;采样 + 反思 + 重写&quot;更可靠**。</li>
+</ul>
+<h3>4. Prompt 设计不对等 (Prompt Design Asymmetry)</h3>
+<ul>
+<li><strong>问题描述：</strong> 在 Self-Refine 的实验中，初始生成的 Prompt 故意不包含完整的任务要求（如没有明确说&quot;必须包含所有概念词&quot;），然后在反馈阶段补充这些要求。</li>
+<li><strong>后果：</strong> 所谓的&quot;自我纠正提升&quot;实际上是&quot;更好的 Prompt 带来的提升&quot;。当把完整的指令直接放在初始 Prompt 中时，不仅不需要自我纠正，效果还更好（81.8% vs 67.0%）。</li>
+<li><strong>启示：</strong> 评估 Self-Correction 时，必须对初始生成和纠正阶段投入同等的 Prompt 设计精力。</li>
+</ul>
+<hr>
+<h2>延伸思考：Generation ≠ Verification，论文结论的适用边界</h2>
+<p>论文的核心发现——“自我纠正无效”——是否可以无条件推广到所有场景？答案是<strong>不能</strong>。关键变量在于：<strong>生成任务和验证任务的难度差距，以及是否存在可追溯的外部参照物。</strong></p>
+<h3>论文实验的特殊性</h3>
+<p>论文测试的三个 Benchmark（GSM8K、CommonSenseQA、HotpotQA）有一个共同特征：<strong>验证和生成本质上是同一件事</strong>。</p>
+<ul>
+<li>检查一道数学题的解法是否正确 ≈ 重新做一遍这道题</li>
+<li>判断一个常识选项对不对 ≈ 重新做一遍常识推理</li>
+<li>没有任何&quot;外部实体&quot;可供对照——模型只能用同一套知识去&quot;自己查自己&quot;</li>
+</ul>
+<p>在这种&quot;生成难度 ≈ 验证难度&quot;且&quot;无外部参照&quot;的设定下，自我纠正确实会退化为同一能力的重复调用，论文的结论完全成立。</p>
+<h3>但很多实际场景并非如此</h3>
+<p>以 <strong>Code Review</strong> 为例，考虑两步流程：</p>
+<ol>
+<li><strong>Step 1（发现）</strong>：在 500 行代码中扫描所有潜在问题——广度搜索、创造性任务</li>
+<li><strong>Step 2（判定）</strong>：“第 42 行是否真的存在空指针解引用？请追踪执行路径”——窄聚焦、分析性任务</li>
+</ol>
+<p>这两步激活的是<strong>不同的能力回路</strong>。计算复杂度理论中 P vs NP 的精神在此适用：<strong>找到答案很难，但验证一个给定答案往往容易得多</strong>。更重要的是，代码本身作为一个外部的、可追溯的实体始终存在于上下文中——Step 2 不是纯粹的&quot;内省&quot;，而是&quot;对照代码做定向分析&quot;。</p>
+<h3>自我纠正有效性的决定公式</h3>
+<blockquote>
+<p><strong>Self-Correction 有效性 ∝ (验证与生成的难度差距) × (外部参照物的可用程度)</strong></p>
+</blockquote>
+<p>按这个框架，不同场景的预期效果：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>生成难度</th>
+<th>验证难度</th>
+<th>有外部参照？</th>
+<th>自我审查有效？</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数学推理纠错</td>
+<td>高</td>
+<td><strong>同样高</strong>（重新算一遍）</td>
+<td>无</td>
+<td><strong>无效</strong>（论文结论）</td>
+</tr>
+<tr>
+<td>常识问答纠错</td>
+<td>中</td>
+<td><strong>同样中</strong></td>
+<td>无</td>
+<td><strong>无效</strong>（论文结论）</td>
+</tr>
+<tr>
+<td>Code Review：空指针/越界</td>
+<td>高（广度扫描）</td>
+<td><strong>低（追踪具体路径）</strong></td>
+<td>有（代码）</td>
+<td><strong>很可能有效</strong></td>
+</tr>
+<tr>
+<td>Code Review：竞态条件</td>
+<td>很高</td>
+<td>高</td>
+<td>有但难追踪</td>
+<td>效果有限</td>
+</tr>
+<tr>
+<td>Code Review：“函数太长”</td>
+<td>低</td>
+<td><strong>同样主观</strong></td>
+<td>无客观标准</td>
+<td>大概率无效</td>
+</tr>
+<tr>
+<td>代码生成 + 测试反馈</td>
+<td>高</td>
+<td><strong>低（跑测试即可）</strong></td>
+<td>有（编译器/测试）</td>
+<td><strong>非常有效</strong></td>
+</tr>
+</tbody>
+</table>
+<h3>实践启示</h3>
+<ol>
+<li><strong>不要因为论文结论就放弃所有 self-review 机制</strong>——当验证明显比生成简单、且有具体代码/数据可供追溯时，二轮审查是有正向收益的。</li>
+<li><strong>对纯推理任务保持警惕</strong>——数学、逻辑、开放性判断等场景中，论文的警告完全适用，多采样 + 投票（Self-Consistency）是更可靠的策略。</li>
+<li><strong>Prompt 设计决定成败</strong>——即使在 self-review 有效的场景中，“请验证第 42 行的执行路径&quot;远优于&quot;你觉得你说的对吗？”。前者引导定向分析，后者诱导谄媚式自我否定。</li>
+</ol>
+<hr>
+<h2>总结</h2>
+<p>这篇论文给 LLM 社区的核心警示是：</p>
+<ol>
+<li><strong>不要迷信&quot;自我反思&quot;：</strong> 没有外部反馈，LLM 目前无法改进自己的推理。让模型&quot;再想想&quot;不但没用，反而可能把对的改成错的。</li>
+<li><strong>警惕实验设计中的漏洞：</strong> Oracle Labels、不公平的基线对比、Prompt 不对等——这三个问题在当时的 Self-Correction 文献中非常普遍。</li>
+<li><strong>Self-Consistency &gt; Self-Correction：</strong> 如果你有额外的推理预算，多采样 + 投票比反思 + 重写更划算。</li>
+<li><strong>外部反馈才是关键：</strong> 真正有效的&quot;纠正&quot;来自于与环境的交互（如代码执行、搜索引擎、测试用例），而非模型的自我审视。</li>
+</ol>
+<p>这篇论文对后来的 AI Agent 设计产生了深远影响——它促使社区从&quot;让模型自己反思&quot;转向&quot;为模型提供可靠的外部验证工具&quot;，这也是 LATS、Toolformer、CRITIC 等框架成功的关键原因之一。</p>
+<h1>参考资料</h1>
+<ul>
+<li><a href="https://arxiv.org/abs/2310.01798">arXiv 论文链接</a></li>
+<li><a href="https://arxiv.org/abs/2310.04406">LATS: Language Agent Tree Search</a>（利用外部环境反馈改进推理的正面案例）</li>
+</ul>
+<p><em>编辑：2026-03-09</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

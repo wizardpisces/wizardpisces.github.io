@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>Prompt 堆叠的尽头，是系统设计问题 | LZ AI NOTE</title>
+  <meta name="description" content="下面是一篇基于我们前面讨论整理的文章版本，尽量保持工程表达，不使用“故事化包装”，也避免过度AI风格。 Prompt 堆叠的尽头，是系统设计问题 在很多 AI 应用（尤其是 Code Review、PRD Review、Agent 类任务）中，一个非常常见的演进路径是： 通过不断增加 Prompt 规则，修复模型在某些 Case 上的失误。 短期来看，这种…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/Prompt%20%E5%A0%86%E5%8F%A0%E7%9A%84%E5%B0%BD%E5%A4%B4%EF%BC%8C%E6%98%AF%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E9%97%AE%E9%A2%98">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="Prompt 堆叠的尽头，是系统设计问题 | LZ AI NOTE">
+  <meta property="og:description" content="下面是一篇基于我们前面讨论整理的文章版本，尽量保持工程表达，不使用“故事化包装”，也避免过度AI风格。 Prompt 堆叠的尽头，是系统设计问题 在很多 AI 应用（尤其是 Code Review、PRD Review、Agent 类任务）中，一个非常常见的演进路径是： 通过不断增加 Prompt 规则，修复模型在某些 Case 上的失误。 短期来看，这种…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/Prompt%20%E5%A0%86%E5%8F%A0%E7%9A%84%E5%B0%BD%E5%A4%B4%EF%BC%8C%E6%98%AF%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E9%97%AE%E9%A2%98">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Prompt 堆叠的尽头，是系统设计问题","description":"下面是一篇基于我们前面讨论整理的文章版本，尽量保持工程表达，不使用“故事化包装”，也避免过度AI风格。 Prompt 堆叠的尽头，是系统设计问题 在很多 AI 应用（尤其是 Code Review、PRD Review、Agent 类任务）中，一个非常常见的演进路径是： 通过不断增加 Prompt 规则，修复模型在某些 Case 上的失误。 短期来看，这种…","url":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/Prompt%20%E5%A0%86%E5%8F%A0%E7%9A%84%E5%B0%BD%E5%A4%B4%EF%BC%8C%E6%98%AF%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E9%97%AE%E9%A2%98","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/Prompt%20%E5%A0%86%E5%8F%A0%E7%9A%84%E5%B0%BD%E5%A4%B4%EF%BC%8C%E6%98%AF%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E9%97%AE%E9%A2%98","dateModified":"2026-06-26","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Prompt 堆叠的尽头，是系统设计问题</h1><p>下面是一篇基于我们前面讨论整理的文章版本，尽量保持工程表达，不使用“故事化包装”，也避免过度AI风格。</p>
+<hr>
+<h1>Prompt 堆叠的尽头，是系统设计问题</h1>
+<p>在很多 AI 应用（尤其是 Code Review、PRD Review、Agent 类任务）中，一个非常常见的演进路径是：</p>
+<blockquote>
+<p>通过不断增加 Prompt 规则，修复模型在某些 Case 上的失误。</p>
+</blockquote>
+<p>短期来看，这种方式有效。但随着使用规模扩大，会逐渐进入一个稳定的困境：<strong>Prompt 变得越来越长，但效果不再稳定提升，甚至开始下降。</strong></p>
+<p>问题并不在于 Prompt 写得不够“细”，而在于它开始承担了不该由它承担的职责。</p>
+<hr>
+<h2>1. Prompt 的自然退化路径</h2>
+<p>一个典型的 Code Review Prompt 优化过程通常是这样的：</p>
+<p>最初版本：</p>
+<blockquote>
+<p>请深入分析代码中的潜在问题。</p>
+</blockquote>
+<p>随后发现模型遗漏问题：</p>
+<blockquote>
+<p>加入：不要遗漏潜在风险。</p>
+</blockquote>
+<p>接着发现模型开始过度发挥：</p>
+<blockquote>
+<p>加入：不要过度推测。</p>
+</blockquote>
+<p>随后模型变得保守：</p>
+<blockquote>
+<p>加入：适当分析潜在风险。</p>
+</blockquote>
+<p>最终 Prompt 变成：</p>
+<blockquote>
+<p>多分析，但不要猜；谨慎一点，但不要漏；深入一点，但不要过度。</p>
+</blockquote>
+<p>这些约束并不是独立增加能力，而是在不断调节同一个空间里的张力。</p>
+<p>本质上，它们在同时施加相互冲突的目标。</p>
+<hr>
+<h2>2. 问题的核心：冲突目标无法通过“补丁式 Prompt”解决</h2>
+<p>上述问题并不是 Prompt 不够精细，而是：</p>
+<blockquote>
+<p>多个目标本身存在不可消解的冲突。</p>
+</blockquote>
+<p>例如在 Code Review 中：</p>
+<ul>
+<li>覆盖率 vs 精确率</li>
+<li>深度分析 vs 避免臆测</li>
+<li>严格检查 vs 避免噪音</li>
+</ul>
+<p>这些目标之间不是“可以同时最大化”的关系，而是典型的 trade-off。</p>
+<p>当 Prompt 用自然语言同时表达这些目标时，会出现三个问题：</p>
+<h3>2.1 规则不可执行化</h3>
+<p>“深入但不要过度推测”本质上没有可执行边界。</p>
+<p>模型无法判断：</p>
+<ul>
+<li>什么算“深入”</li>
+<li>什么算“过度”</li>
+</ul>
+<h3>2.2 冲突不可调和</h3>
+<p>不同规则在不同上下文下会互相覆盖：</p>
+<ul>
+<li>强调风险 → 误报增加</li>
+<li>强调保守 → 漏报增加</li>
+</ul>
+<p>Prompt 无法表达优先级动态变化。</p>
+<h3>2.3 系统行为不可预测</h3>
+<p>同一 Prompt 在不同代码片段中行为不一致，导致输出不可稳定评估。</p>
+<hr>
+<h2>3. 关键转折：从 Prompt Engineering 到 System Design</h2>
+<p>当 Prompt 同时承担以下职责时：</p>
+<ul>
+<li>定义规则</li>
+<li>定义边界</li>
+<li>定义权衡</li>
+<li>定义输出策略</li>
+</ul>
+<p>问题就已经不再是 Prompt 问题，而是系统问题。</p>
+<p>更具体地说，Prompt 在错误地承担三类职责：</p>
+<h3>3.1 Policy（策略层）</h3>
+<p>例如：</p>
+<ul>
+<li>要不要深入分析</li>
+<li>要不要保守</li>
+<li>要不要优先性能</li>
+</ul>
+<p>这些属于策略决策，而不是文本规则。</p>
+<hr>
+<h3>3.2 Evaluation（评估标准）</h3>
+<p>例如：</p>
+<ul>
+<li>什么算高风险</li>
+<li>什么算值得提示</li>
+<li>什么算误报</li>
+</ul>
+<p>这些需要 benchmark 或数据定义，而不是自然语言描述。</p>
+<hr>
+<h3>3.3 Knowledge（知识层）</h3>
+<p>例如：</p>
+<ul>
+<li>React useMemo 使用场景</li>
+<li>Go context 传递规则</li>
+<li>SQL injection 风险模式</li>
+</ul>
+<p>这些应该进入 RAG 或结构化知识，而不是 Prompt 长文本。</p>
+<hr>
+<h2>4. Prompt 堆叠的本质问题</h2>
+<p>当不断通过“补丁式 Prompt”修复问题时，会出现一个结构性现象：</p>
+<blockquote>
+<p>Prompt 不再是规则集合，而变成“例外集合”。</p>
+</blockquote>
+<p>典型演化路径：</p>
+<ul>
+<li>规则 A</li>
+<li>A 的例外 A1</li>
+<li>A1 的例外 A1-1</li>
+<li>与 B 冲突的情况</li>
+<li>在 C 场景下失效的修正</li>
+</ul>
+<p>最终 Prompt 变成：</p>
+<blockquote>
+<p>一组不断相互修正的局部规则，而不是一致的系统行为描述。</p>
+</blockquote>
+<p>这会直接导致三个后果：</p>
+<ul>
+<li>难以维护</li>
+<li>难以解释</li>
+<li>难以评估</li>
+</ul>
+<hr>
+<h2>5. 一个更结构化的替代方式</h2>
+<p>要解决这个问题，关键不是“写更好的 Prompt”，而是拆分职责。</p>
+<h3>5.1 Prompt：定义角色与输出形式</h3>
+<p>Prompt 应该尽量稳定，例如：</p>
+<blockquote>
+<p>扮演 Code Reviewer，对变更进行风险分析。</p>
+</blockquote>
+<p>只保留职责边界，不承载策略细节。</p>
+<hr>
+<h3>5.2 RAG：提供按需知识</h3>
+<p>例如：</p>
+<ul>
+<li>语言特定规则（Go / TS）</li>
+<li>框架最佳实践</li>
+<li>历史失败模式</li>
+</ul>
+<p>按 diff 或上下文召回，而不是全量注入。</p>
+<hr>
+<h3>5.3 Evaluation：定义好坏标准</h3>
+<p>通过 benchmark 定义：</p>
+<ul>
+<li>false positive</li>
+<li>false negative</li>
+<li>review coverage</li>
+<li>noise ratio</li>
+</ul>
+<p>用数据控制“深入 vs 保守”的平衡，而不是 Prompt 语言控制。</p>
+<hr>
+<h3>5.4 Observability：让行为可追踪</h3>
+<p>通过 tracing / logging：</p>
+<ul>
+<li>哪些规则触发</li>
+<li>哪些知识被召回</li>
+<li>哪些判断产生</li>
+</ul>
+<p>让系统行为变得可观测，而不是依赖直觉调 Prompt。</p>
+<hr>
+<h2>6. 结论</h2>
+<p>Prompt 堆叠的问题，本质不是“写得不够好”，而是：</p>
+<blockquote>
+<p>当 Prompt 同时承载策略、知识与评估时，它必然走向冲突与膨胀。</p>
+</blockquote>
+<p>所谓“不断加规则优化 AI”，在长期会退化成：</p>
+<blockquote>
+<p>在一组无法调和的目标之间不断打补丁。</p>
+</blockquote>
+<p>真正有效的路径是把系统拆开：</p>
+<ul>
+<li>Prompt 负责角色与边界</li>
+<li>RAG 负责知识</li>
+<li>Evaluation 负责权衡</li>
+<li>Observability 负责反馈</li>
+</ul>
+<p>当这些职责分离之后，Prompt 才会重新变得稳定。</p>
+<hr>
+<p>如果用一句话总结：</p>
+<blockquote>
+<p><strong>当 Prompt 开始描述“如何权衡多个冲突目标”时，问题已经不在 Prompt，而在系统设计本身。</strong></p>
+</blockquote>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

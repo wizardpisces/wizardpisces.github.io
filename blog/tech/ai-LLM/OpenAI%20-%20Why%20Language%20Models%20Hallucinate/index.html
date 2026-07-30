@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>参考资料 | LZ AI NOTE</title>
+  <meta name="description" content="论文发布时间：2025 09 04 OpenAI 和 Georgia Tech 联合发布的 《Why Language Models Hallucinate》 （[arXiv:2509.04664]）从统计学和博弈论的角度，对大模型的“幻觉”现象给出了一个颠覆性的解释。 简单来说，这篇论文认为 幻觉（Hallucination） 不仅仅是模型能力的缺陷，更…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-LLM/OpenAI%20-%20Why%20Language%20Models%20Hallucinate">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="参考资料 | LZ AI NOTE">
+  <meta property="og:description" content="论文发布时间：2025 09 04 OpenAI 和 Georgia Tech 联合发布的 《Why Language Models Hallucinate》 （[arXiv:2509.04664]）从统计学和博弈论的角度，对大模型的“幻觉”现象给出了一个颠覆性的解释。 简单来说，这篇论文认为 幻觉（Hallucination） 不仅仅是模型能力的缺陷，更…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-LLM/OpenAI%20-%20Why%20Language%20Models%20Hallucinate">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"参考资料","description":"论文发布时间：2025 09 04 OpenAI 和 Georgia Tech 联合发布的 《Why Language Models Hallucinate》 （[arXiv:2509.04664]）从统计学和博弈论的角度，对大模型的“幻觉”现象给出了一个颠覆性的解释。 简单来说，这篇论文认为 幻觉（Hallucination） 不仅仅是模型能力的缺陷，更…","url":"https://wizardpisces.github.io/blog/tech/ai-LLM/OpenAI%20-%20Why%20Language%20Models%20Hallucinate","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-LLM/OpenAI%20-%20Why%20Language%20Models%20Hallucinate","dateModified":"2026-03-03","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>参考资料</h1><p><em>论文发布时间：2025-09-04</em></p>
+<p>OpenAI 和 Georgia Tech 联合发布的 <strong>《Why Language Models Hallucinate》</strong>（<a href="https://www.arxiv.org/pdf/2509.04664">arXiv:2509.04664</a>）从统计学和博弈论的角度，对大模型的“幻觉”现象给出了一个颠覆性的解释。</p>
+<p>简单来说，这篇论文认为**幻觉（Hallucination）<strong>不仅仅是模型能力的缺陷，更是</strong>训练和评估体系（Leaderboards）**一手“逼”出来的。模型就像一个被迫参加考试的学生，因为现在的考试机制鼓励“猜答案”而不是承认“我不知道”，所以模型学会了不懂装懂。</p>
+<p><img src="https://arxiv.org/html/2509.04664v1/x1.png" alt="幻觉成因与 IIV 二元分类框架：生成错误与内部分类错误的关系"></p>
+<h2>这篇论文解决了什么问题？</h2>
+<p><strong>核心问题：揭示了幻觉在统计学上的必然性和评估机制的误导性。</strong></p>
+<p>目前的 AI 社区普遍认为幻觉是一个需要通过更大模型或更好数据来“修复”的 bug，但论文指出：</p>
+<ul>
+<li><strong>统计学根源：</strong> 幻觉在本质上是二元分类（Binary Classification）中的错误。即使是在完美的训练数据上，统计学习的压力也会迫使模型在不确定时生成看似合理的错误信息。</li>
+<li><strong>评估导向错误：</strong> 现有的主流评测（如 MMLU、GPQA 等）通常采用“答对给分，答错或不答零分”的机制。这导致模型在面对不确定问题时，<strong>“瞎猜”的期望收益永远大于“保持沉默”</strong>。</li>
+</ul>
+<p><strong>论文的贡献：</strong> 它证明了只要我们继续用现在的标准去奖励模型（只看准确率，不看置信度），幻觉就永远无法根除。解决之道在于**“社会技术缓解”（Socio-technical Mitigation）**，即修改考试规则。</p>
+<h2>这个问题真实存在吗？</h2>
+<p><strong>非常普遍且严重，直接损害了 AI 的可信度。</strong></p>
+<ul>
+<li><strong>一本正经胡说八道：</strong> 即使是 SOTA 模型（如 GPT-4o, DeepSeek-V3, Llama 3），在被问到具体的冷门事实（如“某某科学家的生日”）时，往往会自信地输出一个错误日期，而不是说“我不知道”。</li>
+<li><strong>基准测试的误导：</strong> 目前的 Leaderboard 排名可能在奖励那些“更敢猜”的模型，而不是更诚实的模型。这导致我们选出的“最强模型”可能恰恰是幻觉最严重的模型。</li>
+</ul>
+<h2>为什么现在才有人去解决？</h2>
+<p>其实大家一直深受幻觉困扰，但之前的研究更多关注技术层面的“对齐”（Alignment）或 RAG（检索增强）。这篇论文从<strong>评估激励机制</strong>的底层逻辑切入，原因在于：</p>
+<ol>
+<li><strong>Leaderboard 文化的盛行：</strong> 各种榜单（Open LLM Leaderboard, HELM 等）成为了模型能力的唯一指挥棒。论文详细分析了这些榜单，发现几乎所有榜单都缺乏对“不确定性”的合理评分。</li>
+<li><strong>幻觉问题的顽固性：</strong> 尽管模型越来越大，数据越来越多，幻觉依然存在。这促使研究者反思，是不是我们的<strong>目标函数</strong>本身就设错了？</li>
+<li><strong>理论框架的完善：</strong> 论文建立了一套将生成问题（Generative）转化为“是否有效”（Is-It-Valid, IIV）分类问题的数学框架，从理论上证明了预训练必然导致幻觉。</li>
+</ol>
+<h2>它是如何解决的？</h2>
+<p>论文提出的不是一个新的模型架构，而是一套<strong>系统性的改革方案</strong>：</p>
+<ul>
+<li><strong>理论归因：</strong> 证明了生成式错误（幻觉）的发生率至少是内部二元分类（IIV）错误率的两倍。这意味着只要模型无法完美区分“真/假”，幻觉就一定存在。</li>
+<li><strong>诊断评估体系：</strong> 分析了 HELM、Open LLM Leaderboard、SWE-bench 等主流榜单，指出它们如何通过评分规则（Scoring Rules）抑制了模型表达不确定性。</li>
+<li><strong>提出解决方案：</strong>
+<ul>
+<li><strong>修改评分规则（Proper Scoring Rules）：</strong> 引入新的计分方式。例如，回答“我不知道”得 0 分，答错扣分（或得分显著低于答对），答对得正分。这样模型在没把握时会倾向于选择“我不知道”以避免惩罚。</li>
+<li><strong>校准训练（Calibration）：</strong> 在后训练（Post-training）阶段，明确奖励模型输出真实的置信度，而不是仅仅奖励最终答案的匹配。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://arxiv.org/html/2509.04664v1/gpt4_calibration_pretrain.png" alt="GPT-4 预训练与 PPO 后的校准曲线：展示置信度与准确率的对应关系"></p>
+<h2>还有更好的解决方案吗？</h2>
+<p>这篇论文主要探讨的是<strong>成因和评估</strong>，在具体的技术消除手段上，社区还有其他路线：</p>
+<ul>
+<li><strong>RAG（检索增强生成）：</strong> 让模型去查资料而不是背书。这是目前工程上最有效的手段，但如果模型本身倾向于“瞎编”，RAG 也可能被模型用来编造虚假的引用。</li>
+<li><strong>CoT（思维链）与自我反思：</strong> 让模型在输出前先推理或检查。这能缓解部分逻辑错误，但对事实性幻觉帮助有限。</li>
+<li><strong>RLHF（人类反馈强化学习）：</strong> 目前的 RLHF 往往加剧了幻觉，因为人类标注员倾向于喜欢“看起来有帮助”的回答，导致模型学会了迎合人类偏好而非坚持事实。</li>
+</ul>
+<p><strong>本论文的优势在于治本：</strong> 如果不改变“考试规则”，上述技术手段都只是在通过过拟合来掩盖问题。</p>
+<p>要深入理解这篇论文，我们需要拆解它提出的几个核心概念。其核心逻辑是：<strong>模型幻觉不仅是能力问题，更是激励机制导致的策略选择。</strong></p>
+<h2>关键词解析</h2>
+<h3>1. IIV (Is-It-Valid) 二元分类问题</h3>
+<p>这是论文提出的核心理论框架。</p>
+<ul>
+<li><strong>传统视角：</strong> 生成文本是一个复杂的序列预测问题。</li>
+<li><strong>论文视角：</strong> 我们可以把生成过程简化为：模型在脑子里构建很多个候选句子，然后判断“这句话是不是真的/有效的”（Is this valid?）。</li>
+<li><strong>结论：</strong> 这是一个二分类问题（Yes/No）。统计学告诉我们，二分类器总会有误差（False Positive）。当模型错误地把一个“无效/虚假”的句子判断为“有效”并输出时，幻觉就产生了。论文证明，生成错误的概率与这个二分类器的错误率成正比。</li>
+</ul>
+<h3>2. 应试行为 (Test-Taking Behavior)</h3>
+<p>这是对模型在 Post-training 阶段行为的形象比喻。</p>
+<ul>
+<li><strong>现象：</strong> 学生在做多项选择题时，如果选错和不选都不得分，那最佳策略就是**“蒙一个”**（Guessing）。</li>
+<li><strong>映射到 AI：</strong> 现有的 Leaderboard（如 MMLU）大多不设“倒扣分”机制。模型发现，遇到不懂的问题，只要自信地输出一个答案，还有 25% 的概率蒙对；如果输出“不知道”，得分率为 0%。</li>
+<li><strong>结果：</strong> RLHF（强化学习）过程实际上是在训练模型成为一个“不仅要懂，不懂也要装懂”的<strong>做题家</strong>。</li>
+</ul>
+<h3>3. 社会技术缓解 (Socio-technical Mitigation)</h3>
+<p>这是论文提出的解决方案类型。</p>
+<ul>
+<li><strong>技术缓解：</strong> 改模型结构、加数据、改算法。</li>
+<li><strong>社会技术缓解：</strong> 改变<strong>人</strong>设定的规则和标准。</li>
+<li><strong>具体措施：</strong> 呼吁整个 AI 社区（OpenAI, Google, Meta 等）修改 Leaderboard 的评分标准。如果大家开始重视并奖励“诚实的不知”，模型厂商自然会调整训练目标，产出更诚实的模型。</li>
+</ul>
+<h3>4. 固有幻觉 vs. 外在幻觉 (Intrinsic vs. Extrinsic Hallucinations)</h3>
+<p>论文对幻觉进行了分类：</p>
+<ul>
+<li><strong>固有幻觉（Intrinsic）：</strong> 模型输出的内容与**上下文（Prompt）**矛盾。
+<ul>
+<li><em>例子：</em> 用户问“DeepSeek 里有几个 D？”，模型回答“3 个”。这属于逻辑处理失败。</li>
+</ul>
+</li>
+<li><strong>外在幻觉（Extrinsic）：</strong> 模型输出的内容与<strong>训练数据或外部事实</strong>矛盾。
+<ul>
+<li><em>例子：</em> 模型编造了一个不存在的论文标题。这是本文关注的重点，源于预训练数据的统计压力。</li>
+</ul>
+</li>
+</ul>
+<h3>5. 适当评分规则 (Proper Scoring Rules)</h3>
+<p>这是一个统计学术语。</p>
+<ul>
+<li><strong>定义：</strong> 一种评分函数，只有当预测者报告其真实的信念概率时，期望得分才最高。</li>
+<li><strong>应用：</strong> 在 AI 评估中，如果我们使用 Brier Score 或 Log Scoring，模型为了最大化分数，就必须输出它内心真实的置信度（比如“我有 60% 把握是对的”），而不是由着性子瞎猜。</li>
+</ul>
+<hr>
+<h3>总结</h3>
+<p>这篇论文给我们的启示是**“评估即指挥棒”**：</p>
+<ol>
+<li><strong>幻觉是统计必然：</strong> 不要指望单纯通过预训练消除所有幻觉。</li>
+<li><strong>激励机制通过 RLHF 放大幻觉：</strong> 现在的榜单逼着模型去“猜”，模型被迫学会了过度自信。</li>
+<li><strong>诚实需要被奖励：</strong> 必须改革 Leaderboard，给“我不知道”或低置信度回答合理的生存空间。</li>
+<li><strong>从源头治起：</strong> 只有当评估标准变了，训练目标才会变，我们才能得到真正值得信赖（Trustworthy）的 AI。</li>
+</ol>
+<h1>参考资料</h1>
+<ul>
+<li><a href="https://www.arxiv.org/pdf/2509.04664">论文原文 (arXiv)</a></li>
+<li><a href="https://openai.com">OpenAI 博客</a></li>
+</ul>
+<p><em>编辑：2025-12-25</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>Domain Specific Language | LZ AI NOTE</title>
+  <meta name="description" content="Domain Specific Language Virtual dom 虚拟dom操作集合 1. creat VNode A （简称 v a） 2. create Dom A (简称 d a) from v a 3. change v a to v b 4. diff v a and v b to patches 5. patch d a from pa…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/other/%E4%B8%80%E4%BA%9BDSL%E5%BA%94%E7%94%A8">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="Domain Specific Language | LZ AI NOTE">
+  <meta property="og:description" content="Domain Specific Language Virtual dom 虚拟dom操作集合 1. creat VNode A （简称 v a） 2. create Dom A (简称 d a) from v a 3. change v a to v b 4. diff v a and v b to patches 5. patch d a from pa…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/other/%E4%B8%80%E4%BA%9BDSL%E5%BA%94%E7%94%A8">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Domain Specific Language","description":"Domain Specific Language Virtual dom 虚拟dom操作集合 1. creat VNode A （简称 v a） 2. create Dom A (简称 d a) from v a 3. change v a to v b 4. diff v a and v b to patches 5. patch d a from pa…","url":"https://wizardpisces.github.io/blog/tech/other/%E4%B8%80%E4%BA%9BDSL%E5%BA%94%E7%94%A8","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/other/%E4%B8%80%E4%BA%9BDSL%E5%BA%94%E7%94%A8","dateModified":"2025-06-20","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Domain Specific Language</h1><h1>Domain Specific Language</h1>
+<h2>Virtual-dom</h2>
+<p>虚拟dom操作集合</p>
+<ol>
+<li>creat VNode-A （简称 v-a）</li>
+<li>create Dom-A (简称 d-a) from v-a</li>
+<li>change v-a to v-b</li>
+<li>diff v-a and v-b to patches</li>
+<li>patch d-a from patches</li>
+<li>continue 3</li>
+</ol>
+<pre><code class="language-javascript">var h = require('virtual-dom/h');
+var diff = require('virtual-dom/diff');
+var patch = require('virtual-dom/patch');
+var createElement = require('virtual-dom/create-element');
+
+
+function render(count)  {
+    return h('div', {}, [String(count)]);
+}
+
+// 2: Initialise the document
+var count = 0;      // We need some app data. Here we just store a count.
+var tree = render(count);              // 1: 创建 VNode
+var rootNode = createElement(tree);     // 2. 生成实际的 DOM
+document.body.appendChild(rootNode);  // 3. 挂载
+count++;
+var newTree = render(count);
+var patches = diff(tree, newTree); // VNode diff
+rootNode = patch(rootNode, patches); // Patch
+</code></pre>
+<h3>Tools</h3>
+<ul>
+<li><a href="https://github.com/twilson63/html2hscript">html2hscript</a> - Parse HTML into hyperscript</li>
+<li><a href="http://html2hscript.herokuapp.com/">html2hscript.herokuapp.com</a> - Online Tool that converts html snippets to hyperscript</li>
+<li><a href="https://github.com/unframework/html2hyperscript">html2hyperscript</a> - Original commandline utility to convert legacy HTML markup into hyperscript</li>
+</ul>
+<h3>Reference</h3>
+<ul>
+<li><a href="https://github.com/hyperhype/hyperscript">hyperscript</a></li>
+<li><a href="https://github1s.com/Matt-Esch/virtual-dom/blob/HEAD/README.md">virtual-dom</a></li>
+<li><a href="https://github.com/snabbdom/snabbdom">snabbdom</a></li>
+</ul>
+<h2>HTML Manipulation</h2>
+<pre><code class="language-ts">import MarkdownIt from 'markdown-it'
+import { parseDocument, DomUtils } from 'htmlparser2'
+import renderDom from 'dom-serializer'
+import { Element } from 'domhandler'
+
+let html = new MarkdownIt(options).render(mdContent)
+const rootDom = parseDocument(html) // parse dom to JSON so we can easily manipulate
+
+// inject hash tag to header tag
+let hElements = rootDom.children.filter(
+        rootSibling =&gt; rootSibling instanceof Element &amp;&amp; ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(rootSibling.tagName)
+    ) as Element[]
+
+hElements.forEach(ele =&gt; {
+    let hName = DomUtils.textContent(ele)
+    ele.attribs['id'] = hName
+    // inject hash link
+    let newEle = new Element('a', { href: '#' + hName }, undefined)
+    DomUtils.prependChild(ele, newEle)
+})
+
+html = renderDom(rootDom) // serialize json dom to string
+
+document.body.appendChild(html);  // 挂载
+
+</code></pre>
+<h3>Ecosystem</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/fb55/htmlparser2">htmlparser2</a></td>
+<td>Fast &amp; forgiving HTML/XML parser</td>
+</tr>
+<tr>
+<td><a href="https://github.com/fb55/domhandler">domhandler</a></td>
+<td>Handler for htmlparser2 that turns documents into a DOM</td>
+</tr>
+<tr>
+<td><a href="https://github.com/fb55/domutils">domutils</a></td>
+<td>Utilities for working with domhandler’s DOM</td>
+</tr>
+<tr>
+<td><a href="https://github.com/fb55/css-select">css-select</a></td>
+<td>CSS selector engine, compatible with domhandler’s DOM</td>
+</tr>
+<tr>
+<td><a href="https://github.com/cheeriojs/cheerio">cheerio</a></td>
+<td>The jQuery API for domhandler’s DOM</td>
+</tr>
+<tr>
+<td><a href="https://github.com/cheeriojs/dom-serializer">dom-serializer</a></td>
+<td>Serializer for domhandler’s DOM</td>
+</tr>
+</tbody>
+</table>
+<h2>Webpack</h2>
+<pre><code class="language-ts">const parser = require('@babel/parser')
+import traverse from '@babel/traverse'
+const babel = require('@babel/core')
+
+// parse to json
+const ast = parser.parse(content, {
+    sourceType: 'module'
+  })
+const dependencies: Record&lt;string, string&gt; = {}
+
+// traverse with type visitor hooks to manipulate
+traverse(ast, {
+    ImportDeclaration({ node }) {
+        const dirname = path.dirname(filename)
+        const newFile = path.join(dirname, node.source.value)
+
+        // collect file dependecies
+        dependencies[node.source.value] = newFile
+    }
+})
+
+// code generation from json
+const { code } = babel.transformFromAstSync(ast, content, {
+    presets: [&quot;@babel/preset-env&quot;]
+})!
+
+</code></pre>
+<h2>总结</h2>
+<p>一般compiler操作集合：</p>
+<ol>
+<li>parse raw string to VNode</li>
+<li>traverse VNode (visitor hooks with manipulation: insert , remove, modify, replace etc )</li>
+<li>code generation or Serialize VNode to string</li>
+</ol>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>参考资料 | LZ AI NOTE</title>
+  <meta name="description" content="论文发布时间：2023 09 05 Princeton 大学发布的 CoALA （论文标题为《[Cognitive Architectures for Language Agents]》）是 AI Agent 领域最重要的 理论框架性 工作之一。 简单来说，这篇论文没有提出新的模型或算法，而是做了一件更有价值的事： 从认知科学和符号 AI 的数十年历史中提…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-agent/paper/Princeton%20-%20CoALA%20-%20Cognitive%20Architectures%20for%20Language%20Agents">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="参考资料 | LZ AI NOTE">
+  <meta property="og:description" content="论文发布时间：2023 09 05 Princeton 大学发布的 CoALA （论文标题为《[Cognitive Architectures for Language Agents]》）是 AI Agent 领域最重要的 理论框架性 工作之一。 简单来说，这篇论文没有提出新的模型或算法，而是做了一件更有价值的事： 从认知科学和符号 AI 的数十年历史中提…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-agent/paper/Princeton%20-%20CoALA%20-%20Cognitive%20Architectures%20for%20Language%20Agents">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"参考资料","description":"论文发布时间：2023 09 05 Princeton 大学发布的 CoALA （论文标题为《[Cognitive Architectures for Language Agents]》）是 AI Agent 领域最重要的 理论框架性 工作之一。 简单来说，这篇论文没有提出新的模型或算法，而是做了一件更有价值的事： 从认知科学和符号 AI 的数十年历史中提…","url":"https://wizardpisces.github.io/blog/tech/ai-agent/paper/Princeton%20-%20CoALA%20-%20Cognitive%20Architectures%20for%20Language%20Agents","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-agent/paper/Princeton%20-%20CoALA%20-%20Cognitive%20Architectures%20for%20Language%20Agents","dateModified":"2026-03-10","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>参考资料</h1><p><em>论文发布时间：2023-09-05</em></p>
+<p>Princeton 大学发布的 <strong>CoALA</strong>（论文标题为《<a href="https://arxiv.org/abs/2309.02427">Cognitive Architectures for Language Agents</a>》）是 AI Agent 领域最重要的<strong>理论框架性</strong>工作之一。
+简单来说，这篇论文没有提出新的模型或算法，而是做了一件更有价值的事：<strong>从认知科学和符号 AI 的数十年历史中提取精髓，为语言 Agent 建立了一套完整的&quot;建筑蓝图&quot;</strong>——定义了 Agent 应该有哪些模块、模块之间如何交互、决策循环如何运转。这套框架叫 CoALA（Cognitive Architectures for Language Agents），它让我们第一次有了统一的语言来描述、比较和设计不同的 Agent 系统。</p>
+<h2>CoALA 解决了什么问题？</h2>
+<p><strong>核心问题：Agent 领域百花齐放，但缺乏统一的&quot;建筑规范&quot;，每个人都在用自己的术语造自己的房子。</strong></p>
+<p>2023 年是 LLM Agent 爆发的一年——ReAct、Reflexion、Voyager、Generative Agents、Tree of Thoughts、AutoGPT 等工作层出不穷。但如果你仔细看这些论文，会发现一个严重的问题：</p>
+<pre><code>┌─────────────────────────────────────────────────────────────┐
+│              Agent 领域的&quot;术语混乱&quot;                           │
+│                                                             │
+│  ReAct 说：      &quot;我用 Thought-Action-Observation 循环&quot;       │
+│  Reflexion 说：  &quot;我有 Self-Reflection 和 Episodic Memory&quot;    │
+│  Voyager 说：    &quot;我有 Skill Library 和 Curriculum&quot;            │
+│  Generative Agents 说： &quot;我有 Memory Stream 和 Reflection&quot;    │
+│  Tree of Thoughts 说：  &quot;我用 BFS/DFS 做 Deliberate Search&quot;   │
+│                                                             │
+│  → 它们在说同一件事吗？不同的事？                               │
+│  → 哪些设计选择是本质性的，哪些只是实现细节？                   │
+│  → 为什么有的 Agent 有记忆有的没有？该不该有？                   │
+│  → 怎么系统性地设计一个新的 Agent？                             │
+│                                                             │
+│  没人知道。因为没有统一的框架。                                 │
+└─────────────────────────────────────────────────────────────┘
+</code></pre>
+<p><strong>CoALA 的贡献：给 Agent 领域提供了等价于强化学习中&quot;MDP 框架&quot;的东西。</strong> 正如 MDP（马尔可夫决策过程）用&quot;状态-动作-奖励-转移&quot;四个概念统一了强化学习的语言，CoALA 用&quot;记忆-动作-决策&quot;三个维度统一了 Agent 的设计空间。</p>
+<h2>这个问题真实存在吗？</h2>
+<p><strong>极其真实，直接制约了整个领域的发展效率。</strong></p>
+<ul>
+<li><strong>学术交流低效：</strong> 每篇论文都发明自己的术语体系，读者需要逐篇翻译才能比较不同方法。Voyager 的&quot;Skill Library&quot;和 Generative Agents 的&quot;Memory Stream&quot;本质上都是长期记忆的变体，但没人这么说。</li>
+<li><strong>工程重复劳动：</strong> 企业在构建 Agent 时，每个团队都从头搭建，缺乏标准化的模块接口。就像机器人领域在有 ROS 之前的混乱状态。</li>
+<li><strong>设计缺乏指导：</strong> 当你要构建一个新的 Agent 时，你不知道应该从哪些维度思考——该不该加记忆？加什么类型的记忆？决策循环该多复杂？没有框架，这些都只能凭直觉。</li>
+</ul>
+<h2>核心洞察一：LLM 就是&quot;概率化的产生式系统&quot;</h2>
+<p>论文最深刻的理论贡献是建立了 <strong>LLM 与经典产生式系统（Production System）的对应关系</strong>。</p>
+<pre><code>┌──────────────────────────────────────────────────────────────┐
+│         经典产生式系统  vs  大语言模型                          │
+├──────────────────┬───────────────────────────────────────────┤
+│  产生式系统        │  LLM                                     │
+├──────────────────┼───────────────────────────────────────────┤
+│  离散规则集合      │  十亿级参数中的隐式规则                     │
+│  X Y Z → X W Z    │  P(continuation | prompt)                │
+│  确定性匹配与执行  │  概率性采样                                │
+│  人工编写每条规则  │  从互联网语料预训练习得                     │
+│  适用于逻辑谓词    │  适用于任意文本                            │
+├──────────────────┼───────────────────────────────────────────┤
+│  核心局限          │  核心局限                                 │
+│  需要大量手写规则  │  不透明、随机、难以控制                     │
+│  仅限逻辑可表达域  │  可能产生幻觉                              │
+├──────────────────┼───────────────────────────────────────────┤
+│  核心优势          │  核心优势                                 │
+│  可解释、可控      │  灵活、零样本泛化、覆盖任意文本             │
+└──────────────────┴───────────────────────────────────────────┘
+</code></pre>
+<p><strong>为什么这个类比重要？</strong> 因为产生式系统在 60 年代就遇到了和今天 LLM 完全相同的问题——单纯的规则匹配不够用，需要更高层的<strong>控制流</strong>来决定何时执行哪条规则。认知科学家花了 30 年时间发展出<strong>认知架构</strong>（如 Soar、ACT-R）来解决这个问题。CoALA 的核心洞察是：<strong>这些认知架构中的设计原则，可以直接移植到 LLM Agent 上。</strong></p>
+<blockquote>
+<p>从产生式系统到认知架构的演进历程——字符串操作 → 算法 → 智能体——正在被 LLM 领域以加速度重演：Prompt → Prompt Chain → Language Agent。</p>
+</blockquote>
+<h2>核心洞察二：Agent = 记忆 + 动作空间 + 决策循环</h2>
+<p>CoALA 将 Agent 的设计分解为三个正交维度，这是全文最核心的架构：</p>
+<pre><code>┌─────────────────────────────────────────────────────────────┐
+│                   CoALA 架构总览                              │
+│                                                             │
+│  ┌─────────────────────────────────────────────────────┐    │
+│  │                  决策循环（Decision Cycle）            │    │
+│  │                                                     │    │
+│  │  ┌──────────┐    ┌──────────┐    ┌──────────┐       │    │
+│  │  │  提议     │───→│  评估    │───→│  选择     │       │    │
+│  │  │ Propose  │    │ Evaluate │    │ Select   │       │    │
+│  │  └──────────┘    └──────────┘    └──────────┘       │    │
+│  │       ↑ 推理 + 检索（规划阶段）        │ 执行阶段    │    │
+│  └───────┼────────────────────────────────┼─────────┘    │
+│          │                                ↓              │
+│  ┌───────┴─────────┐         ┌────────────┴──────────┐  │
+│  │    记忆模块       │         │      动作空间          │  │
+│  │                  │         │                       │  │
+│  │  工作记忆         │    内部: │  推理（更新工作记忆）   │  │
+│  │  情景记忆         │←───────│  检索（读长期记忆）     │  │
+│  │  语义记忆         │         │  学习（写长期记忆）     │  │
+│  │  程序记忆         │    外部: │                       │  │
+│  │  (LLM + 代码)    │         │  接地（与环境交互）     │  │
+│  └──────────────────┘         └───────────────────────┘  │
+└─────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3>维度一：记忆（Memory）</h3>
+<p>CoALA 借鉴认知心理学，将 Agent 的信息存储分为四类：</p>
+<table>
+<thead>
+<tr>
+<th>记忆类型</th>
+<th>存什么</th>
+<th>对应 Agent 中的实例</th>
+<th>读/写</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>工作记忆</strong></td>
+<td>当前决策周期的活跃信息</td>
+<td>Prompt 上下文、当前目标、中间推理结果</td>
+<td>每轮读写</td>
+</tr>
+<tr>
+<td><strong>情景记忆</strong></td>
+<td>过去的经历序列</td>
+<td>Reflexion 的失败轨迹、Generative Agents 的事件流</td>
+<td>可读可写</td>
+</tr>
+<tr>
+<td><strong>语义记忆</strong></td>
+<td>关于世界的知识</td>
+<td>RAG 的文档库、Reflexion 的反思总结</td>
+<td>可读可写</td>
+</tr>
+<tr>
+<td><strong>程序记忆</strong></td>
+<td>如何行动的知识</td>
+<td>LLM 权重（隐式）+ Agent 源代码（显式）</td>
+<td>隐式/显式</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键洞察：LLM 是无状态的，但 Agent 不是。</strong> LLM 每次调用之间不保持任何信息，但 Agent 需要跨多个 LLM 调用维持状态。工作记忆就是连接不同 LLM 调用的&quot;中央枢纽&quot;——它从长期记忆中检索信息、接收环境观察、存储推理结果，并将这些信息组装成下一次 LLM 调用的 Prompt。</p>
+<h3>维度二：动作空间（Action Space）</h3>
+<p>CoALA 将 Agent 的动作分为两大类四小类：</p>
+<pre><code>          动作空间
+         ╱        ╲
+      内部动作      外部动作
+     ╱  │  ╲           │
+  推理 检索 学习      接地（Grounding）
+   │    │    │         │
+  更新  读取  写入    与环境交互
+  工作  长期  长期    （物理/对话/数字）
+  记忆  记忆  记忆
+</code></pre>
+<p><strong>关键洞察：大多数现有 Agent 的动作空间严重不完整。</strong></p>
+<table>
+<thead>
+<tr>
+<th>Agent</th>
+<th>推理</th>
+<th>检索</th>
+<th>学习</th>
+<th>接地</th>
+<th>动作空间完整度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ReAct</td>
+<td>✓</td>
+<td>✗</td>
+<td>✗</td>
+<td>✓</td>
+<td>2/4</td>
+</tr>
+<tr>
+<td>Tree of Thoughts</td>
+<td>✓</td>
+<td>✗</td>
+<td>✗</td>
+<td>特殊</td>
+<td>1.5/4</td>
+</tr>
+<tr>
+<td>Reflexion</td>
+<td>✓</td>
+<td>✗</td>
+<td>部分</td>
+<td>✓</td>
+<td>2.5/4</td>
+</tr>
+<tr>
+<td>Voyager</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td><strong>4/4</strong></td>
+</tr>
+<tr>
+<td>Generative Agents</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td><strong>4/4</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>规律：Agent 越强大，动作空间越完整——但也意味着决策问题越复杂。</strong> Voyager 和 Generative Agents 之所以需要更精巧的手工设计决策流程，正是因为它们的动作空间大。这揭示了一个根本性的权衡：<strong>动作空间的丰富度 vs 决策的复杂度</strong>。</p>
+<h3>维度三：决策循环（Decision Making）</h3>
+<p>每个决策周期分为两个阶段：</p>
+<ol>
+<li><strong>规划阶段（Planning）：</strong> 通过推理和检索来提议、评估、选择动作</li>
+<li><strong>执行阶段（Execution）：</strong> 执行被选中的接地动作或学习动作</li>
+</ol>
+<p><strong>关键洞察：几乎所有现有 Agent 都还停留在&quot;直接生成单一动作&quot;阶段。</strong> 只有 Tree of Thoughts 和 LATS 开始探索&quot;提议多个候选→评估→选择&quot;这种更审慎的决策流程。这意味着 <strong>Agent 决策的&quot;深思熟虑&quot;能力是目前最大的未开发空间。</strong></p>
+<h2>核心洞察三：用 CoALA “X 光” 透视现有 Agent</h2>
+<p>CoALA 最实用的价值在于：<strong>它可以作为诊断工具，揭示现有 Agent 的设计缺陷和改进方向。</strong></p>
+<pre><code>┌──────────────────────────────────────────────────────────────┐
+│  用 CoALA 框架 X 光透视五个经典 Agent                          │
+│                                                              │
+│  ┌────────────┬──────────┬────────────┬──────────────┐       │
+│  │  Agent      │ 长期记忆  │ 内部动作    │  决策方式      │       │
+│  ├────────────┼──────────┼────────────┼──────────────┤       │
+│  │ SayCan     │ 无        │ 无          │ 评估（LLM+    │       │
+│  │            │          │            │  Value Fn）   │       │
+│  ├────────────┼──────────┼────────────┼──────────────┤       │
+│  │ ReAct      │ 无        │ 推理        │ 提议          │       │
+│  ├────────────┼──────────┼────────────┼──────────────┤       │
+│  │ Voyager    │ 程序      │ 推理+检索   │ 提议          │       │
+│  │            │ (技能库)  │  +学习      │              │       │
+│  ├────────────┼──────────┼────────────┼──────────────┤       │
+│  │ Generative │ 情景+语义 │ 推理+检索   │ 提议          │       │
+│  │ Agents     │          │  +学习      │              │       │
+│  ├────────────┼──────────┼────────────┼──────────────┤       │
+│  │ Tree of    │ 无        │ 推理        │ 提议+评估     │       │
+│  │ Thoughts   │          │            │  +选择        │       │
+│  └────────────┴──────────┴────────────┴──────────────┘       │
+│                                                              │
+│  → SayCan: 没有内部动作 → 无法推理，只能逐一评估固定技能         │
+│  → ReAct: 没有长期记忆 → 无法从经验中学习，每次从零开始          │
+│  → Voyager: 只有程序记忆 → 学的是&quot;怎么做&quot;，不记&quot;发生了什么&quot;       │
+│  → Gen. Agents: 决策只有提议 → 不评估不选择，可能做出次优决策     │
+│  → ToT: 没有外部接地 → 所有评估都靠 LLM 自己打分，不接触真实环境 │
+└──────────────────────────────────────────────────────────────┘
+</code></pre>
+<p><strong>每个 Agent 的弱点，恰好就是 CoALA 框架中它缺失的模块。</strong> 这不是巧合——CoALA 框架本身就是从对这些 Agent 的系统性分析中提炼出来的。</p>
+<h2>核心洞察四：程序记忆的双重性——LLM 权重 vs Agent 代码</h2>
+<p>这是论文中最微妙也最深刻的设计洞察：</p>
+<blockquote>
+<p><strong>Agent 的程序记忆有两种形态：LLM 权重中的隐式知识，和 Agent 源代码中的显式规则。两者是互补的，不是替代的。</strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>LLM 权重（隐式）</th>
+<th>Agent 代码（显式）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>灵活性</td>
+<td>极高，零样本泛化</td>
+<td>低，仅处理预设情况</td>
+</tr>
+<tr>
+<td>可控性</td>
+<td>差，黑盒</td>
+<td>强，确定性执行</td>
+</tr>
+<tr>
+<td>可扩展性</td>
+<td>需要重新训练</td>
+<td>直接修改代码</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td>模糊推理、常识</td>
+<td>结构化搜索、精确算法</td>
+</tr>
+</tbody>
+</table>
+<p><strong>实践启示：</strong> 代码应该被&quot;节俭地&quot;使用——只用于实现那些 LLM 做不好的通用算法（如树搜索弥补自回归生成的短视性），而不是用于硬编码领域知识。Tree of Thoughts 用代码实现 BFS/DFS、LATS 用代码实现 MCTS，都是这一原则的完美体现。</p>
+<p>更激进的是，Agent 甚至可以<strong>自己修改自己的代码</strong>。Voyager 已经在做这件事——它生成新的 Minecraft 技能函数并存入技能库。但论文也警告：<strong>修改程序记忆是所有学习形式中风险最高的</strong>——它可能引入 Bug，也可能让 Agent 绕过设计者的安全意图。</p>
+<h2>核心洞察五：Agent 的边界问题——什么算&quot;内部&quot;什么算&quot;外部&quot;？</h2>
+<p>对于物理世界的机器人，内外边界很清楚。但对于数字世界的 Agent，这个问题出人意料地微妙：</p>
+<ul>
+<li>Wikipedia 是 Agent 的&quot;语义记忆&quot;（内部）还是&quot;外部环境&quot;？</li>
+<li>代码执行是&quot;内部推理&quot;还是&quot;外部接地&quot;？</li>
+<li>ToT 的&quot;提议者&quot;和&quot;评估者&quot;是一个 Agent 的两个模块，还是两个协作的 Agent？</li>
+</ul>
+<p>论文给出了两个判断标准：</p>
+<ol>
+<li><strong>可控性（Controllability）：</strong> 如果资源只有 Agent 自己能修改（如离线 Wikipedia 副本），那是内部记忆；如果其他实体也能修改（如在线 Wikipedia），那是外部环境。</li>
+<li><strong>耦合性（Coupling）：</strong> 如果两个组件相互依赖、为彼此设计，那是同一个 Agent 的模块；如果各自独立可用，那更适合看作多 Agent 系统。</li>
+</ol>
+<p><strong>实践启示：</strong> 这不是纯理论问题。<strong>&quot;内部&quot;意味着可信，&quot;外部&quot;意味着需要验证。</strong> 如果你把一个不可控的资源当作内部记忆来信任，Agent 就可能被外部篡改所误导。</p>
+<h2>核心洞察六：Agent 设计的实操指南</h2>
+<p>论文最后给出了一套系统性的 Agent 设计流程（假设外部环境和动作空间已给定）：</p>
+<pre><code>步骤 1: 确定记忆模块
+  ├── 需要记住过去经历吗？ → 情景记忆
+  ├── 需要存储领域知识吗？ → 语义记忆
+  ├── 需要积累可复用技能吗？ → 程序记忆
+  └── 需要跟踪对话状态吗？ → 工作记忆
+
+步骤 2: 定义动作空间
+  ├── 哪些记忆需要读权限？（检索动作）
+  ├── 哪些记忆需要写权限？（学习动作）
+  └── 哪些记忆不应被 Agent 修改？（安全约束）
+
+步骤 3: 设计决策流程
+  ├── 简单任务 → ReAct 式（直接提议+执行）
+  ├── 需要探索 → ToT/LATS 式（提议+评估+选择）
+  └── 性能 vs 通用性的权衡：
+       越定制 = 越强但越不通用（Voyager）
+       越通用 = 越弱但适用面广（ReAct）
+</code></pre>
+<p><strong>以&quot;个性化零售助手&quot;为例：</strong></p>
+<ul>
+<li><strong>语义记忆：</strong> 商品目录（只读）</li>
+<li><strong>情景记忆：</strong> 每位客户的购买历史和对话记录（可读可写）</li>
+<li><strong>程序记忆：</strong> 查询商品数据库的函数（只读，Agent 不应修改自己的查询逻辑）</li>
+<li><strong>工作记忆：</strong> 当前对话状态</li>
+<li><strong>决策：</strong> 检索情景记忆了解用户偏好 → 推理生成搜索意图 → 评估搜索结果是否满足意图 → 学习（对话结束后摘要存入情景记忆）</li>
+</ul>
+<h2>核心洞察七：数字 Agent 的独特优势——可回退、可克隆、可并行</h2>
+<p>论文指出了一个被严重低估的事实：<strong>数字 Agent 不受生物限制。</strong></p>
+<ul>
+<li><strong>可回退：</strong> 物理世界的动作不可撤销（打碎的花瓶不会自动复原），但数字 Agent 可以随时回到任意历史状态——这使得树搜索成为可能。</li>
+<li><strong>可克隆：</strong> 人类无法自我复制，但数字 Agent 可以生成百万个副本并行探索不同路径。</li>
+<li><strong>可并行：</strong> 人一生只能经历一条时间线，但 Agent 可以同时运行无数个&quot;平行宇宙&quot;。</li>
+</ul>
+<blockquote>
+<p>这意味着<strong>照搬人类认知架构可能不是最优的</strong>——数字 Agent 应该利用这些独特优势，发展出超越人类认知模式的决策策略。</p>
+</blockquote>
+<hr>
+<h2>延伸思考：CoALA 的预见性和局限性</h2>
+<h3>CoALA 预见对了什么？</h3>
+<p>论文发表于 2023 年 9 月，之后 Agent 领域的发展高度验证了 CoALA 的判断：</p>
+<ul>
+<li><strong>&quot;模块化 Agent&quot;成为主流：</strong> LangGraph、CrewAI、AutoGen 等框架都走向了模块化设计，与 CoALA 的&quot;记忆-动作-决策&quot;三维分解高度吻合。</li>
+<li><strong>&quot;自适应检索&quot;成为热点：</strong> Self-RAG、FLARE 等方法让 Agent 学会&quot;什么时候该检索&quot;——正是 CoALA 指出的&quot;检索应该是决策的一部分&quot;。</li>
+<li><strong>&quot;学习&quot;维度被大幅拓展：</strong> 从 Voyager 的技能库到 MemGPT 的层次化记忆，Agent 的学习能力不再局限于 In-context learning 或 Fine-tuning。</li>
+</ul>
+<h3>CoALA 的局限在哪？</h3>
+<ul>
+<li><strong>框架的抽象层级偏高：</strong> CoALA 告诉你&quot;应该有记忆模块&quot;，但不告诉你&quot;用向量数据库还是 KV 缓存来实现&quot;。从框架到落地之间仍有巨大的工程鸿沟。</li>
+<li><strong>多 Agent 场景覆盖不足：</strong> CoALA 主要聚焦单 Agent 架构。但 2024-2025 年的趋势表明，多 Agent 协作（如 CAMEL、MetaGPT）正在成为同等重要的方向。</li>
+<li><strong>安全性讨论偏浅：</strong> 论文提到了&quot;Agent 不应修改自己的决策代码&quot;，但对 Agent 安全的深层问题（如目标漂移、权限逃逸）缺乏系统分析。</li>
+</ul>
+<h2>总结</h2>
+<p>CoALA 是一篇罕见的&quot;元论文&quot;——它不解决具体问题，而是为整个领域提供思考工具。其核心贡献：</p>
+<ol>
+<li><strong>LLM = 概率化产生式系统：</strong> 这一类比将 60 年认知科学的积累引入了 Agent 设计，是全文最深刻的理论贡献。</li>
+<li><strong>记忆-动作-决策三维框架：</strong> 为比较和设计 Agent 提供了标准化语言，终结了术语混乱。</li>
+<li><strong>动作空间四分法：</strong> 推理、检索、学习、接地——让&quot;Agent 能做什么&quot;变得可枚举、可对比。</li>
+<li><strong>&quot;完整度&quot;作为诊断工具：</strong> 通过框架可以快速识别任何 Agent 的设计缺陷——缺什么模块，就可能弱在哪里。</li>
+<li><strong>代码与 LLM 的互补性：</strong> 用代码实现通用算法弥补 LLM 短板，用 LLM 提供灵活推理弥补代码僵化——这一原则至今仍是 Agent 设计的黄金法则。</li>
+</ol>
+<p>CoALA 在 Agent 领域的地位，类似于 MDP 之于强化学习、Transformer 论文之于 NLP——<strong>它定义了我们讨论问题的方式本身</strong>。</p>
+<h1>参考资料</h1>
+<ul>
+<li><a href="https://arxiv.org/abs/2309.02427">arXiv 论文链接</a></li>
+<li><a href="https://github.com/ysymyth/awesome-language-agents">GitHub: Awesome Language Agents (CoALA-based)</a></li>
+<li><a href="https://arxiv.org/abs/2210.03629">ReAct: Synergizing Reasoning and Acting</a></li>
+<li><a href="https://arxiv.org/abs/2305.16291">Voyager: An Open-Ended Embodied Agent</a></li>
+<li><a href="https://arxiv.org/abs/2304.03442">Generative Agents: Interactive Simulacra of Human Behavior</a></li>
+<li><a href="https://arxiv.org/abs/2205.03854">Soar Cognitive Architecture</a></li>
+</ul>
+<p><em>编辑：2026-03-10</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

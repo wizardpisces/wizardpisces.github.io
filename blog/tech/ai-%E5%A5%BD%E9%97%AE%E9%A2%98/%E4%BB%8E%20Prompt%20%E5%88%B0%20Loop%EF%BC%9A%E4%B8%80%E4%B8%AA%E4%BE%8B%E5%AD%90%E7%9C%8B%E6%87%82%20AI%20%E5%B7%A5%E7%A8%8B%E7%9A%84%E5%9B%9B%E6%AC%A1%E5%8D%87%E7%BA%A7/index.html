@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>从 Prompt 到 Loop Engineering：一个简单例子看懂 AI 工程的四次升级 | LZ AI NOTE</title>
+  <meta name="description" content="从 Prompt 到 Loop Engineering：一个简单例子看懂 AI 工程的四次升级 最近又冒出一个词：Loop Engineering。 Prompt Engineering、Context Engineering、Harness Engineering，再加上 Loop Engineering。这样的术语生产速度，上一次见到还是在鼎盛时期的前…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E4%BB%8E%20Prompt%20%E5%88%B0%20Loop%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%E7%9A%84%E5%9B%9B%E6%AC%A1%E5%8D%87%E7%BA%A7">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="从 Prompt 到 Loop Engineering：一个简单例子看懂 AI 工程的四次升级 | LZ AI NOTE">
+  <meta property="og:description" content="从 Prompt 到 Loop Engineering：一个简单例子看懂 AI 工程的四次升级 最近又冒出一个词：Loop Engineering。 Prompt Engineering、Context Engineering、Harness Engineering，再加上 Loop Engineering。这样的术语生产速度，上一次见到还是在鼎盛时期的前…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E4%BB%8E%20Prompt%20%E5%88%B0%20Loop%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%E7%9A%84%E5%9B%9B%E6%AC%A1%E5%8D%87%E7%BA%A7">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"从 Prompt 到 Loop Engineering：一个简单例子看懂 AI 工程的四次升级","description":"从 Prompt 到 Loop Engineering：一个简单例子看懂 AI 工程的四次升级 最近又冒出一个词：Loop Engineering。 Prompt Engineering、Context Engineering、Harness Engineering，再加上 Loop Engineering。这样的术语生产速度，上一次见到还是在鼎盛时期的前…","url":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E4%BB%8E%20Prompt%20%E5%88%B0%20Loop%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%E7%9A%84%E5%9B%9B%E6%AC%A1%E5%8D%87%E7%BA%A7","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E4%BB%8E%20Prompt%20%E5%88%B0%20Loop%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%E7%9A%84%E5%9B%9B%E6%AC%A1%E5%8D%87%E7%BA%A7","dateModified":"2026-07-29","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>从 Prompt 到 Loop Engineering：一个简单例子看懂 AI 工程的四次升级</h1><h1>从 Prompt 到 Loop Engineering：一个简单例子看懂 AI 工程的四次升级</h1>
+<p>最近又冒出一个词：Loop Engineering。</p>
+<p>Prompt Engineering、Context Engineering、Harness Engineering，再加上 Loop Engineering。这样的术语生产速度，上一次见到还是在鼎盛时期的前端生态。</p>
+<p>先放下名字。这四个概念各自回答一个问题：</p>
+<pre><code class="language-text">Prompt Engineering
+这次怎么说
+
+Context Engineering
+这次给模型看什么
+
+Harness Engineering
+这次运行允许模型做什么
+
+Loop Engineering
+这次运行结束后，系统做什么
+</code></pre>
+<p>这不是标准分层。边界有重叠，一个框架也可能包办其中几层。把工程边界一层层向外画，至少能帮我们判断手头的问题该改 Prompt，还是该动系统。</p>
+<p>下面只处理一个任务：</p>
+<blockquote>
+<p>写一条“夏日读书会”活动文案，不超过 100 字，不能出现“全网最低”，完成后交给运营审核。</p>
+</blockquote>
+<h2>Prompt Engineering：把要求说清楚</h2>
+<p>最初的输入可能只有一句：</p>
+<pre><code class="language-text">写一条活动文案。
+</code></pre>
+<p>模型不知道活动名称、受众、长度和语气。把要求补全：</p>
+<pre><code class="language-text">请写一条“夏日读书会”的活动文案。
+
+要求：
+1. 不超过 100 字
+2. 面向 20～35 岁读者
+3. 语气轻松，不要过度营销
+4. 不得出现“全网最低”
+</code></pre>
+<p>Prompt Engineering 管任务描述、约束、输出格式和示例。范围限于一次模型调用。</p>
+<p>Prompt 写清了格式，活动时间、地点和报名方式仍然没给。模型只能留空，或者补出一组看起来合理的数据。</p>
+<p>继续打磨措辞没有用。这里缺的是资料。</p>
+<h2>Context Engineering：决定模型看见什么</h2>
+<p>活动资料散落在不同位置：</p>
+<pre><code class="language-text">活动名称：夏日读书会
+时间：7 月 26 日 19:30
+地点：梧桐书店二楼
+报名方式：小程序预约
+目标读者：20～35 岁
+品牌语气：克制、自然，不制造稀缺感
+</code></pre>
+<p>过去发布过的文案也要给模型看。风格可以参考，旧地址不能照抄。</p>
+<p>一次调用里，模型实际看到的内容可能是：</p>
+<pre><code class="language-text">系统规则
++ 用户任务
++ 当前活动资料
++ 品牌规范
++ 两条历史文案
++ 对话记录
+</code></pre>
+<p>这些内容共同组成一次调用的 Context，Prompt 只是其中一项。</p>
+<p>Context Engineering 关心信息的选择、组织和更新：哪些资料必须放入，哪些按需检索，发生冲突时信哪一份，内容过长时先删什么。</p>
+<p>把全年活动、全部品牌文档和几百条历史文案一次塞进去，小流量阶段也许能跑。请求量（QPS）上去后，延迟和 Token 成本会直接暴露，无关内容还会干扰当前任务。建议只取当前活动、有效规则和少量相似样例。</p>
+<p>模型拿到了资料，仍然只能返回一段文本。它不会主动读取活动库，不知道敏感词表刚刚更新，也不能把结果提交给运营。</p>
+<h2>Harness Engineering：给 Agent 搭工作台</h2>
+<p>Harness 是包在模型外面的运行系统。它为一次 Agent 运行准备上下文、工具和权限，也处理工具报错与超时。</p>
+<p>文案 Agent 的工作台不复杂：</p>
+<pre><code class="language-text">get_event
+读取最新活动资料
+
+get_brand_rules
+读取当前品牌规范和敏感词
+
+save_draft
+保存文案草稿
+
+submit_for_review
+提交运营审核
+</code></pre>
+<p>模型不需要知道数据库连接方式。它调用 <code>get_event</code>，Harness 执行查询，把结果放回上下文。模型继续写文案、保存草稿、提交审核。</p>
+<p>一次运行变成：</p>
+<pre><code class="language-text">准备上下文
+     ↓
+调用模型
+     ↓
+模型选择工具
+     ↓
+Harness 执行工具
+     ↓
+结果放回上下文
+     ↓
+模型继续处理
+</code></pre>
+<p>这段流程里已经有 ReAct 式的 Agent Loop：模型观察当前状态，选择动作，读取动作结果，再选择下一步。循环发生在一次 Agent 运行内部，下一步主要由模型决定。</p>
+<p>Harness 还要管模型之外的东西：</p>
+<pre><code class="language-text">哪些工具可以调用
+哪些数据只能读取
+提交审核是否需要确认
+单次运行允许多少 Token
+工具超时如何返回
+日志和 Trace 保存在哪里
+</code></pre>
+<p>为了尽快跑通，直接把工具结果追加到消息列表（messages）里很常见，未必是长期最优解。工具返回一份几万字的文档，后续每次模型调用都会带着它。实际还得做截断、摘要，或只把引用留在上下文里。（这就是某种形式的 Agent 记忆压缩）</p>
+<p>工作台搭好了，Agent 也可能交出一条 126 字的文案，并宣布任务完成。接下来卡在验收。</p>
+<h2>Loop Engineering：接替那个反复催 Agent 的人</h2>
+<p>没有外层系统时，运营承担验收和重试：</p>
+<pre><code class="language-text">Agent 写文案
+     ↓
+运营检查
+     ↓
+“超过 100 字，重写”
+     ↓
+Agent 再写
+     ↓
+运营再检查
+</code></pre>
+<p>Loop Engineering 把运营的重复动作写进系统。</p>
+<pre><code class="language-python">def check(text):
+    problems = []
+
+    if len(text) &gt; 100:
+        problems.append(&quot;超过 100 字&quot;)
+
+    if &quot;夏日读书会&quot; not in text:
+        problems.append(&quot;缺少活动名称&quot;)
+
+    if &quot;全网最低&quot; in text:
+        problems.append(&quot;包含禁用词：全网最低&quot;)
+
+    return problems
+
+
+for attempt in range(3):
+    text = agent.write()
+    problems = check(text)
+
+    if not problems:
+        submit_for_review(text)
+        break
+
+    agent.add_feedback(problems)
+else:
+    handoff_to_human()
+</code></pre>
+<p>代码很短，设计点有五个：</p>
+<pre><code class="language-text">Goal
+什么结果算完成
+
+Action
+让哪个 Agent 执行
+
+Verification
+用什么证据验收
+
+Feedback
+失败信息怎样进入下一轮
+
+Stop
+成功、超限或无进展时如何结束
+</code></pre>
+<p>Agent 给出候选结果，外层 Loop 根据检查结果决定接受、重试还是转人工。</p>
+<p>模型说“已经完成”只是一段输出。字数、必需字段、禁用词可以交给程序检查；语气是否自然、文案是否有吸引力，很难写成可靠规则。更好的策略：程序检查硬约束，人审核软质量。</p>
+<p>另一个模型也能做评审，结果不能当成确定性验证。两个模型可能共享相同偏差，评审还会随模型版本和采样波动。</p>
+<p>最多重试三次只是一个粗糙规则。时间、Token、费用、连续无进展次数都可以设上限。少了停止条件，自动化 Agent 只会变得难以控制。</p>
+<p>理论上，用状态机表达重试、审核和异常分支更清晰；只有三条检查规则时，一个 <code>for</code> 循环更容易维护。团队已有工作流引擎，接进去往往比引入新的 Agent 框架便宜。技术上更完整的方案，不一定适合当前系统。</p>
+<p>一次性文案到这里就够了。任务改成“每天检查新活动并生成文案”，外层还要增加触发器和持久化状态：什么事件启动任务，上次处理到哪里，哪份文案已经提交，失败次数是否跨进程保留。内存里的 <code>for</code> 循环在进程重启后会失忆，生产 Loop 不能只靠它保存状态。</p>
+<h2>Agent Loop 和 Loop Engineering 不是同一类东西</h2>
+<p>Agent 是执行任务的单元。Loop Engineering 是设计执行流程的方法，负责派活、验收和异常处理。</p>
+<p>Agent 内部的循环很容易与外层 Loop 混在一起：</p>
+<pre><code class="language-text">Engineering Loop
+│
+│  选择任务、准备环境、启动 Agent
+│
+└── Agent Run
+    │
+    └── Agent Loop
+        思考 → 调工具 → 观察 → 再行动
+
+│
+│  收集产物、外部验证、记录状态
+│
+└── 通过 → 提交审核
+    失败 → 带反馈重新启动 Agent
+    超限 → 交给人
+</code></pre>
+<p>Agent Loop 处理一次运行中的下一步行动。Engineering Loop 处理一次运行结束后的下一次运行。</p>
+<p>两者可以放在同一个进程里，代码甚至可能只有两个嵌套循环。边界不由代码文件决定，而由控制权决定：模型在选择动作，还是系统在验收模型。</p>
+<h2>再看这四层</h2>
+<pre><code class="language-text">Loop Engineering
+决定何时启动、如何验收、是否重试、何时停止
+│
+└── Harness Engineering
+    提供工具、运行环境、权限和错误处理
+    │
+    └── Context Engineering
+        选择本次运行需要的信息
+        │
+        └── Prompt Engineering
+            表达当前任务与要求
+            │
+            └── Model
+                生成或选择下一步动作
+</code></pre>
+<p>这四层不是替代关系。Loop Engineering 会放大内层设计的好坏：Prompt 写偏了，错误会被重复；Context 取错了，Agent 会稳定跑偏；Harness 权限过大，循环越久，风险越高。</p>
+<p>不确定 Loop Engineering 这个词还能流行多久，不过它的关注层还是比较明确的：把原本由人完成的触发、验收、催促和终止，写进程序。</p>
+<p>当一个任务不再是一个 Loop，而变成多条需要并行、汇合和局部返工的支线时，可以继续看<a href="./%E4%BB%8E%20Loop%20%E5%88%B0%20Graph%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%E5%A4%9A%20Agent%20%E6%80%8E%E4%B9%88%E5%8D%8F%E4%BD%9C.md">《从 Loop 到 Graph Engineering：当一件事变成多条支线》</a>。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

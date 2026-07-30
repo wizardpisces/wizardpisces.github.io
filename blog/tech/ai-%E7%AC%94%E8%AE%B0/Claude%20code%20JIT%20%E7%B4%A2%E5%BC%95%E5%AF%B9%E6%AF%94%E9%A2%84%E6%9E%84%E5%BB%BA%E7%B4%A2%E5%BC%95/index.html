@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>详细解析 | LZ AI NOTE</title>
+  <meta name="description" content="Claude 的 JIT 检索其实就是“在对话时临时做索引”，因此有冷启动成本； 而类似 zilliz/claude context 的 MCP 插件提供“预构建、持久化、高质量索引”，让 Claude 可以跳过 JIT 的昂贵推理步骤，直接走“高质量捷径”。 换句话说： JIT = 模型现算现查（token 贵、慢、有概率错） MCP = 给模型准备好的…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/Claude%20code%20JIT%20%E7%B4%A2%E5%BC%95%E5%AF%B9%E6%AF%94%E9%A2%84%E6%9E%84%E5%BB%BA%E7%B4%A2%E5%BC%95">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="详细解析 | LZ AI NOTE">
+  <meta property="og:description" content="Claude 的 JIT 检索其实就是“在对话时临时做索引”，因此有冷启动成本； 而类似 zilliz/claude context 的 MCP 插件提供“预构建、持久化、高质量索引”，让 Claude 可以跳过 JIT 的昂贵推理步骤，直接走“高质量捷径”。 换句话说： JIT = 模型现算现查（token 贵、慢、有概率错） MCP = 给模型准备好的…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/Claude%20code%20JIT%20%E7%B4%A2%E5%BC%95%E5%AF%B9%E6%AF%94%E9%A2%84%E6%9E%84%E5%BB%BA%E7%B4%A2%E5%BC%95">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"详细解析","description":"Claude 的 JIT 检索其实就是“在对话时临时做索引”，因此有冷启动成本； 而类似 zilliz/claude context 的 MCP 插件提供“预构建、持久化、高质量索引”，让 Claude 可以跳过 JIT 的昂贵推理步骤，直接走“高质量捷径”。 换句话说： JIT = 模型现算现查（token 贵、慢、有概率错） MCP = 给模型准备好的…","url":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/Claude%20code%20JIT%20%E7%B4%A2%E5%BC%95%E5%AF%B9%E6%AF%94%E9%A2%84%E6%9E%84%E5%BB%BA%E7%B4%A2%E5%BC%95","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/Claude%20code%20JIT%20%E7%B4%A2%E5%BC%95%E5%AF%B9%E6%AF%94%E9%A2%84%E6%9E%84%E5%BB%BA%E7%B4%A2%E5%BC%95","dateModified":"2025-11-19","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>详细解析</h1><p><strong>Claude 的 JIT 检索其实就是“在对话时临时做索引”，因此有冷启动成本；
+而类似 zilliz/claude-context 的 MCP 插件提供“预构建、持久化、高质量索引”，让 Claude 可以跳过 JIT 的昂贵推理步骤，直接走“高质量捷径”。</strong></p>
+<p>换句话说：</p>
+<blockquote>
+<p><strong>JIT = 模型现算现查（token 贵、慢、有概率错）</strong>
+<strong>MCP = 给模型准备好的全局知识图（token 少、快、稳定）</strong></p>
+</blockquote>
+<h1>详细解析</h1>
+<h2>1. Claude 的 JIT 检索，本质就是“临时索引”</h2>
+<p>Claude Code 的流程是：</p>
+<ol>
+<li>模型扫描文件列表（token 消耗巨大）</li>
+<li>分析路径关系（再次消耗 token）</li>
+<li>猜测依赖结构、模块边界</li>
+<li>决定哪些文件要 load 进上下文窗口</li>
+<li>重复多轮（探索 → 试错 → 再探索）</li>
+</ol>
+<p>这个就是典型的 <strong>“即时索引（JIT indexing）”</strong>。</p>
+<p>它有两个明确问题：</p>
+<h3><strong>问题 1：冷启动成本高</strong></h3>
+<p>第一次理解仓库结构，需要几十万 token。</p>
+<h3><strong>问题 2：模型推理成本高</strong></h3>
+<p>模型必须用思考（reasoning）来构建临时知识图。</p>
+<h3><strong>问题 3：不稳定（猜结构可能错）</strong></h3>
+<p>尤其在：</p>
+<ul>
+<li>monorepo</li>
+<li>多语言混合项目</li>
+<li>复杂依赖图
+中更容易出错。</li>
+</ul>
+<hr>
+<h2>2. MCP 插件（例如 zilliz/claude-context）提供的是：“长期、结构化的超高质量索引”</h2>
+<p>这类 MCP 工具做的其实是：</p>
+<h3>✔ 提前 vectorize 所有文件</h3>
+<p>（Claude 再也不需要自己一行一行扫）</p>
+<h3>✔ 提前构建 semantic graph（语义图）</h3>
+<p>（比如哪些文件是 API 层、哪些是业务逻辑）</p>
+<h3>✔ 提前构建依赖关系（AST / import graph）</h3>
+<p>（Claude 不用猜谁 import 谁）</p>
+<h3>✔ 提前做 embedding 压缩</h3>
+<p>（降低 token 开销）</p>
+<h3>✔ 多版本 / 多仓库知识共享</h3>
+<p>（JIT 做不到）</p>
+<hr>
+<h1>安装 MCP 后 Claude 会“更偏向使用 MCP 的知识，而非自行 JIT 推理”？</h1>
+<h2>Claude 会自动根据工具的“成本”来决定是否使用它</h2>
+<p>当 Claude 看到 MCP 工具提供：</p>
+<ul>
+<li>结构化搜索（语义 + 路径 + AST）</li>
+<li>相关性极高的文件 top-k</li>
+<li>经过 embedding 聚类的结果</li>
+<li>直接带关键代码段</li>
+</ul>
+<p>Claude 会自动判断：</p>
+<blockquote>
+<p><strong>“既然 MCP 给了高置信度知识，我没必要浪费 token 去做 JIT 索引。”</strong></p>
+</blockquote>
+<h1>🧭 4. 更深一层：MCP 不是替代 JIT，而是让模型的“注意力资本”更有效率</h1>
+<p>Claude 的注意力（attention budget）是有限的。</p>
+<p>JIT 会消耗大量注意力做：</p>
+<ul>
+<li>文件扫描</li>
+<li>依赖关系推理</li>
+<li>路径推理</li>
+<li>多轮检索试错</li>
+</ul>
+<p>MCP 把这些注意力省下来，使 Claude 把预算用在：</p>
+<ul>
+<li>逻辑推理</li>
+<li>代码理解</li>
+<li>修复</li>
+<li>审查</li>
+<li>refactor</li>
+</ul>
+<p>这才是为何 MCP 能显著提升 Claude 的 Code Intelligence。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

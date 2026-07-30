@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>关于node的addon | LZ AI NOTE</title>
+  <meta name="description" content="关于node的addon Node.js 对 native addon 开发侧暴露的是 ABI（In computer software, an application binary interface (ABI) is an interface between two binary program modules） Addon方案演化 以下是摘抄，还有待…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/backend/%E5%85%B3%E4%BA%8Enode%E7%9A%84addon">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="关于node的addon | LZ AI NOTE">
+  <meta property="og:description" content="关于node的addon Node.js 对 native addon 开发侧暴露的是 ABI（In computer software, an application binary interface (ABI) is an interface between two binary program modules） Addon方案演化 以下是摘抄，还有待…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/backend/%E5%85%B3%E4%BA%8Enode%E7%9A%84addon">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"关于node的addon","description":"关于node的addon Node.js 对 native addon 开发侧暴露的是 ABI（In computer software, an application binary interface (ABI) is an interface between two binary program modules） Addon方案演化 以下是摘抄，还有待…","url":"https://wizardpisces.github.io/blog/tech/backend/%E5%85%B3%E4%BA%8Enode%E7%9A%84addon","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/backend/%E5%85%B3%E4%BA%8Enode%E7%9A%84addon","dateModified":"2025-06-20","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>关于node的addon</h1><h1>关于node的addon</h1>
+<p>Node.js 对 native addon 开发侧暴露的是 ABI（In computer software, an application binary interface (ABI) is an interface between two binary program modules）</p>
+<h2>Addon方案演化</h2>
+<p><em><strong>以下是摘抄，还有待琢磨原理</strong></em></p>
+<h3>NAN（Native Abstractions for Node.js）</h3>
+<p>NAN 将 v8/libuv 相关的 API 进行了封装，对外是稳定的抽象层 API (但却无法保证是 ABI 稳定)。用 NAN 进行封装的 native addon 几乎无法通过预编译的方式进行分发，因为跨 Node 版本底层 v8/libuv API 变化之后需要对源码进行重新编译才能使用。所以这就是为什么很多 native addon 在 npm install 后还要调用一堆工具链在本地进行编译才能使用，以及为什么有时候 node 版本升级之后之前安装好的 node_modules 就无法直接使用了。</p>
+<p>一句话理解：V8底层的封装，估计需要理解V8才能开发</p>
+<h3>N-API</h3>
+<p>自从 Node.js v8.0.0 发布之后，Node.js 推出了全新的用于开发 C++ 原生模块的接口，N-API。本质其实是将 NAN 这层抽象挪到了 node 源码中，在 node 编译的时候就编译好这层对外抽象，这样 N-API 对外就是稳定的 ABI 了。</p>
+<p>一句话理解：v8之上node层的封装，跟随Node编译，独立于操作系统</p>
+<h2>应用</h2>
+<h3>C++扩展</h3>
+<p>基本步骤：</p>
+<p>./demo.cc</p>
+<pre><code class="language-C++">#include &lt;node_api.h&gt; // 1. 引入 napi 头
+#include &lt;stdio.h&gt;
+
+// 2. 逻辑开发与声明
+napi_value SayHello(napi_env env, napi_callback_info info)
+{
+    printf(&quot;Hello World\n&quot;);
+    return NULL;
+}
+
+napi_value Init(napi_env env, napi_value exports)
+{
+    napi_status status;
+    napi_value fn;
+
+    status = napi_create_function(env, NULL, 0, SayHello, NULL, &amp;fn);
+    if (status != napi_ok)
+        return NULL;
+
+    status = napi_set_named_property(env, exports, &quot;sayHello&quot;, fn);
+    if (status != napi_ok)
+        return NULL;
+
+    return exports;
+}
+
+// 3. 模块注册
+NAPI_MODULE(NODE_GYP_MODULE_NAME, Init)
+</code></pre>
+<p>模块配置跟编译</p>
+<p>./binding.gyp</p>
+<pre><code class="language-json">{
+    &quot;targets&quot;: [{
+        &quot;target_name&quot;: &quot;demo&quot;,
+        &quot;sources&quot;: [&quot;./demo.cc&quot;]
+    }]
+}
+</code></pre>
+<p>生成.node文件（动态链接库）</p>
+<pre><code class="language-bash">node-gyp rebuild # ./build/Release/demo.node
+</code></pre>
+<p>调用.node文件</p>
+<pre><code class="language-js">const demo = require('./build/Release/demo.node')
+demo.sayHello() // Hello World
+</code></pre>
+<h1>思考</h1>
+<p>node扩展方式</p>
+<ul>
+<li>插件开发</li>
+<li>WebAssembly</li>
+</ul>
+<p>哪种更快些？或者分别适用于哪些场景？</p>
+<p>Wasm被保证与可以运行您的Electron应用程序的任何操作系统兼容。
+C，C++和Rust将没有此保证。除了从JavaScript调用的开销之外，它们将更加高效。
+正在积极地处理从JavaScript调用Wasm的开销，并且正在减少或完全消除这种开销。</p>
+<h1>Reference</h1>
+<ul>
+<li><a href="https://nodejs.fasionchan.com/zh_CN/latest/napi/quick-start.html">N-API入门</a></li>
+<li>Rust bindings for writing safe and fast native Node.js modules.<a href="https://github.com/neon-bindings/neon">neon</a></li>
+<li><a href="https://lyn.one/2020/09/11/rust-napi">用 Rust 和 N-API 开发高性能 Node.js 扩展</a></li>
+</ul>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

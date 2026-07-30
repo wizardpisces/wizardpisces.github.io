@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>参考资料 | LZ AI NOTE</title>
+  <meta name="description" content="论文发布时间：2024 01 中国科学技术大学、UCLA 和 Google DeepMind 联合发布的 CRAG （论文标题为《[Corrective Retrieval Augmented Generation]》）是 RAG 领域的重要进展。 简单来说，这篇论文提出了一种 &quot;纠正式检索增强生成&quot; 框架，在检索结果和生成器之间插入一个 轻量级的&quot;质检员…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-agent/paper-RAG/USTC%20%26%20UCLA%20%26%20Google%20DeepMind%20-%20CRAG%20-%20Corrective%20Retrieval%20Augmented%20Generation">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="参考资料 | LZ AI NOTE">
+  <meta property="og:description" content="论文发布时间：2024 01 中国科学技术大学、UCLA 和 Google DeepMind 联合发布的 CRAG （论文标题为《[Corrective Retrieval Augmented Generation]》）是 RAG 领域的重要进展。 简单来说，这篇论文提出了一种 &quot;纠正式检索增强生成&quot; 框架，在检索结果和生成器之间插入一个 轻量级的&quot;质检员…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-agent/paper-RAG/USTC%20%26%20UCLA%20%26%20Google%20DeepMind%20-%20CRAG%20-%20Corrective%20Retrieval%20Augmented%20Generation">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"参考资料","description":"论文发布时间：2024 01 中国科学技术大学、UCLA 和 Google DeepMind 联合发布的 CRAG （论文标题为《[Corrective Retrieval Augmented Generation]》）是 RAG 领域的重要进展。 简单来说，这篇论文提出了一种 \"纠正式检索增强生成\" 框架，在检索结果和生成器之间插入一个 轻量级的\"质检员…","url":"https://wizardpisces.github.io/blog/tech/ai-agent/paper-RAG/USTC%20%26%20UCLA%20%26%20Google%20DeepMind%20-%20CRAG%20-%20Corrective%20Retrieval%20Augmented%20Generation","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-agent/paper-RAG/USTC%20%26%20UCLA%20%26%20Google%20DeepMind%20-%20CRAG%20-%20Corrective%20Retrieval%20Augmented%20Generation","dateModified":"2026-03-13","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>参考资料</h1><p><em>论文发布时间：2024-01</em></p>
+<p>中国科学技术大学、UCLA 和 Google DeepMind 联合发布的 <strong>CRAG</strong>（论文标题为《<a href="https://arxiv.org/abs/2401.15884">Corrective Retrieval Augmented Generation</a>》）是 RAG 领域的重要进展。
+简单来说，这篇论文提出了一种**“纠正式检索增强生成&quot;<strong>框架，在检索结果和生成器之间插入一个</strong>轻量级的&quot;质检员”**——先评估检索质量，再根据评估结果触发不同的纠正策略（保留、丢弃、或补充网络搜索），从而显著提升 RAG 系统在检索出错时的鲁棒性。</p>
+<h2>CRAG 解决了什么问题？</h2>
+<p><strong>核心问题：RAG 严重依赖检索质量，检索一旦出错，生成必定翻车。</strong></p>
+<p>标准 RAG 的工作流是：用户提问 → 检索器从语料库取回 top-K 文档 → 把文档拼到输入前面 → 生成器基于文档生成回答。但这条流水线有一个致命假设——<strong>检索到的文档是相关且正确的</strong>。现实中，这个假设经常不成立：</p>
+<ul>
+<li><strong>低质量检索器引入大量噪音：</strong> 检索器不完美，经常返回看起来相关但实际上与问题无关的文档。如下图所示，当检索器质量低下时，大量不相关的信息会阻碍生成器获取准确知识，甚至误导生成方向。</li>
+<li><strong>无差别使用检索结果：</strong> 大多数 RAG 系统不加区分地把所有检索文档塞进生成器，<strong>不管这些文档是否真的相关</strong>。</li>
+<li><strong>文档内部信息冗余：</strong> 即使检索到了相关文档，文档中的大部分文本对回答问题并无帮助，这些冗余信息同样会干扰生成质量。</li>
+</ul>
+<pre><code>【标准 RAG 的脆弱性——检索出错的连锁反应】
+
+  用户提问: &quot;Henry Feilden 的职业是什么？&quot;
+       │
+       ▼
+  ┌─────────────┐
+  │  检索器       │
+  │  (取 top-10)  │
+  └──────┬──────┘
+         │  返回 10 篇文档
+         │
+  ┌──────▼───────────────────────────────────────────────┐
+  │  文档 1: &quot;Henry Feilden 是一位英国政治家...&quot;  ← 相关 ✓  │
+  │  文档 2: &quot;Feilden 家族的庄园位于...&quot;          ← 部分相关  │
+  │  文档 3: &quot;Henry Ford 创立了福特汽车公司...&quot;    ← 不相关 ✗  │
+  │  文档 4: &quot;在 Feilden 的数学研究中...&quot;          ← 不相关 ✗  │
+  │  ...                                                    │
+  │  文档 10: &quot;Feilden 路以 Henry Feilden 命名...&quot; ← 部分相关 │
+  └──────────────────────────────────────────────────────┘
+         │  全部塞进生成器
+         ▼
+  ┌─────────────┐
+  │  生成器       │ ← 被大量不相关信息干扰
+  │  (无差别引用) │ ← 无法区分哪些文档可信
+  └──────┬──────┘
+         │
+         ▼
+  &quot;Henry Feilden 是一位汽车制造商&quot;  ← 被文档 3 误导，生成幻觉
+</code></pre>
+<p><strong>CRAG 的目标：</strong> 在检索器和生成器之间加入一个&quot;质检 + 纠正&quot;环节——评估检索质量、过滤噪音文档、必要时求助网络搜索——让 RAG 在<strong>检索出错</strong>的场景下依然能稳定生成高质量回答。</p>
+<h2>这个问题真实存在吗？</h2>
+<p><strong>真实存在，且是 RAG 从&quot;实验室&quot;走向&quot;生产环境&quot;的核心痛点。</strong></p>
+<ul>
+<li><strong>检索质量参差不齐：</strong> 在真实场景中，检索器的性能远非完美。Mallen et al. (2023) 的研究表明，对于长尾实体（月 Wikipedia 访问量 &lt;100 的罕见知识），标准检索器的准确率大幅下降。</li>
+<li><strong>不相关上下文会严重降低 LLM 性能：</strong> Shi et al. (2023) 证明，在输入中加入不相关的上下文会<strong>显著损害</strong> LLM 的推理能力——模型不仅无法忽略噪音，反而会被噪音误导。</li>
+<li><strong>静态语料库的局限性：</strong> 大多数 RAG 系统基于固定的离线语料库（如 Wikipedia 快照），这些语料库在覆盖范围和时效性上天然不足——新事件、小众领域的知识根本找不到。</li>
+</ul>
+<h2>为什么之前没有很好地解决？</h2>
+<p>之前的研究主要聚焦在两个方向，但都没有从根本上解决&quot;检索出错怎么办&quot;的问题：</p>
+<ol>
+<li><strong>改进检索器本身：</strong> 大量工作致力于训练更好的检索器（如 DPR、Contriever），但再好的检索器也会犯错——特别是在长尾知识和模糊查询上。<strong>提升检索质量有天花板，但生成器对检索错误的容忍度几乎为零。</strong></li>
+<li><strong>Self-RAG 的&quot;自反思&quot;路线：</strong> Self-RAG (Asai et al., 2024) 通过训练模型输出反思 token 来判断是否需要检索、检索结果是否相关等。但它有一个关键限制——<strong>需要对 LLM 进行专门的指令微调</strong>，训练成本高，且换底座模型时需要重新训练。</li>
+<li><strong>忽略了纠正机制：</strong> 之前的工作要么研究&quot;要不要检索&quot;（Self-RAG），要么研究&quot;如何更好地检索&quot;（检索器优化），但<strong>没有人认真研究&quot;检索到了不相关的结果后该怎么办&quot;</strong>。</li>
+</ol>
+<p><strong>CRAG 的突破在于：</strong> 不去改造检索器或生成器，而是在两者之间插入一个<strong>轻量级的纠正层</strong>——用一个 T5-large（仅 0.77B 参数）做质量评估，然后根据评估结果执行不同的纠正动作。即插即用，不需要修改任何上下游组件。</p>
+<h2>它是如何解决的？</h2>
+<p>CRAG 的核心设计可以概括为四个模块：<strong>检索评估器 → 动作触发器 → 知识精炼 → 网络搜索补充</strong>。</p>
+<h3>1. 整体架构：三档纠正机制</h3>
+<p>CRAG 的推理流程如下：</p>
+<pre><code>用户提问 x + 检索到的文档集 D = {d₁, d₂, ..., d_K}
+                    │
+       ┌────────────▼────────────────────────────────────┐
+       │  步骤① 检索评估器 E（T5-large, 0.77B）            │
+       │                                                   │
+       │  对每对 (x, dᵢ) 独立打分:                          │
+       │    score₁ = E(x, d₁) = 0.82                      │
+       │    score₂ = E(x, d₂) = 0.15                      │
+       │    score₃ = E(x, d₃) = -0.67                     │
+       │    ...                                            │
+       │    score_K = E(x, d_K) = 0.03                     │
+       │                                                   │
+       │  综合判断：取所有分数的最大值和整体分布              │
+       └────────────┬──────────────────────────────────────┘
+                    │
+       ┌────────────▼────────────────────────────────────┐
+       │  步骤② 动作触发器（基于置信度阈值）                │
+       │                                                   │
+       │  ┌─ max(scores) &gt; 上阈值 ────→ [CORRECT]    ─┐   │
+       │  │                                            │   │
+       │  ├─ max(scores) &lt; 下阈值 ────→ [INCORRECT]  ─┤   │
+       │  │                                            │   │
+       │  └─ 介于两者之间 ────────────→ [AMBIGUOUS]  ─┤   │
+       │                                               │   │
+       └───────────────────────────────────────────────┘   │
+                    │                                       │
+         ┌─────────┼─────────┐                              │
+         ▼         ▼         ▼                              │
+    [CORRECT]  [INCORRECT]  [AMBIGUOUS]                     │
+         │         │         │                              │
+         ▼         ▼         ▼                              │
+  ┌──────────┐ ┌──────────┐ ┌────────────────────┐         │
+  │ 知识精炼  │ │ 网络搜索  │ │ 知识精炼 + 网络搜索 │         │
+  │ 提取内部  │ │ 获取外部  │ │ 两者结合           │         │
+  │ 关键知识  │ │ 补充知识  │ │                    │         │
+  └────┬─────┘ └────┬─────┘ └────────┬───────────┘         │
+       │            │                │                      │
+       └────────────┴────────────────┘                      │
+                    │                                       │
+                    ▼                                       │
+           精炼后的知识 k                                    │
+                    │                                       │
+       ┌────────────▼────────────────────────────────────┐  │
+       │  步骤③ 生成器 G（任意 LLM）                       │  │
+       │  基于 (x, k) 生成最终回答 y                       │  │
+       └────────────┬──────────────────────────────────────┘  │
+                    │                                          │
+                    ▼                                          │
+            最终输出 y                                         │
+</code></pre>
+<h3>2. 检索评估器：轻量但精准的&quot;质检员&quot;</h3>
+<p>CRAG 用一个微调过的 <strong>T5-large（0.77B 参数）</strong> 作为检索评估器，对每对 (问题, 文档) 独立打分，分数范围 [-1, 1]：</p>
+<pre><code>┌──────────────────────────────────────────────────────────┐
+│  检索评估器的工作方式                                       │
+│                                                           │
+│  输入格式: [问题] + [分隔符] + [单篇文档]                    │
+│  输出: 相关性分数 ∈ [-1, 1]                                │
+│                                                           │
+│  示例:                                                    │
+│  ┌─────────────────────────────────────────────────┐      │
+│  │ 问题: &quot;Henry Feilden 的职业是什么？&quot;              │      │
+│  │ 文档: &quot;Henry Feilden (1818-1875) 是英国保守党     │      │
+│  │       政治家，曾担任 Blackburn 选区议员...&quot;        │      │
+│  │                                                   │      │
+│  │ → 评估器打分: 0.89 ✓（文档直接回答了问题）        │      │
+│  └─────────────────────────────────────────────────┘      │
+│                                                           │
+│  ┌─────────────────────────────────────────────────┐      │
+│  │ 问题: &quot;Henry Feilden 的职业是什么？&quot;              │      │
+│  │ 文档: &quot;Henry Ford 创立了福特汽车公司，是美国      │      │
+│  │       著名的工业家和企业家...&quot;                     │      │
+│  │                                                   │      │
+│  │ → 评估器打分: -0.85 ✗（名字相似但完全不同的人）   │      │
+│  └─────────────────────────────────────────────────┘      │
+│                                                           │
+│  关键优势:                                                 │
+│  - 参数量仅 0.77B（对比 Self-RAG 的 Critic 用 LLaMA2-7B） │
+│  - 准确率 84.3%，显著优于 ChatGPT 的 58.0%~64.7%          │
+│  - 推理成本极低，可以对每篇文档独立快速评估                  │
+└──────────────────────────────────────────────────────────┘
+</code></pre>
+<p>一个令人惊讶的发现：<strong>T5-large（0.77B）的评估准确率远超 ChatGPT</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>评估方式</th>
+<th>准确率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CRAG 检索评估器（T5-large）</td>
+<td><strong>84.3%</strong></td>
+</tr>
+<tr>
+<td>ChatGPT（直接提问）</td>
+<td>58.0%</td>
+</tr>
+<tr>
+<td>ChatGPT + CoT</td>
+<td>62.4%</td>
+</tr>
+<tr>
+<td>ChatGPT + Few-shot</td>
+<td>64.7%</td>
+</tr>
+</tbody>
+</table>
+<p>这说明<strong>专精的小模型在特定任务上可以碾压通用的大模型</strong>——评估检索相关性是一个结构化的判断任务，T5 经过针对性微调后，比 ChatGPT 的通用理解能力更有效。</p>
+<h3>3. 动作触发器：三档置信度分流</h3>
+<p>基于评估器给出的分数，CRAG 通过上下两个阈值将结果分为三类：</p>
+<pre><code>┌────────────────────────────────────────────────────────────┐
+│               三档动作触发机制                                │
+│                                                             │
+│  相关性分数轴:                                               │
+│                                                             │
+│  -1.0          下阈值              上阈值           +1.0    │
+│   ├──────────────┼──────────────────┼───────────────┤       │
+│   │  INCORRECT   │    AMBIGUOUS     │   CORRECT     │       │
+│   │  (全部丢弃)   │  (两者结合)      │  (精炼使用)    │       │
+│   │              │                  │               │       │
+│   │  所有文档的   │  不确定，保守     │  至少有 1 篇   │       │
+│   │  分数都低于   │  起见两种策略     │  文档的分数    │       │
+│   │  下阈值       │  同时使用         │  高于上阈值    │       │
+│   └──────────────┴──────────────────┴───────────────┘       │
+│                                                             │
+│  各数据集的阈值设置（经验调优）:                               │
+│  ┌──────────────┬────────────┬────────────┐                 │
+│  │  数据集       │  上阈值     │  下阈值     │                 │
+│  ├──────────────┼────────────┼────────────┤                 │
+│  │  PopQA       │   0.59     │  -0.99     │                 │
+│  │  PubHealth   │   0.50     │  -0.91     │                 │
+│  │  Arc-Chall.  │   0.50     │  -0.91     │                 │
+│  │  Biography   │   0.95     │  -0.91     │                 │
+│  └──────────────┴────────────┴────────────┘                 │
+│                                                             │
+│  ⚠ 注意 Biography 的上阈值高达 0.95 —— 长文生成任务对          │
+│    检索质量要求更严格，宁可多搜也不能用低质量文档               │
+└────────────────────────────────────────────────────────────┘
+</code></pre>
+<p><strong>为什么需要 AMBIGUOUS 这个中间档？</strong></p>
+<p>论文的预实验表明，如果只有 CORRECT 和 INCORRECT 两档（非黑即白），系统效果严重受制于评估器的准确性——评估器一旦误判，要么丢掉了有用的文档，要么保留了垃圾文档。AMBIGUOUS 档的设计是一种**“软决策”**：当评估器不自信时，同时使用内部精炼知识和外部搜索知识，让两者互相补充，显著缓解了对评估器准确性的依赖。</p>
+<h3>4. 知识精炼：从粗到细的&quot;去噪&quot;</h3>
+<p>当动作为 CORRECT 时，检索到的文档虽然整体相关，但内部仍然存在大量冗余信息。CRAG 设计了一个 <strong>decompose-then-recompose（分解-重组）</strong> 算法来提取关键信息：</p>
+<pre><code>【知识精炼流程 —— 以 CORRECT 动作为例】
+
+  相关文档 d₁（较长的文档）:
+  &quot;Henry Feilden (1818-1875) 是一位英国保守党政治家。
+   他出生在兰开夏郡的一个显赫家族。他的祖父曾经...
+   Feilden 于 1865 年当选为 Blackburn 选区的国会议员。
+   在议会期间，他主要关注工业改革和劳工权益...
+   他的庄园 Feniscowles Hall 现在是一处历史遗迹...&quot;
+       │
+       ▼
+  ┌───────────────────────────────────────────────┐
+  │  步骤 A: 分解（Decompose）                      │
+  │                                                │
+  │  按句子/段落切分成细粒度的&quot;知识条&quot;：               │
+  │                                                │
+  │  strip₁: &quot;Henry Feilden (1818-1875) 是一位英国  │
+  │           保守党政治家。&quot;                        │
+  │  strip₂: &quot;他出生在兰开夏郡的一个显赫家族。&quot;      │
+  │  strip₃: &quot;他的祖父曾经...&quot;                      │
+  │  strip₄: &quot;Feilden 于 1865 年当选为 Blackburn    │
+  │           选区的国会议员。&quot;                      │
+  │  strip₅: &quot;在议会期间，他主要关注工业改革和        │
+  │           劳工权益...&quot;                          │
+  │  strip₆: &quot;他的庄园 Feniscowles Hall 现在        │
+  │           是一处历史遗迹...&quot;                     │
+  └────────────────┬──────────────────────────────┘
+                   │
+  ┌────────────────▼──────────────────────────────┐
+  │  步骤 B: 逐条评估（Evaluate）                    │
+  │                                                │
+  │  用同一个检索评估器 E 对每条 strip 打分:          │
+  │                                                │
+  │  E(问题, strip₁) = 0.91  ← 直接回答了职业 ✓     │
+  │  E(问题, strip₂) = 0.12  ← 出生地，不太相关      │
+  │  E(问题, strip₃) = -0.45 ← 完全无关 ✗            │
+  │  E(问题, strip₄) = 0.78  ← 具体职务，相关 ✓      │
+  │  E(问题, strip₅) = 0.65  ← 议会工作，部分相关     │
+  │  E(问题, strip₆) = -0.62 ← 庄园信息，不相关 ✗    │
+  └────────────────┬──────────────────────────────┘
+                   │
+  ┌────────────────▼──────────────────────────────┐
+  │  步骤 C: 过滤 + 重组（Filter &amp; Recompose）      │
+  │                                                │
+  │  过滤阈值: -0.5, 取 top-5                       │
+  │  保留: strip₁ + strip₄ + strip₅                │
+  │  丢弃: strip₂ + strip₃ + strip₆                │
+  │                                                │
+  │  内部知识 =                                     │
+  │  &quot;Henry Feilden (1818-1875) 是一位英国保守党    │
+  │   政治家。Feilden 于 1865 年当选为 Blackburn    │
+  │   选区的国会议员。在议会期间，他主要关注工业      │
+  │   改革和劳工权益。&quot;                             │
+  │                                                │
+  │  → 噪音被过滤，关键信息被提炼并按原顺序重组      │
+  └────────────────────────────────────────────────┘
+</code></pre>
+<h3>5. 网络搜索：当本地知识库无能为力时</h3>
+<p>当动作为 INCORRECT 时，说明本地语料库中<strong>找不到任何相关文档</strong>。CRAG 会求助于网络搜索作为补充知识来源：</p>
+<pre><code>【网络搜索流程 —— INCORRECT 动作触发】
+
+  用户问题: &quot;2024 年诺贝尔物理学奖授予了谁？&quot;
+       │
+       ▼
+  ┌───────────────────────────────────────────────┐
+  │  步骤 A: 查询重写（Query Rewriting）              │
+  │                                                │
+  │  用 ChatGPT 将自然语言问题改写为搜索引擎关键词:   │
+  │                                                │
+  │  原始问题: &quot;2024 年诺贝尔物理学奖授予了谁？&quot;     │
+  │  重写查询: &quot;2024, Nobel Physics Prize, winner&quot;  │
+  │                                                │
+  │  （模拟人类日常使用搜索引擎的习惯）               │
+  └────────────────┬──────────────────────────────┘
+                   │
+  ┌────────────────▼──────────────────────────────┐
+  │  步骤 B: 网络搜索 + URL 筛选                     │
+  │                                                │
+  │  调用 Google Search API:                        │
+  │  → 返回一系列 URL 链接                           │
+  │  → 优先选择权威来源（如 Wikipedia）               │
+  │  → 取 top-5 个 URL                              │
+  └────────────────┬──────────────────────────────┘
+                   │
+  ┌────────────────▼──────────────────────────────┐
+  │  步骤 C: 网页内容提取 + 知识精炼                  │
+  │                                                │
+  │  抓取网页 HTML → 解析为文本段落                   │
+  │  → 用同样的检索评估器 + 知识精炼流程               │
+  │  → 过滤不相关段落，保留关键信息                    │
+  │                                                │
+  │  外部知识 = 精炼后的网页关键信息                    │
+  └────────────────────────────────────────────────┘
+</code></pre>
+<p><strong>为什么 Wikipedia 被优先选择？</strong> 网络搜索的结果质量参差不齐，可能引入偏见或不可靠信息。论文特意选择优先使用 Wikipedia 等权威、受监管的网页作为知识来源，以缓解开放网络搜索的噪音问题。</p>
+<h3>6. 三种动作的完整对比</h3>
+<pre><code>┌──────────┬──────────────────┬──────────────────┬────────────────────┐
+│  动作     │  CORRECT          │  INCORRECT        │  AMBIGUOUS          │
+├──────────┼──────────────────┼──────────────────┼────────────────────┤
+│ 触发条件 │ 至少 1 篇文档     │ 所有文档分数      │ 介于两者之间        │
+│          │ 分数 &gt; 上阈值     │ 都 &lt; 下阈值       │                    │
+├──────────┼──────────────────┼──────────────────┼────────────────────┤
+│ 知识来源 │ 内部精炼知识      │ 外部网络搜索      │ 内部 + 外部         │
+│          │ (decompose →     │ (查询重写 →      │ (两者拼接)          │
+│          │  filter →        │  Google 搜索 →   │                    │
+│          │  recompose)      │  网页精炼)        │                    │
+├──────────┼──────────────────┼──────────────────┼────────────────────┤
+│ 设计意图 │ 检索结果可信      │ 本地语料无用      │ 不确定时            │
+│          │ 但需要去噪        │ 需要外部补充      │ 保守起见两者互补    │
+├──────────┼──────────────────┼──────────────────┼────────────────────┤
+│ 检索文档 │ 保留并精炼        │ 全部丢弃          │ 精炼保留 + 外部补充 │
+│ 处理方式 │                  │                  │                    │
+└──────────┴──────────────────┴──────────────────┴────────────────────┘
+</code></pre>
+<h2>实验结果</h2>
+<p>CRAG 在 4 个数据集上进行了全面评估，涵盖短文生成（PopQA）、长文生成（Biography）、真假判断（PubHealth）和多项选择（Arc-Challenge）：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align:center">PopQA (Accuracy)</th>
+<th style="text-align:center">Bio (FactScore)</th>
+<th style="text-align:center">PubHealth (Accuracy)</th>
+<th style="text-align:center">ARC (Accuracy)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RAG (SelfRAG-LLaMA2-7b)</td>
+<td style="text-align:center">52.8</td>
+<td style="text-align:center">59.2</td>
+<td style="text-align:center">39.0</td>
+<td style="text-align:center">53.2</td>
+</tr>
+<tr>
+<td><strong>CRAG</strong></td>
+<td style="text-align:center"><strong>59.8</strong></td>
+<td style="text-align:center"><strong>74.1</strong></td>
+<td style="text-align:center"><strong>75.6</strong></td>
+<td style="text-align:center"><strong>68.6</strong></td>
+</tr>
+<tr>
+<td>Self-RAG</td>
+<td style="text-align:center">54.9</td>
+<td style="text-align:center">81.2</td>
+<td style="text-align:center">72.4</td>
+<td style="text-align:center">67.3</td>
+</tr>
+<tr>
+<td><strong>Self-CRAG</strong></td>
+<td style="text-align:center"><strong>61.8</strong></td>
+<td style="text-align:center"><strong>86.2</strong></td>
+<td style="text-align:center"><strong>74.8</strong></td>
+<td style="text-align:center"><strong>67.2</strong></td>
+</tr>
+<tr>
+<td>ChatGPT（无检索）</td>
+<td style="text-align:center">29.3</td>
+<td style="text-align:center">71.8</td>
+<td style="text-align:center">70.1</td>
+<td style="text-align:center">75.3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>三个关键发现：</strong></p>
+<ol>
+<li>
+<p><strong>CRAG 大幅提升标准 RAG 的性能：</strong> 基于 SelfRAG-LLaMA2-7b，CRAG 在 PopQA 上提升 7.0%，Biography 上提升 14.9%，PubHealth 上提升 36.6%，Arc-Challenge 上提升 15.4%。PubHealth 的提升尤其惊人——这是因为该数据集的检索错误率较高，CRAG 的纠正机制恰好发挥了最大价值。</p>
+</li>
+<li>
+<p><strong>Self-CRAG 进一步超越 Self-RAG：</strong> 将 CRAG 插入 Self-RAG 框架后（即 Self-CRAG），在 PopQA 上额外提升 6.9%，Biography 上提升 5.0%。这证明了 CRAG 的<strong>即插即用</strong>特性——它可以与任何 RAG 方案叠加使用。</p>
+</li>
+<li>
+<p><strong>底座模型更换时 CRAG 更稳健：</strong> 当底座 LLM 从 SelfRAG-LLaMA2-7b 换成普通 LLaMA2-hf-7b 时，Self-RAG 的性能暴跌（因为它依赖专门微调的反思 token），而 CRAG 仍然保持稳定表现。这说明 CRAG <strong>不要求底座模型具备特殊能力</strong>。</p>
+</li>
+</ol>
+<h3>消融实验：每个组件都不可或缺</h3>
+<pre><code>┌──────────────────────────────────────────────────────────────┐
+│  消融实验结果（PopQA, SelfRAG-LLaMA2-7b）                      │
+│                                                               │
+│  动作消融（去掉某个动作，将其合并到 AMBIGUOUS）:                  │
+│  ┌──────────────────────┬───────┐                             │
+│  │ CRAG（完整）           │ 59.8  │ ■■■■■■■■■■■■■■■■■■■■     │
+│  │ 去掉 Correct          │ 58.3  │ ■■■■■■■■■■■■■■■■■■■      │
+│  │ 去掉 Incorrect        │ 59.5  │ ■■■■■■■■■■■■■■■■■■■■     │
+│  │ 去掉 Ambiguous        │ 59.0  │ ■■■■■■■■■■■■■■■■■■■      │
+│  └──────────────────────┴───────┘                             │
+│                                                               │
+│  知识利用消融（去掉某个知识处理步骤）:                             │
+│  ┌──────────────────────┬───────┐                             │
+│  │ CRAG（完整）           │ 59.8  │ ■■■■■■■■■■■■■■■■■■■■     │
+│  │ 去掉文档精炼          │ 54.2  │ ■■■■■■■■■■■■■■■■■        │
+│  │ 去掉查询重写          │ 56.2  │ ■■■■■■■■■■■■■■■■■■       │
+│  │ 去掉外部知识筛选      │ 58.6  │ ■■■■■■■■■■■■■■■■■■■      │
+│  └──────────────────────┴───────┘                             │
+│                                                               │
+│  → 文档精炼的影响最大（-5.6%），说明去噪对生成质量至关重要        │
+│  → 查询重写也很关键（-3.6%），直接使用原始问题搜索效果差          │
+└──────────────────────────────────────────────────────────────┘
+</code></pre>
+<h3>鲁棒性验证：检索越差，CRAG 的优势越明显</h3>
+<p>论文通过人为删除正确的检索结果来模拟低质量检索器，观察生成性能的变化。结果表明，随着检索质量下降，Self-CRAG 的性能下降幅度<strong>显著小于</strong> Self-RAG——这正是纠正机制的价值所在。</p>
+<h3>计算开销：轻量级的代价</h3>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th style="text-align:center">TFLOPs/token</th>
+<th style="text-align:center">执行时间(s)/实例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RAG</td>
+<td style="text-align:center">26.5</td>
+<td style="text-align:center">0.363</td>
+</tr>
+<tr>
+<td>CRAG</td>
+<td style="text-align:center">27.2</td>
+<td style="text-align:center">0.512</td>
+</tr>
+<tr>
+<td>Self-RAG</td>
+<td style="text-align:center">26.5~132.4</td>
+<td style="text-align:center">0.741</td>
+</tr>
+<tr>
+<td>Self-CRAG</td>
+<td style="text-align:center">27.2~80.2</td>
+<td style="text-align:center">0.908</td>
+</tr>
+</tbody>
+</table>
+<p>CRAG 相对于 RAG 只增加了约 2.6% 的计算量和 41% 的执行时间（主要来自评估器推理和网络搜索），但换来了高达 36.6% 的准确率提升——<strong>性价比极高</strong>。</p>
+<h2>还有更好的解决方案吗？</h2>
+<p>CRAG 开创了&quot;检索纠正&quot;这条路线，与其他 RAG 改进方案形成互补：</p>
+<ul>
+<li><strong>Self-RAG (2023)：</strong> 通过训练模型输出反思 token，从<strong>模型内部</strong>判断是否需要检索和检索质量。优势是不需要外部评估器，但需要专门微调底座模型。CRAG 可以<strong>直接叠加在 Self-RAG 上</strong>（即 Self-CRAG），两者互补。</li>
+<li><strong>Adaptive-RAG (2024)：</strong> 根据查询复杂度动态选择检索策略（无检索/单次/多步），侧重于&quot;要不要检索&quot;的决策，而非&quot;检索错了怎么办&quot;。</li>
+<li><strong>Agentic RAG：</strong> 将 RAG 视为一个 Agent 循环——检索、推理、验证、再检索——直到满意为止。这是更重量级的方案，但灵活性更高。</li>
+</ul>
+<p><strong>CRAG 的独特优势在于&quot;即插即用 + 轻量级&quot;：</strong> 一个 0.77B 的评估器 + 几条规则就能显著提升任意 RAG 系统的鲁棒性，不需要修改检索器、不需要微调生成器、不需要复杂的 Agent 循环。</p>
+<h2>关键词解析</h2>
+<h3>1. 检索评估器（Retrieval Evaluator）</h3>
+<p>CRAG 最核心的组件——一个微调过的 T5-large 模型，专门判断&quot;这篇文档对这个问题有没有用&quot;。</p>
+<ul>
+<li><strong>训练数据来源：</strong> 利用 PopQA 数据集中自带的 golden wiki title 作为正样本信号，随机采样的检索结果（与问题相似但不相关）作为负样本。</li>
+<li><strong>评估方式：</strong> 将问题和单篇文档拼接为输入，输出 [-1, 1] 之间的相关性分数。每篇文档独立评估。</li>
+<li><strong>成本优势：</strong> 参数量仅 0.77B，远小于 Self-RAG 的 Critic 模型（LLaMA2-7B）和直接调用 ChatGPT，且准确率反而更高。</li>
+</ul>
+<pre><code>为什么小模型能赢大模型？
+
+  ChatGPT（175B）:
+  → 通用知识丰富，但&quot;判断文档相关性&quot;不是它的强项
+  → 倾向于给出模糊判断（&quot;这篇文档可能有用...&quot;）
+  → Few-shot 也只到 64.7%
+
+  T5-large（0.77B）:
+  → 被专门训练做一件事：判断 (问题, 文档) 的相关性
+  → 见过大量的正负样本对，学会了精确的二分边界
+  → 不需要&quot;理解&quot;文档内容，只需要判断&quot;相关 vs 不相关&quot;
+  → 达到 84.3%
+
+  类比：
+  让一个全科医生（ChatGPT）和一个专科化验员（T5-large）
+  做同一份血液报告的诊断——化验员更快更准，因为他只练过这一件事。
+</code></pre>
+<h3>2. 知识精炼（Knowledge Refinement）</h3>
+<p>CRAG 的 decompose-then-recompose 算法本质上是一种<strong>文档级别的信息去噪</strong>：</p>
+<ul>
+<li><strong>分解（Decompose）：</strong> 将完整文档切分为细粒度的&quot;知识条&quot;（通常是几句话构成的独立信息单元）。</li>
+<li><strong>过滤（Filter）：</strong> 用同一个检索评估器对每条知识条打分，丢弃低分条目。</li>
+<li><strong>重组（Recompose）：</strong> 将保留的知识条按原始顺序拼接，形成精炼后的&quot;内部知识&quot;。</li>
+</ul>
+<p>这和 Self-RAG 的&quot;片段级评估&quot;有相似之处，但实现方式完全不同——Self-RAG 是在<strong>生成时</strong>逐段评估，CRAG 是在<strong>检索后、生成前</strong>一次性精炼。CRAG 的方式更简单直接，且不依赖生成模型的特殊能力。</p>
+<h3>3. 动作触发（Action Trigger）</h3>
+<p>三档机制的设计体现了一种**“优雅降级”**的工程哲学：</p>
+<pre><code>类比：飞机的燃油系统
+
+  CORRECT（正常）:
+  → 主油箱燃油充足 → 正常供油 → 正常飞行
+  → 检索结果良好 → 精炼后直接使用
+
+  INCORRECT（主油箱故障）:
+  → 主油箱故障 → 切换到备用油箱 → 继续飞行
+  → 本地语料无用 → 切换到网络搜索 → 仍能回答
+
+  AMBIGUOUS（主油箱状态不确定）:
+  → 同时使用主油箱和备用油箱 → 双保险
+  → 不确定检索质量 → 内部 + 外部知识同时使用
+
+  核心理念：系统永远不会因为单点失效而完全崩溃。
+</code></pre>
+<h3>4. 查询重写（Query Rewriting）</h3>
+<p>将用户的自然语言问题转换为搜索引擎友好的关键词查询：</p>
+<pre><code>重写示例（论文中的 Few-shot Prompt）：
+
+  问题: &quot;What is Henry Feilden's occupation?&quot;
+  查询: &quot;Henry Feilden, occupation&quot;
+
+  问题: &quot;In what city was Billy Carlson born?&quot;
+  查询: &quot;city, Billy Carlson, born&quot;
+
+  问题: &quot;What sport does Kiribati men's national basketball team play?&quot;
+  查询: &quot;sport, Kiribati men's national basketball team play&quot;
+</code></pre>
+<p>这个看似简单的步骤对搜索质量影响很大——消融实验显示，去掉查询重写后 PopQA 准确率下降 3.6%。</p>
+<h2>还有哪些值得深挖的洞察？</h2>
+<h3>1. &quot;知道自己不知道&quot;比&quot;知道更多&quot;更重要</h3>
+<p>CRAG 的设计哲学和 Self-RAG 有一个共同的深层洞察：<strong>让系统具备&quot;知道自己不知道&quot;的能力，比让它记住更多知识更有价值。</strong></p>
+<ul>
+<li>Self-RAG 通过 <code>[Retrieve]</code> token 让模型判断&quot;我需不需要查资料&quot;。</li>
+<li>CRAG 通过评估器让系统判断&quot;查到的资料好不好用&quot;。</li>
+<li>两者叠加（Self-CRAG）实现了双重保障：先判断要不要查，再判断查到的好不好。</li>
+</ul>
+<p>这种<strong>元认知能力</strong>（对自身认知状态的认知）在人类学习中被认为是高级思维能力的标志。CRAG 的贡献在于证明了：即使一个极轻量的模型（0.77B），经过专门训练也能具备可靠的元认知判断力。</p>
+<h3>2. 即插即用的架构设计暗示了&quot;RAG 中间件&quot;的未来</h3>
+<p>CRAG 最优雅的特性是它的<strong>即插即用</strong>设计——不需要修改检索器和生成器，只需要在两者之间加入评估 + 纠正层。这暗示了一种新的系统架构模式：</p>
+<pre><code>【传统 RAG —— 紧耦合的两阶段流水线】
+
+  检索器 ──────→ 生成器
+
+【CRAG 范式 —— 松耦合的三阶段架构】
+
+  检索器 ──→ [ 纠正中间件 ] ──→ 生成器
+                    │
+             ┌──────┼──────┐
+             │      │      │
+           评估   精炼   搜索补充
+
+  → 中间件可以独立升级，不影响上下游
+  → 可以堆叠多层中间件（评估 → 纠正 → 再评估 → ...）
+  → 不同场景可以配置不同的中间件策略
+</code></pre>
+<p>这种&quot;中间件&quot;思维在软件工程中非常常见（如 HTTP 中间件、消息队列），但在 RAG 领域还是新鲜事。CRAG 开了一个好头。</p>
+<h3>3. 网络搜索作为&quot;逃生通道&quot;的实际意义</h3>
+<p>CRAG 在 INCORRECT 时求助网络搜索，这不只是一个技术细节，它反映了一个重要的系统设计原则——<strong>为最坏情况提供逃生通道</strong>。</p>
+<p>传统 RAG 的本地语料库是静态的、有限的。当遇到语料库覆盖范围之外的问题时，系统<strong>完全没有后路</strong>。CRAG 通过集成网络搜索，给了系统一个&quot;安全网&quot;：</p>
+<ul>
+<li>时效性问题（“今天的新闻”）→ 本地语料过期 → 网络搜索兜底</li>
+<li>长尾知识（“某个小众人物”）→ 本地语料缺失 → 网络搜索补充</li>
+<li>跨域问题（“医学+法律的交叉问题”）→ 单一语料库不够 → 网络搜索扩展</li>
+</ul>
+<p>论文的对比实验也验证了这一点：单纯给 RAG/Self-RAG 加上网络搜索（不加纠正机制），改善有限甚至会下降；但通过 CRAG 的纠正机制<strong>有选择地</strong>使用网络搜索，效果才会显著提升。这说明**&quot;知道什么时候该搜&quot;比&quot;总是搜&quot;更重要**。</p>
+<h3>4. CRAG 与 Self-RAG 的互补关系</h3>
+<pre><code>┌──────────────┬────────────────────────────┬──────────────────────────┐
+│  维度         │  Self-RAG                   │  CRAG                    │
+├──────────────┼────────────────────────────┼──────────────────────────┤
+│ 纠正时机     │ 生成时（边生成边判断）       │ 检索后、生成前（预处理）  │
+├──────────────┼────────────────────────────┼──────────────────────────┤
+│ 纠正方式     │ 内部反思 token（模型自身）   │ 外部评估器 + 规则         │
+├──────────────┼────────────────────────────┼──────────────────────────┤
+│ 知识补充     │ 无（只在已有文档中选择）     │ 有（网络搜索兜底）       │
+├──────────────┼────────────────────────────┼──────────────────────────┤
+│ 对底座要求   │ 高（需要微调反思 token）     │ 低（任意 LLM 可用）      │
+├──────────────┼────────────────────────────┼──────────────────────────┤
+│ 额外成本     │ 需要训练 Critic + Generator │ 只需微调一个 T5-large    │
+├──────────────┼────────────────────────────┼──────────────────────────┤
+│ 叠加效果     │          Self-CRAG = Self-RAG + CRAG                  │
+│              │          在多个任务上达到最优                           │
+└──────────────┴────────────────────────────┴──────────────────────────┘
+</code></pre>
+<p>Self-RAG 擅长&quot;生成时的质量控制&quot;，CRAG 擅长&quot;检索后的噪音过滤&quot;。两者叠加（Self-CRAG）同时解决了&quot;检索质量差&quot;和&quot;生成不忠实&quot;两个问题，效果自然最好。</p>
+<hr>
+<h3>总结</h3>
+<p>CRAG 的本质是 <strong>“给 RAG 加上质检和纠错机制”</strong>：</p>
+<ol>
+<li><strong>检索评估器</strong>用一个 0.77B 的小模型判断检索质量，准确率超过 ChatGPT。</li>
+<li><strong>三档动作触发</strong>根据评估结果执行不同策略——精炼、搜索、或两者结合——实现&quot;优雅降级&quot;。</li>
+<li><strong>知识精炼</strong>通过分解-过滤-重组去除文档噪音，提取关键信息。</li>
+<li><strong>网络搜索</strong>为本地语料库无法覆盖的场景提供&quot;逃生通道&quot;。</li>
+<li><strong>即插即用</strong>的设计使其可以与任意 RAG 方案叠加使用，不需要修改上下游组件。</li>
+</ol>
+<h1>参考资料</h1>
+<ul>
+<li><a href="https://arxiv.org/abs/2401.15884">论文原文</a></li>
+<li><a href="https://github.com/HuskyInSalt/CRAG">项目代码</a></li>
+</ul>
+<p><em>创建：2026-03-13</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

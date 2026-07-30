@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>参考资料 | LZ AI NOTE</title>
+  <meta name="description" content="论文发布时间：2026 01 13 [RUC（中国人民大学）等机构联合发布的 Memory in the Age of AI Agents ] 是一篇关于智能体记忆的重量级综述。 简单来说，这篇论文为 AI Agent 的 记忆系统（Agent Memory） 建立了一套 全景式的“世界地图” ，它不再局限于传统的“长短期记忆”分类，而是从形式、功能和动态…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-agent/paper/RUC%20-%20Memory%20in%20the%20Age%20of%20AI%20Agents">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="参考资料 | LZ AI NOTE">
+  <meta property="og:description" content="论文发布时间：2026 01 13 [RUC（中国人民大学）等机构联合发布的 Memory in the Age of AI Agents ] 是一篇关于智能体记忆的重量级综述。 简单来说，这篇论文为 AI Agent 的 记忆系统（Agent Memory） 建立了一套 全景式的“世界地图” ，它不再局限于传统的“长短期记忆”分类，而是从形式、功能和动态…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-agent/paper/RUC%20-%20Memory%20in%20the%20Age%20of%20AI%20Agents">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"参考资料","description":"论文发布时间：2026 01 13 [RUC（中国人民大学）等机构联合发布的 Memory in the Age of AI Agents ] 是一篇关于智能体记忆的重量级综述。 简单来说，这篇论文为 AI Agent 的 记忆系统（Agent Memory） 建立了一套 全景式的“世界地图” ，它不再局限于传统的“长短期记忆”分类，而是从形式、功能和动态…","url":"https://wizardpisces.github.io/blog/tech/ai-agent/paper/RUC%20-%20Memory%20in%20the%20Age%20of%20AI%20Agents","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-agent/paper/RUC%20-%20Memory%20in%20the%20Age%20of%20AI%20Agents","dateModified":"2026-01-20","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>参考资料</h1><p><em>论文发布时间：2026-01-13</em></p>
+<p><a href="https://arxiv.org/abs/2512.13564">RUC（中国人民大学）等机构联合发布的 <strong>Memory in the Age of AI Agents</strong></a> 是一篇关于智能体记忆的重量级综述。</p>
+<p>简单来说，这篇论文为 AI Agent 的<strong>记忆系统（Agent Memory）</strong> 建立了一套<strong>全景式的“世界地图”</strong>，它不再局限于传统的“长短期记忆”分类，而是从形式、功能和动态三个维度重新定义了 Agent 是如何“记事”、“用事”和“忘事”的。</p>
+<h2>Agent Memory 解决了什么问题？</h2>
+<p><strong>核心问题：Agent 记忆领域的研究极其碎片化，且术语定义混乱。</strong></p>
+<p>随着 AI Agent 从简单的聊天机器人进化为能独立干活的智能体，关于“记忆”的研究爆发式增长，但也带来了严重的问题：</p>
+<ul>
+<li><strong>概念混淆：</strong> 大家把 RAG（检索增强）、Context Window（上下文窗口）、Prompt Engineering（提示词工程）都混着叫“记忆”，缺乏清晰界限。</li>
+<li><strong>分类过时：</strong> 传统的计算机“内存/硬盘”类比，或者心理学的“长期/短期记忆”分类，已经不足以涵盖现代大模型 Agent 的复杂记忆机制。</li>
+<li><strong>缺乏标准：</strong> 没有统一的框架来评估不同的记忆方法，导致研究者很难横向对比哪个方案更好。</li>
+</ul>
+<p><strong>本论文的作用：</strong> 它提出了一个统一的 <strong>FFD 框架（Forms, Functions, Dynamics）</strong>，像一本“字典”一样统一了语言，让后续的研究者能在同一个频道上对话。</p>
+<h2>这个问题真实存在吗？</h2>
+<p><strong>非常真实。记忆是 Agent 走向“通用智能”的必经之路。</strong></p>
+<ul>
+<li><strong>从“过客”到“管家”：</strong> 如果 Agent 记不住你的偏好、记不住它上周做过什么、记不住它学到的新技能，那它永远只是一个用完即走的工具，而不是一个能长期陪伴的助手。</li>
+<li><strong>幻觉与效率：</strong> 很多 Agent 的“幻觉”或“死循环”，本质上是因为记忆提取失败（忘了之前的设定）或者工作记忆溢出（上下文撑爆了）。</li>
+</ul>
+<h2>为什么现在才有人去解决？</h2>
+<ol>
+<li><strong>Agent 爆发期：</strong> 2024-2025 年是 Agent 的元年，从 AutoGPT 到 BabyAGI，再到各种复杂的 Multi-Agent 系统，记忆模块的复杂度呈指数级上升。</li>
+<li><strong>LLM 能力瓶颈：</strong> 单纯靠扩大模型的 Context Window（如 100万 token）并不能完美解决记忆问题，<strong>“能装”不代表“能用”</strong>。如何高效地管理无限的记忆，成为了比“上下文长度”更重要的问题。</li>
+</ol>
+<h2>它是如何解决的？</h2>
+<p>这篇论文的核心贡献是提出了 <strong>FFD 框架</strong>，从三个维度解构 Agent Memory：</p>
+<ul>
+<li>
+<p><strong>Forms（形态 - 它是怎么存的？）：</strong></p>
+<ul>
+<li><strong>Token-level Memory：</strong> 以自然语言形式存储（如聊天记录、外部文档）。最直观，易于人类理解。</li>
+<li><strong>Parametric Memory：</strong> 存储在模型权重里（如通过微调记住的知识）。</li>
+<li><strong>Latent Memory：</strong> 存储在向量或隐藏状态里（如 KV Cache，Embedding）。</li>
+</ul>
+</li>
+<li>
+<p><strong>Functions（功能 - 它是干嘛用的？）：</strong></p>
+<ul>
+<li><strong>Factual Memory（事实记忆）：</strong> 记住“世界是什么样的”（如：法国首都是巴黎，用户的名字叫 Bob）。</li>
+<li><strong>Experiential Memory（经验记忆）：</strong> 记住“过去发生了什么”以及“如何做某事”（如：上次解决这个 Bug 用的是这个方法）。</li>
+<li><strong>Working Memory（工作记忆）：</strong> 记住“当前正在做什么”（如：当前的思维链、临时变量）。</li>
+</ul>
+</li>
+<li>
+<p><strong>Dynamics（动态 - 它是怎么变的？）：</strong></p>
+<ul>
+<li><strong>Formation（形成）：</strong> 信息如何从环境进入 Agent。</li>
+<li><strong>Evolution（演化）：</strong> 记忆如何被压缩、遗忘、合并。</li>
+<li><strong>Retrieval（检索）：</strong> 如何在需要的时候准确找到那条记忆。</li>
+</ul>
+</li>
+</ul>
+<h2>还有更好的解决方案吗？</h2>
+<p>这是一篇 Survey（综述），它不是提出一个单一的算法，而是总结了所有现有的方案。但它指出了未来<strong>更好</strong>的方向：</p>
+<ul>
+<li><strong>Memory Automation（记忆自动化）：</strong> 不需要人类写 Prompt 告诉 Agent 记什么，Agent 应该像人一样自动决定什么该记，什么该忘。</li>
+<li><strong>Multimodal Memory（多模态记忆）：</strong> 现在的记忆多是文字，未来需要记住图像、声音和视频体验。</li>
+<li><strong>Trustworthiness（可信度）：</strong> 记忆会被污染（如 Prompt 注入），如何保证记忆的真实和安全。</li>
+</ul>
+<p><strong>这篇论文的优势在于“正本清源”：</strong> 它没有盲目堆砌技术细节，而是提供了高屋建瓴的视角，是入门 Agent Memory 领域的最佳导航图。</p>
+<h2>关键词解析</h2>
+<h3>1. Factual vs. Experiential Memory</h3>
+<p>这是借鉴认知心理学的分类，但在 Agent 中有具体含义。</p>
+<ul>
+<li><strong>Factual Memory (事实)：</strong> 类似<strong>百科全书</strong>。
+<ul>
+<li><em>例子：</em> “Python 是一门编程语言。”</li>
+<li><em>实现：</em> 通常通过 RAG 检索文档，或直接微调进模型权重。</li>
+</ul>
+</li>
+<li><strong>Experiential Memory (经验)：</strong> 类似<strong>技能手册</strong>或<strong>日记</strong>。
+<ul>
+<li><em>例子：</em> “上次用户报错说 Python 环境没装，我通过 <code>pip install</code> 解决了。” -&gt; 下次遇到类似问题直接调用这个经验。</li>
+<li><em>实现：</em> 通常存储为“问题-解决方案”对，用于类似 Few-shot learning 的上下文增强。</li>
+</ul>
+</li>
+</ul>
+<h3>2. Parametric vs. Non-Parametric Memory</h3>
+<p>这是 AI 模型中经典的区分。</p>
+<ul>
+<li><strong>Parametric (参数化)：</strong> 知识即权重。
+<ul>
+<li><em>优点：</em> 提取速度快（模型推理时自动调用）。</li>
+<li><em>缺点：</em> 更新极难（需要重新训练或微调），容易灾难性遗忘。</li>
+</ul>
+</li>
+<li><strong>Non-Parametric (非参数化/外部)：</strong> 知识即数据。
+<ul>
+<li><em>优点：</em> 随时增删改查（像数据库一样），更新成本低。</li>
+<li><em>缺点：</em> 需要额外的检索步骤，速度较慢。</li>
+<li><em>趋势：</em> 现代 Agent 都是两者的结合（Hybrid）。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3>总结</h3>
+<p>《Memory in the Age of AI Agents》的本质是**“Agent 记忆系统的工程学指南”**：</p>
+<ol>
+<li><strong>Forms</strong> 告诉我们记忆存在哪（文本、权重、向量）。</li>
+<li><strong>Functions</strong> 告诉我们记忆分什么类（事实、经验、工作）。</li>
+<li><strong>Dynamics</strong> 告诉我们记忆怎么流转（记、存、取）。</li>
+</ol>
+<p>它标志着 Agent Memory 从“小技巧”走向了“系统科学”。</p>
+<h1>参考资料</h1>
+<ul>
+<li><a href="https://arxiv.org/abs/2512.13564">论文地址</a></li>
+<li><a href="./DeepSeek%20-%20Engram%20-%20Conditional%20Memory%20via%20Scalable%20Lookup.md">DeepSeek Engram 解读</a> (作为对比，Engram 是一种具体的 Parametric/Latent Memory 优化技术)</li>
+</ul>
+<p><em>编辑：2026-01-20</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

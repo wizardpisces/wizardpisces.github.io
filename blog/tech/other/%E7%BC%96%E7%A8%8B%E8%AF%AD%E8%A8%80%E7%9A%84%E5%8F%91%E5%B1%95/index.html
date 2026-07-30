@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>关于编程语言的发展 | LZ AI NOTE</title>
+  <meta name="description" content="关于编程语言的发展 一开始 运行环境：OS 语言 汇编 C（FP, OS) C++（C +OOP） 托管时代 运行环境：受托管的执行环境上 特征：自动的垃圾收集，类型安全等 语言 Java（C++ FP +OOP, JVM） Scala（Java +FP, JVM） 命令式/声明式编程(DSL+函数式) 命令式（Imperative） 特征：做什么（Wha…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/other/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E7%9A%84%E5%8F%91%E5%B1%95">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="关于编程语言的发展 | LZ AI NOTE">
+  <meta property="og:description" content="关于编程语言的发展 一开始 运行环境：OS 语言 汇编 C（FP, OS) C++（C +OOP） 托管时代 运行环境：受托管的执行环境上 特征：自动的垃圾收集，类型安全等 语言 Java（C++ FP +OOP, JVM） Scala（Java +FP, JVM） 命令式/声明式编程(DSL+函数式) 命令式（Imperative） 特征：做什么（Wha…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/other/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E7%9A%84%E5%8F%91%E5%B1%95">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"关于编程语言的发展","description":"关于编程语言的发展 一开始 运行环境：OS 语言 汇编 C（FP, OS) C++（C +OOP） 托管时代 运行环境：受托管的执行环境上 特征：自动的垃圾收集，类型安全等 语言 Java（C++ FP +OOP, JVM） Scala（Java +FP, JVM） 命令式/声明式编程(DSL+函数式) 命令式（Imperative） 特征：做什么（Wha…","url":"https://wizardpisces.github.io/blog/tech/other/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E7%9A%84%E5%8F%91%E5%B1%95","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/other/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E7%9A%84%E5%8F%91%E5%B1%95","dateModified":"2025-06-20","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>关于编程语言的发展</h1><h1>关于编程语言的发展</h1>
+<p>一开始</p>
+<ul>
+<li>运行环境：OS</li>
+<li>语言
+<ul>
+<li>汇编 -&gt; C（FP, OS) -&gt; C++（C +OOP）</li>
+</ul>
+</li>
+</ul>
+<p>托管时代</p>
+<ul>
+<li>运行环境：受托管的执行环境上</li>
+<li>特征：自动的垃圾收集，类型安全等</li>
+<li>语言
+<ul>
+<li>Java（C++ -FP +OOP, JVM）-&gt; Scala（Java +FP, JVM）</li>
+</ul>
+</li>
+</ul>
+<h2>命令式/声明式编程(DSL+函数式)</h2>
+<ul>
+<li>命令式（Imperative）
+<ul>
+<li>特征：做什么（What） + 如何（How）（最终目的跟如何达成混在一起）</li>
+<li>例子：for循环，i += 1等等，部分细节会掩盖了“最终目标”，后面可能多往What方向演进</li>
+<li>优势：更加精细化控制，但需要手动</li>
+<li>问题：并行执行程序变得困难，因为像“执行目的”这样更高层次的信息已经丢失</li>
+</ul>
+</li>
+<li>声明式
+<ul>
+<li>外部DSL
+<ul>
+<li>描述：针对特定的领域设计，独立性强（主要被编译解析，不强依赖特定语言，例如：Dart-SASS等编译工具）</li>
+<li>特征：做什么（What）（只是表现出最终的目的，而不是明确指定做事的方式）</li>
+<li>例子：XML、HTML、SASS、SQL等</li>
+<li>发展：利用既有DSL的方言（附带成熟工具链）</li>
+</ul>
+</li>
+<li>内部DSL
+<ul>
+<li>描述：在既有语言上做一系列特别的API及使用模式</li>
+<li>例子：Jquery（伪装成一种DSL把一系列操作通过&quot;.&quot;流畅连接）</li>
+</ul>
+</li>
+<li>函数式
+<ul>
+<li>特征：容易并行（因为运行时不会修改任何状态，因此无论多少线程在运行时都可以观察到正确的结果。）</li>
+<li></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2>动态语言/静态语言</h2>
+<ul>
+<li>动态语言：JIT，源码发布，运行时动态解释执行，例如JS</li>
+<li>静态语言：特征：AOT，提前编译成目标代码，例如C</li>
+</ul>
+<h2>汇总</h2>
+<ul>
+<li>抽象级别越来越高（下一个抽象级别？）</li>
+<li>构建于现有的工具上（Rust以LLVM为目标编译，Scala在JVM的运行）</li>
+<li>多范式（FP，OOP）</li>
+<li>更多声明式，更少的命令式：让代码包含更多的“What”，而不是“How”；执行环境便可以更加聪明地去适应当前的执行要求。</li>
+<li>AOT+JIT？元编程：用代码生成（操纵）代码？</li>
+<li>组合是未来？（Rust 的编程建模模式更像是组合（Composition） 而不是继承（Inheritance）？类似 Vue3 选择 Composition-API 代替 Class Option（更好的逻辑组合复用，更好的支持TS））</li>
+</ul>
+<h2>Reference</h2>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/348306085">编程语言的发展趋势和未来方向</a></li>
+<li><a href="https://www.zhihu.com/question/23856985">怎样理解元编程</a></li>
+<li><a href="https://www.zhihu.com/question/32304837/answer/275204204">https://www.zhihu.com/question/32304837/answer/275204204</a></li>
+</ul>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

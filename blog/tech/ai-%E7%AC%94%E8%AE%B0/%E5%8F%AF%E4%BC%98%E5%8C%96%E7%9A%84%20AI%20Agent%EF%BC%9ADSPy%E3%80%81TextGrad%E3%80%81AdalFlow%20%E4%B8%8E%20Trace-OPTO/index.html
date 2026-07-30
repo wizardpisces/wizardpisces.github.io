@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>可优化的 AI Agent：用 3 个例子讲清 DSPy、TextGrad、AdalFlow 与 Trace/OPTO | LZ AI NOTE</title>
+  <meta name="description" content="可优化的 AI Agent：用 3 个例子讲清 DSPy、TextGrad、AdalFlow 与 Trace/OPTO 很多团队第一次把 LLM 接进业务时，都会走一条熟悉的路： 1. 写一版 Prompt（“你是一个专业助手…”） 2. 线下跑几条 case，看起来不错 3. 一上线，开始“玄学翻车”：边界条件、长文本、工具失败、格式不稳 如果你经历过这…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E5%8F%AF%E4%BC%98%E5%8C%96%E7%9A%84%20AI%20Agent%EF%BC%9ADSPy%E3%80%81TextGrad%E3%80%81AdalFlow%20%E4%B8%8E%20Trace-OPTO">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="可优化的 AI Agent：用 3 个例子讲清 DSPy、TextGrad、AdalFlow 与 Trace/OPTO | LZ AI NOTE">
+  <meta property="og:description" content="可优化的 AI Agent：用 3 个例子讲清 DSPy、TextGrad、AdalFlow 与 Trace/OPTO 很多团队第一次把 LLM 接进业务时，都会走一条熟悉的路： 1. 写一版 Prompt（“你是一个专业助手…”） 2. 线下跑几条 case，看起来不错 3. 一上线，开始“玄学翻车”：边界条件、长文本、工具失败、格式不稳 如果你经历过这…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E5%8F%AF%E4%BC%98%E5%8C%96%E7%9A%84%20AI%20Agent%EF%BC%9ADSPy%E3%80%81TextGrad%E3%80%81AdalFlow%20%E4%B8%8E%20Trace-OPTO">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"可优化的 AI Agent：用 3 个例子讲清 DSPy、TextGrad、AdalFlow 与 Trace/OPTO","description":"可优化的 AI Agent：用 3 个例子讲清 DSPy、TextGrad、AdalFlow 与 Trace/OPTO 很多团队第一次把 LLM 接进业务时，都会走一条熟悉的路： 1. 写一版 Prompt（“你是一个专业助手…”） 2. 线下跑几条 case，看起来不错 3. 一上线，开始“玄学翻车”：边界条件、长文本、工具失败、格式不稳 如果你经历过这…","url":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E5%8F%AF%E4%BC%98%E5%8C%96%E7%9A%84%20AI%20Agent%EF%BC%9ADSPy%E3%80%81TextGrad%E3%80%81AdalFlow%20%E4%B8%8E%20Trace-OPTO","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E5%8F%AF%E4%BC%98%E5%8C%96%E7%9A%84%20AI%20Agent%EF%BC%9ADSPy%E3%80%81TextGrad%E3%80%81AdalFlow%20%E4%B8%8E%20Trace-OPTO","dateModified":"2026-01-04","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>可优化的 AI Agent：用 3 个例子讲清 DSPy、TextGrad、AdalFlow 与 Trace/OPTO</h1><h1>可优化的 AI Agent：用 3 个例子讲清 DSPy、TextGrad、AdalFlow 与 Trace/OPTO</h1>
+<p>很多团队第一次把 LLM 接进业务时，都会走一条熟悉的路：</p>
+<ol>
+<li>写一版 Prompt（“你是一个专业助手…”）</li>
+<li>线下跑几条 case，看起来不错</li>
+<li>一上线，开始“玄学翻车”：边界条件、长文本、工具失败、格式不稳</li>
+</ol>
+<p>如果你经历过这种翻车，你会很自然地问出一个更本质的问题：</p>
+<blockquote>
+<p>我们能不能像训练神经网络一样，让 Agent/工作流在反馈中<strong>持续变好</strong>，而不是靠“灵感写 Prompt”？</p>
+</blockquote>
+<p>这正是近两年 DSPy / TextGrad / AdalFlow / Trace 这条技术支线的共同目标：把“提示词工程”升级成“<strong>可优化系统</strong>”。</p>
+<p>本文不讲论文公式，只用 3 个可复制的例子，把它们各自解决什么、需要什么前置条件、什么时候该用讲清楚。</p>
+<p>参考链接（建议收藏）：</p>
+<ul>
+<li>微软：<a href="https://www.microsoft.com/en-us/research/blog/tracing-the-path-to-self-adapting-ai-agents/"><code>Tracing the path to self-adapting AI agents</code></a></li>
+<li>DSPy 文档：<a href="https://dspy.ai/"><code>DSPy</code></a></li>
+<li>TextGrad 仓库：<a href="https://github.com/zou-group/textgrad"><code>zou-group/textgrad</code></a></li>
+<li>AdalFlow 仓库：<a href="https://github.com/SylphAI-Inc/AdalFlow"><code>SylphAI-Inc/AdalFlow</code></a></li>
+</ul>
+<hr>
+<h2>1）先把“可优化”说透：优化的不是权重，而是系统参数</h2>
+<p>很多人听到“自我进化”，第一反应是“那不得微调模型吗？”<br>
+但在绝大多数工程场景里，最便宜、最有效、也最容易回滚的优化对象其实是：</p>
+<ul>
+<li><strong>指令（instructions）</strong>：系统 prompt、格式要求、边界条件、失败策略</li>
+<li><strong>示例（few-shot demos）</strong>：高质量的输入/输出（最好还带推理过程）</li>
+<li><strong>流程（workflow）</strong>：先检索再回答？先查 schema 再写 SQL？先规划再执行？</li>
+<li><strong>工具策略</strong>：何时调用、怎么填参、失败怎么重试、怎么兜底</li>
+</ul>
+<p>如果把 Agent 看成一个程序，那么这些就是“参数”。<br>
+这些框架做的事，本质上都是：</p>
+<blockquote>
+<p>用可重复的评估（metric/反馈）驱动参数更新，把“人肉调参”变成“系统化迭代”。</p>
+</blockquote>
+<p>**没有评估，就没有优化。**这是全文最重要的一句话。</p>
+<hr>
+<h2>2）例子一：分类/抽取任务 —— DSPy 为什么像“编译器”</h2>
+<h3>场景</h3>
+<p>你做了一个客服意图分类器：</p>
+<ul>
+<li>输入：用户一句话（“我想取消订单”）</li>
+<li>输出：一个固定标签（<code>cancel_order</code> / <code>refund</code> / <code>change_address</code> …）</li>
+</ul>
+<p>你很快会发现：Prompt 里多一句话、少一个例子，准确率就能抖动 5～15%。<br>
+于是你想做一件更“工程化”的事：<strong>把这段 LLM 程序编译成更稳的 Prompt。</strong></p>
+<h3>DSPy 的核心思路</h3>
+<p>DSPy 的主张是：不要把行为写成一大段字符串 prompt，而是写成结构化程序，然后用优化器“编译”出更好的 prompts/weights：<a href="https://dspy.ai/"><code>DSPy</code></a>。</p>
+<p>你可以把它理解成：</p>
+<ul>
+<li>你写的“AI 程序”是<strong>骨架</strong>（输入输出字段、模块链路）</li>
+<li>编译器（optimizer）会在你的数据集上反复试，自动找出：
+<ul>
+<li><strong>更好的指令</strong></li>
+<li><strong>更好的 few-shot 示例组合</strong></li>
+</ul>
+</li>
+</ul>
+<h3>一个很直观的“编译前/编译后”差别</h3>
+<p><strong>编译前</strong>（通常是零样本或少量样本，容易飘）：</p>
+<pre><code class="language-text">你是客服意图分类助手。请输出最合适的标签。
+输入：{text}
+输出：{label}
+</code></pre>
+<p><strong>编译后</strong>（DSPy 会把“最有效的示例”和更好的指令放进去，变成稳定模板）：</p>
+<pre><code class="language-text">你是客服意图分类助手。输出必须是候选标签之一。
+
+示例1：
+输入：我不想要了，能退吗？
+输出：refund
+
+示例2：
+输入：地址填错了怎么改？
+输出：change_address
+
+现在开始：
+输入：{text}
+输出：
+</code></pre>
+<p>注意：这不是“运行时动态 prompt”，而是<strong>离线编译得到的“黄金模板”</strong>——上线后会稳定复用。</p>
+<h3>DSPy 的前置条件（非常硬）</h3>
+<p>DSPy 最吃的不是“天才 prompt”，而是两样东西：</p>
+<ul>
+<li><strong>一份覆盖真实分布的数据集</strong>（几十到几百条就能起步）</li>
+<li><strong>一个稳定的指标/裁判</strong>（accuracy、F1、exact match…）</li>
+</ul>
+<p>如果你没有裁判，DSPy 没法知道“更好”是什么。</p>
+<hr>
+<h2>3）例子二：算术/推理/格式不稳 —— TextGrad 的“文本梯度”到底是什么</h2>
+<h3>场景</h3>
+<p>你给模型一个 system prompt：<br>
+“请一步步思考，算出有多少蔬菜。”</p>
+<p>它却经常漏数、跳步、或者算对但过程乱。<br>
+你当然可以“让模型自己反思再答一次”，但 TextGrad 的贡献是：把这件事变成一个<strong>可重复、可组合的训练循环</strong>：<a href="https://github.com/zou-group/textgrad"><code>zou-group/textgrad</code></a>。</p>
+<h3>“文本梯度”不是微积分，是“可执行的改写建议”</h3>
+<p>在数值梯度里，梯度告诉你“参数往哪改，loss 会下降”。<br>
+在文本世界，梯度变成了<strong>一段非常具体的自然语言建议</strong>，例如（TextGrad README 里就展示过这种形式）：</p>
+<ul>
+<li>“鼓励模型显式逐项相加”</li>
+<li>“要求最后复核总数”</li>
+<li>“如果发现不一致，重新计算并更正”</li>
+</ul>
+<p>这段建议就是“梯度”：它告诉优化器要把 system prompt 往哪个方向改。</p>
+<h3>进阶例子：代码解题（Solution）优化</h3>
+<p>除了优化 Prompt，TextGrad 也可以优化<strong>具体的答案（Solution）</strong>。想象你要解一个数学题或写一段代码：</p>
+<ol>
+<li><strong>Forward（模型试写）</strong>：写了一个解方程的步骤，但把公式 $b^2 - 4ac$ 写成了 $b^2 + 4ac$。</li>
+<li><strong>TextLoss（裁判）</strong>：检测到最终答案错误，或者 LLM 裁判指出“判别式符号有误”。</li>
+<li><strong>Backward（生成梯度）</strong>：
+<blockquote>
+<p>“Gradient: The solution used the wrong sign in the discriminant formula. It should be minus, not plus.”</p>
+</blockquote>
+</li>
+<li><strong>Optimizer.step（更新答案）</strong>：模型根据这个“梯度”修正解题过程，而不仅仅是重试。</li>
+</ol>
+<p>这本质上就是<strong>系统化的 Self-Correction</strong>，但它把“找错（Gradient）”和“改错（Step）”解耦成了通用算子。</p>
+<h3>你可以把它想象成“自动 Code Review”</h3>
+<p>把 prompt 当成代码：</p>
+<ul>
+<li><strong>loss.backward()</strong>：像做 code review 一样指出问题与改法（用 LLM 生成建议）</li>
+<li><strong>optimizer.step()</strong>：按建议把 prompt 重新写一版</li>
+</ul>
+<p>关键区别不是“LLM 能不能改”，而是：</p>
+<blockquote>
+<p>你能否把“反馈 → 归因 → 改写”这条链路做成稳定的、可复用的流水线，并且能扩展到更复杂的系统（多变量、多步链路）。</p>
+</blockquote>
+<h3>TextGrad 的前置条件</h3>
+<p>TextGrad 更偏“反馈驱动”，你至少需要一个能给出好坏信号的东西：</p>
+<ul>
+<li>单测/规则校验（通过/失败）</li>
+<li>任务得分（0/1 或连续分数）</li>
+<li>结构校验（JSON schema 是否通过、SQL 是否可执行）</li>
+</ul>
+<p>如果你只能说“我觉得更好”，那“梯度”会越来越主观，越调越玄学。</p>
+<hr>
+<h2>4）例子三：工具型 Agent 翻车 —— Trace/OPTO 想解决的“归因问题”</h2>
+<h3>场景：Text-to-SQL 的“背锅侠”</h3>
+<p>做一个 Text-to-SQL Agent，链路大概是：</p>
+<ol>
+<li><strong>Step A</strong>: 读用户问题</li>
+<li><strong>Step B</strong>: （可选）查表结构 schema</li>
+<li><strong>Step C</strong>: 生成 SQL</li>
+<li><strong>Step D</strong>: 执行 SQL → <strong>报错：Table not found</strong></li>
+</ol>
+<p>翻车了。如果是传统调试，你可能会去改 Step C 的 Prompt：“请注意表名正确”。<br>
+但真正的原因可能是 <strong>Step B 压根没去查表</strong>，或者查错了库。</p>
+<p>微软 Trace/OPTO 的愿景，是把这种复合系统当成动态计算图，并基于反馈做端到端优化：<a href="https://www.microsoft.com/en-us/research/blog/tracing-the-path-to-self-adapting-ai-agents/"><code>Tracing the path to self-adapting AI agents</code></a>。</p>
+<h3>“最小子图”调试故事</h3>
+<p>OPTO 的核心逻辑（OPTO-Prime）是做<strong>因果切片</strong>：</p>
+<ol>
+<li><strong>Capture Trace</strong>：记录全过程 A-&gt;B-&gt;C-&gt;D。</li>
+<li><strong>Backtrack（回溯）</strong>：收到 D 的报错，OPTO 发现 D 依赖 C，C 依赖 B。</li>
+<li><strong>Causal Graph（归因）</strong>：它发现 C 写错是因为 B 没有提供正确的 Schema 信息。</li>
+<li><strong>Optimization（优化）</strong>：
+<ul>
+<li>它不会去瞎改 C 的 Prompt。</li>
+<li>它会生成一个针对 B 的优化建议：“在涉及模糊表名时，强制执行 schema 查询工具。”</li>
+<li>或者更直接地：把 B 步骤的 <code>tool_use_strategy</code> 参数更新了。</li>
+</ul>
+</li>
+</ol>
+<p>这就是**“信用分配（Credit Assignment）”**——把锅甩给真正该负责的那个参数，而不是只在报错的地方修修补补。</p>
+<hr>
+<h2>5）AdalFlow：为什么看起来像 DSPy？因为它更像“工程整合器”</h2>
+<p>AdalFlow 的定位非常直白：一个 PyTorch-like 的库，用来构建并自动优化 LLM 工作流（从 RAG 到 Agents）：<a href="https://github.com/SylphAI-Inc/AdalFlow"><code>SylphAI-Inc/AdalFlow</code></a>。</p>
+<p>你觉得它像 DSPy，很正常：</p>
+<ul>
+<li>都推崇“用代码描述行为”，而不是手写长 prompt</li>
+<li>都提供“优化”能力（而不是只给编排）</li>
+</ul>
+<p>它更像是把几条路线揉在一起的工程产物：你可以把它当成一个“更重、更全”的框架选项，用于快速搭建并迭代完整工作流。</p>
+<hr>
+<h2>6）到底实不实用？一句话：看你有没有“裁判”</h2>
+<p>这类方法是否实用，不取决于框架有多酷，而取决于你是否具备三件事：</p>
+<ol>
+<li><strong>裁判（metric/verifier）</strong>：单测、规则、执行结果、结构校验……必须能给出稳定好坏信号</li>
+<li><strong>样本/场景覆盖</strong>：几十到几百条覆盖真实边界条件的案例（或可重复运行的环境）</li>
+<li><strong>可观测性（trace/log）</strong>：每一步输入输出、工具参数、错误都能回放</li>
+</ol>
+<p>如果这三件事齐了，收益往往非常可观；如果缺一两件，上这些框架很容易变成“更贵的玄学调参”。</p>
+<hr>
+<h2>7）怎么落地：一份“从零到可优化”的最小清单</h2>
+<p>如果你想把它落到自己的系统里，建议按这个顺序（越往后越花钱）：</p>
+<ol>
+<li><strong>先把评估做出来</strong>：哪怕是最粗糙的 pass/fail</li>
+<li><strong>收集一个小而硬的 benchmark</strong>：优先覆盖最常翻车的边界条件</li>
+<li><strong>把链路打通可观测性</strong>：日志要能定位到“是哪一步导致了失败”</li>
+<li><strong>选工具路线</strong>：
+<ul>
+<li>有清晰标签与数据集：优先 DSPy 的编译式优化 <a href="https://dspy.ai/"><code>DSPy</code></a></li>
+<li>有强反馈、链路长、错误多：考虑 TextGrad 这类反馈改写 <a href="https://github.com/zou-group/textgrad"><code>zou-group/textgrad</code></a></li>
+<li>需要框架化搭建工作流：可评估 AdalFlow <a href="https://github.com/SylphAI-Inc/AdalFlow"><code>SylphAI-Inc/AdalFlow</code></a></li>
+<li>希望做“系统级自适应”：用 Trace/OPTO 的思路设计你的图与反馈 <a href="https://www.microsoft.com/en-us/research/blog/tracing-the-path-to-self-adapting-ai-agents/"><code>Tracing the path to self-adapting AI agents</code></a></li>
+</ul>
+</li>
+<li><strong>最后再考虑微调</strong>：当你确认“系统参数优化”已经把工程水分挤干净，而能力瓶颈仍在模型本体时，再走权重更新（SFT/RL）。</li>
+</ol>
+<h3>一张“快速选型表”</h3>
+<table>
+<thead>
+<tr>
+<th>你的现状</th>
+<th>更像哪条路线</th>
+<th>你需要先补的东西</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>有明确标签/标准答案（分类、抽取、QA）</td>
+<td>DSPy</td>
+<td>训练集 + 稳定指标（accuracy/F1/EM）</td>
+</tr>
+<tr>
+<td>没有标签，但有强反馈（单测/可执行性/结构校验）</td>
+<td>TextGrad</td>
+<td>裁判函数（pass/fail 或得分）+ 可回放日志</td>
+</tr>
+<tr>
+<td>想快速搭建并迭代完整工作流（RAG/Agent/工具链）</td>
+<td>AdalFlow</td>
+<td>先定义评估，再用框架把链路工程化</td>
+</tr>
+<tr>
+<td>链路很长，失败点很多，最痛是“到底该改哪里”</td>
+<td>Trace/OPTO（思路）</td>
+<td>把系统拆成图 + 把反馈能归因到上游参数</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>8）结语：从“写 Prompt”到“写评估”</h2>
+<p>这些框架共同指向一个现实：<br>
+在 Agent 时代，最稀缺的不是 prompt 灵感，而是<strong>可验证性</strong>。</p>
+<p>当你能用测试、指标、规则、反馈把“好”定义清楚，优化就会从玄学变工程；<br>
+当你只能凭感觉说“更像人”“更自然”，所谓“自动优化”就很难稳定收敛。</p>
+<p>换句话说：真正的技术门槛不是“Prompt 工程”，而是<strong>评估工程</strong>。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

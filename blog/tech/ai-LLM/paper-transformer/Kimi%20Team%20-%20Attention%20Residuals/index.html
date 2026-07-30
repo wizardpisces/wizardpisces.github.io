@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>可学习权重：所有输入用同一组权重 | LZ AI NOTE</title>
+  <meta name="description" content="论文发布时间：2026 03 16 Kimi Team 发布的 Attention Residuals （[论文链接]）是 Transformer 架构演进的一次重要创新。这篇论文针对现代大语言模型中标准残差连接的固有缺陷，提出了一种基于注意力机制的动态残差连接方案。 核心问题：PreNorm 残差连接的固有缺陷 标准残差连接的问题是什么？ 在现代 LLM…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-LLM/paper-transformer/Kimi%20Team%20-%20Attention%20Residuals">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="可学习权重：所有输入用同一组权重 | LZ AI NOTE">
+  <meta property="og:description" content="论文发布时间：2026 03 16 Kimi Team 发布的 Attention Residuals （[论文链接]）是 Transformer 架构演进的一次重要创新。这篇论文针对现代大语言模型中标准残差连接的固有缺陷，提出了一种基于注意力机制的动态残差连接方案。 核心问题：PreNorm 残差连接的固有缺陷 标准残差连接的问题是什么？ 在现代 LLM…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-LLM/paper-transformer/Kimi%20Team%20-%20Attention%20Residuals">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"可学习权重：所有输入用同一组权重","description":"论文发布时间：2026 03 16 Kimi Team 发布的 Attention Residuals （[论文链接]）是 Transformer 架构演进的一次重要创新。这篇论文针对现代大语言模型中标准残差连接的固有缺陷，提出了一种基于注意力机制的动态残差连接方案。 核心问题：PreNorm 残差连接的固有缺陷 标准残差连接的问题是什么？ 在现代 LLM…","url":"https://wizardpisces.github.io/blog/tech/ai-LLM/paper-transformer/Kimi%20Team%20-%20Attention%20Residuals","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-LLM/paper-transformer/Kimi%20Team%20-%20Attention%20Residuals","dateModified":"2026-03-23","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>可学习权重：所有输入用同一组权重</h1><p><em>论文发布时间：2026-03-16</em></p>
+<p>Kimi Team 发布的 <strong>Attention Residuals</strong>（<a href="https://arxiv.org/abs/2603.15031">论文链接</a>）是 Transformer 架构演进的一次重要创新。这篇论文针对现代大语言模型中标准残差连接的固有缺陷，提出了一种基于注意力机制的动态残差连接方案。</p>
+<h2>核心问题：PreNorm 残差连接的固有缺陷</h2>
+<p><strong>标准残差连接的问题是什么？</strong></p>
+<p>在现代 LLM 中，PreNorm 结构的残差连接已成为标准配置。其基本形式为：</p>
+<pre><code>x_{l+1} = x_l + Layer_l(Norm(x_l))
+</code></pre>
+<p>这种设计存在一个根本性问题：<strong>所有层的输出都以固定的单位权重（1）累加</strong>。随着网络深度增加：</p>
+<ol>
+<li><strong>不受控的隐藏状态增长</strong>：每层的贡献被平等累加，导致深层网络的隐藏状态幅度失控增长</li>
+<li><strong>层贡献逐渐稀释</strong>：后续层的输出被淹没在前面所有层的累积和中，单个层的影响力被稀释</li>
+<li><strong>信息选择能力缺失</strong>：模型无法根据输入内容动态决定应该更多依赖哪些层的表示</li>
+</ol>
+<p><strong>这个问题真实存在吗？</strong></p>
+<p>确实存在。实验观察到：</p>
+<ul>
+<li>标准 Transformer 在深层网络中，输出幅度随深度指数增长</li>
+<li>梯度分布在不同层之间严重不均匀</li>
+<li>深层模型难以有效训练和优化</li>
+</ul>
+<h2>Attention Residuals：用注意力替代固有累加</h2>
+<p><strong>核心思想非常直接：既然 Attention 机制能够在时间维度上动态选择信息，为什么不能在深度维度上也这样做？</strong></p>
+<h3>基本架构</h3>
+<p>Attention Residuals 将固定的残差累加替换为 softmax 注意力：</p>
+<pre><code>x_{l+1} = Σ_{i=0}^{l} α_{l,i}(x_l) · x_i
+
+其中 α_{l,i}(x_l) = softmax(q_l^T k_i / √d)
+q_l = W_q · x_l  (query 从当前层输出计算)
+k_i = W_k · x_i  (key 从第 i 层输出计算)
+</code></pre>
+<h3>关键问题：这真的是 Attention 吗？</h3>
+<p><strong>AttnRes 不是简单的&quot;可学习权重&quot;，而是真正的 Attention：</strong></p>
+<table>
+<thead>
+<tr>
+<th>方案</th>
+<th>权重形式</th>
+<th>是否依赖输入</th>
+<th>Q-K 机制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>固定残差</td>
+<td>w_i = 1 (常量)</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>可学习权重</td>
+<td>w_i ∈ ℝ (参数)</td>
+<td>❌</td>
+<td>❌</td>
+</tr>
+<tr>
+<td><strong>AttnRes</strong></td>
+<td><strong>α_i = f(x_l, x_i)</strong></td>
+<td><strong>✅</strong></td>
+<td><strong>✅</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>核心区别：</strong></p>
+<pre><code class="language-python"># 可学习权重：所有输入用同一组权重
+x_out = w_0*x_0 + w_1*x_1 + ... + w_L*x_L  
+# w_i 是固定参数，&quot;cat&quot; 和 &quot;dog&quot; 用相同权重
+
+# AttnRes：权重动态计算
+q = W_q @ x_l; k_i = W_k @ x_i
+α_i = softmax(q @ k_i / √d)  # 通过 Q-K 内积计算
+x_out = Σ α_i * x_i
+# 不同输入 → 不同权重分布
+</code></pre>
+<p><strong>为什么叫 Attention？</strong> 因为使用了 Query-Key 机制，权重随输入内容动态变化，不同样本、不同位置会产生不同的层聚合模式。</p>
+<h3>为什么有效？</h3>
+<ul>
+<li><strong>打破固定权重假设</strong>：不同输入可以依赖不同层的表示</li>
+<li><strong>幅度控制</strong>：softmax 归一化避免了累加导致的幅度膨胀</li>
+<li><strong>梯度稳定</strong>：更均匀的跨层梯度分布，易于训练深层网络</li>
+</ul>
+<h2>Block AttnRes：实用化的关键</h2>
+<h3>回答关键问题：在哪里使用 AttnRes？</h3>
+<p><strong>三种方案对比：</strong></p>
+<ol>
+<li>
+<p><strong>标准 Transformer（Baseline）</strong></p>
+<ul>
+<li>每一层都用固定残差：<code>x_{l+1} = x_l + Layer_l(Norm(x_l))</code></li>
+<li>所有层与层之间都是简单相加</li>
+</ul>
+</li>
+<li>
+<p><strong>全量 AttnRes（理想但不实用）</strong></p>
+<ul>
+<li>每一层都用注意力聚合所有前面层的输出</li>
+<li>Layer 10 需要对 Layers 0-9 做注意力</li>
+<li>Layer 20 需要对 Layers 0-19 做注意力</li>
+<li>问题：<strong>复杂度 O(L²)</strong>，内存和通信开销巨大</li>
+</ul>
+</li>
+<li>
+<p><strong>Block AttnRes（论文实际采用）</strong></p>
+<ul>
+<li><strong>并非所有层之间都用 AttnRes</strong></li>
+<li>而是将层分成多个 block，只在 block 级别使用 AttnRes</li>
+</ul>
+</li>
+</ol>
+<h3>Block AttnRes 的具体设计</h3>
+<p><strong>分块策略：</strong></p>
+<p>假设有 12 层 Transformer，分成 3 个 block（每个 block 4 层）：</p>
+<pre><code>Block 1: Layers 1-4
+Block 2: Layers 5-8
+Block 3: Layers 9-12
+</code></pre>
+<p><strong>连接方式：</strong></p>
+<ol>
+<li>
+<p><strong>Block 内部（Layer 与 Layer 之间）</strong>：</p>
+<ul>
+<li>使用<strong>标准残差连接</strong>（固定权重相加）</li>
+<li>Layer 2 = Layer 1 + Transform(Norm(Layer 1))</li>
+<li>Layer 3 = Layer 2 + Transform(Norm(Layer 2))</li>
+<li>这部分和原始 Transformer 完全一样，快速且无额外开销</li>
+</ul>
+</li>
+<li>
+<p><strong>Block 之间（Block 与 Block 之间）</strong>：</p>
+<ul>
+<li>使用 <strong>Attention Residuals</strong></li>
+<li>Block 2 的起始输入 = AttnRes(Block 1 的输出, Block 0 的输出)</li>
+<li>Block 3 的起始输入 = AttnRes(Block 2 的输出, [Block 0, Block 1, Block 2 的输出])</li>
+<li>每个 block 只需要对前面的 N 个 block 做注意力，而不是对 L 个 layer</li>
+</ul>
+</li>
+</ol>
+<p><strong>形象理解：</strong></p>
+<pre><code>标准 Transformer:
+Layer1 --[+]--&gt; Layer2 --[+]--&gt; Layer3 --[+]--&gt; ... --[+]--&gt; Layer12
+         ↑               ↑               ↑                    ↑
+      固定权重1      固定权重1      固定权重1            固定权重1
+
+全量 AttnRes:
+Layer1 --------→ Layer2 --------→ Layer3 --------→ ... --------→ Layer12
+         ↘     ↗         ↘     ↗         ↘     ↗              ↗
+          Attention      Attention      Attention        Attention
+            (所有前面的层)   (所有前面的层)   (所有前面的层)    (所有前面的层)
+
+Block AttnRes:
+[Block1: L1→L2→L3→L4] --Attention--&gt; [Block2: L5→L6→L7→L8] --Attention--&gt; [Block3: L9→L10→L11→L12]
+     Block内部用[+]                        Block内部用[+]                       Block内部用[+]
+                        ↘              ↗                      ↘              ↗
+                         Block级别的Attention                 Block级别的Attention
+</code></pre>
+<p><strong>复杂度优化：</strong></p>
+<table>
+<thead>
+<tr>
+<th>方案</th>
+<th>注意力次数</th>
+<th>内存复杂度</th>
+<th>通信开销</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>标准 Transformer</td>
+<td>0</td>
+<td>O(d)</td>
+<td>O(L)</td>
+</tr>
+<tr>
+<td>全量 AttnRes</td>
+<td>L 次</td>
+<td>O(L·d)</td>
+<td>O(L²)</td>
+</tr>
+<tr>
+<td>Block AttnRes (L=12, N=3)</td>
+<td>N=3 次</td>
+<td>O(N·d)</td>
+<td>O(N²)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>关键优势：</strong></p>
+<ul>
+<li>将注意力操作从 L 次降低到 N 次（N &lt;&lt; L）</li>
+<li>内存从 O(L·d) 降至 O(N·d)</li>
+<li>通信次数从 O(L²) 降至 O(N²)</li>
+<li>保留了大部分全量 AttnRes 的收益（80-90%）</li>
+</ul>
+<p><strong>实现技巧：</strong></p>
+<ul>
+<li><strong>基于缓存的流水线通信</strong>：复用已计算的 block 表示，避免重复传输</li>
+<li><strong>两阶段计算策略</strong>：分离 block 内和 block 间的计算，优化调度</li>
+</ul>
+<h3>具体计算流程示例</h3>
+<p>假设 12 层 Transformer，分成 3 个 block（每 block 4 层）：</p>
+<p><strong>输入</strong>: x₀</p>
+<p><strong>Block 1 (Layers 1-4) 内部标准残差：</strong></p>
+<pre><code>x₁ = x₀ + Layer₁(Norm(x₀))
+x₂ = x₁ + Layer₂(Norm(x₁))
+x₃ = x₂ + Layer₃(Norm(x₂))
+x₄ = x₃ + Layer₄(Norm(x₃))  ← Block 1 输出
+</code></pre>
+<p><strong>Block 2 (Layers 5-8) 开始前使用 AttnRes：</strong></p>
+<pre><code># 注意：这里用 AttnRes 聚合 Block 1 的输出
+x₄' = AttnRes(x₄, [x₄])  # 目前只有一个 block 的输出
+
+# 然后 Block 2 内部继续标准残差
+x₅ = x₄' + Layer₅(Norm(x₄'))
+x₆ = x₅ + Layer₆(Norm(x₅))
+x₇ = x₆ + Layer₇(Norm(x₆))
+x₈ = x₇ + Layer₈(Norm(x₇))  ← Block 2 输出
+</code></pre>
+<p><strong>Block 3 (Layers 9-12) 开始前使用 AttnRes：</strong></p>
+<pre><code># 这里用 AttnRes 聚合 Block 1 和 Block 2 的输出
+x₈' = AttnRes(x₈, [x₄, x₈])  # 对两个 block 的输出做注意力
+
+# 然后 Block 3 内部继续标准残差
+x₉ = x₈' + Layer₉(Norm(x₈'))
+x₁₀ = x₉ + Layer₁₀(Norm(x₉))
+x₁₁ = x₁₀ + Layer₁₁(Norm(x₁₀))
+x₁₂ = x₁₁ + Layer₁₂(Norm(x₁₁))  ← Block 3 输出（最终输出）
+</code></pre>
+<p><strong>关键点：</strong></p>
+<ul>
+<li>AttnRes 只在 <strong>block 边界</strong> 使用（3 个 block = 2 次 AttnRes 调用）</li>
+<li>Block 内部的 4 层之间全部是 <strong>标准残差</strong>（没有额外开销）</li>
+<li>每个 block 开始时会&quot;回顾&quot;前面所有 block 的输出，动态选择聚合权重</li>
+</ul>
+<h3>实验验证</h3>
+<p><strong>Scaling Law 实验：</strong></p>
+<ul>
+<li>AttnRes 在不同模型规模下都持续超越 baseline</li>
+<li>Block AttnRes 能匹配用 1.25 倍计算量训练的 baseline 性能</li>
+<li>验证了深度维度选择机制的有效性</li>
+</ul>
+<p><strong>Kimi Linear 集成：</strong></p>
+<ul>
+<li>模型规模：48B 总参数 / 3B 激活参数</li>
+<li>预训练数据：1.4T tokens</li>
+<li><strong>性能提升跨所有评估任务</strong>：
+<ul>
+<li>MMLU: 73.5 → 74.6 (+1.1)</li>
+<li>更均匀的输出幅度</li>
+<li>更稳定的跨层梯度分布</li>
+</ul>
+</li>
+</ul>
+<h2>技术洞察</h2>
+<h3>1. Attention 的普适性：从时间到深度</h3>
+<p>Transformer 用 Attention 解决了 RNN 在<strong>时间维度</strong>的串行计算问题。AttnRes 进一步将这一思想扩展到<strong>深度维度</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>传统方法</th>
+<th>Attention 方法</th>
+<th>收益</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>时间</td>
+<td>RNN 串行</td>
+<td>Self-Attention</td>
+<td>并行化、长距离依赖</td>
+</tr>
+<tr>
+<td>深度</td>
+<td>固定残差</td>
+<td>Attention Residuals</td>
+<td>动态选择、幅度控制</td>
+</tr>
+</tbody>
+</table>
+<p><strong>深层联系：</strong></p>
+<ul>
+<li><strong>Self-Attention</strong>：token 之间的动态加权（哪些词重要？）</li>
+<li><strong>AttnRes</strong>：layer 之间的动态加权（哪些层重要？）</li>
+<li><strong>统一思想</strong>：让模型学习&quot;在什么情况下关注什么&quot;，而不是硬编码</li>
+</ul>
+<h3>2. 工程实现的重要性</h3>
+<p><strong>全量 AttnRes 虽然理论优雅，但工程上不可行。</strong> Block AttnRes 通过：</p>
+<ul>
+<li>分层设计（block 内外不同策略）</li>
+<li>通信优化（缓存 + 两阶段计算）</li>
+</ul>
+<p>在保留 80-90% 理论收益的同时，将额外开销降至可接受水平（仅增加 ~5% 训练时间）。</p>
+<p><strong>这是 AI 研究中&quot;理论-工程&quot;平衡的典范。</strong></p>
+<h2>与其他方案对比</h2>
+<table>
+<thead>
+<tr>
+<th>方案</th>
+<th>核心思想</th>
+<th>优势</th>
+<th>劣势</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>标准残差</td>
+<td>固定单位权重累加</td>
+<td>简单高效</td>
+<td>幅度失控、无选择性</td>
+</tr>
+<tr>
+<td>DenseNet</td>
+<td>显式连接所有前序层</td>
+<td>信息流丰富</td>
+<td>参数量爆炸</td>
+</tr>
+<tr>
+<td>Mixture of Depths</td>
+<td>跳过某些层计算</td>
+<td>计算高效</td>
+<td>信息损失</td>
+</tr>
+<tr>
+<td><strong>AttnRes</strong></td>
+<td><strong>动态注意力聚合</strong></td>
+<td><strong>内容依赖、幅度可控</strong></td>
+<td><strong>额外计算开销</strong></td>
+</tr>
+</tbody>
+</table>
+<h2>局限与展望</h2>
+<p><strong>当前局限：</strong></p>
+<ul>
+<li>Block 粒度需要手动调优（粒度 vs 开销的权衡）</li>
+<li>额外 5-10% 的训练开销</li>
+<li>与 MoE、Sparse Attention 等的组合尚未充分探索</li>
+</ul>
+<p><strong>未来方向：</strong></p>
+<ul>
+<li>自适应 Block 划分</li>
+<li>多模态模型中的应用</li>
+<li>极深网络（100+ 层）的潜力</li>
+<li>利用学到的权重指导模型压缩</li>
+</ul>
+<h2>启示</h2>
+<ol>
+<li><strong>质疑常识</strong>：架构中的&quot;标准组件&quot;（如固定残差）可能并非最优，值得重新审视</li>
+<li><strong>工程平衡</strong>：理论优雅的方案需要工程优化才能落地（全量 AttnRes → Block AttnRes）</li>
+<li><strong>深度潜力</strong>：网络深度的价值不只在&quot;堆叠&quot;，更在于&quot;如何连接&quot;</li>
+</ol>
+<h2>代码实现</h2>
+<p>官方实现已开源：<a href="https://github.com/MoonshotAI/Attention-Residuals">MoonshotAI/Attention-Residuals</a></p>
+<p>核心伪代码：</p>
+<pre><code class="language-python"># AttnRes 核心实现
+class AttentionResidual(nn.Module):
+    def __init__(self, d_model):
+        super().__init__()
+        self.query = nn.Linear(d_model, d_model)  # W_q
+        self.key = nn.Linear(d_model, d_model)    # W_k
+    
+    def forward(self, current_layer_output, all_previous_outputs):
+        &quot;&quot;&quot;
+        Args:
+            current_layer_output: [batch, seq, d_model]
+            all_previous_outputs: list of [batch, seq, d_model]
+        
+        维度说明:
+            B: Batch Size (批次大小) - 一次处理多少句话
+            S: Sequence Length (序列长度) - 每句话有多少个词
+            D: d_model (模型隐藏维度) - 每个词用多少维向量表示
+            L: Layer Count (层数) - 前面有多少层的输出
+        &quot;&quot;&quot;
+        # 计算 Query 和 Keys
+        q = self.query(current_layer_output)  # [B, S, D]
+        
+        # Q-K 内积计算注意力分数
+        attn_scores = []
+        for prev_output in all_previous_outputs:
+            k = self.key(prev_output)
+            score = (q * k).sum(dim=-1, keepdim=True)  # [B, S, 1]
+            attn_scores.append(score)
+        
+        # Softmax 归一化
+        attn_weights = torch.softmax(
+            torch.cat(attn_scores, dim=-1), dim=-1
+        )  # [B, S, L]
+        
+        # 加权聚合
+        stacked_outputs = torch.stack(all_previous_outputs, dim=-1)  # [B, S, D, L]
+        output = (stacked_outputs * attn_weights.unsqueeze(2)).sum(dim=-1)  # [B, S, D]
+        
+        return output
+
+# Block AttnRes 实现
+class TransformerBlock(nn.Module):
+    def __init__(self, d_model, num_layers_per_block):
+        super().__init__()
+        self.layers = nn.ModuleList([
+            TransformerLayer(d_model) 
+            for _ in range(num_layers_per_block)
+        ])
+    
+    def forward(self, x):
+        for layer in self.layers:
+            x = x + layer(nn.LayerNorm(x))  # Block 内标准残差
+        return x
+
+class BlockAttentionResidual(nn.Module):
+    def __init__(self, d_model, num_blocks, layers_per_block):
+        super().__init__()
+        self.blocks = nn.ModuleList([
+            TransformerBlock(d_model, layers_per_block)
+            for _ in range(num_blocks)
+        ])
+        self.attn_res = AttentionResidual(d_model)
+    
+    def forward(self, x):
+        block_outputs = []
+        
+        for i, block in enumerate(self.blocks):
+            if i &gt; 0:
+                # Block 边界使用 AttnRes 聚合
+                x = self.attn_res(x, block_outputs)
+            x = block(x)  # Block 内标准残差
+            block_outputs.append(x)
+        
+        return x
+</code></pre>
+<h2>总结</h2>
+<p><strong>核心贡献：</strong></p>
+<ul>
+<li>用 Q-K Attention 机制替代固定权重残差，实现输入依赖的层聚合</li>
+<li>Block AttnRes 在保留收益的同时将开销降至可接受水平</li>
+<li>在 48B 参数模型上验证了跨任务的性能提升</li>
+</ul>
+<p><strong>技术价值：</strong></p>
+<ul>
+<li>缓解 PreNorm 的幅度膨胀和梯度不稳定问题</li>
+<li>证明了深度维度的动态信息选择的有效性</li>
+<li>为深度网络架构设计提供新视角</li>
+</ul>
+<p><strong>一句话：</strong> Attention 不仅能处理时间维度的序列，也能处理深度维度的层级——这是 Transformer 思想的又一次延伸。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

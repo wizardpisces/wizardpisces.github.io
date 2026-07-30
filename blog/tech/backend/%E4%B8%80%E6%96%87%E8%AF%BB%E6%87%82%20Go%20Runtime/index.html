@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>Go Runtime：理解 Go “魔法”的核心 | LZ AI NOTE</title>
+  <meta name="description" content="Go Runtime：理解 Go “魔法”的核心 理解 goroutine 的运行原理，就能理解 Go 里面大量看似神奇的机制。 Go 的很多能力： goroutine channel GC 网络并发 defer interface map 本质上都来自同一个思想： Go 不只是编译代码，它还携带一个 runtime，在用户态管理程序运行时的很多机制。 一…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/backend/%E4%B8%80%E6%96%87%E8%AF%BB%E6%87%82%20Go%20Runtime">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="Go Runtime：理解 Go “魔法”的核心 | LZ AI NOTE">
+  <meta property="og:description" content="Go Runtime：理解 Go “魔法”的核心 理解 goroutine 的运行原理，就能理解 Go 里面大量看似神奇的机制。 Go 的很多能力： goroutine channel GC 网络并发 defer interface map 本质上都来自同一个思想： Go 不只是编译代码，它还携带一个 runtime，在用户态管理程序运行时的很多机制。 一…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/backend/%E4%B8%80%E6%96%87%E8%AF%BB%E6%87%82%20Go%20Runtime">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Go Runtime：理解 Go “魔法”的核心","description":"Go Runtime：理解 Go “魔法”的核心 理解 goroutine 的运行原理，就能理解 Go 里面大量看似神奇的机制。 Go 的很多能力： goroutine channel GC 网络并发 defer interface map 本质上都来自同一个思想： Go 不只是编译代码，它还携带一个 runtime，在用户态管理程序运行时的很多机制。 一…","url":"https://wizardpisces.github.io/blog/tech/backend/%E4%B8%80%E6%96%87%E8%AF%BB%E6%87%82%20Go%20Runtime","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/backend/%E4%B8%80%E6%96%87%E8%AF%BB%E6%87%82%20Go%20Runtime","dateModified":"2026-07-10","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Go Runtime：理解 Go “魔法”的核心</h1><h1>Go Runtime：理解 Go “魔法”的核心</h1>
+<p>理解 goroutine 的运行原理，就能理解 Go 里面大量看似神奇的机制。</p>
+<p>Go 的很多能力：</p>
+<ul>
+<li>goroutine</li>
+<li>channel</li>
+<li>GC</li>
+<li>网络并发</li>
+<li>defer</li>
+<li>interface</li>
+<li>map</li>
+</ul>
+<p>本质上都来自同一个思想：</p>
+<blockquote>
+<p>Go 不只是编译代码，它还携带一个 runtime，在用户态管理程序运行时的很多机制。</p>
+</blockquote>
+<hr>
+<h1>一、关键认知：我们写的代码不是简单直接跑在线程上</h1>
+<p>例如：</p>
+<pre><code class="language-go">func foo() {
+    a := 1
+    b := 2
+    fmt.Println(a + b)
+}
+
+func main() {
+    go foo()
+}
+</code></pre>
+<p>很多人的第一反应：</p>
+<pre><code>创建线程
+    |
+    v
+运行 foo()
+</code></pre>
+<p>实际上不是。</p>
+<p>更接近：</p>
+<pre><code>创建一个 goroutine(G)
+
+G:
+    保存 foo 的入口地址
+    拥有自己的栈
+    拥有自己的执行状态
+
+        |
+        v
+
+加入 Go scheduler 管理的队列
+</code></pre>
+<p>goroutine 本质：</p>
+<pre><code>G = 可恢复的执行状态
+</code></pre>
+<p>包含：</p>
+<pre><code>stack
+program counter
+register 状态
+执行状态
+函数入口
+</code></pre>
+<p>它不是线程，也不是函数。</p>
+<p>函数只是代码。</p>
+<p>goroutine 是：</p>
+<blockquote>
+<p>执行这段代码时所需要保存的完整上下文。</p>
+</blockquote>
+<hr>
+<h1>二、Go runtime 在线程之上重新实现了一层调度</h1>
+<p>操作系统看到：</p>
+<pre><code>Process
+
+    Thread 1
+    Thread 2
+    Thread 3
+</code></pre>
+<p>它不知道 goroutine。</p>
+<p>但是 Go runtime 看到：</p>
+<pre><code>G1
+G2
+G3
+G4
+...
+</code></pre>
+<p>然后：</p>
+<pre><code>OS Thread
+
+       |
+       v
+
+Go Scheduler
+
+       |
+       +---- G1
+       |
+       +---- G2
+       |
+       +---- G3
+</code></pre>
+<p>这就是 Go 的 G-M-P 模型：</p>
+<pre><code>G:
+goroutine
+
+M:
+machine
+(OS thread)
+
+P:
+processor
+(Go runtime 调度资源)
+</code></pre>
+<p>关系：</p>
+<pre><code>M(thread)
+    |
+    P
+    |
+    G queue
+</code></pre>
+<hr>
+<h1>三、goroutine 如何运行？</h1>
+<p>当写：</p>
+<pre><code class="language-go">go foo()
+</code></pre>
+<p>编译器不会把 foo 直接塞进线程。</p>
+<p>它会生成类似：</p>
+<pre><code class="language-go">runtime.newproc(foo)
+</code></pre>
+<p>然后：</p>
+<pre><code>runtime:
+
+创建 G
+
+G.entry = foo
+
+放入 scheduler 队列
+</code></pre>
+<p>之后某个线程：</p>
+<pre><code>Thread 1
+
+进入 Go scheduler
+
+发现:
+
+G1 -&gt; foo()
+
+于是：
+
+恢复 G1 的执行状态
+
+CPU 开始执行 foo 的机器码
+</code></pre>
+<p>注意：</p>
+<p>CPU 不知道 goroutine。</p>
+<p>CPU 只是执行：</p>
+<pre><code>foo 的机器指令地址
+</code></pre>
+<hr>
+<h1>四、函数为什么可以暂停和恢复？</h1>
+<p>这是 goroutine 最核心的地方。</p>
+<p>CPU 执行代码时，本质依赖：</p>
+<pre><code>PC:
+下一条指令地址
+
+SP:
+栈位置
+
+Registers:
+寄存器状态
+</code></pre>
+<p>例如：</p>
+<pre><code>G1:
+
+PC = 0x123456
+SP = 0xabcd
+RAX = 10
+</code></pre>
+<p>这些就是执行现场。</p>
+<p>当 goroutine 被切走：</p>
+<p>runtime 保存：</p>
+<pre><code>G1:
+
+PC
+SP
+registers
+stack
+</code></pre>
+<p>然后：</p>
+<p>恢复 G2：</p>
+<pre><code>G2:
+
+PC = 0x987654
+SP = 0xefgh
+</code></pre>
+<p>CPU 继续执行 G2。</p>
+<p>所以：</p>
+<blockquote>
+<p>goroutine 切换，本质就是用户态保存和恢复执行上下文。</p>
+</blockquote>
+<p>和操作系统切线程类似。</p>
+<p>区别：</p>
+<p>线程切换：</p>
+<pre><code>OS kernel 做
+</code></pre>
+<p>goroutine 切换：</p>
+<pre><code>Go runtime 做
+</code></pre>
+<hr>
+<h1>五、什么时候 goroutine 会被切换？</h1>
+<p>不是任何时候。</p>
+<p>主要有：</p>
+<h2>1. 阻塞</h2>
+<p>例如：</p>
+<pre><code class="language-go">ch &lt;- value
+</code></pre>
+<p>如果没有接收者：</p>
+<pre><code>G1
+
+发送数据
+
+发现无法继续
+
+↓
+
+进入等待状态
+
+↓
+
+runtime 调度其他 G
+</code></pre>
+<hr>
+<h2>2. 网络等待</h2>
+<p>例如：</p>
+<pre><code class="language-go">conn.Read(buf)
+</code></pre>
+<p>传统线程：</p>
+<pre><code>thread 阻塞
+</code></pre>
+<p>Go：</p>
+<pre><code>G1 等待 IO
+
+thread 去运行 G2
+</code></pre>
+<p>所以一个线程可以服务大量网络连接。</p>
+<hr>
+<h2>3. 主动让出</h2>
+<p>例如：</p>
+<pre><code class="language-go">runtime.Gosched()
+</code></pre>
+<p>表示：</p>
+<pre><code>我先暂停，让其他 goroutine 运行
+</code></pre>
+<hr>
+<h2>4. 抢占</h2>
+<p>现代 Go 支持异步抢占。</p>
+<p>例如：</p>
+<pre><code class="language-go">for {
+
+}
+</code></pre>
+<p>不会永久霸占线程。</p>
+<p>编译器和 runtime 会协作插入检查点：</p>
+<pre><code>loop
+
+检查是否需要调度
+
+loop
+</code></pre>
+<p>runtime 可以：</p>
+<pre><code>保存 G1
+
+切换 G2
+</code></pre>
+<hr>
+<h1>六、channel 为什么像“魔法”？</h1>
+<p>channel 不是普通队列。</p>
+<p>它是 runtime 管理的数据结构。</p>
+<p>例如：</p>
+<pre><code class="language-go">ch := make(chan int)
+</code></pre>
+<p>内部：</p>
+<pre><code>hchan
+
+ |
+ +-- buffer
+ |
+ +-- send queue
+ |
+ +-- receive queue
+</code></pre>
+<p>发送：</p>
+<pre><code class="language-go">ch &lt;- 10
+</code></pre>
+<p>如果没人接：</p>
+<pre><code>G1
+
+send
+
+↓
+
+挂起
+
+↓
+
+进入等待队列
+</code></pre>
+<p>接收：</p>
+<pre><code class="language-go">x := &lt;-ch
+</code></pre>
+<p>runtime：</p>
+<pre><code>找到等待中的 G1
+
+唤醒
+
+交换数据
+
+继续执行
+</code></pre>
+<p>所以 channel 本质：</p>
+<blockquote>
+<p>调度器 + 同步机制。</p>
+</blockquote>
+<hr>
+<h1>七、Go runtime 管理的不只是 goroutine</h1>
+<p>理解 runtime 后，Go 的很多机制都能串起来。</p>
+<h2>1. Scheduler</h2>
+<p>负责：</p>
+<pre><code>G-M-P 调度模型
+</code></pre>
+<p>管理：</p>
+<ul>
+<li>goroutine 创建</li>
+<li>暂停</li>
+<li>恢复</li>
+<li>抢占</li>
+</ul>
+<hr>
+<h2>2. Garbage Collector</h2>
+<p>Go 自动管理内存。</p>
+<p>例如：</p>
+<pre><code class="language-go">obj := &amp;User{}
+</code></pre>
+<p>runtime 跟踪：</p>
+<pre><code>heap:
+
+obj1
+obj2
+obj3
+</code></pre>
+<p>GC：</p>
+<pre><code>标记存活对象
+
+清理不可达对象
+</code></pre>
+<p>现代 Go：</p>
+<pre><code>程序运行
+
+GC 并发执行
+
+减少暂停
+</code></pre>
+<p>依赖：</p>
+<ul>
+<li>三色标记</li>
+<li>write barrier</li>
+<li>并发扫描</li>
+</ul>
+<hr>
+<h2>3. 网络调度 netpoller</h2>
+<p>Go 网络库不是简单阻塞线程。</p>
+<p>例如：</p>
+<pre><code>10000 个连接
+
+↓
+
+10000 个 goroutine
+
+↓
+
+少量线程
+
+↓
+
+runtime + epoll/kqueue
+</code></pre>
+<p>runtime 管理等待状态。</p>
+<hr>
+<h2>4. defer</h2>
+<p>代码：</p>
+<pre><code class="language-go">defer close(file)
+</code></pre>
+<p>表面：</p>
+<pre><code>注册一个函数
+</code></pre>
+<p>实际：</p>
+<p>编译器和 runtime 会优化执行方式。</p>
+<hr>
+<h2>5. interface</h2>
+<p>interface 背后：</p>
+<pre><code>type 信息
+
++
+
+data 指针
+
++
+
+method table
+</code></pre>
+<p>调用：</p>
+<pre><code class="language-go">w.Write()
+</code></pre>
+<p>实际：</p>
+<pre><code>查找接口表
+
+找到函数地址
+
+跳转执行
+</code></pre>
+<hr>
+<h2>6. map</h2>
+<p>Go map：</p>
+<p>不是简单 hash table。</p>
+<p>runtime 管理：</p>
+<pre><code>hmap
+
+ |
+ +-- buckets
+ |
+ +-- overflow
+ |
+ +-- hash
+</code></pre>
+<p>扩容：</p>
+<pre><code>旧 bucket
+
+逐渐迁移
+
+新 bucket
+</code></pre>
+<p>避免长时间停顿。</p>
+<hr>
+<h1>八、Go 的整体结构</h1>
+<p>最终模型：</p>
+<pre><code>                 CPU
+                  |
+                  v
+          OS scheduler
+                  |
+                  v
+             OS Thread
+                  |
+                  v
+          Go runtime
+                  |
+     +------------+-------------+
+     |            |             |
+ scheduler       GC        netpoller
+     |
+ goroutines
+
+     |
+     v
+
+用户业务代码
+</code></pre>
+<hr>
+<h1>最终理解</h1>
+<p>Go 的核心不是“语法简单”。</p>
+<p>真正核心是：</p>
+<blockquote>
+<p>Go 把很多过去由操作系统负责的机制，在用户态 runtime 中重新实现，并针对并发场景优化。</p>
+</blockquote>
+<p>所以：</p>
+<ul>
+<li>goroutine = runtime 管理的执行上下文</li>
+<li>channel = runtime 管理的同步通信结构</li>
+<li>GC = runtime 管理的内存生命周期</li>
+<li>netpoller = runtime 管理的 IO 等待</li>
+<li>interface/map/defer = 编译器 + runtime 协作实现</li>
+</ul>
+<p>理解 Go runtime 后，Go 的很多“魔法”都会变成普通的工程设计：</p>
+<p><strong>不是代码直接跑在线程上，而是编译后的代码和 runtime 一起运行；runtime 不替代 CPU 执行代码，而是在代码执行过程中管理它的生命周期、调度关系和资源。</strong></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

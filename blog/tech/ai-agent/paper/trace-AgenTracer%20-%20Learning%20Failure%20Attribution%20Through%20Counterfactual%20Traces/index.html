@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>参考资料 | LZ AI NOTE</title>
+  <meta name="description" content="论文发布时间：2025 09 03，v2 修订：2025 09 04 AgenTracer （论文标题为《[AgenTracer: Who Is Inducing Failure in the LLM Agentic Systems?]》）研究的是： 如何训练一个模型，自动判断 Agent 系统失败时到底是谁的问题、哪一步的问题。 它和 TraceElep…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-agent/paper/trace-AgenTracer%20-%20Learning%20Failure%20Attribution%20Through%20Counterfactual%20Traces">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="参考资料 | LZ AI NOTE">
+  <meta property="og:description" content="论文发布时间：2025 09 03，v2 修订：2025 09 04 AgenTracer （论文标题为《[AgenTracer: Who Is Inducing Failure in the LLM Agentic Systems?]》）研究的是： 如何训练一个模型，自动判断 Agent 系统失败时到底是谁的问题、哪一步的问题。 它和 TraceElep…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-agent/paper/trace-AgenTracer%20-%20Learning%20Failure%20Attribution%20Through%20Counterfactual%20Traces">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"参考资料","description":"论文发布时间：2025 09 03，v2 修订：2025 09 04 AgenTracer （论文标题为《[AgenTracer: Who Is Inducing Failure in the LLM Agentic Systems?]》）研究的是： 如何训练一个模型，自动判断 Agent 系统失败时到底是谁的问题、哪一步的问题。 它和 TraceElep…","url":"https://wizardpisces.github.io/blog/tech/ai-agent/paper/trace-AgenTracer%20-%20Learning%20Failure%20Attribution%20Through%20Counterfactual%20Traces","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-agent/paper/trace-AgenTracer%20-%20Learning%20Failure%20Attribution%20Through%20Counterfactual%20Traces","dateModified":"2026-05-08","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>参考资料</h1><p><em>论文发布时间：2025-09-03，v2 修订：2025-09-04</em></p>
+<p><strong>AgenTracer</strong>（论文标题为《<a href="https://arxiv.org/abs/2509.03312">AgenTracer: Who Is Inducing Failure in the LLM Agentic Systems?</a>》）研究的是：<strong>如何训练一个模型，自动判断 Agent 系统失败时到底是谁的问题、哪一步的问题。</strong></p>
+<p>它和 TraceElephant / MP-Bench 的关系可以这样理解：</p>
+<pre><code class="language-text">TraceElephant：告诉你 trace 必须记录完整 input / output / tool logs。
+MP-Bench：告诉你失败归因不一定只有一个根因。
+AgenTracer：尝试训练一个专门的 failure attribution 模型。
+</code></pre>
+<p>所以 AgenTracer 更偏方法论文，不只是 benchmark。</p>
+<h2>一句话结论</h2>
+<p>AgenTracer 的核心想法是：</p>
+<p><strong>与其只让大模型看失败日志猜原因，不如构造“反事实 trace”，训练模型学习：如果某一步被修正后任务能成功，那么这一步就很可能是关键失败点。</strong></p>
+<p>它最有价值的地方是把失败归因从“静态看日志”推进到“用反事实轨迹学习因果关系”。</p>
+<h2>先用一个例子说明</h2>
+<p>假设有一个 Coding Agent 系统：</p>
+<pre><code class="language-text">用户任务：
+修复登录页 bug：表单无效时，提交按钮必须 disabled。
+
+Agent 分工：
+SearchAgent   找相关文件
+CoderAgent    修改代码
+TesterAgent   验证结果
+</code></pre>
+<p>失败轨迹：</p>
+<pre><code class="language-text">Step 1 - SearchAgent
+输出：找到了 LoginPage.vue。
+问题：漏掉 useLoginValidation.ts。
+
+Step 2 - CoderAgent
+输入：只有 LoginPage.vue。
+输出：只改了按钮样式，没有改 disabled 逻辑。
+
+Step 3 - TesterAgent
+输出：现有测试通过，任务完成。
+
+Final
+按钮仍然没有 disabled。
+</code></pre>
+<p>现在有三个候选归因：</p>
+<pre><code class="language-text">候选 A：SearchAgent 漏文件。
+候选 B：CoderAgent 改错逻辑。
+候选 C：TesterAgent 验收不严格。
+</code></pre>
+<p>普通静态归因只能看 trace 猜：</p>
+<pre><code class="language-text">可能是 TesterAgent，因为它最后没兜底。
+</code></pre>
+<p>AgenTracer 的思路更接近实验：</p>
+<pre><code class="language-text">如果我把 Step 1 修正，让 SearchAgent 找到 useLoginValidation.ts，
+后续任务是否更可能成功？
+
+如果我把 Step 2 修正，让 CoderAgent 正确修改 disabled 逻辑，
+后续任务是否成功？
+
+如果我把 Step 3 修正，让 TesterAgent 要求补行为测试，
+系统是否能恢复？
+</code></pre>
+<p>这就是 <strong>counterfactual trace</strong>：</p>
+<pre><code class="language-text">原始世界：Step 1 漏文件 -&gt; Step 2 改错 -&gt; Step 3 误判 -&gt; 失败
+反事实世界：Step 1 找全文件 -&gt; 后续可能成功
+</code></pre>
+<p>如果修正某一步后任务从失败变成功，说明这一步与失败有更强因果关系。</p>
+<h2>AgenTracer 解决了什么问题？</h2>
+<p>它解决的是 failure attribution 的训练数据问题。</p>
+<p>过去常见做法：</p>
+<pre><code class="language-text">收集失败 trace
+让人标注谁错了、哪一步错了
+训练或评测模型
+</code></pre>
+<p>问题是：</p>
+<pre><code class="language-text">人工标注贵。
+不同专家会有分歧。
+单看失败 trace 很难判断因果。
+</code></pre>
+<p>AgenTracer 的解决方式：</p>
+<pre><code class="language-text">用 counterfactual replay 和 fault injection 自动构造大量带标签的训练数据。
+</code></pre>
+<p>也就是说，它不是只靠人类标注，而是主动制造和验证失败原因。</p>
+<h2>核心机制：从失败 trace 到训练数据</h2>
+<p>AgenTracer 可以拆成四步：</p>
+<pre><code class="language-text">1. 采集成功 / 失败 Agent 轨迹
+2. 构造反事实 trace
+3. 用 programmed fault injection 自动注入错误
+4. 训练 AgenTracer-8B 做失败归因
+</code></pre>
+<p>下面用 Coding Agent 例子串起来。</p>
+<h2>1. Counterfactual Replay：从某一步重跑</h2>
+<p>假设原始失败轨迹是：</p>
+<pre><code class="language-text">Step 1 SearchAgent：漏掉 validation 文件
+Step 2 CoderAgent：只改样式
+Step 3 TesterAgent：误判完成
+Final：失败
+</code></pre>
+<p>Counterfactual replay 做的是：</p>
+<pre><code class="language-text">选择一个候选步骤，例如 Step 1。
+把 Step 1 的输出替换成更合理的输出。
+从 Step 2 开始重跑后续 Agent。
+观察最终是否成功。
+</code></pre>
+<p>例子：</p>
+<pre><code class="language-text">原 Step 1：
+SearchAgent -&gt; LoginPage.vue
+
+反事实 Step 1：
+SearchAgent -&gt; LoginPage.vue + useLoginValidation.ts
+
+重新运行：
+CoderAgent 现在看到 validation hook。
+它修改 disabled 逻辑。
+TesterAgent 验证通过。
+Final 成功。
+</code></pre>
+<p>这说明 Step 1 的错误对失败有强影响。</p>
+<p>反过来，如果修正 Step 1 后仍然失败，说明真正问题可能在后面。</p>
+<h2>2. Fault Injection：主动制造可控错误</h2>
+<p>Counterfactual replay 需要知道“修正后会怎样”。但真实失败数据不够多，所以 AgenTracer 用 <strong>programmed fault injection</strong> 主动制造错误。</p>
+<p>还是 Coding Agent 例子。</p>
+<p>原本有一条成功轨迹：</p>
+<pre><code class="language-text">Step 1 SearchAgent：找到 LoginPage.vue + useLoginValidation.ts
+Step 2 CoderAgent：正确修改 disabled 逻辑
+Step 3 TesterAgent：新增 invalid form 测试并通过
+Final：成功
+</code></pre>
+<p>现在故意注入错误：</p>
+<pre><code class="language-text">注入到 Step 1：
+把 SearchAgent 输出改成只返回 LoginPage.vue。
+</code></pre>
+<p>再运行后续步骤：</p>
+<pre><code class="language-text">Step 2 CoderAgent 因为缺上下文，改错。
+Step 3 TesterAgent 没发现。
+Final 失败。
+</code></pre>
+<p>这条失败轨迹的标签天然就是：</p>
+<pre><code class="language-text">失败注入点：Step 1 / SearchAgent
+失败原因：关键文件缺失
+</code></pre>
+<p>这比纯人工标注便宜，也更适合规模化。</p>
+<h2>3. TracerTraj：自动构造的大规模归因数据</h2>
+<p>AgenTracer 基于这种方法构造了 <strong>TracerTraj</strong> 数据集。</p>
+<p>核心特点：</p>
+<pre><code class="language-text">由 counterfactual replay / fault injection 生成。
+包含失败轨迹和对应归因标签。
+用于训练专门的 failure attribution 模型。
+</code></pre>
+<p>和 MP-Bench 的区别：</p>
+<pre><code class="language-text">MP-Bench：
+  小规模、专家标注、多视角、适合评测真实性。
+
+TracerTraj：
+  更偏自动构造、规模训练、适合训练归因模型。
+</code></pre>
+<p>一个简单对比：</p>
+<table>
+<thead>
+<tr>
+<th>数据 / 方法</th>
+<th>重点</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TraceElephant</td>
+<td>full trace / replayable environment</td>
+<td>贴近工程调试</td>
+<td>数据规模小</td>
+</tr>
+<tr>
+<td>MP-Bench</td>
+<td>multi-perspective expert labels</td>
+<td>更真实地处理多根因</td>
+<td>标注贵</td>
+</tr>
+<tr>
+<td>TracerTraj</td>
+<td>counterfactual / injected failures</td>
+<td>可规模化训练</td>
+<td>人工注入错误可能不覆盖真实失败</td>
+</tr>
+</tbody>
+</table>
+<h2>4. AgenTracer-8B：训练专门归因模型</h2>
+<p>论文训练了一个 <strong>AgenTracer-8B</strong>。</p>
+<p>输入是失败轨迹：</p>
+<pre><code class="language-text">task instruction
+agent roles
+step-by-step trace
+tool logs
+final failure
+</code></pre>
+<p>输出是失败归因：</p>
+<pre><code class="language-text">responsible agent
+failure step
+failure reason
+possible correction
+</code></pre>
+<p>用 Coding Agent 例子，理想输出是：</p>
+<pre><code class="language-json">{
+  &quot;failure_step&quot;: 1,
+  &quot;responsible_agent&quot;: &quot;SearchAgent&quot;,
+  &quot;failure_reason&quot;: &quot;SearchAgent returned only LoginPage.vue and missed useLoginValidation.ts, which contains the form validity logic.&quot;,
+  &quot;ideal_action&quot;: &quot;Search validation-related files and provide the validation hook to CoderAgent.&quot;
+}
+</code></pre>
+<p>如果按照 MP-Bench 的多视角范式，也可以输出多个候选：</p>
+<pre><code class="language-json">{
+  &quot;attributions&quot;: [
+    {
+      &quot;step&quot;: 1,
+      &quot;agent&quot;: &quot;SearchAgent&quot;,
+      &quot;reason&quot;: &quot;Missed validation hook.&quot;,
+      &quot;evidence&quot;: &quot;Only LoginPage.vue was passed to CoderAgent.&quot;
+    },
+    {
+      &quot;step&quot;: 3,
+      &quot;agent&quot;: &quot;TesterAgent&quot;,
+      &quot;reason&quot;: &quot;Accepted existing tests without checking disabled behavior.&quot;,
+      &quot;evidence&quot;: &quot;No invalid-form behavior test was added.&quot;
+    }
+  ]
+}
+</code></pre>
+<p>论文主要强调的是训练一个归因器，而不是定义多视角输出协议；但工程上建议把两者结合。</p>
+<h2>结果说明什么？</h2>
+<p>论文报告了几类结果：</p>
+<pre><code class="language-text">1. AgenTracer-8B 在 Who&amp;When 上超过多个强基线。
+2. 它在跨系统归因上比通用 LLM 更稳定。
+3. 将归因结果反馈给 Agent 系统，可以提升后续任务成功率。
+</code></pre>
+<p>它声称在 MetaGPT / MaAS 等系统上，基于归因反馈能带来约 <strong>4.8% - 14.2%</strong> 的性能提升。</p>
+<p>这个结果的意义不是“AgenTracer 已经解决归因问题”，而是：</p>
+<pre><code class="language-text">失败归因可以变成训练信号。
+归因结果可以反过来改善 Agent 系统。
+</code></pre>
+<h2>和 TraceElephant / MP-Bench 的区别</h2>
+<h3>TraceElephant vs AgenTracer</h3>
+<p>TraceElephant 的重点：</p>
+<pre><code class="language-text">完整 trace 很重要。
+input_context 很重要。
+可重放环境很重要。
+</code></pre>
+<p>AgenTracer 的重点：</p>
+<pre><code class="language-text">用 counterfactual replay 和 fault injection 生成训练数据。
+训练专门的 failure attribution 模型。
+</code></pre>
+<p>关系：</p>
+<pre><code class="language-text">TraceElephant 更像观测标准。
+AgenTracer 更像自动诊断方法。
+</code></pre>
+<h3>MP-Bench vs AgenTracer</h3>
+<p>MP-Bench 的重点：</p>
+<pre><code class="language-text">失败可能有多个合理归因。
+评测应该用 multi-perspective ranking。
+</code></pre>
+<p>AgenTracer 的重点：</p>
+<pre><code class="language-text">用反事实轨迹学习归因。
+</code></pre>
+<p>关系：</p>
+<pre><code class="language-text">MP-Bench 改任务定义。
+AgenTracer 改训练方法。
+</code></pre>
+<p>两者应该组合：</p>
+<pre><code class="language-text">AgenTracer 负责产生候选归因。
+MP-Bench 思路负责把候选归因排序、解释、保留多个视角。
+</code></pre>
+<h2>工程上怎么用？</h2>
+<p>如果你要把 AgenTracer 思路落地，不建议一上来训练 8B 模型。更现实的是先实现流程。</p>
+<h3>1. 先让 Agent 系统支持 replay</h3>
+<p>最低要求：</p>
+<pre><code class="language-text">每一步 trace 可序列化。
+每一步 input_context 可还原。
+工具调用结果可缓存。
+可以从某个 step 重新执行后续流程。
+</code></pre>
+<p>没有 replay，AgenTracer 的核心方法用不起来。</p>
+<h3>2. 建一个小型 fault injection 集合</h3>
+<p>可以从常见失败开始：</p>
+<pre><code class="language-text">SearchAgent：
+  删除一个关键文件
+  返回过期文档
+  返回相似但错误的 API
+
+CoderAgent：
+  改错文件
+  只改样式不改逻辑
+  忽略边界条件
+
+TesterAgent：
+  只跑已有测试
+  忽略失败日志
+  错误判断任务完成
+
+Orchestrator：
+  过早结束
+  派错 Agent
+  没有触发重试
+</code></pre>
+<p>每种 fault 都能自动产生标签：</p>
+<pre><code class="language-text">注入在哪里，标签就是哪里。
+</code></pre>
+<h3>3. 用小模型或通用 LLM 做归因器</h3>
+<p>早期不需要训练专门模型。</p>
+<p>可以这样做：</p>
+<pre><code class="language-text">输入：
+失败 trace + fault injection 类型库 + Agent 职责说明
+
+输出：
+多个候选失败点 + reason + ideal action
+</code></pre>
+<p>再用 replay 验证前几个候选。</p>
+<h3>4. 把归因结果变成改进动作</h3>
+<p>归因输出不能停在“谁错了”。</p>
+<p>应该进入改进闭环：</p>
+<pre><code class="language-text">SearchAgent 高频失败
+=&gt; 改检索 query expansion / 文件依赖追踪。
+
+CoderAgent 高频失败
+=&gt; 增加 patch checklist / 要求解释行为变化。
+
+TesterAgent 高频失败
+=&gt; 强制生成验收测试 / mutation test。
+
+Orchestrator 高频失败
+=&gt; 改 done criteria / 加重试策略。
+</code></pre>
+<h2>和 MP-Bench 组合后的推荐架构</h2>
+<p>一个比较合理的工程形态：</p>
+<pre><code class="language-text">失败 trace
+  ↓
+候选归因生成器（AgenTracer 思路）
+  ↓
+多视角聚合与排序（MP-Bench 思路）
+  ↓
+Top-K 候选 replay 验证
+  ↓
+输出调试报告
+  ↓
+修 prompt / 工具 / orchestration / tests
+</code></pre>
+<p>输出报告可以长这样：</p>
+<pre><code class="language-json">{
+  &quot;top_attributions&quot;: [
+    {
+      &quot;rank&quot;: 1,
+      &quot;step&quot;: 3,
+      &quot;agent&quot;: &quot;TesterAgent&quot;,
+      &quot;reason&quot;: &quot;TesterAgent did not verify the disabled behavior.&quot;,
+      &quot;counterfactual_result&quot;: &quot;When TesterAgent was prompted to require invalid-form test, the failure was detected.&quot;,
+      &quot;fix&quot;: &quot;Strengthen verifier done criteria and require behavior-level tests.&quot;
+    },
+    {
+      &quot;rank&quot;: 2,
+      &quot;step&quot;: 1,
+      &quot;agent&quot;: &quot;SearchAgent&quot;,
+      &quot;reason&quot;: &quot;SearchAgent missed validation hook file.&quot;,
+      &quot;counterfactual_result&quot;: &quot;When useLoginValidation.ts was included, CoderAgent generated a correct patch.&quot;,
+      &quot;fix&quot;: &quot;Improve code search with import/dependency expansion.&quot;
+    }
+  ]
+}
+</code></pre>
+<p>这比输出单个“责任 Agent”更有工程价值。</p>
+<h2>局限性</h2>
+<p>AgenTracer 也有明显边界：</p>
+<ul>
+<li>Fault injection 生成的是“人为错误”，不一定覆盖真实世界所有失败。</li>
+<li>Counterfactual replay 依赖可复现环境；很多生产 Agent 系统没有这个能力。</li>
+<li>如果任务成功判定本身不可靠，反事实结果也不可靠。</li>
+<li>它更偏单根因 / 可控注入范式，和 MP-Bench 的多视角真实分歧仍需结合。</li>
+<li>训练专门模型成本不低，早期工程不一定划算。</li>
+</ul>
+<h2>总结</h2>
+<p>AgenTracer 的核心价值是：</p>
+<p><strong>把 Agent 失败归因从“看日志猜原因”，推进到“用反事实轨迹学习原因”。</strong></p>
+<p>关键点：</p>
+<ol>
+<li><strong>Counterfactual replay：</strong> 修改某一步，重跑后续，看任务是否恢复。</li>
+<li><strong>Fault injection：</strong> 从成功轨迹主动制造失败，自动获得归因标签。</li>
+<li><strong>AgenTracer-8B：</strong> 用这些反事实数据训练专门 failure attribution 模型。</li>
+<li><strong>工程闭环：</strong> 归因结果可以反过来改进 Agent 系统。</li>
+</ol>
+<p>实践上，我更建议把它和 TraceElephant / MP-Bench 组合：</p>
+<pre><code class="language-text">TraceElephant：先把 trace 记录完整。
+AgenTracer：用 replay / fault injection 验证和训练归因。
+MP-Bench：保留多个合理归因，并按优先级排序。
+</code></pre>
+<p>一句话：</p>
+<p><strong>AgenTracer 不是单纯评测 Agent 错在哪，而是尝试让系统通过“如果当时那一步没错会怎样”来学习失败因果。</strong></p>
+<h1>参考资料</h1>
+<ul>
+<li><a href="https://arxiv.org/abs/2509.03312">论文原文：AgenTracer: Who Is Inducing Failure in the LLM Agentic Systems?</a></li>
+<li><a href="https://arxiv.org/pdf/2509.03312">PDF</a></li>
+</ul>
+<p><em>编辑：2026-05-08</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

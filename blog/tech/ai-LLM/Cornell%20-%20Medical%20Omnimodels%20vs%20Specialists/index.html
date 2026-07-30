@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>参考资料 | LZ AI NOTE</title>
+  <meta name="description" content="论文发布时间：2025 08 31 Cornell University 的研究人员发表了一篇题为《[Can General Purpose Omnimodels Compete with Specialists? A Case Study in Medical Image Segmentation]》的论文，在医疗 AI 领域引发了关于 “通才 vs 专…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-LLM/Cornell%20-%20Medical%20Omnimodels%20vs%20Specialists">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="参考资料 | LZ AI NOTE">
+  <meta property="og:description" content="论文发布时间：2025 08 31 Cornell University 的研究人员发表了一篇题为《[Can General Purpose Omnimodels Compete with Specialists? A Case Study in Medical Image Segmentation]》的论文，在医疗 AI 领域引发了关于 “通才 vs 专…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-LLM/Cornell%20-%20Medical%20Omnimodels%20vs%20Specialists">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"参考资料","description":"论文发布时间：2025 08 31 Cornell University 的研究人员发表了一篇题为《[Can General Purpose Omnimodels Compete with Specialists? A Case Study in Medical Image Segmentation]》的论文，在医疗 AI 领域引发了关于 “通才 vs 专…","url":"https://wizardpisces.github.io/blog/tech/ai-LLM/Cornell%20-%20Medical%20Omnimodels%20vs%20Specialists","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-LLM/Cornell%20-%20Medical%20Omnimodels%20vs%20Specialists","dateModified":"2026-01-30","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>参考资料</h1><p><em>论文发布时间：2025-08-31</em></p>
+<p>Cornell University 的研究人员发表了一篇题为《<a href="https://arxiv.org/abs/2509.00866">Can General-Purpose Omnimodels Compete with Specialists? A Case Study in Medical Image Segmentation</a>》的论文，在医疗 AI 领域引发了关于**“通才 vs 专才”**的激烈讨论。</p>
+<p>简单来说，这篇论文对比了**通用全能模型（Omnimodels，如 Google Gemini “Nano Banana”）<strong>与</strong>特定领域专家模型（Specialist Models）**在医疗图像分割任务上的表现。结果出人意料：虽然专家在“简单题”上表现稳健，但在“难题”上，通用模型反而展现出了惊人的鲁棒性。</p>
+<h2>全能模型解决了什么问题？</h2>
+<p><strong>核心问题：传统医疗 AI 模型（专才）在面对“非标准”或“困难”样本时极易失效。</strong></p>
+<p>目前的医疗 AI 开发模式主要是“专病专治”：训练一个专门分割息肉的模型，或者一个专门分割视网膜血管的模型。这种**专家模型（Specialist）**存在明显的局限性：</p>
+<ul>
+<li><strong>脆弱性（Brittleness）：</strong> 它们通常在清洗干净、标准化的数据集上训练。一旦遇到模糊、伪影、或者不常见的病灶形态（即分布外数据 OOD），性能就会断崖式下跌。</li>
+<li><strong>开发成本高：</strong> 每一个新任务都需要收集大量标注数据，重新训练一个新模型。</li>
+</ul>
+<p><strong>Omnimodels 的作用：</strong> 试图用一个模型解决所有问题。凭借其在海量互联网数据上学到的“世界知识”和强大的视觉理解能力，它能够以**零样本（Zero-shot）**的方式直接处理各种医疗图像，无需针对特定任务进行微调。</p>
+<h2>这个问题真实存在吗？</h2>
+<p><strong>真实存在，且是医疗 AI 落地难的核心原因之一。</strong></p>
+<p>在实验室里跑分很高的模型，到了真实的医院环境往往“水土不服”。</p>
+<ul>
+<li><strong>长尾场景：</strong> 临床中总会出现训练集中没见过的罕见病例。</li>
+<li><strong>数据异质性：</strong> 不同医院、不同机器拍出来的片子差异巨大，专家模型往往“过拟合”了特定分布，缺乏泛化能力。</li>
+</ul>
+<h2>为什么现在才有人去解决？</h2>
+<p>主要归功于**多模态大模型（LMM）**的爆发式进步：</p>
+<ol>
+<li><strong>Omnimodels 的涌现：</strong> 像 Gemini 2.5 Pro (“Nano Banana”) 这样的模型，不仅能看懂自然图像，对医学图像也展现出了惊人的理解力。</li>
+<li><strong>零样本能力的成熟：</strong> 以前的通用模型必须微调才能干活，现在只需用自然语言“提示”（Prompt）一下，就能完成复杂的分割任务。</li>
+<li><strong>对鲁棒性的追求：</strong> 业界开始意识到，单纯追求 99% 的准确率（Accuracy）没有意义，模型在“坏”数据上的表现（Robustness）才是安全的底线。</li>
+</ol>
+<h2>它是如何解决的？</h2>
+<p>为了公平对比，研究团队设计了一个精妙的实验架构：</p>
+<h3>1. 任务选择：从粗到细</h3>
+<p>他们选择了三个代表性的医学分割任务：</p>
+<ul>
+<li><strong>息肉分割（Polyp）：</strong> 相对宏观，目标明确。</li>
+<li><strong>乳腺肿瘤分割（Breast Tumor）：</strong> 超声图像，噪声大，难度中等。</li>
+<li><strong>视网膜血管分割（Retinal Vessel）：</strong> 极度细微，对精度要求极高。</li>
+</ul>
+<h3>2. 核心机制：难易分级（Difficulty Stratification）</h3>
+<p>这是论文最精彩的部分。他们没有只看平均分，而是根据专家模型的表现，将测试数据分为**“简单样本”<strong>和</strong>“困难样本”**。</p>
+<ul>
+<li><strong>简单样本（Easy）：</strong> 专家模型非常有信心且预测正确的样本。</li>
+<li><strong>困难样本（Hard）：</strong> 专家模型预测失败、甚至完全“瞎猜”的样本。</li>
+</ul>
+<h3>3. 实验结果：互补的“剪刀差”</h3>
+<ul>
+<li><strong>在简单样本上：</strong> 专家模型（Specialist）完胜。毕竟是“科班出身”，在标准试题上拿满分。</li>
+<li><strong>在困难样本上：</strong> 全能模型（Omnimodel）<strong>逆袭</strong>。当图像模糊、病灶不典型时，专家模型直接崩溃，而 Gemini 依然能凭借强大的语义理解能力，“猜”出病灶的大致位置。</li>
+<li><strong>例外：</strong> 在视网膜血管这种需要<strong>像素级精度</strong>的任务上，全能模型完败。这说明目前的 LLM 还是更擅长“理解”，而不是“描边”。</li>
+</ul>
+<h2>还有更好的解决方案吗？</h2>
+<p>目前的结论是：<strong>没有“谁取代谁”，只有“强强联手”。</strong></p>
+<ul>
+<li><strong>纯专家模型：</strong> 精度高，但太脆。</li>
+<li><strong>纯全能模型：</strong> 鲁棒性强，但精度（尤其是边缘细节）不够。</li>
+<li><strong>混合专家（Ensemble）：</strong> 这是未来的方向。
+<ul>
+<li>日常由<strong>专家模型</strong>处理，快速且精准。</li>
+<li>当专家模型信心不足（遇到难题）时，召唤<strong>全能模型</strong>作为“会诊专家”或“安全网（Safety Net）”，提供第二意见。</li>
+</ul>
+</li>
+</ul>
+<h2>关键词解析</h2>
+<h3>1. Omnimodel (全能模型)</h3>
+<p>指能处理多种模态（文本、图像、视频、音频）的通用大模型，如 Gemini、GPT-4o。</p>
+<ul>
+<li><strong>特点：</strong> “通才”。什么都懂一点，无需专门训练（Zero-shot）就能上手新任务。</li>
+<li><strong>优势：</strong> 泛化能力强，遇到没见过的情况也能根据常识推理。</li>
+</ul>
+<h3>2. Zero-shot Segmentation (零样本分割)</h3>
+<ul>
+<li><strong>传统模型：</strong> 需要几千张标注好的肿瘤图片训练，才能学会认肿瘤。</li>
+<li><strong>Zero-shot：</strong> 直接给模型一张图，说“把图里的肿瘤圈出来”。模型靠的是它对“肿瘤”这个词和图像特征的理解，而不是死记硬背。</li>
+</ul>
+<h3>3. Robustness vs. Precision (鲁棒性 vs. 精度)</h3>
+<ul>
+<li><strong>精度（Precision）：</strong> 在考试中能考 100 分的能力。（专家模型强项）</li>
+<li><strong>鲁棒性（Robustness）：</strong> 即使试卷印歪了、题目超纲了，也能考 60 分及格的能力。（全能模型强项）</li>
+<li><strong>通俗理解：</strong> 专家模型像是一个“做题家”，全能模型像是一个“老江湖”。</li>
+</ul>
+<h2>深度洞察</h2>
+<h3>1. “语义理解”是最后一道防线</h3>
+<p>为什么全能模型在难题上表现好？因为当图像特征模糊（看不清）时，专家模型这种基于**“像素统计规律”<strong>的方法就失效了。而全能模型是基于</strong>“语义理解”<strong>的。它可能“看”不清边界，但它结合上下文分析出“这里大概率有个肿瘤”，这种</strong>Top-down（自顶向下）**的认知能力在极端情况下至关重要。</p>
+<h3>2. 灵敏度（Sensitivity）的“过载”</h3>
+<p>研究发现，全能模型有时会找出人类标注员都漏掉的微小病灶。这既是好事也是坏事——它可能具备了超人的<strong>灵敏度（Sensitivity）</strong>，但也可能导致更多的<strong>假阳性（False Positives）</strong>。这提示我们，全能模型可能更适合做“初筛”。</p>
+<h3>3. 医疗 AI 的“Scaling Law”新方向</h3>
+<p>过去我们卷特定任务的 SOTA（State of the Art），现在方向变了。与其花大力气去提升那 0.1% 的精度，不如引入全能模型来解决那 5% 的“长尾崩溃”问题。<strong>可靠性（Reliability）比极致的精度更重要。</strong></p>
+<hr>
+<h3>总结</h3>
+<p>这篇论文的本质是**“通才与专才的互补论”**：</p>
+<ol>
+<li><strong>专家模型</strong>赢在<strong>精度</strong>，特别是精细结构（如血管）。</li>
+<li><strong>全能模型</strong>赢在<strong>鲁棒性</strong>，特别是困难、非标样本。</li>
+<li>未来的医疗 AI 架构将是 <strong>Specialist + Omnimodel</strong> 的混合体。</li>
+</ol>
+<h1>参考资料</h1>
+<ul>
+<li><a href="https://arxiv.org/abs/2509.00866">论文地址</a></li>
+<li><a href="https://arxiv.org/pdf/2509.00866">PDF 下载</a></li>
+</ul>
+<p><em>编辑：2026-01-30</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

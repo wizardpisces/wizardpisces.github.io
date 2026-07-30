@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>参考资料 | LZ AI NOTE</title>
+  <meta name="description" content="论文发布时间：2026 04 24 中国科学院软件研究所等团队发布的 TraceElephant （论文标题为《[Seeing the Whole Elephant: A Benchmark for Failure Attribution in LLM based Multi Agent Systems]》）研究的是一个很工程化的问题： 多 Agent 系…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-agent/paper/CAS%20-%20TraceElephant%20-%20Seeing%20the%20Whole%20Elephant">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="参考资料 | LZ AI NOTE">
+  <meta property="og:description" content="论文发布时间：2026 04 24 中国科学院软件研究所等团队发布的 TraceElephant （论文标题为《[Seeing the Whole Elephant: A Benchmark for Failure Attribution in LLM based Multi Agent Systems]》）研究的是一个很工程化的问题： 多 Agent 系…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-agent/paper/CAS%20-%20TraceElephant%20-%20Seeing%20the%20Whole%20Elephant">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"参考资料","description":"论文发布时间：2026 04 24 中国科学院软件研究所等团队发布的 TraceElephant （论文标题为《[Seeing the Whole Elephant: A Benchmark for Failure Attribution in LLM based Multi Agent Systems]》）研究的是一个很工程化的问题： 多 Agent 系…","url":"https://wizardpisces.github.io/blog/tech/ai-agent/paper/CAS%20-%20TraceElephant%20-%20Seeing%20the%20Whole%20Elephant","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-agent/paper/CAS%20-%20TraceElephant%20-%20Seeing%20the%20Whole%20Elephant","dateModified":"2026-05-08","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>参考资料</h1><p><em>论文发布时间：2026-04-24</em></p>
+<p>中国科学院软件研究所等团队发布的 <strong>TraceElephant</strong>（论文标题为《<a href="https://arxiv.org/abs/2604.22708">Seeing the Whole Elephant: A Benchmark for Failure Attribution in LLM-based Multi-Agent Systems</a>》）研究的是一个很工程化的问题：</p>
+<p><strong>多 Agent 系统失败后，怎么判断“是谁导致失败”，以及“从哪一步开始失败已经不可挽回”。</strong></p>
+<p>我的判断：这篇有价值。不是因为它提出了新 Agent 架构，而是因为它把 Agent 工程里很重要的一件事讲清楚了：<strong>Agent 不能只看成功率，还必须能调试失败。</strong></p>
+<h2>先用一个例子说明</h2>
+<p>假设你有一个 Coding Agent 系统：</p>
+<pre><code class="language-text">用户任务：
+修复登录页 bug：提交按钮在表单无效时应该禁用。
+
+Agent 分工：
+PlannerAgent  拆任务
+SearchAgent   找相关代码
+CoderAgent    修改代码
+TesterAgent   运行测试并判断是否修好
+</code></pre>
+<p>最后系统失败了：按钮还是没有正确禁用。</p>
+<p>执行轨迹可能是这样的：</p>
+<pre><code class="language-text">Step 1 - PlannerAgent
+输出：需要找到 login form 组件和校验逻辑。
+
+Step 2 - SearchAgent
+输出：找到了 LoginPage.vue，但漏掉了 useLoginValidation.ts。
+
+Step 3 - CoderAgent
+输入：只看到了 LoginPage.vue。
+输出：只改了按钮样式，没有改 disabled 逻辑。
+
+Step 4 - TesterAgent
+输入：代码 diff + 测试输出。
+输出：测试通过，任务完成。
+
+Final
+线上行为仍然错误。
+</code></pre>
+<p>现在问题来了：<strong>这次失败是谁的锅？</strong></p>
+<p>直觉上可以有三个答案：</p>
+<pre><code class="language-text">SearchAgent 有问题：它漏找了 useLoginValidation.ts。
+CoderAgent 有问题：它只改样式，没有改逻辑。
+TesterAgent 有问题：它应该发现行为没修好，却误判通过。
+</code></pre>
+<p>TraceElephant 关心的不是泛泛地说“大家都有问题”，而是要标两个东西：</p>
+<pre><code class="language-text">1. failure-responsible agent
+   主要责任 Agent 是谁？
+
+2. decisive failure step
+   哪一步让失败变得不可恢复？
+</code></pre>
+<p>在这个例子里，一个合理归因可能是：</p>
+<pre><code class="language-text">failure-responsible agent：TesterAgent
+decisive failure step：Step 4
+</code></pre>
+<p>为什么不是 SearchAgent 或 CoderAgent？</p>
+<p>因为 Step 2 / Step 3 的错误理论上还可以被 Step 4 纠正。TesterAgent 的职责就是验证是否真的修好。如果它发现按钮逻辑没改，可以要求重新搜索或重新修改。它没有发现，失败才真正变成最终失败。</p>
+<p>这就是这篇论文最关键的思想：</p>
+<p><strong>第一个错误不一定是最终责任点；没有被该负责的组件纠正的错误，才可能是 decisive failure。</strong></p>
+<h2>TraceElephant 解决了什么问题？</h2>
+<p>它解决的是 <strong>failure attribution</strong>，可以翻译成“失败归因”。</p>
+<p>普通 benchmark 问：</p>
+<pre><code class="language-text">Agent 最后做对了吗？
+</code></pre>
+<p>TraceElephant 问：</p>
+<pre><code class="language-text">Agent 做错时，能不能解释：
+1. 哪个 Agent / 组件负责？
+2. 哪一步开始不可恢复？
+3. 为什么是这一步，而不是更早或更晚？
+</code></pre>
+<p>这对 Agent 工程很关键。因为真实系统失败后，你要决定修哪里：</p>
+<pre><code class="language-text">修 planner？
+修 search？
+修 coder prompt？
+加更强的 verifier？
+改 orchestration？
+补测试？
+</code></pre>
+<p>如果归因不清楚，你只能拍脑袋改 prompt。</p>
+<h2>为什么只看输出不够？</h2>
+<p>论文强调：已有一些 benchmark 只记录 Agent 每一步“输出了什么”。这不够。</p>
+<p>还是前面的例子：</p>
+<pre><code class="language-text">Step 3 - CoderAgent 输出：
+修改了 LoginPage.vue 的按钮样式。
+</code></pre>
+<p>只看输出，你可能觉得 CoderAgent 很蠢：为什么不改 disabled 逻辑？</p>
+<p>但如果看输入：</p>
+<pre><code class="language-text">Step 3 - CoderAgent 输入：
+SearchAgent 只提供了 LoginPage.vue，没有提供 useLoginValidation.ts。
+</code></pre>
+<p>那 CoderAgent 的责任就没那么明确了。它可能只是拿到的信息不完整。</p>
+<p>再看 TesterAgent：</p>
+<pre><code class="language-text">Step 4 - TesterAgent 输入：
+任务要求：按钮在表单无效时应该禁用。
+代码 diff：只改了 CSS class。
+测试输出：现有测试通过，但没有覆盖 disabled 行为。
+
+Step 4 - TesterAgent 输出：
+任务完成。
+</code></pre>
+<p>这时 TesterAgent 的责任就更明确：它看到了任务目标，也看到了 diff，但没有发现行为没被验证。</p>
+<p>所以 TraceElephant 的核心观点是：</p>
+<p><strong>要做失败归因，必须记录 input context。只看 output 是不够的。</strong></p>
+<h2>TraceElephant 记录什么？</h2>
+<p>它记录的不是普通聊天记录，而是结构化 trace。</p>
+<p>最少需要这些字段：</p>
+<pre><code class="language-json">{
+  &quot;step_id&quot;: 4,
+  &quot;agent_name&quot;: &quot;TesterAgent&quot;,
+  &quot;input_context&quot;: &quot;User asked to disable submit button when form is invalid. Diff only changes CSS class. Existing tests pass.&quot;,
+  &quot;output_content&quot;: &quot;The task is complete.&quot;,
+  &quot;tool_logs&quot;: [
+    {
+      &quot;tool_name&quot;: &quot;test_runner&quot;,
+      &quot;output&quot;: &quot;All existing tests passed.&quot;
+    }
+  ]
+}
+</code></pre>
+<p>对调试来说，几个字段价值不同：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>agent_name</code></td>
+<td>判断责任组件</td>
+</tr>
+<tr>
+<td><code>input_context</code></td>
+<td>判断它当时是否已经看到关键信息</td>
+</tr>
+<tr>
+<td><code>output_content</code></td>
+<td>判断它做了什么决策</td>
+</tr>
+<tr>
+<td><code>tool_logs</code></td>
+<td>判断工具结果是否误导了它</td>
+</tr>
+<tr>
+<td><code>system metadata</code></td>
+<td>判断它的角色职责和系统架构</td>
+</tr>
+</tbody>
+</table>
+<p>其中最重要的是 <code>input_context</code>。</p>
+<p>因为同一个输出，在不同输入下责任完全不同：</p>
+<pre><code class="language-text">情况 A：
+TesterAgent 没看到用户要求 disabled 行为。
+=&gt; 可能是上游信息传递问题。
+
+情况 B：
+TesterAgent 看到了 disabled 要求，但仍然说完成。
+=&gt; TesterAgent 更可能是责任方。
+</code></pre>
+<h2>“哪一步失败”为什么难？</h2>
+<p>因为多 Agent 系统里，错误可能会被后续步骤修复。</p>
+<p>看这个简化链路：</p>
+<pre><code class="language-text">Step 2 SearchAgent：
+漏找一个关键文件。
+
+Step 3 CoderAgent：
+基于不完整信息写了错误 patch。
+
+Step 4 TesterAgent：
+本该发现行为没修好，但没发现。
+
+Final：
+任务失败。
+</code></pre>
+<p>如果只找“第一个错误”，会选 Step 2。</p>
+<p>但 TraceElephant 更关心“不可恢复点”：</p>
+<pre><code class="language-text">Step 2 错了，但 Step 3/4 还有机会恢复。
+Step 3 错了，但 Step 4 还有机会恢复。
+Step 4 错了，系统宣布完成，失败进入最终答案。
+</code></pre>
+<p>所以 Step 4 更可能是 decisive failure step。</p>
+<p>这个定义比“第一个错误”更贴近工程实际。一个系统可以允许中间步骤犯错，但必须有机制纠错；真正的问题往往是纠错点失效。</p>
+<h2>它怎么做 benchmark？</h2>
+<p>TraceElephant 做了三件事：</p>
+<ol>
+<li>收集多 Agent 系统执行轨迹。</li>
+<li>找出失败轨迹。</li>
+<li>人工标注“负责 Agent”和“关键失败步骤”。</li>
+</ol>
+<p>数据覆盖三个系统：</p>
+<table>
+<thead>
+<tr>
+<th>系统</th>
+<th>类型</th>
+<th>任务来源</th>
+<th style="text-align:right">失败轨迹</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Captain-Agent</td>
+<td>动态组队多 Agent</td>
+<td>GAIA / AssistantBench</td>
+<td style="text-align:right">85</td>
+</tr>
+<tr>
+<td>Magentic-One</td>
+<td>固定角色 + Orchestrator</td>
+<td>GAIA / AssistantBench</td>
+<td style="text-align:right">91</td>
+</tr>
+<tr>
+<td>SWE-Agent</td>
+<td>软件工程 Agent</td>
+<td>SWE-Bench Verified</td>
+<td style="text-align:right">44</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td>-</td>
+<td>-</td>
+<td style="text-align:right"><strong>220</strong></td>
+</tr>
+</tbody>
+</table>
+<p>这几个系统覆盖了不同失败形态：</p>
+<pre><code class="language-text">Captain-Agent：
+可能错在选错 Agent、分工错、协调错。
+
+Magentic-One：
+可能错在 orchestrator 分派、早期计划、重规划。
+
+SWE-Agent：
+可能错在文件定位、patch、测试、工具使用。
+</code></pre>
+<h2>它发现了什么？</h2>
+<h3>1. 完整 trace 明显更有用</h3>
+<p>论文比较了“只看输出”和“看完整 trace”的效果。</p>
+<p>结论很直接：</p>
+<p><strong>完整 trace 显著提升失败归因准确率。</strong></p>
+<p>论文里提到：</p>
+<pre><code class="language-text">完整 trace 相比 output-only trace：
+agent-level accuracy 提升约 22%
+step-level accuracy 提升约 76%
+</code></pre>
+<p>意思是：如果不记录输入和系统上下文，你很可能连责任方都判断错，更别说定位具体步骤。</p>
+<h3>2. 定位具体步骤比定位 Agent 难得多</h3>
+<p>最高结果大概是：</p>
+<table>
+<thead>
+<tr>
+<th>任务</th>
+<th style="text-align:right">最好准确率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>找负责 Agent</td>
+<td style="text-align:right">66.7%</td>
+</tr>
+<tr>
+<td>找关键失败步骤</td>
+<td style="text-align:right">33.3%</td>
+</tr>
+</tbody>
+</table>
+<p>这说明 step-level attribution 很难。</p>
+<p>原因是它不是简单分类，而是因果判断：</p>
+<pre><code class="language-text">这一步是否真的错？
+它是否拿到了足够信息？
+后续是否还有修复机会？
+它的角色是否负责兜底？
+如果这里改对，后面是否能恢复？
+</code></pre>
+<h3>3. 可重放环境有价值</h3>
+<p>论文还提供可复现环境，不只是静态日志。</p>
+<p>这允许做动态调试：</p>
+<pre><code class="language-text">静态判断：
+我怀疑 Step 4 的 TesterAgent 是关键失败点。
+
+动态验证：
+从 Step 4 重新跑，把 TesterAgent 的提示改成：
+&quot;请检查 diff 是否真的实现 disabled 行为。&quot;
+
+如果重跑后系统发现问题并修复：
+说明 Step 4 的确是关键恢复点。
+</code></pre>
+<p>这很像软件调试里的断点重放。</p>
+<h2>这篇论文的价值在哪里？</h2>
+<p>我认为价值主要在工程方向。</p>
+<h3>1. Agent 系统必须从第一天设计 trace</h3>
+<p>不要等失败后才想起补日志。</p>
+<p>至少要记录：</p>
+<pre><code class="language-text">每次 LLM 调用的 messages
+agent role
+orchestrator decision
+tool call 参数
+tool call 结果
+关键状态变更
+最终输出
+</code></pre>
+<p>如果缺这些，后面只能猜。</p>
+<h3>2. Verifier 不是装饰组件</h3>
+<p>很多 Agent 系统会加一个 verifier，但 verifier 经常只是形式上检查。</p>
+<p>TraceElephant 的视角会逼你问：</p>
+<pre><code class="language-text">Verifier 到底负责检查什么？
+它拿到了哪些输入？
+它有没有权限要求重试？
+它漏检时是否应该归因给它？
+</code></pre>
+<p>这会提高 Agent 架构设计质量。</p>
+<h3>3. 失败归因可以指导系统优化</h3>
+<p>如果你能统计失败归因，就能知道应该修哪里：</p>
+<pre><code class="language-text">70% 失败来自 SearchAgent 漏上下文
+=&gt; 改检索和文件定位。
+
+50% 失败来自 TesterAgent 误判通过
+=&gt; 加行为测试生成和更严格验收。
+
+大量失败来自 Orchestrator 过早结束
+=&gt; 改 done criteria。
+</code></pre>
+<p>这比“整体成功率低，所以换个大模型”更有效。</p>
+<h2>和普通 Agent benchmark 的区别</h2>
+<p>普通 benchmark：</p>
+<pre><code class="language-text">最后成功了吗？
+</code></pre>
+<p>TraceElephant：</p>
+<pre><code class="language-text">失败时，能不能定位：
+谁错了？
+哪一步错到不可恢复？
+需要修系统的哪个部分？
+</code></pre>
+<p>这两个问题都重要。</p>
+<p>如果只看成功率，你知道系统不好。</p>
+<p>如果有失败归因，你才知道怎么把系统变好。</p>
+<h2>局限性</h2>
+<p>这篇论文也有边界：</p>
+<ul>
+<li>数据只有 220 条失败轨迹，规模不大。</li>
+<li>只覆盖三个 Agent 系统，不能代表所有架构。</li>
+<li>人工标注“关键失败步骤”本身有主观性。</li>
+<li>可重放环境适合研发场景，不一定适合所有生产平台。</li>
+<li>trace 会包含敏感 prompt、工具结果和业务数据，生产落地需要权限和脱敏。</li>
+</ul>
+<h2>总结</h2>
+<p><strong>TraceElephant 讲的不是怎么让 Agent 更聪明，而是怎么让 Agent 失败后可调试。</strong></p>
+<p>最核心的三点：</p>
+<ol>
+<li><strong>失败归因要分 who 和 when：</strong> 谁负责，哪一步让失败不可恢复。</li>
+<li><strong>只看输出不够：</strong> 必须记录每一步的输入上下文、工具日志和系统配置。</li>
+<li><strong>可重放环境很重要：</strong> 静态看日志只能猜，动态 replay 才能验证候选失败点。</li>
+</ol>
+<p>一句话理解：</p>
+<p><strong>Agent 工程不能只有“跑起来”，还要能在失败时解释清楚、定位清楚、修复清楚。</strong></p>
+<h1>参考资料</h1>
+<ul>
+<li><a href="https://arxiv.org/abs/2604.22708">论文原文：Seeing the Whole Elephant: A Benchmark for Failure Attribution in LLM-based Multi-Agent Systems</a></li>
+<li><a href="https://arxiv.org/html/2604.22708v1">arXiv HTML 版本</a></li>
+<li><a href="https://github.com/TraceElephant/TraceElephant">官方代码与数据仓库：TraceElephant/TraceElephant</a></li>
+</ul>
+<p><em>编辑：2026-05-08</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>关于程序跨端 | LZ AI NOTE</title>
+  <meta name="description" content="关于程序跨端 背景 为什么需要跨端？ 一套代码跑多端，省时省力 发展方向？ 开发体验：复用现有生态，追求热更新 运行环境：代码执行适配，渲染引擎适配 性能：追求原生 包大小（冷热启动速度） 小程序上层框架（跨APP） 简介：基于web技术的一套代码跑在各个APP小程序：微信/支付宝/抖音等 代表框架: taro1/2（类React语法，ps：taro3后可…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/other/%E5%85%B3%E4%BA%8E%E7%A8%8B%E5%BA%8F%E8%B7%A8%E7%AB%AF">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="关于程序跨端 | LZ AI NOTE">
+  <meta property="og:description" content="关于程序跨端 背景 为什么需要跨端？ 一套代码跑多端，省时省力 发展方向？ 开发体验：复用现有生态，追求热更新 运行环境：代码执行适配，渲染引擎适配 性能：追求原生 包大小（冷热启动速度） 小程序上层框架（跨APP） 简介：基于web技术的一套代码跑在各个APP小程序：微信/支付宝/抖音等 代表框架: taro1/2（类React语法，ps：taro3后可…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/other/%E5%85%B3%E4%BA%8E%E7%A8%8B%E5%BA%8F%E8%B7%A8%E7%AB%AF">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"关于程序跨端","description":"关于程序跨端 背景 为什么需要跨端？ 一套代码跑多端，省时省力 发展方向？ 开发体验：复用现有生态，追求热更新 运行环境：代码执行适配，渲染引擎适配 性能：追求原生 包大小（冷热启动速度） 小程序上层框架（跨APP） 简介：基于web技术的一套代码跑在各个APP小程序：微信/支付宝/抖音等 代表框架: taro1/2（类React语法，ps：taro3后可…","url":"https://wizardpisces.github.io/blog/tech/other/%E5%85%B3%E4%BA%8E%E7%A8%8B%E5%BA%8F%E8%B7%A8%E7%AB%AF","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/other/%E5%85%B3%E4%BA%8E%E7%A8%8B%E5%BA%8F%E8%B7%A8%E7%AB%AF","dateModified":"2026-05-29","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>关于程序跨端</h1><h1>关于程序跨端</h1>
+<h2>背景</h2>
+<ul>
+<li>为什么需要跨端？
+<ul>
+<li>一套代码跑多端，省时省力</li>
+</ul>
+</li>
+<li>发展方向？
+<ul>
+<li>开发体验：复用现有生态，追求热更新</li>
+<li>运行环境：代码执行适配，渲染引擎适配</li>
+<li>性能：追求原生</li>
+<li>包大小（冷热启动速度）</li>
+</ul>
+</li>
+</ul>
+<h2>小程序上层框架（跨APP）</h2>
+<p>简介：基于web技术的一套代码跑在各个APP小程序：微信/支付宝/抖音等
+代表框架: taro1/2（类React语法，ps：taro3后可以同时支持RN/React/Vue）,uniapp（类Vue语法）</p>
+<h3>原理</h3>
+<p>主要分两种：渲染pipeline的重组优化，尽可能提出平台无关的IR？</p>
+<h4>框架耦合，重编译时</h4>
+<p>代表：uniapp、nanachi、taro1/2；分别支持某一个种框架：Vue或者React；
+简介：使用工具把代码语法分析一遍，把其中的 JSX 部分和逻辑部分抽取出来，分别生成小程序的静态模板和 小程序页面的定义。运行时并没有 React/Vue 的存在，实际运行的是静态编译转换之后的小程序代码。</p>
+<ul>
+<li>运行环境：同下面介绍的原生小程序（主要是一个翻译器，运行时比较少）</li>
+<li>视图渲染：类React/Vue模板<strong>编译</strong>（AST转换）成对应APP小程序模板树（eg：微信小程序模板），再被原生小程序编译渲染
+<ul>
+<li>问题
+<ul>
+<li>编译：复杂的AST转化可能会丢失SourceMap导致Debug困难</li>
+<li>编译：框架（Vue或者React）DSL强绑定限制使用范围</li>
+<li>编译：JSX的模板过于灵活，导致编译成特定平台困难</li>
+<li>运行时：各个小程序平台升级（BUG或者新增特效）会导致跨端框架被迫跟进升级</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>API层面：把各端API <strong>proxy</strong>成统一的API调用（生命周期映射，系统模块调用等）</li>
+<li>组件：各自框架语法封装了一套</li>
+</ul>
+<h4>框架独立，重运行时</h4>
+<p>代表：taro3 支持 Vue、React等框架；仿照React-Dom跟 RN中的 Yoga，在小程序中模拟实现 DOM 以及 BOM 的 API（或者称为Taro-Dom？），从而实现直接将 React 运行到小程序环境中的目的</p>
+<ul>
+<li>运行环境：同上</li>
+<li>视图渲染：同上</li>
+<li>框架独立原因：框架编译作为Plugin接入，最终会编译成 Taro VNode？，然后通过统一API映射</li>
+<li>API层面：同上</li>
+<li>组件：用web-components；优势：框架独立；劣势：是否会有更多的坑？</li>
+</ul>
+<h3>思考</h3>
+<ul>
+<li>为什么跨端框架不直接调用native原生渲染，而是先编译到微信小程序等原生的代码？
+推测：原生小程序只对原生目录结构的代码开放API，双线程渲染？</li>
+</ul>
+<h2>原生小程序（跨操作系统）</h2>
+<p>双线程+1个native线程
+简介：基于web技术的一套代码跑在 IOS ，Android，开发者工具上
+代表框架：微信小/支付宝等原生小程序</p>
+<h3>原理</h3>
+<ul>
+<li>运行环境：各大支持小程序的APP：微信，支付宝等（IOS-JavascriptCore-WKWebView，Android-V8-chromium内核，开发者工具-NWJS-chromeWebview）</li>
+<li>视图渲染：原生+webview混合（内置组件类型），模板会转为语法树，然后跟内置组件映射渲染
+<ul>
+<li>使用原生组件的地方会被先用DOM节点占位，然后再用原生组件覆盖占位点
+<ul>
+<li>问题：导致原生组件层级会更高，DOM样式没法应用上去</li>
+<li>优势：体验更好（input键盘控制力；减轻webview渲染压力，比如map直接给原生线程渲染了）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>API（本地存储，网络请求等）：JSBridge</li>
+<li>包大小：看系统是否自带了 JS Engine</li>
+<li>HMR：蹩脚；<em><strong>小程序IDE检测到目录文件发生变动时会自动重新渲染。</strong></em>，渲染管道比较长，中间转换比较多，能支持也是比较慢；一般使用uniapp或者taro上层框架开发，然后转成原生小程序，再通过原生小程序转换由App渲染</li>
+</ul>
+<h3>关于双线程</h3>
+<ul>
+<li>安全管控
+<ul>
+<li>沙箱可控</li>
+<li>限制 DOM 和 BOM 能力</li>
+<li>各种API限制</li>
+</ul>
+</li>
+<li>性能（UI跟逻辑分离，互不阻塞）</li>
+<li>引发的问题：逻辑层与渲染层之间通信延迟，异步-&gt;运行时序-&gt;生命周期（解决方案）</li>
+<li>发展方向：提升通信速度？</li>
+<li>天生延迟：由于是不同线程之前的调用，所以对原生API的调用也是异步，所以会出现各种callback？</li>
+</ul>
+<h2>App（跨操作系统）</h2>
+<p>简介：基于或者不基于web技术的一套代码跑在IOS跟Android系统
+代表框架：React Native（类React语法），Flutter（Dart widget）</p>
+<h3>原理</h3>
+<h4>React Native（三线程）</h4>
+<p>iOS Android 的原生渲染管线都是 <a href="https://www.zhihu.com/question/39093254/answer/1351958747">保留渲染模式（Retained Mode GUI）</a> 范式，那么总是有相似点的，比如说 UI 都是树状嵌套布局，都有事件回调等等。React或者Vue虚拟DOM可很好转换过去（RN跟Weex的基石）。
+<code>小知识：渲染范式大致分保留模式（Retained-Mode）跟立即模式（Immediate-Mode）两种，前者在绘制基础上再做更改，更费内存；后者是每一帧都重复渲染，更费CPU；canvas属于后者；</code></p>
+<ul>
+<li>运行环境：js代码交由JS Engine（JavascriptCore，Hermes，V8 etc）执行</li>
+<li>API调用（本地存储，定位，网络请求等）：Native &lt;-&gt; js代码通过<a href="https://wizardpisces.github.io/blog/JsBridge%E5%BC%95%E5%8F%91%E7%9A%84%E6%80%9D%E8%80%83"><strong>JsBridge</strong></a>实现</li>
+<li>视图渲染：通过 UI Manager 来创建视图的（基于 Virtual DOM ，RN 把不同平台创建视图的逻辑封装了一层，不同平台通过 Bridge 调用 UI Manager 来创建不同的 Native 视图）；依赖原生渲染层，纯 Native 渲染；（类比:在浏览器 React 可以调用 DOM API 完成创建 UI 的工作，依赖原生渲染层）</li>
+<li>包大小：看系统是否自带了 Skia 引擎</li>
+<li>发展：平台关联性较强，所以跨端（PC，web等）速度可能会比较慢</li>
+<li>HMR：有</li>
+</ul>
+<blockquote>
+<p>三线程</p>
+</blockquote>
+<ul>
+<li>JS thread： 负责 JS 和原生代码的交互线程，因为 JS 是单线程模型，所以需要一个单独的线程来驱动，并且 JS 和 Native 交互是异步的。</li>
+<li>Shadow thread: 这个线程是负责 Native 布局，提供给 yoga 引擎使用。</li>
+<li>UI thread：这个可以看作是主线程，可以看作是 UI Manager 线程，负责页面的交互和控件绘制逻辑。</li>
+</ul>
+<p>总结：JIT模式，需要频繁地在JavaScript与Native之间进行通信，从而会有一定的性能损耗影响，导致体验上与原生会有一些差异。</p>
+<p><em><strong>开发者编写的js代码，通过 react native 的中间层转化为原生控件和操作，Bridge 的作用就是给 React Native 内嵌的 JS Engine 提供原生接口的扩展供 JS 调用</strong></em></p>
+<h4>Flutter</h4>
+<p>重写了一整套包括底层渲染逻辑和上层开发语言的完整解决方案</p>
+<ul>
+<li>运行环境：dart语言
+<ul>
+<li>Dev阶段 JIT + Dart VM，保证开发效率</li>
+<li>Prodution阶段 AOT编译成原生，保证产线运行效率</li>
+</ul>
+</li>
+<li>API调用：dart可以AOT编译成平台原生代码，所以不需要bridge进行交互</li>
+<li>视图渲染：flutter不使用平台原生控件（那是不是小程序/web这些端也能完美跨起来？），而是使用自身渲染引擎（skia）绘制widget，依赖平台的canvas能力（所以Flutter把Canvas这种立即渲染模式转换成了保留渲染模式？）
+<ul>
+<li>问题：那视频播放会不会是问题？</li>
+<li>方向：会在 Native 控件上发力？</li>
+</ul>
+</li>
+<li>发展：平台关联性较弱，在其他端的支持上可能会更快</li>
+<li>HMR：有（APP）</li>
+</ul>
+<h1>Kraken</h1>
+<p>结合前端生态跟Flutter渲染引擎，声称更精简的渲染管线</p>
+<h1>非js语言运行在js环境（跨语言）</h1>
+<ul>
+<li>node addons 机制可以让非js语言编译成 .node 文件，被 node 调用</li>
+<li>WebAssembly 很多语言都可以编译成 .wasm，被 WebAssembly instantiate 后在浏览器或者node环境运行；实际还是需要编译成机器码
+<ul>
+<li>是一个基于栈的虚拟机 (stack machine)，所以跨平台能力一流。类似 JVM？</li>
+<li>WebAssembly 字节码是一种抹平了不同 CPU 架构的机器码，WebAssembly 字节码不能直接在任何一种 CPU 架构上运行， 但由于非常接近机器码，可以非常快的被翻译为对应架构的机器码，因此 WebAssembly 运行速度和机器码接近，类似 Java 字节码。</li>
+<li>优势
+<ul>
+<li>体积小：由于浏览器运行时只加载编译成的字节码，一样的逻辑比用字符串描述的 JS 文件体积要小很多；(按道理JS源码会更小；其他语言编译的 .wasm 会大很多，信息里面需要包含除了逻辑代码外的信息；这里的更小是相对于下发相同逻辑的同一种语言？)</li>
+<li>加载快：由于文件体积小，再加上无需解释执行，WebAssembly 能更快的加载并实例化，减少运行前的等待时间；</li>
+<li>兼容性问题少：WebAssembly 是非常底层的字节码规范，制订好后很少变动，就算以后发生变化,也只需在从高级语言编译成字节码过程中做兼容。可能出现兼容性问题的地方在于 JS 和 WebAssembly 桥接的 JS 接口。</li>
+</ul>
+</li>
+<li>拓展
+<ul>
+<li>LLVM 实现了 LLVM IR 到 WebAssembly 字节码的编译功能，也就是能编译到 LLVM 的高级语言都能编译成 WebAssembly（eg：Rust）</li>
+<li>是否能重新写 React 的更新？以及 SSR 的 renderToString</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1>Reference</h1>
+<ul>
+<li><a href="https://juejin.cn/post/6844903630584152072">移动端跨平台开发的深度解析</a></li>
+<li><a href="https://juejin.cn/post/6916452544956858382#heading-8">RN原理分析</a></li>
+<li><a href="https://toutiao.io/posts/pwz320j/preview">Taro3跨端跨框架原理初探</a></li>
+<li><a href="https://developers.weixin.qq.com/ebook?action=get_post_info&amp;docid=0006a2289c8bb0bb0086ee8c056c0a">双线程模型</a>)</li>
+<li><a href="https://zhuanlan.zhihu.com/p/70070316">Flutter 与 React Native 深入对比分析</a></li>
+<li><a href="https://www.zhihu.com/question/39093254/answer/1351958747">React 和 IMGUI 有何联系和区别？</a></li>
+<li><a href="https://wizardpisces.github.io/blog/JSbridge%E5%BC%95%E5%8F%91%E7%9A%84%E6%80%9D%E8%80%83">关于JSBridge</a></li>
+<li><a href="https://fed.taobao.org/blog/taofed/do71ct/chrome-remote-debugging-technics/">揭秘浏览器远程调试技术</a></li>
+<li><a href="https://toutiao.io/posts/ldjp4jh/preview">WebAssembly 简介及原理</a></li>
+</ul>
+<p><em><strong>本文属于个人的见解，酌情观看</strong></em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

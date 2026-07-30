@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>Agent 系统的五个核心范式 | LZ AI NOTE</title>
+  <meta name="description" content="Agent 系统的五个核心范式 从 deepagents 源码出发，提炼 AI Agent 系统设计的通用范式 引言 分析 deepagents 源码后，我发现 Agent 系统的核心挑战可以归结为 五个范式问题 。这些问题不依赖于具体框架——无论你用 LangGraph、CrewAI 还是自建系统，都必须面对它们。 本文不是框架教程，而是试图回答： 构建…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-agent/Agent%20Framework%20%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%20-%20deepagents%20%E6%A1%88%E4%BE%8B%E7%A0%94%E7%A9%B6">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="Agent 系统的五个核心范式 | LZ AI NOTE">
+  <meta property="og:description" content="Agent 系统的五个核心范式 从 deepagents 源码出发，提炼 AI Agent 系统设计的通用范式 引言 分析 deepagents 源码后，我发现 Agent 系统的核心挑战可以归结为 五个范式问题 。这些问题不依赖于具体框架——无论你用 LangGraph、CrewAI 还是自建系统，都必须面对它们。 本文不是框架教程，而是试图回答： 构建…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-agent/Agent%20Framework%20%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%20-%20deepagents%20%E6%A1%88%E4%BE%8B%E7%A0%94%E7%A9%B6">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Agent 系统的五个核心范式","description":"Agent 系统的五个核心范式 从 deepagents 源码出发，提炼 AI Agent 系统设计的通用范式 引言 分析 deepagents 源码后，我发现 Agent 系统的核心挑战可以归结为 五个范式问题 。这些问题不依赖于具体框架——无论你用 LangGraph、CrewAI 还是自建系统，都必须面对它们。 本文不是框架教程，而是试图回答： 构建…","url":"https://wizardpisces.github.io/blog/tech/ai-agent/Agent%20Framework%20%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%20-%20deepagents%20%E6%A1%88%E4%BE%8B%E7%A0%94%E7%A9%B6","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-agent/Agent%20Framework%20%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%20-%20deepagents%20%E6%A1%88%E4%BE%8B%E7%A0%94%E7%A9%B6","dateModified":"2026-04-01","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Agent 系统的五个核心范式</h1><h1>Agent 系统的五个核心范式</h1>
+<blockquote>
+<p>从 deepagents 源码出发，提炼 AI Agent 系统设计的通用范式</p>
+</blockquote>
+<h2>引言</h2>
+<p>分析 deepagents 源码后，我发现 Agent 系统的核心挑战可以归结为<strong>五个范式问题</strong>。这些问题不依赖于具体框架——无论你用 LangGraph、CrewAI 还是自建系统，都必须面对它们。</p>
+<p>本文不是框架教程，而是试图回答：<strong>构建一个生产级 Agent 系统，到底需要解决哪些本质问题？</strong></p>
+<hr>
+<h2>范式一：注意力经济学 — Less is More</h2>
+<h3>核心命题</h3>
+<blockquote>
+<p><strong>给 LLM 更多信息，不会让它更聪明，反而更蠢。</strong></p>
+</blockquote>
+<p>这是 Agent 系统最反直觉的发现。</p>
+<h3>数学基础</h3>
+<p>Transformer 的自注意力机制是一个<strong>零和博弈</strong>：</p>
+<pre><code class="language-python">weights = softmax(scores)  # 所有权重之和 = 1
+</code></pre>
+<p>当你往 context 里塞入无关内容时：</p>
+<pre><code>场景 A：只有相关内容（3 个 keys）
+  weights = [0.35, 0.30, 0.35]  # 相关内容分享 100% 注意力
+
+场景 B：混入无关内容（3 相关 + 5 无关）
+  weights = [0.18, 0.15, 0.17, 0.08, 0.06, 0.07, 0.09, 0.07]
+  # 相关内容只分到 50% 注意力 — 被稀释了一半
+</code></pre>
+<p><strong>实测数据（Anthropic 研究）：</strong></p>
+<ul>
+<li>10k tokens context（80% 相关）：准确率 87%</li>
+<li>100k tokens context（20% 相关）：准确率 79%（<strong>-8%</strong>）</li>
+</ul>
+<p>这不是偶然，是注意力机制的数学必然。</p>
+<h3>范式解法：渐进式披露（Progressive Disclosure）</h3>
+<p><strong>核心思想：</strong> 把上下文当成稀缺资源来管理，而不是垃圾桶。</p>
+<p><strong>deepagents 的实现：</strong></p>
+<pre><code>启动时注入（~150 tokens）：
+  可用技能：
+  - query-writing: 写 SQL 查询
+  - schema-exploration: 探索数据库结构
+  需要时用 read_file 加载详细内容。
+
+Agent 决定需要时，才加载（+480 tokens）：
+  read_file(&quot;./skills/query-writing/SKILL.md&quot;)
+  → 获得完整 69 行 workflow
+</code></pre>
+<p><strong>实现机制（源码）：</strong></p>
+<p>deepagents 的 <code>SkillsMiddleware</code> 启动时扫描 skills 目录，<strong>只提取 YAML frontmatter</strong>（name + description），不读 body：</p>
+<pre><code class="language-python"># 正则只匹配 --- 之间的 YAML 头部
+frontmatter_pattern = r&quot;^---\s*\n(.*?)\n---\s*\n&quot;
+match = re.match(frontmatter_pattern, content, re.DOTALL)
+# 解析得到 name, description → 注入 system prompt
+# body 不读，等 Agent 自己调用 read_file
+</code></pre>
+<p><strong>注意：</strong> deepagents 的渐进式只有<strong>两层</strong>（索引 → 全文），不支持深层嵌套。如果知识庞大，设计策略是拆成多个平级 skill，而非嵌套。</p>
+<h3>范式启发</h3>
+<pre><code>旧范式：信息量 ↑ → 效果 ↑
+新范式：信噪比 ↑ → 效果 ↑
+
+设计原则：
+  1. 按需加载，不要预加载
+  2. 索引和内容分离
+  3. 让 Agent 自己决定何时加载什么
+</code></pre>
+<p><strong>行业印证：</strong> Anthropic、Cloudflare、Cursor、Vercel 在生产实践中独立收敛到这个模式。</p>
+<hr>
+<h2>范式二：工具选择 — 从静态注册到动态检索</h2>
+<h3>核心命题</h3>
+<blockquote>
+<p><strong>工具不是越多越好。50+ 工具时准确率下降 23%。</strong></p>
+</blockquote>
+<p>原因和范式一相同：工具描述占据 context，稀释注意力。但解法不同。</p>
+<h3>三个层次</h3>
+<p><strong>层次 1：静态注册</strong></p>
+<pre><code class="language-python"># 启动时确定，运行时不变
+agent = Agent(tools=[tool1, tool2, ..., tool50])
+</code></pre>
+<p>问题：所有工具描述每次都注入，即使任务只需要 3 个。</p>
+<p><strong>层次 2：能力过滤（deepagents 的位置）</strong></p>
+<pre><code class="language-python"># deepagents 的 FilesystemMiddleware
+# 每次调用模型前检查：backend 不支持执行 → 移除 execute 工具
+if not supports_execution(backend):
+    tools.remove(&quot;execute&quot;)
+</code></pre>
+<p>这只是<strong>基于环境能力的静态过滤</strong>，不理解任务语义。</p>
+<p><strong>层次 3：语义检索（业界前沿：Tool RAG）</strong></p>
+<pre><code class="language-python"># 从 500 工具中，根据任务语义检索 10 个最相关的
+task = &quot;查询加拿大客户数量&quot;
+tools = tool_rag.semantic_search(task, top_k=10)
+# → [list_tables, get_schema, query_db, ...]
+# 而不是注入全部 500 个工具描述
+</code></pre>
+<p>加上学习系统：记录每种任务类型下哪些工具组合成功率最高，下次优先选择。</p>
+<h3>范式启发</h3>
+<pre><code>演进路径：
+  静态列表 → 能力过滤 → 语义检索 → 学习优化
+
+核心思想：
+  工具选择本质上是一个「检索」问题，
+  和 RAG 检索文档的逻辑完全一致。
+</code></pre>
+<hr>
+<h2>范式三：消息完整性 — 协议约束下的自愈</h2>
+<h3>核心命题</h3>
+<blockquote>
+<p><strong>LLM API 有严格的消息协议。状态不一致时，系统应该自愈而不是崩溃。</strong></p>
+</blockquote>
+<h3>问题场景</h3>
+<p>OpenAI / Anthropic 的 API 要求：每个 <code>tool_calls</code> 必须有对应的 <code>ToolMessage</code>。</p>
+<pre><code class="language-python"># 这种消息序列会被 API 拒绝（400 Bad Request）
+messages = [
+    AIMessage(tool_calls=[{&quot;id&quot;: &quot;abc&quot;, &quot;name&quot;: &quot;search&quot;, ...}]),
+    # 缺少 ToolMessage(tool_call_id=&quot;abc&quot;)
+    HumanMessage(content=&quot;算了不搜了&quot;)
+]
+</code></pre>
+<p><strong>何时出现？</strong> 用户中断、网络超时、checkpoint 恢复、人工介入 — 这些在生产环境中都是常见场景。</p>
+<h3>deepagents 的解法</h3>
+<p>核心就是：扫描消息链，<strong>对每个没有配对 ToolMessage 的 tool_call，补一个</strong>。</p>
+<pre><code class="language-python"># patch_tool_calls.py 的完整逻辑
+for i, msg in enumerate(messages):
+    if isinstance(msg, AIMessage) and msg.tool_calls:
+        for tc in msg.tool_calls:
+            # 用 tool_call_id 精确匹配后续的 ToolMessage
+            found = next(
+                (m for m in messages[i:]
+                 if m.type == &quot;tool&quot; and m.tool_call_id == tc[&quot;id&quot;]),
+                None
+            )
+            if not found:
+                # 补一条
+                patched.append(ToolMessage(
+                    content=f&quot;Tool call {tc['name']} was cancelled&quot;,
+                    tool_call_id=tc[&quot;id&quot;],
+                    name=tc[&quot;name&quot;]
+                ))
+</code></pre>
+<p><strong>匹配机制：</strong> 结构化属性（<code>msg.tool_call_id</code>），不是字符串搜索。</p>
+<h3>范式启发</h3>
+<pre><code>设计原则：
+  系统应该假设状态可能不一致，并自动修复，
+  而不是假设一切完美，出错时崩溃。
+
+类比：
+  TCP 协议不假设网络可靠 → 有重传机制
+  Agent 系统不应假设消息完整 → 有修补机制
+</code></pre>
+<p>技术难度低（30 行代码），但多数框架没做。这不是技术问题，是<strong>鲁棒性意识</strong>问题。</p>
+<hr>
+<h2>范式四：上下文生命周期 — 压缩、卸载、恢复</h2>
+<h3>核心命题</h3>
+<blockquote>
+<p><strong>Agent 的上下文窗口是有限内存。长任务需要&quot;虚拟内存&quot;机制。</strong></p>
+</blockquote>
+<h3>类比操作系统</h3>
+<table>
+<thead>
+<tr>
+<th>OS 概念</th>
+<th>Agent 对应</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>物理内存</td>
+<td>Context Window</td>
+</tr>
+<tr>
+<td>虚拟内存</td>
+<td>历史卸载到文件</td>
+</tr>
+<tr>
+<td>页面置换</td>
+<td>自动总结 + 截断</td>
+</tr>
+<tr>
+<td>缺页中断</td>
+<td>ContextOverflowError</td>
+</tr>
+</tbody>
+</table>
+<h3>deepagents 的实现</h3>
+<p><strong>三道防线：</strong></p>
+<pre><code class="language-python"># 防线 1：截断旧消息的大 tool args
+# 早期的 tool 返回（如 5000 行文件内容）被截断
+for msg in old_messages:
+    if len(msg.tool_args) &gt; threshold:
+        msg.tool_args = msg.tool_args[:1000] + &quot;...[truncated]&quot;
+
+# 防线 2：主动总结（85% 阈值）
+total_tokens = count_tokens(messages, tools)
+if total_tokens &gt; 0.85 * model.max_tokens:
+    summary = model.summarize(messages[:cutoff])
+    backend.write(f&quot;/conversation_history/{thread_id}.md&quot;, full_history)
+    messages = [summary_message] + messages[cutoff:]
+
+# 防线 3：被动降级（ContextOverflowError）
+try:
+    response = model.invoke(messages)
+except ContextOverflowError:
+    # 强制进入总结流程
+    summary = summarize(messages)
+    response = model.invoke([summary] + recent_messages)
+</code></pre>
+<h3>范式启发</h3>
+<pre><code>核心原则：
+  1. 分层管理 — 热数据在 context，冷数据卸载到存储
+  2. 预防优先 — 主动压缩（85% 阈值），而非等溢出
+  3. 优雅降级 — 溢出时自动总结重试，而非直接失败
+  4. 可恢复 — 历史写入文件，Agent 可以回溯
+
+类比：
+  不是&quot;内存不够就崩溃&quot;，
+  而是&quot;内存不够就换页到磁盘&quot;。
+</code></pre>
+<hr>
+<h2>范式五：可组合性 — 中间件模式</h2>
+<h3>核心命题</h3>
+<blockquote>
+<p><strong>Agent 的功能应该可以独立开发、测试、组合。</strong></p>
+</blockquote>
+<h3>问题：功能耦合</h3>
+<pre><code class="language-python"># 坏：所有功能混在一起
+class Agent:
+    def run(self):
+        self.patch_messages()     # 状态修补
+        self.filter_tools()       # 工具过滤
+        self.inject_skills()      # 技能注入
+        self.check_tokens()       # 上下文管理
+        response = self.call_llm()
+        self.evict_large_output() # 大输出卸载
+        return response
+</code></pre>
+<p>问题：加一个功能要改核心循环，测试要测整个系统。</p>
+<h3>解法：中间件栈</h3>
+<pre><code class="language-python"># deepagents 的实际装配（graph.py）
+middleware_stack = [
+    TodoListMiddleware(),           # 规划
+    SkillsMiddleware(...),          # 渐进式披露
+    FilesystemMiddleware(...),      # 工具 + 大输出卸载
+    SubAgentMiddleware(...),        # 子 agent
+    SummarizationMiddleware(...),   # 上下文压缩
+    PatchToolCallsMiddleware(),     # 状态修补
+    MemoryMiddleware(...),          # 长期记忆
+    HumanInTheLoopMiddleware(...)   # 人工介入
+]
+</code></pre>
+<p>每个中间件有三个钩子：</p>
+<pre><code class="language-python">class Middleware:
+    def before_agent(self, state):
+        &quot;&quot;&quot;Agent 运行前：修改 state&quot;&quot;&quot;
+    
+    def wrap_model_call(self, request, handler):
+        &quot;&quot;&quot;每次调用 LLM 前：修改 request（tools、messages、system_prompt）&quot;&quot;&quot;
+    
+    def wrap_tool_call(self, request, handler):
+        &quot;&quot;&quot;每次执行工具后：拦截和修改结果&quot;&quot;&quot;
+</code></pre>
+<h3>范式启发</h3>
+<pre><code>核心原则：
+  1. 正交分解 — 每个中间件只负责一件事
+  2. 顺序组合 — 中间件按顺序执行，形成处理管道
+  3. 独立测试 — 每个中间件可以单独测试
+  4. 可插拔 — 不需要的功能直接移除
+
+这是 Agent 系统中真正的架构创新。
+不在于某个中间件做了什么，
+在于中间件模式本身的可组合性。
+</code></pre>
+<hr>
+<h2>范式之外：几个值得辨析的概念</h2>
+<h3>Cognitive Blueprint：配置 vs 平台</h3>
+<p>Cognitive Blueprint 的思想是把 Agent 的配置（身份、工具、行为）和运行时引擎<strong>彻底解耦</strong>：</p>
+<pre><code class="language-yaml"># sql_expert.yaml — 配置层
+cognitive_blueprint:
+  identity: { name: &quot;SQL-Expert&quot; }
+  tools: [{ protocol: &quot;mcp://sqlite/query&quot; }]
+  behavior: { planning: { strategy: &quot;hierarchical&quot; } }
+</code></pre>
+<pre><code class="language-python"># runtime.py — 运行时层（通用）
+runtime = CognitiveRuntime()
+agent = runtime.load_blueprint(&quot;sql_expert.yaml&quot;)
+</code></pre>
+<p><strong>理想很美好：</strong> 配置即产品，可分发、可版本化、跨语言复用。</p>
+<p><strong>现实（2026.03）：</strong></p>
+<ul>
+<li>❌ 没有成熟的通用运行时引擎</li>
+<li>❌ 没有标准的 blueprint schema</li>
+<li>❌ Cursor、Claude Code 都不消费这个格式</li>
+</ul>
+<p><strong>但思想已经在渗透：</strong></p>
+<ul>
+<li>Cursor 的 <code>.cursor/rules/</code> — 声明式 Agent 行为配置</li>
+<li>Claude Code 的 <code>CLAUDE.md</code> — Markdown 格式的 Agent 身份</li>
+<li>deepagents 的 <code>AGENTS.md</code> + <code>SKILL.md</code> — 分层配置</li>
+</ul>
+<p>这些都是 Blueprint 的<strong>雏形</strong>，只是绑定了各自的运行时。真正的突破需要一个<strong>通用运行时标准</strong>。</p>
+<p><strong>如果用于公司内部低代码：</strong> 你需要自建运行时引擎。Blueprint 不是产品，是设计模式。</p>
+<h3>流式的本质：信息流控制</h3>
+<p>流式不是&quot;最后一步逐字输出&quot;，而是<strong>对整个执行过程的选择性展示</strong>。</p>
+<p><strong>四个维度：</strong></p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>选项</th>
+<th>价值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>粒度</strong></td>
+<td>token / message / task</td>
+<td>不同场景需要不同密度</td>
+</tr>
+<tr>
+<td><strong>内容</strong></td>
+<td>thinking / tool_call / response</td>
+<td>隐藏或展示哪些环节</td>
+</tr>
+<tr>
+<td><strong>受众</strong></td>
+<td>developer / user / audit</td>
+<td>同一过程，不同呈现</td>
+</tr>
+<tr>
+<td><strong>聚合</strong></td>
+<td>逐条 / 批量 / 摘要</td>
+<td>减少信息过载</td>
+</tr>
+</tbody>
+</table>
+<p><strong>实际例子：</strong> 50 次 <code>read_file</code> 调用</p>
+<pre><code>全量展示（开发者）：
+  🔧 read_file(a.py)  ✓
+  🔧 read_file(b.py)  ✓
+  ... 50 条
+
+聚合展示（用户）：
+  📁 正在读取 50 个文件... ✓
+
+审计记录：
+  {&quot;ts&quot;: &quot;...&quot;, &quot;tool&quot;: &quot;read_file&quot;, &quot;file&quot;: &quot;a.py&quot;, &quot;tokens&quot;: 1200}
+  ... 50 条 JSON
+</code></pre>
+<p><strong>deepagents 支持基础流式</strong>（继承 LangGraph 的 <code>stream_mode</code>），但<strong>选择性过滤需要应用层实现</strong>。</p>
+<hr>
+<h2>总结：五个范式的关系</h2>
+<pre><code>范式一（注意力经济学）
+    ↓ 解决&quot;给 LLM 什么&quot;
+范式二（工具选择）
+    ↓ 解决&quot;给 LLM 哪些工具&quot;
+范式三（消息完整性）
+    ↓ 解决&quot;消息格式正确&quot;
+范式四（上下文生命周期）
+    ↓ 解决&quot;长期运行不崩溃&quot;
+范式五（可组合性）
+    ↓ 解决&quot;如何优雅地实现以上所有&quot;
+</code></pre>
+<p><strong>五个范式都指向同一个核心问题：</strong></p>
+<blockquote>
+<p><strong>在有限的 context window 内，如何高效地完成开放式任务？</strong></p>
+</blockquote>
+<p>这个约束催生了渐进式披露（减少输入）、工具检索（精选工具）、上下文压缩（管理历史）、消息修补（保证格式）、中间件模式（组合能力）。</p>
+<p><strong>deepagents 的贡献：</strong> 用中间件模式把这五个范式的最佳实践打包成开箱即用的方案。不是每个范式都做到了业界最优，但提供了一个<strong>可组合的基座</strong>。</p>
+<hr>
+<h2>附录：deepagents 真实定位</h2>
+<pre><code>deepagents ≠ 技术革新
+deepagents = 工程整合 + 标准约定
+
+贡献分解：
+  60% — 把分散的最佳实践打包（上下文压缩、状态修补、渐进式披露）
+  25% — 中间件架构（范式五的核心创新）
+  15% — 标准约定（SKILL.md 格式、Backend 协议）
+</code></pre>
+<p>类比：Django 没有发明 ORM、模板引擎、路由系统，但把它们整合成了一个高效的框架。deepagents 对 Agent 系统做了同样的事。</p>
+<hr>
+<p><em>本文基于 deepagents 源码分析和 2026 年业界实践。核心观点：Agent 系统的本质挑战是在有限 context window 内高效完成开放式任务。所有设计模式都围绕这个约束展开。</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>Docker 镜像 | LZ AI NOTE</title>
+  <meta name="description" content="Docker 镜像 层次关系 Docker 镜像的层次关系原理基于联合文件系统（Union File System），这种文件系统允许多个文件系统层次叠加在一起，表现为一个单一的文件系统。Docker 利用这一特性来构建和管理镜像和容器。 联合文件系统（Union File System） 联合文件系统（如 AUFS、OverlayFS、btrfs 等）是…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/frontend/Docker%20%E7%9A%84%E7%90%86%E8%A7%A3">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="Docker 镜像 | LZ AI NOTE">
+  <meta property="og:description" content="Docker 镜像 层次关系 Docker 镜像的层次关系原理基于联合文件系统（Union File System），这种文件系统允许多个文件系统层次叠加在一起，表现为一个单一的文件系统。Docker 利用这一特性来构建和管理镜像和容器。 联合文件系统（Union File System） 联合文件系统（如 AUFS、OverlayFS、btrfs 等）是…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/frontend/Docker%20%E7%9A%84%E7%90%86%E8%A7%A3">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Docker 镜像","description":"Docker 镜像 层次关系 Docker 镜像的层次关系原理基于联合文件系统（Union File System），这种文件系统允许多个文件系统层次叠加在一起，表现为一个单一的文件系统。Docker 利用这一特性来构建和管理镜像和容器。 联合文件系统（Union File System） 联合文件系统（如 AUFS、OverlayFS、btrfs 等）是…","url":"https://wizardpisces.github.io/blog/tech/frontend/Docker%20%E7%9A%84%E7%90%86%E8%A7%A3","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/frontend/Docker%20%E7%9A%84%E7%90%86%E8%A7%A3","dateModified":"2025-06-20","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Docker 镜像</h1><h1>Docker 镜像</h1>
+<h2>层次关系</h2>
+<p>Docker 镜像的层次关系原理基于联合文件系统（Union File System），这种文件系统允许多个文件系统层次叠加在一起，表现为一个单一的文件系统。Docker 利用这一特性来构建和管理镜像和容器。</p>
+<h3>联合文件系统（Union File System）</h3>
+<p>联合文件系统（如 AUFS、OverlayFS、btrfs 等）是 Docker 的核心技术之一。它允许多个目录（称为层）叠加在一起，使其看起来像一个单一的目录。每一层都是只读的，只有最顶层是可写的。</p>
+<h3>Docker 镜像层次结构</h3>
+<p>Docker 镜像由多个只读层组成，每一层对应 Dockerfile 中的一条指令。这些层是增量的，即每一层只包含相对于前一层的变化。镜像层次结构的基本原理如下：</p>
+<ol>
+<li>
+<p><strong>基础镜像层</strong>：这是镜像的最底层，通常是一个操作系统的基础镜像（如 <code>ubuntu</code>、<code>alpine</code>、<code>node</code> 等）。它提供了运行应用所需的基本环境。</p>
+</li>
+<li>
+<p><strong>中间层</strong>：每一条 Dockerfile 指令（如 <code>RUN</code>、<code>COPY</code>、<code>ADD</code> 等）都会创建一个新的层。每个中间层只包含相对于前一层的变化。例如，安装软件包、复制文件等。</p>
+</li>
+<li>
+<p><strong>顶层</strong>：这是镜像的最顶层，通常包含应用程序的代码和配置文件。</p>
+</li>
+</ol>
+<h3>容器层次结构</h3>
+<p>当你启动一个容器时，Docker 会在镜像的基础上添加一个可写层，这个可写层称为容器层。容器层是唯一可写的层，所有对文件系统的修改（如创建新文件、修改现有文件等）都会发生在这一层。</p>
+<h3>分层存储的优点</h3>
+<ol>
+<li>
+<p><strong>高效存储</strong>：由于每一层是只读的，并且是增量的，Docker 可以通过共享相同的基础层来节省存储空间。例如，多个基于同一基础镜像的容器可以共享该基础镜像的层。</p>
+</li>
+<li>
+<p><strong>快速构建</strong>：构建镜像时，如果某一层已经存在且没有变化，Docker 可以直接重用该层，而不需要重新构建。这大大加快了镜像的构建速度。</p>
+</li>
+<li>
+<p><strong>缓存机制</strong>：Docker 使用缓存机制来加速镜像的构建和部署。如果某一层已经存在于缓存中，并且没有变化，Docker 可以直接从缓存中获取该层，而不需要重新执行指令。</p>
+</li>
+</ol>
+<h3>示例：Docker 镜像和容器的层次关系</h3>
+<p>假设我们有如下的 Dockerfile：</p>
+<pre><code class="language-Dockerfile"># 使用官方的 Node.js 镜像作为基础镜像
+FROM node:14
+
+# 设置工作目录
+WORKDIR /app
+
+# 复制 package.json 和 package-lock.json 到工作目录
+COPY package*.json ./
+
+# 安装依赖
+RUN npm install
+
+# 复制应用程序代码到工作目录
+COPY . .
+
+# 暴露应用程序运行的端口
+EXPOSE 3000
+
+# 运行应用程序
+CMD [&quot;node&quot;, &quot;app.js&quot;]
+</code></pre>
+<p>构建镜像时，每一条指令都会创建一个新的层：</p>
+<ol>
+<li><strong>基础镜像层</strong>：<code>FROM node:14</code></li>
+<li><strong>工作目录层</strong>：<code>WORKDIR /app</code></li>
+<li><strong>复制依赖文件层</strong>：<code>COPY package*.json ./</code></li>
+<li><strong>安装依赖层</strong>：<code>RUN npm install</code></li>
+<li><strong>复制应用程序代码层</strong>：<code>COPY . .</code></li>
+<li><strong>暴露端口层</strong>：<code>EXPOSE 3000</code></li>
+<li><strong>运行应用程序层</strong>：<code>CMD [&quot;node&quot;, &quot;app.js&quot;]</code></li>
+</ol>
+<p>当你运行容器时，Docker 会在这些只读层的基础上添加一个可写层。所有对文件系统的修改都会发生在这个可写层中。</p>
+<h3>联合文件系统（Union File System）</h3>
+<p>联合文件系统（Union File System）如何允许多个文件系统层次叠加在一起，表现为一个单一的文件系统。例子：</p>
+<p>假设我们有三个不同的目录，每个目录代表一个文件系统层：</p>
+<ol>
+<li><strong>Layer 1</strong>：包含基本的操作系统文件</li>
+<li><strong>Layer 2</strong>：包含一些应用程序文件</li>
+<li><strong>Layer 3</strong>：包含用户的数据文件，容器运行时的<strong>可写层</strong></li>
+</ol>
+<h4>目录结构</h4>
+<ul>
+<li>
+<p><strong>Layer 1</strong>（基础操作系统层）</p>
+<pre><code>/bin
+/lib
+/etc
+</code></pre>
+</li>
+<li>
+<p><strong>Layer 2</strong>（应用程序层）</p>
+<pre><code>/app
+/usr/local/bin
+</code></pre>
+</li>
+<li>
+<p><strong>Layer 3</strong>（用户数据层）</p>
+<pre><code>/home/user
+/var/log
+</code></pre>
+</li>
+</ul>
+<h4>叠加后的联合文件系统</h4>
+<p>当我们使用联合文件系统将这三个层叠加在一起时，它们会表现为一个单一的文件系统：</p>
+<pre><code>/bin
+/lib
+/etc
+/app
+/usr/local/bin
+/home/user
+/var/log
+</code></pre>
+<h3>具体例子：Docker 镜像和容器</h3>
+<p>让我们将这个概念应用到 Docker 镜像和容器上：</p>
+<ol>
+<li>
+<p><strong>基础镜像（Layer 1）</strong>：假设我们使用一个 Ubuntu 基础镜像，它包含了操作系统的基本文件。</p>
+<pre><code>/bin
+/lib
+/etc
+</code></pre>
+</li>
+<li>
+<p><strong>应用程序层（Layer 2）</strong>：我们在基础镜像上安装了一个应用程序，这会创建一个新的层。</p>
+<pre><code>/app
+/usr/local/bin
+</code></pre>
+</li>
+<li>
+<p><strong>用户数据层（Layer 3）</strong>：容器运行时，用户在容器内创建或修改文件，这些变化会记录在一个可写层中。</p>
+<pre><code>/home/user
+/var/log
+</code></pre>
+</li>
+</ol>
+<h4>叠加后的文件系统</h4>
+<p>当我们启动容器时，Docker 会将这些层叠加在一起，表现为一个单一的文件系统：</p>
+<pre><code>/bin
+/lib
+/etc
+/app
+/usr/local/bin
+/home/user
+/var/log
+</code></pre>
+<p>用户在容器内看到的文件系统就像是一个完整的文件系统，尽管它实际上是由多个层叠加而成的。</p>
+<h2>写时复制</h2>
+<p>在写时复制机制（Copy-on-Write, CoW）下，可能存在两份 <code>/etc/config</code> 文件，一份在只读层（lower layer），一份在可写层（upper layer）。但是，从文件系统的视图来看，用户只会看到一份文件。具体来说，这样的设计是为了在保证只读层数据不变的同时允许用户修改文件。以下是更详细的解释：</p>
+<h3>联合文件系统视图</h3>
+<p>联合文件系统通过叠加多个层来形成一个合并视图，用户只会看到合并后的文件系统视图，而不是底层的具体实现。</p>
+<h3>文件叠加机制</h3>
+<ol>
+<li>
+<p><strong>查找文件</strong>：</p>
+<ul>
+<li>当用户访问 <code>/etc/config</code> 文件时，联合文件系统首先在可写层（upper layer）中查找。</li>
+<li>如果可写层中找不到该文件，则继续查找只读层（lower layer）。</li>
+</ul>
+</li>
+<li>
+<p><strong>写时复制过程</strong>：</p>
+<ul>
+<li>如果用户对 <code>/etc/config</code> 文件进行修改，并且该文件在只读层中存在（可写层中不存在），则联合文件系统会将该文件从只读层复制到可写层。</li>
+<li>所有的修改操作都会在可写层中的副本上进行。</li>
+</ul>
+</li>
+</ol>
+<h3>确保数据完整性</h3>
+<p>这种机制确保了只读层的文件不会被直接修改，从而保持了其完整性。同时，用户对文件的修改操作仍然可以进行，只是这些修改会反映在可写层中。</p>
+<h3>实际示例</h3>
+<p>假设有一个联合文件系统，其中只读层和可写层的初始状态如下：</p>
+<ul>
+<li>
+<p><strong>只读层（lower layer）</strong>：</p>
+<pre><code>/etc/config
+/var/log/app.log
+</code></pre>
+</li>
+<li>
+<p><strong>可写层（upper layer）</strong>：</p>
+<pre><code>（初始为空）
+</code></pre>
+</li>
+</ul>
+<p>当用户修改 <code>/etc/config</code> 文件时，文件系统执行以下步骤：</p>
+<ol>
+<li>
+<p><strong>查找</strong>：</p>
+<ul>
+<li>在可写层中查找 <code>/etc/config</code>，未找到。</li>
+<li>在只读层中查找 <code>/etc/config</code>，找到该文件。</li>
+</ul>
+</li>
+<li>
+<p><strong>复制</strong>：</p>
+<ul>
+<li>将 <code>/etc/config</code> 文件从只读层复制到可写层。</li>
+</ul>
+</li>
+<li>
+<p><strong>修改</strong>：</p>
+<ul>
+<li>在可写层中的副本上进行修改。</li>
+</ul>
+</li>
+</ol>
+<p>修改后的文件系统层次结构如下：</p>
+<ul>
+<li>
+<p><strong>只读层（lower layer）</strong>：</p>
+<pre><code>/etc/config
+/var/log/app.log
+</code></pre>
+</li>
+<li>
+<p><strong>可写层（upper layer）</strong>：</p>
+<pre><code>/etc/config  （已被修改）
+</code></pre>
+</li>
+</ul>
+<h3>用户视图</h3>
+<p>用户通过文件系统看到的合并视图如下：</p>
+<pre><code>/etc/config  （已被修改）
+/var/log/app.log  （未被修改）
+</code></pre>
+<p>从用户的角度来看，他们看到的只是一个文件系统，其中 <code>/etc/config</code> 文件已被修改，而不会意识到底层存在两份 <code>/etc/config</code> 文件。</p>
+<h3>具体应用</h3>
+<ul>
+<li>
+<p><strong>Docker容器</strong>：Docker容器的文件系统利用联合文件系统叠加多个只读层（来自Docker镜像的各层）和一个可写层（容器的读写层）。容器启动后，所有对文件的修改都在可写层进行，而镜像层保持不变。</p>
+</li>
+<li>
+<p><strong>Linux Live CD</strong>：Live CD系统通常是只读的，但用户可以在会话期间对文件进行修改。这些修改被写入到一个临时的可写层（如RAM），原始的CD内容不变。</p>
+</li>
+</ul>
+<h3>总结</h3>
+<p>在联合文件系统中，通过写时复制机制，文件系统可以在只读层中保持文件的原始状态不变，同时允许用户对文件进行修改。这种机制在保持数据完整性和一致性的同时，提供了灵活的文件管理能力。虽然底层可能存在两份文件（原始和副本），但用户看到的是一个统一的、合并的文件系统视图。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

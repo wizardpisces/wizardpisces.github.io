@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>框架设计的思考 | LZ AI NOTE</title>
+  <meta name="description" content="（时间：2021 12 2，最后更新时间2022 1 13） 框架设计的思考 文章内容主要基于[2019 JSConf.Asia 尤雨溪在框架设计中寻求平衡] + 自身对[vue,react hook,svelte的简单实现]后的思考总结 状态管理 大致种类： 1. Mutable vs Immutable 2. Dependency Tracking v…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/frontend/%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%80%9D%E8%80%83">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="框架设计的思考 | LZ AI NOTE">
+  <meta property="og:description" content="（时间：2021 12 2，最后更新时间2022 1 13） 框架设计的思考 文章内容主要基于[2019 JSConf.Asia 尤雨溪在框架设计中寻求平衡] + 自身对[vue,react hook,svelte的简单实现]后的思考总结 状态管理 大致种类： 1. Mutable vs Immutable 2. Dependency Tracking v…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/frontend/%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%80%9D%E8%80%83">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"框架设计的思考","description":"（时间：2021 12 2，最后更新时间2022 1 13） 框架设计的思考 文章内容主要基于[2019 JSConf.Asia 尤雨溪在框架设计中寻求平衡] + 自身对[vue,react hook,svelte的简单实现]后的思考总结 状态管理 大致种类： 1. Mutable vs Immutable 2. Dependency Tracking v…","url":"https://wizardpisces.github.io/blog/tech/frontend/%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%80%9D%E8%80%83","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/frontend/%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%80%9D%E8%80%83","dateModified":"2025-08-06","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>框架设计的思考</h1><p>（时间：2021-12-2，最后更新时间2022-1-13）</p>
+<h1>框架设计的思考</h1>
+<p>文章内容主要基于<a href="https://zhuanlan.zhihu.com/p/76622839">2019 JSConf.Asia - 尤雨溪在框架设计中寻求平衡</a> + 自身对<a href="https://github.com/wizardpisces/experiment/packages">vue,react-hook,svelte的简单实现</a>后的思考总结</p>
+<h2>状态管理</h2>
+<p>大致种类：</p>
+<ol>
+<li>Mutable vs Immutable</li>
+<li>Dependency Tracking vs Dirty Tracking</li>
+<li>Reactivity vs Simulated Reactivity</li>
+</ol>
+<p>eg:</p>
+<ul>
+<li>vue偏向OOP(Object Oriented Program)编程模型; 驱动视图偏向data mutable tracking</li>
+<li>React偏向FP(Functioanl Program)编程模型；驱动视图偏向data immutable快照更新</li>
+<li>Angular Dirty Tracking</li>
+<li>Svelte 偏向编译时的 Dirty Tracking</li>
+</ul>
+<h2>渲染机制；Render Mechanism</h2>
+<p>大致种类：</p>
+<ol>
+<li>JSX vs Template （动态渲染函数和基于静态字符串的复杂的 Vue 表达式）</li>
+<li>Expressiveness vs Raw Perf （表现力和原生性能）</li>
+<li>Runtime Scheduling vs AOT（运行时调度和提前优化）</li>
+</ol>
+<p>JSX 表现力强，但是没法做静态编译优化
+Template 失去了很多表现力，受限于模板语法，但是可以做静态编译优化</p>
+<p>eg:</p>
+<ul>
+<li>vue jsx/Virtual-DOM + template，编译成render函数
+<ul>
+<li>主要方向是 template 的静态优化</li>
+</ul>
+</li>
+<li>react jsx/Virtual-DOM，编译成render函数
+<ul>
+<li>主要方向是 JSX + 运行时调度优化，提升用户<strong>感知性能</strong>，例如：时间切片（调度也耗时）</li>
+</ul>
+</li>
+<li>angular 基于template的，它们将模板编译成相对较低级别的指令来进行内容渲染，基于Incremental DOM更新（相对Virtual-DOM diff节省内存，同时更费CPU，所以是一个CPU跟内存的取舍）
+<ul>
+<li>主要方向是：待补充</li>
+</ul>
+</li>
+<li>svelte（一种编译器框架） 编译生成指令更新，基本无runtime调度
+<ul>
+<li>缺点：包大小会随着工程增长而成比较陡峭线性增长；受限于模板语法，所以有很多心智负担？级别越低的编译输出，很难将你的自定义操作与它进行挂钩，就好比你无法使用 C 语言去调试你的汇编代码</li>
+<li>主要方向 AOT优化，缩小编译体积，例如对编译指令大小的优化</li>
+</ul>
+</li>
+</ul>
+<h1>框架层面</h1>
+<h2>Vue</h2>
+<p>react &lt; vue编译时 &lt; svelte
+react &gt; vue运行时 &gt; svelte</p>
+<h3>一句话运行原理</h3>
+<p><strong>运行时模板一次性依赖收集</strong>
+<s>运行时<strong>关联变量更新操作与组件的更新函数</strong>，变量变动时触发对应组件的更新函数</s></p>
+<h3>API：ref vs reactive</h3>
+<h3>调用方式</h3>
+<ol>
+<li>reactive只能传入对象，方便数据的访问；</li>
+<li>ref 能传任意值，会创建一个 ref 对象，主要暴露 .value 属性，对value是Object的情况会用 reactive再次封装；
+所以 ref 可以理解成对 reactive 的再次封装，处理了 primary reactive场景，同时解决了 对象整体替换的烦恼</li>
+</ol>
+<h3>immutable vs mutable</h3>
+<ol>
+<li>reactive 是 mutable 模式的数据 tracking；</li>
+<li>ref 是 immutable 模式的数据 tracking；能传 ref</li>
+</ol>
+<h3>开发体验</h3>
+<p>细粒度的热更新：在同一组件层面还能区分只对样式、模板或者js逻辑更新</p>
+<h2>React-Hooks</h2>
+<p>轻编译重运行时</p>
+<h3>一句话运行原理</h3>
+<p><strong>运行时反复依赖处理</strong>
+<s>运行时通过hooks调用顺序<strong>关联hooks(eg:setData)跟函数组件</strong>，做后续hook调用触发对应函数组件更新</s></p>
+<h2>Svelte深入</h2>
+<p>重编译轻运行时</p>
+<h3>一句话运行原理</h3>
+<p><strong>编译时模板一次性依赖收集</strong>
+<s>编译时通过<strong>收集模板对变量的引用顺序编译出真实事件函数与更新函数</strong>，做后续事件精准更新</s></p>
+<h3>一句话调度原理</h3>
+<p>利用浏览器的 microTask 或者 macroTask 做组件树更新的批量处理</p>
+<h3>关于调度</h3>
+<ol>
+<li>基本调度单元?</li>
+</ol>
+<blockquote>
+<p>组件的更新函数</p>
+</blockquote>
+<ol start="2">
+<li>如何调度父组件更新又触发子组件的更新？</li>
+</ol>
+<blockquote>
+<p>动态修改调度的数组，保证子组件的update函数能在父组件的更新job中实时push到调度的queue，保证了更新的一致性</p>
+<blockquote>
+<p>坑：queue的遍历不建议通过静态遍历方式，例如：forEach，而需要通关过动态遍历方式来做，例如：“for let of”；<em>（ps:动静指是否实时对数组长度做求值，只有实时计算才能保证动态改变的调度队列也能被执行）</em></p>
+</blockquote>
+</blockquote>
+<h1>进一步思考</h1>
+<ul>
+<li>优势可能演变成劣势，缺点也可能演变成某种优势；分久必合合久必分；</li>
+<li>Vue跟React最大的不同点可能就在于数据的Reactivity（是Immutable还是Mutable）；后续的演变都离不开这点，例子：
+<ol>
+<li>Vue3的Hooks为了解决.vue文件<strong>更贴近web开发者</strong>却导致逻辑视图割裂问题；顺带有更好的逻辑复用 + 更好的ts</li>
+<li>React fiber为了解决 数据Immutable更安全更好预测却导致的更新性能问题</li>
+<li>React + Mobx 跟 Vue3 Composition-API如此类似</li>
+</ol>
+</li>
+</ul>
+<h1>Reference</h1>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/35046696">https://zhuanlan.zhihu.com/p/35046696</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/76622839">https://zhuanlan.zhihu.com/p/76622839</a></li>
+<li><a href="https://github.com/wizardpisces/experiment/blob/master/packages/mini-react">https://github.com/wizardpisces/experiment/blob/master/packages/mini-react</a></li>
+<li><a href="https://github.com/wizardpisces/experiment/blob/master/packages/mini-svelte">https://github.com/wizardpisces/experiment/blob/master/packages/mini-svelte</a></li>
+<li><a href="https://github.com/wizardpisces/experiment/blob/master/packages/mini-vue">https://github.com/wizardpisces/experiment/blob/master/packages/mini-vue</a></li>
+<li><a href="https://github.com/vuejs/vue-next">https://github.com/vuejs/vue-next</a></li>
+<li><a href="https://github.com/google/incremental-dom">https://github.com/google/incremental-dom</a></li>
+</ul>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

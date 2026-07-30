@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>参考资料 | LZ AI NOTE</title>
+  <meta name="description" content="论文发布时间：2025 02 17 DeepSeek 团队发布的 NSA (Native Sparse Attention) （论文标题为《[Native Sparse Attention: Hardware Aligned and Natively Trainable Sparse Attention]》）是长文本模型效率优化的一次重要突破。 简单来说，…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-LLM/paper-transformer/DeepSeek%20-%20Native%20Sparse%20Attention">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="参考资料 | LZ AI NOTE">
+  <meta property="og:description" content="论文发布时间：2025 02 17 DeepSeek 团队发布的 NSA (Native Sparse Attention) （论文标题为《[Native Sparse Attention: Hardware Aligned and Natively Trainable Sparse Attention]》）是长文本模型效率优化的一次重要突破。 简单来说，…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-LLM/paper-transformer/DeepSeek%20-%20Native%20Sparse%20Attention">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"参考资料","description":"论文发布时间：2025 02 17 DeepSeek 团队发布的 NSA (Native Sparse Attention) （论文标题为《[Native Sparse Attention: Hardware Aligned and Natively Trainable Sparse Attention]》）是长文本模型效率优化的一次重要突破。 简单来说，…","url":"https://wizardpisces.github.io/blog/tech/ai-LLM/paper-transformer/DeepSeek%20-%20Native%20Sparse%20Attention","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-LLM/paper-transformer/DeepSeek%20-%20Native%20Sparse%20Attention","dateModified":"2026-03-03","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>参考资料</h1><p><em>论文发布时间：2025-02-17</em></p>
+<p>DeepSeek 团队发布的 <strong>NSA (Native Sparse Attention)</strong>（论文标题为《<a href="https://arxiv.org/abs/2502.11089">Native Sparse Attention: Hardware-Aligned and Natively Trainable Sparse Attention</a>》）是长文本模型效率优化的一次重要突破。</p>
+<p>简单来说，这篇论文提出了一种<strong>原生可训练（Natively Trainable）<strong>且</strong>硬件对齐（Hardware-Aligned）<strong>的稀疏注意力机制。它打破了“稀疏注意力只能用于推理加速”的刻板印象，证明了在</strong>训练阶段</strong>就引入稀疏性，不仅能大幅降低计算成本，还能在长上下文和推理任务上超越全注意力（Full Attention）模型。</p>
+<h2>NSA 解决了什么问题？</h2>
+<p><strong>核心问题：全注意力机制（Full Attention）在长文本下的昂贵开销，以及现有稀疏方法的“虚假繁荣”。</strong></p>
+<p>在 NSA 出现之前，长文本处理面临两个主要困境：</p>
+<ul>
+<li><strong>全注意力的计算墙：</strong> 标准 Attention 的计算复杂度是 $O(N^2)$。处理 64k 甚至更长的序列时，计算量和显存占用呈二次方爆炸。这不仅拖慢推理，更让长序列的<strong>训练</strong>变得极其昂贵。</li>
+<li><strong>现有稀疏方法的局限：</strong> 业界虽然有很多稀疏注意力方法（如 H2O, Quest, MInference），但它们大多存在致命缺陷：
+<ul>
+<li><strong>推理“特供”：</strong> 大多数方法是在模型训练完后，推理时强行砍掉“不重要”的 KV。这是一种“事后诸葛亮”，模型在训练时没见过稀疏模式，导致效果下降。</li>
+<li><strong>难以训练：</strong> 一些试图在训练中引入稀疏的方法（如基于聚类或哈希），往往包含不可导的操作（如 Top-k index），或者由于内存访问不连续，无法利用 GPU Tensor Core 加速，导致<strong>理论上计算少了，实际上跑得更慢</strong>。</li>
+</ul>
+</li>
+</ul>
+<p><strong>NSA 的作用：</strong> 它设计了一套既能<strong>端到端训练</strong>，又能**完美契合硬件（Triton 优化）**的稀疏架构。它让模型在“娘胎里”（预训练阶段）就学会如何高效地“挑重点看”，从而在保持甚至超越全注意力性能的同时，实现数倍的训练和推理加速。</p>
+<h2>这个问题真实存在吗？</h2>
+<p><strong>极其真实，是迈向“无限上下文”和“深度推理”的必经之路。</strong></p>
+<ul>
+<li><strong>长文本刚需：</strong> 现在的 AI 需要阅读整本书、处理整个代码库（Repo-level coding）、进行超长思维链（Long Chain-of-Thought）推理。64k、128k 甚至 1M 的上下文正在成为标配。</li>
+<li><strong>算力瓶颈：</strong> 在 64k 长度下，Attention 计算占据了 70%-80% 的推理延迟。如果不解决这个问题，单纯堆卡也无法实现实时的长文本应用。</li>
+<li><strong>硬件利用率陷阱：</strong> 很多稀疏算法看着很美（计算量只有 10%），但因为内存读写（IO）太乱，GPU 大部分时间都在等数据，导致加速比极低。</li>
+</ul>
+<h2>它是如何解决的？</h2>
+<p>NSA 的核心在于**“分层（Hierarchical）”**的设计思想，它将注意力分配到了三个不同的分支，像漏斗一样高效筛选信息。</p>
+<h3>1. 核心架构组件：三支柱策略</h3>
+<p><img src="https://arxiv.org/html/2502.11089v1/x1.png" alt="NSA 三分支架构总览：压缩、选择、滑动窗口的层级设计"></p>
+<p>NSA 的核心在于**“分层（Hierarchical）”<strong>的设计思想，它将注意力分配到了三个不同的分支，像漏斗一样高效筛选信息。以下是它们在</strong>网络层（Tensor Op）**的具体实现：</p>
+<h4>A. 压缩注意力 (Token Compression) —— “低分辨率扫全局”</h4>
+<ul>
+<li><strong>原理：</strong> 将连续的 Token 块压缩成一个摘要 Token，用极低的成本扫描全局。</li>
+<li><strong>网络层实现：</strong>
+<ol>
+<li><strong>Reshape (分组)：</strong> 将输入序列 <code>[t, d]</code> 切分为 <code>[t/32, 32, d]</code> 的块（例如 Block Size = 32）。</li>
+<li><strong>MLP (融合)：</strong> 使用一个简单的 MLP 对每个块内的 32 个 Token 进行加权融合（类似于池化），输出 <code>[t/32, d]</code> 的压缩向量。</li>
+<li><strong>Result：</strong> 得到一个长度仅为原始 1/32 的“目录”序列。</li>
+</ol>
+</li>
+<li><strong>作用：</strong> 解决“因为稀疏而漏掉重要信息”的问题。计算量减少了 97%。</li>
+</ul>
+<h4>B. 选择注意力 (Token Selection) —— “高分辨率看重点”</h4>
+<ul>
+<li><strong>原理：</strong> 基于压缩分支的评分，选出最重要（Top-k）的原始 Block 进行精读。</li>
+<li><strong>网络层实现：</strong>
+<ol>
+<li><strong>Score (打分)：</strong> Query 与“目录”序列计算相似度。</li>
+<li><strong>TopK (筛选)：</strong> 这是一个不可导操作（但在 Forward 中使用），选出分数最高的 $k$ 个索引（Indices）。</li>
+<li><strong>Gather (取货)：</strong> <strong>这是关键一步</strong>。利用索引，直接从显存中的原始高精度 KV 存储区（Shape <code>[t, d]</code>）中，<strong>只搬运</strong>那 $k$ 个 Block 到计算单元。</li>
+<li><strong>Attention：</strong> 只对这 $k \times 32$ 个 Token 进行标准的 Attention 计算。</li>
+</ol>
+</li>
+<li><strong>作用：</strong> 它是稀疏性的主要来源。无论总长度 $t$ 多长，计算量被锁定为常量 $O(k)$。</li>
+</ul>
+<h4>C. 滑动窗口 (Sliding Window) —— “高分辨率看眼前”</h4>
+<ul>
+<li><strong>原理：</strong> 无论如何，始终保留最近的 $w$ 个 Token。</li>
+<li><strong>网络层实现：</strong>
+<ol>
+<li><strong>Slice (切片)：</strong> 这是一个简单的张量切片操作 <code>K[:, -w:, :]</code>。</li>
+<li><strong>Attention：</strong> 对这 $w$ 个 Token 进行标准计算。</li>
+</ol>
+</li>
+<li><strong>作用：</strong> 保证基础流畅度和局部逻辑不丢失。</li>
+</ul>
+<blockquote>
+<p><strong>疑问：这三个分支处理的 Token 会重叠吗？是重复计算吗？</strong></p>
+<ul>
+<li><strong>物理重叠：</strong> 是的。一个重要的近期 Token，可能既在 <strong>Window</strong> 里，又被 <strong>Selection</strong> 选中了。</li>
+<li><strong>计算不重复（特征解耦）：</strong> 论文强调了 <strong>Independent Keys and Values</strong>。也就是说，这三个分支拥有<strong>独立的一套投影参数 ($W_{QKV}$)</strong>。
+<ul>
+<li><strong>Window 分支</strong>可能侧重看“语法”（比如主谓一致）。</li>
+<li><strong>Selection 分支</strong>可能侧重看“语义”（比如指代消解）。</li>
+<li><strong>Compression 分支</strong>则负责“宏观概括”。</li>
+<li>即使是同一个词，被三个分支“看”的时候，提取出的特征也是<strong>正交</strong>的，这不仅不是浪费，反而是全方位的增强。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h3>2. 硬件对齐 (Hardware-Aligned) 的魔法</h3>
+<p><img src="https://arxiv.org/html/2502.11089v1/x2.png" alt="硬件对齐的稀疏 Kernel：块级稀疏与 GQA 友好的内核设计"></p>
+<p>算法设计得再好，如果由于内存访问碎片化导致 GPU 跑不快也是白搭。NSA 做了两项关键的工程优化：</p>
+<ul>
+<li><strong>块级稀疏 (Blockwise Sparsity)：</strong>
+<ul>
+<li><strong>问题：</strong> GPU 极其讨厌“随机访问”（比如读第 1 个，第 5 个，第 9 个 Token）。</li>
+<li><strong>NSA 的解法：</strong> 强制以 <strong>Block（块）</strong> 为单位进行读取（比如一次读连续的 64 个 Token）。这就像搬砖，一次搬一整车，而不是一块块捡，完美利用了 Tensor Core 的矩阵乘法能力。</li>
+</ul>
+</li>
+<li><strong>GQA 友好的内核设计 (Group-Centric Kernel)：</strong>
+<ul>
+<li><strong>问题：</strong> 现代大模型都用 GQA（分组查询注意力），多个 Query 头共享一组 KV。</li>
+<li><strong>NSA 的解法：</strong> 在底层 Kernel 实现上，强制让同一组的 Query 共享 KV 加载。这避免了重复读取显存，进一步压榨了 IO 性能。</li>
+<li><strong>结果：</strong> 在 64k 长度下，前向传播（Forward）加速 <strong>9 倍</strong>，解码（Decoding）加速 <strong>11.6 倍</strong>。</li>
+</ul>
+</li>
+</ul>
+<h3>3. 原生可训练 (Natively Trainable)</h3>
+<ul>
+<li><strong>门控融合 (Gating)：</strong> 三个分支的结果不是简单相加，而是通过一个可学习的 MLP 门控网络进行加权融合。</li>
+<li><strong>训练稳定性：</strong> 相比于那些生硬的“剪枝”，NSA 的每个组件都是可微或通过巧妙设计参与反向传播的，这让模型能真正学会“如何稀疏”。</li>
+</ul>
+<h2>深度解构：从网络层视角看变化</h2>
+<p>为了更有“体感”地理解 NSA 对网络层的改变，我们直接对比标准 <strong>Decoder-only Transformer (如 GPT)</strong> 和 <strong>NSA</strong> 在推理（Inference）时的<strong>关键数学公式</strong>。</p>
+<h3>1. 标准 Attention 层 (Baseline)</h3>
+<p>在标准的《Attention Is All You Need》架构中，Decoder 生成第 $t$ 个词时，需要回头看之前所有的 $t-1$ 个词。</p>
+<p>$$
+Output_t = \text{Softmax}\left(\frac{\mathbf{q}<em>t \cdot \mathbf{K}</em>{1:t}^T}{\sqrt{d}}\right) \cdot \mathbf{V}_{1:t}
+$$</p>
+<ul>
+<li><strong>计算瓶颈：</strong> $\mathbf{K}_{1:t}$ 的长度是 $t$。随着生成长度无限增长（例如 64k），这个矩阵乘法的计算量呈线性爆炸 $O(t)$，且每次都要搬运巨大的 KV Cache。</li>
+</ul>
+<h3>2. NSA Attention 层</h3>
+<p>NSA 将上述单一的巨大矩阵计算，拆解为三个并行的小型矩阵计算，并通过门控（Gating）融合。</p>
+<blockquote>
+<p><strong>关键前置知识：这些 K 和 V 是从哪来的？</strong></p>
+<p>在计算公式之前，必须先明确数据流的**“身世”<strong>。NSA 并不是简单地对一套 KV 进行切分，而是引入了</strong>三套独立的投影**（为了特征解耦）：</p>
+<ol>
+<li><strong>输入：</strong> 原始隐藏状态 $X$ (Shape: $[t, d_{model}]$)</li>
+<li><strong>独立投影：</strong>
+<ul>
+<li><strong>Window 分支：</strong> $K^{win} = X W_K^{win}$ （保留原始精度）</li>
+<li><strong>Selection 分支：</strong> $K^{slc} = X W_K^{slc}$ （保留原始精度）</li>
+<li><strong>Compression 分支：</strong> $K^{raw_cmp} = X W_K^{cmp}$ $\rightarrow$ <strong>压缩变换</strong> $\rightarrow$ $K^{cmp}$</li>
+</ul>
+</li>
+</ol>
+<p>搞清楚了原料来源，我们再看具体的烹饪过程：</p>
+</blockquote>
+<p>$$
+Output_t = g_{cmp} \cdot \mathbf{O}<em>{cmp} + g</em>{slc} \cdot \mathbf{O}<em>{slc} + g</em>{win} \cdot \mathbf{O}_{win}
+$$</p>
+<p>其中三个核心组件的计算公式如下：</p>
+<h4>A. 压缩注意力 (Compression) —— “低分辨率扫全局”</h4>
+<p>$$
+K_{cmp} = \text{MLP}(\text{Reshape}(K^{raw_cmp}))
+$$
+$$
+\mathbf{O}<em>{cmp} = \text{Attention}(\mathbf{q}<em>t, \mathbf{K}</em>{cmp}, \mathbf{V}</em>{cmp})
+$$</p>
+<ul>
+<li><strong>网络层实现 (Tensor Op)：</strong>
+<ol>
+<li><strong>Reshape (分组)：</strong> 将长度为 $t$ 的序列切成 $t/32$ 个块。比如 <code>[64000, d]</code> $\rightarrow$ <code>[2000, 32, d]</code>。</li>
+<li><strong>MLP (融合)：</strong> 对每个块内的 32 个 Token 向量进行加权融合（学习如何提取摘要），变成 1 个向量。形状变为 <code>[2000, d]</code>。</li>
+<li><strong>Result：</strong> 这 2000 个向量就是“目录”。</li>
+</ol>
+</li>
+<li><strong>意义：</strong> 计算量直接砍掉 97%，用极低成本获取全局概览。</li>
+</ul>
+<h4>B. 选择注意力 (Selection) —— “高分辨率看重点”</h4>
+<p>$$
+\text{Indices} = \text{TopK}(\text{Softmax}(\mathbf{q}<em>t \cdot \mathbf{K}</em>{cmp}^T)) \quad \leftarrow \text{1. 拿【压缩分支】的评分}
+$$
+$$
+\mathbf{K}<em>{indices} = \text{Gather}(K^{slc}, \text{Indices}) \quad \leftarrow \text{2. 去【选择分支】取货}
+$$
+$$
+\mathbf{O}</em>{slc} = \text{Attention}(\mathbf{q}<em>t, \mathbf{K}</em>{indices}, \mathbf{V}_{indices})
+$$</p>
+<ul>
+<li><strong>网络层实现 (Tensor Op)：</strong>
+<ol>
+<li><strong>Score (打分)：</strong> Query 和 2000 个“目录”向量算相似度，得到 2000 个分数。</li>
+<li><strong>TopK (筛选)：</strong> 选出分数最高的 16 个索引（比如第 5 块和第 100 块）。</li>
+<li><strong>Gather (取货)：</strong> 利用这 16 个索引，从 $K^{slc}$（原始精度存储）中把对应的 Token 块搬运到 GPU 计算单元。注意：这里搬运的是<strong>未经压缩</strong>的原始向量。</li>
+<li><strong>Attention：</strong> 只对这 $16 \times 32 = 512$ 个 Token 进行精细计算。</li>
+</ol>
+</li>
+<li><strong>意义：</strong> <strong>这是最关键的公式变化</strong>。无论总长度 $t$ 是 64k 还是 100k，这一步的计算量永远锁定在 512 个 Token。<strong>复杂度从 $O(t)$ 降为 $O(1)$</strong>。</li>
+</ul>
+<h4>C. 滑动窗口 (Window) —— “高分辨率看眼前”</h4>
+<p>$$
+\mathbf{O}<em>{win} = \text{Attention}(\mathbf{q}<em>t, \mathbf{K}^{win}</em>{t-w:t}, \mathbf{V}^{win}</em>{t-w:t})
+$$</p>
+<ul>
+<li><strong>维度变化：</strong> 输入的 KV 长度固定为 $w$（例如 512）。</li>
+<li><strong>意义：</strong> 保证附近的词（Local Context）永远被高精度关注。</li>
+</ul>
+<blockquote>
+<p><strong>疑问：这三个分支处理的 Token 会重叠吗？是重复计算吗？</strong></p>
+<ul>
+<li><strong>物理重叠：</strong> 是的。一个重要的近期 Token，可能既在 <strong>Window</strong>（因为它近）里，又被 <strong>Selection</strong>（因为它重要）选中了，同时也参与了 <strong>Compression</strong>（因为它在全文里）。</li>
+<li><strong>计算不重复（特征解耦）：</strong> 论文特别强调了 <strong>Independent Keys and Values</strong>。也就是说，这三个分支拥有<strong>独立的一套投影参数 ($W_{QKV}$)</strong>。
+<ul>
+<li><strong>Window 分支</strong>可能侧重看“语法”（比如主谓一致）。</li>
+<li><strong>Selection 分支</strong>可能侧重看“语义”（比如指代消解）。</li>
+<li><strong>Compression 分支</strong>的 $W_{cmp}$ 则是看“宏观概括”。</li>
+<li>即使是同一个词，被三个分支“看”的时候，提取出的特征也是<strong>正交</strong>的，就像你是通过形状、颜色和气味三个独立通道去感知同一个苹果，这不仅不是浪费，反而是全方位的增强。</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>追问：Standard Transformer 的 N 层堆叠本身不就是为了提取多层次抽象吗？NSA 在单层内搞 3 个分支，是不是把 N 变成了 3N 层抽象？</strong></p>
+<p><strong>不是。这 3 个分支是并行（Parallel）的，不是串行（Sequential）的。</strong></p>
+<p>你可以把它理解为 <strong>Attention 层的 MoE（混合专家）</strong>：</p>
+<ul>
+<li><strong>Full Attention (老师傅)：</strong> 一个人干完所有活（看全局、看细节、看局部），能力强但慢。</li>
+<li><strong>NSA (分工协作)：</strong> 把活拆给三个<strong>专精的小工</strong>：
+<ul>
+<li>小工 A (Window) 负责看眼前。</li>
+<li>小工 B (Selection) 负责挑重点。</li>
+<li>小工 C (Compression) 负责扫大局。</li>
+</ul>
+</li>
+<li>他们<strong>同时干活</strong>，最后把结果拼起来。这依然是<strong>一层</strong>的计算量，并没有增加网络的深度，而是增加了单层内的**“特征广度”**。</li>
+</ul>
+</blockquote>
+<h3>3. 核心差异总结</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">维度</th>
+<th style="text-align:left">标准 Attention (GPT)</th>
+<th style="text-align:left">NSA (DeepSeek)</th>
+<th style="text-align:left">体感差异</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>KV 矩阵大小</strong></td>
+<td style="text-align:left">随时间 $t$ 无限增长</td>
+<td style="text-align:left">锁定为常数 ($C \approx 2000$)</td>
+<td style="text-align:left"><strong>越聊越慢 vs. 永不减速</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>计算复杂度</strong></td>
+<td style="text-align:left">$O(t)$ (Linear)</td>
+<td style="text-align:left">$O(1)$ (Constant)</td>
+<td style="text-align:left">彻底解决长文本推理延迟</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>显存带宽</strong></td>
+<td style="text-align:left">必须搬运全量 KV Cache</td>
+<td style="text-align:left">只搬运 Top-K 块 (Cache Hit)</td>
+<td style="text-align:left">显存带宽压力骤降</td>
+</tr>
+</tbody>
+</table>
+<p><strong>本质变化：</strong>
+NSA 在数学上将注意力的“广度”和“精度”解耦了。</p>
+<ul>
+<li><strong>旧公式：</strong> 要么全看（高精但慢），要么不看（快但傻）。</li>
+<li><strong>新公式：</strong> 远处“眯着眼看”（Compression），感兴趣的地方“拿放大镜看”（Selection），眼前“睁大眼看”（Window）。这非常符合人类的阅读直觉。</li>
+</ul>
+<h2>还有更好的解决方案吗？</h2>
+<p>长文本优化是目前的“兵家必争之地”，NSA 并不是唯一的玩家。我们用<strong>网络层公式的视角</strong>来对比各路豪杰：</p>
+<p>$$
+\text{Attention}(Q, K, V) = \text{Softmax}\left(\frac{QK^T}{\sqrt{d}}\right)V
+$$</p>
+<h3>1. Ring Attention / FlashAttention</h3>
+<ul>
+<li><strong>流派：</strong> <strong>系统优化派 (System Optimization)</strong>。</li>
+<li><strong>公式视角：</strong> <strong>公式完全不变</strong>。
+<ul>
+<li>它们不改变数学公式的任何一项，计算结果和标准 Attention 一模一样。</li>
+<li><strong>核心改动：</strong> 它们优化的是<strong>如何切分</strong> $Q, K, V$ 矩阵，以及<strong>如何搬运</strong>它们进 GPU 显存（Tiling &amp; IO Optimization）。</li>
+</ul>
+</li>
+<li><strong>对比 NSA：</strong>
+<ul>
+<li>FlashAttention 是把 $O(N^2)$ 做得更快，但还是 $O(N^2)$。</li>
+<li>NSA 是直接把公式里的 $N$ 换成了常数 $C$，实现了算法层面的降维打击。</li>
+</ul>
+</li>
+</ul>
+<h3>2. Mamba / SSM (状态空间模型)</h3>
+<ul>
+<li><strong>流派：</strong> <strong>线性递归派 (Linear Recurrence)</strong>。</li>
+<li><strong>公式视角：</strong> <strong>彻底抛弃 $QK^T$</strong>。
+<ul>
+<li><strong>公式变化：</strong> $h_t = A h_{t-1} + B x_t$ （类似于 RNN）。</li>
+<li>它不再保留历史的 $K$ 和 $V$ 矩阵，而是把所有历史压缩进一个固定大小的隐状态 $h_t$ 中。</li>
+</ul>
+</li>
+<li><strong>对比 NSA：</strong>
+<ul>
+<li><strong>SSM：</strong> 遗忘是必然的。因为 $h_t$ 容量有限，太久远的信息会被挤出去，无法“精准回看”。</li>
+<li><strong>NSA：</strong> 保留了 Attention 的灵魂——<strong>随时可以精准回看</strong>（只要它被 Selection 选中）。它结合了 RNN 的速度（压缩分支）和 Attention 的精度（选择分支）。</li>
+</ul>
+</li>
+</ul>
+<h3>3. 其他稀疏 Attention (H2O, Quest, InfLLM)</h3>
+<ul>
+<li><strong>流派：</strong> <strong>推理剪枝派 (Inference Pruning)</strong>。</li>
+<li><strong>公式视角：</strong> <strong>训练时用全量，推理时用残量</strong>。
+<ul>
+<li><strong>训练公式：</strong> $Output = \text{Attention}(Q, K_{all}, V_{all})$</li>
+<li><strong>推理公式：</strong> $Output = \text{Attention}(Q, K_{topk}, V_{topk})$</li>
+</ul>
+</li>
+<li><strong>对比 NSA：</strong>
+<ul>
+<li>这种“训练一套、推理一套”的做法导致了<strong>分布偏移 (Distribution Shift)</strong>。模型在训练时习惯了依赖微弱的信号，推理时突然被切断，性能会崩塌。</li>
+<li><strong>NSA：</strong> 训练和推理用的是同一套稀疏公式，模型<strong>适应了稀疏</strong>。</li>
+</ul>
+</li>
+</ul>
+<h3>4. Gated Attention (Alibaba)</h3>
+<ul>
+<li><strong>流派：</strong> <strong>门控修正派 (Gating Correction)</strong>。</li>
+<li><strong>公式视角：</strong> <strong>公式外部加锁</strong>。
+<ul>
+<li><strong>公式变化：</strong> $Output = \text{Attention}(Q, K, V) \odot \sigma(Gate)$</li>
+<li>它不改变 Attention 内部的计算（依然是全量 $O(N^2)$），但在输出时加了一个门，如果不重要就乘 0。</li>
+</ul>
+</li>
+<li><strong>对比 NSA：</strong>
+<ul>
+<li><strong>Gated Attention：</strong> 解决的是<strong>质量问题</strong>（注意力黑洞），计算量没变，甚至略有增加。</li>
+<li><strong>NSA：</strong> 解决的是<strong>速度问题</strong>，计算量大幅减少。</li>
+</ul>
+</li>
+</ul>
+<p><strong>NSA 的优势在于：</strong> 它不妥协。既要 Attention 的精准（Performance），又要 RNN 级别的速度（Efficiency），还要能像标准 Transformer 一样好训练。</p>
+<h2>关键词解析</h2>
+<h3>1. 压缩与选择 (Compression &amp; Selection)</h3>
+<p>这是 NSA 解决“既要全局又要细节”矛盾的核心。</p>
+<ul>
+<li><strong>压缩 (Compression)：</strong> 就像看书先看<strong>目录</strong>。把一章的内容（比如 32 个词）压缩成一个向量。Query 先和这些“目录”算相关性。</li>
+<li><strong>选择 (Selection)：</strong> 发现第 5 章“目录”很有趣，于是把第 5 章的<strong>正文</strong>（原始 KV）完整加载出来细读。</li>
+<li><strong>通俗理解：</strong> 如果全注意力是“逐字阅读整本书”，NSA 就是“先扫目录，再跳读重点章节，同时余光扫视正在读的这一段（滑动窗口）”。</li>
+</ul>
+<h3>2. 硬件算术强度 (Arithmetic Intensity)</h3>
+<p>这是 DeepSeek 团队非常强调的一个底层概念。</p>
+<ul>
+<li><strong>定义：</strong> 计算量 (FLOPs) / 内存访问量 (Bytes)。</li>
+<li><strong>现状：</strong> Transformer 的解码阶段（Decoding）是典型的<strong>内存受限 (Memory-bound)</strong> 任务。GPU 算力过剩，但显存带宽不够，数据供不上。</li>
+<li><strong>NSA 的解法：</strong> 通过大幅减少需要读取的 KV Block 数量（只读 Top-k），直接降低了内存访问压力，从而释放了 GPU 的计算潜能。</li>
+</ul>
+<h3>3. MLA (Multi-Head Latent Attention) 是 NSA 吗？</h3>
+<p><strong>不是，它们是 DeepSeek 的两把不同的“屠龙刀”。</strong></p>
+<p>很多同学因为它们都出自 DeepSeek 且都涉及“省显存”而混淆。</p>
+<ul>
+<li>
+<p><strong>MLA (DeepSeek-V2/V3 核心)：</strong></p>
+<ul>
+<li><strong>本质：</strong> <strong>无损压缩的全注意力 (Compressed Full Attention)</strong>。</li>
+<li><strong>解决问题：</strong> <strong>存不下</strong>。通过低秩分解（Low-Rank Compression）把 KV 向量压得极小，让 64k 长度的 KV Cache 能塞进显存。</li>
+<li><strong>计算：</strong> <strong>依然是全量计算</strong>。逻辑上，Query 还是要和 64k 个（解压后的）KV 交互。计算复杂度依然是 $O(N^2)$。</li>
+<li><strong>关键词：</strong> 显存容量 (Memory Capacity)、低秩 (Low-Rank)。</li>
+</ul>
+</li>
+<li>
+<p><strong>NSA (新论文)：</strong></p>
+<ul>
+<li><strong>本质：</strong> <strong>有损（但聪明）的稀疏注意力 (Sparse Attention)</strong>。</li>
+<li><strong>解决问题：</strong> <strong>算得慢</strong>。即使显存放得下，算 64k 次乘法也太慢了。NSA 选择只和 1k 个最重要的 KV 交互。</li>
+<li><strong>计算：</strong> <strong>稀疏计算</strong>。Query 忽略绝大多数“无关紧要”的 KV。计算复杂度是 $O(N \log N)$ 或更低。</li>
+<li><strong>关键词：</strong> 计算效率 (Compute Efficiency)、选择 (Selection)。</li>
+</ul>
+</li>
+</ul>
+<p><strong>终极形态预测：</strong> 未来的模型（DeepSeek-V4？）很可能会<strong>同时使用 MLA 和 NSA</strong> —— 用 MLA 让你能以极低显存代价“存”下 100 万字，用 NSA 让你能以极快速度“读”完这 100 万字。</p>
+<hr>
+<h2>总结</h2>
+<p>NSA 的本质是**“符合 GPU 脾气的原生稀疏注意力”**：</p>
+<ol>
+<li><strong>原生 (Native)：</strong> 它是训练出来的，不是推理想象出来的。模型自己学会了忽略噪音。</li>
+<li><strong>分层 (Hierarchical)：</strong> 宏观（压缩）+ 微观（选择）+ 局部（窗口），三管齐下，无死角覆盖。</li>
+<li><strong>工程化 (Engineering)：</strong> 一切算法设计都为硬件效率让路（Blockwise, Triton Kernel），将理论稀疏度转化为真实的物理加速。</li>
+</ol>
+<h1>参考资料</h1>
+<ul>
+<li><a href="https://arxiv.org/abs/2502.11089">论文原文 (ArXiv)</a></li>
+</ul>
+<p><em>编辑：2026-01-30</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

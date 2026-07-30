@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>为什么需要隔离 | LZ AI NOTE</title>
+  <meta name="description" content="为什么需要隔离 防止控件之间样式覆盖，特别在微前端应用场景（例如 qiankun ），良好的隔离能够降低样式污染 几种隔离方案原理 Scoped Vue 中的 scoped 属性是一个特殊的属性，可以添加到 &lt;style 标签上，以确保样式只应用于当前组件的元素，而不泄露到外部。其工作原理基于以下几个步骤： 1. 唯一属性标识 ：当你在 &lt;style 标签…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/frontend/css%20%E9%9A%94%E7%A6%BB">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="为什么需要隔离 | LZ AI NOTE">
+  <meta property="og:description" content="为什么需要隔离 防止控件之间样式覆盖，特别在微前端应用场景（例如 qiankun ），良好的隔离能够降低样式污染 几种隔离方案原理 Scoped Vue 中的 scoped 属性是一个特殊的属性，可以添加到 &lt;style 标签上，以确保样式只应用于当前组件的元素，而不泄露到外部。其工作原理基于以下几个步骤： 1. 唯一属性标识 ：当你在 &lt;style 标签…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/frontend/css%20%E9%9A%94%E7%A6%BB">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"为什么需要隔离","description":"为什么需要隔离 防止控件之间样式覆盖，特别在微前端应用场景（例如 qiankun ），良好的隔离能够降低样式污染 几种隔离方案原理 Scoped Vue 中的 scoped 属性是一个特殊的属性，可以添加到 \u003cstyle 标签上，以确保样式只应用于当前组件的元素，而不泄露到外部。其工作原理基于以下几个步骤： 1. 唯一属性标识 ：当你在 \u003cstyle 标签…","url":"https://wizardpisces.github.io/blog/tech/frontend/css%20%E9%9A%94%E7%A6%BB","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/frontend/css%20%E9%9A%94%E7%A6%BB","dateModified":"2025-06-20","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>为什么需要隔离</h1><h1>为什么需要隔离</h1>
+<p>防止控件之间样式覆盖，特别在微前端应用场景（例如 qiankun ），良好的隔离能够降低样式污染</p>
+<h1>几种隔离方案原理</h1>
+<h2>Scoped</h2>
+<p>Vue 中的 <code>scoped</code> 属性是一个特殊的属性，可以添加到 <code>&lt;style&gt;</code> 标签上，以确保样式只应用于当前组件的元素，而不泄露到外部。其工作原理基于以下几个步骤：</p>
+<ol>
+<li>
+<p><strong>唯一属性标识</strong>：当你在 <code>&lt;style&gt;</code> 标签上加上 <code>scoped</code> 属性后，Vue 会为每个组件生成一个唯一的 data 属性（例如 <code>data-v-f3f3eg9</code>）。这个属性是随机的，并且对于每个组件都是独一无二的。</p>
+</li>
+<li>
+<p><strong>后处理 CSS</strong>：Vue 通过其构建工具（如 webpack 加上 vue-loader）在编译过程中处理这些 <code>scoped</code> 样式。它会自动将上述生成的唯一 data 属性作为选择器添加到所有的 CSS 规则中。这意味着，这些样式只会匹配带有相应 data 属性的元素。</p>
+</li>
+<li>
+<p><strong>更新模板</strong>：在编译组件模板时，Vue 会自动将相应的 data 属性添加到所有模板中的元素上。因此，这些元素将与 <code>scoped</code> 样式中的选择器匹配。</p>
+</li>
+<li>
+<p><strong>防止样式泄露</strong>：由于这些 data 属性是唯一的，因此样式只能匹配到拥有相应 data 属性的元素。这就确保了样式只会应用于当前组件内的元素，而不会影响到其他组件的元素。</p>
+</li>
+</ol>
+<p>这样的处理方式确保了组件样式的封闭性，避免了全局样式污染。但是，这种方法也有它的局限性，比如它不能很好地处理子组件的样式覆盖问题，因为子组件的根节点不会被父组件的 scoped 样式所影响。对于这种情况，Vue 提供了深度选择器 <code>&gt;&gt;&gt;</code> 或 <code>/deep/</code>（在某些 SCSS 预处理器中使用 <code>::v-deep</code>），以便可以强制样式穿透到子组件中。</p>
+<p>总的来说，Vue 的 <code>scoped</code> CSS 功能是通过自动添加唯一的属性选择器到组件的样式规则，并将这些选择器应用于带有对应属性的元素，从而实现样式封装和隔离的。</p>
+<h2>CSS Modules</h2>
+<p>CSS Modules 是一种 CSS 文件模块化方案，它的主要目标是解决全局 CSS 命名冲突的问题，从而实现样式的局部作用域。这种方法在 React 社区中非常流行。其工作原理基于以下几个步骤：</p>
+<ol>
+<li>
+<p><strong>生成唯一类名</strong>：CSS Modules 在构建过程中，会为每个 CSS 类名生成一个唯一的、全局唯一的标识符。这个标识符通常是由原始类名和一些其他信息（如文件名、路径、哈希值等）组成的，确保了在全局范围内的唯一性。</p>
+</li>
+<li>
+<p><strong>构建 CSS 文件</strong>：CSS Modules 将修改过的类名写入构建后的 CSS 文件。这样，每个组件的样式都有自己的唯一类名，避免了不同组件间的样式冲突。</p>
+</li>
+<li>
+<p><strong>导出类名映射</strong>：CSS Modules 会导出一个 JavaScript 对象，这个对象是原始类名到生成的唯一类名的映射。这就是为什么我们可以使用 <code>import styles from './Component.module.css'</code> 这样的语法来导入 CSS Module，<code>styles</code> 对象就包含了这个映射。</p>
+</li>
+<li>
+<p><strong>使用类名</strong>：在 React 组件中，我们可以使用这个映射来为元素应用样式。例如，<code>&lt;div className={styles.container}&gt;</code>，这里的 <code>styles.container</code> 就是生成的唯一类名。</p>
+</li>
+</ol>
+<p>这种方法的优点是可以确保样式的封装性，避免了全局样式污染。缺点是需要配置构建工具（如 webpack），并且不支持直接在 CSS 中使用其他组件的样式，因为每个组件的样式都是封装的。</p>
+<p>CSS Modules 的原理就是通过在构建过程中为每个 CSS 类名生成一个全局唯一的标识符，然后在 JavaScript 中使用这个标识符来应用样式，从而实现样式的局部作用域。</p>
+<h3>缺陷</h3>
+<p><strong>不方便做样式覆盖</strong></p>
+<p>例如：需要对 ant-table 做样式覆盖，则需要 <code>className = styles.antTable</code> 的 jsx 显示覆盖，更期望只对外层的 css 做类似 Vue 的 scoped，而不是每个使用的地方都写 <code>className = styles.antTable</code>；</p>
+<h2>styled-components</h2>
+<p><code>styled-components</code> 是一个在 React 和其他 JavaScript 库中实现 CSS-in-JS 的库。它使用 JavaScript 来编写 CSS，使得组件的样式和逻辑可以在同一个地方定义，而且可以利用 JavaScript 的全部功能来创建动态的样式。<code>styled-components</code> 的样式隔离原理基于以下几个步骤：</p>
+<ol>
+<li>
+<p><strong>创建样式化组件</strong>：首先，你会使用 <code>styled-components</code> 提供的 API 来创建一个样式化组件。这个 API 接收一个模板字符串，其中包含你的 CSS 规则，然后返回一个新的 React 组件。这个新的组件会将这些 CSS 规则应用到它呈现的元素上。</p>
+<pre><code class="language-jsx">import styled from 'styled-components';
+
+const Button = styled.button`
+  background-color: blue;
+`;
+</code></pre>
+</li>
+<li>
+<p><strong>生成唯一类名</strong>：当你创建一个样式化组件时，<code>styled-components</code> 会为这个组件生成一个唯一的类名。这个类名是全局唯一的，因此不会与其他组件的样式发生冲突。</p>
+</li>
+<li>
+<p><strong>插入样式</strong>：<code>styled-components</code> 会将你的 CSS 规则插入到一个样式标签中，并且将生成的唯一类名添加到这些规则中。这个样式标签通常被插入到 <code>&lt;head&gt;</code> 元素中。</p>
+</li>
+<li>
+<p><strong>应用样式</strong>：当你使用样式化组件时，它会将生成的唯一类名添加到呈现的元素的 <code>class</code> 属性中。这样，这个元素就会接收到你在样式化组件中定义的样式。</p>
+</li>
+</ol>
+<p>这种方法的优点是，它不仅可以实现样式的封装性，而且可以利用 JavaScript 的全部功能来创建动态的、复杂的样式。它的缺点是，可能会<strong>增加运行时的复杂性</strong>，因为样式是在运行时插入到文档中的，而不是在构建时。此外，它也需要一些学习成本，因为你需要习惯在 JavaScript 中编写 CSS。</p>
+<p>总的来说，<code>styled-components</code> 的原理是通过在 JavaScript 中创建样式化组件，然后为每个组件生成一个唯一的类名，将这个类名和对应的 CSS 规则插入到文档中，从而实现样式的封装和隔离。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

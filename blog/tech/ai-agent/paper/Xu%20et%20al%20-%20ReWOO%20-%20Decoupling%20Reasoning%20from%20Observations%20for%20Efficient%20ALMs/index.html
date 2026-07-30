@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>Xu et al - ReWOO - Decoupling Reasoning from Observations for Efficient ALMs | LZ AI NOTE</title>
+  <meta name="description" content="论文发布时间：2023 05 24 ReWOO （论文标题为《[ReWOO: Decoupling Reasoning from Observations for Efficient Augmented Language Models]》）解决了一个被普遍忽视的效率问题： ReAct 等主流 Agent 范式在每一步推理时都要把完整的历史 prompt 重…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-agent/paper/Xu%20et%20al%20-%20ReWOO%20-%20Decoupling%20Reasoning%20from%20Observations%20for%20Efficient%20ALMs">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="Xu et al - ReWOO - Decoupling Reasoning from Observations for Efficient ALMs | LZ AI NOTE">
+  <meta property="og:description" content="论文发布时间：2023 05 24 ReWOO （论文标题为《[ReWOO: Decoupling Reasoning from Observations for Efficient Augmented Language Models]》）解决了一个被普遍忽视的效率问题： ReAct 等主流 Agent 范式在每一步推理时都要把完整的历史 prompt 重…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-agent/paper/Xu%20et%20al%20-%20ReWOO%20-%20Decoupling%20Reasoning%20from%20Observations%20for%20Efficient%20ALMs">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Xu et al - ReWOO - Decoupling Reasoning from Observations for Efficient ALMs","description":"论文发布时间：2023 05 24 ReWOO （论文标题为《[ReWOO: Decoupling Reasoning from Observations for Efficient Augmented Language Models]》）解决了一个被普遍忽视的效率问题： ReAct 等主流 Agent 范式在每一步推理时都要把完整的历史 prompt 重…","url":"https://wizardpisces.github.io/blog/tech/ai-agent/paper/Xu%20et%20al%20-%20ReWOO%20-%20Decoupling%20Reasoning%20from%20Observations%20for%20Efficient%20ALMs","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-agent/paper/Xu%20et%20al%20-%20ReWOO%20-%20Decoupling%20Reasoning%20from%20Observations%20for%20Efficient%20ALMs","dateModified":"2026-03-06","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Xu et al - ReWOO - Decoupling Reasoning from Observations for Efficient ALMs</h1><p><em>论文发布时间：2023-05-24</em></p>
+<p><strong>ReWOO</strong>（论文标题为《<a href="https://arxiv.org/abs/2305.18323">ReWOO: Decoupling Reasoning from Observations for Efficient Augmented Language Models</a>》）解决了一个被普遍忽视的效率问题：<strong>ReAct 等主流 Agent 范式在每一步推理时都要把完整的历史 prompt 重新发给 LLM，导致 token 消耗随推理步数二次增长。</strong> ReWOO 通过将&quot;推理规划&quot;和&quot;工具观察&quot;彻底解耦，用 Planner-Worker-Solver 三模块架构实现了 <strong>5 倍 token 效率提升</strong>，同时在 HotpotQA 上准确率还提高了 4%。</p>
+<h2>ReWOO 解决了什么问题？</h2>
+<p><strong>核心问题：ReAct 范式的 token 消耗随推理步数二次增长，既贵又慢。</strong></p>
+<pre><code>ReAct 的工作方式（交替推理-观察）:
+────────────────────────────────────
+
+第 1 轮 LLM 调用:
+  输入: [Context Prompt] + [6 个 Exemplar] + [用户问题]
+  输出: Thought₁ + Action₁
+  → 暂停，等待工具返回 Observation₁
+
+第 2 轮 LLM 调用:
+  输入: [Context Prompt] + [6 个 Exemplar] + [用户问题]
+       + Thought₁ + Action₁ + Observation₁          ← 全部重传！
+  输出: Thought₂ + Action₂
+  → 暂停，等待 Observation₂
+
+第 3 轮 LLM 调用:
+  输入: [Context Prompt] + [6 个 Exemplar] + [用户问题]
+       + T₁ + A₁ + O₁ + T₂ + A₂ + O₂               ← 越来越长！
+  输出: Thought₃ + Action₃
+  ...
+
+问题:
+  • Context Prompt 和 Exemplar 每轮都要重传（OpenAI API 无状态）
+  • 历史 TAO 越积越多，每轮输入越来越长
+  • k 步推理的总 token 消耗 ∝ k × (Context + Exemplar) + k² × TAO
+  • HotpotQA 平均 5 步推理 → 每个问题消耗 ~9800 token，约 $0.02
+
+实际成本:
+  ReAct 在 HotpotQA 上: 1000 个问题花费 $19.59
+  → 这还只是一个简单的问答基准
+  → 工业级 Agent 系统每天处理百万请求，成本不可承受
+</code></pre>
+<p>这个问题不仅是&quot;贵&quot;——token 超限也是一个硬约束。GPT-3.5 的上下文窗口只有 4096 token，ReAct 在复杂任务中经常因为历史太长而被截断，直接导致推理失败。</p>
+<h2>它是如何解决的？</h2>
+<p>ReWOO 的核心洞察：<strong>LLM 其实不需要看到每一步的工具返回结果就能规划出完整的解题步骤。</strong> 人类在解题时也是先列提纲、再逐步执行、最后汇总——ReWOO 把这三步拆成独立模块。</p>
+<h3>Planner-Worker-Solver 三模块架构</h3>
+<pre><code>ReWOO 的工作方式:
+──────────────────
+
+  ┌─ Planner（一次性生成完整计划）────────────────────────┐
+  │                                                        │
+  │  输入: [Context] + [Exemplar] + [用户问题]             │
+  │  输出: 完整的蓝图，包含多步计划 + 占位符               │
+  │                                                        │
+  │  Plan: 搜索 Jon Raymond Polito 的信息                  │
+  │  #E1 = Wikipedia[Jon Raymond Polito]                   │
+  │                                                        │
+  │  Plan: 找出 1989 漫画书的名字                          │
+  │  #E2 = LLM[1989 漫画书叫什么？依据: #E1]              │
+  │                                                        │
+  │  Plan: 搜索该漫画改编电影的信息                        │
+  │  #E3 = Wikipedia[#E2 电影版]                           │
+  │                                                        │
+  │  Plan: 找出漫画作者                                    │
+  │  #E4 = LLM[谁创作了 #E2？依据: #E3]                   │
+  │                                                        │
+  │  注意: #E1~#E4 是占位符，此时还没有实际值              │
+  │  Planner 凭&quot;可预见推理&quot;能力规划出完整路径              │
+  └────────────────────────────────────────────────────────┘
+          │
+          ▼
+  ┌─ Worker（按计划执行工具调用）──────────────────────────┐
+  │                                                        │
+  │  #E1 = Wikipedia[&quot;Jon Raymond Polito&quot;]                 │
+  │       → 返回: &quot;...appeared in The Rocketeer...&quot;        │
+  │                                                        │
+  │  #E2 = LLM[&quot;1989 漫画书叫什么？依据: {#E1的内容}&quot;]    │
+  │       → 返回: &quot;The Rocketeer&quot;                          │
+  │                                                        │
+  │  #E3 = Wikipedia[&quot;The Rocketeer film version&quot;]         │
+  │       → 返回: &quot;...created by Dave Stevens...&quot;          │
+  │                                                        │
+  │  #E4 = LLM[&quot;谁创作了 The Rocketeer？依据: {#E3}&quot;]     │
+  │       → 返回: &quot;Dave Stevens&quot;                           │
+  │                                                        │
+  │  无依赖的步骤可以并行执行                              │
+  └────────────────────────────────────────────────────────┘
+          │
+          ▼
+  ┌─ Solver（整合计划和证据，给出最终答案）────────────────┐
+  │                                                        │
+  │  输入: [Solver Context] + [用户问题]                   │
+  │       + Plan₁ + Evidence₁                              │
+  │       + Plan₂ + Evidence₂                              │
+  │       + Plan₃ + Evidence₃                              │
+  │       + Plan₄ + Evidence₄                              │
+  │                                                        │
+  │  输出: &quot;Dave Stevens&quot;                                  │
+  └────────────────────────────────────────────────────────┘
+</code></pre>
+<h3>Token 消耗的数学分析</h3>
+<pre><code>k 步推理的 token 消耗对比:
+──────────────────────────
+
+ReAct（交替推理-观察）:
+  #Token = k×(Context + Exemplar + Question) + Σ(k-j)×(T+A+O)
+         ≈ k × 固定开销 + O(k²) × 每步开销
+  → 二次增长
+
+ReWOO（计划-执行-求解）:
+  #Token = 2×(Context + Question) + 1×Exemplar + Σ(Plan+Evidence)
+         ≈ 2 × 固定开销 + O(k) × 每步开销
+  → 线性增长
+
+关键差异:
+  ReAct: Context 和 Exemplar 重复 k 次（每轮都要重传）
+  ReWOO: Context 只出现 2 次（Planner 一次，Solver 一次）
+         Exemplar 只出现 1 次（只在 Planner 中使用）
+
+  当 k 增大（任务越复杂），ReWOO 的优势越明显
+</code></pre>
+<h3>效率提升的真正来源：不是并行，是&quot;少调 LLM&quot;</h3>
+<p>一个常见误解：ReWOO 省 token 是因为并行执行工具。<strong>不是。</strong> 大部分计划步骤之间有依赖关系（Plan2 用 #E1 的结果），不能并行。省 token 的核心是<strong>减少 LLM 调用次数</strong>：</p>
+<pre><code>ReAct: k 步推理 → 调 LLM k 次，每次重传完整历史
+  LLM 调用 1: [Context + Exemplar + Q]                              → T1, A1
+  LLM 调用 2: [Context + Exemplar + Q + T1+A1+O1]                  → T2, A2
+  LLM 调用 3: [Context + Exemplar + Q + T1+A1+O1 + T2+A2+O2]      → T3, A3
+              ↑ Context+Exemplar 每次都重传，历史越积越长
+
+ReWOO: 只调 LLM 2 次
+  Planner:  [Context + Exemplar + Q] → 完整计划（一次性）
+  Worker:   按顺序执行工具调用（不调 LLM，纯工具调用，无 token 消耗）
+  Solver:   [Context + Q + 所有 Plan+Evidence] → 最终答案
+            ↑ Context 只发 2 次，Exemplar 只发 1 次
+
+→ 省的是&quot;重复发给 LLM 的冗余 prompt&quot;
+→ 并行只是附带收益（如果恰好有无依赖步骤）
+</code></pre>
+<h3>“可预见推理”——不看结果就规划，质量够吗？</h3>
+<p>Planner 生成的计划<strong>确实有依赖关系</strong>——Plan2 引用 #E1，Plan3 引用 #E2。它不是&quot;把所有步骤独立规划&quot;，而是&quot;在不知道 #E1 具体内容的情况下，假设 #E1 会是某种类型的结果（比如人名），然后基于这个假设规划后续步骤&quot;。</p>
+<pre><code>举例:
+  问题: &quot;Melanie C 的 2000 年冠军单曲的合唱者是谁，此人 2002 年车祸去世？&quot;
+
+  Planner 的输出（不看任何工具结果）:
+    Plan1: 搜索 Melanie C → #E1
+    Plan2: 从 #E1 中提取合唱者 → #E2        ← 依赖 #E1，不能并行
+    Plan3: 搜索 #E2 的信息 → #E3              ← 依赖 #E2，不能并行
+    Plan4: 确认 #E2 是否 2002 年车祸去世 → #E4
+
+  Planner 不知道 #E2 具体是&quot;Lisa Lopes&quot;
+  但它知道 #E2 &quot;应该是一个人名&quot;
+  → 用 #E2 作为占位符传给 Plan3、Plan4 完全合理
+
+这就是&quot;可预见推理&quot;(Foreseeable Reasoning):
+  不依赖具体观察值，仅依赖对结果类型的合理预期来规划
+
+合理质疑: 不看中间结果就规划，不是比看了再决定更差吗？
+  理论上: 是的，自适应规划 &gt; 盲规划
+  实际上: ReWOO 准确率反而更高（42.4% vs ReAct 40.8%）
+
+为什么？论文分析了 100 个 ReAct 失败案例:
+  76/100 是&quot;推理被带偏&quot;——工具返回了噪声，后续推理跟着错
+  18/100 是&quot;token 超限&quot;——历史太长被截断
+  → ReAct 的&quot;看了再决定&quot;反而成了弱点：看到垃圾就被垃圾带偏
+  → ReWOO 的&quot;盲规划&quot;不受工具噪声干扰，反而更稳定
+</code></pre>
+<h2>实验结果</h2>
+<h3>Token 效率</h3>
+<pre><code>HotpotQA（1000 题，基于 GPT-3.5-turbo）:
+                  准确率    Token 总量    每千题成本
+──────────────────────────────────────────────────
+Direct Prompt     37.8%       55.5        $0.11
+CoT               41.6%      481.9        $0.96
+ReAct             40.8%    9,795.1       $19.59
+ReWOO             42.4%    1,986.2        $3.97    ← 5x 省 token，准确率还更高
+
+→ ReWOO 用 ReAct 1/5 的 token 达到了更高的准确率
+→ 节省的不是微量——是 $15.62 / 千题的实打实成本差
+</code></pre>
+<h3>六大基准平均表现</h3>
+<pre><code>六个公开 NLP 基准的平均表现（GPT-3.5-turbo）:
+──────────────────────────────────────────────────
+
+ReWOO vs ReAct:
+  • Token 消耗平均降低 64%
+  • 准确率平均提高 4.4%
+  • 在所有 6 个基准上 ReWOO 全面胜出
+
+各基准详情:
+                    ReAct 准确率 → ReWOO 准确率    Token 节省
+HotpotQA            40.8%  →  42.4%  (+1.6%)       -80%
+TriviaQA            59.4%  →  66.6%  (+7.2%)       -68%
+GSM8K               62.0%  →  62.4%  (+0.4%)       -42%
+StrategyQA          64.6%  →  66.6%  (+2.0%)       -24%
+PhysicsQA           64.1%  →  66.0%  (+1.9%)       -43%
+SportsUnderstanding 58.6%  →  61.3%  (+2.7%)       -50%
+SOTUQA (curated)    64.8%  →  70.2%  (+5.4%)       -43%
+</code></pre>
+<h3>工具失败时的鲁棒性</h3>
+<pre><code>当所有工具返回&quot;No evidence found&quot;时（HotpotQA）:
+──────────────────────────────────────────────────
+
+              正常准确率 → 工具失败后准确率     下降幅度
+ReAct         40.8%    →    0.0%               -40.8%  ← 完全崩溃
+ReWOO         42.4%    →   13.2%               -29.2%  ← 仍有残余能力
+
+为什么 ReWOO 更鲁棒？
+  ReAct: 工具失败 → 下一步推理基于错误观察 → 陷入无限循环
+         → 反复调同一个失败的工具直到 token 超限
+  ReWOO: 计划已经制定好了，不受工具失败影响
+         → Solver 拿到空证据后仍然可以用内置知识尝试回答
+</code></pre>
+<h3>多余工具有害</h3>
+<pre><code>从 2 个工具逐步增加到 7 个工具（HotpotQA）:
+──────────────────────────────────────────────
+
+工具数量:  2 → 3 → 4 → 5 → 6 → 7
+准确率趋势: ↗ (Google 短暂提升) → 持续 ↓ ↓ ↓
+
+分析 20 个失败案例:
+  17/20 是工具误用（如用 Yelp 搜名人）
+
+→ 不必要的工具是有害的——它们扩大了行动空间，增加了选错工具的概率
+→ 这对当前 MCP 生态有直接启示：不是接入越多工具越好
+</code></pre>
+<h3>解耦的附带收益：可以用小模型替换 GPT-3.5 当 Planner</h3>
+<p>ReWOO 把系统拆成了三个独立角色。既然是独立的，那<strong>能不能用一个便宜的小模型来扮演其中一个角色？</strong> 论文的回答是：可以，而且因为 Planner 的输入输出极其简单，训练小模型来当 Planner 非常容易。</p>
+<pre><code>先理解&quot;蒸馏&quot;是什么意思——用大模型的输出当老师，教小模型模仿:
+───────────────────────────────────────────────────────────────
+
+第一步: 用 GPT-3.5 当 Planner，跑 4000 道题，收集它生成的计划
+  问题: &quot;Melanie C 的冠军单曲合唱者是谁？&quot;
+  GPT-3.5 输出:
+    Plan1: 搜索 Melanie C → #E1
+    Plan2: 从 #E1 提取合唱者 → #E2
+    Plan3: 搜索 #E2 → #E3
+
+第二步: 过滤，只保留最终答对了的计划（约 2000 条）
+
+第三步: 用这 2000 条 (问题 → 计划) 数据微调 LLaMA 7B
+  → 小模型学会了: 看到一个问题 → 输出类似的分步计划
+
+第四步: 部署时，用微调后的 7B 模型替换 GPT-3.5 当 Planner
+  → Worker 和 Solver 可以继续用 GPT-3.5，也可以各自替换
+</code></pre>
+<p><strong>为什么 Planner 特别容易被替换，而 ReAct 做不到这一点？</strong></p>
+<pre><code>关键区别:
+─────────
+
+Planner 的输入输出:
+  输入: 问题
+  输出: Plan1 + #E1, Plan2 + #E2, ...（纯文本，不含任何工具结果）
+  → 收集训练数据 = 给 GPT-3.5 喂问题，录下它生成的计划
+  → 不需要真的执行工具，不需要搭环境
+  → 所以收集 2000 条数据非常简单快速
+
+ReAct 的输入输出（如果要蒸馏整个流程）:
+  输入: 问题
+  输出: T1 → A1 → O1 → T2 → A2 → O2 → ... → 答案
+                   ↑            ↑
+              Wikipedia 的真实返回（几百字）
+  → 收集训练数据 = 必须真的调 Wikipedia、Calculator 等工具
+  → 工具挂了/换了/返回变了 → 之前收集的数据全废
+  → 收集成本高、不可复用
+
+这就是&quot;解耦&quot;的价值:
+  Planner 不碰工具 → 训练数据不依赖工具 → 可以廉价地独立训练
+</code></pre>
+<pre><code>实验结果:
+──────────
+
+① LLaMA 7B → 52k 通用指令微调 → Alpaca 7B（先学会基本对话能力）
+② Alpaca 7B → 2000 条 Planner 数据微调 → Planner 7B（再学会规划能力）
+
+用 Planner 7B 替换 GPT-3.5 当 Planner 后的准确率:
+                  GPT-3.5    Alpaca 7B    Planner 7B
+HotpotQA           42.4%      ~38%         ~42%     ← 7B 追平 175B
+TriviaQA           66.6%      ~62%         ~65%
+StrategyQA         66.6%      ~60%         ~64%
+
+→ 25 倍参数缩减，性能基本持平
+→ 用区区 2000 条规划数据就够了
+→ 在单张 RTX 4090 上用 LoRA 就能微调完成
+</code></pre>
+<h2>还有更好的解决方案吗？</h2>
+<p>ReWOO 有一个根本性局限：<strong>当任务需要根据环境反馈动态调整计划时，&quot;可预见推理&quot;失效。</strong></p>
+<pre><code>ReWOO 失效的场景——AlfWorld 环境探索:
+
+  &quot;你在房间中央，周围有 drawer 1-5, shelf 1-12, cabinet 1-4...&quot;
+  &quot;任务: 把花瓶放进保险箱&quot;
+
+  → Planner 不知道花瓶在哪个抽屉/架子上
+  → 必须枚举所有可能位置：打开 drawer1 → 没有 → 打开 drawer2 → ...
+  → 计划步数 = 最坏情况的穷举搜索
+  → 此时 ReWOO 退化为和 ReAct 一样的复杂度
+
+本质限制:
+  可预见推理 ✓: &quot;搜 A → 从 A 中提取 B → 搜 B → 确认 C&quot;
+                 每步输出的类型是可预期的（人名、事实、数字）
+  可预见推理 ✗: &quot;打开 drawer1 → 根据里面有什么决定下一步&quot;
+                 下一步完全取决于上一步的具体内容，无法预见
+</code></pre>
+<h2>冷思考：ReWOO 在 Agent 架构演化中的位置</h2>
+<h3>1. ReAct 的效率批判者</h3>
+<p>ReWOO 最重要的贡献不是模型性能，而是<strong>第一次正式量化了 ReAct 范式的效率问题</strong>，并给出了数学分析（二次 vs 线性增长）。在此之前，大家关注的都是&quot;Agent 能不能解对题&quot;，没人认真算过&quot;解一道题要花多少 token&quot;。</p>
+<pre><code>Agent 架构关注点的演化:
+──────────────────────
+
+2023.03 ReAct:     &quot;LLM 能不能交替推理和使用工具？&quot; → 能
+2023.03 Reflexion:  &quot;失败后能不能反思改进？&quot; → 能
+2023.03 HuggingGPT: &quot;能不能调度海量模型？&quot; → 能
+2023.05 ReWOO:      &quot;等等，这些方案到底花了多少钱？&quot; → 贵得离谱
+                    &quot;有没有更省的方式？&quot; → 有，而且还更准
+
+→ ReWOO 把&quot;效率&quot;正式引入 Agent 架构的评估维度
+</code></pre>
+<h3>2. 与 HuggingGPT 和 Pre-Act 的关系</h3>
+<p>ReWOO 的 Planner-Worker-Solver 架构和 <a href="./ZJU%20%26%20Microsoft%20-%20HuggingGPT%20-%20Solving%20AI%20Tasks%20with%20ChatGPT%20and%20Hugging%20Face.md">HuggingGPT</a> 的四阶段流水线（任务规划 → 模型选择 → 任务执行 → 响应生成）在结构上高度相似，但出发点不同：</p>
+<pre><code>HuggingGPT vs ReWOO:
+────────────────────
+
+HuggingGPT:
+  目标: 让 LLM 调度跨模态专家模型
+  计划和执行天然分离（因为要调不同的模型）
+  没有讨论 token 效率
+
+ReWOO:
+  目标: 降低 ReAct 范式的 token 消耗
+  主动将计划和执行分离（为了避免 prompt 冗余）
+  token 效率是核心评估指标
+
+Pre-Act:
+  目标: 通过多步规划提升 Agent 的行动质量
+  也是&quot;先规划再执行&quot;
+  关注的是规划质量而非效率
+
+三者在架构上趋同: 都是&quot;先规划 → 再执行 → 最后整合&quot;
+但各自的核心关切不同: 能力边界 / 成本效率 / 规划质量
+</code></pre>
+<h3>3. &quot;多余工具有害&quot;对 MCP 生态的警示</h3>
+<p>ReWOO 的实验发现——<strong>增加不相关工具反而降低准确率</strong>——对当前 MCP 生态有直接启示。</p>
+<pre><code>当前 MCP 的隐患:
+────────────────
+
+MCP 让接入工具变得极其简单
+  → 开发者倾向于接入尽可能多的 MCP Server
+  → &quot;万一用得上呢&quot;
+
+ReWOO 的实验数据:
+  2 个工具 → 7 个工具: 准确率持续下降
+  17/20 失败案例是工具误用
+
+启示:
+  工具数量 ≠ 能力强度
+  精确匹配任务需求的少量工具 &gt; 大量&quot;可能有用&quot;的工具
+  → Agent 系统需要&quot;工具准入机制&quot;，而不是无限扩展工具池
+</code></pre>
+<h3>4. 可预见推理的自举条件</h3>
+<p>延续 <a href="./Meta%20-%20Toolformer%20-%20Language%20Models%20Can%20Teach%20Themselves%20to%20Use%20Tools.md">Toolformer</a> 分析中的自举框架：</p>
+<pre><code>ReWOO 的自举前置条件:
+────────────────────
+
+前置条件: LLM 的&quot;可预见推理&quot;能力
+  → 模型必须能在不看工具结果的情况下，预见结果的类型并规划后续步骤
+  → 这本质上是一种&quot;计划能力&quot;，需要模型对任务结构有足够的理解
+
+Specialization 的自举链:
+  GPT-3.5 有可预见推理能力
+  → 用 GPT-3.5 生成 2000 条规划数据
+  → 微调 LLaMA 7B → 获得可预见推理能力
+  → 7B 模型在 zero-shot 下追平 GPT-3.5
+
+成功的关键:
+  因为 Planner 模块不接触工具返回值
+  → 微调数据只需要 (问题 → 计划) 对
+  → 不需要模拟工具环境
+  → 比蒸馏 ReAct 简单得多（ReAct 要连 TAO 一起蒸馏）
+</code></pre>
+<h2>总结</h2>
+<p>ReWOO 通过将推理规划与工具观察彻底解耦，用 Planner-Worker-Solver 三模块架构把 ReAct 的二次 token 增长降为线性，在六个基准上实现了平均 <strong>64% 的 token 节省和 4.4% 的准确率提升</strong>。它最有价值的贡献有三个：一是<strong>首次正式量化了 Agent 的效率问题</strong>，把&quot;花多少钱&quot;引入评估体系；二是发现了**&quot;可预见推理&quot;这种反直觉的 LLM 能力**——不看工具结果也能做出合理规划；三是证明了<strong>多余工具有害</strong>，对当前&quot;接入越多工具越好&quot;的 MCP 生态敲响警钟。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

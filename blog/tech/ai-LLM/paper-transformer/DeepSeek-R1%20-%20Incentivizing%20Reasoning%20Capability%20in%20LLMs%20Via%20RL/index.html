@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>参考资料 | LZ AI NOTE</title>
+  <meta name="description" content="论文发布时间：2025 01 22 DeepSeek 发布的 DeepSeek R1 （论文标题为《[DeepSeek R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning]》）在 AI 圈引起了很大关注。 简单来说，这篇论文揭示了如何仅通过 强化学习（RL） 而…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-LLM/paper-transformer/DeepSeek-R1%20-%20Incentivizing%20Reasoning%20Capability%20in%20LLMs%20Via%20RL">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="参考资料 | LZ AI NOTE">
+  <meta property="og:description" content="论文发布时间：2025 01 22 DeepSeek 发布的 DeepSeek R1 （论文标题为《[DeepSeek R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning]》）在 AI 圈引起了很大关注。 简单来说，这篇论文揭示了如何仅通过 强化学习（RL） 而…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-LLM/paper-transformer/DeepSeek-R1%20-%20Incentivizing%20Reasoning%20Capability%20in%20LLMs%20Via%20RL">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"参考资料","description":"论文发布时间：2025 01 22 DeepSeek 发布的 DeepSeek R1 （论文标题为《[DeepSeek R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning]》）在 AI 圈引起了很大关注。 简单来说，这篇论文揭示了如何仅通过 强化学习（RL） 而…","url":"https://wizardpisces.github.io/blog/tech/ai-LLM/paper-transformer/DeepSeek-R1%20-%20Incentivizing%20Reasoning%20Capability%20in%20LLMs%20Via%20RL","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-LLM/paper-transformer/DeepSeek-R1%20-%20Incentivizing%20Reasoning%20Capability%20in%20LLMs%20Via%20RL","dateModified":"2026-03-03","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>参考资料</h1><p><em>论文发布时间：2025-01-22</em></p>
+<p>DeepSeek 发布的 <strong>DeepSeek-R1</strong>（论文标题为《<a href="https://arxiv.org/abs/2501.12948">DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning</a>》）在 AI 圈引起了很大关注。</p>
+<p>简单来说，这篇论文揭示了如何仅通过**强化学习（RL）**而非大规模人工监督微调（SFT），让大模型“涌现”出复杂的推理能力（Reasoning），并详细阐述了从纯 RL 探索到工程化落地的完整路径。</p>
+<h2>DeepSeek-R1 论文概述</h2>
+<h3>1. DeepSeek-R1 解决了什么问题？</h3>
+<p><strong>核心问题：如何低成本、自动化地让大模型学会复杂的逻辑推理（Reasoning）。</strong></p>
+<p>目前提升模型推理能力的方法（如 CoT）主要面临两大瓶颈：</p>
+<ul>
+<li><strong>监督数据的天花板：</strong> 依赖人类编写的“思维链”（CoT）数据不仅昂贵，而且人类的认知上限限制了模型的潜力。</li>
+<li><strong>推理过程的黑盒：</strong> 普通模型只输出答案，缺乏像 OpenAI o1 那样的“慢思考”过程（Self-Reflection, Verification）。</li>
+</ul>
+<p><strong>R1 的作用：</strong> 它证明了只要给予正确的激励（Incentive），模型可以通过自我博弈（RL）自发学会检查、验算和长链条思考，而不需要人类手把手教。</p>
+<hr>
+<h3>2. 这个问题真实存在吗？</h3>
+<p><strong>真实存在且紧迫。</strong></p>
+<ul>
+<li><strong>数据耗尽：</strong> 高质量的推理数据（如数学证明、竞赛代码）在互联网上相对稀缺。</li>
+<li><strong>SFT 的局限：</strong> 单纯模仿人类步骤，模型容易“形似神不似”，遇到新题往往靠背诵而非推理。</li>
+<li><strong>对标闭源：</strong> 开源界急需知道 OpenAI o1 这种“系统 2（System 2）”思维能力是如何训练出来的。</li>
+</ul>
+<hr>
+<h3>3. 为什么现在才有人去解决？</h3>
+<p>这是一个算法突破与算力成熟的结合点：</p>
+<ol>
+<li><strong>算法成本降低：</strong> 传统的 RL（如 PPO）需要维护庞大的 Critic 模型，显存和计算开销极大。DeepSeek 提出的 <strong>GRPO（Group Relative Policy Optimization）</strong> 摒弃了 Critic，极大降低了训练门槛。</li>
+<li><strong>“Aha Moment”的发现：</strong> DeepSeek 发现，仅通过简单的验证信号（如答案对错），模型就能自发涌现出复杂的“反思”行为。</li>
+<li><strong>基础模型的成熟：</strong> DeepSeek-V3 这样强大的 Base 模型为 RL 探索提供了足够好的底座。</li>
+</ol>
+<hr>
+<h3>4. 它是如何解决的？</h3>
+<p>解决方案分为两个阶段：</p>
+<ul>
+<li><strong>R1-Zero（纯 RL 探索）：</strong> 直接在 Base 模型上跑 RL，奖励只看“答案对不对”和“格式有没有”。结果发现模型<strong>自发</strong>学会了长思维链和自我反思，但也带来了语言混乱和可读性差的问题。</li>
+</ul>
+<p><img src="https://arxiv.org/html/2501.12948v1/x1.png" alt="R1-Zero 训练曲线与 Aha Moment 涌现"></p>
+<ul>
+<li><strong>R1（工程化完全体）：</strong> 引入了“冷启动 -&gt; RL -&gt; 拒绝采样 -&gt; SFT -&gt; 最终对齐”的多阶段流水线。通过少量高质量数据定型，再通过 RL 提升智力，最后通过 SFT 和对齐修复语言风格和安全性。</li>
+</ul>
+<hr>
+<h3>5. 还有更好的解决方案吗？</h3>
+<p>DeepSeek-R1 是目前开源领域的<strong>最佳实践</strong>，但并非终局。</p>
+<ul>
+<li><strong>局限：</strong> 目前主要在有标准答案的理工科任务（数学、代码）上表现出色，文科和开放式任务的奖励定义仍是难题。有时会出现“过度思考”浪费算力的问题。</li>
+<li><strong>未来方向：</strong> 可能是更精细的过程奖励模型（PRM）、自适应计算（Adaptive Computation）以及与工具使用（Tool Use）的结合。</li>
+</ul>
+<p>要深入理解 DeepSeek-R1，我们需要拆解其中的核心技术概念。R1 的核心逻辑其实就是：<strong>给模型一个难题和一把尺子，让它自己试错，试对了就奖励，它自己就能琢磨出解题套路。</strong></p>
+<h2>关键词解析：</h2>
+<hr>
+<h3>1. GRPO (Group Relative Policy Optimization)</h3>
+<p>这是相对于传统 <strong>PPO（Proximal Policy Optimization）</strong> 的一种更高效的强化学习算法。</p>
+<ul>
+<li><strong>PPO（传统）：</strong> 需要一个额外的“老师傅”模型（Critic）来时刻给模型的每一步打分（Value Function）。这导致显存占用翻倍，且 Critic 自身在大模型长输出任务中很难训练稳定。</li>
+<li><strong>GRPO（组相对策略）：</strong> 不需要 Critic。它让模型对着同一道题生成一组（比如 4 个）不同的答案。</li>
+<li><strong>机制：</strong>
+<ul>
+<li><strong>组内对比：</strong> 只要这一组里有一个答案是对的，或者比其他答案好，它就获得正向激励（Advantage &gt; 0）；差的就受罚。</li>
+<li><strong>通俗理解：</strong> 不需要请专门的老师（Critic），让学生自己做几遍，然后把做得好的那遍当成榜样来学。</li>
+</ul>
+</li>
+<li><strong>优势：</strong> 极大地节省了显存，使得大规模 RL 训练成为可能。</li>
+</ul>
+<h3>2. 自我博弈与收敛 (Self-Play / Exploration)</h3>
+<p>在 R1 的语境下，这指的是模型在 RL 过程中的<strong>自我探索</strong>。</p>
+<p><img src="https://arxiv.org/html/2501.12948v1/figures/plot_aime_with_maj.png" alt="AIME 准确率随训练步数变化"></p>
+<ul>
+<li><strong>R1-Zero 的闭环：</strong>
+<ol>
+<li><strong>采样（Generate）：</strong> 模型针对题目尝试生成多种解法。</li>
+<li><strong>验证（Verify）：</strong> 用规则（如编译器、答案比对）判断对错。</li>
+<li><strong>更新（Update）：</strong> 用 GRPO 强化那些做对的路径。</li>
+</ol>
+</li>
+<li><strong>涌现（Emergence）：</strong> 随着训练进行，模型发现“多写点步骤”、“回头检查一遍”能显著提高做对的概率。于是，**反思（Reflection）<strong>和</strong>验证（Verification）**的能力就作为一种“生存策略”被模型自发学会了。</li>
+</ul>
+<h3>3. 冷启动 (Cold Start)</h3>
+<p><img src="https://arxiv.org/html/2501.12948v1/figures/plot_length.png" alt="思维链长度随训练步数变化"></p>
+<p>这是解决纯 RL 模型“不说人话”的关键步骤。</p>
+<ul>
+<li><strong>问题：</strong> R1-Zero 虽然聪明，但经常中英夹杂、格式混乱、甚至无限重复。因为它只在乎答案对不对，不在乎好不好看。</li>
+<li><strong>解决：</strong> 在大规模 RL 之前，先用少量（几千条）高质量的人类可读的 CoT 数据微调模型。</li>
+<li><strong>作用：</strong> 给模型立个规矩——“不仅要算对，还要写得像个人”。这极大地稳定了后续 RL 的训练过程。</li>
+</ul>
+<h3>4. 拒绝采样 (Rejection Sampling)</h3>
+<p>这是将 RL 获得的智力转化为稳定能力的手段。</p>
+<ul>
+<li><strong>过程：</strong> 用训练好的强模型生成海量数据。</li>
+<li><strong>过滤：</strong> 扔掉错误的，只保留正确的推理路径。</li>
+<li><strong>回灌：</strong> 把这些筛选后的精华数据当作 SFT 数据，重新训练一个通用模型。</li>
+<li><strong>目的：</strong> 把 RL 探索到的“灵光一现”固化为模型的本能反应，同时可以混合非推理任务的数据，保证模型不偏科。</li>
+</ul>
+<h3>5. 过程奖励 vs. 结果奖励 (Process vs. Outcome Reward)</h3>
+<p>DeepSeek-R1 主要依赖<strong>结果奖励（Outcome Reward）</strong>，这与未来的**过程奖励（Process Reward）**方向形成对比。</p>
+<ul>
+<li><strong>结果奖励（R1）：</strong> 只看最后答案对不对。优点是廉价、易得；缺点是反馈稀疏，模型可能蒙对。</li>
+<li><strong>过程奖励（未来）：</strong> 给推理的每一步打分。优点是反馈精准，模型知道哪一步走错了；缺点是数据极其昂贵，难以标注。</li>
+</ul>
+<hr>
+<h3>总结</h3>
+<p>DeepSeek-R1 的本质是**“思维的涌现”**：</p>
+<ol>
+<li><strong>纯 RL + 结果激励</strong>证明了推理能力可以自学。</li>
+<li><strong>GRPO</strong> 让这种自学变得便宜可行。</li>
+<li><strong>冷启动和拒绝采样</strong> 把天才的思路变成了工程上可靠的产品。</li>
+</ol>
+<h1>参考资料</h1>
+<ul>
+<li><a href="https://arxiv.org/abs/2501.12948">论文地址</a></li>
+</ul>
+<p><em>编辑：2026-01-20</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

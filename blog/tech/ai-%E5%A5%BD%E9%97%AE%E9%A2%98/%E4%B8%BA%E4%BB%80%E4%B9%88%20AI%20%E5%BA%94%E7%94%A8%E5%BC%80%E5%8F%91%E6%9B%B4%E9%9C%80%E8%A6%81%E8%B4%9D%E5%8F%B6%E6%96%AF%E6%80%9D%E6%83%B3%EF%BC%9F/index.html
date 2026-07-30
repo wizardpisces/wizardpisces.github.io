@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>为什么 AI 应用开发更需要贝叶斯思想？ | LZ AI NOTE</title>
+  <meta name="description" content="AI 应用研发比传统软件研发更需要贝叶斯决策思想。原因不是 AI 更复杂，而是 AI 产品的不确定性远高于传统软件。 传统软件实现的是确定需求： 用户点击按钮 → 后端计算 → 返回结果。 AI 应用在不断验证概率问题： 用户真的需要这个能力吗？（需求不确定） Prompt 是否有效？（方案不确定） Model A 还是 Model B 更好？（模型不确定…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E4%B8%BA%E4%BB%80%E4%B9%88%20AI%20%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E6%9B%B4%E9%9C%80%E8%A6%81%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%80%9D%E6%83%B3%EF%BC%9F">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="为什么 AI 应用开发更需要贝叶斯思想？ | LZ AI NOTE">
+  <meta property="og:description" content="AI 应用研发比传统软件研发更需要贝叶斯决策思想。原因不是 AI 更复杂，而是 AI 产品的不确定性远高于传统软件。 传统软件实现的是确定需求： 用户点击按钮 → 后端计算 → 返回结果。 AI 应用在不断验证概率问题： 用户真的需要这个能力吗？（需求不确定） Prompt 是否有效？（方案不确定） Model A 还是 Model B 更好？（模型不确定…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E4%B8%BA%E4%BB%80%E4%B9%88%20AI%20%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E6%9B%B4%E9%9C%80%E8%A6%81%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%80%9D%E6%83%B3%EF%BC%9F">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"为什么 AI 应用开发更需要贝叶斯思想？","description":"AI 应用研发比传统软件研发更需要贝叶斯决策思想。原因不是 AI 更复杂，而是 AI 产品的不确定性远高于传统软件。 传统软件实现的是确定需求： 用户点击按钮 → 后端计算 → 返回结果。 AI 应用在不断验证概率问题： 用户真的需要这个能力吗？（需求不确定） Prompt 是否有效？（方案不确定） Model A 还是 Model B 更好？（模型不确定…","url":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E4%B8%BA%E4%BB%80%E4%B9%88%20AI%20%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E6%9B%B4%E9%9C%80%E8%A6%81%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%80%9D%E6%83%B3%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E4%B8%BA%E4%BB%80%E4%B9%88%20AI%20%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E6%9B%B4%E9%9C%80%E8%A6%81%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%80%9D%E6%83%B3%EF%BC%9F","dateModified":"2026-07-21","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>为什么 AI 应用开发更需要贝叶斯思想？</h1><p>AI 应用研发比传统软件研发更需要贝叶斯决策思想。原因不是 AI 更复杂，而是 AI 产品的不确定性远高于传统软件。</p>
+<p>传统软件实现的是确定需求：</p>
+<blockquote>
+<p>用户点击按钮 → 后端计算 → 返回结果。</p>
+</blockquote>
+<p>AI 应用在不断验证概率问题：</p>
+<ul>
+<li>用户真的需要这个能力吗？（需求不确定）</li>
+<li>Prompt 是否有效？（方案不确定）</li>
+<li>Model A 还是 Model B 更好？（模型不确定）</li>
+<li>Agent 是否应该拆成多个工具？（架构不确定）</li>
+<li>用户为什么满意或不满意？（反馈不确定）</li>
+</ul>
+<p>研发过程就是不断更新这些概率。</p>
+<p>贝叶斯思想的核心公式是：</p>
+<p><strong>‌后验概率 ∝ 先验概率 × 似然‌</strong></p>
+<p>翻译成产品语言就是：</p>
+<p><strong>‌更新后的判断 ∝ 之前的判断 × 新观察到的证据</strong></p>
+<p>以下通过几个例子说明这个现象</p>
+<h2>例子一：AI Router</h2>
+<p>用户输入一句话：</p>
+<blockquote>
+<p>帮我总结这份 PDF。</p>
+</blockquote>
+<p>系统并不知道应该调用哪个模型。</p>
+<p>开始时，它只是猜：</p>
+<pre><code class="language-python">belief = {
+    &quot;gpt-4.1&quot;: 0.4,
+    &quot;claude&quot;: 0.4,
+    &quot;gemini&quot;: 0.2
+}
+</code></pre>
+<p>跑了一千次。</p>
+<p>发现：</p>
+<ul>
+<li>PDF 总结，Claude 最稳定。</li>
+<li>数学推理，GPT 更好。</li>
+<li>图片理解，Gemini 更好。</li>
+</ul>
+<p>Router 变成：</p>
+<pre><code class="language-python">belief = {
+    &quot;gpt-4.1&quot;: 0.2,
+    &quot;claude&quot;: 0.7,
+    &quot;gemini&quot;: 0.1
+}
+</code></pre>
+<p>它不是在寻找唯一正确答案。</p>
+<p>而是在不断调整：</p>
+<blockquote>
+<p><strong>什么情况下，更应该相信哪个模型。</strong></p>
+</blockquote>
+<hr>
+<h2>例子二：RAG</h2>
+<p>用户问：</p>
+<blockquote>
+<p>MCP 是什么？</p>
+</blockquote>
+<p>第一次检索：</p>
+<pre><code class="language-text">Doc A  相似度 0.82
+Doc B  相似度 0.79
+Doc C  相似度 0.74
+</code></pre>
+<p>系统觉得：</p>
+<blockquote>
+<p>Doc A 最可能有帮助。</p>
+</blockquote>
+<p>回答以后用户立刻追问：</p>
+<blockquote>
+<p>不是，我说的是 Anthropic 的 MCP。</p>
+</blockquote>
+<p>系统突然发现原来自己的判断错了。</p>
+<p>于是下一次遇到：</p>
+<pre><code class="language-text">MCP
+</code></pre>
+<p>它开始提高 Anthropic 文档的权重。</p>
+<p>降低其他 MCP 文档。</p>
+<p>这里更新的不是答案。而是：</p>
+<blockquote>
+<p><strong>哪类文档更值得相信。</strong></p>
+</blockquote>
+<hr>
+<h2>例子三：Agent Tool Selection</h2>
+<p>Agent 有三个工具：</p>
+<pre><code class="language-text">Search
+Python
+Browser
+</code></pre>
+<p>收到请求：</p>
+<blockquote>
+<p>帮我统计 Excel。</p>
+</blockquote>
+<p>开始：</p>
+<pre><code class="language-python">Search  40%
+Python 35%
+Browser 25%
+</code></pre>
+<p>执行几十轮。</p>
+<p>发现Excel 请求几乎都调用 Python。</p>
+<p>慢慢变成：</p>
+<pre><code class="language-python">Search  5%
+Python 90%
+Browser 5%
+</code></pre>
+<p>整个 Agent 的行为改变了。</p>
+<p>没有改 Prompt。</p>
+<p>没有改模型。</p>
+<p>只是：</p>
+<blockquote>
+<p><strong>相信 Python Tool 的概率越来越高。</strong></p>
+</blockquote>
+<hr>
+<h2>为什么 AI 特别需要这种思维</h2>
+<p>AI 系统本身就是概率系统：</p>
+<ul>
+<li>LLM：P(next token | context)</li>
+<li>RAG：P(这篇文档有帮助)</li>
+<li>Embedding：P(语义相似)</li>
+<li>ReRank：P(应该排第一)</li>
+<li>Agent：P(应该调用哪个 Tool)</li>
+<li>Evaluation：P(用户满意)</li>
+</ul>
+<p>整个 AI Pipeline 到处都是概率。
+AI 产品研发自然应该采用不断根据证据更新判断的方法，而不是一次性做出不可更改的决策。</p>
+<hr>
+<p>优秀 AI 团队真正更新的不是代码，而是&quot;信念&quot;</p>
+<pre><code class="language-text">提出假设（Prior）
+        ↓
+做最小可验证版本（MVP）
+        ↓
+收集真实用户行为（Evidence）
+        ↓
+更新产品判断（Posterior）
+        ↓
+重新分配研发资源
+        ↓
+提出新的假设
+</code></pre>
+<p>代码只是实验载体，真正持续迭代的是团队对&quot;什么最有价值&quot;的信念。AI 产品由于需求、模型能力和用户行为都具有高度不确定性，因此比传统软件更依赖这种基于证据持续更新决策的研发方式。</p>
+<p><em>观察现象，记录本质  - LZ</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

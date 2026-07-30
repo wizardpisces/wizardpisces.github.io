@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>Claude Sonnet 5 的 Token 消耗更多了？一文看懂 Token 的演化 | LZ AI NOTE</title>
+  <meta name="description" content="Claude Sonnet 5 的 Token 消耗更多了？一文看懂 Token 的演化 Anthropic 发布 Claude Sonnet 5 后，在更新说明里专门提到一件事： Claude Sonnet 5 uses a new tokenizer. The same input text produces approximately 30% mor…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Claude%20Sonnet%205%20%E7%9A%84%20Token%20%E6%B6%88%E8%80%97%E6%9B%B4%E5%A4%9A%E4%BA%86%EF%BC%9F%E4%B8%80%E6%96%87%E7%9C%8B%E6%87%82%20Token%20%E7%9A%84%E6%BC%94%E5%8C%96">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="Claude Sonnet 5 的 Token 消耗更多了？一文看懂 Token 的演化 | LZ AI NOTE">
+  <meta property="og:description" content="Claude Sonnet 5 的 Token 消耗更多了？一文看懂 Token 的演化 Anthropic 发布 Claude Sonnet 5 后，在更新说明里专门提到一件事： Claude Sonnet 5 uses a new tokenizer. The same input text produces approximately 30% mor…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Claude%20Sonnet%205%20%E7%9A%84%20Token%20%E6%B6%88%E8%80%97%E6%9B%B4%E5%A4%9A%E4%BA%86%EF%BC%9F%E4%B8%80%E6%96%87%E7%9C%8B%E6%87%82%20Token%20%E7%9A%84%E6%BC%94%E5%8C%96">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Claude Sonnet 5 的 Token 消耗更多了？一文看懂 Token 的演化","description":"Claude Sonnet 5 的 Token 消耗更多了？一文看懂 Token 的演化 Anthropic 发布 Claude Sonnet 5 后，在更新说明里专门提到一件事： Claude Sonnet 5 uses a new tokenizer. The same input text produces approximately 30% mor…","url":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Claude%20Sonnet%205%20%E7%9A%84%20Token%20%E6%B6%88%E8%80%97%E6%9B%B4%E5%A4%9A%E4%BA%86%EF%BC%9F%E4%B8%80%E6%96%87%E7%9C%8B%E6%87%82%20Token%20%E7%9A%84%E6%BC%94%E5%8C%96","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Claude%20Sonnet%205%20%E7%9A%84%20Token%20%E6%B6%88%E8%80%97%E6%9B%B4%E5%A4%9A%E4%BA%86%EF%BC%9F%E4%B8%80%E6%96%87%E7%9C%8B%E6%87%82%20Token%20%E7%9A%84%E6%BC%94%E5%8C%96","dateModified":"2026-07-08","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Claude Sonnet 5 的 Token 消耗更多了？一文看懂 Token 的演化</h1><h1>Claude Sonnet 5 的 Token 消耗更多了？一文看懂 Token 的演化</h1>
+<p>Anthropic 发布 Claude Sonnet 5 后，在更新说明里专门提到一件事：</p>
+<blockquote>
+<p>Claude Sonnet 5 uses a new tokenizer. The same input text produces approximately 30% more tokens than on Claude Sonnet 4.6. The exact increase depends on the content.</p>
+</blockquote>
+<p>Sonnet 5 使用了新的 Tokenizer，同样的文本，大约会比之前的 Claude 模型多产生 30% 的 Token。
+那么问题来了：</p>
+<blockquote>
+<p>同样一句话，为什么 Token 会变多？</p>
+<p>Token 不应该是固定的吗？</p>
+<p>是不是 Anthropic 在变相涨价？</p>
+</blockquote>
+<p>要理解上面的问题，首先得搞清楚 Token 是什么？</p>
+<p>Token 从来不是自然存在的计量单位，它只是模型选择的一种&quot;编码方式&quot;。</p>
+<p>理解这一点，也就理解了为什么不同模型，即使面对完全相同的一段文字，也可能得到完全不同的 Token 数。</p>
+<h2>Token 是什么？</h2>
+<p>很多人第一次接触 LLM，会觉得：</p>
+<pre><code>一句中文 → Tokenizer → Token
+</code></pre>
+<p>仿佛 Token 就像汉字一样，是天然存在的。</p>
+<p>实际上并不是。</p>
+<p>模型根本不能理解文字。</p>
+<p>Transformer 能处理的只有数字。</p>
+<p>真正的数据流是：</p>
+<pre><code>文本 → Tokenizer → [5318, 99122, 8129, ...] → Embedding → 向量 → Transformer
+</code></pre>
+<p>Tokenizer 更像是一种编译器。</p>
+<p>它负责把人类语言翻译成模型能够理解的编号。</p>
+<p>所以：</p>
+<blockquote>
+<p>Token 是人为设计出来的。不是自然规律。</p>
+</blockquote>
+<p>同一句话，可以切成完全不同的 Token</p>
+<p>例如：</p>
+<pre><code>internationalization
+</code></pre>
+<p>一种 Tokenizer 切出来：</p>
+<pre><code>international  ization
+</code></pre>
+<p>另一种：</p>
+<pre><code>inter  national  ization
+</code></pre>
+<p>还有一种：</p>
+<pre><code>i  n  t  e  ...
+</code></pre>
+<p>甚至：</p>
+<pre><code>internationalization
+</code></pre>
+<p>整个就是一个 Token。</p>
+<p>模型都可以训练。</p>
+<p>只是训练效率不同。</p>
+<p>所以：</p>
+<blockquote>
+<p>Token 的多少，从来没有唯一答案。</p>
+</blockquote>
+<h2>Tokenizer 的目标</h2>
+<p>这是很多人最大的误区。</p>
+<p>大家潜意识都会觉得：</p>
+<blockquote>
+<p>Token 越少，模型越先进。</p>
+</blockquote>
+<p>事实上。</p>
+<p>Tokenizer 真正优化的是：</p>
+<blockquote>
+<p>模型最终效果。</p>
+</blockquote>
+<p>而不是：</p>
+<blockquote>
+<p>Token 数。</p>
+</blockquote>
+<p>举个例子。</p>
+<p>假设有一个函数：</p>
+<pre><code class="language-python">calculate_total_price_after_discount()
+</code></pre>
+<p>一种 Tokenizer 切出来：</p>
+<pre><code>calculate_total_price_after_discount
+</code></pre>
+<p>整个就是一个 Token。</p>
+<p>模型看到：</p>
+<pre><code>582931
+</code></pre>
+<p>结束。</p>
+<p>另一种切出来：</p>
+<pre><code>calculate  total  price  after  discount
+</code></pre>
+<p>虽然 Token 多了。</p>
+<p>但是模型可以分别理解：</p>
+<pre><code>calculate  →  动作
+total      →  聚合
+price      →  价格
+discount   →  折扣
+</code></pre>
+<p>Attention 更容易建立语义联系。</p>
+<p>模型反而可能更聪明。</p>
+<p>因此：</p>
+<blockquote>
+<p>Token 更多，并不意味着模型更差。</p>
+</blockquote>
+<h2>Tokenizer 怎么训练的？</h2>
+<p>Tokenizer 本身也是训练出来的。</p>
+<p>例如语料：</p>
+<pre><code>apple
+application
+apply
+</code></pre>
+<p>开始时，每个字符都是一个 Token：</p>
+<pre><code>a  p  p  l  e
+</code></pre>
+<p>算法不断统计：</p>
+<p>哪些字符组合出现最多。</p>
+<p>发现：</p>
+<pre><code>app
+</code></pre>
+<p>出现频率极高。</p>
+<p>于是把 <code>a</code> <code>p</code> <code>p</code> 这三个 Token 合并成一个新 Token：</p>
+<pre><code>app
+</code></pre>
+<p>继续训练。</p>
+<p>后来：</p>
+<pre><code>apple
+</code></pre>
+<p>又出现很多。</p>
+<p>继续合并。</p>
+<p>最后得到：</p>
+<pre><code>app  apple  lication  ly
+</code></pre>
+<p>这就是经典的 <strong>BPE（Byte Pair Encoding）</strong>。</p>
+<p>它的核心思想只有一句话：</p>
+<blockquote>
+<p>不断把最常一起出现的片段合并。</p>
+</blockquote>
+<h2>Tokenizer 的演化</h2>
+<p><strong>第一代：Word Level</strong></p>
+<pre><code>I  love  AI
+</code></pre>
+<p>一个词一个 Token。</p>
+<p>问题：</p>
+<pre><code>loving  loved  lovely
+</code></pre>
+<p>全部都是新词。</p>
+<p>词典无限膨胀。</p>
+<p><strong>第二代：Character Level</strong></p>
+<pre><code>l  o  v  e
+</code></pre>
+<p>没有未知词。</p>
+<p>但是：</p>
+<pre><code>internationalization
+</code></pre>
+<p>会变成二十多个 Token。</p>
+<p>上下文迅速变长。</p>
+<p>Transformer 成本暴涨。</p>
+<p><strong>第三代：Subword</strong></p>
+<p>今天几乎所有 LLM 都属于这一代。</p>
+<p>思想非常简单：</p>
+<blockquote>
+<p>常见片段作为 Token。</p>
+</blockquote>
+<p>例如：</p>
+<pre><code>international  ization
+</code></pre>
+<p>或者：</p>
+<pre><code>inter  national  ization
+</code></pre>
+<p>既避免未知词。</p>
+<p>又不会 Token 太长。</p>
+<p>今天大家熟悉的 GPT、Claude、Gemini、Llama，基本都属于这一类。</p>
+<p>区别只是：切法不同。</p>
+<h3>GPT 为什么后来又开始使用 Byte-Level？</h3>
+<p>GPT-2 引入了一个重要变化。</p>
+<p>以前：</p>
+<pre><code>汉
+</code></pre>
+<p>就是一个 Unicode 字符。</p>
+<p>GPT-2：直接处理 UTF-8。</p>
+<p>例如：</p>
+<pre><code>汉
+</code></pre>
+<p>底层其实是：</p>
+<pre><code>E6  B1  89
+</code></pre>
+<p>三个 Byte。</p>
+<p>这样做最大的优点：<u>任何字符、任何 Emoji、任何语言，都一定可以编码。</u></p>
+<p>不会出现未知字符。</p>
+<p>代价就是：有时候 Token 会变多。</p>
+<h2>那 Sonnet 5 为什么 Token 更多？</h2>
+<p>这也是目前大家最关心的问题。</p>
+<p>官方没有公布 Tokenizer 的具体实现。</p>
+<p>没有论文、没有 Vocabulary、没有 Merge Rules。</p>
+<p>所以没人知道它到底长什么样。</p>
+<p>官方目前只公布了：</p>
+<ul>
+<li>使用新的 Tokenizer</li>
+<li>同样文本约增加 30% Token</li>
+<li>更适合 Coding 和 Agent</li>
+</ul>
+<p>下面是新 Tokenizer 的推测：</p>
+<p><strong>推测一：代码语料占比更高</strong></p>
+<p>Claude 今天最大的优势不是聊天，而是：</p>
+<ul>
+<li>Coding</li>
+<li>Agent</li>
+<li>MCP</li>
+<li>Tool Calling</li>
+</ul>
+<p>因此，Tokenizer 很可能重新学习了：</p>
+<pre><code>async  await  import  SELECT  FROM  JSON  Markdown  XML
+</code></pre>
+<p>这些高频模式，而不是传统自然语言。</p>
+<p><strong>推测二：更多关注语义，而不是压缩率</strong></p>
+<p>Tokenizer 最初目标：</p>
+<blockquote>
+<p>Token 越少越好。</p>
+</blockquote>
+<p>今天越来越多研究发现：</p>
+<blockquote>
+<p>压缩率最高，并不等于模型效果最好。</p>
+</blockquote>
+<p>有时候，适当增加 Token，反而让 Transformer 更容易学习。</p>
+<p><strong>推测三：结构化文本得到优化</strong></p>
+<p>Agent 今天大量输出：</p>
+<pre><code>{
+  &quot;name&quot;:&quot;search&quot;
+}
+</code></pre>
+<p>或者：</p>
+<pre><code>&lt;/tool_call&gt;
+</code></pre>
+<p>这些以前几乎没有。</p>
+<p>新的 Tokenizer 很可能针对 JSON、XML、Markdown 进行了专门优化。</p>
+<p><u>所以它大概率仍属于现代 subword tokenizer 家族，但重新设计了训练目标和词表，而不是完全发明了一种全新的 tokenizer。</u></p>
+<h3>那是不是意味着 API 更贵了？</h3>
+<p>答案其实有两层。</p>
+<p>如果比较的是：</p>
+<blockquote>
+<p>每百万 Token 单价。</p>
+</blockquote>
+<p>没有变化。</p>
+<p>但是如果比较：</p>
+<blockquote>
+<p>完成同一个任务。</p>
+</blockquote>
+<p>情况就复杂得多。</p>
+<p>如果以前：8000 Token，现在：10000 Token，那么成本确实会上升。</p>
+<p>但另一方面，如果 Sonnet 5 一次就完成，以前需要两轮，最终总 Token 反而可能下降。</p>
+<p>所以真正应该比较的是：</p>
+<blockquote>
+<p>Cost per Task（完成一个任务的成本）</p>
+</blockquote>
+<p>而不是：</p>
+<blockquote>
+<p>Cost per Token。</p>
+</blockquote>
+<h2>写在最后</h2>
+<blockquote>
+<p>Token 从来不是自然单位。</p>
+</blockquote>
+<p>它更像一种压缩格式。</p>
+<p>ZIP、RAR、7z，面对同一份文件，压缩后的大小可以完全不同。</p>
+<p>Tokenizer 也是如此。同样一句话，不同模型，可以得到完全不同的 Token 数。</p>
+<p>而模型设计者真正追求的，也不是&quot;切得最少&quot;，而是让 Transformer 更容易学习、更稳定推理、更高效完成任务。</p>
+<p>也许未来几年，我们讨论模型时，会越来越少比较&quot;每百万 Token 多少钱&quot;，而更多比较：</p>
+<blockquote>
+<p>完成同一个任务，到底需要多少成本。</p>
+</blockquote>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

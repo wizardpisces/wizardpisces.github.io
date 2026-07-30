@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>[Context Engineering for AI Agents: Lessons from Building Manus](https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus) | LZ AI NOTE</title>
+  <meta name="description" content="[Context Engineering for AI Agents: Lessons from Building Manus] 这篇文章是 Manus 团队基于构建通用 AI Agent（Manus）的实战经验，分享关于 上下文工程（Context Engineering） 的深度技术文章。 核心思想 ： 在构建复杂的 Agent 系统时， Contex…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/Manus%20-%20Context%20Engineering%20for%20AI%20Agents">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="[Context Engineering for AI Agents: Lessons from Building Manus](https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus) | LZ AI NOTE">
+  <meta property="og:description" content="[Context Engineering for AI Agents: Lessons from Building Manus] 这篇文章是 Manus 团队基于构建通用 AI Agent（Manus）的实战经验，分享关于 上下文工程（Context Engineering） 的深度技术文章。 核心思想 ： 在构建复杂的 Agent 系统时， Contex…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/Manus%20-%20Context%20Engineering%20for%20AI%20Agents">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"[Context Engineering for AI Agents: Lessons from Building Manus](https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus)","description":"[Context Engineering for AI Agents: Lessons from Building Manus] 这篇文章是 Manus 团队基于构建通用 AI Agent（Manus）的实战经验，分享关于 上下文工程（Context Engineering） 的深度技术文章。 核心思想 ： 在构建复杂的 Agent 系统时， Contex…","url":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/Manus%20-%20Context%20Engineering%20for%20AI%20Agents","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/Manus%20-%20Context%20Engineering%20for%20AI%20Agents","dateModified":"2026-01-20","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>[Context Engineering for AI Agents: Lessons from Building Manus](https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus)</h1><h1><a href="https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus">Context Engineering for AI Agents: Lessons from Building Manus</a></h1>
+<p>这篇文章是 Manus 团队基于构建通用 AI Agent（Manus）的实战经验，分享关于**上下文工程（Context Engineering）**的深度技术文章。</p>
+<p><strong>核心思想</strong>：
+在构建复杂的 Agent 系统时，<strong>Context Engineering（上下文工程）比 Prompt Engineering 更重要</strong>。不仅仅是“写好提示词”，而是要像管理内存一样，精心设计上下文的结构、存储和生命周期。</p>
+<ul>
+<li><strong>上下文是稀缺资源</strong>：尽管模型支持 128k+ 上下文，但在实际工程中，上下文的长度直接关联到<strong>成本（Cost）</strong>、<strong>延迟（Latency）<strong>和</strong>准确率（Accuracy）</strong>。</li>
+<li><strong>KV-Cache 是关键指标</strong>：Agent 的运行是一个不断循环的过程（Loop），每一轮都会产生新的 Token。必须优化 KV-Cache 的命中率（Hit Rate），避免每一步都重新计算整个上下文。</li>
+<li><strong>信息压缩与外部化</strong>：不要把所有东西都塞进 Context Window，学会使用文件系统作为“外挂内存”。</li>
+</ul>
+<p><strong>解决的问题</strong>：</p>
+<ol>
+<li><strong>高昂的推理成本与延迟</strong>：在长任务中，Input Token 远多于 Output Token（比例可达 100:1），如果每次都全量重新处理，速度极慢且烧钱。</li>
+<li><strong>“迷失中间”（Lost in the Middle）</strong>：随着对话变长，Agent 容易忘记最初的目标或上一轮的决策细节。</li>
+<li><strong>模式僵化（Pattern Collapse）</strong>：过多的 Few-Shot 示例会导致模型刻板模仿，失去灵活性。</li>
+<li><strong>错误恢复能力差</strong>：很多系统倾向于隐藏错误，导致 Agent 不知道自己试错过什么，从而陷入死循环。</li>
+</ol>
+<p><strong>核心策略（Manus 的解决方案）</strong>：</p>
+<ol>
+<li><strong>极致优化 KV-Cache（降本提速）</strong>
+<ul>
+<li><strong>前缀稳定性</strong>：保持 System Prompt 和早期历史记录绝对不变。</li>
+<li><strong>Append-Only 原则</strong>：不要修改或删除历史消息。</li>
+<li><strong>确定性序列化</strong>：工具输出（如 JSON）键值顺序固定。</li>
+</ul>
+</li>
+<li><strong>外部化记忆（Externalized Memory）</strong>
+<ul>
+<li><strong>文件系统即记忆</strong>：将长内容写入文件，Context 里只保留路径。</li>
+<li><strong>按需读取</strong>：只有确实需要细节时才读取文件内容。</li>
+</ul>
+</li>
+<li><strong>保持注意力的技巧</strong>
+<ul>
+<li><strong>Recitation（背诵/复述）</strong>：强制 Agent 维护 <code>todo.md</code>，每轮思考前读取，明确当前进度。</li>
+<li><strong>保留错误堆栈</strong>：报错是极高价值的反馈信号，能帮助 Agent 自我修正。</li>
+</ul>
+</li>
+<li><strong>对抗模式僵化</strong>
+<ul>
+<li><strong>动态 Few-Shot</strong>：引入随机性或结构变异，防止模型过拟合。</li>
+</ul>
+</li>
+</ol>
+<p><strong>思考与未来</strong>：
+Manus 的方案是当前架构下的工程最佳实践。未来可能的方向：</p>
+<ul>
+<li><strong>架构级改进</strong>：如 Linear Attention, SSM (State Space Models) 解决长序列遗忘。</li>
+<li><strong>智能压缩</strong>：使用小模型将长文本压缩为 Embedding 或 Summary Tokens。</li>
+<li><strong>元学习</strong>：Agent 拥有跨任务的长期记忆。</li>
+</ul>
+<blockquote>
+<p><strong>Context is Money.</strong> 不要迷信模型能力的无限提升，好的工程架构（特别是上下文管理）才是让 Agent 从 Demo 走向 Production 的关键。</p>
+</blockquote>
+<p><em>编辑：2026-01-20</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

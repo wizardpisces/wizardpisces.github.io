@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>二维码的纠错原理 | LZ AI NOTE</title>
+  <meta name="description" content="二维码的纠错原理 Reed Solomon 算法简介 Reed Solomon 算法是一种基于多项式插值的纠错编码技术。它的主要功能是通过加入冗余信息（纠错码），在部分数据损坏的情况下恢复原始数据。 以下是 Reed Solomon 的工作流程与简单例子，帮助理解其原理和应用。 一、基本概念 1. 数据视为多项式 原始数据可以用一个多项式 \( f(x) …">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/other/QRCode">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="二维码的纠错原理 | LZ AI NOTE">
+  <meta property="og:description" content="二维码的纠错原理 Reed Solomon 算法简介 Reed Solomon 算法是一种基于多项式插值的纠错编码技术。它的主要功能是通过加入冗余信息（纠错码），在部分数据损坏的情况下恢复原始数据。 以下是 Reed Solomon 的工作流程与简单例子，帮助理解其原理和应用。 一、基本概念 1. 数据视为多项式 原始数据可以用一个多项式 \( f(x) …">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/other/QRCode">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"二维码的纠错原理","description":"二维码的纠错原理 Reed Solomon 算法简介 Reed Solomon 算法是一种基于多项式插值的纠错编码技术。它的主要功能是通过加入冗余信息（纠错码），在部分数据损坏的情况下恢复原始数据。 以下是 Reed Solomon 的工作流程与简单例子，帮助理解其原理和应用。 一、基本概念 1. 数据视为多项式 原始数据可以用一个多项式 \\( f(x) …","url":"https://wizardpisces.github.io/blog/tech/other/QRCode","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/other/QRCode","dateModified":"2025-06-20","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>二维码的纠错原理</h1><h1>二维码的纠错原理</h1>
+<h1>Reed-Solomon 算法简介</h1>
+<p>Reed-Solomon 算法是一种基于多项式插值的纠错编码技术。它的主要功能是通过加入冗余信息（纠错码），在部分数据损坏的情况下恢复原始数据。</p>
+<p>以下是 Reed-Solomon 的工作流程与简单例子，帮助理解其原理和应用。</p>
+<hr>
+<h2>一、基本概念</h2>
+<ol>
+<li>
+<p><strong>数据视为多项式</strong></p>
+<ul>
+<li>原始数据可以用一个多项式 ( f(x) ) 表示。</li>
+<li>数据点是多项式在不同位置的取值（编码点）。</li>
+</ul>
+</li>
+<li>
+<p><strong>生成冗余校验点</strong></p>
+<ul>
+<li>对 ( f(x) ) 计算额外的点值，作为校验数据。</li>
+</ul>
+</li>
+<li>
+<p><strong>纠错能力</strong></p>
+<ul>
+<li>如果有 ( k ) 个原始数据和 ( n - k ) 个校验数据，Reed-Solomon 能够纠正最多 ( \frac{n-k}{2} ) 个错误。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2>二、简单例子</h2>
+<h3>场景描述</h3>
+<ol>
+<li><strong>原始数据</strong>：3个数据点 ( [1, 3, 5] )。</li>
+<li><strong>目标</strong>：通过 Reed-Solomon，添加 2 个校验点，使其在损坏的情况下可以恢复。</li>
+<li><strong>有限域</strong>：采用有限域 GF(7)（简单的模 7 运算）。</li>
+</ol>
+<hr>
+<h3>1. 构造多项式</h3>
+<p>根据原始数据 ( [1, 3, 5] )，构造一个二次多项式：<br>
+[
+f(x) = a_0 + a_1x + a_2x^2
+]</p>
+<p>将数据点 ( (x, y) ) 填入：</p>
+<ul>
+<li>当 ( x = 0 ), ( y = 1 ): ( a_0 = 1 )</li>
+<li>当 ( x = 1 ), ( y = 3 ): ( 1 + a_1 + a_2 = 3 )</li>
+<li>当 ( x = 2 ), ( y = 5 ): ( 1 + 2a_1 + 4a_2 = 5 )</li>
+</ul>
+<p>解方程得到系数：
+[
+f(x) = 1 + 2x + x^2
+]</p>
+<hr>
+<h3>2. 生成校验点</h3>
+<p>计算 ( f(x) ) 的额外点值：</p>
+<ul>
+<li>( f(3) = 1 + 2(3) + (3)^2 = 16 \mod 7 = 2 )</li>
+<li>( f(4) = 1 + 2(4) + (4)^2 = 25 \mod 7 = 4 )</li>
+</ul>
+<p>完整数据变为：<br>
+原始数据 ( [1, 3, 5] ) 和校验数据 ( [2, 4] )。</p>
+<hr>
+<h3>3. 数据损坏</h3>
+<p>假设传输中，数据 ( [1, ?, 5, ?, 4] ) 被部分损坏（两个未知）。<br>
+需要恢复完整数据。</p>
+<hr>
+<h3>4. 数据恢复（多项式插值）</h3>
+<h4>已知：</h4>
+<ul>
+<li>数据点 ( (0, 1), (2, 5), (4, 4) )</li>
+<li>两个损坏的数据点 ( (1, ?), (3, ?) )</li>
+</ul>
+<h4>插值恢复：</h4>
+<p>通过插值法恢复 ( f(x) = 1 + 2x + x^2 )，重新计算缺失点：</p>
+<ul>
+<li>( f(1) = 1 + 2(1) + (1)^2 = 3 )</li>
+<li>( f(3) = 1 + 2(3) + (3)^2 = 16 \mod 7 = 2 )</li>
+</ul>
+<p>恢复完整数据：<br>
+[ [1, 3, 5, 2, 4] ]</p>
+<hr>
+<h2>三、应用场景</h2>
+<ol>
+<li>
+<p><strong>光盘存储</strong>：</p>
+<ul>
+<li>数据分块存储，利用 Reed-Solomon 校验码修复划痕损坏的数据。</li>
+</ul>
+</li>
+<li>
+<p><strong>二维码</strong>：</p>
+<ul>
+<li>部分二维码模块被污损或遮挡，利用冗余信息恢复完整数据。</li>
+</ul>
+</li>
+<li>
+<p><strong>通信系统</strong>：</p>
+<ul>
+<li>在噪声干扰的信道中传输数据，校验码用于纠正传输错误。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2>四、总结</h2>
+<ul>
+<li><strong>核心思想</strong>：将数据映射到多项式，通过添加校验点增强容错能力。</li>
+<li><strong>纠错能力</strong>：已知错误位置，最多修复 n-k 个错误点。（n 是数据点数量，k 是原始数据点数量, n-k 是校验点数量），纠错率 (n-k)/n</li>
+<li><strong>实际意义</strong>：保证在部分数据丢失或损坏的情况下，仍能准确恢复原始信息。</li>
+</ul>
+<p>二维码的应用场景中，大多数损坏属于<strong>位置已知</strong>的错误，这使得二维码非常适合使用 Reed-Solomon 算法 的纠错功能。</p>
+<h1>二维码的形变恢复</h1>
+<p>二维码的形变恢复主要依赖于功能区域（如定位图形、对齐图形和时间图案）来校正二维码的几何形态，将其还原为标准的矩阵形式。以下是二维码形变校正的具体步骤和原理：</p>
+<hr>
+<h3><strong>1. 形变类型</strong></h3>
+<p>二维码的形变主要分为以下几类：</p>
+<ul>
+<li><strong>旋转变形：</strong> 二维码被旋转。</li>
+<li><strong>透视变形：</strong> 二维码拍摄时不是正面拍摄，导致图像呈现梯形或菱形。</li>
+<li><strong>弯曲变形：</strong> 二维码印刷在曲面上或因物理原因导致形状弯曲。</li>
+</ul>
+<hr>
+<h3><strong>2. 功能区域的作用</strong></h3>
+<p>二维码的功能区域（尤其是定位图形和对齐图形）起到了关键作用：</p>
+<ol>
+<li>
+<p><strong>定位图形：</strong></p>
+<ul>
+<li>三个大方块位于二维码的左上角、右上角和左下角。</li>
+<li>它们的相对位置用于确定二维码的整体方向、大小和形变。</li>
+</ul>
+</li>
+<li>
+<p><strong>对齐图形：</strong></p>
+<ul>
+<li>多个小方块位于二维码的内部，帮助校正非线性形变（如弯曲或局部拉伸）。</li>
+</ul>
+</li>
+<li>
+<p><strong>时间图案：</strong></p>
+<ul>
+<li>位于二维码顶部和左侧的黑白相间线条，用于确定网格的行列数量，帮助解码器找到数据模块的准确位置。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3><strong>3. 校正形变的步骤</strong></h3>
+<h4><strong>步骤 1：检测定位图形</strong></h4>
+<ul>
+<li>解码器扫描图像，寻找二维码的三个定位图形。</li>
+<li>根据定位图形的几何特性（黑白模块的固定比例和形状），确定它们在图像中的位置。</li>
+</ul>
+<h4><strong>步骤 2：估计透视变换矩阵</strong></h4>
+<ul>
+<li>利用定位图形的相对位置，计算实际图像中的四个顶点（包括隐含的右下角）。</li>
+<li>将实际顶点与标准二维码的顶点位置对应，生成一个 <strong>透视变换矩阵</strong>。
+<ul>
+<li>透视变换矩阵是一个 3x3 的矩阵，能够将任何透视变形的图像还原为平面图像。</li>
+</ul>
+</li>
+</ul>
+<h4><strong>步骤 3：应用透视变换</strong></h4>
+<ul>
+<li>使用计算出的透视变换矩阵，对二维码图像进行仿射变换或透视变换，恢复为标准的矩形。</li>
+</ul>
+<h4><strong>步骤 4：细化校正</strong></h4>
+<ul>
+<li>检测对齐图形，进一步校正非线性变形（如弯曲）。</li>
+<li>对齐图形通过测量变形后的位置与预期位置的偏差，调整内部模块的位置。</li>
+</ul>
+<h4><strong>步骤 5：提取网格</strong></h4>
+<ul>
+<li>根据时间图案的黑白间隔，确定二维码的行列数量。</li>
+<li>将恢复后的图像划分为标准的网格矩阵，准备解码。</li>
+</ul>
+<hr>
+<h3><strong>6. 总结</strong></h3>
+<p>二维码形变恢复的核心是：</p>
+<ul>
+<li>利用功能区域（定位图形、对齐图形、时间图案）识别变形。</li>
+<li>计算透视变换矩阵，将形变二维码恢复为标准矩形。</li>
+<li>细化校正，确保内部数据模块的位置精确无误。</li>
+</ul>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-B1qXZRki.js"></script>
+</body>
+</html>

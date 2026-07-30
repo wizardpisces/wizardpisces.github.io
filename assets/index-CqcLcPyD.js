@@ -1,7 +1,0 @@
-import{_,q as d,G as h,D as B,r as D,o,c as i,a as u,l as C,x as F,F as A,d as m,e as E,g,b as p,t as a}from"./index-ORuMYPhB.js";const f={name:"Home",setup(){const{getLatestBlogs:n}=g(),c=d(()=>n(10));function r(t){const s=t.blogLink.replace("/src/blog/","").replace(/\.md$/,"").split("/");return s.length===1?"blog":s.slice(0,-1).join(" / ")}return{latestBlogs:c,createBlogRoutePath:h,formatFreshnessDate:B,formatBlogPath:r}}},x={class:"home"},k=u("section",{class:"home-intro"},[u("div",{class:"home-intro-content"},[u("h1",null,"LZ AI Note"),u("pre",null,`很高兴遇到同样保持独立思考的你。
-如今 AI 的噪音太多，每天都有新的“神话”和“焦虑”。
-
-在这里我会做两件事：
-滤掉噪音：带你从喧嚣的现象中，抽离出不变的本质。
-硬核拆解：不仅看懂趋势，更从深度实现的视角，思考 AI 的真正落地。
-`)])],-1),b={class:"articles"},L={class:"section-header"},v=u("h2",null,"Latest writing",-1),P={class:"article-list"},I={class:"article-meta"},N={class:"article-date"},w={class:"article-title"},V={class:"article-excerpt"};function y(n,c,r,t,s,R){const l=D("router-link");return o(),i("div",x,[k,u("section",b,[u("div",L,[v,C(l,{to:"/blog/Introduction"},{default:F(()=>[p("更多")]),_:1})]),u("div",P,[(o(!0),i(A,null,m(t.latestBlogs,e=>(o(),E(l,{key:e.blogLink,to:t.createBlogRoutePath(e),class:"article-row"},{default:F(()=>[u("span",I,[u("span",N,a(t.formatFreshnessDate(e)),1)]),u("span",w,a(e.blogTitle),1),u("span",V,a(t.formatBlogPath(e)),1)]),_:2},1032,["to"]))),128))])])])}const j=_(f,[["render",y]]);export{j as default};
