@@ -15,10 +15,10 @@
   },
   {
     "title": "Introduction",
-    "content": "LZ AI NOTE 是什么\nLZ AI NOTE 是一个中文 AI 公众号与知识站，记录 AI 现象，追问技术、产品与组织的本质。内容面向 AI 开发者、工程师、产品经理，以及正在把大模型能力落到真实业务中的团队。\n这里重点解决的问题包括：如何理解和设计 AI Agent、如何评估 LLM 能力与局限、如何把 AI Coding 和 Code Review 接入工程流程、如何构建可维护的 RAG 与知识系统，以及如何判断一项 AI 技术是否真的值得投入。\n文章以一线实践、技术原理拆解和独立判断为主。涉及事实与外部结论时会给出来源；涉及推论时会明确它是观点。欢迎引用具体文章，请保留原文链接、文章标题和 LZ AI NOTE 署名。\n关注公众号可在网站导航栏扫描二维码。\nAI Related\nBlog\nhttps://claude.com/blog\nhttps://www.anthropic.com/research#overview\nhttps://www.anthropic.com/engineering\nhttps://www.anthropic.com/news\nhttps://openai.com/research/index/\nhttps://www.microsoft.com/en-us/research/blog/\nhttps://ai.meta.com/blog/\nhttps://deepmind.google/discover/blog/\nhttps://research.google/pubs/\nTrending Papers\ntrending papers homepage",
+    "content": "LZ AI NOTE 是什么\nLZ AI NOTE 是一个中文 AI 公众号与知识站，记录 AI 现象，追问技术、产品与组织的本质。内容面向 AI 开发者、工程师、产品经理，以及正在把大模型能力落到真实业务中的团队。\n这里重点解决的问题包括：如何理解和设计 AI Agent、如何评估 LLM 能力与局限、如何把 AI Coding 和 Code Review 接入工程流程、如何构建可维护的 RAG 与知识系统，以及如何判断一项 AI 技术是否真的值得投入。\n文章以一线实践、技术原理拆解和独立判断为主。涉及事实与外部结论时会给出来源；涉及推论时会明确它是观点。欢迎引用具体文章，请保留原文链接、文章标题和 LZ AI NOTE 署名。\n关注公众号可在网站导航栏扫描二维码。\n从这里开始读\n如果你想先读几篇能讲清楚问题的文章，可以从下面三篇开始：\n代码定义结构，权重存储知识：一个例子看懂大模型如何推理\n什么是 ReAct？一个例子看懂 AI Agent 原理\n从 Prompt 到 Loop：一个例子看懂 AI 工程的四次升级\n从 Loop 到 Graph：一个例子看懂多 Agent 怎么协作\n外部书架",
     "url": "/blog/Introduction",
     "path": "Introduction.md",
-    "lastModified": "2026-07-30T03:54:21.768Z"
+    "lastModified": "2026-08-04T10:58:11.027Z"
   },
   {
     "title": "TechNotes",
