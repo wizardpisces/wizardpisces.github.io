@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>一篇产品页怎样进入 AI 的答案：一个例子读懂 GEO | LZ AI NOTE</title>
+  <meta name="description" content="一篇产品页怎样进入 AI 的答案：一个例子读懂 GEO 假设我做了一款代码审查工具，叫 PatchPilot。 官网已经上线，搜索产品名也能找到。首页写着： 但当用户问 AI： 我们是一个 20 人的 GitLab 团队，想自动审查 Merge Request，有哪些工具适合？ AI 推荐了三款竞品，没提 PatchPilot。 页面明明存在，为什么没有进…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E4%B8%80%E7%AF%87%E4%BA%A7%E5%93%81%E9%A1%B5%E6%80%8E%E6%A0%B7%E8%BF%9B%E5%85%A5%20AI%20%E7%9A%84%E7%AD%94%E6%A1%88%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E8%AF%BB%E6%87%82%20GEO">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="一篇产品页怎样进入 AI 的答案：一个例子读懂 GEO | LZ AI NOTE">
+  <meta property="og:description" content="一篇产品页怎样进入 AI 的答案：一个例子读懂 GEO 假设我做了一款代码审查工具，叫 PatchPilot。 官网已经上线，搜索产品名也能找到。首页写着： 但当用户问 AI： 我们是一个 20 人的 GitLab 团队，想自动审查 Merge Request，有哪些工具适合？ AI 推荐了三款竞品，没提 PatchPilot。 页面明明存在，为什么没有进…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E4%B8%80%E7%AF%87%E4%BA%A7%E5%93%81%E9%A1%B5%E6%80%8E%E6%A0%B7%E8%BF%9B%E5%85%A5%20AI%20%E7%9A%84%E7%AD%94%E6%A1%88%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E8%AF%BB%E6%87%82%20GEO">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"一篇产品页怎样进入 AI 的答案：一个例子读懂 GEO","description":"一篇产品页怎样进入 AI 的答案：一个例子读懂 GEO 假设我做了一款代码审查工具，叫 PatchPilot。 官网已经上线，搜索产品名也能找到。首页写着： 但当用户问 AI： 我们是一个 20 人的 GitLab 团队，想自动审查 Merge Request，有哪些工具适合？ AI 推荐了三款竞品，没提 PatchPilot。 页面明明存在，为什么没有进…","url":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E4%B8%80%E7%AF%87%E4%BA%A7%E5%93%81%E9%A1%B5%E6%80%8E%E6%A0%B7%E8%BF%9B%E5%85%A5%20AI%20%E7%9A%84%E7%AD%94%E6%A1%88%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E8%AF%BB%E6%87%82%20GEO","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E4%B8%80%E7%AF%87%E4%BA%A7%E5%93%81%E9%A1%B5%E6%80%8E%E6%A0%B7%E8%BF%9B%E5%85%A5%20AI%20%E7%9A%84%E7%AD%94%E6%A1%88%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E8%AF%BB%E6%87%82%20GEO","dateModified":"2026-08-04","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>一篇产品页怎样进入 AI 的答案：一个例子读懂 GEO</h1><h1>一篇产品页怎样进入 AI 的答案：一个例子读懂 GEO</h1>
+<p>假设我做了一款代码审查工具，叫 PatchPilot。</p>
+<p>官网已经上线，搜索产品名也能找到。首页写着：</p>
+<pre><code class="language-text">下一代智能代码审查平台
+帮助团队更快交付高质量代码
+</code></pre>
+<p>但当用户问 AI：</p>
+<blockquote>
+<p>我们是一个 20 人的 GitLab 团队，想自动审查 Merge Request，有哪些工具适合？</p>
+</blockquote>
+<p>AI 推荐了三款竞品，没提 PatchPilot。</p>
+<p>页面明明存在，为什么没有进入 AI 的答案？</p>
+<p>这就是 GEO（Generative Engine Optimization，生成式引擎优化）想解决的问题。</p>
+<p>PatchPilot 是一个虚构产品。我们暂时不谈各种 GEO 技巧，只跟着这张产品页走一遍，看看它在哪一步消失了。</p>
+<h2>一张网页要经过几道门</h2>
+<p>AI 不会在回答每个问题时阅读整个互联网。一张网页要进入答案，大致要走过这条路：</p>
+<pre><code class="language-text">网页被发现
+    ↓
+进入搜索索引
+    ↓
+用户问题被改写成搜索查询
+    ↓
+网页进入候选结果
+    ↓
+其中的内容被选作证据
+    ↓
+模型生成答案并附上引用
+</code></pre>
+<p>真实平台的排序和选源方法并不完全公开，具体实现也不相同。但抓取、检索、选源和生成这几层，在主流 AI 搜索中普遍存在。</p>
+<p>我们先检查最前面两步。</p>
+<p>PatchPilot 没有阻止搜索爬虫，服务器日志里也能看到 OAI-SearchBot 的访问记录。页面可以被普通搜索引擎找到，标题和正文都能正常读取。</p>
+<p>它至少拿到了入场券。问题出在后面。</p>
+<p>顺带说一句，OpenAI 的 OAI-SearchBot 和 GPTBot 不是一回事。前者用于搜索，后者与潜在的模型训练有关。允许网页进入 ChatGPT Search，并不等于同意用它训练模型。<a href="https://help.openai.com/en/articles/12627856">OpenAI 的发布者说明</a>明确区分了两者。</p>
+<h2>用户问了一句话，AI 可能搜了好几个问题</h2>
+<p>用户问的是：</p>
+<pre><code class="language-text">20 人 GitLab 团队适合哪些代码审查工具？
+</code></pre>
+<p>ChatGPT Search 不一定把这句话原样交给搜索服务。OpenAI 的公开说明提到，它可能把问题改写成一个或多个更具体的查询，查看结果后再继续搜索。Google 把类似过程称为 <code>query fan-out</code>。</p>
+<p>在这个例子里，查询可能被拆成：</p>
+<pre><code class="language-text">GitLab AI code review tools
+AI code review self-hosted
+AI code review data privacy
+AI code review pricing small team
+</code></pre>
+<p>这些查询是示意，我们看不到平台每次实际使用的词。但把它们和 PatchPilot 的首页放在一起，问题已经很明显了。</p>
+<p>用户关心 GitLab、部署方式、数据权限和价格，页面却只写了“下一代”“智能”“更快”。它能匹配品牌名，匹配不了选型问题。</p>
+<p>传统 SEO 常从一个关键词出发优化页面。AI 搜索可能把一句自然语言拆成一组意图，页面需要回答的是这组意图背后的具体问题。</p>
+<h2>被搜到，还要能成为一句话的证据</h2>
+<p>假设 PatchPilot 还是进入了候选结果。它依然可能输给一份写得更具体的竞品文档：</p>
+<pre><code class="language-text">支持 GitLab 16.0 及以上版本
+可以部署在客户自己的 Kubernetes 集群
+只读取 Merge Request Diff
+</code></pre>
+<p>如果模型要写“某工具支持私有化部署”，上面三句话能直接提供证据。“安全、高效、适合现代团队”则无法支持这个结论。</p>
+<p>于是我们重写 PatchPilot 的产品页：</p>
+<pre><code class="language-text">PatchPilot 是一款面向 GitLab 团队的 Merge Request 代码审查工具。
+
+它读取当前 Merge Request 的 Diff，生成审查意见，
+并以 GitLab Comment 的形式写回。
+
+支持 SaaS 和私有化部署。
+所需权限、数据保留时间和部署要求见对应文档。
+</code></pre>
+<p>页面下方再给出安装文档、权限清单和价格说明。</p>
+<p>这次没有添加所谓的“AI 关键词”，只是把原来空泛的宣传换成了可以核验的事实。人类选型时需要这些信息，模型组织答案时也需要。</p>
+<p>GEO 原始论文做过类似方向的实验：在特定测试环境中，为内容补充相关引用、引语和统计数据，可以提高它在生成答案中的可见性，最高约 40%。但这个数字不是通用引用率，不同领域的效果也不同。<a href="https://arxiv.org/abs/2311.09735">GEO 论文</a></p>
+<h2>GEO 和 SEO，差在最后几步</h2>
+<p>现在回头看，SEO 和 GEO 并不是两套互不相干的技术。</p>
+<pre><code class="language-text">SEO 更关注：
+网页能否被发现、收录和检索
+
+GEO 继续追问：
+网页进入候选后，是否影响了最终答案
+</code></pre>
+<p>没有前面的搜索基础，后面的生成无从发生。Google 也明确表示，AI Overviews 和 AI Mode 仍然依赖原有的搜索索引、排名和质量系统，基础 SEO 继续有效。<a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide">Google Search 文档</a></p>
+<p>变化在于，传统搜索把候选链接交给用户选择；AI 搜索会先替用户组织一遍。你的页面即使排进了候选，也可能没有任何一句话被带进答案。</p>
+<p>所以 GEO 争的不是一个新的固定排名，而是三件事：</p>
+<pre><code class="language-text">是否被选作证据
+是否被提及和引用
+是否被准确表述
+</code></pre>
+<h2>最后复测一次</h2>
+<p>页面重新抓取后，不能只问一遍原问题，然后截一张“AI 终于推荐我了”的图。</p>
+<p>至少固定几种真实问法：</p>
+<pre><code class="language-text">有哪些 GitLab 代码审查工具？
+哪些工具支持私有化部署？
+20 人团队适合哪一种？
+</code></pre>
+<p>定期重复测试，记录 PatchPilot 是否被提及、引用了哪个页面、产品信息有没有说错。生成结果会随问法和时间波动，一次出现只能证明那一次出现过。</p>
+<p>到这里，PatchPilot 没进入答案的原因已经找到了：网页存在，也能被搜索，但它没有提供足以回答用户问题的事实。</p>
+<p>GEO 的核心因此可以压缩成一句话：</p>
+<blockquote>
+<p>让一份真实、有用的信息，更容易进入 AI 的答案，并在答案里不被说错。</p>
+</blockquote>
+<p>它没有取代 SEO，也不是讨好模型的新文风。它只是把内容优化的终点，从“进入搜索结果”往后推到了“参与生成答案”。</p>
+<h2>References</h2>
+<ul>
+<li><a href="https://arxiv.org/abs/2311.09735">GEO: Generative Engine Optimization（KDD 2024）</a></li>
+<li><a href="https://help.openai.com/en/articles/9237897-chatgpt-search">ChatGPT Search</a></li>
+<li><a href="https://help.openai.com/en/articles/12627856">Publishers and Developers - FAQ</a></li>
+<li><a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide">Optimizing your website for generative AI features on Google Search</a></li>
+</ul>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-DWKe3Ovo.js"></script>
+</body>
+</html>
