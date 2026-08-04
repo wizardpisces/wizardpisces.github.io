@@ -11330,6 +11330,72 @@
     "originalTitle": "参考资料"
   },
   {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%8A%8A%E4%BD%A0%E5%86%99%E8%BF%9B%E7%AD%94%E6%A1%88%EF%BC%9F%E4%BB%8E%E4%B8%80%E5%8F%A5%E4%BA%A7%E5%93%81%E6%8E%A8%E8%8D%90%E8%AF%BB%E6%87%82%20GEO#chunk-0",
+    "title": "AI 为什么没把你写进答案？从一句产品推荐读懂 GEO",
+    "content": "AI 为什么没把你写进答案？从一句产品推荐读懂 GEO\n假设我做了一款代码审查工具，叫 PatchPilot。\n官网已经上线，搜索产品名也能找到。首页写着：\n但当用户问 AI：\n我们是一个 20 人的 GitLab 团队，代码不能出内网，想自动审查 Merge Request，有哪些工具适合？\nAI 推荐了三款竞品，没提 PatchPilot。\n页面明明存在，为什么没被写进答案？\n这就是 GEO（Generative Engine Optimization，生成式引擎优化）出现的背景。\nPatchPilot 是一个虚构产品。下面只追踪一句本来可能出现、最后却消失了的产品推荐。\n一句话，先被拆成几个问题",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%8A%8A%E4%BD%A0%E5%86%99%E8%BF%9B%E7%AD%94%E6%A1%88%EF%BC%9F%E4%BB%8E%E4%B8%80%E5%8F%A5%E4%BA%A7%E5%93%81%E6%8E%A8%E8%8D%90%E8%AF%BB%E6%87%82%20GEO",
+    "chunkIndex": 0,
+    "totalChunks": 6,
+    "startPos": 0,
+    "endPos": 305,
+    "originalTitle": "AI 为什么没把你写进答案？从一句产品推荐读懂 GEO"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%8A%8A%E4%BD%A0%E5%86%99%E8%BF%9B%E7%AD%94%E6%A1%88%EF%BC%9F%E4%BB%8E%E4%B8%80%E5%8F%A5%E4%BA%A7%E5%93%81%E6%8E%A8%E8%8D%90%E8%AF%BB%E6%87%82%20GEO#chunk-1",
+    "title": "AI 为什么没把你写进答案？从一句产品推荐读懂 GEO (第2段)",
+    "content": "...能出现、最后却消失了的产品推荐。\n一句话，先被拆成几个问题 用户只问了一句话，里面其实有四个条件：团队不大、使用 GitLab、代码不能出内网、需要自动审查 Merge Request。\nAI 搜索不一定拿整句话只搜一次。它可能拆出几次更具体的查询：\n这些不是平台真实日志，只是对 Query 拆分的简化。它的作用是把一个模糊的“推荐什么”，拆成平台、部署、功能、成本和数据边界几个可以分别寻找证据的问题。\n搜索完成后，AI 再把找到的材料拼回一段答案。如果它决定推荐 PatchPilot，可能会写：\n这句话正好回应了前面拆出的几个条件：平台、功能、部署方式、成本和数据范围都有了着落。\n回头看 PatchPilot 的首页，它能支撑哪一个？\n一个也不能。\n“下一代”“智能”“更快”可以做宣传，却不能证明产品支持什么平台、怎样部署，又会读取哪些数据。",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%8A%8A%E4%BD%A0%E5%86%99%E8%BF%9B%E7%AD%94%E6%A1%88%EF%BC%9F%E4%BB%8E%E4%B8%80%E5%8F%A5%E4%BA%A7%E5%93%81%E6%8E%A8%E8%8D%90%E8%AF%BB%E6%87%82%20GEO",
+    "chunkIndex": 1,
+    "totalChunks": 6,
+    "startPos": 305,
+    "endPos": 653,
+    "originalTitle": "AI 为什么没把你写进答案？从一句产品推荐读懂 GEO"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%8A%8A%E4%BD%A0%E5%86%99%E8%BF%9B%E7%AD%94%E6%A1%88%EF%BC%9F%E4%BB%8E%E4%B8%80%E5%8F%A5%E4%BA%A7%E5%93%81%E6%8E%A8%E8%8D%90%E8%AF%BB%E6%87%82%20GEO#chunk-2",
+    "title": "AI 为什么没把你写进答案？从一句产品推荐读懂 GEO (第3段)",
+    "content": "...，却不能证明产品支持什么平台、怎样部署，又会读取哪些数据。 所以 PatchPilot 缺的不是更多品牌介绍，而是能让 AI 写出这句话的证据。\n这也是 GEO 最容易被忽略的地方：生成答案时，真正被挑选的不只是网页，而是网页里能够支撑某句话的内容。\n竞品能进入答案，并非 AI 更喜欢它，而是它的文档回答了拆出来的问题。\n问题找到了。我们重写 PatchPilot 的首页：\n下面再放上部署文档、权限清单和价格说明。\n这里没有特殊的“AI 文风”，也没有刻意堆关键词。只是把空泛评价换成事实，再让事实有地方可以核验。\n把 PatchPilot 放回完整流程\n到这里，先把刚才发生的事放回完整链路：\nPatchPilot 沿着上面那条路进入候选；“GitLab、内网部署、MR 审查、成本”沿着下面那条路变成检索条件。两条路在候选检索处汇合。",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%8A%8A%E4%BD%A0%E5%86%99%E8%BF%9B%E7%AD%94%E6%A1%88%EF%BC%9F%E4%BB%8E%E4%B8%80%E5%8F%A5%E4%BA%A7%E5%93%81%E6%8E%A8%E8%8D%90%E8%AF%BB%E6%87%82%20GEO",
+    "chunkIndex": 2,
+    "totalChunks": 6,
+    "startPos": 653,
+    "endPos": 995,
+    "originalTitle": "AI 为什么没把你写进答案？从一句产品推荐读懂 GEO"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%8A%8A%E4%BD%A0%E5%86%99%E8%BF%9B%E7%AD%94%E6%A1%88%EF%BC%9F%E4%BB%8E%E4%B8%80%E5%8F%A5%E4%BA%A7%E5%93%81%E6%8E%A8%E8%8D%90%E8%AF%BB%E6%87%82%20GEO#chunk-3",
+    "title": "AI 为什么没把你写进答案？从一句产品推荐读懂 GEO (第4段)",
+    "content": "...成本”沿着下面那条路变成检索条件。两条路在候选检索处汇合。 旧页面并没有消失在搜索环节。它真正掉队的地方是“选择证据”：页面被找到了，却没有一句内容能支撑那条推荐。\n这也说明了 SEO 和 GEO 的关系：\n两者的边界有重叠，GEO 也离不开抓取、收录和检索。变化在于，内容竞争从“网页排在哪里”，继续延伸到“哪条主张会被写进答案”。\n所以 GEO 不是让 AI “相信”某个品牌。它是在提高一条真实主张被检索、被选作证据，并被准确写进答案的机会。\n生成答案以后呢？\n页面重新抓取后，我们再问一次。假设这次 AI 写出了最开始缺失的那句话，并引用了 PatchPilot 的部署文档。\n看起来链路走通了，但这只是一轮结果。",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%8A%8A%E4%BD%A0%E5%86%99%E8%BF%9B%E7%AD%94%E6%A1%88%EF%BC%9F%E4%BB%8E%E4%B8%80%E5%8F%A5%E4%BA%A7%E5%93%81%E6%8E%A8%E8%8D%90%E8%AF%BB%E6%87%82%20GEO",
+    "chunkIndex": 3,
+    "totalChunks": 6,
+    "startPos": 995,
+    "endPos": 1277,
+    "originalTitle": "AI 为什么没把你写进答案？从一句产品推荐读懂 GEO"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%8A%8A%E4%BD%A0%E5%86%99%E8%BF%9B%E7%AD%94%E6%A1%88%EF%BC%9F%E4%BB%8E%E4%B8%80%E5%8F%A5%E4%BA%A7%E5%93%81%E6%8E%A8%E8%8D%90%E8%AF%BB%E6%87%82%20GEO#chunk-4",
+    "title": "AI 为什么没把你写进答案？从一句产品推荐读懂 GEO (第5段)",
+    "content": "...lot 的部署文档。\n看起来链路走通了，但这只是一轮结果。 第一次提到，第二次没提；换个问法，又把 PatchPilot 说成了免费云服务。生成答案会波动，一张成功截图说明不了什么。怎样用固定问题、重复采样和对照实验量化 GEO，是接下来的工程问题。\n但沿着这条流程再追问一步：候选来源由谁提供，证据由谁选择，答案又由谁组织？\n过去，搜索引擎决定链接排在第几位，用户自己打开网页判断；现在，AI 会先选择材料，再替用户组织结论。谁控制候选来源、引用方式和答案表达，谁就在重新分配品牌与内容的可见性。\nGoogle 的索引优势还剩多少？ChatGPT 这样的答案入口又拿走了什么？这场竞争表面上发生在搜索框里，更深处争的是“谁来组成最终答案”。\n这已经不只是 GEO 的优化技巧，而是搜索正在发生的变局。\nReferences",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%8A%8A%E4%BD%A0%E5%86%99%E8%BF%9B%E7%AD%94%E6%A1%88%EF%BC%9F%E4%BB%8E%E4%B8%80%E5%8F%A5%E4%BA%A7%E5%93%81%E6%8E%A8%E8%8D%90%E8%AF%BB%E6%87%82%20GEO",
+    "chunkIndex": 4,
+    "totalChunks": 6,
+    "startPos": 1277,
+    "endPos": 1610,
+    "originalTitle": "AI 为什么没把你写进答案？从一句产品推荐读懂 GEO"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%8A%8A%E4%BD%A0%E5%86%99%E8%BF%9B%E7%AD%94%E6%A1%88%EF%BC%9F%E4%BB%8E%E4%B8%80%E5%8F%A5%E4%BA%A7%E5%93%81%E6%8E%A8%E8%8D%90%E8%AF%BB%E6%87%82%20GEO#chunk-5",
+    "title": "AI 为什么没把你写进答案？从一句产品推荐读懂 GEO (第6段)",
+    "content": "...的优化技巧，而是搜索正在发生的变局。\nReferences GEO: Generative Engine Optimization（KDD 2024）\nChatGPT Search\nPublishers and Developers - FAQ\nAI features and your website\nOptimizing your website for generative AI features on Google Search\nIntroducing Search Generative AI performance reports in Search Console",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%8A%8A%E4%BD%A0%E5%86%99%E8%BF%9B%E7%AD%94%E6%A1%88%EF%BC%9F%E4%BB%8E%E4%B8%80%E5%8F%A5%E4%BA%A7%E5%93%81%E6%8E%A8%E8%8D%90%E8%AF%BB%E6%87%82%20GEO",
+    "chunkIndex": 5,
+    "totalChunks": 6,
+    "startPos": 1610,
+    "endPos": 1870,
+    "originalTitle": "AI 为什么没把你写进答案？从一句产品推荐读懂 GEO"
+  },
+  {
     "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FClaude%20Dreaming%20vs%20Hermes%20Skill%EF%BC%9A%E5%B8%AE%E4%BD%A0%E5%85%A5%E5%9D%91%20Agent%20Memory#chunk-0",
     "title": "Claude Dreaming vs Hermes Skill：帮你入坑 Agent Memory",
     "content": "Claude Dreaming vs Hermes Skill：帮你入坑 Agent Memory\nClaude 有 Dreaming，Hermes 有 Skill。\n看着都在做同一件事：\n让 AI 从经验中学习。\n从 Agent Architecture 来看，它们其实属于两个完全不同的层级：\n**Dreaming 关心的是：哪些经验值得长期记住？**\n**Skill 关心的是：哪些经验值得固化成能力？**\n换句话说，一个优化的是 **Memory**，另一个优化的是 **Capability**。\n更准确一点说：\nClaude Dreaming 更接近 **Semantic Memory**，也就是“知道什么”。",
@@ -11559,83 +11625,6 @@
     "startPos": 2716,
     "endPos": 2778,
     "originalTitle": "Claude Sonnet 5 的 Token 消耗更多了？一文看懂 Token 的演化"
-  },
-  {
-    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E4%B8%80%E7%AF%87%E4%BA%A7%E5%93%81%E9%A1%B5%E6%80%8E%E6%A0%B7%E8%BF%9B%E5%85%A5%20AI%20%E7%9A%84%E7%AD%94%E6%A1%88%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E8%AF%BB%E6%87%82%20GEO#chunk-0",
-    "title": "一篇产品页怎样进入 AI 的答案：一个例子读懂 GEO",
-    "content": "一篇产品页怎样进入 AI 的答案：一个例子读懂 GEO\n假设我做了一款代码审查工具，叫 PatchPilot。\n官网已经上线，搜索产品名也能找到。首页写着：\n但当用户问 AI：\n我们是一个 20 人的 GitLab 团队，想自动审查 Merge Request，有哪些工具适合？\nAI 推荐了三款竞品，没提 PatchPilot。\n页面明明存在，为什么没有进入 AI 的答案？\n这就是 GEO（Generative Engine Optimization，生成式引擎优化）想解决的问题。\nPatchPilot 是一个虚构产品。我们暂时不谈各种 GEO 技巧，只跟着这张产品页走一遍，看看它在哪一步消失了。\n一张网页要经过几道门",
-    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E4%B8%80%E7%AF%87%E4%BA%A7%E5%93%81%E9%A1%B5%E6%80%8E%E6%A0%B7%E8%BF%9B%E5%85%A5%20AI%20%E7%9A%84%E7%AD%94%E6%A1%88%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E8%AF%BB%E6%87%82%20GEO",
-    "chunkIndex": 0,
-    "totalChunks": 7,
-    "startPos": 0,
-    "endPos": 314,
-    "originalTitle": "一篇产品页怎样进入 AI 的答案：一个例子读懂 GEO"
-  },
-  {
-    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E4%B8%80%E7%AF%87%E4%BA%A7%E5%93%81%E9%A1%B5%E6%80%8E%E6%A0%B7%E8%BF%9B%E5%85%A5%20AI%20%E7%9A%84%E7%AD%94%E6%A1%88%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E8%AF%BB%E6%87%82%20GEO#chunk-1",
-    "title": "一篇产品页怎样进入 AI 的答案：一个例子读懂 GEO (第2段)",
-    "content": "...产品页走一遍，看看它在哪一步消失了。\n一张网页要经过几道门 AI 不会在回答每个问题时阅读整个互联网。一张网页要进入答案，大致要走过这条路：\n真实平台的排序和选源方法并不完全公开，具体实现也不相同。但抓取、检索、选源和生成这几层，在主流 AI 搜索中普遍存在。\n我们先检查最前面两步。\nPatchPilot 没有阻止搜索爬虫，服务器日志里也能看到 OAI-SearchBot 的访问记录。页面可以被普通搜索引擎找到，标题和正文都能正常读取。\n它至少拿到了入场券。问题出在后面。\n顺带说一句，OpenAI 的 OAI-SearchBot 和 GPTBot 不是一回事。前者用于搜索，后者与潜在的模型训练有关。允许网页进入 ChatGPT Search，并不等于同意用它训练模型。OpenAI 的发布者说明明确区分了两者。\n用户问了一句话，AI 可能搜了好几个问题",
-    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E4%B8%80%E7%AF%87%E4%BA%A7%E5%93%81%E9%A1%B5%E6%80%8E%E6%A0%B7%E8%BF%9B%E5%85%A5%20AI%20%E7%9A%84%E7%AD%94%E6%A1%88%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E8%AF%BB%E6%87%82%20GEO",
-    "chunkIndex": 1,
-    "totalChunks": 7,
-    "startPos": 314,
-    "endPos": 665,
-    "originalTitle": "一篇产品页怎样进入 AI 的答案：一个例子读懂 GEO"
-  },
-  {
-    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E4%B8%80%E7%AF%87%E4%BA%A7%E5%93%81%E9%A1%B5%E6%80%8E%E6%A0%B7%E8%BF%9B%E5%85%A5%20AI%20%E7%9A%84%E7%AD%94%E6%A1%88%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E8%AF%BB%E6%87%82%20GEO#chunk-2",
-    "title": "一篇产品页怎样进入 AI 的答案：一个例子读懂 GEO (第3段)",
-    "content": "...明确区分了两者。\n用户问了一句话，AI 可能搜了好几个问题 用户问的是：\nChatGPT Search 不一定把这句话原样交给搜索服务。OpenAI 的公开说明提到，它可能把问题改写成一个或多个更具体的查询，查看结果后再继续搜索。Google 把类似过程称为 。\n在这个例子里，查询可能被拆成：\n这些查询是示意，我们看不到平台每次实际使用的词。但把它们和 PatchPilot 的首页放在一起，问题已经很明显了。\n用户关心 GitLab、部署方式、数据权限和价格，页面却只写了“下一代”“智能”“更快”。它能匹配品牌名，匹配不了选型问题。\n传统 SEO 常从一个关键词出发优化页面。AI 搜索可能把一句自然语言拆成一组意图，页面需要回答的是这组意图背后的具体问题。\n被搜到，还要能成为一句话的证据",
-    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E4%B8%80%E7%AF%87%E4%BA%A7%E5%93%81%E9%A1%B5%E6%80%8E%E6%A0%B7%E8%BF%9B%E5%85%A5%20AI%20%E7%9A%84%E7%AD%94%E6%A1%88%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E8%AF%BB%E6%87%82%20GEO",
-    "chunkIndex": 2,
-    "totalChunks": 7,
-    "startPos": 665,
-    "endPos": 984,
-    "originalTitle": "一篇产品页怎样进入 AI 的答案：一个例子读懂 GEO"
-  },
-  {
-    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E4%B8%80%E7%AF%87%E4%BA%A7%E5%93%81%E9%A1%B5%E6%80%8E%E6%A0%B7%E8%BF%9B%E5%85%A5%20AI%20%E7%9A%84%E7%AD%94%E6%A1%88%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E8%AF%BB%E6%87%82%20GEO#chunk-3",
-    "title": "一篇产品页怎样进入 AI 的答案：一个例子读懂 GEO (第4段)",
-    "content": "...是这组意图背后的具体问题。\n被搜到，还要能成为一句话的证据 假设 PatchPilot 还是进入了候选结果。它依然可能输给一份写得更具体的竞品文档：\n如果模型要写“某工具支持私有化部署”，上面三句话能直接提供证据。“安全、高效、适合现代团队”则无法支持这个结论。\n于是我们重写 PatchPilot 的产品页：\n页面下方再给出安装文档、权限清单和价格说明。\n这次没有添加所谓的“AI 关键词”，只是把原来空泛的宣传换成了可以核验的事实。人类选型时需要这些信息，模型组织答案时也需要。\nGEO 原始论文做过类似方向的实验：在特定测试环境中，为内容补充相关引用、引语和统计数据，可以提高它在生成答案中的可见性，最高约 40%。但这个数字不是通用引用率，不同领域的效果也不同。GEO 论文\nGEO 和 SEO，差在最后几步",
-    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E4%B8%80%E7%AF%87%E4%BA%A7%E5%93%81%E9%A1%B5%E6%80%8E%E6%A0%B7%E8%BF%9B%E5%85%A5%20AI%20%E7%9A%84%E7%AD%94%E6%A1%88%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E8%AF%BB%E6%87%82%20GEO",
-    "chunkIndex": 3,
-    "totalChunks": 7,
-    "startPos": 984,
-    "endPos": 1313,
-    "originalTitle": "一篇产品页怎样进入 AI 的答案：一个例子读懂 GEO"
-  },
-  {
-    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E4%B8%80%E7%AF%87%E4%BA%A7%E5%93%81%E9%A1%B5%E6%80%8E%E6%A0%B7%E8%BF%9B%E5%85%A5%20AI%20%E7%9A%84%E7%AD%94%E6%A1%88%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E8%AF%BB%E6%87%82%20GEO#chunk-4",
-    "title": "一篇产品页怎样进入 AI 的答案：一个例子读懂 GEO (第5段)",
-    "content": "...效果也不同。GEO 论文\nGEO 和 SEO，差在最后几步 现在回头看，SEO 和 GEO 并不是两套互不相干的技术。\n没有前面的搜索基础，后面的生成无从发生。Google 也明确表示，AI Overviews 和 AI Mode 仍然依赖原有的搜索索引、排名和质量系统，基础 SEO 继续有效。Google Search 文档\n变化在于，传统搜索把候选链接交给用户选择；AI 搜索会先替用户组织一遍。你的页面即使排进了候选，也可能没有任何一句话被带进答案。\n所以 GEO 争的不是一个新的固定排名，而是三件事：\n最后复测一次\n页面重新抓取后，不能只问一遍原问题，然后截一张“AI 终于推荐我了”的图。\n至少固定几种真实问法：",
-    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E4%B8%80%E7%AF%87%E4%BA%A7%E5%93%81%E9%A1%B5%E6%80%8E%E6%A0%B7%E8%BF%9B%E5%85%A5%20AI%20%E7%9A%84%E7%AD%94%E6%A1%88%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E8%AF%BB%E6%87%82%20GEO",
-    "chunkIndex": 4,
-    "totalChunks": 7,
-    "startPos": 1313,
-    "endPos": 1597,
-    "originalTitle": "一篇产品页怎样进入 AI 的答案：一个例子读懂 GEO"
-  },
-  {
-    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E4%B8%80%E7%AF%87%E4%BA%A7%E5%93%81%E9%A1%B5%E6%80%8E%E6%A0%B7%E8%BF%9B%E5%85%A5%20AI%20%E7%9A%84%E7%AD%94%E6%A1%88%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E8%AF%BB%E6%87%82%20GEO#chunk-5",
-    "title": "一篇产品页怎样进入 AI 的答案：一个例子读懂 GEO (第6段)",
-    "content": "...截一张“AI 终于推荐我了”的图。\n至少固定几种真实问法： 定期重复测试，记录 PatchPilot 是否被提及、引用了哪个页面、产品信息有没有说错。生成结果会随问法和时间波动，一次出现只能证明那一次出现过。\n到这里，PatchPilot 没进入答案的原因已经找到了：网页存在，也能被搜索，但它没有提供足以回答用户问题的事实。\nGEO 的核心因此可以压缩成一句话：\n让一份真实、有用的信息，更容易进入 AI 的答案，并在答案里不被说错。\n它没有取代 SEO，也不是讨好模型的新文风。它只是把内容优化的终点，从“进入搜索结果”往后推到了“参与生成答案”。\nReferences\nGEO: Generative Engine Optimization（KDD 2024）\nChatGPT Search\nPublishers and Developers - FAQ",
-    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E4%B8%80%E7%AF%87%E4%BA%A7%E5%93%81%E9%A1%B5%E6%80%8E%E6%A0%B7%E8%BF%9B%E5%85%A5%20AI%20%E7%9A%84%E7%AD%94%E6%A1%88%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E8%AF%BB%E6%87%82%20GEO",
-    "chunkIndex": 5,
-    "totalChunks": 7,
-    "startPos": 1597,
-    "endPos": 1948,
-    "originalTitle": "一篇产品页怎样进入 AI 的答案：一个例子读懂 GEO"
-  },
-  {
-    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E4%B8%80%E7%AF%87%E4%BA%A7%E5%93%81%E9%A1%B5%E6%80%8E%E6%A0%B7%E8%BF%9B%E5%85%A5%20AI%20%E7%9A%84%E7%AD%94%E6%A1%88%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E8%AF%BB%E6%87%82%20GEO#chunk-6",
-    "title": "一篇产品页怎样进入 AI 的答案：一个例子读懂 GEO (第7段)",
-    "content": "...blishers and Developers - FAQ Optimizing your website for generative AI features on Google Search",
-    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E4%B8%80%E7%AF%87%E4%BA%A7%E5%93%81%E9%A1%B5%E6%80%8E%E6%A0%B7%E8%BF%9B%E5%85%A5%20AI%20%E7%9A%84%E7%AD%94%E6%A1%88%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E8%AF%BB%E6%87%82%20GEO",
-    "chunkIndex": 6,
-    "totalChunks": 7,
-    "startPos": 1948,
-    "endPos": 2015,
-    "originalTitle": "一篇产品页怎样进入 AI 的答案：一个例子读懂 GEO"
   },
   {
     "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E4%B8%BA%E4%BB%80%E4%B9%88%20AI%20%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E6%9B%B4%E9%9C%80%E8%A6%81%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%80%9D%E6%83%B3%EF%BC%9F#chunk-0",
