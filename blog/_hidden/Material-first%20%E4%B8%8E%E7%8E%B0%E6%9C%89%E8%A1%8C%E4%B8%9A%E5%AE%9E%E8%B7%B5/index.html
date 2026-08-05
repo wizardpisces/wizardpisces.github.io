@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Material-first 与现有行业实践 | LZ AI NOTE</title>
+  <meta name="description" content="Material first 与现有行业实践 Material first 涉及的能力并非全部从零开始。组件驱动开发、设计组件与代码组件映射、使用生产组件制作原型，以及让 AI 遵循既有设计系统生成页面，都已经有对应工具。 问题在于，这些工具处在生产链路的不同位置。把它们并列为同一种实践，会掩盖各自解决的问题，也容易让人误以为“从需求到统一 Schema”…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/Material-first%20%E4%B8%8E%E7%8E%B0%E6%9C%89%E8%A1%8C%E4%B8%9A%E5%AE%9E%E8%B7%B5">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="Material-first 与现有行业实践 | LZ AI NOTE">
+  <meta property="og:description" content="Material first 与现有行业实践 Material first 涉及的能力并非全部从零开始。组件驱动开发、设计组件与代码组件映射、使用生产组件制作原型，以及让 AI 遵循既有设计系统生成页面，都已经有对应工具。 问题在于，这些工具处在生产链路的不同位置。把它们并列为同一种实践，会掩盖各自解决的问题，也容易让人误以为“从需求到统一 Schema”…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/Material-first%20%E4%B8%8E%E7%8E%B0%E6%9C%89%E8%A1%8C%E4%B8%9A%E5%AE%9E%E8%B7%B5">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Material-first 与现有行业实践","description":"Material first 与现有行业实践 Material first 涉及的能力并非全部从零开始。组件驱动开发、设计组件与代码组件映射、使用生产组件制作原型，以及让 AI 遵循既有设计系统生成页面，都已经有对应工具。 问题在于，这些工具处在生产链路的不同位置。把它们并列为同一种实践，会掩盖各自解决的问题，也容易让人误以为“从需求到统一 Schema”…","url":"https://wizardpisces.github.io/blog/_hidden/Material-first%20%E4%B8%8E%E7%8E%B0%E6%9C%89%E8%A1%8C%E4%B8%9A%E5%AE%9E%E8%B7%B5","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/Material-first%20%E4%B8%8E%E7%8E%B0%E6%9C%89%E8%A1%8C%E4%B8%9A%E5%AE%9E%E8%B7%B5","dateModified":"2026-08-05","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Material-first 与现有行业实践</h1><h1>Material-first 与现有行业实践</h1>
+<p>Material-first 涉及的能力并非全部从零开始。组件驱动开发、设计组件与代码组件映射、使用生产组件制作原型，以及让 AI 遵循既有设计系统生成页面，都已经有对应工具。</p>
+<p>问题在于，这些工具处在生产链路的不同位置。把它们并列为同一种实践，会掩盖各自解决的问题，也容易让人误以为“从需求到统一 Schema”的整套流程已经得到验证。</p>
+<p>这篇调研只回答两个问题：现有工具分别覆盖了哪一段，以及 Material-first 还需要补上什么。</p>
+<h2>能力位置对比</h2>
+<table>
+<thead>
+<tr>
+<th>实践</th>
+<th>主要输入</th>
+<th>主要输出</th>
+<th>覆盖的环节</th>
+<th>与 Material-first 的关系</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Storybook</td>
+<td>代码组件、Props、Mock 数据</td>
+<td>可隔离运行和测试的组件状态</td>
+<td>组件开发、文档与验证</td>
+<td>为 Material Catalog 提供可运行的组件事实</td>
+</tr>
+<tr>
+<td>Figma Code Connect</td>
+<td>Figma 组件与代码组件</td>
+<td>稳定映射、真实代码上下文</td>
+<td>设计到实现的连接</td>
+<td>强化 Figma-to-Schema 逆向路径</td>
+</tr>
+<tr>
+<td>UXPin Merge</td>
+<td>生产 React 组件</td>
+<td>可交互设计原型</td>
+<td>使用真实组件进行设计</td>
+<td>最接近 Material-first 的物料原型</td>
+</tr>
+<tr>
+<td>v0 Design Systems</td>
+<td>组件、Token、规范与来源</td>
+<td>遵循设计系统生成的应用代码</td>
+<td>AI 按既有系统生成页面</td>
+<td>最接近 Material Catalog 到页面的正向路径</td>
+</tr>
+</tbody>
+</table>
+<h2>Storybook：组件事实的承载层</h2>
+<p>Storybook 的核心是让组件脱离完整应用独立运行。每个 Story 描述组件的一种状态，团队可以围绕这些状态开发、测试和编写文档。官方推荐的 Component-Driven workflow 也是从基础组件开始，逐步组合为复杂组件和页面，再接入业务数据。</p>
+<p>它能为 Material Catalog 提供很有价值的事实：组件有哪些状态、需要哪些 Props、在边界条件下如何表现。AI 如果要理解和组合生产物料，这些结构化信息可以成为重要输入。</p>
+<p>但 Storybook 本身不负责理解 PRD，也不负责把 Figma 节点映射成代码组件。它解决的是“组件如何被开发和验证”，不是“页面原型应当如何生成”。</p>
+<p>参考：<a href="https://storybook.js.org/docs/get-started/why-storybook">Why Storybook</a></p>
+<h2>Figma Code Connect：稳定设计与代码的映射</h2>
+<p>Figma Code Connect 把 Figma 组件连接到代码仓库中的真实组件。通过 Code Connect UI 或 CLI，团队可以提供组件路径、导入方式、属性映射、代码示例和补充说明。</p>
+<p>这些映射也会进入 Figma MCP Server 的上下文。AI Agent 读取包含已连接组件的设计稿时，可以拿到更准确的组件名称、属性和实现方式，不必只根据视觉结构猜测。</p>
+<p>它解决的是 Figma 与生产代码之间的连接问题，因此更接近本文里的逆向路径：</p>
+<pre><code class="language-text">Figma → Code Connect / Recognition → Schema
+</code></pre>
+<p>Code Connect 可以降低自由识别带来的不确定性，但它通常从已有 Figma 设计出发，并不负责在需求阶段生成物料原型。</p>
+<p>参考：<a href="https://developers.figma.com/docs/code-connect/">Figma Code Connect</a>、<a href="https://developers.figma.com/docs/figma-mcp-server/code-connect-integration/">Code Connect 与 Figma MCP Server</a></p>
+<h2>UXPin Merge：使用生产组件制作原型</h2>
+<p>UXPin Merge 可以把 Git 仓库中的 React 组件同步到设计工具，设计师直接使用这些组件制作原型。组件的交互、数据和属性来自真实代码，因此原型与最终产品共享同一套实现基础。</p>
+<p>在所比较的实践中，它与 Material-first 最接近：设计的起点不再是一组重新绘制的视觉组件，而是已经存在于生产环境中的代码组件。</p>
+<p>两者仍有差别。UXPin Merge 重点解决“如何用生产组件设计”，Material-first 还加入了需求理解、AI 自动生成原型、缺口审计、Candidate Material 治理以及统一 Schema 等环节。</p>
+<p>参考：<a href="https://www.uxpin.com/docs/merge/what-is-uxpin-merge/">What is UXPin Merge</a></p>
+<h2>v0 Design Systems：让 AI 遵循真实设计系统生成</h2>
+<p>v0 Design Systems 2.0 会读取定义设计系统的来源，例如 GitHub 仓库、消费端应用、Figma Frame 和文档，再保存一份适配该系统的 Skill。生成页面时，v0 可以据此使用团队已有的组件、Token 和约定。</p>
+<p>官方文档还明确提出：无法从来源中验证的组件、Prop 或 Token 不应被使用。这与 Material-first 的一个基本前提一致，即 AI 应在可核验的生产物料范围内生成，而不是凭空编造组件能力。</p>
+<p>它已经覆盖了“设计系统到 AI 生成”这条正向路径的重要部分：</p>
+<pre><code class="language-text">Design System → AI Generation → Application Code
+</code></pre>
+<p>但它是否能承担需求阶段的信息结构确认、物料缺口审计、候选治理，以及输出团队自定义的统一 Design Schema，需要结合具体接入方式另行验证。</p>
+<p>参考：<a href="https://v0.app/docs/design-systems-2">v0 Design Systems 2.0</a></p>
+<h2>现有实践还没有覆盖的部分</h2>
+<p>四类工具拼在一起，已经能覆盖组件事实、设计与代码映射、生产组件原型和 AI 页面生成。不过，Material-first 所设想的闭环仍有几处空白。</p>
+<h3>从 PRD 到页面语义</h3>
+<p>现有工具可以根据提示或设计输入工作，却不一定能把业务目标稳定地转换为页面信息架构、操作、状态和内容约束。Requirement-to-Schema 需要一套明确的需求补全和人工确认机制。</p>
+<h3>物料缺口审计</h3>
+<p>AI 不仅要知道“有什么组件”，还要区分现有组件可以直接复用、只需扩展 Variant、需要页面级组合，还是确实出现了新的公共物料候选。</p>
+<h3>Candidate Material 治理</h3>
+<p>从一次需求中生成的结构不能自动进入公共 Catalog。复用证据、参数化能力、视觉稳定性和兼容成本仍需人工判断。现有工具大多管理正式组件，对候选物料的生命周期支持有限。</p>
+<h3>统一的页面语义</h3>
+<p>Figma-to-Schema 和 Requirement-to-Schema 必须输出同一种区块定义、Props 组织和嵌套结构。否则，下游 Runtime 仍然面对两套协议，只是把分裂从设计阶段转移到了渲染阶段。</p>
+<h3>交付结果回流</h3>
+<p>一次交付新增的物料、映射和约束，需要回到下一次原型生成中。没有这条反馈链，系统仍会重复识别和补漏，谈不上闭环。</p>
+<h2>结论</h2>
+<p>现有行业实践已经验证了 Material-first 所需的多项局部能力，但没有证明整条链路已经成熟。</p>
+<p>Storybook 提供组件事实，Code Connect 稳定设计与代码的映射，UXPin Merge 证明生产组件可以直接参与原型设计，v0 则开始让 AI 按真实设计系统生成页面。Material-first 的工作不是再造这些能力，而是补上需求理解、缺口审计、候选治理、统一 Schema 和结果回流，并验证它们能否在同一条生产链路中稳定运行。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-BhXBiu0i.js"></script>
+</body>
+</html>
