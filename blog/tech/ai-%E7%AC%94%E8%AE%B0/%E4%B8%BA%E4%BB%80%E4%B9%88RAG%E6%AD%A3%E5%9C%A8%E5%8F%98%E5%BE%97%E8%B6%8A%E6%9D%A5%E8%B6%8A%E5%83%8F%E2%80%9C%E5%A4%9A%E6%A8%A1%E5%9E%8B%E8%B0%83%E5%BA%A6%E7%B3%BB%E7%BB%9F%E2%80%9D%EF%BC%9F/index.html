@@ -12,7 +12,9 @@
   <meta property="og:title" content="为什么RAG正在变得越来越像“多模型调度系统”？ | LZ AI NOTE">
   <meta property="og:description" content="[这篇文章]讲的是： RAG 里用户问题不要直接丢给检索和生成，而要先被解析成一张“执行计划表”，再由 dispatcher 决定后面的检索方式、chunk 处理方式、模型档位和审计记录。 用一个例子串起来： 用户上传一份保险合同，问： What is the annual premium and what are the main exclusions?…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%B8%BA%E4%BB%80%E4%B9%88RAG%E6%AD%A3%E5%9C%A8%E5%8F%98%E5%BE%97%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%83%8F%E2%80%9C%E5%A4%9A%E6%A8%A1%E5%9E%8B%E8%B0%83%E5%BA%A6%E7%B3%BB%E7%BB%9F%E2%80%9D%EF%BC%9F">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"为什么RAG正在变得越来越像“多模型调度系统”？","description":"[这篇文章]讲的是： RAG 里用户问题不要直接丢给检索和生成，而要先被解析成一张“执行计划表”，再由 dispatcher 决定后面的检索方式、chunk 处理方式、模型档位和审计记录。 用一个例子串起来： 用户上传一份保险合同，问： What is the annual premium and what are the main exclusions?…","url":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%B8%BA%E4%BB%80%E4%B9%88RAG%E6%AD%A3%E5%9C%A8%E5%8F%98%E5%BE%97%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%83%8F%E2%80%9C%E5%A4%9A%E6%A8%A1%E5%9E%8B%E8%B0%83%E5%BA%A6%E7%B3%BB%E7%BB%9F%E2%80%9D%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%B8%BA%E4%BB%80%E4%B9%88RAG%E6%AD%A3%E5%9C%A8%E5%8F%98%E5%BE%97%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%83%8F%E2%80%9C%E5%A4%9A%E6%A8%A1%E5%9E%8B%E8%B0%83%E5%BA%A6%E7%B3%BB%E7%BB%9F%E2%80%9D%EF%BC%9F","dateModified":"2026-06-29","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <meta property="og:image" content="https://wizardpisces.github.io/covers/rag-stateless-guardrail.png">
+  <meta name="twitter:image" content="https://wizardpisces.github.io/covers/rag-stateless-guardrail.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"为什么RAG正在变得越来越像“多模型调度系统”？","description":"[这篇文章]讲的是： RAG 里用户问题不要直接丢给检索和生成，而要先被解析成一张“执行计划表”，再由 dispatcher 决定后面的检索方式、chunk 处理方式、模型档位和审计记录。 用一个例子串起来： 用户上传一份保险合同，问： What is the annual premium and what are the main exclusions?…","url":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%B8%BA%E4%BB%80%E4%B9%88RAG%E6%AD%A3%E5%9C%A8%E5%8F%98%E5%BE%97%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%83%8F%E2%80%9C%E5%A4%9A%E6%A8%A1%E5%9E%8B%E8%B0%83%E5%BA%A6%E7%B3%BB%E7%BB%9F%E2%80%9D%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%B8%BA%E4%BB%80%E4%B9%88RAG%E6%AD%A3%E5%9C%A8%E5%8F%98%E5%BE%97%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%83%8F%E2%80%9C%E5%A4%9A%E6%A8%A1%E5%9E%8B%E8%B0%83%E5%BA%A6%E7%B3%BB%E7%BB%9F%E2%80%9D%EF%BC%9F","dateModified":"2026-06-29","image":"https://wizardpisces.github.io/covers/rag-stateless-guardrail.png","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>为什么RAG正在变得越来越像“多模型调度系统”？</h1><p><a href="https://towardsdatascience.com/dispatching-the-parsed-rag-question-chunk-strategy-model-tier-activations-audit/">这篇文章</a>讲的是：<strong>RAG 里用户问题不要直接丢给检索和生成，而要先被解析成一张“执行计划表”，再由 dispatcher 决定后面的检索方式、chunk 处理方式、模型档位和审计记录。</strong></p>
@@ -100,6 +102,6 @@ DOCX:
 <p>它的观点很工程化：<br>
 RAG 不只是“检索增强生成”，更像一个文档问答操作系统。问题解析器负责理解意图，dispatcher 负责调度资源，retrieval 和 generation 只是被调度的执行单元。</p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-CA6E_ULQ.js"></script>
+  <script type="module" crossorigin src="/assets/index-PoxT77KL.js"></script>
 </body>
 </html>

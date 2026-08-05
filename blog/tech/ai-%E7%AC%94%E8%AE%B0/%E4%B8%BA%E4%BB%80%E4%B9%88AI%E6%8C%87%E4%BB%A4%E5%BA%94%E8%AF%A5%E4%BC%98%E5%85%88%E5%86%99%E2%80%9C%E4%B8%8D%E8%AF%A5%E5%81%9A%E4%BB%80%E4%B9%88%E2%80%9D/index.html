@@ -12,7 +12,9 @@
   <meta property="og:title" content="为什么AI指令应该优先写“不该做什么” | LZ AI NOTE">
   <meta property="og:description" content="一、问题的起点：正向清单无法穷举 指令设计的直觉往往导向“应该做什么”。产品经理、提示词工程师、普通用户，第一反应几乎都是描述期望：你应该礼貌、应该详细、应该主动追问。 但正向清单存在一个无法解决的缺陷：它不可能穷举。没有设计者能遍历所有场景，而大模型作为概率系统，在未被明确指引的灰色地带会本能地选择“讨好”——帮用户合理化一个糟糕的决策，为明显错误的命题…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%B8%BA%E4%BB%80%E4%B9%88AI%E6%8C%87%E4%BB%A4%E5%BA%94%E8%AF%A5%E4%BC%98%E5%85%88%E5%86%99%E2%80%9C%E4%B8%8D%E8%AF%A5%E5%81%9A%E4%BB%80%E4%B9%88%E2%80%9D">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"为什么AI指令应该优先写“不该做什么”","description":"一、问题的起点：正向清单无法穷举 指令设计的直觉往往导向“应该做什么”。产品经理、提示词工程师、普通用户，第一反应几乎都是描述期望：你应该礼貌、应该详细、应该主动追问。 但正向清单存在一个无法解决的缺陷：它不可能穷举。没有设计者能遍历所有场景，而大模型作为概率系统，在未被明确指引的灰色地带会本能地选择“讨好”——帮用户合理化一个糟糕的决策，为明显错误的命题…","url":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%B8%BA%E4%BB%80%E4%B9%88AI%E6%8C%87%E4%BB%A4%E5%BA%94%E8%AF%A5%E4%BC%98%E5%85%88%E5%86%99%E2%80%9C%E4%B8%8D%E8%AF%A5%E5%81%9A%E4%BB%80%E4%B9%88%E2%80%9D","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%B8%BA%E4%BB%80%E4%B9%88AI%E6%8C%87%E4%BB%A4%E5%BA%94%E8%AF%A5%E4%BC%98%E5%85%88%E5%86%99%E2%80%9C%E4%B8%8D%E8%AF%A5%E5%81%9A%E4%BB%80%E4%B9%88%E2%80%9D","dateModified":"2026-05-21","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <meta property="og:image" content="https://wizardpisces.github.io/covers/negative-instructions-first.png">
+  <meta name="twitter:image" content="https://wizardpisces.github.io/covers/negative-instructions-first.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"为什么AI指令应该优先写“不该做什么”","description":"一、问题的起点：正向清单无法穷举 指令设计的直觉往往导向“应该做什么”。产品经理、提示词工程师、普通用户，第一反应几乎都是描述期望：你应该礼貌、应该详细、应该主动追问。 但正向清单存在一个无法解决的缺陷：它不可能穷举。没有设计者能遍历所有场景，而大模型作为概率系统，在未被明确指引的灰色地带会本能地选择“讨好”——帮用户合理化一个糟糕的决策，为明显错误的命题…","url":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%B8%BA%E4%BB%80%E4%B9%88AI%E6%8C%87%E4%BB%A4%E5%BA%94%E8%AF%A5%E4%BC%98%E5%85%88%E5%86%99%E2%80%9C%E4%B8%8D%E8%AF%A5%E5%81%9A%E4%BB%80%E4%B9%88%E2%80%9D","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%B8%BA%E4%BB%80%E4%B9%88AI%E6%8C%87%E4%BB%A4%E5%BA%94%E8%AF%A5%E4%BC%98%E5%85%88%E5%86%99%E2%80%9C%E4%B8%8D%E8%AF%A5%E5%81%9A%E4%BB%80%E4%B9%88%E2%80%9D","dateModified":"2026-05-21","image":"https://wizardpisces.github.io/covers/negative-instructions-first.png","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>为什么AI指令应该优先写“不该做什么”</h1><p>一、问题的起点：正向清单无法穷举</p>
@@ -50,6 +52,6 @@
 <p>测试的时候，不要把精力均匀撒在所有场景上。优先测试边界——拿五个故意踩线的真实提问去跑，看模型在应当拒绝的时候是否还在努力帮忙。调整的判断标准不是“输出是否优雅”，而是“该停的时候有没有停住”。</p>
 <p>法治社会用了几个世纪才把法无禁止即可为沉淀为共识。AI指令设计大概不需要那么久。但底层的道理是一样的：最好的秩序不是被规定出来的，是用边界保护出来的。</p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-CA6E_ULQ.js"></script>
+  <script type="module" crossorigin src="/assets/index-PoxT77KL.js"></script>
 </body>
 </html>

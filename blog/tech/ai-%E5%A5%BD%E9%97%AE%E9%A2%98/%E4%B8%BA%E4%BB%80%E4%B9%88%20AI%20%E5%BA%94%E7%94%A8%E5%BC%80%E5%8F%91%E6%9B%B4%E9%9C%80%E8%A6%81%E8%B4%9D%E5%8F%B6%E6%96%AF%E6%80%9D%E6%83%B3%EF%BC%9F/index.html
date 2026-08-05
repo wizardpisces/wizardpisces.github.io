@@ -12,7 +12,9 @@
   <meta property="og:title" content="为什么 AI 应用开发更需要贝叶斯思想？ | LZ AI NOTE">
   <meta property="og:description" content="AI 应用研发比传统软件研发更需要贝叶斯决策思想。原因不是 AI 更复杂，而是 AI 产品的不确定性远高于传统软件。 传统软件实现的是确定需求： 用户点击按钮 → 后端计算 → 返回结果。 AI 应用在不断验证概率问题： 用户真的需要这个能力吗？（需求不确定） Prompt 是否有效？（方案不确定） Model A 还是 Model B 更好？（模型不确定…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E4%B8%BA%E4%BB%80%E4%B9%88%20AI%20%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E6%9B%B4%E9%9C%80%E8%A6%81%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%80%9D%E6%83%B3%EF%BC%9F">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"为什么 AI 应用开发更需要贝叶斯思想？","description":"AI 应用研发比传统软件研发更需要贝叶斯决策思想。原因不是 AI 更复杂，而是 AI 产品的不确定性远高于传统软件。 传统软件实现的是确定需求： 用户点击按钮 → 后端计算 → 返回结果。 AI 应用在不断验证概率问题： 用户真的需要这个能力吗？（需求不确定） Prompt 是否有效？（方案不确定） Model A 还是 Model B 更好？（模型不确定…","url":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E4%B8%BA%E4%BB%80%E4%B9%88%20AI%20%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E6%9B%B4%E9%9C%80%E8%A6%81%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%80%9D%E6%83%B3%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E4%B8%BA%E4%BB%80%E4%B9%88%20AI%20%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E6%9B%B4%E9%9C%80%E8%A6%81%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%80%9D%E6%83%B3%EF%BC%9F","dateModified":"2026-07-21","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <meta property="og:image" content="https://wizardpisces.github.io/covers/ai-product-bayesian-belief-update.png">
+  <meta name="twitter:image" content="https://wizardpisces.github.io/covers/ai-product-bayesian-belief-update.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"为什么 AI 应用开发更需要贝叶斯思想？","description":"AI 应用研发比传统软件研发更需要贝叶斯决策思想。原因不是 AI 更复杂，而是 AI 产品的不确定性远高于传统软件。 传统软件实现的是确定需求： 用户点击按钮 → 后端计算 → 返回结果。 AI 应用在不断验证概率问题： 用户真的需要这个能力吗？（需求不确定） Prompt 是否有效？（方案不确定） Model A 还是 Model B 更好？（模型不确定…","url":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E4%B8%BA%E4%BB%80%E4%B9%88%20AI%20%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E6%9B%B4%E9%9C%80%E8%A6%81%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%80%9D%E6%83%B3%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E4%B8%BA%E4%BB%80%E4%B9%88%20AI%20%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E6%9B%B4%E9%9C%80%E8%A6%81%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%80%9D%E6%83%B3%EF%BC%9F","dateModified":"2026-07-21","image":"https://wizardpisces.github.io/covers/ai-product-bayesian-belief-update.png","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>为什么 AI 应用开发更需要贝叶斯思想？</h1><p>AI 应用研发比传统软件研发更需要贝叶斯决策思想。原因不是 AI 更复杂，而是 AI 产品的不确定性远高于传统软件。</p>
@@ -155,6 +157,6 @@ AI 产品研发自然应该采用不断根据证据更新判断的方法，而�
 <p>代码只是实验载体，真正持续迭代的是团队对&quot;什么最有价值&quot;的信念。AI 产品由于需求、模型能力和用户行为都具有高度不确定性，因此比传统软件更依赖这种基于证据持续更新决策的研发方式。</p>
 <p><em>观察现象，记录本质  - LZ</em></p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-CA6E_ULQ.js"></script>
+  <script type="module" crossorigin src="/assets/index-PoxT77KL.js"></script>
 </body>
 </html>
