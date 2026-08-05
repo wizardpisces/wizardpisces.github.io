@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>从 AI+Figma 到 AI 原生：Material-first 页面生产模式 | LZ AI NOTE</title>
+  <meta name="description" content="把生产物料前移到需求原型阶段，减少 Figma-to-Code 的后置识别与返工。">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E4%BB%8E%20AI%2BFigma%20%E5%88%B0%20AI%20%E5%8E%9F%E7%94%9F%EF%BC%9AMaterial-first%20%E9%A1%B5%E9%9D%A2%E7%94%9F%E4%BA%A7%E6%A8%A1%E5%BC%8F">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="从 AI+Figma 到 AI 原生：Material-first 页面生产模式 | LZ AI NOTE">
+  <meta property="og:description" content="把生产物料前移到需求原型阶段，减少 Figma-to-Code 的后置识别与返工。">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E4%BB%8E%20AI%2BFigma%20%E5%88%B0%20AI%20%E5%8E%9F%E7%94%9F%EF%BC%9AMaterial-first%20%E9%A1%B5%E9%9D%A2%E7%94%9F%E4%BA%A7%E6%A8%A1%E5%BC%8F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"从 AI+Figma 到 AI 原生：Material-first 页面生产模式","description":"把生产物料前移到需求原型阶段，减少 Figma-to-Code 的后置识别与返工。","url":"https://wizardpisces.github.io/blog/_hidden/%E4%BB%8E%20AI%2BFigma%20%E5%88%B0%20AI%20%E5%8E%9F%E7%94%9F%EF%BC%9AMaterial-first%20%E9%A1%B5%E9%9D%A2%E7%94%9F%E4%BA%A7%E6%A8%A1%E5%BC%8F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E4%BB%8E%20AI%2BFigma%20%E5%88%B0%20AI%20%E5%8E%9F%E7%94%9F%EF%BC%9AMaterial-first%20%E9%A1%B5%E9%9D%A2%E7%94%9F%E4%BA%A7%E6%A8%A1%E5%BC%8F","dateModified":"2026-08-05","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>从 AI+Figma 到 AI 原生：Material-first 页面生产模式</h1><h1>从 AI+Figma 到 AI 原生：Material-first 页面生产模式</h1>
+<p>现在的 Figma-to-Code 已经能做不少事：识别 Figma 页面结构，映射已有物料，生成楼层 JSON，再由渲染引擎输出页面。</p>
+<p>它比 Screenshot-to-Code 稳定得多，也更容易校验。问题是，流程仍然从一张自由设计的 Figma 开始。设计完成后，团队才知道现有物料能不能覆盖；不能覆盖，就得重新识别、拼装、补属性，甚至补组件。返工往往发生在最贵的时候。</p>
+<p>所以更值得讨论的问题不是“怎么把 Figma 还原得更准”，而是能否换个起点：先让 AI 用已有生产物料生成可运行原型，产品和设计在原型上继续修改；只有现有物料确实不够时，才进入物料扩展或自由设计。</p>
+<p>这里说的“AI 原生”不是取消 Figma，也不是让设计师只能从组件库里挑积木。它只是把 AI 和生产物料提前放进设计阶段，让页面从一开始就尽量处在可实现、可运行、可复用的范围内。</p>
+<h2>现有流程里，AI 其实在 Figma 之后工作</h2>
+<p>现有链路大致是：</p>
+<pre><code class="language-text">PRD
+  ↓
+产品 / UED 输出 Figma
+  ↓
+AI 映射为楼层 JSON
+  ↓
+Renderer 渲染页面
+  ↓
+接入业务逻辑
+</code></pre>
+<p>FE AI Code 真正消费的，通常已经不是原始 Figma，而是识别后的组件楼层 JSON。现有方案已经完成了几件重要的事：页面不再由模型直接拼 React 结构，Figma 节点尽量映射到已注册物料，页面结构由 Schema 描述，并通过真实 Runtime Component 渲染。结果还能继续做视觉和运行验证。</p>
+<p>它更像 Figma 到 Material Schema 的转换，而不是传统意义上的 Design-to-Code。</p>
+<h2>为什么 Figma 还原仍然不算闭环</h2>
+<p>问题不在于页面能不能生成，而在于设计、物料和实现之间仍然是单向关系。</p>
+<p>Figma 可以自由表达视觉效果，生产物料却有明确的 Props、Variant、组合关系和运行时限制。团队通常要等到组件识别时，才会知道设计到底能不能直接复用，还是要补 Variant、新增公共组件，或者为当前页面写一次性实现。</p>
+<p>设计一改，识别也要重来。节点层级变化、组件实例替换、页面结构调整，都可能让原来的映射失效。即使最后仍由同一组物料实现，Agent 也得重新判断：这次画的还是不是上次那个组件？</p>
+<p>这类识别可以越来越准，但它本质上仍是后验推断。只要设计结构或上下文变了，同一块视觉区域就可能得到不同的解释。</p>
+<p>物料建设和页面交付也会缠在一起。Agent 发现缺口时，团队一边要赶当前页面，一边要判断这个结构值不值得沉淀为公共能力。交付压力一上来，组件边界很容易做歪。</p>
+<h2>先生成物料原型，再进入设计</h2>
+<p>更合适的默认流程可以是：</p>
+<pre><code class="language-text">业务需求
+  ↓
+AI 理解页面目标、内容、操作与状态
+  ↓
+基于 Material Catalog 生成可运行原型
+  ↓
+产品确认信息结构
+  ↓
+UED 在原型上调整体验与视觉
+  ↓
+审计物料缺口
+  ↓
+基础组合 / 扩展 Variant / 新物料 / 自由设计
+  ↓
+人工确认楼层 JSON / Design Schema
+  ↓
+FE Code Agent 接入业务逻辑与宿主能力
+</code></pre>
+<p>表面上只是把物料原型提前了一步，实际改变的是工作关系。</p>
+<p>过去是设计先给出最终结果，Agent 再寻找实现方式。现在则是 AI 先用真实生产物料给出一个能跑的起点，产品和设计围绕它修改、验证，必要时再突破它。</p>
+<p>最终页面仍然可以进入 Figma，设计师也仍然可以大幅调整。区别只在于，团队能更早看见哪些区域已经被稳定覆盖，哪些区域正在偏离现有能力，以及这种偏离值不值得留下。</p>
+<h2>为什么应在需求原型阶段发现缺口</h2>
+<p>需求原型是产品意图第一次被组织成页面结构的时候。此时讨论的是页面表达什么、用户怎么操作，而不是“开发周期内怎么把这个视觉效果做出来”。</p>
+<p>这时发现缺口，成本最低。设计还没冻结，产品、UED 和开发可以一起决定是调整页面组合、扩展已有物料，还是保留一个新设计。相比开发阶段再补洞，讨论会从容得多。</p>
+<p>它也更容易区分需求和物料能力。一个需求无法被现有组件表达，可能只是基础组件换个组合；可能只缺一个合理属性；也可能真的出现了新的稳定 UI 形态。不是每个特殊区域都该变成公共组件。</p>
+<p>用真实物料渲染出的原型还能直接暴露排版、状态、交互和内容容量的问题。内容太长、空状态没设计、操作不可用、容器装不下，这些问题不必等到开发后期才出现。</p>
+<h2>Material-first 不是让设计师迁就组件库</h2>
+<p>Material-first 最容易被误解成“开发先规定组件，设计只能从中选择”。真这么做，页面会越来越像，组件库里的缺陷也会被固化。</p>
+<p>更合理的边界是：已有物料提供默认起点，不是设计上限。</p>
+<ul>
+<li>已有物料满足需求，直接复用；</li>
+<li>视觉骨架正确，只缺合理属性时，评审是否扩展 Variant；</li>
+<li>多个页面反复出现新的稳定骨架时，作为公共物料候选；</li>
+<li>当前页面的特殊排列，保留为页面组合；</li>
+<li>现有物料已经影响体验时，允许 UED 自由设计。</li>
+</ul>
+<p>设计师仍然负责体验和视觉判断。变化只是，设计偏离生产物料时，这种偏离会被及时记录和评估，而不是拖到开发阶段才被动发现。</p>
+<h2>缺口可以前移，物料泛化不能自动化</h2>
+<p>需求阶段适合提前发现缺口，却不适合自动把缺口塞进组件库。</p>
+<pre><code class="language-text">过去：Figma 未覆盖区块 → 识别视觉骨架 → 判断是否新增公共物料
+未来：需求无法由现有物料表达 → AI 生成候选页面结构 → 产品 / UED 验证 → 依据复用证据决定是否进入 Catalog
+</code></pre>
+<p>简单结构可以继续用基础组件组合；页面特例留在当前页面；复用证据不足的结构先作为候选物料。只有形态稳定、输入可参数化、且有复用证据的结构，才经人工 Review 进入公共 Catalog。</p>
+<p>这样既能减少开发阶段补漏，也不会让 AI 因为每一份 PRD 都往物料库里塞新东西。</p>
+<h2>Figma 仍然有位置</h2>
+<p>Figma 不需要退出流程，只是不再是所有页面唯一的起点。</p>
+<p>对于标准业务页面，AI 可以先生成真实物料组成的原型，UED 再在 AJR Designer 或 Figma 中继续编辑。到底以哪个工具为主，是后续产品形态要验证的问题，不影响 Material-first 的原则。</p>
+<p>对于营销创意页、新交互、复杂动画或现有物料完全覆盖不了的体验，仍然可以采用 Figma-first。设计确定后，再进入组件识别、物料审计和楼层 JSON 生成。</p>
+<p>存量 Figma 页面、外部团队设计和非标准组件库稿件，也仍然需要 Figma Parser 和 Recognition。目标不是删掉 Figma-to-Schema，而是少做那些本可避免的全量逆向识别。</p>
+<p>如果 Figma 使用官方组件实例，应该优先通过稳定的 Component ID 和 Variant 直接映射；自由 Frame、Detached Instance 和未知结构，才交给 AI Recognition。</p>
+<h2>两条路径汇聚到同一种 Schema</h2>
+<p>不需要为新流程重新建设一套 FE AI Code 渲染体系。两条路径最终仍然汇聚到同一种楼层 JSON / Design Schema：</p>
+<pre><code class="language-text">现有路径：Figma → 自动识别与映射 ────────┐
+                                         ├→ 楼层 JSON / Design Schema
+新增路径：需求 → 物料原型 → 设计确认 ────┘
+                                                     ↓
+                                             AJR Runtime 渲染
+                                                     ↓
+                                             FE 业务逻辑接入
+</code></pre>
+<p>一条是逆向路径：Figma → Recognition → Schema。另一条是正向路径：Material Catalog → Prototype → Schema。</p>
+<p>后面的 Renderer、Runtime、Code Agent、测试和视觉校验能力都可以复用。这样既不浪费已有 Figma 还原能力，也能按页面类型逐步引入新模式；同一页面甚至可以混用两种来源。</p>
+<h2>与现有行业实践的关系</h2>
+<p>Material-first 不是凭空出现的概念。物料驱动开发、Design System、设计组件与代码组件映射，以及基于生产组件构建原型，都已有成熟实践。Storybook 的 Component-Driven Development、Figma Code Connect、UXPin Merge，以及 v0 的 Design Systems，都覆盖了其中一部分想法。</p>
+<p>这里提出的不是其中某一项能力，而是尝试把它们接成一条链路：AI 在需求阶段基于生产物料生成可运行原型；产品和设计围绕原型确认、修改和创新；无法覆盖的部分进入物料候选与设计评审；最后统一输出楼层 JSON / Design Schema，并接入后续 FE AI Code。</p>
+<p>它不是成熟的行业标准流程，而是一种值得试点的 AI 原生页面生产模式。它是否优于现有流程，最终要看真实业务场景、页面类型和团队协作方式，不能只靠范式推演下结论。</p>
+<h2>结语</h2>
+<p>现有 Figma 还原流程本身很有工程价值，真正需要调整的是物料进入流程的时机。</p>
+<p>过去，物料在 Figma 完成后等待匹配。现在，物料可以在需求原型阶段参与页面生成。设计师依然可以复用、修改，甚至推翻这个起点；无法覆盖的部分也能更早进入物料补充和设计评审。</p>
+<p>从“AI+Figma”走向“AI 原生”，不是不用 Figma，也不是让 AI 直接替人决定页面。它更像是把“设计完成后寻找实现方式”，改成“先用真实生产物料生成可运行原型，再由人决定复用、修改还是创新”。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-Cxg1OThJ.js"></script>
+</body>
+</html>

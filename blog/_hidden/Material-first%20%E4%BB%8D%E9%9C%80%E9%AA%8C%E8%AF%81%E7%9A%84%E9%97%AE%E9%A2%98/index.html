@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>这套模式仍需验证的问题 | LZ AI NOTE</title>
+  <meta name="description" content="这套模式仍需验证的问题 Material first 不是已经被验证的标准流程，只是一种值得试点的页面生产方式。 原型可能带来锚定效应 真实物料生成的页面，很容易让人觉得“已经差不多完成了”。产品和设计可能过早围绕第一个方案优化，反而少了对其他方向的探索。 AI 原型应当被定位为可修改的默认起点，不是默认答案。团队必须始终保留自由设计和创新设计的入口，不能…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/Material-first%20%E4%BB%8D%E9%9C%80%E9%AA%8C%E8%AF%81%E7%9A%84%E9%97%AE%E9%A2%98">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="这套模式仍需验证的问题 | LZ AI NOTE">
+  <meta property="og:description" content="这套模式仍需验证的问题 Material first 不是已经被验证的标准流程，只是一种值得试点的页面生产方式。 原型可能带来锚定效应 真实物料生成的页面，很容易让人觉得“已经差不多完成了”。产品和设计可能过早围绕第一个方案优化，反而少了对其他方向的探索。 AI 原型应当被定位为可修改的默认起点，不是默认答案。团队必须始终保留自由设计和创新设计的入口，不能…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/Material-first%20%E4%BB%8D%E9%9C%80%E9%AA%8C%E8%AF%81%E7%9A%84%E9%97%AE%E9%A2%98">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"这套模式仍需验证的问题","description":"这套模式仍需验证的问题 Material first 不是已经被验证的标准流程，只是一种值得试点的页面生产方式。 原型可能带来锚定效应 真实物料生成的页面，很容易让人觉得“已经差不多完成了”。产品和设计可能过早围绕第一个方案优化，反而少了对其他方向的探索。 AI 原型应当被定位为可修改的默认起点，不是默认答案。团队必须始终保留自由设计和创新设计的入口，不能…","url":"https://wizardpisces.github.io/blog/_hidden/Material-first%20%E4%BB%8D%E9%9C%80%E9%AA%8C%E8%AF%81%E7%9A%84%E9%97%AE%E9%A2%98","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/Material-first%20%E4%BB%8D%E9%9C%80%E9%AA%8C%E8%AF%81%E7%9A%84%E9%97%AE%E9%A2%98","dateModified":"2026-08-05","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>这套模式仍需验证的问题</h1><h1>这套模式仍需验证的问题</h1>
+<p>Material-first 不是已经被验证的标准流程，只是一种值得试点的页面生产方式。</p>
+<h2>原型可能带来锚定效应</h2>
+<p>真实物料生成的页面，很容易让人觉得“已经差不多完成了”。产品和设计可能过早围绕第一个方案优化，反而少了对其他方向的探索。</p>
+<p>AI 原型应当被定位为可修改的默认起点，不是默认答案。团队必须始终保留自由设计和创新设计的入口，不能让生产物料变成设计上限。</p>
+<h2>Material Catalog 的语义能力可能不够</h2>
+<p>组件能被代码调用，不代表 AI 就能正确理解它。适用场景、Props、Variant、状态、组合规则、约束和示例，如果没有被清楚描述，AI 很难稳定检索和组合。</p>
+<p>对 AI 来说，Material Catalog 不只是组件库，也是生成页面时要查询的知识库。在扩大原型生成范围前，需要先验证 Catalog 是否真的达到可理解、可检索、可组合的程度。</p>
+<h2>PRD 未必给得出足够的页面信息</h2>
+<p>很多 PRD 只讲业务目标，无法完整描述信息架构、布局和交互细节。AI 可以指出缺什么、给出几个备选，但不能替代产品和设计完成需求分析与体验设计。产品与 UED 的早期确认仍然不可省略。</p>
+<h2>原型编辑方式还没有答案</h2>
+<p>Material-first 不限定设计工具。直接在 AJR Designer 编辑，还是同步到 Figma 后继续设计，会影响设计体验、双向同步成本，以及最终事实源的管理方式。</p>
+<p>这些问题更适合放到真实项目里试，而不是在方案阶段假设已经解决。</p>
+<h2>需求候选可能污染公共物料库</h2>
+<p>缺口发现越早、候选生成越容易，就越可能冒出大量只服务于单个页面的候选组件。</p>
+<p>需求阶段发现的结构不该直接进入公共 Material Catalog。它应先作为 Candidate Material，经人工 Review，再结合视觉稳定性、参数化能力和复用证据决定是否纳入。缺口发现可以前移，公共物料的泛化决策不应自动前移。</p>
+<h2>Material Catalog 需要持续治理</h2>
+<p>Material-first 不会减少设计系统建设，反而会把更多要求压到 Material Catalog 上。组件命名、分类、版本、兼容策略、语义描述和生命周期治理，都会直接影响 AI 原型的质量。</p>
+<p>前提不是“组件越多越好”，而是要有一套能持续演进、又保持一致的生产物料体系。</p>
+<h2>两条路径必须收敛到同一种页面语义</h2>
+<p>Requirement-to-Schema 与 Figma-to-Schema 最终都需要输出统一的楼层 JSON / Design Schema。</p>
+<p>如果两条路径采用不同的区块定义、Props 组织方式或嵌套结构，下游 Runtime 和 FE AI Code 仍得适配两套页面语义，统一链路就无从谈起。</p>
+<p>试点阶段最该验证的，不是 AI 能不能生成一张漂亮页面，而是两条路径能否稳定地产生同一种页面语义。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-Cxg1OThJ.js"></script>
+</body>
+</html>
