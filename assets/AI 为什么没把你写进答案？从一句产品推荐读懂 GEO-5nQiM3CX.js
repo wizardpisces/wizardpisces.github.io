@@ -68,21 +68,33 @@ GEO &#x7EE7;&#x7EED;&#x4E89;&#x53D6;&#x8BA9;&#x5176;&#x4E2D;&#x7684;&#x4E3B;&#x5
 </code></pre>
 <p>&#x8FD9;&#x6761;&#x7EBF;&#x5E76;&#x4E0D;&#x7EDD;&#x5BF9;&#x3002;GEO &#x540C;&#x6837;&#x79BB;&#x4E0D;&#x5F00;&#x6293;&#x53D6;&#x3001;&#x6536;&#x5F55;&#x548C;&#x68C0;&#x7D22;&#xFF0C;&#x53EA;&#x662F;&#x5185;&#x5BB9;&#x7ADE;&#x4E89;&#x53C8;&#x591A;&#x4E86;&#x4E00;&#x5C42;&#xFF1A;&#x7F51;&#x9875;&#x6392;&#x5728;&#x54EA;&#x91CC;&#x4ECD;&#x7136;&#x91CD;&#x8981;&#xFF0C;&#x7F51;&#x9875;&#x91CC;&#x7684;&#x54EA;&#x6761;&#x4E3B;&#x5F20;&#x80FD;&#x8FDB;&#x5165;&#x7B54;&#x6848;&#x4E5F;&#x5F00;&#x59CB;&#x53D8;&#x5F97;&#x91CD;&#x8981;&#x3002;</p>
 <p>GEO &#x8981;&#x63D0;&#x9AD8;&#x7684;&#xFF0C;&#x662F;&#x4E00;&#x6761;&#x771F;&#x5B9E;&#x4E3B;&#x5F20;&#x4ECE;&#x68C0;&#x7D22;&#x5019;&#x9009;&#x8D70;&#x5230;&#x6700;&#x7EC8;&#x7B54;&#x6848;&#x7684;&#x6982;&#x7387;&#x3002;&#x524D;&#x63D0;&#x4ECD;&#x7136;&#x662F;&#x6709;&#x4E8B;&#x5B9E;&#x3001;&#x6709;&#x8BC1;&#x636E;&#xFF1B;&#x5B83;&#x4E0D;&#x80FD;&#x8BA9; AI &#x51ED;&#x7A7A;&#x4FE1;&#x4EFB;&#x67D0;&#x4E2A;&#x54C1;&#x724C;&#x3002;</p>
-<h2 id="&#x8FDB;&#x8FC7;&#x4E00;&#x6B21;&#x7B54;&#x6848;&#xFF0C;&#x5C31;&#x7B97;&#x6210;&#x529F;&#x5417;&#xFF1F;"><a href="#&#x8FDB;&#x8FC7;&#x4E00;&#x6B21;&#x7B54;&#x6848;&#xFF0C;&#x5C31;&#x7B97;&#x6210;&#x529F;&#x5417;&#xFF1F;"></a>&#x8FDB;&#x8FC7;&#x4E00;&#x6B21;&#x7B54;&#x6848;&#xFF0C;&#x5C31;&#x7B97;&#x6210;&#x529F;&#x5417;&#xFF1F;</h2>
-<p>&#x9875;&#x9762;&#x91CD;&#x65B0;&#x6293;&#x53D6;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x518D;&#x95EE;&#x4E00;&#x6B21;&#x3002;&#x8FD9;&#x6B21; AI &#x7EC8;&#x4E8E;&#x5199;&#x51FA;&#x4E86;&#x6700;&#x5F00;&#x59CB;&#x7F3A;&#x5931;&#x7684;&#x90A3;&#x53E5;&#x8BDD;&#xFF0C;&#x4E5F;&#x5F15;&#x7528;&#x4E86; PatchPilot &#x7684;&#x90E8;&#x7F72;&#x6587;&#x6863;&#x3002;</p>
-<p>&#x4F46;&#x4E00;&#x6B21;&#x51FA;&#x73B0;&#xFF0C;&#x80FD;&#x8BC1;&#x660E; GEO &#x751F;&#x6548;&#x4E86;&#x5417;&#xFF1F;</p>
-<p>&#x540C;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#x518D;&#x95EE;&#x51E0;&#x904D;&#xFF0C;PatchPilot &#x53EF;&#x80FD;&#x65F6;&#x800C;&#x51FA;&#x73B0;&#xFF0C;&#x65F6;&#x800C;&#x6D88;&#x5931;&#xFF1B;&#x7A0D;&#x5FAE;&#x6362;&#x4E2A;&#x95EE;&#x6CD5;&#xFF0C;&#x5B83;&#x751A;&#x81F3;&#x53C8;&#x88AB;&#x8BF4;&#x6210;&#x514D;&#x8D39;&#x4E91;&#x670D;&#x52A1;&#x3002;&#x751F;&#x6210;&#x7B54;&#x6848;&#x5B58;&#x5728;&#x6CE2;&#x52A8;&#xFF0C;&#x4E00;&#x5F20;&#x622A;&#x56FE;&#x53EA;&#x80FD;&#x8BC1;&#x660E;&#x201C;&#x5B83;&#x51FA;&#x73B0;&#x8FC7;&#x201D;&#xFF0C;&#x8BC1;&#x660E;&#x4E0D;&#x4E86;&#x201C;&#x4F18;&#x5316;&#x6709;&#x6548;&#x201D;&#x3002;</p>
-<p>&#x600E;&#x6837;&#x628A;&#x8FD9;&#x79CD;&#x6CE2;&#x52A8;&#x53D8;&#x6210;&#x53EF;&#x4EE5;&#x91CD;&#x590D;&#x3001;&#x53EF;&#x4EE5;&#x6BD4;&#x8F83;&#x7684;&#x5B9E;&#x9A8C;&#xFF0C;&#x662F; GEO &#x4ECE;&#x5185;&#x5BB9;&#x6280;&#x5DE7;&#x8D70;&#x5411;&#x5DE5;&#x7A0B;&#x7684;&#x7B2C;&#x4E00;&#x9053;&#x574E;&#x3002;</p>
-<p>&#x518D;&#x628A;&#x76EE;&#x5149;&#x4ECE; PatchPilot &#x79FB;&#x5230;&#x6574;&#x6761;&#x94FE;&#x8DEF;&#xFF1A;&#x5019;&#x9009;&#x7531;&#x8C01;&#x63D0;&#x4F9B;&#xFF0C;&#x8BC1;&#x636E;&#x7531;&#x8C01;&#x9009;&#x62E9;&#xFF0C;&#x6700;&#x540E;&#x90A3;&#x53E5;&#x8BDD;&#x53C8;&#x7531;&#x8C01;&#x5199;&#x4E0B;&#xFF1F;</p>
-<p>&#x8FC7;&#x53BB;&#xFF0C;&#x641C;&#x7D22;&#x5F15;&#x64CE;&#x51B3;&#x5B9A;&#x94FE;&#x63A5;&#x6392;&#x5728;&#x7B2C;&#x51E0;&#x4F4D;&#xFF0C;&#x5224;&#x65AD;&#x7559;&#x7ED9;&#x7528;&#x6237;&#xFF1B;&#x73B0;&#x5728;&#xFF0C;AI &#x8FD8;&#x4F1A;&#x66FF;&#x7528;&#x6237;&#x9009;&#x62E9;&#x6750;&#x6599;&#x3001;&#x7EC4;&#x7EC7;&#x7ED3;&#x8BBA;&#x3002;Google &#x5B88;&#x7740;&#x7F51;&#x9875;&#x7D22;&#x5F15;&#xFF0C;ChatGPT &#x5360;&#x4F4F;&#x7B54;&#x6848;&#x5165;&#x53E3;&#xFF0C;&#x4E00;&#x4E2A;&#x66F4;&#x63A5;&#x8FD1;&#x4FE1;&#x606F;&#x6E90;&#xFF0C;&#x4E00;&#x4E2A;&#x66F4;&#x63A5;&#x8FD1;&#x7528;&#x6237;&#x7684;&#x5224;&#x65AD;&#x3002;</p>
-<p>&#x8FD9;&#x4E00;&#x7BC7;&#x8FFD;&#x7684;&#x662F; PatchPilot &#x600E;&#x6837;&#x8FDB;&#x5165;&#x7B54;&#x6848;&#x3002;&#x6CBF;&#x7740;&#x8FD9;&#x6761;&#x94FE;&#x8DEF;&#x7EE7;&#x7EED;&#x8D70;&#xFF0C;&#x4E0B;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#x66F4;&#x96BE;&#xFF1A;&#x8C01;&#x6B63;&#x5728;&#x83B7;&#x5F97;&#x7EC4;&#x6210;&#x6700;&#x7EC8;&#x7B54;&#x6848;&#x7684;&#x6743;&#x529B;&#xFF1F;</p>
+<h2 id="&#x8FDB;&#x5165;&#x7B54;&#x6848;&#xFF0C;&#x53EA;&#x662F;&#x4E00;&#x6B21;&#x547D;&#x4E2D;"><a href="#&#x8FDB;&#x5165;&#x7B54;&#x6848;&#xFF0C;&#x53EA;&#x662F;&#x4E00;&#x6B21;&#x547D;&#x4E2D;"></a>&#x8FDB;&#x5165;&#x7B54;&#x6848;&#xFF0C;&#x53EA;&#x662F;&#x4E00;&#x6B21;&#x547D;&#x4E2D;</h2>
+<p>&#x9875;&#x9762;&#x91CD;&#x65B0;&#x6293;&#x53D6;&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x518D;&#x95EE;&#x4E00;&#x6B21;&#x3002;&#x8FD9;&#x56DE;&#xFF0C;AI &#x7EC8;&#x4E8E;&#x5199;&#x51FA;&#x4E86;&#x6700;&#x5F00;&#x59CB;&#x7F3A;&#x5931;&#x7684;&#x90A3;&#x53E5;&#x8BDD;&#xFF0C;&#x4E5F;&#x5F15;&#x7528;&#x4E86; PatchPilot &#x7684;&#x90E8;&#x7F72;&#x6587;&#x6863;&#x3002;</p>
+<p>&#x5230;&#x8FD9;&#x91CC;&#xFF0C;&#x7B2C;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#x6709;&#x4E86;&#x7B54;&#x6848;&#xFF1A;PatchPilot &#x4E0D;&#x662F;&#x65E0;&#x6CD5;&#x88AB;&#x641C;&#x7D22;&#xFF0C;&#x800C;&#x662F;&#x7F3A;&#x5C11;&#x8DB3;&#x4EE5;&#x652F;&#x6491;&#x63A8;&#x8350;&#x7684;&#x4E8B;&#x5B9E;&#x548C;&#x8BC1;&#x636E;&#x3002;</p>
+<p>&#x53EF;&#x4E00;&#x6B21;&#x51FA;&#x73B0;&#xFF0C;&#x8FD8;&#x4E0D;&#x80FD;&#x8BC1;&#x660E; GEO &#x751F;&#x6548;&#x4E86;&#x3002;</p>
+<p>&#x540C;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#x591A;&#x95EE;&#x51E0;&#x904D;&#xFF0C;PatchPilot &#x53EF;&#x80FD;&#x65F6;&#x800C;&#x51FA;&#x73B0;&#xFF0C;&#x65F6;&#x800C;&#x6D88;&#x5931;&#xFF1B;&#x7A0D;&#x5FAE;&#x6362;&#x4E2A;&#x95EE;&#x6CD5;&#xFF0C;&#x5B83;&#x751A;&#x81F3;&#x53C8;&#x88AB;&#x8BF4;&#x6210;&#x514D;&#x8D39;&#x4E91;&#x670D;&#x52A1;&#x3002;&#x4E00;&#x5F20;&#x622A;&#x56FE;&#x53EA;&#x80FD;&#x8BC1;&#x660E;&#x201C;&#x5B83;&#x51FA;&#x73B0;&#x8FC7;&#x201D;&#xFF0C;&#x8BC1;&#x660E;&#x4E0D;&#x4E86;&#x8FD9;&#x6B21;&#x4F18;&#x5316;&#x80FD;&#x591F;&#x7A33;&#x5B9A;&#x590D;&#x73B0;&#x3002;</p>
+<p>&#x66F4;&#x9EBB;&#x70E6;&#x7684;&#x60C5;&#x51B5;&#x968F;&#x540E;&#x51FA;&#x73B0;&#x4E86;&#xFF1A;&#x9875;&#x9762;&#x4E00;&#x4E2A;&#x5B57;&#x6CA1;&#x6539;&#xFF0C;&#x5E73;&#x53F0;&#x53EA;&#x662F;&#x5347;&#x7EA7;&#x4E86;&#x641C;&#x7D22;&#x6A21;&#x578B;&#xFF0C;PatchPilot &#x88AB;&#x51C6;&#x786E;&#x63D0;&#x5230;&#x7684;&#x6B21;&#x6570;&#x5374;&#x4E0B;&#x964D;&#x4E86;&#x3002;</p>
+<p>&#x6A21;&#x578B;&#x53D8;&#x5F3A;&#x4E86;&#xFF0C;GEO &#x6570;&#x636E;&#x4E3A;&#x4EC0;&#x4E48;&#x53CD;&#x800C;&#x6389;&#x4E86;&#xFF1F;</p>
+<p>&#x4E0B;&#x4E00;&#x7BC7;&#xFF0C;&#x6211;&#x4EEC;&#x7EE7;&#x7EED;&#x8FFD;&#x8E2A; PatchPilot&#xFF0C;&#x770B;&#x770B;&#x600E;&#x6837;&#x6D4B;&#x91CF;&#x4E00;&#x4E2A;&#x4F1A;&#x968F;&#x6A21;&#x578B;&#x3001;&#x68C0;&#x7D22;&#x7CFB;&#x7EDF;&#x548C;&#x65F6;&#x95F4;&#x4E0D;&#x65AD;&#x79FB;&#x52A8;&#x7684;&#x9776;&#x3002;</p>
 <h2 id="References"><a href="#References"></a>References</h2>
-<ul>
-<li><a href="https://arxiv.org/abs/2311.09735">GEO: Generative Engine Optimization&#xFF08;KDD 2024&#xFF09;</a></li>
-<li><a href="https://help.openai.com/en/articles/9237897-chatgpt-search">ChatGPT Search</a></li>
-<li><a href="https://help.openai.com/en/articles/12627856">Publishers and Developers - FAQ</a></li>
-<li><a href="https://developers.google.com/search/docs/appearance/ai-features">AI features and your website</a></li>
-<li><a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide">Optimizing your website for generative AI features on Google Search</a></li>
-<li><a href="https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports">Introducing Search Generative AI performance reports in Search Console</a></li>
-</ul>
-`,E=[{level:1,title:"AI 为什么没把你写进答案？从一句产品推荐读懂 GEO",children:[{level:2,title:"一句话，可能触发两轮搜索",children:[]},{level:2,title:"PatchPilot 究竟卡在哪一步？",children:[]},{level:2,title:"进过一次答案，就算成功吗？",children:[]},{level:2,title:"References",children:[]}]}];export{x as attributes,F as html,E as nestedHeaders};
+<ol>
+<li>
+<p>GEO: Generative Engine Optimization&#xFF08;KDD 2024&#xFF09;&#xFF1A;https://arxiv.org/abs/2311.09735</p>
+</li>
+<li>
+<p>ChatGPT Search&#xFF1A;https://help.openai.com/en/articles/9237897-chatgpt-search</p>
+</li>
+<li>
+<p>Publishers and Developers - FAQ&#xFF1A;https://help.openai.com/en/articles/12627856</p>
+</li>
+<li>
+<p>AI features and your website&#xFF1A;https://developers.google.com/search/docs/appearance/ai-features</p>
+</li>
+<li>
+<p>Optimizing your website for generative AI features on Google Search&#xFF1A;https://developers.google.com/search/docs/fundamentals/ai-optimization-guide</p>
+</li>
+<li>
+<p>Introducing Search Generative AI performance reports in Search Console&#xFF1A;https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports</p>
+</li>
+</ol>
+`,E=[{level:1,title:"AI 为什么没把你写进答案？从一句产品推荐读懂 GEO",children:[{level:2,title:"一句话，可能触发两轮搜索",children:[]},{level:2,title:"PatchPilot 究竟卡在哪一步？",children:[]},{level:2,title:"进入答案，只是一次命中",children:[]},{level:2,title:"References",children:[]}]}];export{x as attributes,F as html,E as nestedHeaders};
