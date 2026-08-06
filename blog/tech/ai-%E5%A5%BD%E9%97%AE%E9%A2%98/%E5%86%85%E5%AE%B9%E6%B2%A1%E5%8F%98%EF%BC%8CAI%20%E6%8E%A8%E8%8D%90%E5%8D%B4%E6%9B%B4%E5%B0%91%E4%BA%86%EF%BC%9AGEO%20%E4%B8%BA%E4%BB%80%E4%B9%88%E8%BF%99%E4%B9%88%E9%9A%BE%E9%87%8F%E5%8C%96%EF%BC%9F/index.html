@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>内容没变，AI 推荐却更少了：GEO 为什么这么难量化？ | LZ AI NOTE</title>
+  <meta name="description" content="内容没变，AI 推荐却更少了：GEO 为什么这么难量化？ 假设有一款代码审查工具，叫 PatchPilot。官网可以被搜到，但用户让 AI 推荐支持 GitLab、私有化部署的 Merge Request 审查工具时，它很少出现在答案里。（想了解背景，可以先看《AI 为什么没把你写进答案？从一句产品推荐读懂 GEO》） 我们改写了它的首页，补上 GitLa…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E5%86%85%E5%AE%B9%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%8E%A8%E8%8D%90%E5%8D%B4%E6%9B%B4%E5%B0%91%E4%BA%86%EF%BC%9AGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="内容没变，AI 推荐却更少了：GEO 为什么这么难量化？ | LZ AI NOTE">
+  <meta property="og:description" content="内容没变，AI 推荐却更少了：GEO 为什么这么难量化？ 假设有一款代码审查工具，叫 PatchPilot。官网可以被搜到，但用户让 AI 推荐支持 GitLab、私有化部署的 Merge Request 审查工具时，它很少出现在答案里。（想了解背景，可以先看《AI 为什么没把你写进答案？从一句产品推荐读懂 GEO》） 我们改写了它的首页，补上 GitLa…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E5%86%85%E5%AE%B9%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%8E%A8%E8%8D%90%E5%8D%B4%E6%9B%B4%E5%B0%91%E4%BA%86%EF%BC%9AGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"内容没变，AI 推荐却更少了：GEO 为什么这么难量化？","description":"内容没变，AI 推荐却更少了：GEO 为什么这么难量化？ 假设有一款代码审查工具，叫 PatchPilot。官网可以被搜到，但用户让 AI 推荐支持 GitLab、私有化部署的 Merge Request 审查工具时，它很少出现在答案里。（想了解背景，可以先看《AI 为什么没把你写进答案？从一句产品推荐读懂 GEO》） 我们改写了它的首页，补上 GitLa…","url":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E5%86%85%E5%AE%B9%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%8E%A8%E8%8D%90%E5%8D%B4%E6%9B%B4%E5%B0%91%E4%BA%86%EF%BC%9AGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E5%86%85%E5%AE%B9%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%8E%A8%E8%8D%90%E5%8D%B4%E6%9B%B4%E5%B0%91%E4%BA%86%EF%BC%9AGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F","dateModified":"2026-08-06","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>内容没变，AI 推荐却更少了：GEO 为什么这么难量化？</h1><h1>内容没变，AI 推荐却更少了：GEO 为什么这么难量化？</h1>
+<p>假设有一款代码审查工具，叫 PatchPilot。官网可以被搜到，但用户让 AI 推荐支持 GitLab、私有化部署的 Merge Request 审查工具时，它很少出现在答案里。（想了解背景，可以先看《AI 为什么没把你写进答案？从一句产品推荐读懂 GEO》）</p>
+<p>我们改写了它的首页，补上 GitLab、私有化部署、价格和数据边界等可核验信息。这类工作通常被称为 GEO：让页面上可核验的主张更有机会进入生成式答案。</p>
+<p>接着用四种问法各测十次。改版前，40 个答案里只有 1 个准确提到 PatchPilot；改版后，变成了 15 个。</p>
+<p>看起来，GEO 生效了。</p>
+<p>一周后，平台升级了搜索模型。页面一个字没改，同样的 40 个问题里，PatchPilot 只剩 7 次准确出现。</p>
+<p>答案反而更好了：把产品说错的次数少了，引用的资料也更可靠。</p>
+<p>内容没有退步，模型还变强了。为什么 GEO 数据反而掉了？</p>
+<h2>模型更好了，PatchPilot 为什么反而消失了？</h2>
+<p>假设旧模型每次会推荐五款工具。它的候选范围很宽，PatchPilot 容易混进来，但也会把 SaaS 说成私有化部署，或者张冠李戴地拼错价格。</p>
+<p>新模型收紧了选择。它只推荐两三款，还要求“私有化部署”同时得到官方文档和其他可信来源的支撑。PatchPilot 的官网写对了，站外证据却还不够，于是被筛掉。</p>
+<p>对用户来说，答案更准了；对 PatchPilot 来说，曝光变少了。</p>
+<pre><code class="language-text">模型整体质量上升
+        ≠
+每个品牌都更容易进入答案
+</code></pre>
+<p>模型升级不会把所有品牌的分数一起抬高。它会改变候选范围和证据门槛，重新划定谁能留在答案里。</p>
+<h2>答案里的位置，仍然是有限的</h2>
+<p>用户没有让 AI 列出网上所有代码审查工具。他需要的是两三款可以继续评估的产品。</p>
+<p>旧模型给出五款，PatchPilot 也在里面；新模型删掉证据不足的选项，只留下两三款。答案没有变长。模型把更多篇幅留给核验依据，能列出的候选自然更少。</p>
+<p>这就是答案预算。受限的不只是字数，还有一段回答能容纳多少证据、用户愿意比较多少个选项。模型更强调准确性时，候选范围可能变窄；想引入更多来源时，单个品牌能占到的位置也会变少。</p>
+<p>PatchPilot 的消失未必是一次单独的降权，更可能是有限的位置被重新分配了。</p>
+<h2>页面没变，变的是它与系统的关系</h2>
+<p>如果 GEO 分数属于页面本身，那么 PatchPilot 从 15 次跌到 7 次就说不通：页面加载速度没变，部署文档没变，价格说明也没变。</p>
+<p>变化发生在页面之外。问题怎么问、检索系统怎么找、证据门槛设在哪里，都会影响最终的可见性：</p>
+<pre><code class="language-text">可见性 = f（内容，问题分布，检索与模型版本，平台规则，时间）
+</code></pre>
+<p>内容只是其中一项。同一个页面换了模型，表现会变；同一个模型遇到不同问法和时间，结果也会变。</p>
+<p>这也是 GEO 比 SEO 更难量化的原因。多测几次能估计当前的分布，却挡不住下一次升级把分布本身换掉。</p>
+<p>除了随机噪声，系统本身也会变。</p>
+<p>这两种波动看起来很像，处理方式却不同：</p>
+<pre><code class="language-text">同一版本，重复回答不同
+→ 采样波动，可以用更多样本估计
+
+模型或检索系统升级，整组结果改变
+→ 系统漂移，旧样本不再描述同一个系统
+</code></pre>
+<p>对第一种波动，测一百次通常比测一次更可靠。对第二种，继续增加样本也无法把新旧版本变回同一个东西。把它们全部混在一起取平均，可能得到一个非常精确、却没有明确含义的数字。</p>
+<h2>模型升级后，真正失效的是什么？</h2>
+<p>看到 15 次变成 7 次，很容易觉得之前做的 GEO 白费了。</p>
+<p>我们重新打开 PatchPilot 的页面。部署方式、权限清单和价格说明都还在，也依然可以被检索和核验。消失的不是这些事实，而是它们在旧模型那里换来的优势。</p>
+<p>旧模型可能只凭官方部署文档就接受“支持私有化”这条主张；新模型还想找到其他来源交叉验证。PatchPilot 没有失去原来的证据，只是这份证据不再足以换来答案中的一个位置。</p>
+<p>这也解释了为什么有些优化会跟着模型一起过期。团队如果只是发现旧模型偏爱某种问法、页面格式或单一信源，再围着这个偏好反复调整，规则一变，优势就没了。具体的产品事实和原始文档仍留在页面上，等新的检索与证据规则重新采用它们。</p>
+<p>因此，7 次准确提及不能简单理解为“内容只剩原来的一半”。这个数字同时受页面上的内容资产和模型此刻的使用方式影响。</p>
+<h2>给移动靶拍一张带时间的照片</h2>
+<p>弄清这一点后，我们没有把 7 次直接接在 15 次后面，画成一条持续下跌的曲线。那样会把两个不同系统里的测量当成同一件事。</p>
+<p>新的测试仍然保留四种问法，每种重复十次，但每一批结果都带上平台、接口、时间和已知的模型版本，完整回答与引用也一起留下。这样记录下来的不是 PatchPilot 永久有效的 GEO 分数，只是它在某个时间窗口里的表现。</p>
+<p>有些平台不会公布版本。我们便保留一组长期不变的问题，再放入几个参照产品。如果 PatchPilot 和参照产品在同一时间集体变化，更可能是靶心移动了，不必急着给最近那次页面改版记功或定罪。</p>
+<p>最后，报告不再写“PatchPilot 的 GEO 得分是 37.5%”，而是写成：在这个平台、这组问题和这段时间里，40 次回答有 15 次准确提及；系统升级后，在新的时间窗口里变成了 7 次。</p>
+<p>这张带时间的照片能告诉我们 PatchPilot 何时出现、何时消失，但它只回答了“有没有出现”。</p>
+<p>有一次，AI 准确推荐了 PatchPilot，后面还列出十个来源。提及率、引用率和信息准确率都很好看，按现在的量化方式，这几乎是一次完美命中。</p>
+<p>可打开那些来源会发现，关于部署难度、价格和外部依赖的不同意见，几乎都没有进入正文。</p>
+<p>PatchPilot 终于进了答案。可如果用户认识的只是一个被省略了重要限制条件的版本，这次 GEO 究竟算成功，还是失真？</p>
+<h2>参考资料</h2>
+<ol>
+<li>
+<p>Don’t Measure Once: Measuring Visibility in AI Search (GEO)：<a href="https://arxiv.org/abs/2604.07585">https://arxiv.org/abs/2604.07585</a></p>
+</li>
+<li>
+<p>Quantifying Uncertainty in AI Visibility: A Statistical Framework for Generative Search Measurement：<a href="https://arxiv.org/abs/2603.08924">https://arxiv.org/abs/2603.08924</a></p>
+</li>
+<li>
+<p>Optimizing Visibility in Generative Engines: A Critical Survey of GEO (2023–2026)：<a href="https://arxiv.org/abs/2607.14035">https://arxiv.org/abs/2607.14035</a></p>
+</li>
+<li>
+<p>What Gets Cited: Competitive GEO in AI Answer Engines：<a href="https://arxiv.org/abs/2605.25517">https://arxiv.org/abs/2605.25517</a></p>
+</li>
+<li>
+<p>From Citation Selection to Citation Absorption：<a href="https://arxiv.org/abs/2604.25707">https://arxiv.org/abs/2604.25707</a></p>
+</li>
+</ol>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-ysof8te7.js"></script>
+</body>
+</html>

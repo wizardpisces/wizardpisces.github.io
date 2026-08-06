@@ -11847,6 +11847,105 @@
     "originalTitle": "从 Prompt 到 Loop Engineering：一个简单例子看懂 AI 工程的四次升级"
   },
   {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%86%85%E5%AE%B9%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%8E%A8%E8%8D%90%E5%8D%B4%E6%9B%B4%E5%B0%91%E4%BA%86%EF%BC%9AGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F#chunk-0",
+    "title": "内容没变，AI 推荐却更少了：GEO 为什么这么难量化？",
+    "content": "内容没变，AI 推荐却更少了：GEO 为什么这么难量化？\n假设有一款代码审查工具，叫 PatchPilot。官网可以被搜到，但用户让 AI 推荐支持 GitLab、私有化部署的 Merge Request 审查工具时，它很少出现在答案里。（想了解背景，可以先看《AI 为什么没把你写进答案？从一句产品推荐读懂 GEO》）\n我们改写了它的首页，补上 GitLab、私有化部署、价格和数据边界等可核验信息。这类工作通常被称为 GEO：让页面上可核验的主张更有机会进入生成式答案。\n接着用四种问法各测十次。改版前，40 个答案里只有 1 个准确提到 PatchPilot；改版后，变成了 15 个。\n看起来，GEO 生效了。",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%86%85%E5%AE%B9%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%8E%A8%E8%8D%90%E5%8D%B4%E6%9B%B4%E5%B0%91%E4%BA%86%EF%BC%9AGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F",
+    "chunkIndex": 0,
+    "totalChunks": 9,
+    "startPos": 0,
+    "endPos": 310,
+    "originalTitle": "内容没变，AI 推荐却更少了：GEO 为什么这么难量化？"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%86%85%E5%AE%B9%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%8E%A8%E8%8D%90%E5%8D%B4%E6%9B%B4%E5%B0%91%E4%BA%86%EF%BC%9AGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F#chunk-1",
+    "title": "内容没变，AI 推荐却更少了：GEO 为什么这么难量化？ (第2段)",
+    "content": "...ot；改版后，变成了 15 个。\n看起来，GEO 生效了。 一周后，平台升级了搜索模型。页面一个字没改，同样的 40 个问题里，PatchPilot 只剩 7 次准确出现。\n答案反而更好了：把产品说错的次数少了，引用的资料也更可靠。\n内容没有退步，模型还变强了。为什么 GEO 数据反而掉了？\n模型更好了，PatchPilot 为什么反而消失了？\n假设旧模型每次会推荐五款工具。它的候选范围很宽，PatchPilot 容易混进来，但也会把 SaaS 说成私有化部署，或者张冠李戴地拼错价格。\n新模型收紧了选择。它只推荐两三款，还要求“私有化部署”同时得到官方文档和其他可信来源的支撑。PatchPilot 的官网写对了，站外证据却还不够，于是被筛掉。\n对用户来说，答案更准了；对 PatchPilot 来说，曝光变少了。",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%86%85%E5%AE%B9%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%8E%A8%E8%8D%90%E5%8D%B4%E6%9B%B4%E5%B0%91%E4%BA%86%EF%BC%9AGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F",
+    "chunkIndex": 1,
+    "totalChunks": 9,
+    "startPos": 310,
+    "endPos": 641,
+    "originalTitle": "内容没变，AI 推荐却更少了：GEO 为什么这么难量化？"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%86%85%E5%AE%B9%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%8E%A8%E8%8D%90%E5%8D%B4%E6%9B%B4%E5%B0%91%E4%BA%86%EF%BC%9AGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F#chunk-2",
+    "title": "内容没变，AI 推荐却更少了：GEO 为什么这么难量化？ (第3段)",
+    "content": "...，答案更准了；对 PatchPilot 来说，曝光变少了。 模型升级不会把所有品牌的分数一起抬高。它会改变候选范围和证据门槛，重新划定谁能留在答案里。\n答案里的位置，仍然是有限的\n用户没有让 AI 列出网上所有代码审查工具。他需要的是两三款可以继续评估的产品。\n旧模型给出五款，PatchPilot 也在里面；新模型删掉证据不足的选项，只留下两三款。答案没有变长。模型把更多篇幅留给核验依据，能列出的候选自然更少。\n这就是答案预算。受限的不只是字数，还有一段回答能容纳多少证据、用户愿意比较多少个选项。模型更强调准确性时，候选范围可能变窄；想引入更多来源时，单个品牌能占到的位置也会变少。\nPatchPilot 的消失未必是一次单独的降权，更可能是有限的位置被重新分配了。\n页面没变，变的是它与系统的关系",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%86%85%E5%AE%B9%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%8E%A8%E8%8D%90%E5%8D%B4%E6%9B%B4%E5%B0%91%E4%BA%86%EF%BC%9AGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F",
+    "chunkIndex": 2,
+    "totalChunks": 9,
+    "startPos": 641,
+    "endPos": 964,
+    "originalTitle": "内容没变，AI 推荐却更少了：GEO 为什么这么难量化？"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%86%85%E5%AE%B9%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%8E%A8%E8%8D%90%E5%8D%B4%E6%9B%B4%E5%B0%91%E4%BA%86%EF%BC%9AGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F#chunk-3",
+    "title": "内容没变，AI 推荐却更少了：GEO 为什么这么难量化？ (第4段)",
+    "content": "...是有限的位置被重新分配了。\n页面没变，变的是它与系统的关系 如果 GEO 分数属于页面本身，那么 PatchPilot 从 15 次跌到 7 次就说不通：页面加载速度没变，部署文档没变，价格说明也没变。\n变化发生在页面之外。问题怎么问、检索系统怎么找、证据门槛设在哪里，都会影响最终的可见性：\n内容只是其中一项。同一个页面换了模型，表现会变；同一个模型遇到不同问法和时间，结果也会变。\n这也是 GEO 比 SEO 更难量化的原因。多测几次能估计当前的分布，却挡不住下一次升级把分布本身换掉。\n除了随机噪声，系统本身也会变。\n这两种波动看起来很像，处理方式却不同：\n对第一种波动，测一百次通常比测一次更可靠。对第二种，继续增加样本也无法把新旧版本变回同一个东西。把它们全部混在一起取平均，可能得到一个非常精确、却没有明确含义的数字。",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%86%85%E5%AE%B9%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%8E%A8%E8%8D%90%E5%8D%B4%E6%9B%B4%E5%B0%91%E4%BA%86%EF%BC%9AGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F",
+    "chunkIndex": 3,
+    "totalChunks": 9,
+    "startPos": 964,
+    "endPos": 1300,
+    "originalTitle": "内容没变，AI 推荐却更少了：GEO 为什么这么难量化？"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%86%85%E5%AE%B9%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%8E%A8%E8%8D%90%E5%8D%B4%E6%9B%B4%E5%B0%91%E4%BA%86%EF%BC%9AGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F#chunk-4",
+    "title": "内容没变，AI 推荐却更少了：GEO 为什么这么难量化？ (第5段)",
+    "content": "...在一起取平均，可能得到一个非常精确、却没有明确含义的数字。 模型升级后，真正失效的是什么？\n看到 15 次变成 7 次，很容易觉得之前做的 GEO 白费了。\n我们重新打开 PatchPilot 的页面。部署方式、权限清单和价格说明都还在，也依然可以被检索和核验。消失的不是这些事实，而是它们在旧模型那里换来的优势。\n旧模型可能只凭官方部署文档就接受“支持私有化”这条主张；新模型还想找到其他来源交叉验证。PatchPilot 没有失去原来的证据，只是这份证据不再足以换来答案中的一个位置。\n这也解释了为什么有些优化会跟着模型一起过期。团队如果只是发现旧模型偏爱某种问法、页面格式或单一信源，再围着这个偏好反复调整，规则一变，优势就没了。具体的产品事实和原始文档仍留在页面上，等新的检索与证据规则重新采用它们。",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%86%85%E5%AE%B9%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%8E%A8%E8%8D%90%E5%8D%B4%E6%9B%B4%E5%B0%91%E4%BA%86%EF%BC%9AGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F",
+    "chunkIndex": 4,
+    "totalChunks": 9,
+    "startPos": 1300,
+    "endPos": 1625,
+    "originalTitle": "内容没变，AI 推荐却更少了：GEO 为什么这么难量化？"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%86%85%E5%AE%B9%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%8E%A8%E8%8D%90%E5%8D%B4%E6%9B%B4%E5%B0%91%E4%BA%86%EF%BC%9AGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F#chunk-5",
+    "title": "内容没变，AI 推荐却更少了：GEO 为什么这么难量化？ (第6段)",
+    "content": "...和原始文档仍留在页面上，等新的检索与证据规则重新采用它们。 因此，7 次准确提及不能简单理解为“内容只剩原来的一半”。这个数字同时受页面上的内容资产和模型此刻的使用方式影响。\n给移动靶拍一张带时间的照片\n弄清这一点后，我们没有把 7 次直接接在 15 次后面，画成一条持续下跌的曲线。那样会把两个不同系统里的测量当成同一件事。\n新的测试仍然保留四种问法，每种重复十次，但每一批结果都带上平台、接口、时间和已知的模型版本，完整回答与引用也一起留下。这样记录下来的不是 PatchPilot 永久有效的 GEO 分数，只是它在某个时间窗口里的表现。\n有些平台不会公布版本。我们便保留一组长期不变的问题，再放入几个参照产品。如果 PatchPilot 和参照产品在同一时间集体变化，更可能是靶心移动了，不必急着给最近那次页面改版记功或定罪。",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%86%85%E5%AE%B9%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%8E%A8%E8%8D%90%E5%8D%B4%E6%9B%B4%E5%B0%91%E4%BA%86%EF%BC%9AGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F",
+    "chunkIndex": 5,
+    "totalChunks": 9,
+    "startPos": 1625,
+    "endPos": 1963,
+    "originalTitle": "内容没变，AI 推荐却更少了：GEO 为什么这么难量化？"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%86%85%E5%AE%B9%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%8E%A8%E8%8D%90%E5%8D%B4%E6%9B%B4%E5%B0%91%E4%BA%86%EF%BC%9AGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F#chunk-6",
+    "title": "内容没变，AI 推荐却更少了：GEO 为什么这么难量化？ (第7段)",
+    "content": "...更可能是靶心移动了，不必急着给最近那次页面改版记功或定罪。 最后，报告不再写“PatchPilot 的 GEO 得分是 37.5%”，而是写成：在这个平台、这组问题和这段时间里，40 次回答有 15 次准确提及；系统升级后，在新的时间窗口里变成了 7 次。\n这张带时间的照片能告诉我们 PatchPilot 何时出现、何时消失，但它只回答了“有没有出现”。\n有一次，AI 准确推荐了 PatchPilot，后面还列出十个来源。提及率、引用率和信息准确率都很好看，按现在的量化方式，这几乎是一次完美命中。\n可打开那些来源会发现，关于部署难度、价格和外部依赖的不同意见，几乎都没有进入正文。\nPatchPilot 终于进了答案。可如果用户认识的只是一个被省略了重要限制条件的版本，这次 GEO 究竟算成功，还是失真？\n参考资料",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%86%85%E5%AE%B9%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%8E%A8%E8%8D%90%E5%8D%B4%E6%9B%B4%E5%B0%91%E4%BA%86%EF%BC%9AGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F",
+    "chunkIndex": 6,
+    "totalChunks": 9,
+    "startPos": 1963,
+    "endPos": 2295,
+    "originalTitle": "内容没变，AI 推荐却更少了：GEO 为什么这么难量化？"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%86%85%E5%AE%B9%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%8E%A8%E8%8D%90%E5%8D%B4%E6%9B%B4%E5%B0%91%E4%BA%86%EF%BC%9AGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F#chunk-7",
+    "title": "内容没变，AI 推荐却更少了：GEO 为什么这么难量化？ (第8段)",
+    "content": "...条件的版本，这次 GEO 究竟算成功，还是失真？\n参考资料 1. Don't Measure Once: Measuring Visibility in AI Search (GEO)：https://arxiv.org/abs/2604.07585\n2. Quantifying Uncertainty in AI Visibility: A Statistical Framework for Generative Search Measurement：https://arxiv.org/abs/2603.08924\n3. Optimizing Visibility in Generative Engines: A Critical Survey of GEO (2023–2026)：https://arxiv.org/abs/2607.14035",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%86%85%E5%AE%B9%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%8E%A8%E8%8D%90%E5%8D%B4%E6%9B%B4%E5%B0%91%E4%BA%86%EF%BC%9AGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F",
+    "chunkIndex": 7,
+    "totalChunks": 9,
+    "startPos": 2295,
+    "endPos": 2645,
+    "originalTitle": "内容没变，AI 推荐却更少了：GEO 为什么这么难量化？"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%86%85%E5%AE%B9%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%8E%A8%E8%8D%90%E5%8D%B4%E6%9B%B4%E5%B0%91%E4%BA%86%EF%BC%9AGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F#chunk-8",
+    "title": "内容没变，AI 推荐却更少了：GEO 为什么这么难量化？ (第9段)",
+    "content": "...ps://arxiv.org/abs/2607.14035 4. What Gets Cited: Competitive GEO in AI Answer Engines：https://arxiv.org/abs/2605.25517\n5. From Citation Selection to Citation Absorption：https://arxiv.org/abs/2604.25707",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%86%85%E5%AE%B9%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%8E%A8%E8%8D%90%E5%8D%B4%E6%9B%B4%E5%B0%91%E4%BA%86%EF%BC%9AGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F",
+    "chunkIndex": 8,
+    "totalChunks": 9,
+    "startPos": 2645,
+    "endPos": 2817,
+    "originalTitle": "内容没变，AI 推荐却更少了：GEO 为什么这么难量化？"
+  },
+  {
     "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%BD%93%E5%8D%81%E4%B8%AA%E9%93%BE%E6%8E%A5%E8%A2%AB%E5%8E%8B%E6%88%90%E4%B8%80%E5%8F%A5%E8%AF%9D%EF%BC%9AGoogle%20%E4%B8%8E%20ChatGPT%20%E5%9C%A8%E4%BA%89%E5%A4%BA%E4%BB%80%E4%B9%88%EF%BC%9F#chunk-0",
     "title": "当十个链接被压成一句话：Google 与 ChatGPT 在争夺什么？",
     "content": "当十个链接被压成一句话：Google 与 ChatGPT 在争夺什么？\n假设有一款虚构的代码审查工具，叫 PatchPilot。它支持 GitLab Merge Request 自动审查和私有化部署。\n一个 20 人的 GitLab 团队想判断它是否适合自己，于是向 AI 提问。AI 搜索了官网、价格页、第三方评测和用户讨论，给出了十个引用链接。\n最后答案只留下一句：\nPatchPilot 支持 GitLab Merge Request 自动审查和私有化部署，适合对代码安全要求较高的团队。\n这句话没有明显错误。但十个网页里，还有人说私有化部署很麻烦，有人质疑它的价格，也有文档提到一项未被写进答案的外部依赖。\n引用了十个来源，为什么最后会变成一句语气这么确定的话？\n十个网页怎样只剩一句话",
@@ -12065,94 +12164,6 @@
     "startPos": 3793,
     "endPos": 3893,
     "originalTitle": "当排行榜开始训练大模型"
-  },
-  {
-    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E6%A8%A1%E5%9E%8B%E8%B6%8A%E5%BC%BA%EF%BC%8CGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%8D%E8%80%8C%E8%B6%8A%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F%E4%BB%8E%E4%B8%80%E6%AC%A1%E6%8E%A8%E8%8D%90%E6%B3%A2%E5%8A%A8%E7%9C%8B%E6%87%82%E2%80%9C%E7%A7%BB%E5%8A%A8%E9%9D%B6%E2%80%9D#chunk-0",
-    "title": "模型越强，GEO 为什么反而越难量化？从一次推荐波动看懂“移动靶”",
-    "content": "模型越强，GEO 为什么反而越难量化？从一次推荐波动看懂“移动靶”\n假设有一款代码审查工具，叫 PatchPilot。官网可以被搜到，但用户让 AI 推荐支持 GitLab、私有化部署的 Merge Request 审查工具时，它很少出现在答案里。（想了解背景，可以先看《AI 为什么没把你写进答案？从一句产品推荐读懂 GEO》）\n我们改写了它的首页，补上 GitLab、私有化部署、价格和数据边界等可核验信息。这类工作通常被称为 GEO：让页面上可核验的主张更有机会进入生成式答案。\n接着用四种问法各测十次。改版前，40 个答案里只有 1 个准确提到 PatchPilot；改版后，变成了 15 个。\n看起来，GEO 生效了。",
-    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E6%A8%A1%E5%9E%8B%E8%B6%8A%E5%BC%BA%EF%BC%8CGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%8D%E8%80%8C%E8%B6%8A%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F%E4%BB%8E%E4%B8%80%E6%AC%A1%E6%8E%A8%E8%8D%90%E6%B3%A2%E5%8A%A8%E7%9C%8B%E6%87%82%E2%80%9C%E7%A7%BB%E5%8A%A8%E9%9D%B6%E2%80%9D",
-    "chunkIndex": 0,
-    "totalChunks": 8,
-    "startPos": 0,
-    "endPos": 315,
-    "originalTitle": "模型越强，GEO 为什么反而越难量化？从一次推荐波动看懂“移动靶”"
-  },
-  {
-    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E6%A8%A1%E5%9E%8B%E8%B6%8A%E5%BC%BA%EF%BC%8CGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%8D%E8%80%8C%E8%B6%8A%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F%E4%BB%8E%E4%B8%80%E6%AC%A1%E6%8E%A8%E8%8D%90%E6%B3%A2%E5%8A%A8%E7%9C%8B%E6%87%82%E2%80%9C%E7%A7%BB%E5%8A%A8%E9%9D%B6%E2%80%9D#chunk-1",
-    "title": "模型越强，GEO 为什么反而越难量化？从一次推荐波动看懂“移动靶” (第2段)",
-    "content": "...ot；改版后，变成了 15 个。\n看起来，GEO 生效了。 一周后，平台升级了搜索模型。页面一个字没改，同样的 40 个问题里，PatchPilot 只剩 7 次准确出现。\n答案反而更好了：把产品说错的次数少了，引用的资料也更可靠。\n内容没有退步，模型还变强了。为什么 GEO 数据反而掉了？\n模型更好了，PatchPilot 为什么反而消失了？\n假设旧模型每次会推荐五款工具。它的候选范围很宽，PatchPilot 容易混进来，但也会把 SaaS 说成私有化部署，或者张冠李戴地拼错价格。\n新模型收紧了选择。它只推荐两三款，还要求“私有化部署”同时得到官方文档和其他可信来源的支撑。PatchPilot 的官网写对了，站外证据却还不够，于是被筛掉。\n对用户来说，答案更准了；对 PatchPilot 来说，曝光变少了。",
-    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E6%A8%A1%E5%9E%8B%E8%B6%8A%E5%BC%BA%EF%BC%8CGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%8D%E8%80%8C%E8%B6%8A%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F%E4%BB%8E%E4%B8%80%E6%AC%A1%E6%8E%A8%E8%8D%90%E6%B3%A2%E5%8A%A8%E7%9C%8B%E6%87%82%E2%80%9C%E7%A7%BB%E5%8A%A8%E9%9D%B6%E2%80%9D",
-    "chunkIndex": 1,
-    "totalChunks": 8,
-    "startPos": 315,
-    "endPos": 646,
-    "originalTitle": "模型越强，GEO 为什么反而越难量化？从一次推荐波动看懂“移动靶”"
-  },
-  {
-    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E6%A8%A1%E5%9E%8B%E8%B6%8A%E5%BC%BA%EF%BC%8CGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%8D%E8%80%8C%E8%B6%8A%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F%E4%BB%8E%E4%B8%80%E6%AC%A1%E6%8E%A8%E8%8D%90%E6%B3%A2%E5%8A%A8%E7%9C%8B%E6%87%82%E2%80%9C%E7%A7%BB%E5%8A%A8%E9%9D%B6%E2%80%9D#chunk-2",
-    "title": "模型越强，GEO 为什么反而越难量化？从一次推荐波动看懂“移动靶” (第3段)",
-    "content": "...，答案更准了；对 PatchPilot 来说，曝光变少了。 模型升级不会把所有品牌的分数一起抬高。它会改变候选范围和证据门槛，重新划定谁能留在答案里。\n答案里的位置，仍然是有限的\n用户没有让 AI 列出网上所有代码审查工具。他需要的是两三款可以继续评估的产品。\n旧模型给出五款，PatchPilot 也在里面；新模型删掉证据不足的选项，只留下两三款。答案没有变长。模型把更多篇幅留给核验依据，能列出的候选自然更少。\n这就是答案预算。受限的不只是字数，还有一段回答能容纳多少证据、用户愿意比较多少个选项。模型更强调准确性时，候选范围可能变窄；想引入更多来源时，单个品牌能占到的位置也会变少。\nPatchPilot 的消失未必是一次单独的降权，更可能是有限的位置被重新分配了。\n页面没变，变的是它与系统的关系",
-    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E6%A8%A1%E5%9E%8B%E8%B6%8A%E5%BC%BA%EF%BC%8CGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%8D%E8%80%8C%E8%B6%8A%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F%E4%BB%8E%E4%B8%80%E6%AC%A1%E6%8E%A8%E8%8D%90%E6%B3%A2%E5%8A%A8%E7%9C%8B%E6%87%82%E2%80%9C%E7%A7%BB%E5%8A%A8%E9%9D%B6%E2%80%9D",
-    "chunkIndex": 2,
-    "totalChunks": 8,
-    "startPos": 646,
-    "endPos": 969,
-    "originalTitle": "模型越强，GEO 为什么反而越难量化？从一次推荐波动看懂“移动靶”"
-  },
-  {
-    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E6%A8%A1%E5%9E%8B%E8%B6%8A%E5%BC%BA%EF%BC%8CGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%8D%E8%80%8C%E8%B6%8A%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F%E4%BB%8E%E4%B8%80%E6%AC%A1%E6%8E%A8%E8%8D%90%E6%B3%A2%E5%8A%A8%E7%9C%8B%E6%87%82%E2%80%9C%E7%A7%BB%E5%8A%A8%E9%9D%B6%E2%80%9D#chunk-3",
-    "title": "模型越强，GEO 为什么反而越难量化？从一次推荐波动看懂“移动靶” (第4段)",
-    "content": "...是有限的位置被重新分配了。\n页面没变，变的是它与系统的关系 如果 GEO 分数属于页面本身，那么 PatchPilot 从 15 次跌到 7 次就说不通：页面加载速度没变，部署文档没变，价格说明也没变。\n变化发生在页面之外。问题怎么问、检索系统怎么找、证据门槛设在哪里，都会影响最终的可见性：\n内容只是其中一项。同一个页面换了模型，表现会变；同一个模型遇到不同问法和时间，结果也会变。\n这也是 GEO 比 SEO 更难量化的原因。多测几次能估计当前的分布，却挡不住下一次升级把分布本身换掉。\n除了随机噪声，系统本身也会变。\n这两种波动看起来很像，处理方式却不同：\n对第一种波动，测一百次通常比测一次更可靠。对第二种，继续增加样本也无法把新旧版本变回同一个东西。把它们全部混在一起取平均，可能得到一个非常精确、却没有明确含义的数字。",
-    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E6%A8%A1%E5%9E%8B%E8%B6%8A%E5%BC%BA%EF%BC%8CGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%8D%E8%80%8C%E8%B6%8A%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F%E4%BB%8E%E4%B8%80%E6%AC%A1%E6%8E%A8%E8%8D%90%E6%B3%A2%E5%8A%A8%E7%9C%8B%E6%87%82%E2%80%9C%E7%A7%BB%E5%8A%A8%E9%9D%B6%E2%80%9D",
-    "chunkIndex": 3,
-    "totalChunks": 8,
-    "startPos": 969,
-    "endPos": 1305,
-    "originalTitle": "模型越强，GEO 为什么反而越难量化？从一次推荐波动看懂“移动靶”"
-  },
-  {
-    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E6%A8%A1%E5%9E%8B%E8%B6%8A%E5%BC%BA%EF%BC%8CGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%8D%E8%80%8C%E8%B6%8A%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F%E4%BB%8E%E4%B8%80%E6%AC%A1%E6%8E%A8%E8%8D%90%E6%B3%A2%E5%8A%A8%E7%9C%8B%E6%87%82%E2%80%9C%E7%A7%BB%E5%8A%A8%E9%9D%B6%E2%80%9D#chunk-4",
-    "title": "模型越强，GEO 为什么反而越难量化？从一次推荐波动看懂“移动靶” (第5段)",
-    "content": "...在一起取平均，可能得到一个非常精确、却没有明确含义的数字。 模型升级后，真正失效的是什么？\n看到 15 次变成 7 次，很容易觉得之前做的 GEO 白费了。\n我们重新打开 PatchPilot 的页面。部署方式、权限清单和价格说明都还在，也依然可以被检索和核验。消失的不是这些事实，而是它们在旧模型那里换来的优势。\n旧模型可能只凭官方部署文档就接受“支持私有化”这条主张；新模型还想找到其他来源交叉验证。PatchPilot 没有失去原来的证据，只是这份证据不再足以换来答案中的一个位置。\n这也解释了为什么有些优化会跟着模型一起过期。团队如果只是发现旧模型偏爱某种问法、页面格式或单一信源，再围着这个偏好反复调整，规则一变，优势就没了。具体的产品事实和原始文档仍留在页面上，等新的检索与证据规则重新采用它们。",
-    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E6%A8%A1%E5%9E%8B%E8%B6%8A%E5%BC%BA%EF%BC%8CGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%8D%E8%80%8C%E8%B6%8A%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F%E4%BB%8E%E4%B8%80%E6%AC%A1%E6%8E%A8%E8%8D%90%E6%B3%A2%E5%8A%A8%E7%9C%8B%E6%87%82%E2%80%9C%E7%A7%BB%E5%8A%A8%E9%9D%B6%E2%80%9D",
-    "chunkIndex": 4,
-    "totalChunks": 8,
-    "startPos": 1305,
-    "endPos": 1630,
-    "originalTitle": "模型越强，GEO 为什么反而越难量化？从一次推荐波动看懂“移动靶”"
-  },
-  {
-    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E6%A8%A1%E5%9E%8B%E8%B6%8A%E5%BC%BA%EF%BC%8CGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%8D%E8%80%8C%E8%B6%8A%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F%E4%BB%8E%E4%B8%80%E6%AC%A1%E6%8E%A8%E8%8D%90%E6%B3%A2%E5%8A%A8%E7%9C%8B%E6%87%82%E2%80%9C%E7%A7%BB%E5%8A%A8%E9%9D%B6%E2%80%9D#chunk-5",
-    "title": "模型越强，GEO 为什么反而越难量化？从一次推荐波动看懂“移动靶” (第6段)",
-    "content": "...和原始文档仍留在页面上，等新的检索与证据规则重新采用它们。 因此，7 次准确提及不能简单理解为“内容只剩原来的一半”。这个数字同时受页面上的内容资产和模型此刻的使用方式影响。\n给移动靶拍一张带时间的照片\n弄清这一点后，我们没有把 7 次直接接在 15 次后面，画成一条持续下跌的曲线。那样会把两个不同系统里的测量当成同一件事。\n新的测试仍然保留四种问法，每种重复十次，但每一批结果都带上平台、接口、时间和已知的模型版本，完整回答与引用也一起留下。这样记录下来的不是 PatchPilot 永久有效的 GEO 分数，只是它在某个时间窗口里的表现。\n有些平台不会公布版本。我们便保留一组长期不变的问题，再放入几个参照产品。如果 PatchPilot 和参照产品在同一时间集体变化，更可能是靶心移动了，不必急着给最近那次页面改版记功或定罪。",
-    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E6%A8%A1%E5%9E%8B%E8%B6%8A%E5%BC%BA%EF%BC%8CGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%8D%E8%80%8C%E8%B6%8A%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F%E4%BB%8E%E4%B8%80%E6%AC%A1%E6%8E%A8%E8%8D%90%E6%B3%A2%E5%8A%A8%E7%9C%8B%E6%87%82%E2%80%9C%E7%A7%BB%E5%8A%A8%E9%9D%B6%E2%80%9D",
-    "chunkIndex": 5,
-    "totalChunks": 8,
-    "startPos": 1630,
-    "endPos": 1968,
-    "originalTitle": "模型越强，GEO 为什么反而越难量化？从一次推荐波动看懂“移动靶”"
-  },
-  {
-    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E6%A8%A1%E5%9E%8B%E8%B6%8A%E5%BC%BA%EF%BC%8CGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%8D%E8%80%8C%E8%B6%8A%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F%E4%BB%8E%E4%B8%80%E6%AC%A1%E6%8E%A8%E8%8D%90%E6%B3%A2%E5%8A%A8%E7%9C%8B%E6%87%82%E2%80%9C%E7%A7%BB%E5%8A%A8%E9%9D%B6%E2%80%9D#chunk-6",
-    "title": "模型越强，GEO 为什么反而越难量化？从一次推荐波动看懂“移动靶” (第7段)",
-    "content": "...更可能是靶心移动了，不必急着给最近那次页面改版记功或定罪。 最后，报告不再写“PatchPilot 的 GEO 得分是 37.5%”，而是写成：在这个平台、这组问题和这段时间里，40 次回答有 15 次准确提及；系统升级后，在新的时间窗口里变成了 7 次。\n这张带时间的照片能告诉我们 PatchPilot 何时出现、何时消失，但回答不了模型为什么留下这条证据、舍弃另一条。\n还有一点容易被忽略：网页出现在引用列表里，不等于它的观点进了正文。AI 可以搜索十个来源，最后只写下一句毫无分歧的推荐。\n下一篇，我们继续沿着 PatchPilot 往下追：当十个链接被压成一句话，哪些事实留下了，哪些分歧又消失了？\nReferences\nDon't Measure Once: Measuring Visibility in AI Search (GEO)",
-    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E6%A8%A1%E5%9E%8B%E8%B6%8A%E5%BC%BA%EF%BC%8CGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%8D%E8%80%8C%E8%B6%8A%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F%E4%BB%8E%E4%B8%80%E6%AC%A1%E6%8E%A8%E8%8D%90%E6%B3%A2%E5%8A%A8%E7%9C%8B%E6%87%82%E2%80%9C%E7%A7%BB%E5%8A%A8%E9%9D%B6%E2%80%9D",
-    "chunkIndex": 6,
-    "totalChunks": 8,
-    "startPos": 1968,
-    "endPos": 2314,
-    "originalTitle": "模型越强，GEO 为什么反而越难量化？从一次推荐波动看懂“移动靶”"
-  },
-  {
-    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E6%A8%A1%E5%9E%8B%E8%B6%8A%E5%BC%BA%EF%BC%8CGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%8D%E8%80%8C%E8%B6%8A%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F%E4%BB%8E%E4%B8%80%E6%AC%A1%E6%8E%A8%E8%8D%90%E6%B3%A2%E5%8A%A8%E7%9C%8B%E6%87%82%E2%80%9C%E7%A7%BB%E5%8A%A8%E9%9D%B6%E2%80%9D#chunk-7",
-    "title": "模型越强，GEO 为什么反而越难量化？从一次推荐波动看懂“移动靶” (第8段)",
-    "content": "...Visibility in AI Search (GEO) Quantifying Uncertainty in AI Visibility: A Statistical Framework for Generative Search Measurement\nOptimizing Visibility in Generative Engines: A Critical Survey of GEO (2023–2026)\nWhat Gets Cited: Competitive GEO in AI Answer Engines\nFrom Citation Selection to Citation Absorption",
-    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E6%A8%A1%E5%9E%8B%E8%B6%8A%E5%BC%BA%EF%BC%8CGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%8D%E8%80%8C%E8%B6%8A%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F%E4%BB%8E%E4%B8%80%E6%AC%A1%E6%8E%A8%E8%8D%90%E6%B3%A2%E5%8A%A8%E7%9C%8B%E6%87%82%E2%80%9C%E7%A7%BB%E5%8A%A8%E9%9D%B6%E2%80%9D",
-    "chunkIndex": 7,
-    "totalChunks": 8,
-    "startPos": 2314,
-    "endPos": 2596,
-    "originalTitle": "模型越强，GEO 为什么反而越难量化？从一次推荐波动看懂“移动靶”"
   },
   {
     "chunkId": "/blog/tech%2Fai-%E7%AC%94%E8%AE%B0%2FAAR%20-%20%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AF%B9%E9%BD%90%E7%A0%94%E7%A9%B6%E7%9A%84%E5%90%AF%E7%A4%BA%E4%B8%8E%E9%99%B7%E9%98%B1#chunk-0",
