@@ -4,70 +4,112 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
-  <title>Git 为什么难用，却成了程序员离不开的工具？ | LZ AI NOTE</title>
-  <meta name="description" content="Git 为什么难用，却成了程序员离不开的工具？ 设想一个你愿意真正托付工作的 AI Agent。 它刚刚修复了一个线上问题，改动了二十多个文件。你没有全程盯着它，也没有因为它动得快而心慌。因为你能看到它从哪些日志得出了判断，能在部署前检查每一处差异；如果测试没有通过，它会停在隔离环境里，不会把半成品带到生产。即使发布后出现异常，也能找回上一个已知状态，知道…">
+  <title>Git 为什么这么难用，却始终没有被替代？ | LZ AI NOTE</title>
+  <meta name="description" content="Git 为什么这么难用，却始终没有被替代？ 想象一下，你准备重写项目的登录流程。 几个小时后，新方案没跑通，旧方案也被改得面目全非。你隐约记得哪些文件动过，却已经说不清每一步改了什么。 如果没有 Git，你大概会寻找昨天的备份，或者对着一堆“最终版”文件重新拼一次。 Git 改变的正是这件事： 它没有阻止人走错路，却让一次走错不必毁掉已经走过的路。 这也是…">
   <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-%E4%BB%8E%E7%BB%8F%E5%85%B8%E4%B8%AD%E5%AD%A6%E4%B9%A0/Git%20%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9A%BE%E7%94%A8%EF%BC%8C%E5%8D%B4%E6%88%90%E4%BA%86%E7%A8%8B%E5%BA%8F%E5%91%98%E7%A6%BB%E4%B8%8D%E5%BC%80%E7%9A%84%E5%B7%A5%E5%85%B7%EF%BC%9F">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
-  <meta property="og:title" content="Git 为什么难用，却成了程序员离不开的工具？ | LZ AI NOTE">
-  <meta property="og:description" content="Git 为什么难用，却成了程序员离不开的工具？ 设想一个你愿意真正托付工作的 AI Agent。 它刚刚修复了一个线上问题，改动了二十多个文件。你没有全程盯着它，也没有因为它动得快而心慌。因为你能看到它从哪些日志得出了判断，能在部署前检查每一处差异；如果测试没有通过，它会停在隔离环境里，不会把半成品带到生产。即使发布后出现异常，也能找回上一个已知状态，知道…">
+  <meta property="og:title" content="Git 为什么这么难用，却始终没有被替代？ | LZ AI NOTE">
+  <meta property="og:description" content="Git 为什么这么难用，却始终没有被替代？ 想象一下，你准备重写项目的登录流程。 几个小时后，新方案没跑通，旧方案也被改得面目全非。你隐约记得哪些文件动过，却已经说不清每一步改了什么。 如果没有 Git，你大概会寻找昨天的备份，或者对着一堆“最终版”文件重新拼一次。 Git 改变的正是这件事： 它没有阻止人走错路，却让一次走错不必毁掉已经走过的路。 这也是…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E4%BB%8E%E7%BB%8F%E5%85%B8%E4%B8%AD%E5%AD%A6%E4%B9%A0/Git%20%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9A%BE%E7%94%A8%EF%BC%8C%E5%8D%B4%E6%88%90%E4%BA%86%E7%A8%8B%E5%BA%8F%E5%91%98%E7%A6%BB%E4%B8%8D%E5%BC%80%E7%9A%84%E5%B7%A5%E5%85%B7%EF%BC%9F">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Git 为什么难用，却成了程序员离不开的工具？","description":"Git 为什么难用，却成了程序员离不开的工具？ 设想一个你愿意真正托付工作的 AI Agent。 它刚刚修复了一个线上问题，改动了二十多个文件。你没有全程盯着它，也没有因为它动得快而心慌。因为你能看到它从哪些日志得出了判断，能在部署前检查每一处差异；如果测试没有通过，它会停在隔离环境里，不会把半成品带到生产。即使发布后出现异常，也能找回上一个已知状态，知道…","url":"https://wizardpisces.github.io/blog/tech/ai-%E4%BB%8E%E7%BB%8F%E5%85%B8%E4%B8%AD%E5%AD%A6%E4%B9%A0/Git%20%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9A%BE%E7%94%A8%EF%BC%8C%E5%8D%B4%E6%88%90%E4%BA%86%E7%A8%8B%E5%BA%8F%E5%91%98%E7%A6%BB%E4%B8%8D%E5%BC%80%E7%9A%84%E5%B7%A5%E5%85%B7%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E4%BB%8E%E7%BB%8F%E5%85%B8%E4%B8%AD%E5%AD%A6%E4%B9%A0/Git%20%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9A%BE%E7%94%A8%EF%BC%8C%E5%8D%B4%E6%88%90%E4%BA%86%E7%A8%8B%E5%BA%8F%E5%91%98%E7%A6%BB%E4%B8%8D%E5%BC%80%E7%9A%84%E5%B7%A5%E5%85%B7%EF%BC%9F","dateModified":"2026-08-07","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Git 为什么这么难用，却始终没有被替代？","description":"Git 为什么这么难用，却始终没有被替代？ 想象一下，你准备重写项目的登录流程。 几个小时后，新方案没跑通，旧方案也被改得面目全非。你隐约记得哪些文件动过，却已经说不清每一步改了什么。 如果没有 Git，你大概会寻找昨天的备份，或者对着一堆“最终版”文件重新拼一次。 Git 改变的正是这件事： 它没有阻止人走错路，却让一次走错不必毁掉已经走过的路。 这也是…","url":"https://wizardpisces.github.io/blog/tech/ai-%E4%BB%8E%E7%BB%8F%E5%85%B8%E4%B8%AD%E5%AD%A6%E4%B9%A0/Git%20%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9A%BE%E7%94%A8%EF%BC%8C%E5%8D%B4%E6%88%90%E4%BA%86%E7%A8%8B%E5%BA%8F%E5%91%98%E7%A6%BB%E4%B8%8D%E5%BC%80%E7%9A%84%E5%B7%A5%E5%85%B7%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E4%BB%8E%E7%BB%8F%E5%85%B8%E4%B8%AD%E5%AD%A6%E4%B9%A0/Git%20%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9A%BE%E7%94%A8%EF%BC%8C%E5%8D%B4%E6%88%90%E4%BA%86%E7%A8%8B%E5%BA%8F%E5%91%98%E7%A6%BB%E4%B8%8D%E5%BC%80%E7%9A%84%E5%B7%A5%E5%85%B7%EF%BC%9F","dateModified":"2026-08-07","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
 </head>
 <body>
-  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Git 为什么难用，却成了程序员离不开的工具？</h1><h1>Git 为什么难用，却成了程序员离不开的工具？</h1>
-<p>设想一个你愿意真正托付工作的 AI Agent。</p>
-<p>它刚刚修复了一个线上问题，改动了二十多个文件。你没有全程盯着它，也没有因为它动得快而心慌。因为你能看到它从哪些日志得出了判断，能在部署前检查每一处差异；如果测试没有通过，它会停在隔离环境里，不会把半成品带到生产。即使发布后出现异常，也能找回上一个已知状态，知道这次变化究竟从哪里开始。</p>
-<p>注意，让你放心的不是“它保证百分之百正确”。而是它的错误能被接住。</p>
-<p>这正是 Git 在软件开发里早就解决过的问题。也解释了一个看似矛盾的现象：Git 难学、难记、偶尔让人抓狂，却没有被一个“更简单的保存按钮”替代。</p>
-<h2>Git 最反直觉的地方：它不急着替你做决定</h2>
-<p>普通软件倾向于把历史藏起来。你改一段文字，点保存，系统默认当前版本就是答案。Git 却在修改和共享之间塞进了一层暂存区，还允许你开分支、改写本地历史、比较差异、合并冲突。</p>
-<p>初学者会觉得这很绕。为什么改了文件还不算提交？为什么同样是撤销，<code>restore</code>、<code>revert</code>、<code>reset</code> 却不是一回事？为什么合并冲突不能自动解决？</p>
-<p>因为它们对应的不是命令设计的任性，而是开发中几种不同的“还没想好”。</p>
-<p>工作区里的修改，是一个尚在尝试的想法。暂存区是在说：“这部分我准备当作一个完整的变化交出去。”提交是把这个判断变成可追溯的快照。分支让互相竞争的方案先并存。冲突则是在说：“这两个人的意图不能由机器替他们选。”</p>
-<p>Git 的官方文档把暂存区描述为下一次提交的提案，也强调本地历史可以在分享前尽可能晚地整理。这正是它真正的发明：把“现在就必须做对”的压力，拆成一连串可以检查、可以回退、可以延后决定的动作。<a href="https://git-scm.com/book/en/v2/Getting-Started-What-is-Git">Git 官方文档：三种状态与暂存区</a> <a href="https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History.html">Git 官方文档：重写本地历史</a></p>
-<p>Git 因此并没有减少复杂性。它只是拒绝掩盖复杂性，并给复杂性配上了操作方式。</p>
-<h2>程序员真正依赖的，是“可被比较的意图”</h2>
-<p>把 Git 看成版本备份工具，仍然低估了它。</p>
-<p>备份只能回答：“旧文件还在吗？”Git 还能回答：“你这次到底主张改什么？它和上一个判断差在哪？这个判断是谁在什么上下文下做的？”</p>
-<p>这是一种很特别的能力：把模糊的意图变成可比较的对象。</p>
-<p>一段正在编辑的代码，谁也不必立刻认可。进入暂存区后，它开始有边界。形成 commit 后，它有了身份和父节点。发起 review 后，团队可以围绕一份明确的差异讨论，而不必围绕“我大概改了一些东西”互相猜测。</p>
-<p>于是，开发者敢于更早地尝试，也更容易推翻自己的尝试。分支不是为了把代码藏起来，而是给一个尚未证实的判断留出空间。提交也不是表演式地写一句 message，而是让以后的人有机会理解当时的选择。</p>
-<p>连 Git 的恢复能力都建立在这层可追溯性上。reflog 会记录本地引用何时移动，因而常能找回看似丢失的提交；但记录会过期，已经泄露到外部的密钥也不会因为回退而失去风险。它从不承诺“任何错误都没事”，只尽量让状态和线索还在。<a href="https://git-scm.com/docs/git-reflog.html">Git 官方文档：reflog</a></p>
-<p>这个区别很重要。优秀系统不是消灭错误，而是让错误在扩散之前有边界，让人有材料去判断该不该继续。</p>
-<h2>Agent 的问题，恰恰不是“会不会写代码”</h2>
-<p>今天的 Agent 已经能读仓库、跑测试、修改文件、创建工单，甚至执行部署。模型能力越强，越容易把注意力都放在“这次判断准不准”上。</p>
-<p>但实际风险往往发生在判断之后。</p>
-<p>一个推理大体正确的 Agent，可能选错环境；一段补丁本身没有问题，可能和另一个未完成改动互相覆盖；一封内容正确的邮件，发给了错误的客户列表。Agent 的速度和权限让这类失误的影响更快、更广。</p>
-<p>因此，可靠 Agent 的核心能力应当有两层。</p>
-<p>第一层是做对事：理解任务、找到证据、选择工具、给出合理方案。</p>
-<p>第二层是让这件事即使做错，也能被看见、暂停、追查和补救。</p>
-<p>第一层通常由模型和知识决定。第二层主要是系统设计。很多产品只投资前者，于是 Agent 看上去越来越聪明，团队却迟迟不敢放开权限。</p>
-<h2>给 Agent 一个“提交协议”，而不是一句“请谨慎执行”</h2>
-<p>把 Git 的思想借给 Agent，重点不是让它每操作一步都执行 <code>git commit</code>，而是给行动设置类似提交的边界。</p>
-<p>一次足以影响外部世界的操作，至少应该回答五个问题：</p>
-<ul>
-<li>它基于什么证据和前提？</li>
-<li>它准备改变什么，影响范围多大？</li>
-<li>哪些结果已经自动验证，哪些仍是猜测？</li>
-<li>谁或什么策略有权批准这一步？</li>
-<li>如果结果不对，回滚、补偿或人工接管的路径是什么？</li>
-</ul>
-<p>这五个问题组成一个“提交协议”。它把 Agent 的长链路任务切成可检查的状态，而不是让用户在最后面对一句“已经完成”。</p>
-<p>以修 Bug 为例，Agent 不应从报错直接跳到部署。更合理的路径是：先在隔离工作区复现，再产生 diff 和测试结果；当影响范围清楚后，由策略或人决定是否合并；上线后把版本、观测数据和告警关联起来。每一步都能被检查，但只有跨过高风险边界时才需要打断人。</p>
-<p>这和 Git 的思路很接近：先允许本地尝试，再把值得共享的变化打磨成清晰的对象。人类复核不必变成每一步点“同意”，而应当放在权限扩大、不可逆或证据不足的时刻。Agent 设计中的停止条件和人工复核，也是在保护这种边界。<a href="https://resources.anthropic.com/hubfs/Building%20Effective%20AI%20Agents-%20Architecture%20Patterns%20and%20Implementation%20Frameworks.pdf">Anthropic：Building Effective AI Agents</a></p>
-<h2>有些世界无法像 Git 一样回退</h2>
-<p>这是类比最容易被滥用的地方。</p>
-<p>代码仓库里的某次修改可以恢复到旧版本，业务世界不一定可以。已经发送的邮件无法收回，已经完成的支付不能假装没发生，已经通知客户的错误信息也会继续影响信任。</p>
-<p>所以，Agent 的“回滚”不能只借用 Git 的名字。它需要根据动作类型选择机制：写入前先 dry run；重复请求带上幂等键；高风险操作要求显式授权；真正发生错误时执行补偿动作，并把事件交给人处理。能恢复的状态就恢复，不能恢复的影响就诚实地处理。</p>
-<p>这不是给自主性泼冷水。恰好相反，只有把不可逆的边界看清楚，才知道哪些地方可以放心让 Agent 自动做得更快。</p>
-<h2>回到开头：我们想托付的到底是什么</h2>
-<p>一个值得信赖的 Agent，不一定是最少停下来问人的那个。它应该知道什么时候继续，什么时候停下；知道怎样把自己的行动变成可检查的证据，也知道哪些后果不能靠一句“撤销”解决。</p>
-<p>Git 之所以留了下来，并不是它让程序员更少犯错。它让人可以在还不确定时先行动，在真正共享前再整理判断，在分歧出现时拿出差异来讨论，在出错后仍有机会知道发生过什么。</p>
-<p>这是一种比“永远正确”更实际的安全感。</p>
-<p>AI Agent 终究也要学会这一点。模型能把任务做得更快，但只有当系统能把错误接住、把意图保存下来、把外部后果控制住，人们才会真的把更多工作交给它。</p>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Git 为什么这么难用，却始终没有被替代？</h1><h1>Git 为什么这么难用，却始终没有被替代？</h1>
+<p>想象一下，你准备重写项目的登录流程。</p>
+<p>几个小时后，新方案没跑通，旧方案也被改得面目全非。你隐约记得哪些文件动过，却已经说不清每一步改了什么。</p>
+<p>如果没有 Git，你大概会寻找昨天的备份，或者对着一堆“最终版”文件重新拼一次。</p>
+<p>Git 改变的正是这件事：</p>
+<blockquote>
+<p><strong>它没有阻止人走错路，却让一次走错不必毁掉已经走过的路。</strong></p>
+</blockquote>
+<p>这也是它看起来麻烦，却一直没有被更简单工具取代的原因。</p>
+<h2>保存副本，只能回到过去</h2>
+<p>大多数人最初理解的版本管理，是不断复制文件：</p>
+<pre><code class="language-text">方案.doc
+方案-最终版.doc
+方案-最终版2.doc
+方案-真的最终版.doc
+</code></pre>
+<p>它确实保留了过去，却没有记录这些版本为什么出现、彼此是什么关系。</p>
+<p>Git 保存的是另一种东西。</p>
+<pre><code class="language-text">A ← B ← C ← D
+</code></pre>
+<p>每次提交都指向来时的路。于是你看到的不只是一份旧代码，还能知道它从哪里分开、经过哪些变化，又怎样走到今天。</p>
+<p>普通保存回答“当时的文件是什么样”。</p>
+<p>Git 还要回答“我们是怎样走到这里的”。</p>
+<h2>Commit 不是存档，而是 checkpoint</h2>
+<p>这也解释了新手最困惑的一件事：文件已经保存了，为什么还要 <code>git add</code> 和 <code>commit</code>？</p>
+<p>因为保存只说明磁盘上的内容变了，commit 则是在历史中划出一个可以辨认、可以返回的边界。</p>
+<p>假设你刚才修了一个 Bug，顺手改了格式，还写了一半重构。它们同时躺在工作区里，却不该挤进同一个 checkpoint。</p>
+<p>暂存区让你挑出真正属于这一步的变化，commit 再把它们连同原因一起放进历史。</p>
+<p>所以好的提交不只是“下午三点的代码”。它会告诉后来的人：这里完成了什么，从这里重新出发是否安全。</p>
+<p>保存得再频繁，也不一定容易恢复。</p>
+<p>真正有用的是在事情说得清的位置留下 checkpoint。</p>
+<h2>分支让一次尝试不必押上现在</h2>
+<p>有了 checkpoint，另一件事才变得可能：从同一个位置出发，尝试几种不同的未来。</p>
+<pre><code class="language-text">A---B---E       main
+     \
+      C---D     feature
+</code></pre>
+<p>分支并不是复制一整套项目。它只是记住：这条尝试从 B 开始。</p>
+<p>于是，重写登录流程的人可以继续向前，修补旧流程的人也不必停下来。两边不需要立刻争出谁对，失败的方案也不会污染已经稳定的代码。</p>
+<p>等证据足够，再决定合并哪一条路。</p>
+<p>Git 保存的因此不只是过去。</p>
+<p>它还让几个尚未被选中的未来，可以同时存在一阵子。</p>
+<h2>已经影响别人的事，不能假装没发生</h2>
+<p>Git 那几种容易混淆的撤销命令，也在处理同一个问题：错误发生在什么阶段？</p>
+<p>还没有提交的修改，可以像草稿一样丢掉。</p>
+<p>只存在于本地的提交，可以重新整理边界。</p>
+<p>但一段代码已经进入共同历史，甚至被别人接着开发，再把它偷偷抹掉，所有人的来路都会混乱。</p>
+<p>这时 <code>revert</code> 不会修改过去，而是增加一次反向变化：那件事确实发生过，现在我们又把它改了回来。</p>
+<p>这很像现实世界。没有寄出的邮件可以重写，已经寄出的邮件只能再发一封更正；数据库里没有执行的更新可以取消，已经发生的扣款则需要退款。</p>
+<p>后悔看起来只有一句话，处理方式却取决于它有没有越过外部边界。</p>
+<h2>Git 难，因为它给试错留下了形状</h2>
+<p>Git 的命令确实可以更好记，报错也可以更友好。</p>
+<p>可它背后的这些区别很难真正删掉：正在修改、准备记录、已经记录、已经影响别人，本来就不是同一个状态。</p>
+<p>软件开发也不是沿着一条直线写出正确答案。人会尝试，会并行探索，也会在错误发生后改变主意。</p>
+<p>简单工具把这些过程藏起来，直到出错时一起爆出来。</p>
+<p>Git 把它们提前摆在了桌面上。</p>
+<p>它的复杂，不全是设计得差。还有一部分，是试错本身终于有了位置、有了边界，也有了回去的路。</p>
+<h2>Agent 的重试，不能只是再来一遍</h2>
+<p>现在让一个 Agent 完成发布任务。</p>
+<p>它先修改配置，运行测试，然后执行数据库迁移，最后发送上线通知。</p>
+<p>如果最后一步超时，Agent 应该怎么办？</p>
+<p>最直觉的答案是：重试。</p>
+<p>可从头再跑一次，可能重复执行迁移；直接重发通知，又可能让所有人收到两封邮件。超时只说明 Agent 没拿到结果，不代表外部世界什么都没发生。</p>
+<p>这时，单纯记住对话没有多大用。Agent 需要知道上一个可以安全恢复的位置在哪里，哪些步骤已经成功，哪些工具调用产生了外部事实，以及下一次执行怎样避免重复。</p>
+<p>这才是 checkpoint 的意义。</p>
+<p>它保存的不是“Agent 刚才说过什么”，而是“任务已经走到哪里，哪些路不用再走”。</p>
+<p>retry 负责再试一次，checkpoint 决定从哪里再试。</p>
+<h2>Agent 也需要可以分叉和补偿的历史</h2>
+<p>Git 的其他设计也跟着回来了。</p>
+<p>Agent 可以从同一个 checkpoint 分出两条路线，分别尝试两种修复，再选择测试通过的一条。这更像 branch，而不是让两次尝试在同一份状态上互相覆盖。</p>
+<p>如果错误只存在于沙箱，它可以回到 checkpoint 重来；如果动作已经越过边界，写进数据库、发出邮件或者完成支付，就不能靠回滚上下文假装一切没发生。</p>
+<p>这时需要的可能是去重标识、状态核对，或者一笔明确的补偿操作。</p>
+<p>一个没有 checkpoint 的 Agent，就像一个开着自动保存、却从来不用 Git 的程序员：它可以工作很久，也可以在最后一步出错时，让你不知道该从哪里收拾。</p>
+<p>所以，当 Agent 说“我会重试”时，真正值得追问的不是它会不会再想一次。</p>
+<p>而是它准备从哪里重新开始，哪些事情不会重复，哪一步之后已经没有真正的撤销键。</p>
+<h2>参考资料</h2>
+<ol>
+<li>
+<p>Git 官方文档：What is Git：<a href="https://git-scm.com/book/en/v2/Getting-Started-What-is-Git">https://git-scm.com/book/en/v2/Getting-Started-What-is-Git</a></p>
+</li>
+<li>
+<p>Git 官方文档：Rewriting History：<a href="https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History.html">https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History.html</a></p>
+</li>
+<li>
+<p>Anthropic：Building Effective AI Agents：<a href="https://resources.anthropic.com/hubfs/Building%20Effective%20AI%20Agents-%20Architecture%20Patterns%20and%20Implementation%20Frameworks.pdf">https://resources.anthropic.com/hubfs/Building Effective AI Agents- Architecture Patterns and Implementation Frameworks.pdf</a></p>
+</li>
+<li>
+<p>LangGraph 官方文档：Persistence：<a href="https://docs.langchain.com/oss/python/langgraph/persistence">https://docs.langchain.com/oss/python/langgraph/persistence</a></p>
+</li>
+<li>
+<p>Temporal：Architecture Overview：<a href="https://github.com/temporalio/temporal/blob/main/docs/architecture/README.md">https://github.com/temporalio/temporal/blob/main/docs/architecture/README.md</a></p>
+</li>
+</ol>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-C9SoMJnl.js"></script>
+  <script type="module" crossorigin src="/assets/index-BoxWXjY2.js"></script>
 </body>
 </html>

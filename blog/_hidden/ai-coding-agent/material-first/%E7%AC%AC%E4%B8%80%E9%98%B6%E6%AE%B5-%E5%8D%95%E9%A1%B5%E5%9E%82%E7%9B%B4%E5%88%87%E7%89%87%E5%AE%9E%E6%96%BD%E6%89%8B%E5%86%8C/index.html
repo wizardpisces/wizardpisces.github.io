@@ -4,790 +4,255 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex,nofollow">
-  <title>第一阶段：web-affiliate-rn 单页垂直切片实施手册 | LZ AI NOTE</title>
-  <meta name="description" content="用 3～4 周跑通 Figma 到 React Native 页面代码和 Native 视觉验证闭环。">
+  <title>第一阶段：web-affiliate-rn 单页垂直切片实施方案 | LZ AI NOTE</title>
+  <meta name="description" content="用一个真实页面验证 Figma 到 RN 代码和 Native 视觉反馈闭环。">
   <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/ai-coding-agent/material-first/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%8D%95%E9%A1%B5%E5%9E%82%E7%9B%B4%E5%88%87%E7%89%87%E5%AE%9E%E6%96%BD%E6%89%8B%E5%86%8C">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
-  <meta property="og:title" content="第一阶段：web-affiliate-rn 单页垂直切片实施手册 | LZ AI NOTE">
-  <meta property="og:description" content="用 3～4 周跑通 Figma 到 React Native 页面代码和 Native 视觉验证闭环。">
+  <meta property="og:title" content="第一阶段：web-affiliate-rn 单页垂直切片实施方案 | LZ AI NOTE">
+  <meta property="og:description" content="用一个真实页面验证 Figma 到 RN 代码和 Native 视觉反馈闭环。">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/ai-coding-agent/material-first/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%8D%95%E9%A1%B5%E5%9E%82%E7%9B%B4%E5%88%87%E7%89%87%E5%AE%9E%E6%96%BD%E6%89%8B%E5%86%8C">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"第一阶段：web-affiliate-rn 单页垂直切片实施手册","description":"用 3～4 周跑通 Figma 到 React Native 页面代码和 Native 视觉验证闭环。","url":"https://wizardpisces.github.io/blog/_hidden/ai-coding-agent/material-first/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%8D%95%E9%A1%B5%E5%9E%82%E7%9B%B4%E5%88%87%E7%89%87%E5%AE%9E%E6%96%BD%E6%89%8B%E5%86%8C","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/ai-coding-agent/material-first/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%8D%95%E9%A1%B5%E5%9E%82%E7%9B%B4%E5%88%87%E7%89%87%E5%AE%9E%E6%96%BD%E6%89%8B%E5%86%8C","dateModified":"2026-08-07","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"第一阶段：web-affiliate-rn 单页垂直切片实施方案","description":"用一个真实页面验证 Figma 到 RN 代码和 Native 视觉反馈闭环。","url":"https://wizardpisces.github.io/blog/_hidden/ai-coding-agent/material-first/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%8D%95%E9%A1%B5%E5%9E%82%E7%9B%B4%E5%88%87%E7%89%87%E5%AE%9E%E6%96%BD%E6%89%8B%E5%86%8C","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/ai-coding-agent/material-first/%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%8D%95%E9%A1%B5%E5%9E%82%E7%9B%B4%E5%88%87%E7%89%87%E5%AE%9E%E6%96%BD%E6%89%8B%E5%86%8C","dateModified":"2026-08-07","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
 </head>
 <body>
-  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>第一阶段：web-affiliate-rn 单页垂直切片实施手册</h1><h1>第一阶段：web-affiliate-rn 单页垂直切片实施手册</h1>
-<h2>阶段目标</h2>
-<p>第一阶段只解决一个问题：</p>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>第一阶段：web-affiliate-rn 单页垂直切片实施方案</h1><h1>第一阶段：web-affiliate-rn 单页垂直切片实施方案</h1>
+<h2>第一阶段只验证一件事</h2>
+<p>第一阶段要验证的是：</p>
 <blockquote>
-<p>能否选择一个真实 Figma 页面，在不建设 RN 动态 Runtime、不升级现有 RN 技术栈的前提下，稳定生成符合 <code>web-affiliate-rn</code> 规范的普通 React Native 代码，并在 Native 环境中完成视觉验证？</p>
+<p>能否选择一个真实 Figma 页面，在不升级 RN 技术栈、不建设线上动态 Runtime 的前提下，稳定生成符合 <code>web-affiliate-rn</code> 规范的普通 React Native 代码，并在 Native 环境中完成视觉验证？</p>
 </blockquote>
-<p>阶段完成时，应该得到一条最短闭环：</p>
-<pre><code class="language-text">Figma Frame
+<p>第一阶段的价值不只是交付一页，而是找出未来可以复用的最小生产闭环。</p>
+<pre><code class="language-text">Figma
   → RN Material Mapping
   → RN Page Plan
-  → TSX + style.ts
-  → Hostless / Simulator / Emulator
-  → Screenshot Diff
-  → 修正 Mapping、Catalog 或 Emitter
+  → RN Code
+  → Native Render
+  → Visual Feedback
 </code></pre>
-<p>这一阶段不追求自动接入所有业务逻辑，也不追求覆盖所有页面类型。</p>
-<h2>明确不做什么</h2>
-<p>为了避免第一阶段再次膨胀，以下内容明确不做：</p>
+<h2>为什么先做单页垂直切片</h2>
+<p>当前有三个不确定性需要一起验证：</p>
+<ol>
+<li><code>web-affiliate-rn</code> 中哪些组件真正适合作为 AI Material；</li>
+<li>Figma 的布局和视觉信息能否稳定转换为 RN Flexbox 与项目样式；</li>
+<li>RN 页面能否建立类似 Web 的快速视觉反馈，但以 Native 截图而非浏览器 DOM 为事实。</li>
+</ol>
+<p>如果先做全量 Catalog、完整 Agent 流程或 RN Runtime，会在核心问题尚未验证时引入大量基础设施。单页垂直切片能够用最小范围同时暴露这三类问题。</p>
+<h2>试点页面怎么选</h2>
+<p>首个页面应当是中等复杂度，而不是最简单或最复杂的页面。</p>
+<p>适合的页面：</p>
 <ul>
-<li>不建设 App 运行时解释的 RN Schema Renderer；</li>
-<li>不要求兼容现有 Web AJR Runtime；</li>
-<li>不改造完整 <code>ai-code-agent</code> 工作流；</li>
-<li>不抽取仓库全部公共组件；</li>
-<li>不自动发布公共物料；</li>
-<li>不升级 React、React Native、Metro、Node 或 ShopeeRN SDK；</li>
-<li>不用 React Native Web 的截图作为最终验收；</li>
-<li>不让 AI 自由重写 API、Redux、Navigator、Tracking 和业务规则；</li>
-<li>不选择 Home、复杂图表、无限列表或业务耦合极重的页面作为首个样本。</li>
-</ul>
-<h2>人员与职责</h2>
-<p>最低人员配置：</p>
-<table>
-<thead>
-<tr>
-<th>角色</th>
-<th style="text-align:right">投入</th>
-<th>第一阶段职责</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>主力实施者</td>
-<td style="text-align:right">100%</td>
-<td>Catalog、Mapping、Emitter、Fixture、验证闭环</td>
-</tr>
-<tr>
-<td>RN Reviewer</td>
-<td style="text-align:right">20%～30%</td>
-<td>环境、ShopeeRN 约定、代码 Review、平台问题定位</td>
-</tr>
-<tr>
-<td>产品/UED</td>
-<td style="text-align:right">关键节点参与</td>
-<td>提供 Figma、状态、资源，确认视觉与交互取舍</td>
-</tr>
-<tr>
-<td>物料 Owner</td>
-<td style="text-align:right">按需</td>
-<td>判断组件复用、扩展和页面局部实现边界</td>
-</tr>
-</tbody>
-</table>
-<p>如果主力实施者对 RN 不熟，RN Reviewer 不能省略。否则大量时间会消耗在 Metro、Native SDK、PageContainer 和平台差异上，而不是验证方案本身。</p>
-<h2>第 0 步：锁定试点输入</h2>
-<p>预计：1 人日。</p>
-<h3>页面选择标准</h3>
-<p>首个页面最好满足：</p>
-<ul>
-<li>新页面或相对独立的页面；</li>
 <li>详情页、结果页、成功页或简单表单；</li>
 <li>5～10 个主要视觉区块；</li>
-<li>以展示为主，只有少量按钮、输入或弹层；</li>
-<li>现有组件预计可以覆盖 60% 以上结构；</li>
-<li>不依赖复杂 Native 能力；</li>
-<li>能提供完整的 Figma Frame 和设计资源。</li>
+<li>大部分结构预计可由已有组件覆盖；</li>
+<li>包含 content 和至少两个 loading/empty/error 等状态；</li>
+<li>只有少量交互和宿主能力；</li>
+<li>有完整的 375 宽 Figma 与设计资源。</li>
 </ul>
-<p>“60%”只用于选择试点，不是最终验收指标。如果连大部分结构都明显无法复用，第一阶段会退化成新组件开发项目。</p>
-<h3>必须收集的输入</h3>
+<p>不适合的页面：</p>
 <ul>
-<li>Figma 文件链接与精确 Frame/Node ID；</li>
-<li>设计基准尺寸，原则上使用项目默认的 375 宽；</li>
-<li>iOS 与 Android 是否共用设计；</li>
-<li>normal、loading、empty、error、disabled 等状态；</li>
-<li>长文本或多语言参考；</li>
-<li>图片、图标、插画和字体资源；</li>
-<li>页面入口、返回行为和底部安全区要求；</li>
-<li>页面需要的操作列表；</li>
-<li>一份固定 Mock 数据；</li>
-<li>如果是已有页面改造，提供当前页面入口和截图。</li>
+<li>Home；</li>
+<li>复杂图表；</li>
+<li>无限列表和多层联动筛选；</li>
+<li>强依赖多个 Native SDK 的流程；</li>
+<li>设计本身仍在频繁变化的页面。</li>
 </ul>
-<h3>形成 <code>pilot-brief.md</code></h3>
-<p>内容至少包括：</p>
-<pre><code class="language-text">页面名称：
-目标 MODULE：
-Figma File / Node：
-设计尺寸：
-Golden 平台：iOS / Android
-Golden 国家与语言：
-页面状态：
-交互范围：
-明确不做：
-验收人：
-</code></pre>
-<h3>完成标准</h3>
+<h2>第一阶段的六个核心环节</h2>
+<h3>一、建立稳定的 Native 预览与截图入口</h3>
+<p>在生成任何代码之前，先保证一个固定页面状态能够被重复打开、使用固定 Mock 数据渲染，并输出稳定截图。</p>
+<p>Storybook 可以承担隔离渲染，但不是强制前提。由于项目技术栈较旧，应限时验证兼容性：</p>
 <ul>
-<li>所有人指向同一个 Figma Frame；</li>
-<li>确认哪些区域属于系统状态栏、Native 导航和页面内容；</li>
-<li>确认截图比较范围；</li>
-<li>Mock 数据固定，不会在视觉验证时随机变化；</li>
-<li>试点范围可以在 3～4 周内完成。</li>
+<li>能在不升级 React、RN、Metro 和 ShopeeRN Host 的情况下运行，就使用 RN Storybook；</li>
+<li>无法低成本接入，就使用一个开发态 Fixture Page；</li>
+<li>最终视觉截图始终来自 Simulator、Emulator 或真机。</li>
 </ul>
-<h2>第 1 步：跑通 RN 开发和截图环境</h2>
-<p>预计：2～3 人日。</p>
-<p>这一阶段不要先写生成器。先确保一段手写 RN 页面能够被稳定打开、固定数据、重复截图。</p>
-<h3>熟悉最小 RN 工程路径</h3>
-<p>需要理解：</p>
+<p>这一环节的结果不是完善的组件平台，而是一个稳定的“输入状态 → Native 画面”通道。</p>
+<h3>二、建立首批 RN Material Catalog</h3>
+<p>仓库中的组件目录不等于 Material Catalog。只有能够独立渲染、Props 相对稳定、展示边界清楚的组件，才适合进入首批 Catalog。</p>
+<p>首批 Catalog 只覆盖试点页面，预计 15～25 个 Material，包括：</p>
 <ul>
-<li><code>src/index.ts</code> 如何加载页面模块；</li>
-<li><code>PageContainer</code> 如何注册页面；</li>
-<li><code>MODULES</code> 如何定义页面名；</li>
-<li><code>Navigator</code> 如何进入和退出页面；</li>
-<li><code>CustomStyleSheetV2</code> 如何处理 375 设计尺寸；</li>
-<li><code>SAFE_AREA_INSETS_BOTTOM</code> 如何影响底栏；</li>
-<li><code>i18n.t</code> / <code>i18n.tNode</code> 如何提供文案；</li>
-<li>Hostless 如何启动并进入指定页面。</li>
+<li>RN 与 <code>@dp/rn</code> 基础组件；</li>
+<li>TitleBar、SearchBar、Tabs、BottomButton 等公共组件；</li>
+<li>Empty、Loading、LoadError 等状态组件；</li>
+<li>试点页面真正需要的 Affiliate 展示区块。</li>
 </ul>
-<p>项目已有常用命令：</p>
-<pre><code class="language-bash">yarn hostless:start
-yarn dev:start
-yarn ts-checker
-yarn lint
-yarn jest
-</code></pre>
-<p>不要在第一阶段执行依赖升级或自动迁移命令。</p>
-<h3>建立开发态 Fixture Runner</h3>
-<p>建议增加一个只在开发环境注册的页面，例如：</p>
-<pre><code class="language-text">src/ai-render/
-  fixture-registry.ts
-  FixturePage.tsx
-  fixtures/
-    materials/
-    pilot-page/
-</code></pre>
-<p>Fixture Runner 接收：</p>
-<pre><code class="language-text">fixtureId
-state
-locale
-viewport
-</code></pre>
-<p>然后使用固定 Props 渲染一个 Material 或完整页面状态。</p>
-<p>第一阶段至少支持：</p>
+<p>每个 Material 至少要说明：</p>
 <ul>
-<li>按 ID 选择 Fixture；</li>
-<li>选择 normal/loading/empty/error 等状态；</li>
-<li>全屏渲染，隐藏无关调试 UI；</li>
-<li>根节点设置稳定 <code>testID</code>；</li>
-<li>禁止随机数、当前时间和真实网络请求；</li>
-<li>能通过固定入口重复打开同一状态。</li>
+<li>正确 import；</li>
+<li>适用场景；</li>
+<li>Props 和状态；</li>
+<li>组合约束；</li>
+<li>一个可运行 Fixture；</li>
+<li>如果存在，对应的 Figma Component ID。</li>
 </ul>
-<h3>Storybook 可行性 Spike</h3>
-<p>限时最多 2 人日，不允许无限排查。</p>
-<p>需要验证：</p>
-<ol>
-<li>是否存在兼容 React 16、RN 0.63、当前 Metro 和 Node 14 的 <code>@storybook/react-native</code> 版本；</li>
-<li>能否不修改生产入口、不升级核心依赖；</li>
-<li>能否加载项目别名、ShopeeRN SDK 和内部组件；</li>
-<li>能否全屏选择指定 Story；</li>
-<li>能否被外部脚本稳定控制并截图。</li>
-</ol>
-<p>决策规则：</p>
+<p>直接访问 API、Redux、Navigator 或强业务 Context 的组件，先拆出展示层 Adapter，不能原样作为 Material。</p>
+<h3>三、人工建立一份 Golden Mapping</h3>
+<p>在评估自动识别之前，先由人把试点页面正确拆一次。</p>
+<p>每个主要区域只需要判断它属于：</p>
 <ul>
-<li>全部满足：Storybook 作为 Fixture UI；</li>
-<li>可以渲染但无法稳定自动截图：Storybook 用于组件开发，截图仍走 Fixture Page；</li>
-<li>需要升级核心技术栈或修改 Host：停止接入，使用轻量 Fixture Runner。</li>
+<li>已有 Material；</li>
+<li>基础组件组合；</li>
+<li>页面局部结构；</li>
+<li>物料缺口；</li>
+<li>Native 宿主区域；</li>
+<li>本阶段不处理。</li>
 </ul>
-<p>不要因为 Web 团队熟悉 Storybook，就把 Storybook 变成第一阶段的强制依赖。</p>
-<h3>截图通道 Spike</h3>
-<p>按以下顺序验证：</p>
-<h4>方案 A：Hostless 截图</h4>
-<p>确认内部 Hostless 是否支持：</p>
+<p>Golden Mapping 是后续评估自动 Mapping 的基准。没有这份基准，就只能评价最终截图“像不像”，无法知道问题来自识别、物料还是布局生成。</p>
+<h3>四、形成 RN Page Plan</h3>
+<p>RN Page Plan 是 Figma 与 RN Code 之间的可审计中间产物。</p>
+<p>它表达：</p>
 <ul>
-<li>通过参数打开指定 MODULE；</li>
-<li>注入固定 <code>propsData</code>；</li>
-<li>固定平台、尺寸、语言和 Safe Area；</li>
-<li>等待页面 ready；</li>
-<li>导出无压缩 PNG。</li>
-</ul>
-<p>若缺少稳定截图能力，不要立即改造 Hostless，转方案 B/C。</p>
-<h4>方案 B：iOS Simulator</h4>
-<p>目标是通过脚本完成：</p>
-<pre><code class="language-text">启动 Simulator
-→ 打开指定页面
-→ 等待 fixture-ready
-→ xcrun simctl io booted screenshot output.png
-</code></pre>
-<h4>方案 C：Android Emulator</h4>
-<p>目标是通过脚本完成：</p>
-<pre><code class="language-text">启动 Emulator
-→ 打开指定页面
-→ 等待 fixture-ready
-→ adb exec-out screencap -p &gt; output.png
-</code></pre>
-<p>首期只要一个平台能自动截图即可开始；阶段结束前补齐另一个平台的人工或自动截图。</p>
-<h3>完成标准</h3>
-<ul>
-<li>一个手写 Fixture 可以重复打开；</li>
-<li>相同 Fixture 连续截图布局稳定；</li>
-<li>截图尺寸、像素密度和 Figma 比较基准明确；</li>
-<li>Storybook 使用与否已有结论；</li>
-<li>不再依赖人工临时点击才能进入试点状态，或者已经明确记录首期人工步骤。</li>
-</ul>
-<h2>第 2 步：制作 Golden Mapping</h2>
-<p>预计：1～2 人日。</p>
-<p>不要先让 AI 自动识别。先由人对试点页面做一次正确拆解，这份结果是后面判断自动 Mapping 是否进步的基准。</p>
-<h3>拆分原则</h3>
-<p>对每个主要视觉区块判断：</p>
-<ul>
-<li><code>EXISTING_MATERIAL</code>：已有稳定 RN 组件；</li>
-<li><code>PRIMITIVE_COMPOSITION</code>：使用 View/Text/Image/Touchable 等组合；</li>
-<li><code>PAGE_LOCAL</code>：只服务当前页面的局部组件；</li>
-<li><code>MATERIAL_GAP</code>：可能需要扩展或新增物料；</li>
-<li><code>HOST_REGION</code>：状态栏、导航、Safe Area 或 Native 宿主；</li>
-<li><code>OUT_OF_SCOPE</code>：第一阶段不处理。</li>
-</ul>
-<h3>Golden Mapping 最小字段</h3>
-<pre><code class="language-json">{
-  &quot;figmaNodeId&quot;: &quot;123:456&quot;,
-  &quot;name&quot;: &quot;Result summary&quot;,
-  &quot;decision&quot;: &quot;EXISTING_MATERIAL&quot;,
-  &quot;materialId&quot;: &quot;affiliate.ResultSummaryCard&quot;,
-  &quot;reason&quot;: &quot;现有组件骨架和状态与设计一致&quot;,
-  &quot;allowedDifferences&quot;: [&quot;native font rasterization&quot;],
-  &quot;owner&quot;: &quot;reviewer&quot;
-}
-</code></pre>
-<p>它不需要成为正式平台协议，但必须可读、可 Diff、可追踪。</p>
-<h3>完成标准</h3>
-<ul>
-<li>每个主要区域都有唯一决策；</li>
-<li>没有为了追求组件数量而过度拆分；</li>
-<li>页面局部结构没有被误判成公共物料；</li>
-<li>宿主区域没有进入页面视觉生成；</li>
-<li>UED 与 RN Reviewer 对拆分结果无重大分歧。</li>
-</ul>
-<h2>第 3 步：建立首批 RN Material Catalog</h2>
-<p>预计：3～5 人日。</p>
-<p>Catalog 不是把组件源码交给模型，也不是导出 TypeScript 类型就结束。它要告诉 Agent：这个组件是什么、何时使用、怎样组合、如何验证。</p>
-<h3>Catalog 分层</h3>
-<h4>Primitive</h4>
-<ul>
-<li><code>View</code></li>
-<li><code>ScrollView</code></li>
-<li><code>Image</code></li>
-<li><code>@dp/rn/ui/Text</code></li>
-<li><code>@dp/rn/ui/Touchable</code></li>
-<li>基础 Button、Input</li>
-</ul>
-<h4>Shared Material</h4>
-<p>从 <code>src/components</code> 和外部 UI 包中选择稳定组件，例如：</p>
-<ul>
-<li>TitleBar / ActionBar</li>
-<li>SearchBar</li>
-<li>Tabs / TabBar</li>
-<li>BottomButton</li>
-<li>Empty / NoResult / LoadError / Loading</li>
-<li>Divider</li>
-<li>DropdownChip</li>
-<li>UniversalList</li>
-<li>Price</li>
-</ul>
-<h4>Affiliate Block</h4>
-<p>与 Affiliate 领域相关、但可以跨页面复用的卡片或展示区块。</p>
-<h4>Page Local</h4>
-<p>试点页面独有结构，不进入公共 Catalog，只在当前 Page Plan 中声明。</p>
-<h3>Material Definition 建议字段</h3>
-<pre><code class="language-ts">interface RNMaterialDefinition {
-  id: string;
-  title: string;
-  category: 'primitive' | 'shared' | 'affiliate-block';
-  import: {
-    source: string;
-    exportName: string;
-    kind: 'named' | 'default';
-  };
-  componentPath?: string;
-  description: string;
-  useWhen: string[];
-  doNotUseWhen: string[];
-  props: Record&lt;string, {
-    type: string;
-    required: boolean;
-    description: string;
-    allowedValues?: unknown[];
-  }&gt;;
-  children?: {
-    mode: 'none' | 'single' | 'multiple' | 'render-prop';
-    allowed?: string[];
-  };
-  states: string[];
-  figma?: {
-    componentKeys?: string[];
-    variantMapping?: Record&lt;string, string&gt;;
-  };
-  examples: string[];
-  fixtureIds: string[];
-}
-</code></pre>
-<p>首期不需要支持所有字段，但 <code>id</code>、import、使用场景、Props、状态、示例和 Fixture 必须有。</p>
-<h3>每个 Material 必须能独立渲染</h3>
-<p>Catalog 中的每个组件都要有至少一个 Fixture；试点页面实际使用的状态必须全部有 Fixture。</p>
-<p>如果一个组件无法脱离 Redux、API、Navigator 或全局状态独立渲染，它暂时不适合作为 Material。可以先做展示层 Adapter，把业务容器留在页面。</p>
-<h3>不要自动把 <code>src/components</code> 全量注册</h3>
-<p>需要排除：</p>
-<ul>
-<li>内部直接请求 API 的组件；</li>
-<li>强依赖 Redux Store 的组件；</li>
-<li>内部写死 Tracking 的组件；</li>
-<li>只能在某个页面 Context 中运行的组件；</li>
-<li>Props 不稳定或存在多个重复版本的组件；</li>
-<li>名字通用但实际包含强业务逻辑的组件。</li>
-</ul>
-<h3>完成标准</h3>
-<ul>
-<li>Catalog 覆盖试点页所有 <code>EXISTING_MATERIAL</code>；</li>
-<li>每个 Material 有稳定 import 和 Fixture；</li>
-<li>错误使用场景有说明；</li>
-<li>Catalog 可以被脚本读取和校验；</li>
-<li>RN Reviewer 确认生成器不会引用已经废弃的组件版本。</li>
-</ul>
-<h2>第 4 步：定义 RN Page Plan</h2>
-<p>预计：1～2 人日。</p>
-<p>Page Plan 是 Figma 与 RN Code 之间的中间产物。它要足够表达页面结构，但不承载 API、Redux 和 Tracking。</p>
-<h3>页面级信息</h3>
-<pre><code class="language-json">{
-  &quot;version&quot;: &quot;rn-page-plan.v1&quot;,
-  &quot;pageId&quot;: &quot;pilot-page&quot;,
-  &quot;targetModule&quot;: &quot;PILOT_PAGE&quot;,
-  &quot;designWidth&quot;: 375,
-  &quot;platforms&quot;: [&quot;ios&quot;, &quot;android&quot;],
-  &quot;states&quot;: [&quot;loading&quot;, &quot;empty&quot;, &quot;error&quot;, &quot;content&quot;],
-  &quot;root&quot;: {},
-  &quot;unresolved&quot;: []
-}
-</code></pre>
-<h3>节点级信息</h3>
-<p>每个节点至少表达：</p>
-<ul>
-<li>稳定 node ID；</li>
-<li>来源 Figma Node ID；</li>
-<li>Material ID 或 Primitive 类型；</li>
-<li>Props；</li>
-<li>children；</li>
+<li>页面和状态；</li>
+<li>Material 与 Props；</li>
+<li>页面结构和嵌套关系；</li>
 <li>布局意图；</li>
-<li>Token 或设计值；</li>
-<li>Mock 数据引用；</li>
-<li>生成策略；</li>
-<li>未解决问题。</li>
+<li>Figma Node 来源；</li>
+<li>未解决区域。</li>
 </ul>
-<h3>明确不放入 Page Plan</h3>
+<p>它不表达：</p>
 <ul>
-<li>GraphQL 查询文本；</li>
-<li>Redux Action；</li>
-<li>Tracking Event；</li>
-<li>权限判断；</li>
-<li>AB Test；</li>
-<li>Navigator 具体业务参数；</li>
-<li>生产环境接口数据；</li>
-<li>可以执行的任意模型代码。</li>
-</ul>
-<p>这些内容由宿主接入阶段处理。</p>
-<h3>完成标准</h3>
-<ul>
-<li>Golden Mapping 可以完整转换成 Page Plan；</li>
-<li>Page Plan 能在没有 Figma 的情况下重复生成同一视觉骨架；</li>
-<li>未识别区域显式出现在 <code>unresolved</code>，不能静默降级；</li>
-<li>Schema Diff 能让人看出页面结构发生了什么变化。</li>
-</ul>
-<h2>第 5 步：实现 Figma 到 RN Page Plan</h2>
-<p>预计：3～5 人日。</p>
-<p>第一阶段不要追求通用视觉理解。围绕试点页面实现最小闭环，但每条规则要区分“通用能力”和“页面特例”。</p>
-<h3>解析阶段</h3>
-<p>复用已有 Figma Parser 能力，至少获取：</p>
-<ul>
-<li>Frame 与节点层级；</li>
-<li>Component Instance 和 Component Key；</li>
-<li>Variant/Component Properties；</li>
-<li>Auto Layout；</li>
-<li>Bounding Box；</li>
-<li>Text Style；</li>
-<li>Fill、Stroke、Radius、Shadow；</li>
-<li>图片和图标引用；</li>
-<li>Preview PNG。</li>
-</ul>
-<h3>Mapping 优先级</h3>
-<pre><code class="language-text">1. Figma Component Key → Material ID 的确定映射
-2. 节点 Metadata / Variant → Material Props
-3. Catalog 描述与已有使用示例检索
-4. AI 根据视觉和语义选择候选
-5. 无法确认则进入 unresolved
-</code></pre>
-<p>AI 不能覆盖确定性映射，也不能编造 Catalog 中不存在的 Props。</p>
-<h3>布局转换原则</h3>
-<ul>
-<li>Auto Layout 优先转换为 RN Flexbox；</li>
-<li>纵向页面优先 <code>flexDirection: column</code>；</li>
-<li>并排内容优先 <code>row</code>，不要根据绝对坐标堆 <code>position: absolute</code>；</li>
-<li>Absolute 只用于浮层、角标、覆盖图等确实需要叠放的结构；</li>
-<li>Figma 375 设计值直接作为 <code>CustomStyleSheetV2</code> 输入坐标；</li>
-<li>固定高度只在设计和内容约束明确时使用；</li>
-<li>文本容器默认允许扩展，避免泰语、缅甸语或长文案被截断；</li>
-<li>Safe Area、系统状态栏和 Native 导航不从 Figma 普通 Frame 猜测。</li>
-</ul>
-<h3>Token 与自由值</h3>
-<p>先尝试匹配现有颜色、字号、间距和圆角常量。无法匹配时记录自由值和差异，不要为了“全部 Token 化”偷偷改设计。</p>
-<h3>完成标准</h3>
-<ul>
-<li>自动 Page Plan 能与 Golden Mapping 做结构对比；</li>
-<li>同一输入重复运行，Material 选择和节点 ID 稳定；</li>
-<li>所有低可信区域都显式报告；</li>
-<li>Figma 修改一个局部区域时，Page Plan Diff 主要集中在对应节点。</li>
-</ul>
-<h2>第 6 步：实现 RN Code Emitter</h2>
-<p>预计：4～6 人日。</p>
-<p>Code Emitter 应尽量确定性，不让模型每次自由发挥文件结构。</p>
-<h3>建议输出</h3>
-<pre><code class="language-text">src/pages/&lt;PilotPage&gt;/
-  index.tsx
-  style.ts
-  components/
-  fixtures.ts
-  generated-source-map.json
-</code></pre>
-<p>实际目录遵循目标页面现有约定；<code>generated-source-map.json</code> 可以放在开发产物目录，不一定提交生产代码。</p>
-<h3>模板负责的内容</h3>
-<ul>
-<li>React / React Native imports；</li>
-<li>Catalog Material imports；</li>
-<li>页面组件结构；</li>
-<li><code>CustomStyleSheetV2</code>；</li>
-<li>Mock Props 类型；</li>
-<li>页面状态分支；</li>
-<li><code>testID</code>；</li>
-<li><code>PageContainer</code> 接入占位；</li>
-<li>Figma Node 到代码区域的注释或 source map。</li>
-</ul>
-<h3>AI 可以负责的内容</h3>
-<ul>
-<li>为 <code>PAGE_LOCAL</code> 区域建议组件边界；</li>
-<li>生成局部纯展示组件草案；</li>
-<li>根据 Page Plan 填充受约束 JSX；</li>
-<li>解释未解决区域；</li>
-<li>给出 Catalog 缺口建议。</li>
-</ul>
-<h3>AI 不得负责的内容</h3>
-<ul>
-<li>编造 Material import；</li>
-<li>使用 Catalog 未声明的 Props；</li>
-<li>修改全局依赖和 RN 配置；</li>
-<li>自动接入真实 API；</li>
-<li>编造 Tracking；</li>
-<li>修改已有公共物料以迁就单页；</li>
-<li>在重新生成时覆盖人工业务代码。</li>
-</ul>
-<h3>生成代码分区</h3>
-<p>为后续增量更新，至少区分：</p>
-<pre><code class="language-text">generated visual region
-host integration region
-manual page-local region
-</code></pre>
-<p>第一阶段可以通过文件分离实现：</p>
-<pre><code class="language-text">PilotPageView.tsx       # 可重新生成的视觉层
-PilotPageContainer.tsx  # 人工维护的业务与宿主层
-</code></pre>
-<p>这比在同一个大文件里做文本标记合并更容易排查。</p>
-<h3>完成标准</h3>
-<ul>
-<li>Page Plan 可以重复生成相同代码结构；</li>
-<li>生成代码通过 TypeScript 和 Lint；</li>
-<li>视觉层不直接访问 API、Redux 或 Navigator；</li>
-<li>人工接入业务逻辑后，重新生成视觉层不会覆盖业务层；</li>
-<li>Material import 全部来自 Catalog。</li>
-</ul>
-<h2>第 7 步：接入 RN 宿主能力</h2>
-<p>预计：3～4 人日。</p>
-<p>这一部分以人工或 FE Code Agent 辅助完成，不从 Figma 猜测。</p>
-<p>需要接入：</p>
-<ul>
-<li><code>PageContainer</code> 与 MODULE；</li>
-<li>页面入口和返回行为；</li>
-<li>API/GraphQL；</li>
-<li>Redux 或本地 State；</li>
-<li>i18n key；</li>
+<li>API；</li>
+<li>Redux；</li>
 <li>Tracking；</li>
-<li>Safe Area；</li>
-<li>Loading/Error 处理；</li>
-<li>图片资源；</li>
-<li>平台分支；</li>
-<li>必要的 Native SDK。</li>
+<li>权限与 AB Test；</li>
+<li>具体业务导航参数。</li>
 </ul>
-<h3>文案处理</h3>
-<p>Figma 文案只作为设计参考。生产代码使用 i18n key，并通过 Fixture 提供：</p>
+<p>Page Plan 首期只是生成产物，不进入 App 运行时。它的作用是让映射结果可以 Review、Diff 和重复生成，而不是建立另一套线上低代码协议。</p>
+<h3>五、编译为普通 RN 代码</h3>
+<p>Code Emitter 将 Page Plan 转为项目可维护的：</p>
+<pre><code class="language-text">TSX
++ CustomStyleSheetV2
++ Material imports
++ 页面状态骨架
+</code></pre>
+<p>生成过程应以模板和 Catalog 约束为主。AI 可以帮助判断 Material 和生成页面局部展示结构，但不能编造组件、Props、API 或业务规则。</p>
+<p>视觉层与宿主逻辑需要分离：</p>
+<pre><code class="language-text">Generated View：可重新生成的页面视觉结构
+Host Container：人工或 FE Agent 维护的 API、State、Navigator、i18n、Tracking
+</code></pre>
+<p>这样重新生成视觉层时，不会覆盖已经接入的业务逻辑。</p>
+<h3>六、建立 Native 视觉反馈</h3>
+<p>Web 方案依赖浏览器截图和 DOM Geometry；RN 方案改为 Native Screenshot。</p>
+<p>需要固定：</p>
 <ul>
-<li>设计稿文案；</li>
-<li>长文本；</li>
-<li>泰语/缅甸语等行高敏感文本；</li>
-<li>缺失翻译的 fallback。</li>
+<li>设备尺寸与 Pixel Ratio；</li>
+<li>Safe Area 和导航栏范围；</li>
+<li>平台和系统版本；</li>
+<li>国家、语言与字体缩放；</li>
+<li>Mock 数据；</li>
+<li>图片加载和动画状态。</li>
 </ul>
-<h3>图片和图标</h3>
-<p>优先顺序：</p>
+<p>每轮验证至少保留：</p>
+<ul>
+<li>Figma 原图；</li>
+<li>RN 截图；</li>
+<li>Overlay；</li>
+<li>Diff；</li>
+<li>差异分类。</li>
+</ul>
+<p>差异不能只给一个相似度分数，需要判断它属于：</p>
+<ul>
+<li>Material 选错；</li>
+<li>Catalog 信息不足；</li>
+<li>Layout 转换错误；</li>
+<li>Token 或资源错误；</li>
+<li>Safe Area/宿主问题；</li>
+<li>iOS/Android 字体等允许差异。</li>
+</ul>
+<p>只有问题能够被分类，视觉反馈才能反过来改善 Mapping、Catalog 和 Emitter。</p>
+<h2>Figma 到 RN 的关键转换原则</h2>
+<p>第一阶段只需要确认几个关键原则，不必提前设计完整协议。</p>
+<h3>Material 映射优先级</h3>
+<pre><code class="language-text">Figma Component ID 的确定映射
+→ Material Catalog 检索
+→ 已有页面使用证据
+→ AI 识别自由结构
+→ 无法确认则显式报告缺口
+</code></pre>
+<p>确定映射优先于模型判断，AI 不能使用 Catalog 中不存在的 Props。</p>
+<h3>布局转换</h3>
+<ul>
+<li>Figma Auto Layout 优先转换为 RN Flexbox；</li>
+<li>避免根据绝对坐标堆叠 <code>position: absolute</code>；</li>
+<li>375 设计值进入项目已有的 <code>CustomStyleSheetV2</code>；</li>
+<li>文本容器默认允许扩展，避免长文本和多语言截断；</li>
+<li>Safe Area、系统状态栏和 Native 导航由宿主处理。</li>
+</ul>
+<h3>物料与页面特例</h3>
+<p>首期发现的特殊结构不能自动进入公共 Catalog：</p>
+<ul>
+<li>简单结构使用基础组件组合；</li>
+<li>单页特例留在页面；</li>
+<li>形态稳定但证据不足的结构只记录为候选；</li>
+<li>是否扩展或新增公共 Material，留给后续人工评审。</li>
+</ul>
+<h2>第一阶段交付物</h2>
+<p>第一阶段只要求以下核心产物：</p>
 <ol>
-<li><code>@shopee-rn/icon-library</code>；</li>
-<li>项目公共图片；</li>
-<li>已有页面资源；</li>
-<li>从 Figma 导出并经过项目图片校验的新资源。</li>
+<li>一个试点页面及完整 Figma 状态；</li>
+<li>一个稳定的 RN Fixture/预览与截图入口；</li>
+<li>首批 RN Material Catalog；</li>
+<li>一份人工 Golden Mapping；</li>
+<li>一份自动生成的 RN Page Plan；</li>
+<li>一个 RN Code Emitter；</li>
+<li>生成的视觉层和人工维护的宿主层；</li>
+<li>iOS/Android 视觉对比报告；</li>
+<li>一份阶段复盘。</li>
 </ol>
-<p>不要把 Figma 中的常用图标全部导出为新的 PNG。</p>
-<h3>完成标准</h3>
+<p>更细的文件、字段、脚本和每日任务，在方案确认后再拆成 TodoList。</p>
+<h2>时间安排</h2>
+<p>第一阶段预计 3～4 周、约 4～6 人周。</p>
+<h3>第 1 周：打通输入和验证环境</h3>
 <ul>
-<li>页面可从 ShopeeRN 正常进入和退出；</li>
-<li>所有状态都可通过 Fixture 或 Mock 触发；</li>
-<li>无真实网络时仍可完成视觉验证；</li>
-<li>Tracking、API 和 Navigator 不在生成视觉组件内部；</li>
-<li>新增图片通过项目资产校验。</li>
+<li>锁定试点页面和状态；</li>
+<li>熟悉最小 ShopeeRN 页面链路；</li>
+<li>确定 Storybook 或 Fixture Page；</li>
+<li>跑通至少一个平台的稳定截图；</li>
+<li>完成 Golden Mapping 和首批 Catalog。</li>
 </ul>
-<h2>第 8 步：建立视觉对比闭环</h2>
-<p>预计：3～4 人日。</p>
-<h3>统一截图坐标系</h3>
-<p>Figma 与 Native 截图比较前先固定：</p>
+<h3>第 2 周：形成 Page Plan 与代码生成</h3>
 <ul>
-<li>设备逻辑宽度；</li>
-<li>截图物理像素；</li>
-<li>Pixel Ratio；</li>
-<li>Safe Area；</li>
-<li>状态栏和导航栏是否纳入；</li>
-<li>字体缩放；</li>
-<li>国家和语言；</li>
-<li>iOS/Android 版本；</li>
-<li>图片加载完成条件；</li>
-<li>动画关闭或固定到某一帧。</li>
-</ul>
-<p>如果坐标系没有统一，后面的 Diff 分数没有意义。</p>
-<h3>Diff 产物</h3>
-<p>每个状态至少输出：</p>
-<pre><code class="language-text">figma.png
-rn.png
-overlay.png
-diff.png
-report.json
-</code></pre>
-<p><code>report.json</code> 记录：</p>
-<ul>
-<li>页面与状态；</li>
-<li>平台、设备、语言；</li>
-<li>截图尺寸；</li>
-<li>像素差异指标；</li>
-<li>被 Mask 的动态区域；</li>
-<li>人工分类后的主要差异；</li>
-<li>最终 Review 结论。</li>
-</ul>
-<p>项目已有 <code>sharp</code>，首期可以使用 Node 脚本完成缩放、对齐、Overlay 和基础像素 Diff，不必先引入完整视觉测试平台。</p>
-<h3>差异分类</h3>
-<p>每个明显差异归入以下一种：</p>
-<ul>
-<li><code>PARSER</code>：Figma 信息读取错误；</li>
-<li><code>MAPPING</code>：选错 Material；</li>
-<li><code>CATALOG</code>：Material 描述或 Props 不完整；</li>
-<li><code>LAYOUT</code>：Flex/尺寸转换错误；</li>
-<li><code>TOKEN</code>：颜色、字号、圆角或间距错误；</li>
-<li><code>ASSET</code>：图片、图标或裁剪错误；</li>
-<li><code>HOST</code>：Safe Area、导航栏或平台容器错误；</li>
-<li><code>DATA</code>：Mock 内容不同；</li>
-<li><code>PLATFORM_NOISE</code>：字体栅格化等允许差异；</li>
-<li><code>DESIGN_EXCEPTION</code>：实现经过 UED 批准与 Figma 不同。</li>
-</ul>
-<p>分类比单一相似度分数更重要，因为它决定下一轮应该修 Parser、Catalog、Emitter 还是页面代码。</p>
-<h3>首期验证矩阵</h3>
-<p>最低要求：</p>
-<table>
-<thead>
-<tr>
-<th>维度</th>
-<th>最低覆盖</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>平台</td>
-<td>iOS + Android 各一次</td>
-</tr>
-<tr>
-<td>尺寸</td>
-<td>375 基准 + 一个 320/小屏</td>
-</tr>
-<tr>
-<td>语言</td>
-<td>Golden 语言 + 一个长文本或行高敏感语言</td>
-</tr>
-<tr>
-<td>状态</td>
-<td>content + loading + empty/error 中至少两个</td>
-</tr>
-<tr>
-<td>交互</td>
-<td>返回、主按钮、滚动/输入中与页面有关的动作</td>
-</tr>
-</tbody>
-</table>
-<h3>完成标准</h3>
-<ul>
-<li>主要差异都有分类，不能只报告一个总分；</li>
-<li>UED 确认页面结构和视觉层级；</li>
-<li>RN Reviewer 确认没有为像素匹配破坏响应式或多语言；</li>
-<li>允许差异被显式记录；</li>
-<li>修正能够回到 Catalog、Mapping 或 Emitter，而不是只在生成代码里打补丁。</li>
-</ul>
-<h2>第 9 步：运行工程检查</h2>
-<p>预计：1 人日，可与视觉修正并行。</p>
-<p>至少运行：</p>
-<pre><code class="language-bash">yarn ts-checker
-yarn lint
-yarn jest
-yarn validate
-yarn deps:circular:check
-</code></pre>
-<p>如果全量 Jest 或 Lint 存在历史失败，应记录基线，并至少对新增文件执行定向检查。不能为了通过试点修改无关历史问题。</p>
-<p>新增测试重点：</p>
-<ul>
-<li>页面状态选择；</li>
-<li>Material Props 映射；</li>
-<li>主交互 callback；</li>
-<li>长文本不被固定容器截断；</li>
-<li>Code Emitter Golden Test；</li>
-<li>相同 Page Plan 生成结果稳定。</li>
-</ul>
-<p>Jest Tree Snapshot 不能替代 Native Screenshot。它适合检查组件结构，不代表 iOS/Android 的真实视觉结果。</p>
-<h2>第 10 步：复盘并决定是否进入第二阶段</h2>
-<p>预计：1 人日。</p>
-<h3>必须记录的数据</h3>
-<ul>
-<li>总投入人日；</li>
-<li>环境和工具接入耗时；</li>
-<li>Catalog Material 数量；</li>
-<li>直接复用、Primitive、Page Local、Gap 的区域数量；</li>
-<li>自动 Mapping 与 Golden Mapping 的差异；</li>
-<li>生成代码保留比例；</li>
-<li>人工修改的文件和原因；</li>
-<li>视觉收敛轮次；</li>
-<li>各类视觉问题数量；</li>
-<li>iOS/Android 和多语言问题；</li>
-<li>如果完全手写，RN Reviewer 估计需要的时间。</li>
-</ul>
-<h3>继续条件</h3>
-<p>满足以下条件再进入第二阶段：</p>
-<ul>
-<li>相同输入重复执行，Page Plan 和主要 Material 选择稳定；</li>
-<li>页面所有主要区域都有显式决策；</li>
-<li>生成代码能够被 RN 开发理解和继续维护；</li>
-<li>视觉问题能定位到明确层级；</li>
-<li>没有因为试点引入新的线上 Runtime；</li>
-<li>Catalog 至少有一部分可以直接用于第二个页面；</li>
-<li>实际投入没有显著超过同页面纯手写成本且看不到复用收益。</li>
-</ul>
-<p>最后一条需要反向理解：第一页面承担基础设施成本，单页未必比手写快；但必须能解释第二页为什么会更快。如果所有能力都只服务第一页面，就不应继续扩大。</p>
-<h2>3～4 周建议排期</h2>
-<h3>第 1 周：环境、基线与 Catalog</h3>
-<ul>
-<li>锁定页面和状态；</li>
-<li>跑通 Hostless/Simulator；</li>
-<li>建立 Fixture Runner；</li>
-<li>完成 Storybook 限时 Spike；</li>
-<li>打通至少一个平台截图；</li>
-<li>完成 Golden Mapping；</li>
-<li>建立首批 Material Catalog。</li>
-</ul>
-<p>周末交付：可以稳定打开和截图的手写页面骨架，以及人工确认的页面拆分。</p>
-<h3>第 2 周：Page Plan 与 Code Emitter</h3>
-<ul>
-<li>Figma 解析归一化；</li>
-<li>自动 Material Mapping；</li>
+<li>Figma 解析与 Material Mapping；</li>
 <li>RN Page Plan；</li>
-<li>TSX/style 模板；</li>
-<li>视觉层与业务层分离；</li>
-<li>Codegen Golden Test。</li>
+<li>RN Code Emitter；</li>
+<li>使用 Mock 数据跑通生成页面。</li>
 </ul>
-<p>周末交付：不接真实业务的生成页面，可以使用 Mock 状态运行。</p>
 <h3>第 3 周：宿主接入与视觉闭环</h3>
 <ul>
-<li>PageContainer、MODULE、Navigator；</li>
-<li>API/State/i18n/Tracking；</li>
-<li>iOS 与 Android 截图；</li>
-<li>Figma Overlay/Diff；</li>
-<li>修正 Catalog、Mapping 和 Emitter；</li>
-<li>工程检查。</li>
+<li>接入 PageContainer、State、i18n、Navigator 等宿主能力；</li>
+<li>补齐 iOS/Android 和关键状态；</li>
+<li>完成 Figma/RN Diff；</li>
+<li>修正 Catalog、Mapping 和 Emitter。</li>
 </ul>
-<p>周末交付：可进入人工验收的真实试点页面。</p>
-<h3>第 4 周：缓冲与复盘</h3>
-<p>以下任一情况出现时使用第 4 周：</p>
+<h3>第 4 周：缓冲或复用预演</h3>
+<p>用于处理 RN 环境、平台差异和设计缺失。如果前三周顺利，则选择第二个小页面做复用预演，不继续无限优化第一页面的像素分数。</p>
+<h2>第一阶段怎样才算成功</h2>
+<p>不是“生成了一张看起来接近的页面”，而是同时满足：</p>
 <ul>
-<li>RN 环境或内部 SDK 排查耗时；</li>
-<li>Storybook/截图方案需要切换；</li>
-<li>iOS 与 Android 差异较大；</li>
-<li>设计状态不完整；</li>
-<li>Material 需要展示层 Adapter；</li>
-<li>页面首次接入多语言和 Safe Area。</li>
+<li>相同输入重复执行时，主要 Material 选择和 Page Plan 稳定；</li>
+<li>页面所有主要视觉区域都有显式决策；</li>
+<li>生成代码能够通过工程检查并被 RN 开发继续维护；</li>
+<li>视觉层重新生成不会覆盖宿主逻辑；</li>
+<li>至少有 iOS 和 Android 的真实截图证据；</li>
+<li>差异能够定位到 Catalog、Mapping、Emitter 或 Host；</li>
+<li>第一阶段产物中有一部分可以直接用于第二个页面。</li>
 </ul>
-<p>如果前三周顺利，第 4 周改为第二个小页面的复用预演，而不是继续打磨第一页面的像素分数。</p>
-<h2>第一周可以立即执行的任务清单</h2>
-<h3>Day 1</h3>
+<p>第一页面本身未必比纯手写快，因为它承担了基础能力建设。真正的继续条件是：团队能够解释第二页面为什么会更快、更稳定。</p>
+<h2>第一阶段之后再拆什么</h2>
+<p>方案确认并锁定试点页面后，再单独拆 TodoList，包括：</p>
 <ul>
-<li>[ ] 确认试点页面、Figma Node、状态和验收人；</li>
-<li>[ ] 找 RN Reviewer 进行 60 分钟项目导览；</li>
-<li>[ ] 使用 Node 14.17.4 启动现有 Hostless；</li>
-<li>[ ] 手工进入一个已有页面；</li>
-<li>[ ] 确认 iOS/Android 调试资源。</li>
+<li>具体目录和文件；</li>
+<li>Material Definition 字段；</li>
+<li>Fixture 状态；</li>
+<li>Figma Parser 输入；</li>
+<li>Page Plan Schema；</li>
+<li>Code Emitter 模板；</li>
+<li>Screenshot 与 Diff 脚本；</li>
+<li>工程命令与测试；</li>
+<li>每日任务和负责人。</li>
 </ul>
-<h3>Day 2</h3>
-<ul>
-<li>[ ] 注册开发态 Fixture Page；</li>
-<li>[ ] 用固定 Mock 渲染一个已有公共组件；</li>
-<li>[ ] 通过参数切换至少两个状态；</li>
-<li>[ ] 根节点补稳定 <code>testID</code>；</li>
-<li>[ ] 产出第一张 Native PNG。</li>
-</ul>
-<h3>Day 3</h3>
-<ul>
-<li>[ ] 限时验证兼容的 RN Storybook；</li>
-<li>[ ] 同时验证系统截图命令；</li>
-<li>[ ] 决定 Storybook、Fixture Runner 和截图通道；</li>
-<li>[ ] 固定截图尺寸、语言和 Safe Area；</li>
-<li>[ ] 写下工具决策，不再反复摇摆。</li>
-</ul>
-<h3>Day 4</h3>
-<ul>
-<li>[ ] 人工拆解 Figma 页面；</li>
-<li>[ ] 标记 Existing/Primitive/PageLocal/Gap/Host；</li>
-<li>[ ] 从 <code>src/components</code>、<code>@dp/rn</code> 和 <code>@shopee-rn/ui-common</code> 选择首批 Material；</li>
-<li>[ ] 为试点实际使用状态添加 Fixture；</li>
-<li>[ ] 排除强业务耦合组件。</li>
-</ul>
-<h3>Day 5</h3>
-<ul>
-<li>[ ] 完成 Golden Mapping；</li>
-<li>[ ] 完成首版 Material Definitions；</li>
-<li>[ ] 评审 Figma 区块与 RN 组件边界；</li>
-<li>[ ] 评审第一周是否已经有稳定截图通道；</li>
-<li>[ ] 确认第二周可以开始 Page Plan 和 Emitter。</li>
-</ul>
-<h2>第一阶段最终交付清单</h2>
-<ul>
-<li>[ ] <code>pilot-brief.md</code>；</li>
-<li>[ ] Golden Figma Frame 与各状态 PNG；</li>
-<li>[ ] Fixture Runner 或兼容的 RN Storybook；</li>
-<li>[ ] 首批 RN Material Catalog；</li>
-<li>[ ] Material Fixtures；</li>
-<li>[ ] Golden Mapping；</li>
-<li>[ ] RN Page Plan Schema 与试点实例；</li>
-<li>[ ] Figma-to-Page-Plan；</li>
-<li>[ ] RN Code Emitter；</li>
-<li>[ ] 生成的页面视觉层；</li>
-<li>[ ] 人工维护的宿主接入层；</li>
-<li>[ ] iOS/Android Screenshot；</li>
-<li>[ ] Overlay、Diff 和分类报告；</li>
-<li>[ ] Type/Lint/Test 结果；</li>
-<li>[ ] 阶段复盘与第二阶段建议。</li>
-</ul>
-<h2>第一阶段最重要的三条原则</h2>
-<ol>
-<li><strong>Native 结果才是视觉事实。</strong> Storybook、React Native Web 和 Figma Preview 都是辅助环境。</li>
-<li><strong>先建立可重复的 Fixture 和截图，再做自动生成。</strong> 没有验证闭环，生成得越快越难排查。</li>
-<li><strong>优先沉淀 Catalog、Mapping 和 Emitter，少在生成代码里打一次性补丁。</strong> 第一页的价值在于让第二页更容易。</li>
-</ol>
+<p>现在先不锁死这些实现细节，避免在试点页面和 RN 验证通道尚未确定前过早设计。</p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-C9SoMJnl.js"></script>
+  <script type="module" crossorigin src="/assets/index-BoxWXjY2.js"></script>
 </body>
 </html>

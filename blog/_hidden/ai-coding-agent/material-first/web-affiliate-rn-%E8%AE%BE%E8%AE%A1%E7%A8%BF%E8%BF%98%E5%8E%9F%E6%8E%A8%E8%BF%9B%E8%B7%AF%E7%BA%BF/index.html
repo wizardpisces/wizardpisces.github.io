@@ -5,285 +5,159 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex,nofollow">
   <title>web-affiliate-rn 设计稿还原推进路线 | LZ AI NOTE</title>
-  <meta name="description" content="面向 ShopeeRN InApp 项目的 Figma 还原路线、阶段拆分与时间评估。">
+  <meta name="description" content="面向 ShopeeRN InApp 项目的 Figma 还原路线与阶段规划。">
   <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/ai-coding-agent/material-first/web-affiliate-rn-%E8%AE%BE%E8%AE%A1%E7%A8%BF%E8%BF%98%E5%8E%9F%E6%8E%A8%E8%BF%9B%E8%B7%AF%E7%BA%BF">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
   <meta property="og:title" content="web-affiliate-rn 设计稿还原推进路线 | LZ AI NOTE">
-  <meta property="og:description" content="面向 ShopeeRN InApp 项目的 Figma 还原路线、阶段拆分与时间评估。">
+  <meta property="og:description" content="面向 ShopeeRN InApp 项目的 Figma 还原路线与阶段规划。">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/ai-coding-agent/material-first/web-affiliate-rn-%E8%AE%BE%E8%AE%A1%E7%A8%BF%E8%BF%98%E5%8E%9F%E6%8E%A8%E8%BF%9B%E8%B7%AF%E7%BA%BF">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"web-affiliate-rn 设计稿还原推进路线","description":"面向 ShopeeRN InApp 项目的 Figma 还原路线、阶段拆分与时间评估。","url":"https://wizardpisces.github.io/blog/_hidden/ai-coding-agent/material-first/web-affiliate-rn-%E8%AE%BE%E8%AE%A1%E7%A8%BF%E8%BF%98%E5%8E%9F%E6%8E%A8%E8%BF%9B%E8%B7%AF%E7%BA%BF","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/ai-coding-agent/material-first/web-affiliate-rn-%E8%AE%BE%E8%AE%A1%E7%A8%BF%E8%BF%98%E5%8E%9F%E6%8E%A8%E8%BF%9B%E8%B7%AF%E7%BA%BF","dateModified":"2026-08-07","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"web-affiliate-rn 设计稿还原推进路线","description":"面向 ShopeeRN InApp 项目的 Figma 还原路线与阶段规划。","url":"https://wizardpisces.github.io/blog/_hidden/ai-coding-agent/material-first/web-affiliate-rn-%E8%AE%BE%E8%AE%A1%E7%A8%BF%E8%BF%98%E5%8E%9F%E6%8E%A8%E8%BF%9B%E8%B7%AF%E7%BA%BF","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/ai-coding-agent/material-first/web-affiliate-rn-%E8%AE%BE%E8%AE%A1%E7%A8%BF%E8%BF%98%E5%8E%9F%E6%8E%A8%E8%BF%9B%E8%B7%AF%E7%BA%BF","dateModified":"2026-08-07","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>web-affiliate-rn 设计稿还原推进路线</h1><h1>web-affiliate-rn 设计稿还原推进路线</h1>
-<h2>结论</h2>
-<p><code>web-affiliate-rn</code> 的首期目标，不应是建设一套完整的“AI 原生 RN 页面平台”，而应先跑通一个可验证的单页闭环：</p>
+<h2>我们要解决什么</h2>
+<p>当前目标是让 <code>web-affiliate-rn</code> 能够使用 AI 还原 Figma 设计稿。</p>
+<p>这件事不能直接复制 React Web 的方案。<code>web-affiliate-rn</code> 实际是 ShopeeRN 工程，页面最终渲染为 iOS/Android Native View，不存在浏览器 DOM 和 CSSOM。Web 上基于 Storybook、Headless Chromium、Playwright DOM Geometry 的闭环，只能借鉴思想，不能原样复用。</p>
+<p>同时，也不应该先把现有 Web AI Code 的复杂流程完整迁移到 RN。现有实现中的 Parser、Recognition、Catalog 和 Review 思想可以吸收，但新的 RN 路径应从最短闭环开始重新设计。</p>
+<h2>核心判断</h2>
+<p>首期推荐走“编译期生成 RN 代码”，而不是建设 RN 动态 Schema Runtime：</p>
 <pre><code class="language-text">Figma
-  → 识别页面结构和 RN 物料
-  → 生成可审计的 RN Page Plan
-  → 编译为普通 TSX + style.ts
-  → 接入现有 RN 宿主能力
-  → 在模拟器或真机中截图并与 Figma 对比
+  → 映射 RN 物料与页面结构
+  → 形成可审计的 RN Page Plan
+  → 生成普通 TSX + style.ts
+  → 接入 RN 宿主能力
+  → Native 截图与 Figma 对比
 </code></pre>
-<p>最终进入业务仓库的是普通 React Native 代码，不是线上动态解释的页面 Schema。中间 Page Plan 只服务生成、审计和重复执行。</p>
-<p>这条路线兼顾两个目标：</p>
-<ol>
-<li>立即解决现有 Figma 设计稿还原问题；</li>
-<li>顺手建设 RN Material Catalog，未来再把同一批物料用于 Material-first 原型生成。</li>
-</ol>
-<p>短期仍然从 Figma 开始，不代表放弃 Material-first。相反，Figma-to-RN 和未来的 Requirement-to-RN 会共享同一套 Catalog、页面语义和验证方法。</p>
-<h2>为什么不能直接复制 React Web 方案</h2>
-<p><code>web-affiliate-rn</code> 实际是 ShopeeRN 工程，而不是浏览器中的 Web 页面：</p>
+<p>最终交付物仍然是开发熟悉的 React Native 代码。Page Plan 只作为生成、审计和重复执行的中间产物，不进入线上 Runtime。</p>
+<p>这样做的原因是：</p>
 <ul>
-<li>React 16.13、React Native 0.63、TypeScript 4.2；</li>
-<li>页面通过 <code>PageContainer</code> 接入 ShopeeRN；</li>
-<li>UI 最终渲染为 iOS/Android Native View，不存在浏览器 DOM；</li>
-<li>项目以 375 为设计基准，通过 <code>CustomStyleSheetV2</code> 做屏幕与多语言适配；</li>
-<li>路由、Safe Area、Navigator、i18n、Tracking 和 Native SDK 都属于宿主的一部分。</li>
+<li>当前项目已经有成熟的页面注册、组件、样式和宿主约定；</li>
+<li>视觉还原只是页面交付的一部分，最终仍需接入 API、Navigator、i18n 和 Tracking；</li>
+<li>新建运行时解释层会显著扩大首期范围和线上风险；</li>
+<li>普通 TSX 更容易 Review、排错和被现有开发继续维护；</li>
+<li>未来即使建设 RN Runtime，Material Catalog、Page Plan 和视觉验证仍可复用。</li>
 </ul>
-<p>因此，Web 上这套方法不能原样照搬：</p>
-<pre><code class="language-text">Storybook Web
-→ Headless Chromium
-→ Playwright 获取 DOM Geometry
-→ CSS 调整
-→ Browser Screenshot Diff
-</code></pre>
-<p>RN 中没有 DOM 和 CSSOM。Playwright 无法读取 Native View 的布局，也不能用 Chromium 的截图代表最终 iOS/Android 渲染。</p>
-<p>但是，RN 并非不能使用 Storybook，也并非不能做视觉回归。</p>
-<p><a href="https://storybookjs.github.io/react-native/docs/intro/">React Native Storybook</a>运行在 Native 环境中，使用 Metro，并把 Story 渲染在 App 内；它与 Web Storybook 的 iframe/浏览器环境不同。官方也支持通过 React Native Web 运行 Storybook，但前提是组件本身支持 Web。</p>
-<p>视觉截图则需要设备、模拟器或 Emulator。比如 <a href="https://wix.github.io/Detox/docs/guide/taking-screenshots/">Detox 支持设备级和元素级截图</a>，React Native 官方测试文档也把 Detox、Appium、Maestro 等列为 E2E 选择。</p>
-<p>当前项目版本较老，而最新版 React Native Storybook 文档面向 Storybook 10+ 和现代 RN 工具链。首期不能直接执行最新 CLI 并期待兼容，应把 Storybook 安装作为一个限时 Spike，而不是主链路的前置依赖。</p>
-<h2>首期技术选择</h2>
-<h3>选择编译期代码生成</h3>
-<p>首期采用：</p>
-<pre><code class="language-text">Figma → RN Page Plan → RN Code Emitter → 普通业务代码
-</code></pre>
-<p>不采用：</p>
-<pre><code class="language-text">Figma → JSON Schema → App 线上动态解释 Schema
-</code></pre>
-<p>原因包括：</p>
+<h2>RN Storybook 与视觉验证</h2>
+<p>RN 不是不能使用 Storybook。<a href="https://storybookjs.github.io/react-native/docs/intro/">React Native Storybook</a>可以在 Native 环境中隔离渲染组件和页面状态。</p>
+<p>但它不是 Web Storybook：</p>
 <ul>
-<li>当前没有 RN Runtime；</li>
-<li>现有 AJR Runtime 面向 React Web；</li>
-<li>RN 0.63 工程引入新的运行时解释层风险较高；</li>
-<li>业务最终仍需接入 API、Redux、Navigator、Tracking 和 Native SDK；</li>
-<li>普通 TSX 更容易被现有开发维护和 Review；</li>
-<li>即使后续建设 RN Runtime，第一阶段的 Catalog、Page Plan 和验证资产仍能复用。</li>
+<li>使用 Metro 和 Native Runtime；</li>
+<li>没有 iframe、DOM 和 CSS；</li>
+<li>Playwright 无法读取 Native View 的布局；</li>
+<li>最终视觉事实必须来自 Simulator、Emulator 或真机截图。</li>
 </ul>
-<h3>选择轻量 Fixture Runner 作为默认预览环境</h3>
-<p>首期先建设一个开发态 RN Fixture Runner，用确定 Mock 数据渲染组件和页面状态。</p>
-<p>它可以是一个仅在开发环境注册的 ShopeeRN Page：</p>
-<pre><code class="language-text">Material Gallery
-  ├─ Button / default / disabled / loading
-  ├─ Empty / default / long-text
-  ├─ ProductCard / normal / sold-out
-  └─ PilotPage / loading / empty / error / content
-</code></pre>
-<p>如果老版本 Storybook 能在不升级 RN、React、Metro 和 ShopeeRN Host 的前提下接入，可以把 Fixture 迁移为 CSF Story；如果不能，Fixture Runner 继续承担首期隔离渲染，不阻塞项目。</p>
-<h3>选择 Native Screenshot 作为最终视觉事实</h3>
-<p>视觉验证按以下优先级推进：</p>
-<ol>
-<li>Hostless 是否提供稳定的页面启动与截图接口；</li>
-<li>iOS Simulator，通过固定页面入口和系统截图命令采集；</li>
-<li>Android Emulator，通过固定页面入口和 <code>adb</code> 截图采集；</li>
-<li>如果后续需要完整 E2E，再评估兼容当前 RN 版本的 Detox、Maestro 或内部自动化平台。</li>
-</ol>
-<p>React Native Web 可以作为快速预览，但不能作为最终视觉验收，因为 ShopeeRN SDK、字体、Native View、Safe Area 和平台差异无法被完整模拟。</p>
-<h2>整体推进阶段</h2>
-<h3>第一阶段：单页垂直切片</h3>
-<p>目标是证明一页能从 Figma 稳定生成 RN 代码并通过视觉验收。</p>
-<p>主要产物：</p>
+<p>因此，Storybook 在本方案中只承担“隔离渲染状态”的角色。截图和视觉比较使用 Native 环境；Detox 等工具支持设备级或元素级截图，<a href="https://wix.github.io/Detox/docs/guide/taking-screenshots/">官方说明</a>。</p>
+<p>当前项目使用 React 16、RN 0.63 和 Node 14，与现代 Storybook 工具链存在兼容风险。首期应限时验证 Storybook：能低成本接入就使用，不能就用一个轻量的开发态 Fixture Page 替代。不能为了视觉试点先升级整个 RN 工程。</p>
+<h2>整体推进方式</h2>
+<h3>第一阶段：跑通一个真实页面</h3>
+<p>用一个中等复杂度页面验证完整闭环：</p>
 <ul>
-<li>一个适合试点的真实页面；</li>
-<li>首批 15～25 个 RN Material 定义；</li>
-<li>一个开发态 Fixture Runner；</li>
-<li>一份人工确认的 Golden Mapping；</li>
-<li>RN Page Plan；</li>
-<li>RN Code Emitter；</li>
-<li>一组 Figma 与 RN 截图对比报告；</li>
-<li>一份差异分类和后续决策记录。</li>
+<li>Figma 能否稳定映射到已有 RN 组件；</li>
+<li>现有组件能否被组织成 AI 可理解的 Material Catalog；</li>
+<li>Page Plan 能否稳定生成普通 RN 代码；</li>
+<li>视觉层能否与业务和宿主逻辑分离；</li>
+<li>Native 截图是否能形成可重复的视觉反馈。</li>
 </ul>
-<p>详细任务见<a href="./%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%8D%95%E9%A1%B5%E5%9E%82%E7%9B%B4%E5%88%87%E7%89%87%E5%AE%9E%E6%96%BD%E6%89%8B%E5%86%8C.md">《第一阶段：单页垂直切片实施手册》</a>。</p>
-<h3>第二阶段：第二类页面与 Catalog 泛化</h3>
-<p>第一阶段很容易“为一个页面做出一套专用生成器”。第二阶段必须换一种页面类型，验证能力是否真正复用。</p>
-<p>主要工作：</p>
+<p>第一阶段不追求平台化，只证明方向成立。</p>
+<p>详见<a href="./%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%8D%95%E9%A1%B5%E5%9E%82%E7%9B%B4%E5%88%87%E7%89%87%E5%AE%9E%E6%96%BD%E6%89%8B%E5%86%8C.md">《第一阶段：单页垂直切片实施方案》</a>。</p>
+<h3>第二阶段：用第二类页面验证泛化</h3>
+<p>第一页面很容易被“特制”出来。第二阶段必须选择不同类型的页面，验证第一阶段沉淀的 Catalog、Mapping 和 Code Emitter 是否真正可以复用。</p>
+<p>重点不是再生成一页，而是回答：</p>
 <ul>
-<li>选择第二个页面，尽量与首个页面结构不同；</li>
-<li>复用首批 Catalog，记录缺失项；</li>
-<li>把页面特例与公共物料分开；</li>
-<li>固化 Layout、Text、Asset、Safe Area 和列表规则；</li>
-<li>形成可重复的 Material 覆盖审计；</li>
-<li>验证 Figma 小改动是否能增量更新，而不是全页重生成。</li>
+<li>哪些能力是跨页面的；</li>
+<li>哪些只是首个页面的特例；</li>
+<li>物料缺口应该怎样记录；</li>
+<li>Figma 局部修改能否增量更新；</li>
+<li>第二页是否明显比第一页更容易。</li>
 </ul>
-<h3>第三阶段：稳定自动化与 Agent 接入</h3>
-<p>在两页闭环稳定后，再接入 <code>fe-code-agent</code> 和 <code>ai-code-agent</code>。</p>
-<p>主要工作：</p>
+<h3>第三阶段：形成稳定自动化并接入 Agent</h3>
+<p>在两个页面闭环稳定后，再接入 <code>fe-code-agent</code> 和 <code>ai-code-agent</code>。</p>
+<p>这一阶段主要解决：</p>
 <ul>
-<li>为任务输入增加 <code>platform=react_native</code>；</li>
-<li>把 Figma 解析、RN Mapping、代码生成、验证拆成可观测节点；</li>
-<li>为每个节点保存独立产物和错误原因；</li>
-<li>支持从失败节点重跑；</li>
-<li>防止重新生成覆盖开发已经接入的业务逻辑；</li>
-<li>把页面结构生成和宿主逻辑接入分成两个阶段；</li>
-<li>把视觉报告接入人工 Review。</li>
+<li>任务编排和产物传递；</li>
+<li>失败步骤的定位与重跑；</li>
+<li>人工 Review；</li>
+<li>视觉层重新生成时不覆盖业务逻辑；</li>
+<li>多页面和多状态的批量验证。</li>
 </ul>
-<p>这一步应吸收现有方案中有价值的 Parser、Recognition、Artifact 和 Review 思路，但不需要保持原有复杂流程和所有中间协议兼容。</p>
-<h3>第四阶段：Material-first 正向原型</h3>
-<p>当 RN Catalog、Fixture 和 Code Emitter 已被真实页面验证后，再增加需求到原型的正向路径：</p>
+<p>新路径稳定后，再把旧方案中有价值的能力并进来，而不是让新方案先兼容全部旧流程。</p>
+<h3>第四阶段：从 Figma 还原走向 Material-first</h3>
+<p>当 RN Material Catalog 和代码生成能力被真实页面验证后，再增加需求到原型的正向路径：</p>
 <pre><code class="language-text">需求
-  → 页面目标、内容、操作与状态
   → 基于 RN Material Catalog 生成可运行原型
-  → 产品和 UED 修改
-  → 复用同一 RN Page Plan 与代码生成器
+  → 产品与 UED 修改
+  → 使用同一 Page Plan 和 RN Code Emitter 交付
 </code></pre>
-<p>此时 Figma-to-RN 是兼容和创新通道，Material-first 成为标准页面的候选默认入口。</p>
+<p>此时 Figma-to-RN 继续处理存量、创新和自由设计，Material-first 则成为标准页面的候选默认入口。</p>
 <h2>时间评估</h2>
-<h3>评估前提</h3>
-<p>以下时间按这个投入模型估算：</p>
+<p>评估假设：</p>
 <ul>
 <li>1 名主力前端全职，熟悉 React Web，但刚开始熟悉 ShopeeRN；</li>
-<li>1 名熟悉 <code>web-affiliate-rn</code> 的工程师投入 20%～30% 时间答疑与 Review；</li>
-<li>产品/UED 能在关键节点及时确认；</li>
-<li>第一阶段选择中等复杂度页面，不选择 Home、复杂图表或超长列表；</li>
-<li>Figma 能提供完整 Frame、状态和资源；</li>
-<li>不在同期升级 React Native、React、Metro 或 ShopeeRN SDK。</li>
+<li>1 名 RN 工程师投入约 20%～30% 时间答疑和 Review；</li>
+<li>产品/UED 能及时提供设计状态并参与确认；</li>
+<li>不升级 RN 核心技术栈；</li>
+<li>第一阶段不选择复杂首页、图表或超长列表。</li>
 </ul>
 <table>
 <thead>
 <tr>
 <th>阶段</th>
-<th>目标</th>
-<th style="text-align:right">人力估算</th>
 <th style="text-align:right">日历时间</th>
+<th>主要结果</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>第一阶段</td>
-<td>单页 Figma → RN Code → Native Visual Loop</td>
-<td style="text-align:right">4～6 人周</td>
 <td style="text-align:right">3～4 周</td>
+<td>单页 Figma → RN Code → Native Visual Loop</td>
 </tr>
 <tr>
 <td>第二阶段</td>
-<td>第二类页面、Catalog 泛化、增量更新</td>
-<td style="text-align:right">4～5 人周</td>
 <td style="text-align:right">2～3 周</td>
+<td>第二类页面与 Catalog 泛化</td>
 </tr>
 <tr>
 <td>第三阶段</td>
-<td>稳定自动化、可观测性、Agent 接入</td>
-<td style="text-align:right">4～6 人周</td>
 <td style="text-align:right">2～3 周</td>
+<td>稳定自动化与 Agent 接入</td>
 </tr>
 <tr>
 <td>第四阶段</td>
-<td>Requirement-to-Prototype / Material-first</td>
-<td style="text-align:right">5～7 人周</td>
 <td style="text-align:right">3～4 周</td>
+<td>Material-first 正向原型</td>
 </tr>
 <tr>
 <td>合计</td>
-<td>从验证到可持续试用</td>
-<td style="text-align:right">17～24 人周</td>
 <td style="text-align:right">10～14 周</td>
+<td>在有限页面类型中可持续试用</td>
 </tr>
 </tbody>
 </table>
-<p>如果只有一名对 RN 不熟悉的工程师独立推进，整体更接近 14～20 周。这里的“完成”指可以在有限页面类型中稳定试用，不代表已经覆盖仓库所有历史页面和组件。</p>
-<h3>第一阶段内部时间</h3>
-<table>
-<thead>
-<tr>
-<th>工作包</th>
-<th style="text-align:right">预计时间</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>RN 环境熟悉、目标页启动与 Mock</td>
-<td style="text-align:right">2～3 人日</td>
-</tr>
-<tr>
-<td>Storybook/Fixture/Screenshot 可行性 Spike</td>
-<td style="text-align:right">2～3 人日</td>
-</tr>
-<tr>
-<td>Golden Mapping 与首批 Catalog</td>
-<td style="text-align:right">3～5 人日</td>
-</tr>
-<tr>
-<td>Figma 归一化与 RN Page Plan</td>
-<td style="text-align:right">3～5 人日</td>
-</tr>
-<tr>
-<td>RN Code Emitter</td>
-<td style="text-align:right">4～6 人日</td>
-</tr>
-<tr>
-<td>页面宿主接入</td>
-<td style="text-align:right">3～4 人日</td>
-</tr>
-<tr>
-<td>Native 截图、Diff、修正与复盘</td>
-<td style="text-align:right">3～4 人日</td>
-</tr>
-<tr>
-<td>合计</td>
-<td style="text-align:right">20～30 人日</td>
-</tr>
-</tbody>
-</table>
-<p>部分工作可以并行，所以在有 RN Reviewer 支持的情况下，日历时间约为 3～4 周。</p>
-<h2>每个阶段的继续条件</h2>
-<p>项目不应只按时间推进，而应设置继续条件。</p>
-<h3>第一阶段进入第二阶段</h3>
-<ul>
-<li>页面所有主要视觉区块都有明确 Material 或页面局部实现决策；</li>
-<li>相同输入重复生成时，Page Plan 结构稳定；</li>
-<li>生成代码能通过类型、Lint 和必要测试；</li>
-<li>至少完成一组 iOS 和 Android 截图；</li>
-<li>375 基准和一个小屏尺寸完成验证；</li>
-<li>loading、empty/error、content 等约定状态完成验证；</li>
-<li>人工修改有记录，能分清是 Catalog、Mapping、Emitter 还是宿主逻辑问题。</li>
-</ul>
-<h3>第二阶段进入 Agent 集成</h3>
-<ul>
-<li>第二个页面明显复用了第一阶段能力；</li>
-<li>没有为每个页面复制一套规则；</li>
-<li>Catalog 中的公共 Material 与页面局部组件边界清楚；</li>
-<li>Figma 小改动不要求全页推翻重做；</li>
-<li>失败原因能够在单个步骤定位。</li>
-</ul>
-<h3>Agent 集成进入 Material-first</h3>
-<ul>
-<li>Figma-to-RN 已经稳定消费 Catalog；</li>
-<li>Catalog 的 Props、状态和示例足够支持正向组合；</li>
-<li>UED 愿意使用可运行原型进行一次真实修改；</li>
-<li>页面生成结果能够被现有开发继续维护。</li>
-</ul>
-<h2>关键风险</h2>
-<h3>老版本 RN 与现代工具不兼容</h3>
-<p>当前 React 16 / RN 0.63 / Node 14 与现代 Storybook、Detox 和部分构建工具存在明显代际差异。原则是：工具接入失败时换轻量实现，不为试点升级整个 RN 工程。</p>
-<h3>公共组件很多，但可用物料不一定多</h3>
-<p>仓库中的组件可能混有 API、Redux、Tracking、Navigator 和业务判断。首批只注册展示边界清楚、Props 稳定、可以使用 Mock 独立渲染的组件。</p>
-<h3>Web 预览与 Native 实际结果不一致</h3>
-<p>React Native Web 适合加速调试，不适合作为最终事实。最终视觉证据必须来自目标平台。</p>
-<h3>自动视觉调参陷入像素优化</h3>
-<p>Figma 与 Native 字体渲染存在天然差异。需要区分结构错误、物料错误、布局错误、资源错误和平台噪声，不要只优化一个全页面像素分数。</p>
-<h3>AI 生成代码难以维护</h3>
-<p>Code Emitter 应以模板和 Catalog 约束为主。AI 负责 Mapping 和局部建议，不能每次自由重写整个页面。</p>
-<h2>当前最应该做的决定</h2>
-<p>启动前只需要先确定四件事：</p>
+<p>如果只有一名对 RN 不熟悉的工程师独立推进，整体更接近 14～20 周。</p>
+<p>这里的时间不是“覆盖整个仓库”的时间，而是从单页验证推进到一套可以继续扩展的生产路径。</p>
+<h2>成败取决于什么</h2>
+<p>这个项目的关键不在于 AI 第一次能还原多少像素，而在于以下能力能否成立：</p>
 <ol>
-<li>首个试点页面和 Figma 链接；</li>
-<li>需要覆盖的页面状态；</li>
-<li>用哪个国家、语言、设备尺寸作为 Golden Baseline；</li>
-<li>哪位 RN 工程师负责每周两次短 Review。</li>
+<li><strong>物料可理解</strong>：AI 知道现有 RN 组件是什么、何时使用、有哪些状态与约束。</li>
+<li><strong>映射可审计</strong>：每个主要 Figma 区域都能解释为什么使用某个 Material。</li>
+<li><strong>生成可维护</strong>：输出是普通、清晰、符合仓库规范的 RN 代码。</li>
+<li><strong>验证可重复</strong>：同一页面状态能稳定启动、截图和对比。</li>
+<li><strong>问题可定位</strong>：差异能区分为 Mapping、Catalog、Layout、Asset 或 Host 问题。</li>
+<li><strong>能力可复用</strong>：第二个页面能够复用第一阶段的成果，而不是重新定制。</li>
 </ol>
-<p>确定后直接按第一阶段实施手册推进。首期不要等待完整 Material-first 平台、全量组件治理或 Agent 总流程改造。</p>
+<h2>当前最需要确定的输入</h2>
+<p>开始第一阶段前，只需先确认：</p>
+<ul>
+<li>试点页面和 Figma Frame；</li>
+<li>需要覆盖的页面状态；</li>
+<li>Golden 平台、国家、语言和设备尺寸；</li>
+<li>一名能够持续参与 Review 的 RN 工程师。</li>
+</ul>
+<p>更细的任务拆解等这四项确定、第一阶段方案评审通过后，再单独形成 TodoList。</p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-C9SoMJnl.js"></script>
+  <script type="module" crossorigin src="/assets/index-BoxWXjY2.js"></script>
 </body>
 </html>
