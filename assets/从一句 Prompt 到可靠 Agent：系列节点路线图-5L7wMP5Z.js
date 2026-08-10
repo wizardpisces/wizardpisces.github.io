@@ -63,7 +63,7 @@ const x={},F=`<h1 id="&#x4ECE;&#x4E00;&#x53E5; Prompt &#x5230;&#x53EF;&#x9760; A
 <h2 id="&#x7B2C;&#x4E00;&#x5B63;&#xFF1A;Prompt &#x4E0D;&#x662F;&#x7A0B;&#x5E8F;"><a href="#&#x7B2C;&#x4E00;&#x5B63;&#xFF1A;Prompt &#x4E0D;&#x662F;&#x7A0B;&#x5E8F;"></a>&#x7B2C;&#x4E00;&#x5B63;&#xFF1A;Prompt &#x4E0D;&#x662F;&#x7A0B;&#x5E8F;</h2>
 <h3 id="N00&#xFF5C;&#x5E8F;&#x7AE0;&#xFF1A;&#x7ECF;&#x9A8C;&#x4E3A;&#x4EC0;&#x4E48;&#x80FD;&#x591F;&#x79EF;&#x7D2F;"><a href="#N00&#xFF5C;&#x5E8F;&#x7AE0;&#xFF1A;&#x7ECF;&#x9A8C;&#x4E3A;&#x4EC0;&#x4E48;&#x80FD;&#x591F;&#x79EF;&#x7D2F;"></a>N00&#xFF5C;&#x5E8F;&#x7AE0;&#xFF1A;&#x7ECF;&#x9A8C;&#x4E3A;&#x4EC0;&#x4E48;&#x80FD;&#x591F;&#x79EF;&#x7D2F;</h3>
 <ul>
-<li>&#x72B6;&#x6001;&#xFF1A;&#x5DF2;&#x6709;&#x6587;&#x7AE0;&#xFF0C;&#x7EE7;&#x7EED;&#x7CBE;&#x4FEE;&#x3002;</li>
+<li>&#x72B6;&#x6001;&#xFF1A;&#x5DF2;&#x6709;&#x6587;&#x7AE0;&#xFF0C;&#x53EF;&#x4F5C;&#x4E3A;&#x7CFB;&#x5217;&#x5E8F;&#x7AE0;&#xFF1B;&#x4E0D;&#x518D;&#x4E3A;&#x672C;&#x7CFB;&#x5217;&#x4FEE;&#x6539;&#x6B63;&#x6587;&#x3002;</li>
 <li>&#x6682;&#x5B9A;&#x6807;&#x9898;&#xFF1A;<code>&#x53EA;&#x6709;&#x4E03;&#x79CD;&#x65B9;&#x5757;&#xFF0C;&#x300A;&#x4FC4;&#x7F57;&#x65AF;&#x65B9;&#x5757;&#x300B;&#x4E3A;&#x4EC0;&#x4E48;&#x56DB;&#x5341;&#x5E74;&#x8FD8;&#x6CA1;&#x88AB;&#x73A9;&#x5B8C;&#xFF1F;</code></li>
 <li>&#x4E3B;&#x89D2;&#xFF1A;&#x4FC4;&#x7F57;&#x65AF;&#x65B9;&#x5757;&#xFF0C;&#x4E0D;&#x5F15;&#x5165;&#x6280;&#x672F;&#x7B80;&#x62A5;&#x52A9;&#x624B;&#x3002;</li>
 <li>&#x73B0;&#x8C61;&#xFF1A;&#x5E73;&#x53F0;&#x3001;&#x786C;&#x4EF6;&#x548C;&#x753B;&#x9762;&#x4E00;&#x76F4;&#x6362;&#xFF0C;&#x73A9;&#x5BB6;&#x7EC3;&#x51FA;&#x7684;&#x80FD;&#x529B;&#x5374;&#x6CA1;&#x6709;&#x8FC7;&#x671F;&#x3002;</li>
@@ -118,7 +118,7 @@ const x={},F=`<h1 id="&#x4ECE;&#x4E00;&#x53E5; Prompt &#x5230;&#x53EF;&#x9760; A
 <h2 id="&#x7B2C;&#x4E8C;&#x5B63;&#xFF1A;&#x4E0B;&#x4E00;&#x6B65;&#x7531;&#x8C01;&#x51B3;&#x5B9A;"><a href="#&#x7B2C;&#x4E8C;&#x5B63;&#xFF1A;&#x4E0B;&#x4E00;&#x6B65;&#x7531;&#x8C01;&#x51B3;&#x5B9A;"></a>&#x7B2C;&#x4E8C;&#x5B63;&#xFF1A;&#x4E0B;&#x4E00;&#x6B65;&#x7531;&#x8C01;&#x51B3;&#x5B9A;</h2>
 <h3 id="N03&#xFF5C;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#xFF0C;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x53EA;&#x9700;&#x8981; Workflow&#xFF0C;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x624D;&#x503C;&#x5F97;&#x4EA4;&#x7ED9; Agent"><a href="#N03&#xFF5C;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#xFF0C;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x53EA;&#x9700;&#x8981; Workflow&#xFF0C;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x624D;&#x503C;&#x5F97;&#x4EA4;&#x7ED9; Agent"></a>N03&#xFF5C;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#xFF0C;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x53EA;&#x9700;&#x8981; Workflow&#xFF0C;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x624D;&#x503C;&#x5F97;&#x4EA4;&#x7ED9; Agent</h3>
 <ul>
-<li>&#x72B6;&#x6001;&#xFF1A;&#x5DF2;&#x6709;&#x8349;&#x7A3F;&#xFF0C;&#x9700;&#x8981;&#x7528;&#x201C;&#x6280;&#x672F;&#x7B80;&#x62A5;&#x52A9;&#x624B;&#x201D;&#x91CD;&#x5199;&#xFF0C;&#x66FF;&#x6362;&#x652F;&#x4ED8; SDK &#x4F8B;&#x5B50;&#x3002;</li>
+<li>&#x72B6;&#x6001;&#xFF1A;&#x5F85;&#x65B0;&#x5199;&#x3002;&#x6B64;&#x524D;&#x8349;&#x7A3F;&#x5DF2;&#x5220;&#x9664;&#xFF0C;&#x4E0D;&#x4ECE;&#x65E7;&#x7A3F;&#x6539;&#x5199;&#x3002;</li>
 <li>&#x6682;&#x5B9A;&#x6807;&#x9898;&#xFF1A;<code>&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#xFF0C;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x53EA;&#x9700;&#x8981; Workflow&#xFF0C;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x624D;&#x503C;&#x5F97;&#x4EA4;&#x7ED9; Agent&#xFF1F;</code></li>
 <li>&#x4E0A;&#x4E00;&#x7248;&#x7CFB;&#x7EDF;&#xFF1A;&#x4E00;&#x4E2A; Prompt &#x540C;&#x65F6;&#x9605;&#x8BFB;&#x3001;&#x5224;&#x65AD;&#x548C;&#x5199;&#x4F5C;&#x3002;</li>
 <li>&#x672C;&#x7BC7;&#x7B2C;&#x4E00;&#x6B21;&#x6539;&#x9020;&#xFF1A;&#x62C6;&#x6210;&#x56FA;&#x5B9A; Workflow&#x3002;</li>
@@ -435,48 +435,10 @@ const x={},F=`<h1 id="&#x4ECE;&#x4E00;&#x53E5; Prompt &#x5230;&#x53EF;&#x9760; A
 <li>&#x6700;&#x7EC8;&#x4EA7;&#x7269;&#xFF1A;&#x5B8C;&#x6574;&#x4EE3;&#x7801;&#x3001;&#x67B6;&#x6784;&#x56FE;&#x3001;&#x5931;&#x8D25;&#x6848;&#x4F8B;&#x96C6;&#x3001;&#x8BC4;&#x6D4B;&#x96C6;&#x4E0E;&#x7248;&#x672C;&#x6F14;&#x8FDB;&#x8BB0;&#x5F55;&#x3002;</li>
 <li>&#x4EE3;&#x7801;&#x5FEB;&#x7167;&#xFF1A;<code>14_complete_agent.py</code></li>
 </ul>
-<h2 id="&#x65E7;&#x6587;&#x7AE0;&#x5982;&#x4F55;&#x6302;&#x56DE;&#x4E3B;&#x7EBF;"><a href="#&#x65E7;&#x6587;&#x7AE0;&#x5982;&#x4F55;&#x6302;&#x56DE;&#x4E3B;&#x7EBF;"></a>&#x65E7;&#x6587;&#x7AE0;&#x5982;&#x4F55;&#x6302;&#x56DE;&#x4E3B;&#x7EBF;</h2>
-<table>
-<thead>
-<tr>
-<th>&#x5DF2;&#x6709;&#x5185;&#x5BB9;</th>
-<th>&#x5EFA;&#x8BAE;&#x4F4D;&#x7F6E;</th>
-<th>&#x5904;&#x7406;&#x65B9;&#x5F0F;</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>&#x300A;&#x4ECE; Prompt &#x5230; Loop&#xFF1A;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;&#x770B;&#x61C2; AI &#x5DE5;&#x7A0B;&#x7684;&#x56DB;&#x6B21;&#x5347;&#x7EA7;&#x300B;</td>
-<td>N03 &#x524D;&#x540E;&#x7684;&#x5168;&#x5C40;&#x5730;&#x56FE;</td>
-<td>&#x4FDD;&#x7559;&#x4E3A;&#x6982;&#x89C8;&#xFF0C;&#x4E3B;&#x7CFB;&#x5217;&#x4E0D;&#x91CD;&#x590D;&#x5176;&#x5206;&#x5C42;&#x7ED3;&#x8BBA;</td>
-</tr>
-<tr>
-<td>&#x300A;&#x4EC0;&#x4E48;&#x662F; ReAct&#xFF1F;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;&#x770B;&#x61C2; AI Agent &#x539F;&#x7406;&#x300B;</td>
-<td>N04 &#x6269;&#x5C55;&#x9605;&#x8BFB;</td>
-<td>&#x89E3;&#x91CA; Agent &#x5185;&#x90E8;&#x7684; Thought / Action / Observation Loop</td>
-</tr>
-<tr>
-<td>&#x300A;&#x4ECE; Loop &#x5230; Graph&#xFF1A;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;&#x770B;&#x61C2;&#x591A; Agent &#x600E;&#x4E48;&#x534F;&#x4F5C;&#x300B;</td>
-<td>N10</td>
-<td>&#x7528;&#x6280;&#x672F;&#x7B80;&#x62A5;&#x52A9;&#x624B;&#x91CD;&#x5199;&#xFF0C;&#x6216;&#x4FDD;&#x7559;&#x4E3A;&#x65C1;&#x652F;&#x6848;&#x4F8B;</td>
-</tr>
-<tr>
-<td>&#x300A;&#x6709;&#x6548;&#x7684; AI Agent &#x4E0A;&#x4E0B;&#x6587;&#x5DE5;&#x7A0B;&#x300B;</td>
-<td>N07</td>
-<td>&#x63D0;&#x70BC;&#x6210;&#x9762;&#x5411;&#x7EDF;&#x4E00;&#x6848;&#x4F8B;&#x7684;&#x6B63;&#x6587;&#xFF0C;&#x5176;&#x4F59;&#x6DF1;&#x5EA6;&#x5185;&#x5BB9;&#x505A;&#x6269;&#x5C55;&#x9605;&#x8BFB;</td>
-</tr>
-<tr>
-<td>Memory &#x8BBA;&#x6587;&#x4E0E;&#x5B9E;&#x8DF5;&#x6587;&#x7AE0;</td>
-<td>N08</td>
-<td>&#x4F5C;&#x4E3A;&#x7406;&#x8BBA;&#x4E0E;&#x5B9E;&#x73B0;&#x53C2;&#x8003;&#xFF0C;&#x4E0D;&#x5728;&#x6B63;&#x6587;&#x7F57;&#x5217;&#x8BBA;&#x6587;</td>
-</tr>
-<tr>
-<td>BubbleWrap &#x6C99;&#x7BB1;&#x6587;&#x7AE0;</td>
-<td>N12</td>
-<td>&#x4FDD;&#x7559;&#x4E3A;&#x201C;&#x4E16;&#x754C;&#x4E0E;&#x5730;&#x56FE;&#x201D;&#x601D;&#x60F3;&#x7BC7;&#xFF0C;&#x4E3B;&#x7EBF;&#x6587;&#x7AE0;&#x8BB2;&#x5177;&#x4F53;&#x5B9E;&#x73B0;</td>
-</tr>
-</tbody>
-</table>
+<h2 id="&#x4E0E;&#x5DF2;&#x6709;&#x6587;&#x7AE0;&#x7684;&#x8FB9;&#x754C;"><a href="#&#x4E0E;&#x5DF2;&#x6709;&#x6587;&#x7AE0;&#x7684;&#x8FB9;&#x754C;"></a>&#x4E0E;&#x5DF2;&#x6709;&#x6587;&#x7AE0;&#x7684;&#x8FB9;&#x754C;</h2>
+<p>&#x672C;&#x8DEF;&#x7EBF;&#x56FE;&#x53EA;&#x89C4;&#x5212;&#x65B0;&#x7CFB;&#x5217;&#xFF0C;&#x4E0D;&#x4FEE;&#x6539;&#x5DF2;&#x6709;&#x6587;&#x7AE0;&#x3002;</p>
+<p>&#x5DF2;&#x6709;&#x5185;&#x5BB9;&#x5982;&#x679C;&#x521A;&#x597D;&#x80FD;&#x8865;&#x5145;&#x67D0;&#x4E2A;&#x8282;&#x70B9;&#xFF0C;&#x53EA;&#x5728;&#x6587;&#x672B;&#x4F5C;&#x4E3A;&#x5EF6;&#x4F38;&#x9605;&#x8BFB;&#x51FA;&#x73B0;&#xFF1B;&#x4E0D;&#x91CD;&#x5199;&#x3001;&#x4E0D;&#x62C6;&#x5206;&#xFF0C;&#x4E5F;&#x4E0D;&#x4E3A;&#x4E86;&#x7EDF;&#x4E00;&#x6848;&#x4F8B;&#x5F3A;&#x884C;&#x5E76;&#x5165;&#x6B63;&#x6587;&#x3002;&#x65B0;&#x7CFB;&#x5217;&#x9700;&#x8981;&#x7684;&#x5185;&#x5BB9;&#x5168;&#x90E8;&#x53E6;&#x8D77;&#x65B0;&#x7A3F;&#xFF0C;&#x907F;&#x514D;&#x7275;&#x4E00;&#x53D1;&#x52A8;&#x5168;&#x8EAB;&#x3002;</p>
+<p>&#x300A;&#x4FC4;&#x7F57;&#x65AF;&#x65B9;&#x5757;&#x300B;&#x53EF;&#x4EE5;&#x627F;&#x62C5;&#x5E8F;&#x7AE0;&#xFF0C;&#x662F;&#x56E0;&#x4E3A;&#x5B83;&#x672C;&#x8EAB;&#x5DF2;&#x7ECF;&#x5B8C;&#x6574;&#xFF0C;&#x53EA;&#x9700;&#x5728;&#x53D1;&#x5E03;&#x5C42;&#x9762;&#x628A;&#x5B83;&#x89C6;&#x4E3A;&#x7CFB;&#x5217;&#x601D;&#x8003;&#x7684;&#x8D77;&#x70B9;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x56DE;&#x5934;&#x6539;&#x9020;&#x6210;&#x201C;Agent &#x6587;&#x7AE0;&#x201D;&#x3002;</p>
 <h2 id="&#x4EE3;&#x7801;&#x4ED3;&#x5E93;&#x89C4;&#x5212;"><a href="#&#x4EE3;&#x7801;&#x4ED3;&#x5E93;&#x89C4;&#x5212;"></a>&#x4EE3;&#x7801;&#x4ED3;&#x5E93;&#x89C4;&#x5212;</h2>
 <p>&#x6240;&#x6709; Python &#x793A;&#x4F8B;&#x7EDF;&#x4E00;&#x4F7F;&#x7528; <code>uv</code> &#x7BA1;&#x7406;&#x3002;</p>
 <pre><code class="language-text">tech-brief-agent/
@@ -605,24 +567,118 @@ n14-complete-agent
 </tr>
 </tbody>
 </table>
-<h2 id="&#x53D1;&#x5E03;&#x8282;&#x594F;&#x5EFA;&#x8BAE;"><a href="#&#x53D1;&#x5E03;&#x8282;&#x594F;&#x5EFA;&#x8BAE;"></a>&#x53D1;&#x5E03;&#x8282;&#x594F;&#x5EFA;&#x8BAE;</h2>
-<p>&#x4E0D;&#x5FC5;&#x4E00;&#x5F00;&#x59CB;&#x627F;&#x8BFA; 15 &#x7BC7;&#x3002;&#x5BF9;&#x5916;&#x53EA;&#x5BA3;&#x5E03;&#x4E09;&#x7BC7;&#x4EE5;&#x5185;&#xFF0C;&#x5185;&#x90E8;&#x6309;&#x5B8C;&#x6574;&#x8DEF;&#x7EBF;&#x63A8;&#x8FDB;&#x3002;</p>
-<p>&#x6BCF;&#x4E2A;&#x9636;&#x6BB5;&#x7ED3;&#x675F;&#x540E;&#xFF0C;&#x6839;&#x636E;&#x8BFB;&#x8005;&#x53CD;&#x9988;&#x51B3;&#x5B9A;&#x662F;&#x5426;&#x5C55;&#x5F00;&#x4E0B;&#x4E00;&#x5B63;&#xFF1A;</p>
-<pre><code class="language-text">&#x7B2C;&#x4E00;&#x5B63;&#xFF1A;&#x8BFB;&#x8005;&#x662F;&#x5426;&#x5173;&#x5FC3; Prompt &#x7684;&#x53EF;&#x9760;&#x6027;&#xFF1F;
-&#x7B2C;&#x4E8C;&#x5B63;&#xFF1A;&#x8BFB;&#x8005;&#x662F;&#x5426;&#x613F;&#x610F;&#x8DDF;&#x7740;&#x4EE3;&#x7801;&#x7EE7;&#x7EED;&#x642D;&#x7CFB;&#x7EDF;&#xFF1F;
-&#x7B2C;&#x4E09;&#x5B63;&#xFF1A;&#x8BFB;&#x8005;&#x662F;&#x5426;&#x5F00;&#x59CB;&#x5173;&#x5FC3;&#x751F;&#x4EA7;&#x53EF;&#x9760;&#x6027;&#x4E0E;&#x6743;&#x8861;&#xFF1F;
+<h2 id="&#x7CFB;&#x5217;&#x53D1;&#x5E03;&#x7B56;&#x7565;"><a href="#&#x7CFB;&#x5217;&#x53D1;&#x5E03;&#x7B56;&#x7565;"></a>&#x7CFB;&#x5217;&#x53D1;&#x5E03;&#x7B56;&#x7565;</h2>
+<h3 id="&#x5148;&#x533A;&#x5206;&#x4E24;&#x79CD;&#x987A;&#x5E8F;"><a href="#&#x5148;&#x533A;&#x5206;&#x4E24;&#x79CD;&#x987A;&#x5E8F;"></a>&#x5148;&#x533A;&#x5206;&#x4E24;&#x79CD;&#x987A;&#x5E8F;</h3>
+<p>&#x5185;&#x90E8;&#x6309;&#x7167; N00 &#x2192; N14 &#x63A8;&#x8FDB;&#xFF0C;&#x56E0;&#x4E3A;&#x4EE3;&#x7801;&#x5FC5;&#x987B;&#x9010;&#x5C42;&#x6F14;&#x5316;&#xFF1B;&#x5BF9;&#x5916;&#x4E0D;&#x5F3A;&#x8C03;&#x7F16;&#x53F7;&#xFF0C;&#x4E5F;&#x4E0D;&#x628A;&#x5341;&#x4E94;&#x7BC7;&#x76EE;&#x5F55;&#x4E00;&#x6B21;&#x6027;&#x6254;&#x7ED9;&#x8BFB;&#x8005;&#x3002;</p>
+<p>&#x8BFB;&#x8005;&#x70B9;&#x5F00;&#x4E00;&#x7BC7;&#x6587;&#x7AE0;&#xFF0C;&#x9996;&#x5148;&#x5173;&#x5FC3;&#x7684;&#x662F;&#x773C;&#x524D;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x4E0D;&#x662F;&#x4F5C;&#x8005;&#x7684;&#x8BFE;&#x7A0B;&#x89C4;&#x5212;&#x3002;&#x56E0;&#x800C;&#x6BCF;&#x7BC7;&#x6807;&#x9898;&#x90FD;&#x5E94;&#x662F;&#x4E00;&#x4E2A;&#x53EF;&#x4EE5;&#x72EC;&#x7ACB;&#x6210;&#x7ACB;&#x7684;&#x771F;&#x5B9E;&#x7591;&#x95EE;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;</p>
+<pre><code class="language-text">&#x4E3A;&#x4EC0;&#x4E48;&#x6A21;&#x578B;&#x4E00;&#x5347;&#x7EA7;&#xFF0C;&#x6628;&#x5929;&#x597D;&#x7528;&#x7684; Prompt &#x4ECA;&#x5929;&#x5C31;&#x5931;&#x6548;&#x4E86;&#xFF1F;
+Prompt &#x6539;&#x5230;&#x7B2C;&#x516B;&#x7248;&#xFF0C;&#x4E3A;&#x4EC0;&#x4E48;&#x53CD;&#x800C;&#x4E0D;&#x77E5;&#x9053;&#x54EA;&#x7248;&#x6700;&#x597D;&#xFF1F;
+&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x53EA;&#x9700;&#x8981; Workflow&#xFF0C;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x624D;&#x503C;&#x5F97;&#x4EA4;&#x7ED9; Agent&#xFF1F;
+&#x4E00;&#x6B21; Agent &#x8FD0;&#x884C;&#x4E86;&#x516D;&#x5206;&#x949F;&#xFF0C;&#x6700;&#x540E;&#x5230;&#x5E95;&#x574F;&#x5728;&#x54EA;&#x4E00;&#x6B65;&#xFF1F;
 </code></pre>
-<p>&#x4F18;&#x5148;&#x53D1;&#x5E03;&#x987A;&#x5E8F;&#xFF1A;</p>
+<p>&#x8282;&#x70B9;&#x7F16;&#x53F7;&#x53EA;&#x7528;&#x4E8E;&#x5185;&#x90E8;&#x7BA1;&#x7406;&#x548C;&#x4EE3;&#x7801;&#x7248;&#x672C;&#xFF0C;&#x4E0D;&#x8FDB;&#x5165;&#x6807;&#x9898;&#x3002;&#x6587;&#x7AE0;&#x672B;&#x5C3E;&#x4E5F;&#x53EA;&#x629B;&#x51FA;&#x7D27;&#x90BB;&#x7684;&#x4E0B;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x4E0D;&#x9884;&#x544A;&#x6574;&#x5F20;&#x6280;&#x672F;&#x8DEF;&#x7EBF;&#x56FE;&#x3002;</p>
+<h3 id="&#x7B2C;&#x4E00;&#x6279;&#xFF1A;&#x5148;&#x9A8C;&#x8BC1;&#x8FD9;&#x6761;&#x4E3B;&#x7EBF;&#x503C;&#x4E0D;&#x503C;&#x5F97;&#x8FFD;"><a href="#&#x7B2C;&#x4E00;&#x6279;&#xFF1A;&#x5148;&#x9A8C;&#x8BC1;&#x8FD9;&#x6761;&#x4E3B;&#x7EBF;&#x503C;&#x4E0D;&#x503C;&#x5F97;&#x8FFD;"></a>&#x7B2C;&#x4E00;&#x6279;&#xFF1A;&#x5148;&#x9A8C;&#x8BC1;&#x8FD9;&#x6761;&#x4E3B;&#x7EBF;&#x503C;&#x4E0D;&#x503C;&#x5F97;&#x8FFD;</h3>
+<p>&#x7B2C;&#x4E00;&#x6279;&#x53EA;&#x89C4;&#x5212;&#x4E09;&#x7BC7;&#xFF0C;&#x4E0D;&#x5BA3;&#x5E03;&#x201C;&#x5341;&#x4E94;&#x7BC7;&#x5927;&#x578B;&#x6559;&#x7A0B;&#x201D;&#x3002;</p>
+<table>
+<thead>
+<tr>
+<th>&#x53D1;&#x5E03;&#x4F4D;&#x7F6E;</th>
+<th>&#x6587;&#x7AE0;</th>
+<th>&#x8BFB;&#x8005;&#x83B7;&#x5F97;&#x4EC0;&#x4E48;</th>
+<th>&#x627F;&#x62C5;&#x7684;&#x4EFB;&#x52A1;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&#x5165;&#x53E3;</td>
+<td>N00 &#x4FC4;&#x7F57;&#x65AF;&#x65B9;&#x5757;</td>
+<td>&#x7A33;&#x5B9A;&#x89C4;&#x5219;&#x4E3A;&#x4EC0;&#x4E48;&#x80FD;&#x8BA9;&#x7ECF;&#x9A8C;&#x79EF;&#x7D2F;</td>
+<td>&#x5EFA;&#x7ACB;&#x89C2;&#x5BDF;&#x89C6;&#x89D2;&#xFF0C;&#x4E0D;&#x8D1F;&#x8D23;&#x6559; Agent</td>
+</tr>
+<tr>
+<td>&#x51B2;&#x7A81;</td>
+<td>N01 Prompt &#x5931;&#x6548;</td>
+<td>Prompt &#x4E3A;&#x4EC0;&#x4E48;&#x4F1A;&#x968F;&#x6A21;&#x578B;&#x4E00;&#x8D77;&#x53D8;&#x5316;</td>
+<td>&#x628A;&#x7ECF;&#x5178;&#x95EE;&#x9898;&#x81EA;&#x7136;&#x843D;&#x5230; AI &#x73B0;&#x573A;</td>
+</tr>
+<tr>
+<td>&#x56DE;&#x5E94;</td>
+<td>N02 Prompt &#x7248;&#x672C;&#x4E0E;&#x56DE;&#x5F52;</td>
+<td>&#x5982;&#x4F55;&#x628A;&#x4E00;&#x6B21;&#x6B21;&#x8C03;&#x53C2;&#x53D8;&#x6210;&#x53EF;&#x6BD4;&#x8F83;&#x7684;&#x6539;&#x8FDB;</td>
+<td>&#x7B2C;&#x4E00;&#x6B21;&#x7ED9;&#x51FA;&#x53EF;&#x6267;&#x884C;&#x505A;&#x6CD5;</td>
+</tr>
+</tbody>
+</table>
+<p>&#x4E09;&#x7BC7;&#x5F62;&#x6210;&#x4E00;&#x4E2A;&#x5B8C;&#x6574;&#x7684;&#x5C0F;&#x95ED;&#x73AF;&#xFF1A;</p>
+<pre><code class="language-text">&#x7A33;&#x5B9A;&#x89C4;&#x5219;&#x8BA9;&#x7ECF;&#x9A8C;&#x80FD;&#x591F;&#x79EF;&#x7D2F;
+&#x2192; Prompt &#x7684;&#x884C;&#x4E3A;&#x8FB9;&#x754C;&#x5374;&#x5728;&#x79FB;&#x52A8;
+&#x2192; &#x6240;&#x4EE5;&#x771F;&#x6B63;&#x9700;&#x8981;&#x7BA1;&#x7406;&#x7684;&#x4E0D;&#x662F;&#x4E00;&#x53E5;&#x8BDD;&#xFF0C;&#x800C;&#x662F;&#x53D8;&#x5316;&#x672C;&#x8EAB;
+</code></pre>
+<p>&#x5373;&#x4F7F;&#x7CFB;&#x5217;&#x5230;&#x8FD9;&#x91CC;&#x6682;&#x505C;&#xFF0C;&#x8BFB;&#x8005;&#x4E5F;&#x5DF2;&#x7ECF;&#x83B7;&#x5F97;&#x4E00;&#x4E2A;&#x5B8C;&#x6574;&#x5224;&#x65AD;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x53EA;&#x770B;&#x4E86;&#x4E09;&#x7BC7;&#x94FA;&#x57AB;&#x3002;</p>
+<h3 id="&#x7B2C;&#x4E8C;&#x6279;&#xFF1A;&#x8BA9;&#x540C;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;&#x771F;&#x6B63;&#x957F;&#x6210;&#x5E94;&#x7528;"><a href="#&#x7B2C;&#x4E8C;&#x6279;&#xFF1A;&#x8BA9;&#x540C;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;&#x771F;&#x6B63;&#x957F;&#x6210;&#x5E94;&#x7528;"></a>&#x7B2C;&#x4E8C;&#x6279;&#xFF1A;&#x8BA9;&#x540C;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;&#x771F;&#x6B63;&#x957F;&#x6210;&#x5E94;&#x7528;</h3>
+<p>&#x8BFB;&#x8005;&#x786E;&#x8BA4;&#x5BF9;&#x8FD9;&#x6761;&#x4E3B;&#x7EBF;&#x6709;&#x5174;&#x8DA3;&#x540E;&#xFF0C;&#x518D;&#x8FDB;&#x5165; N03&#xFF5E;N06&#xFF1A;</p>
+<pre><code class="language-text">&#x4E00;&#x4E2A; Prompt &#x987E;&#x6B64;&#x5931;&#x5F7C;
+&#x2192; &#x62C6;&#x6210;&#x786E;&#x5B9A;&#x7684; Workflow
+&#x2192; &#x53EA;&#x628A;&#x672A;&#x77E5;&#x8DEF;&#x5F84;&#x4EA4;&#x7ED9; Agent
+&#x2192; &#x5DE5;&#x5177;&#x589E;&#x591A;&#x540E;&#x5F15;&#x5165; LangChain
+&#x2192; &#x72B6;&#x6001;&#x3001;&#x5206;&#x652F;&#x548C;&#x56DE;&#x9000;&#x589E;&#x591A;&#x540E;&#x5F15;&#x5165; LangGraph
+&#x2192; &#x7CFB;&#x7EDF;&#x53D8;&#x957F;&#x540E;&#xFF0C;&#x7528; Langfuse &#x770B;&#x6E05;&#x5B83;&#x4E3A;&#x4F55;&#x5931;&#x8D25;
+</code></pre>
+<p>&#x8FD9;&#x6279;&#x6587;&#x7AE0;&#x7684;&#x5356;&#x70B9;&#x4E0D;&#x662F;&#x201C;&#x5B66;&#x4F1A;&#x4E09;&#x4E2A;&#x6846;&#x67B6;&#x201D;&#xFF0C;&#x800C;&#x662F;&#x770B;&#x5230;&#x6BCF;&#x4E2A;&#x6846;&#x67B6;&#x5728;&#x4EC0;&#x4E48;&#x65F6;&#x523B;&#x624D;&#x6709;&#x5B58;&#x5728;&#x7684;&#x7406;&#x7531;&#x3002;&#x6846;&#x67B6;&#x540D;&#x53EF;&#x4EE5;&#x51FA;&#x73B0;&#x5728;&#x526F;&#x6807;&#x9898;&#x6216;&#x6B63;&#x6587;&#x4E2D;&#xFF0C;&#x4E3B;&#x6807;&#x9898;&#x4ECD;&#x4F18;&#x5148;&#x5199;&#x95EE;&#x9898;&#x548C;&#x51B2;&#x7A81;&#x3002;</p>
+<p>&#x5EFA;&#x8BAE;&#x53D1;&#x5E03;&#x7ED3;&#x6784;&#x4E3A;&#xFF1A;</p>
 <ol>
-<li>N00 &#x4FC4;&#x7F57;&#x65AF;&#x65B9;&#x5757;&#x3002;</li>
-<li>N01 &#x6A21;&#x578B;&#x5347;&#x7EA7;&#x4E0E; Prompt &#x5931;&#x6548;&#x3002;</li>
-<li>N02 Prompt &#x7248;&#x672C;&#x4E0E;&#x56DE;&#x5F52;&#x3002;</li>
-<li>N03 Workflow &#x4E0E; Agent&#x3002;</li>
-<li>N04 &#x6700;&#x5C0F; LangChain&#x3002;</li>
-<li>N05 &#x6700;&#x5C0F; LangGraph&#x3002;</li>
-<li>N06 &#x6700;&#x5C0F; Langfuse&#x3002;</li>
+<li>N03 &#x5148;&#x8BB2;&#x5224;&#x65AD;&#xFF1A;Workflow &#x4E0E; Agent &#x7684;&#x8FB9;&#x754C;&#x3002;</li>
+<li>N04&#x3001;N05 &#x8FDE;&#x7EED;&#x8BB2;&#x5B9E;&#x73B0;&#xFF0C;&#x8BA9;&#x8BFB;&#x8005;&#x770B;&#x5230;&#x76F8;&#x90BB;&#x4EE3;&#x7801;&#x7248;&#x672C;&#x7684;&#x53D8;&#x5316;&#x3002;</li>
+<li>N06 &#x505A;&#x4E00;&#x6B21;&#x9636;&#x6BB5;&#x590D;&#x76D8;&#xFF1A;&#x7CFB;&#x7EDF;&#x5DF2;&#x7ECF;&#x4F1A;&#x8DD1;&#xFF0C;&#x4F46;&#x6211;&#x4EEC;&#x4ECD;&#x4E0D;&#x77E5;&#x9053;&#x5B83;&#x4E3A;&#x4F55;&#x5076;&#x5C14;&#x8DD1;&#x9519;&#x3002;</li>
 </ol>
-<p>&#x5B8C;&#x6210; N06 &#x540E;&#x518D;&#x8BC4;&#x4F30;&#x7B2C;&#x4E09;&#x5B63;&#xFF0C;&#x4E0D;&#x8981;&#x4E3A;&#x4E86;&#x8DEF;&#x7EBF;&#x56FE;&#x5B8C;&#x6574;&#x800C;&#x5F3A;&#x884C;&#x5199;&#x5B8C;&#x3002;</p>
+<h3 id="&#x7B2C;&#x4E09;&#x6279;&#xFF1A;&#x4E0D;&#x518D;&#x589E;&#x52A0;&#x806A;&#x660E;&#xFF0C;&#x800C;&#x662F;&#x507F;&#x8FD8;&#x53EF;&#x9760;&#x6027;"><a href="#&#x7B2C;&#x4E09;&#x6279;&#xFF1A;&#x4E0D;&#x518D;&#x589E;&#x52A0;&#x806A;&#x660E;&#xFF0C;&#x800C;&#x662F;&#x507F;&#x8FD8;&#x53EF;&#x9760;&#x6027;"></a>&#x7B2C;&#x4E09;&#x6279;&#xFF1A;&#x4E0D;&#x518D;&#x589E;&#x52A0;&#x806A;&#x660E;&#xFF0C;&#x800C;&#x662F;&#x507F;&#x8FD8;&#x53EF;&#x9760;&#x6027;</h3>
+<p>N07&#xFF5E;N14 &#x4E0D;&#x5B9C;&#x673A;&#x68B0;&#x5730;&#x4E00;&#x5468;&#x4E00;&#x4E2A;&#x6982;&#x5FF5;&#x3002;&#x6309;&#x771F;&#x5B9E;&#x5931;&#x8D25;&#x7EC4;&#x6210;&#x4E09;&#x4E2A;&#x5C0F;&#x5355;&#x5143;&#xFF1A;</p>
+<table>
+<thead>
+<tr>
+<th>&#x5C0F;&#x5355;&#x5143;</th>
+<th>&#x8282;&#x70B9;</th>
+<th>&#x5171;&#x540C;&#x95EE;&#x9898;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&#x4FE1;&#x606F;&#x8FB9;&#x754C;</td>
+<td>N07 Context&#x3001;N08 Memory</td>
+<td>&#x54EA;&#x4E9B;&#x4FE1;&#x606F;&#x8BE5;&#x8FDB;&#x5165;&#x5F53;&#x4E0B;&#xFF0C;&#x54EA;&#x4E9B;&#x7ECF;&#x9A8C;&#x503C;&#x5F97;&#x7559;&#x4E0B;</td>
+</tr>
+<tr>
+<td>&#x4EFB;&#x52A1;&#x7EC4;&#x7EC7;</td>
+<td>N09 Plan&#x3001;N10 &#x591A; Agent</td>
+<td>&#x957F;&#x4EFB;&#x52A1;&#x5982;&#x4F55;&#x62C6;&#x89E3;&#xFF0C;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x5206;&#x5DE5;&#x53CD;&#x800C;&#x66F4;&#x7CDF;</td>
+</tr>
+<tr>
+<td>&#x751F;&#x4EA7;&#x53EF;&#x9760;&#x6027;</td>
+<td>N11 Checkpoint&#x3001;N12 &#x6743;&#x9650;&#x3001;N13 Eval</td>
+<td>&#x4E2D;&#x65AD;&#x600E;&#x6837;&#x6062;&#x590D;&#xFF0C;&#x52A8;&#x4F5C;&#x600E;&#x6837;&#x53D7;&#x63A7;&#xFF0C;&#x5347;&#x7EA7;&#x600E;&#x6837;&#x907F;&#x514D;&#x56DE;&#x5F52;</td>
+</tr>
+</tbody>
+</table>
+<p>N14 &#x4E0D;&#x662F;&#x518D;&#x4ECB;&#x7ECD;&#x4E00;&#x5F20;&#x201C;&#x5927;&#x800C;&#x5168;&#x67B6;&#x6784;&#x56FE;&#x201D;&#xFF0C;&#x800C;&#x662F;&#x8BA9;&#x6700;&#x7EC8;&#x7248;&#x672C;&#x91CD;&#x65B0;&#x8DD1;&#x8FC7;&#x5168;&#x7CFB;&#x5217;&#x7684;&#x56FA;&#x5B9A;&#x5931;&#x8D25;&#x6848;&#x4F8B;&#xFF0C;&#x56DE;&#x7B54;&#x4E09;&#x4E2A;&#x95EE;&#x9898;&#xFF1A;</p>
+<ol>
+<li>&#x54EA;&#x4E9B;&#x590D;&#x6742;&#x5EA6;&#x786E;&#x5B9E;&#x89E3;&#x51B3;&#x4E86;&#x95EE;&#x9898;&#xFF1F;</li>
+<li>&#x54EA;&#x4E9B;&#x80FD;&#x529B;&#x53EA;&#x6709;&#x89C4;&#x6A21;&#x4E0A;&#x6765;&#x4EE5;&#x540E;&#x624D;&#x503C;&#x5F97;&#x52A0;&#x5165;&#xFF1F;</li>
+<li>&#x5982;&#x679C;&#x4ECE;&#x5934;&#x518D;&#x505A;&#x4E00;&#x6B21;&#xFF0C;&#x6700;&#x5C0F;&#x7248;&#x672C;&#x4F1A;&#x4FDD;&#x7559;&#x4EC0;&#x4E48;&#xFF1F;</li>
+</ol>
+<h3 id="&#x6BCF;&#x6B21;&#x53EA;&#x627F;&#x8BFA;&#x4E0B;&#x4E00;&#x6B65;"><a href="#&#x6BCF;&#x6B21;&#x53EA;&#x627F;&#x8BFA;&#x4E0B;&#x4E00;&#x6B65;"></a>&#x6BCF;&#x6B21;&#x53EA;&#x627F;&#x8BFA;&#x4E0B;&#x4E00;&#x6B65;</h3>
+<p>&#x5BF9;&#x5916;&#x9884;&#x544A;&#x6700;&#x591A;&#x53EA;&#x8BF4;&#x4E0B;&#x4E00;&#x7BC7;&#xFF0C;&#x4E0D;&#x8BF4;&#x201C;&#x63A5;&#x4E0B;&#x6765;&#x8FD8;&#x6709;&#x5341;&#x4E8C;&#x7BC7;&#x201D;&#x3002;&#x7ED3;&#x5C3E;&#x94A9;&#x5B50;&#x6765;&#x81EA;&#x5F53;&#x524D;&#x7248;&#x672C;&#x4ECD;&#x672A;&#x89E3;&#x51B3;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;</p>
+<pre><code class="language-text">&#x6211;&#x4EEC;&#x7EC8;&#x4E8E;&#x80FD;&#x6BD4;&#x8F83;&#x4E24;&#x4E2A; Prompt &#x7684;&#x597D;&#x574F;&#x4E86;&#x3002;
+&#x4F46;&#x8FD8;&#x6709;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#x6CA1;&#x6709;&#x6D88;&#x5931;&#xFF1A;&#x641C;&#x7D22;&#x3001;&#x5224;&#x65AD;&#x548C;&#x5199;&#x4F5C;&#xFF0C;&#x5168;&#x585E;&#x5728;&#x4E00;&#x6B21;&#x8C03;&#x7528;&#x91CC;&#xFF0C;&#x4EFB;&#x4F55;&#x4E00;&#x6B65;&#x6539;&#x5584;&#x90FD;&#x53EF;&#x80FD;&#x8BA9;&#x53E6;&#x4E00;&#x6B65;&#x9000;&#x5316;&#x3002;
+</code></pre>
+<p>&#x8FD9;&#x6BD4;&#x201C;&#x4E0B;&#x4E00;&#x7BC7;&#x5C06;&#x4ECB;&#x7ECD; Workflow&#x201D;&#x66F4;&#x81EA;&#x7136;&#xFF0C;&#x56E0;&#x4E3A;&#x8BFB;&#x8005;&#x671F;&#x5F85;&#x7684;&#x662F;&#x95EE;&#x9898;&#x5982;&#x4F55;&#x88AB;&#x89E3;&#x51B3;&#xFF0C;&#x4E0D;&#x662F;&#x7B49;&#x4E00;&#x4E2A;&#x65B0;&#x540D;&#x8BCD;&#x767B;&#x573A;&#x3002;</p>
+<h3 id="&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x7EE7;&#x7EED;&#xFF0C;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x8C03;&#x6574;"><a href="#&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x7EE7;&#x7EED;&#xFF0C;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x8C03;&#x6574;"></a>&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x7EE7;&#x7EED;&#xFF0C;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x8C03;&#x6574;</h3>
+<p>&#x6BCF;&#x4E00;&#x6279;&#x7ED3;&#x675F;&#x540E;&#x518D;&#x5224;&#x65AD;&#x4E0B;&#x4E00;&#x6279;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x4E3A;&#x4E86;&#x8DEF;&#x7EBF;&#x56FE;&#x5B8C;&#x6574;&#x5F3A;&#x884C;&#x5199;&#x5B8C;&#xFF1A;</p>
+<ul>
+<li>&#x7B2C;&#x4E00;&#x6279;&#x770B;&#xFF1A;&#x8BFB;&#x8005;&#x662F;&#x5426;&#x5BF9;&#x201C;&#x7ECF;&#x9A8C;&#x4E3A;&#x4F55;&#x5931;&#x6548;&#x3001;&#x600E;&#x6837;&#x79EF;&#x7D2F;&#x201D;&#x4EA7;&#x751F;&#x5171;&#x9E23;&#x3002;</li>
+<li>&#x7B2C;&#x4E8C;&#x6279;&#x770B;&#xFF1A;&#x8BFB;&#x8005;&#x662F;&#x5426;&#x613F;&#x610F;&#x6301;&#x7EED;&#x8DDF;&#x968F;&#x540C;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;&#x548C;&#x4EE3;&#x7801;&#x4ED3;&#x5E93;&#x3002;</li>
+<li>&#x7B2C;&#x4E09;&#x6279;&#x770B;&#xFF1A;&#x8BFB;&#x8005;&#x66F4;&#x5173;&#x5FC3; Context&#x3001;Memory&#xFF0C;&#x8FD8;&#x662F;&#x6062;&#x590D;&#x3001;&#x6743;&#x9650;&#x548C;&#x8BC4;&#x6D4B;&#xFF1B;&#x636E;&#x6B64;&#x8C03;&#x6574;&#x5C0F;&#x5355;&#x5143;&#x7684;&#x5148;&#x540E;&#x3002;</li>
+</ul>
+<p>&#x8DEF;&#x7EBF;&#x56FE;&#x5141;&#x8BB8;&#x589E;&#x5220;&#x8282;&#x70B9;&#xFF0C;&#x4F46;&#x6709;&#x4E00;&#x6761;&#x4E0D;&#x80FD;&#x53D8;&#xFF1A;&#x53EA;&#x6709;&#x5F53;&#x524D;&#x7248;&#x672C;&#x771F;&#x7684;&#x649E;&#x4E0A;&#x4E86;&#x67D0;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;&#x4E0B;&#x4E00;&#x79CD;&#x673A;&#x5236;&#x624D;&#x53EF;&#x4EE5;&#x767B;&#x573A;&#x3002;</p>
 <h2 id="&#x5B98;&#x65B9;&#x53C2;&#x8003;"><a href="#&#x5B98;&#x65B9;&#x53C2;&#x8003;"></a>&#x5B98;&#x65B9;&#x53C2;&#x8003;</h2>
 <ol>
 <li>
@@ -644,4 +700,4 @@ n14-complete-agent
 <p>Langfuse Evaluation&#xFF1A;https://langfuse.com/docs/evaluation/overview</p>
 </li>
 </ol>
-`,E=[{level:1,title:"从一句 Prompt 到可靠 Agent：系列节点路线图",children:[{level:2,title:"系列定位",children:[]},{level:2,title:"贯穿全系列的例子",children:[]},{level:2,title:"总体节点图",children:[]},{level:2,title:"第一季：Prompt 不是程序",children:[{level:3,title:"N00｜序章：经验为什么能够积累",children:[]},{level:3,title:"N01｜同一句 Prompt，为什么换个模型就不好用了",children:[]},{level:3,title:"N02｜Prompt 改到第八版，为什么反而不知道哪版最好",children:[]}]},{level:2,title:"第二季：下一步由谁决定",children:[{level:3,title:"N03｜一个任务，什么时候只需要 Workflow，什么时候才值得交给 Agent",children:[]},{level:3,title:"N04｜一个例子读懂 LangChain：它到底封装了什么",children:[]},{level:3,title:"N05｜流程第一次需要走回头路：最小 LangGraph",children:[]},{level:3,title:"N06｜最终文章写错了，到底是哪一步坏了：最小 Langfuse",children:[]}]},{level:2,title:"第三季：Agent 怎样从能跑变成敢用",children:[{level:3,title:"N07｜Context：资料越多，为什么回答反而越差",children:[]},{level:3,title:"N08｜Memory：Agent 应该记住什么，又该忘掉什么",children:[]},{level:3,title:"N09｜Plan 与 Skill：任务变长以后，Agent 为什么越来越容易跑偏",children:[]},{level:3,title:"N10｜多 Agent：什么时候分工真的比一个 Agent 更好",children:[]},{level:3,title:"N11｜Checkpoint 与 Retry：做到一半断了，为什么不能从头重来",children:[]},{level:3,title:"N12｜沙箱、权限与人工审批：能做不等于可以直接做",children:[]},{level:3,title:"N13｜Dataset 与 Eval：Demo 成功，为什么上线后越来越差",children:[]},{level:3,title:"N14｜终章：一个可靠 Agent 的完整结构",children:[]}]},{level:2,title:"旧文章如何挂回主线",children:[]},{level:2,title:"代码仓库规划",children:[]},{level:2,title:"每篇文章的固定叙事模板",children:[]},{level:2,title:"系列的核心权衡线",children:[]},{level:2,title:"发布节奏建议",children:[]},{level:2,title:"官方参考",children:[]}]}];export{x as attributes,F as html,E as nestedHeaders};
+`,E=[{level:1,title:"从一句 Prompt 到可靠 Agent：系列节点路线图",children:[{level:2,title:"系列定位",children:[]},{level:2,title:"贯穿全系列的例子",children:[]},{level:2,title:"总体节点图",children:[]},{level:2,title:"第一季：Prompt 不是程序",children:[{level:3,title:"N00｜序章：经验为什么能够积累",children:[]},{level:3,title:"N01｜同一句 Prompt，为什么换个模型就不好用了",children:[]},{level:3,title:"N02｜Prompt 改到第八版，为什么反而不知道哪版最好",children:[]}]},{level:2,title:"第二季：下一步由谁决定",children:[{level:3,title:"N03｜一个任务，什么时候只需要 Workflow，什么时候才值得交给 Agent",children:[]},{level:3,title:"N04｜一个例子读懂 LangChain：它到底封装了什么",children:[]},{level:3,title:"N05｜流程第一次需要走回头路：最小 LangGraph",children:[]},{level:3,title:"N06｜最终文章写错了，到底是哪一步坏了：最小 Langfuse",children:[]}]},{level:2,title:"第三季：Agent 怎样从能跑变成敢用",children:[{level:3,title:"N07｜Context：资料越多，为什么回答反而越差",children:[]},{level:3,title:"N08｜Memory：Agent 应该记住什么，又该忘掉什么",children:[]},{level:3,title:"N09｜Plan 与 Skill：任务变长以后，Agent 为什么越来越容易跑偏",children:[]},{level:3,title:"N10｜多 Agent：什么时候分工真的比一个 Agent 更好",children:[]},{level:3,title:"N11｜Checkpoint 与 Retry：做到一半断了，为什么不能从头重来",children:[]},{level:3,title:"N12｜沙箱、权限与人工审批：能做不等于可以直接做",children:[]},{level:3,title:"N13｜Dataset 与 Eval：Demo 成功，为什么上线后越来越差",children:[]},{level:3,title:"N14｜终章：一个可靠 Agent 的完整结构",children:[]}]},{level:2,title:"与已有文章的边界",children:[]},{level:2,title:"代码仓库规划",children:[]},{level:2,title:"每篇文章的固定叙事模板",children:[]},{level:2,title:"系列的核心权衡线",children:[]},{level:2,title:"系列发布策略",children:[{level:3,title:"先区分两种顺序",children:[]},{level:3,title:"第一批：先验证这条主线值不值得追",children:[]},{level:3,title:"第二批：让同一个例子真正长成应用",children:[]},{level:3,title:"第三批：不再增加聪明，而是偿还可靠性",children:[]},{level:3,title:"每次只承诺下一步",children:[]},{level:3,title:"什么时候继续，什么时候调整",children:[]}]},{level:2,title:"官方参考",children:[]}]}];export{x as attributes,F as html,E as nestedHeaders};
