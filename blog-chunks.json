@@ -12320,6 +12320,83 @@
     "originalTitle": "当排行榜开始训练大模型"
   },
   {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%8D%A2%EF%BC%8CPrompt%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%A4%B1%E6%95%88%EF%BC%9F%E4%BB%8E%E9%9A%90%E5%90%AB%E9%BB%98%E5%A5%91%E5%88%B0%E8%A1%8C%E4%B8%BA%E5%8D%8F%E8%AE%AE#chunk-0",
+    "title": "Prompt 没变，为什么换个模型，行为就变了？",
+    "content": "Prompt 没变，为什么换个模型，行为就变了？\n假设我们做了一个技术简报助手。\n输入五篇资料，它负责写一篇 500～800 字的中文简报。Prompt 很普通：\n它稳定运行了一段时间。事实基本准确，遇到互相矛盾的资料，也知道把分歧留下来。\n后来模型升级了。\n新模型写得明显更顺，标题也更像人写的。可仔细一看，两个来源原本还在争论，它却替双方总结出了一个确定答案；有个数字只在营销稿里出现，它也顺手写进了结论。\nPrompt 一个字没改，文章甚至更好看了，任务却做坏了。\n文章更好看了，为什么反而错了？\n问题藏在“严谨”“专业”“有依据”这些听起来很清楚的词里。",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%8D%A2%EF%BC%8CPrompt%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%A4%B1%E6%95%88%EF%BC%9F%E4%BB%8E%E9%9A%90%E5%90%AB%E9%BB%98%E5%A5%91%E5%88%B0%E8%A1%8C%E4%B8%BA%E5%8D%8F%E8%AE%AE",
+    "chunkIndex": 0,
+    "totalChunks": 7,
+    "startPos": 0,
+    "endPos": 282,
+    "originalTitle": "Prompt 没变，为什么换个模型，行为就变了？"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%8D%A2%EF%BC%8CPrompt%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%A4%B1%E6%95%88%EF%BC%9F%E4%BB%8E%E9%9A%90%E5%90%AB%E9%BB%98%E5%A5%91%E5%88%B0%E8%A1%8C%E4%B8%BA%E5%8D%8F%E8%AE%AE#chunk-1",
+    "title": "Prompt 没变，为什么换个模型，行为就变了？ (第2段)",
+    "content": "...问题藏在“严谨”“专业”“有依据”这些听起来很清楚的词里。 严谨，是每句话都附来源，还是只采用可信来源？两个来源冲突时，是选择看起来更权威的一方，还是把分歧交给读者？所谓有依据，是允许根据常识补全，还是只能使用给定资料？\nPrompt 没说。\n旧模型比较保守，碰到冲突时停了下来。新模型更擅长组织材料，为了让文章完整、流畅，主动替我们消解了冲突。它们都可以认为自己在“给出有依据的判断”。\n这类失效很难第一时间发现。它不报错，也不胡言乱语，甚至显得更聪明。它只是悄悄换了一种方式，理解我们从未明说的要求。\n过去表现稳定，不一定说明 Prompt 写对了。也可能只是旧模型碰巧猜对了我们的默契。\nPrompt 没变，解释它的人变了\n我们很容易把 Prompt 当成程序：只要文字不动，行为就应该不动。",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%8D%A2%EF%BC%8CPrompt%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%A4%B1%E6%95%88%EF%BC%9F%E4%BB%8E%E9%9A%90%E5%90%AB%E9%BB%98%E5%A5%91%E5%88%B0%E8%A1%8C%E4%B8%BA%E5%8D%8F%E8%AE%AE",
+    "chunkIndex": 1,
+    "totalChunks": 7,
+    "startPos": 282,
+    "endPos": 602,
+    "originalTitle": "Prompt 没变，为什么换个模型，行为就变了？"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%8D%A2%EF%BC%8CPrompt%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%A4%B1%E6%95%88%EF%BC%9F%E4%BB%8E%E9%9A%90%E5%90%AB%E9%BB%98%E5%A5%91%E5%88%B0%E8%A1%8C%E4%B8%BA%E5%8D%8F%E8%AE%AE#chunk-2",
+    "title": "Prompt 没变，为什么换个模型，行为就变了？ (第3段)",
+    "content": "...把 Prompt 当成程序：只要文字不动，行为就应该不动。 如果一定要用程序来比喻，Prompt 更像一段需要解释的脚本。模型不只负责执行，还在决定每句话究竟是什么意思。更换模型，相当于连解释器和默认设置一起换了。\n真正决定结果的是：\nPrompt 只是其中一项。模型一换，解释任务的方式也换了。\n所以模型升级后 Prompt 失效，往往不是那几句话突然过期了。新模型只是用不同的回答，把藏在 Prompt 空白处的问题暴露了出来。\n这也解释了一个常见现象：遇到跑偏，我们总想把语气写得更重。\n但“极其严谨”并没有比“严谨”多规定一个动作。模型要猜的事情，一件也没少。\n把默契一条条抓出来\n改法就藏在那篇做坏了的简报里。\n它替两个冲突来源下了结论，我们就把这条默契写出来：",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%8D%A2%EF%BC%8CPrompt%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%A4%B1%E6%95%88%EF%BC%9F%E4%BB%8E%E9%9A%90%E5%90%AB%E9%BB%98%E5%A5%91%E5%88%B0%E8%A1%8C%E4%B8%BA%E5%8D%8F%E8%AE%AE",
+    "chunkIndex": 2,
+    "totalChunks": 7,
+    "startPos": 602,
+    "endPos": 909,
+    "originalTitle": "Prompt 没变，为什么换个模型，行为就变了？"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%8D%A2%EF%BC%8CPrompt%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%A4%B1%E6%95%88%EF%BC%9F%E4%BB%8E%E9%9A%90%E5%90%AB%E9%BB%98%E5%A5%91%E5%88%B0%E8%A1%8C%E4%B8%BA%E5%8D%8F%E8%AE%AE#chunk-3",
+    "title": "Prompt 没变，为什么换个模型，行为就变了？ (第4段)",
+    "content": "...报里。\n它替两个冲突来源下了结论，我们就把这条默契写出来： 再跑一次。冲突保住了，可资料里缺少一个关键数字，模型又根据上下文补了个“大概”。于是再加一条：\n最后，事实和判断偶尔还会混在一起，我们干脆规定输出结构：\n到这里，Prompt 的变化很有意思。\n最初，我们在描述一个理想的助手：你要严谨、专业、准确。\n现在，我们在描述任务本身：遇到什么情况，采取什么动作；规则冲突时谁优先；信息不够时在哪里停下来。\n“不要胡编乱造”是一种期望。“找不到依据时，不补全并说明缺失”才是一种可以观察的行为。\nPrompt 的稳定性，往往就藏在这一步里：少描述性格，多交代边界。\n有些规则不该继续写进 Prompt\n改到这里，新模型稳定了不少。但第三次发现它漏掉“尚存分歧”时，我们终于没有再往 Prompt 里补一句“必须严格遵守”。",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%8D%A2%EF%BC%8CPrompt%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%A4%B1%E6%95%88%EF%BC%9F%E4%BB%8E%E9%9A%90%E5%90%AB%E9%BB%98%E5%A5%91%E5%88%B0%E8%A1%8C%E4%B8%BA%E5%8D%8F%E8%AE%AE",
+    "chunkIndex": 3,
+    "totalChunks": 7,
+    "startPos": 909,
+    "endPos": 1241,
+    "originalTitle": "Prompt 没变，为什么换个模型，行为就变了？"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%8D%A2%EF%BC%8CPrompt%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%A4%B1%E6%95%88%EF%BC%9F%E4%BB%8E%E9%9A%90%E5%90%AB%E9%BB%98%E5%A5%91%E5%88%B0%E8%A1%8C%E4%B8%BA%E5%8D%8F%E8%AE%AE#chunk-4",
+    "title": "Prompt 没变，为什么换个模型，行为就变了？ (第5段)",
+    "content": "...我们终于没有再往 Prompt 里补一句“必须严格遵守”。 自然语言里的“必须”，终究还是一句需要模型理解的自然语言。既然区块缺没缺、篇幅超没超都能直接检查，为什么还要每次提醒模型？\n简报助手于是多了一道关：模型负责阅读和判断，程序负责守住确定的边界。\n输出格式可以交给 Schema，篇幅可以由程序计算，关键数字有没有标注来源也可以检查。至于来源是否真的支持这个数字、资料之间是否存在分歧，仍然需要模型判断。\n这里没有必要把模型管得更死。需要理解的，留给模型；能够确定验证的，就别再赌模型这次愿不愿意照做。\n越不能出错的规则，越不该只写在 Prompt 里。\n模型会换，应该留下什么？\n现在再问：有没有一套 Prompt，可以从当前模型一直用到未来所有模型？\n很难有。",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%8D%A2%EF%BC%8CPrompt%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%A4%B1%E6%95%88%EF%BC%9F%E4%BB%8E%E9%9A%90%E5%90%AB%E9%BB%98%E5%A5%91%E5%88%B0%E8%A1%8C%E4%B8%BA%E5%8D%8F%E8%AE%AE",
+    "chunkIndex": 4,
+    "totalChunks": 7,
+    "startPos": 1241,
+    "endPos": 1547,
+    "originalTitle": "Prompt 没变，为什么换个模型，行为就变了？"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%8D%A2%EF%BC%8CPrompt%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%A4%B1%E6%95%88%EF%BC%9F%E4%BB%8E%E9%9A%90%E5%90%AB%E9%BB%98%E5%A5%91%E5%88%B0%E8%A1%8C%E4%B8%BA%E5%8D%8F%E8%AE%AE#chunk-5",
+    "title": "Prompt 没变，为什么换个模型，行为就变了？ (第6段)",
+    "content": "...rompt，可以从当前模型一直用到未来所有模型？\n很难有。 只要规则仍由自然语言表达，它就需要被解释；只要模型还会升级，解释方式就可能变化。能留下来的，是我们从失败中抓出来的东西：什么算完成，什么算越界，碰到分支怎么办，结果如何检查。\n所谓 Prompt 迭代，也就不再是把同一句要求越写越重。每失败一次，我们都多发现了一条原先没意识到的业务规则，再决定它应该写进 Prompt，还是交给程序检查。\n从这个角度看，换模型像一次意外的压力测试。那些一升级就消失的“稳定表现”，原来并不属于系统，只是暂时寄存在旧模型的习惯里。\n模型可以换，文风和判断倾向也可以变。只要任务边界没有跟着悄悄漂走，升级就不必等于重写一切。\n不过，故事到这里还没结束。",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%8D%A2%EF%BC%8CPrompt%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%A4%B1%E6%95%88%EF%BC%9F%E4%BB%8E%E9%9A%90%E5%90%AB%E9%BB%98%E5%A5%91%E5%88%B0%E8%A1%8C%E4%B8%BA%E5%8D%8F%E8%AE%AE",
+    "chunkIndex": 5,
+    "totalChunks": 7,
+    "startPos": 1547,
+    "endPos": 1839,
+    "originalTitle": "Prompt 没变，为什么换个模型，行为就变了？"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%8D%A2%EF%BC%8CPrompt%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%A4%B1%E6%95%88%EF%BC%9F%E4%BB%8E%E9%9A%90%E5%90%AB%E9%BB%98%E5%A5%91%E5%88%B0%E8%A1%8C%E4%B8%BA%E5%8D%8F%E8%AE%AE#chunk-6",
+    "title": "Prompt 没变，为什么换个模型，行为就变了？ (第7段)",
+    "content": "...漂走，升级就不必等于重写一切。\n不过，故事到这里还没结束。 为了修复前面的失败，Prompt 已经从 v1 改到了 v5。v5 在这五篇资料上表现更好，换一批资料，却可能还不如 v3。如果最后仍靠“读起来不错”挑版本，我们和最开始凭感觉写下“请保持严谨”，其实没有走出多远。\nPrompt 工程的下一步，可能不是写出 v6，而是先找一把不会跟着模型一起漂移的尺子。",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%8D%A2%EF%BC%8CPrompt%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%A4%B1%E6%95%88%EF%BC%9F%E4%BB%8E%E9%9A%90%E5%90%AB%E9%BB%98%E5%A5%91%E5%88%B0%E8%A1%8C%E4%B8%BA%E5%8D%8F%E8%AE%AE",
+    "chunkIndex": 6,
+    "totalChunks": 7,
+    "startPos": 1839,
+    "endPos": 1991,
+    "originalTitle": "Prompt 没变，为什么换个模型，行为就变了？"
+  },
+  {
     "chunkId": "/blog/tech%2Fai-%E7%AC%94%E8%AE%B0%2FAAR%20-%20%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AF%B9%E9%BD%90%E7%A0%94%E7%A9%B6%E7%9A%84%E5%90%AF%E7%A4%BA%E4%B8%8E%E9%99%B7%E9%98%B1#chunk-0",
     "title": "AAR - 自动化对齐研究的启示与陷阱",
     "content": "*文章发布时间：2026-04-17*\nAnthropic 在 2026 年 4 月发布了一篇名为 《Automated Alignment Researchers: Using large language models to scale scalable oversight》 的研究博客（同步发表在 Alignment Science blog 的 Automated Weak-to-Strong Researcher）。\n表面看，这是一个\"让 AI 帮忙做 AI 对齐研究\"的实验：9 个 Claude Opus 4.6 并行跑了 5 天，把一个叫 PGR 的指标从人类研究员的 0.23 推到 0.97。听起来是又一条\"AI 能做 X 了\"的新闻。",

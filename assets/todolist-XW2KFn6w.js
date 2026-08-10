@@ -1,2 +1,0 @@
-const x={},F=`<p>[] &#x6211;&#x4EEC;&#x505A;&#x7684;&#x8FD9;&#x5957;&#x4E1C;&#x897F;&#xFF0C;&#x5BF9;&#x8BBE;&#x8BA1;&#x56E2;&#x961F;&#x6765;&#x8BF4;&#xFF0C;&#x63D0;&#x4F9B;&#x4EC0;&#x4E48;&#x54EA;&#x4E9B;&#x80FD;&#x529B;&#xFF0C;&#x4ED6;&#x4EEC;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#xFF08;&#x8F93;&#x5165;&#x662F;&#x4EC0;&#x4E48;&#xFF09;&#xFF1F;</p>
-`,E=[];export{x as attributes,F as html,E as nestedHeaders};

@@ -4,721 +4,400 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex,nofollow">
-  <title>从一句 Prompt 到可靠 Agent：系列节点路线图 | LZ AI NOTE</title>
-  <meta name="description" content="从一句 Prompt 到可靠 Agent：系列节点路线图 系列定位 用同一个“技术简报助手”，从一句 Prompt 开始，每次只解决一个真实失败，最终演化成一个可观测、可恢复、可评测、有人类控制边界的完整 Agent。 这不是按框架编排的教程： 真正的叙事顺序是： 每篇文章必须满足：即使读者不继续追系列，也能带走一个独立判断。 贯穿全系列的例子 项目暂定名…">
+  <title>从一句 Prompt 到可靠 Agent：写作推进路线图 | LZ AI NOTE</title>
+  <meta name="description" content="从一句 Prompt 到可靠 Agent：写作推进路线图 这是内部写作地图，不是对外发布的课程目录。 它要解决的问题很具体：我现在该推哪一篇，写之前要准备什么，一篇写完后又根据什么选下一篇。 先看结论 系列不再预设十五个必须依次完成的节点。 真正需要稳定的只有三件事： 1. 始终使用同一个「技术简报助手」作为主例子。 2. 每篇从一个真实失败出发，只引入解…">
   <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E4%B8%80%E5%8F%A5%20Prompt%20%E5%88%B0%E5%8F%AF%E9%9D%A0%20Agent%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
-  <meta property="og:title" content="从一句 Prompt 到可靠 Agent：系列节点路线图 | LZ AI NOTE">
-  <meta property="og:description" content="从一句 Prompt 到可靠 Agent：系列节点路线图 系列定位 用同一个“技术简报助手”，从一句 Prompt 开始，每次只解决一个真实失败，最终演化成一个可观测、可恢复、可评测、有人类控制边界的完整 Agent。 这不是按框架编排的教程： 真正的叙事顺序是： 每篇文章必须满足：即使读者不继续追系列，也能带走一个独立判断。 贯穿全系列的例子 项目暂定名…">
+  <meta property="og:title" content="从一句 Prompt 到可靠 Agent：写作推进路线图 | LZ AI NOTE">
+  <meta property="og:description" content="从一句 Prompt 到可靠 Agent：写作推进路线图 这是内部写作地图，不是对外发布的课程目录。 它要解决的问题很具体：我现在该推哪一篇，写之前要准备什么，一篇写完后又根据什么选下一篇。 先看结论 系列不再预设十五个必须依次完成的节点。 真正需要稳定的只有三件事： 1. 始终使用同一个「技术简报助手」作为主例子。 2. 每篇从一个真实失败出发，只引入解…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E4%B8%80%E5%8F%A5%20Prompt%20%E5%88%B0%E5%8F%AF%E9%9D%A0%20Agent%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"从一句 Prompt 到可靠 Agent：系列节点路线图","description":"从一句 Prompt 到可靠 Agent：系列节点路线图 系列定位 用同一个“技术简报助手”，从一句 Prompt 开始，每次只解决一个真实失败，最终演化成一个可观测、可恢复、可评测、有人类控制边界的完整 Agent。 这不是按框架编排的教程： 真正的叙事顺序是： 每篇文章必须满足：即使读者不继续追系列，也能带走一个独立判断。 贯穿全系列的例子 项目暂定名…","url":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E4%B8%80%E5%8F%A5%20Prompt%20%E5%88%B0%E5%8F%AF%E9%9D%A0%20Agent%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E4%B8%80%E5%8F%A5%20Prompt%20%E5%88%B0%E5%8F%AF%E9%9D%A0%20Agent%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","dateModified":"2026-08-10","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"从一句 Prompt 到可靠 Agent：写作推进路线图","description":"从一句 Prompt 到可靠 Agent：写作推进路线图 这是内部写作地图，不是对外发布的课程目录。 它要解决的问题很具体：我现在该推哪一篇，写之前要准备什么，一篇写完后又根据什么选下一篇。 先看结论 系列不再预设十五个必须依次完成的节点。 真正需要稳定的只有三件事： 1. 始终使用同一个「技术简报助手」作为主例子。 2. 每篇从一个真实失败出发，只引入解…","url":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E4%B8%80%E5%8F%A5%20Prompt%20%E5%88%B0%E5%8F%AF%E9%9D%A0%20Agent%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E4%B8%80%E5%8F%A5%20Prompt%20%E5%88%B0%E5%8F%AF%E9%9D%A0%20Agent%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","dateModified":"2026-08-10","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
 </head>
 <body>
-  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>从一句 Prompt 到可靠 Agent：系列节点路线图</h1><h1>从一句 Prompt 到可靠 Agent：系列节点路线图</h1>
-<h2>系列定位</h2>
-<p>用同一个“技术简报助手”，从一句 Prompt 开始，每次只解决一个真实失败，最终演化成一个可观测、可恢复、可评测、有人类控制边界的完整 Agent。</p>
-<p>这不是按框架编排的教程：</p>
-<pre><code class="language-text">Prompt → LangChain → LangGraph → Langfuse
-</code></pre>
-<p>真正的叙事顺序是：</p>
-<pre><code class="language-text">上一版能运行
-→ 遇到一个具体失败
-→ 原有结构无法解决
-→ 引入一个新机制
-→ 得到一个更可靠的版本
-→ 暴露下一篇的问题
-</code></pre>
-<p>每篇文章必须满足：即使读者不继续追系列，也能带走一个独立判断。</p>
-<h2>贯穿全系列的例子</h2>
-<p>项目暂定名：<code>tech-brief-agent</code></p>
-<p>初始需求：</p>
-<pre><code class="language-text">输入：
-一个技术主题 + 5 个资料链接
-
-输出：
-一篇 500～800 字中文技术简报
-包含事实、来源，以及一个有依据的判断
-</code></pre>
-<p>固定质量要求：</p>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>从一句 Prompt 到可靠 Agent：写作推进路线图</h1><h1>从一句 Prompt 到可靠 Agent：写作推进路线图</h1>
+<p>这是内部写作地图，不是对外发布的课程目录。</p>
+<p>它要解决的问题很具体：我现在该推哪一篇，写之前要准备什么，一篇写完后又根据什么选下一篇。</p>
+<h2>先看结论</h2>
+<p>系列不再预设十五个必须依次完成的节点。</p>
+<p>真正需要稳定的只有三件事：</p>
 <ol>
-<li>重要事实有来源支撑。</li>
-<li>明确区分资料事实与作者判断。</li>
-<li>不使用宣传腔，不为了完整而面面俱到。</li>
-<li>资料互相冲突时，不擅自选择更顺耳的答案。</li>
-<li>所有来源链接集中放在文末。</li>
+<li>始终使用同一个「技术简报助手」作为主例子。</li>
+<li>每篇从一个真实失败出发，只引入解决这个失败所需的机制。</li>
+<li>每篇都要独立给出一个有用的判断，不让读者等到系列完结才得到答案。</li>
 </ol>
-<p>固定测试场景：</p>
-<pre><code class="language-text">场景 A：资料充分且彼此一致
-场景 B：资料缺少关键事实
-场景 C：两个来源互相矛盾
-场景 D：来源里混有营销稿和二手转述
-场景 E：模型或 Prompt 升级后输出发生回归
-</code></pre>
-<p>这些输入会在整个系列反复出现。机制越来越复杂，问题不换，读者才能看见每一层到底解决了什么。</p>
-<h2>总体节点图</h2>
-<pre><code class="language-mermaid">flowchart TD
-    N00[序章：俄罗斯方块与可积累的经验]
-    N01[Prompt 为何随模型升级失效]
-    N02[Prompt 版本、测试与回滚]
-    N03[Workflow 还是 Agent]
-    N04[最小 LangChain]
-    N05[最小 LangGraph]
-    N06[最小 Langfuse Trace]
-    N07[Context：只带需要的证据]
-    N08[Memory：保留什么，忘掉什么]
-    N09[Plan 与 Skill：长任务如何不跑偏]
-    N10[多 Agent：何时值得并行分工]
-    N11[Checkpoint 与 Retry：中断后如何继续]
-    N12[沙箱、权限与人工审批]
-    N13[Dataset、Eval 与持续优化]
-    N14[终章：一个可靠 Agent 的完整结构]
+<p>其他都可以变：文章顺序、是否使用某个框架、代码展示多少，以及这个系列最后有几篇。</p>
+<h2>系列真正要讲什么</h2>
+<p>这不是 LangChain、LangGraph 和 Langfuse 的连载教程。</p>
+<p>系列的核心判断是：</p>
+<blockquote>
+<p>一个可靠 Agent 不是一次设计出来的。它是在一次次具体失败中，逐渐长出行为边界、状态、恢复能力和验证方法。</p>
+</blockquote>
+<p>所以文章里的主角始终是问题，不是框架。</p>
+<pre><code class="language-text">不是：这一篇该介绍 LangGraph 了
 
-    N00 --&gt; N01 --&gt; N02 --&gt; N03 --&gt; N04 --&gt; N05 --&gt; N06
-    N06 --&gt; N07 --&gt; N08 --&gt; N09 --&gt; N10 --&gt; N11 --&gt; N12 --&gt; N13 --&gt; N14
+而是：当前流程已经出现回退、暂停和恢复，
+      普通函数调用开始难以说清状态，
+      这时才值得讨论图。
 </code></pre>
-<h2>第一季：Prompt 不是程序</h2>
-<h3>N00｜序章：经验为什么能够积累</h3>
-<ul>
-<li>状态：已有文章，可作为系列序章；不再为本系列修改正文。</li>
-<li>暂定标题：<code>只有七种方块，《俄罗斯方块》为什么四十年还没被玩完？</code></li>
-<li>主角：俄罗斯方块，不引入技术简报助手。</li>
-<li>现象：平台、硬件和画面一直换，玩家练出的能力却没有过期。</li>
-<li>核心判断：稳定规则让经验可以跨局、跨平台积累。</li>
-<li>AI 只占结尾两段：模型升级后，为什么 Prompt 的最佳实践经常过期？</li>
-<li>下一节点钩子：Prompt 究竟是可迁移的能力，还是对某代模型的适配？</li>
-</ul>
-<h3>N01｜同一句 Prompt，为什么换个模型就不好用了</h3>
-<ul>
-<li>状态：待写。</li>
-<li>暂定标题：<code>为什么模型一升级，昨天好用的 Prompt 今天就失效了？</code></li>
-<li>上一版系统：同一句 Prompt，把五篇资料压缩成技术简报。</li>
-<li>本篇失败：换模型后，引用丢失、篇幅失控、事实与判断混在一起。</li>
-<li>展示方式：固定相同输入与 Prompt，只替换模型，对比输出差异。</li>
-<li>新增概念：
-<ul>
-<li>Prompt 不独立运行；实际行为来自模型、Prompt、参数与上下文的组合。</li>
-<li>“同一句话”不等于“同一个程序”。</li>
-<li>模型升级改变能力，也可能改变指令优先级与表达偏好。</li>
-</ul>
-</li>
-<li>不在本篇解决：不急着引入平台、评测框架或 Agent。</li>
-<li>核心判断：Prompt 是行为契约的一部分，不是脱离模型存在的源码。</li>
-<li>下一节点钩子：既然行为会变，怎样知道哪个版本更好，坏了又怎样退回去？</li>
-<li>代码快照：<code>01_single_prompt.py</code></li>
-</ul>
-<h3>N02｜Prompt 改到第八版，为什么反而不知道哪版最好</h3>
-<ul>
-<li>状态：待写。</li>
-<li>暂定标题：<code>Prompt 改到第八版，为什么反而不知道哪版最好？</code></li>
-<li>上一版系统：一个 Prompt 能生成简报，但效果依赖模型与措辞。</li>
-<li>本篇失败：v3 文风更好却漏掉引用；v5 修好引用又产生大量废话。</li>
-<li>新增机制：
-<ul>
-<li>Prompt 文件化与版本号。</li>
-<li>固定输入样本。</li>
-<li>最小评价标准：引用完整、事实准确、篇幅合适、判断有依据。</li>
-<li>变更说明、灰度与回滚。</li>
-</ul>
-</li>
-<li>最小实现：先用普通文件、Git、测试样本和简单脚本，不引入 Langfuse。</li>
-<li>关键权衡：
-<ul>
-<li>版本多不等于管理好；没有测试样本，版本号只是存档。</li>
-<li>自动评分便宜但可能偏；人工评价可靠但慢。</li>
-</ul>
-</li>
-<li>核心判断：管理 Prompt 的重点不是保存文字，而是知道一次改动让哪些案例变好、又让哪些案例变坏。</li>
-<li>下一节点钩子：即使 Prompt 管好了，让一次模型调用同时搜索、判断、写作，仍然容易顾此失彼。</li>
-<li>代码快照：<code>02_versioned_prompt.py</code></li>
-</ul>
-<h2>第二季：下一步由谁决定</h2>
-<h3>N03｜一个任务，什么时候只需要 Workflow，什么时候才值得交给 Agent</h3>
-<ul>
-<li>状态：待新写。此前草稿已删除，不从旧稿改写。</li>
-<li>暂定标题：<code>一个任务，什么时候只需要 Workflow，什么时候才值得交给 Agent？</code></li>
-<li>上一版系统：一个 Prompt 同时阅读、判断和写作。</li>
-<li>本篇第一次改造：拆成固定 Workflow。</li>
-</ul>
-<pre><code class="language-text">读取资料
-→ 提取事实
-→ 合并重复信息
-→ 生成提纲
-→ 撰写简报
-→ 检查引用
+<h2>系列中的固定例子</h2>
+<p>项目暂定名：<code>tech-brief-agent</code>。</p>
+<p>需求保持简单：</p>
+<pre><code class="language-text">输入：一个技术主题 + 5 个资料链接
+
+输出：一篇 500～800 字的中文技术简报
+要有事实、来源，以及一个有依据的判断
 </code></pre>
+<p>固定要求：</p>
 <ul>
-<li>第一层反转：每一步都可以调用 LLM，但下一步由代码决定，所以仍然是 Workflow。</li>
-<li>第二层反转：有 <code>if</code>、循环和重试，也未必是 Agent。</li>
-<li>本篇失败：两个来源互相矛盾，系统无法预先知道该搜索什么、先检查哪个来源。</li>
-<li>局部 Agent Loop：</li>
+<li>重要事实有来源。</li>
+<li>资料事实与作者判断能够分开。</li>
+<li>来源冲突时保留分歧，不擅自选择更顺耳的答案。</li>
+<li>证据不足时缩小结论，不用常识补齐。</li>
+<li>不使用宣传腔，不为了完整而面面俱到。</li>
 </ul>
-<pre><code class="language-text">观察冲突
-→ 提出假设
-→ 选择新的搜索或检查动作
-→ 获得证据
-→ 保留、修正或放弃假设
+<p>需要长期保留的不是一份大而全的应用，而是四组可重复使用的失败样例：</p>
+<table>
+<thead>
+<tr>
+<th>样例</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>资料充分且一致</td>
+<td>检查修复边缘失败时，是否伤害了正常输入</td>
+</tr>
+<tr>
+<td>缺少关键证据</td>
+<td>检查模型会不会擅自补齐</td>
+</tr>
+<tr>
+<td>两个来源互相矛盾</td>
+<td>检查模型会不会悄悄合并分歧</td>
+</tr>
+<tr>
+<td>营销稿与二手转述混入资料</td>
+<td>检查来源判断和引用质量</td>
+</tr>
+</tbody>
+</table>
+<p>这些样例会随文章逐渐补齐，不需要在第一篇之前全部建完。</p>
+<h2>当前状态</h2>
+<table>
+<thead>
+<tr>
+<th>内容</th>
+<th>状态</th>
+<th>怎样处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../../tech/ai-%E4%BB%8E%E7%BB%8F%E5%85%B8%E4%B8%AD%E5%AD%A6%E4%B9%A0/%E4%BF%84%E7%BD%97%E6%96%AF%E6%96%B9%E5%9D%97%EF%BC%9A%E4%B8%80%E4%B8%AA%E5%9B%9B%E5%8D%81%E5%B9%B4%E6%B2%A1%E8%AE%A9%E7%94%A8%E6%88%B7%E9%87%8D%E5%AD%A6%E7%9A%84%E4%BA%A7%E5%93%81.md">《俄罗斯方块：一个四十年没让用户重学的产品》</a></td>
+<td>已有文章</td>
+<td>作为系列的思想序章或延伸阅读，不回头改成 Agent 教程</td>
+</tr>
+<tr>
+<td>[《Prompt 没变，为什么换个模型，行为就变了？》](…/…/tech/ai-好问题/模型一换，Prompt 为什么会失效？<a href="http://xn--siqwns0g36am5a71sp32g9wfho1a03s.md">从隐含默契到行为协议.md</a>)</td>
+<td>已有完整草稿</td>
+<td>不再从头起草，先补实验证据，完成编辑后发布</td>
+</tr>
+<tr>
+<td>Prompt 版本与回归</td>
+<td>有核心思路</td>
+<td>作为下一篇新稿，但先不扩展到完整 Eval 平台</td>
+</tr>
+<tr>
+<td>Workflow 与 Agent</td>
+<td>有选题判断</td>
+<td>留作第三篇候选；是否紧接上一篇，根据实现和读者反馈决定</td>
+</tr>
+<tr>
+<td>LangChain 之后的所有节点</td>
+<td>选题池</td>
+<td>不排期，不预先编写对应代码</td>
+</tr>
+</tbody>
+</table>
+<h2>现在就怎么推进</h2>
+<h3>第一步：把 Prompt 失效草稿变成可发布的文章</h3>
+<p>现有草稿的主线已经成立：</p>
+<pre><code class="language-text">同一句 Prompt，换模型后结果更好看却更不可靠
+→ 问题来自「严谨」等未被说明的词
+→ 继续堆人格词没有减少解释空间
+→ 把默契改成可观察的行为
+→ 再把能确定检查的边界交给程序
 </code></pre>
+<p>这篇现在缺的不是更多观点，而是一个能够支撑开场的实验记录。</p>
+<p>发布前准备：</p>
 <ul>
-<li>关键权衡：
-<ul>
-<li>Workflow 更可控、便宜、容易重放。</li>
-<li>Agent 能处理未知路径，但带来成本、延迟与不可预测性。</li>
-<li>同一个任务可以有确定骨架和局部探索，不必整体选边。</li>
+<li>[ ] 固定一组包含「来源冲突 + 缺少证据 + 营销数字」的资料。</li>
+<li>[ ] 使用同一句 Prompt、相同参数，至少运行两个模型或两个模型版本。</li>
+<li>[ ] 保留原始输出，标出哪句话合并了冲突，哪个数字没有足够证据。</li>
+<li>[ ] 判断这是否真的是模型差异。如果结果无法稳定复现，就把「旧模型稳定、新模型出错」改成边界更窄的表述。</li>
+<li>[ ] 确定哪些输出截图或对比片段进正文，完整输出可放附录或仓库。</li>
+<li>[ ] 实验补完后再做一轮 <code>humanizer-zh</code>，不在还没有证据时继续打磨金句。</li>
 </ul>
-</li>
-<li>核心判断：在看到当前结果以前，能否确定下一步？能则 Workflow；不能才给 Agent 选择权。</li>
-<li>下一节点钩子：手写一次模型、工具和消息循环很简单，工具多起来以后，胶水代码先失控。</li>
-<li>代码快照：<code>03_workflow_vs_agent.py</code></li>
-</ul>
-<h3>N04｜一个例子读懂 LangChain：它到底封装了什么</h3>
-<ul>
-<li>状态：待写。</li>
-<li>暂定标题：<code>一个例子读懂 LangChain：它到底替 Agent 封装了什么？</code></li>
-<li>上一版系统：手写模型调用、工具定义、tool call 解析、结果回传和停止条件。</li>
-<li>本篇失败：加入搜索、网页读取、来源核验三个工具后，消息与工具循环变得杂乱。</li>
-<li>先手写最小循环，让读者看到问题：</li>
-</ul>
-<pre><code class="language-text">模型选择工具
-→ 程序执行工具
-→ 工具结果回到模型
-→ 模型决定继续还是结束
+<p>这篇的完成标准：读者能从对比输出里看见 Prompt 的隐含默契如何被不同模型解释，而不只是接受作者的说法。</p>
+<h3>第二步：只建一份最小样例集</h3>
+<p>不需要现在就搭建 Agent 应用。为第二篇准备三到四组固定输入就够了。</p>
+<p>每组样例留下：</p>
+<pre><code class="language-text">原始资料
+希望保住的关键事实
+必须暴露的冲突或缺失
+不能出现的错误
+可以接受的表达差异
 </code></pre>
-<ul>
-<li>再用 LangChain 重写同一段逻辑。</li>
-<li>只介绍当前例子需要的能力：
-<ul>
-<li>Model。</li>
-<li>Messages。</li>
-<li>Tools。</li>
-<li>Structured Output。</li>
-<li><code>create_agent</code> 与停止条件。</li>
-</ul>
-</li>
-<li>不在本篇展开：Memory、多 Agent、LangGraph checkpoint。</li>
-<li>关键权衡：
-<ul>
-<li>框架减少胶水代码，也引入抽象与版本依赖。</li>
-<li>简单调用不必为了统一而强行套框架。</li>
-</ul>
-</li>
-<li>核心判断：LangChain 没有让模型更聪明，它收起的是模型、工具和循环之间容易写乱的胶水。</li>
-<li>下一节点钩子：Agent 能循环以后，搜索不足要回头、人工审核要暂停、服务重启要恢复，单个循环开始装不下这些状态。</li>
-<li>代码快照：<code>04_langchain_agent.py</code></li>
-</ul>
-<h3>N05｜流程第一次需要走回头路：最小 LangGraph</h3>
-<ul>
-<li>状态：待写。</li>
-<li>暂定标题：<code>流程第一次需要“走回头路”：一个例子实现最小 LangGraph</code></li>
-<li>上一版系统：LangChain Agent 可以调用工具，但外部业务流程仍散落在条件判断里。</li>
-<li>本篇失败：
-<ul>
-<li>证据不足，要回到搜索。</li>
-<li>引用失败，要退回写作。</li>
-<li>通过以后，要等待人工确认。</li>
-</ul>
-</li>
-<li>最小图：</li>
-</ul>
-<pre><code class="language-text">搜索 → 判断证据
-        ├─ 足够 → 写作 → 引用检查
-        └─ 不足 → 修改查询 → 搜索
+<p>先用 Markdown 或 JSON 记录，不引入评测平台。这份样例集的作用是帮助写文章和比较 Prompt，不是提前完成一套生产系统。</p>
+<h3>第三步：写 Prompt 版本与回归</h3>
+<p>暂定标题：</p>
+<blockquote>
+<p>Prompt 改到第八版，为什么反而不知道哪版最好？</p>
+</blockquote>
+<p>核心启发：</p>
+<blockquote>
+<p>没有固定样例和评价标准，Prompt 版本只是存档，不是能够积累的经验。</p>
+</blockquote>
+<p>推荐叙事路径：</p>
+<pre><code class="language-text">每次修改都修好了眼前的问题
+→ v3 文风更好，却漏掉引用
+→ v5 修好引用，正常样例又变得冗长
+→ 固定几组输入和最小评价标准
+→ 第一次能说清一次修改改善了什么，又牺牲了什么
 </code></pre>
+<p>动笔前需要的材料：</p>
 <ul>
-<li>只引入：
-<ul>
-<li>State。</li>
-<li>Node。</li>
-<li>Edge 与 Conditional Edge。</li>
-<li>一个循环。</li>
+<li>同一个 Prompt 的至少三个版本。</li>
+<li>上一步建立的最小样例集。</li>
+<li>一张简单对比表：引用完整、冲突保留、缺失处理、篇幅和信息密度。</li>
+<li>至少一个「修好 A，却伤害 B」的真实回归。</li>
 </ul>
-</li>
-<li>暂不引入持久化 checkpoint，把“能画出流程”和“能恢复执行”分成两篇。</li>
-<li>关键权衡：
-<ul>
-<li>图能让状态与转移显式化，但小任务会因此变重。</li>
-<li>节点拆得太细，理解与观测成本增加；太粗，又失去恢复和定位价值。</li>
-</ul>
-</li>
-<li>核心判断：LangGraph 的价值不在画图，而在明确“当前状态是什么，下一步依据什么发生”。</li>
-<li>下一节点钩子：图已经能跑，但最终简报写错时，仍然不知道最早坏在哪个节点。</li>
-<li>代码快照：<code>05_minimal_langgraph.py</code></li>
-</ul>
-<h3>N06｜最终文章写错了，到底是哪一步坏了：最小 Langfuse</h3>
-<ul>
-<li>状态：待写。</li>
-<li>暂定标题：<code>最终文章写错了，到底是哪一步坏了？一个例子接入 Langfuse</code></li>
-<li>上一版系统：Graph 能运行，但日志只能看到零散输出。</li>
-<li>本篇失败：把“仍在内测”写成“正式发布”，无法判断是搜索、提取、判断还是改写出错。</li>
-<li>最小 Trace：</li>
-</ul>
-<pre><code class="language-text">一次简报任务 = 一个 Trace
-搜索、提取、判断、写作 = Observations
-每次模型调用 = Generation
+<p>这篇不展开 Langfuse、LLM-as-a-Judge 和完整 CI。先用文件、Git、少量脚本和人工判断说清「为什么要比较」。</p>
+<p>完成标准：读者看完后能给自己的 Prompt 建一份最小回归表，而不是只学会给文件加版本号。</p>
+<h3>第四步：再决定是否紧接 Workflow 与 Agent</h3>
+<p>候选标题：</p>
+<blockquote>
+<p>什么时候只需要 Workflow，什么时候才值得交给 Agent？</p>
+</blockquote>
+<p>核心启发：</p>
+<blockquote>
+<p>Agent 的价值不在于让流程显得更智能，而在于处理那些无法提前确定下一步的局部问题。</p>
+</blockquote>
+<p>推荐叙事路径：</p>
+<pre><code class="language-text">一次模型调用同时负责搜索、判断和写作
+→ 修改一项要求，其他能力跟着退化
+→ 先把确定步骤拆成 Workflow
+→ 只有「证据不足时下一步怎么走」无法写死
+→ 把这一小段交给 Agent 动态决定
 </code></pre>
-<ul>
-<li>只引入：
-<ul>
-<li>Trace、Observation、Generation。</li>
-<li>输入、输出、延迟、Token 与成本。</li>
-<li>把 Prompt 版本关联到 Generation。</li>
-</ul>
-</li>
-<li>不在本篇展开：Dataset、Experiment、LLM-as-a-Judge。</li>
-<li>关键权衡：
-<ul>
-<li>观测越细，定位越容易，但数据量、隐私与成本也会上升。</li>
-<li>Trace 能告诉你发生了什么，不会自动告诉你怎样修。</li>
-</ul>
-</li>
-<li>核心判断：最终答案只是事故现场的最后一张照片，Trace 才保留事情怎样一步步发生。</li>
-<li>下一节点钩子：看见每一步以后，新的问题是哪些信息真的该进入模型上下文。</li>
-<li>代码快照：<code>06_langfuse_trace.py</code></li>
-</ul>
-<h2>第三季：Agent 怎样从能跑变成敢用</h2>
-<h3>N07｜Context：资料越多，为什么回答反而越差</h3>
-<ul>
-<li>状态：已有相关笔记，可重写为系列正文。</li>
-<li>暂定标题：<code>资料越多，Agent 为什么反而越容易答错？</code></li>
-<li>上一版系统：把所有搜索结果、历史消息和工具输出都塞给模型。</li>
-<li>本篇失败：关键信息被噪声淹没，旧结论与新证据互相污染。</li>
-<li>新增机制：
-<ul>
-<li>原始资料与送入模型的 Context 分离。</li>
-<li>摘要、检索、裁剪和引用回溯。</li>
-<li>当前步骤只获得完成任务所需的信息。</li>
-</ul>
-</li>
-<li>关键权衡：上下文太少会漏信息，太多会增加成本并稀释注意力。</li>
-<li>核心判断：Context Engineering 不是让模型看得更多，而是让它在这一步只看该看的东西。</li>
-<li>下一节点钩子：当前任务的上下文能控制了，但用户每次都要重新说明自己的偏好。</li>
-<li>代码快照：<code>07_context_pipeline.py</code></li>
-</ul>
-<h3>N08｜Memory：Agent 应该记住什么，又该忘掉什么</h3>
-<ul>
-<li>状态：已有 Memory 文章与论文笔记，可复用材料。</li>
-<li>暂定标题：<code>Agent 为什么总记不住你？又为什么不能什么都记？</code></li>
-<li>上一版系统：每次都要重新说明写作偏好和可信来源标准。</li>
-<li>本篇失败：记忆不足导致重复沟通；记忆过多又把一次性的要求带到后续任务。</li>
-<li>区分：
-<ul>
-<li>当前运行 State。</li>
-<li>会话内短期记忆。</li>
-<li>跨任务长期偏好。</li>
-<li>不应持久化的临时信息。</li>
-</ul>
-</li>
-<li>关键权衡：个性化与污染、便利与隐私、自动写入与用户确认。</li>
-<li>核心判断：Memory 的难点不是存储，而是决定什么值得在未来继续影响判断。</li>
-<li>下一节点钩子：助手认识用户以后，面对一篇长研究仍然可能做到一半忘了最初目标。</li>
-<li>代码快照：<code>08_memory.py</code></li>
-</ul>
-<h3>N09｜Plan 与 Skill：任务变长以后，Agent 为什么越来越容易跑偏</h3>
-<ul>
-<li>状态：待写，可吸收 Skill 与 Context 笔记。</li>
-<li>暂定标题：<code>任务变长以后，Agent 为什么越来越容易跑偏？</code></li>
-<li>上一版系统：Agent 边做边想，没有显式计划，也会重复发明相同做法。</li>
-<li>本篇失败：研究多个子问题时漏项、重复搜索、写作目标漂移。</li>
-<li>新增机制：
-<ul>
-<li>显式计划和 Todo。</li>
-<li>完成条件。</li>
-<li>可复用 Skill：来源评级、冲突核验、简报写作规范。</li>
-<li>计划可更新，但每次变化留下原因。</li>
-</ul>
-</li>
-<li>关键权衡：计划太死会阻碍探索，完全无计划又难以知道是否偏航。</li>
-<li>核心判断：计划不是预言未来，而是给变化提供一个可以比较的基准。</li>
-<li>下一节点钩子：子问题越来越多，可以并行处理，但多 Agent 是否只是把混乱复制了几份？</li>
-<li>代码快照：<code>09_plan_and_skills.py</code></li>
-</ul>
-<h3>N10｜多 Agent：什么时候分工真的比一个 Agent 更好</h3>
-<ul>
-<li>状态：已有《从 Loop 到 Graph》，需要换成统一例子后重写或作为扩展阅读。</li>
-<li>暂定标题：<code>一个 Agent 忙不过来，就该拆成多个吗？</code></li>
-<li>上一版系统：一个 Agent 顺序研究产品、公司、技术与市场背景。</li>
-<li>本篇适用条件：子任务相对独立、工具与上下文不同、并行能显著降低耗时。</li>
-<li>图结构：</li>
-</ul>
-<pre><code class="language-text">规划
-├─ 技术证据研究
-├─ 产品与公司资料研究
-└─ 反方证据研究
-        ↓
-统一证据格式 → 汇总 → 冲突检查 → 写作
+<p>这篇需要一个真正会分叉的任务。如果当时的简报助手仍然只是固定地读五个链接再写作，先不写这篇，因为它还没有真正需要 Agent。</p>
+<p>可用的分叉是：</p>
+<pre><code class="language-text">证据足够 → 进入写作
+证据不足 → 修改查询并继续搜索
+来源冲突 → 寻找原始资料或保留分歧
 </code></pre>
-<ul>
-<li>关键权衡：
-<ul>
-<li>并行提高速度，也会制造重复搜索和互相矛盾。</li>
-<li>专业 Agent 能缩小上下文，但汇总节点可能成为新瓶颈。</li>
-<li>能用一个 Agent 解决时，不为角色扮演强拆多个。</li>
-</ul>
-</li>
-<li>核心判断：多 Agent 的理由不是“专家听起来更聪明”，而是任务确实存在可以独立推进、最后再汇合的支线。</li>
-<li>下一节点钩子：任务运行十分钟后中断，已经完成的三条支线是否全部重做？</li>
-<li>代码快照：<code>10_multi_agent.py</code></li>
-</ul>
-<h3>N11｜Checkpoint 与 Retry：做到一半断了，为什么不能从头重来</h3>
-<ul>
-<li>状态：待写。</li>
-<li>暂定标题：<code>Agent 做到一半断了，为什么不能从头重来？</code></li>
-<li>上一版系统：长任务能分工，但进程重启或工具超时后只能整段重跑。</li>
-<li>本篇失败：三条研究支线已有两条完成，第三条超时；盲目重试会浪费成本，甚至重复外部动作。</li>
-<li>新增机制：
-<ul>
-<li>LangGraph Checkpoint。</li>
-<li>从最后成功状态恢复。</li>
-<li>Retry Policy。</li>
-<li>幂等工具调用。</li>
-<li>已完成结果复用。</li>
-</ul>
-</li>
-<li>关键权衡：checkpoint 频率越高，重复计算越少，但存储和兼容成本越高。</li>
-<li>核心判断：retry 决定再做一次，checkpoint 决定从哪里再做；二者不是一回事。</li>
-<li>下一节点钩子：能恢复不等于敢放手运行，尤其当工具可以发布文章、发消息或改数据。</li>
-<li>代码快照：<code>11_durable_execution.py</code></li>
-</ul>
-<h3>N12｜沙箱、权限与人工审批：能做不等于可以直接做</h3>
-<ul>
-<li>状态：已有 BubbleWrap 沙箱文章，可作为思想支线。</li>
-<li>暂定标题：<code>Agent 能写完文章，为什么还不能让它直接发布？</code></li>
-<li>上一版系统：Agent 能研究、写作并恢复执行，但工具权限过大。</li>
-<li>本篇失败：来源判断错误，却已经更新文章或发送通知。</li>
-<li>新增机制：
-<ul>
-<li>读工具与写工具分离。</li>
-<li>沙箱与真实世界隔离。</li>
-<li>发布前人工确认。</li>
-<li>高风险参数约束。</li>
-<li>已发生副作用的补偿路径。</li>
-</ul>
-</li>
-<li>关键权衡：控制越强，自动化收益越低；权限越宽，错误半径越大。</li>
-<li>核心判断：Agent 能做什么，和它被允许直接做什么，是两个问题。</li>
-<li>下一节点钩子：有了控制边界，还要证明新版本整体上真的比旧版本好。</li>
-<li>代码快照：<code>12_guardrails_and_hitl.py</code></li>
-</ul>
-<h3>N13｜Dataset 与 Eval：Demo 成功，为什么上线后越来越差</h3>
-<ul>
-<li>状态：待写。</li>
-<li>暂定标题：<code>Demo 明明成功了，为什么 Agent 上线后越来越差？</code></li>
-<li>上一版系统：有 Trace、有权限，但优化仍靠挑几个案例观察。</li>
-<li>本篇失败：修好来源冲突案例后，正常简报反而变得冗长；换模型降低成本，却丢了引用。</li>
-<li>形成闭环：</li>
-</ul>
-<pre><code class="language-text">线上失败 Trace
-→ 加入 Dataset
-→ 修改 Prompt、模型或流程
-→ 批量 Experiment
-→ 比较质量、成本与延迟
-→ 灰度发布
-→ 继续观察
+<p>动笔前先问自己：我手里有真实运行记录，证明固定流程在这里不够吗？如果没有，这个题继续留在候选池。</p>
+<h2>后续不排期，只保留认知层次</h2>
+<p>前三篇之后不再依次填框架。下面这些是不同层次的问题池。哪个问题先在实现中出现，哪一篇就先写。</p>
+<h3>层次一：行为怎样变得可比较</h3>
+<table>
+<thead>
+<tr>
+<th>标题方向</th>
+<th>核心启发</th>
+<th>什么时候值得写</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>同一句 Prompt，换个模型为什么像换了一个程序？</td>
+<td>Prompt 里没写出来的默契会随模型一起变</td>
+<td>已有草稿，正在补证据</td>
+</tr>
+<tr>
+<td>Prompt 改到第八版，为什么反而不知道哪版最好？</td>
+<td>版本只记录变化，样例与评价才能积累经验</td>
+<td>有了至少一个真实回归案例后</td>
+</tr>
+<tr>
+<td>Demo 成功了，为什么改一处就坏另一处？</td>
+<td>评测要说明改善了什么、牺牲了什么</td>
+<td>手工对比已经无法覆盖线上失败时</td>
+</tr>
+</tbody>
+</table>
+<h3>层次二：一次调用怎样长成流程</h3>
+<table>
+<thead>
+<tr>
+<th>标题方向</th>
+<th>核心启发</th>
+<th>什么时候值得写</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>什么时候只需要 Workflow，什么时候才值得交给 Agent？</td>
+<td>确定的步骤写成流程，无法预定的局部才需要 Agent</td>
+<td>实际任务已经出现证据不足、动态回退或工具选择</td>
+</tr>
+<tr>
+<td>一个例子读懂 LangChain：它到底封装了什么？</td>
+<td>它收起的是模型、工具和消息之间的胶水，不会让模型更聪明</td>
+<td>手写工具循环已经影响理解或维护时</td>
+</tr>
+<tr>
+<td>流程什么时候需要「走回头路」？</td>
+<td>图的价值是让状态与转移条件可见</td>
+<td>已经出现多个分支、循环、暂停或恢复点时</td>
+</tr>
+<tr>
+<td>Agent 最后答错了，究竟是哪一步先坏的？</td>
+<td>最终输出只是结果，Trace 才能还原错误路径</td>
+<td>流程越过一次调用，普通日志已经无法定位失败时</td>
+</tr>
+</tbody>
+</table>
+<p>LangChain、LangGraph 和 Langfuse 只是候选实现。写作时可以使用它们，也可以用更小的手写版本说清问题。</p>
+<h3>层次三：Agent 怎样管理信息与长任务</h3>
+<table>
+<thead>
+<tr>
+<th>标题方向</th>
+<th>核心启发</th>
+<th>什么时候值得写</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>资料越多，Agent 为什么反而越容易答错？</td>
+<td>Context Engineering 管的是这一步应该看什么，不是能塞进多少</td>
+<td>资料与历史消息已经开始互相污染时</td>
+</tr>
+<tr>
+<td>Agent 应该记住什么，又该忘掉什么？</td>
+<td>Memory 的难点是决定什么值得在未来继续影响判断</td>
+<td>重复说明偏好与旧记忆污染开始同时出现时</td>
+</tr>
+<tr>
+<td>任务变长后，Agent 为什么越来越容易跑偏？</td>
+<td>Plan 是用来比较变化的基准，Skill 是可复用的做事方法</td>
+<td>已经出现漏项、重复搜索或长任务目标漂移时</td>
+</tr>
+<tr>
+<td>一个 Agent 忙不过来，就该拆成多个吗？</td>
+<td>多 Agent 只适合能够独立推进、最后重新汇合的支线</td>
+<td>子任务真的独立，并行能节省时间且汇总格式已经明确时</td>
+</tr>
+</tbody>
+</table>
+<h3>层次四：Agent 怎样从能跑变成敢用</h3>
+<table>
+<thead>
+<tr>
+<th>标题方向</th>
+<th>核心启发</th>
+<th>什么时候值得写</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Agent 做到一半断了，为什么不能从头再来？</td>
+<td>Retry 决定再做一次，Checkpoint 决定从哪里继续</td>
+<td>任务时间和成本已经高到不能接受整段重跑时</td>
+</tr>
+<tr>
+<td>Agent 能写完文章，为什么还不能让它直接发布？</td>
+<td>能做什么与被允许直接做什么是两个问题</td>
+<td>工具开始产生真实副作用，需要沙箱、权限或人工确认时</td>
+</tr>
+<tr>
+<td>一个可靠 Agent 最后应该留下哪些复杂度？</td>
+<td>没有对应失败的机制不应因为框架提供了就保留</td>
+<td>系列已经积累足够失败案例，可以做一次回顾时</td>
+</tr>
+</tbody>
+</table>
+<h2>每次怎样决定下一篇</h2>
+<p>一篇发布后，不按原目录自动进入下一节。先问四个问题：</p>
+<ol>
+<li>我在实现或使用中，真的遇到了哪个失败？</li>
+<li>这个失败能不能用一组具体输入和输出展示？</li>
+<li>解决它需要的是一个新机制，还是只是继续改 Prompt？</li>
+<li>这个问题能不能给读者一个可迁移的判断，而不是只介绍某个库？</li>
+</ol>
+<p>四个问题都有答案，再把它提升为下一篇。如果只是某个新框架刚好很热，可以单独写工具文，不必强行放进这个系列。</p>
+<h2>每篇的写作骨架</h2>
+<p>不要用一套八步法把所有文章写成同一个模子。只要保住下面这条叙事线：</p>
+<pre><code class="language-text">一个已经能跑的版本
+→ 在具体输入上失败
+→ 最直觉的修法为什么不够
+→ 加入一个新机制
+→ 同一个输入重新运行
+→ 得到什么，又多付出了什么
 </code></pre>
-<ul>
-<li>评价维度：事实准确、引用完整、冲突处理、信息密度、成本、延迟。</li>
-<li>评价方式：代码规则、人工标注、用户反馈、LLM-as-a-Judge 组合。</li>
-<li>关键权衡：单一总分方便比较，却可能掩盖某个关键能力退化。</li>
-<li>核心判断：评测不是给 Agent 打一个分，而是让每次修改都能回答“改善了什么，又牺牲了什么”。</li>
-<li>下一节点钩子：所有部件都有了，最后需要回看哪些复杂度真的值得保留。</li>
-<li>代码快照：<code>13_evaluation_loop.py</code></li>
-</ul>
-<h3>N14｜终章：一个可靠 Agent 的完整结构</h3>
-<ul>
-<li>状态：待写，系列完结篇。</li>
-<li>暂定标题：<code>一个小 Agent，是怎样一步步长成复杂系统的？</code></li>
-<li>内容形式：用同一个输入，从 N01 到 N13 逐层回放。</li>
-<li>最终结构：</li>
-</ul>
-<pre><code class="language-text">入口与固定 Workflow
-├─ Prompt 版本与配置
-├─ 局部 Agent 探索
-├─ LangChain 模型与工具封装
-├─ LangGraph 状态、路由与 checkpoint
-├─ Context 与 Memory
-├─ Plan、Skill 与可选子 Agent
-├─ 沙箱、权限与人工审批
-└─ Langfuse Trace、Dataset 与 Eval
+<p>小标题不要固定。有的文章可以先展示两份输出，有的可以从一次中断或误发开始。叙事线稳定，表面结构不必整齐。</p>
+<p>每篇开写前，只填这五项：</p>
+<pre><code class="language-text">暂定标题：
+读者能带走的判断：
+用来开场的失败：
+需要准备的证据或代码：
+这篇明确不展开什么：
 </code></pre>
-<ul>
-<li>必须回答：
-<ul>
-<li>哪些能力解决了真实失败？</li>
-<li>哪些只是规模扩大后才需要？</li>
-<li>如果今天重新实现，最小可用版本会保留什么？</li>
-</ul>
-</li>
-<li>最终判断：丰富 Agent 不是一次设计出来的，而是从具体失败中逐层长出来的；没有对应问题的复杂度，应当暂缓加入。</li>
-<li>最终产物：完整代码、架构图、失败案例集、评测集与版本演进记录。</li>
-<li>代码快照：<code>14_complete_agent.py</code></li>
-</ul>
-<h2>与已有文章的边界</h2>
-<p>本路线图只规划新系列，不修改已有文章。</p>
-<p>已有内容如果刚好能补充某个节点，只在文末作为延伸阅读出现；不重写、不拆分，也不为了统一案例强行并入正文。新系列需要的内容全部另起新稿，避免牵一发动全身。</p>
-<p>《俄罗斯方块》可以承担序章，是因为它本身已经完整，只需在发布层面把它视为系列思考的起点，不需要回头改造成“Agent 文章”。</p>
-<h2>代码仓库规划</h2>
-<p>所有 Python 示例统一使用 <code>uv</code> 管理。</p>
+<h2>代码怎样跟着文章长</h2>
+<p>代码服务于证明，不是系列本身的建筑项目。</p>
+<p>当前只需要：</p>
 <pre><code class="language-text">tech-brief-agent/
 ├── pyproject.toml
 ├── uv.lock
-├── README.md
-├── examples/
-│   ├── 01_single_prompt.py
-│   ├── 02_versioned_prompt.py
-│   ├── 03_workflow_vs_agent.py
-│   ├── 04_langchain_agent.py
-│   ├── 05_minimal_langgraph.py
-│   ├── 06_langfuse_trace.py
-│   ├── 07_context_pipeline.py
-│   ├── 08_memory.py
-│   ├── 09_plan_and_skills.py
-│   ├── 10_multi_agent.py
-│   ├── 11_durable_execution.py
-│   ├── 12_guardrails_and_hitl.py
-│   ├── 13_evaluation_loop.py
-│   └── 14_complete_agent.py
-├── prompts/
-│   ├── brief_v1.md
-│   └── brief_v2.md
 ├── fixtures/
-│   ├── consistent_sources/
-│   ├── missing_evidence/
-│   └── conflicting_sources/
-├── datasets/
-├── tests/
-└── app/
+├── prompts/
+├── outputs/
+└── experiments/
 </code></pre>
-<p>建议每个节点打一个 Git Tag：</p>
-<pre><code class="language-text">n01-single-prompt
-n02-prompt-versioning
-n03-workflow-agent
-...
-n14-complete-agent
-</code></pre>
-<p>这样读者可以直接比较相邻版本，不必只看最终复杂代码。</p>
-<h2>每篇文章的固定叙事模板</h2>
-<ol>
-<li>先展示上一版已经能做什么。</li>
-<li>用一个具体输入让它失败。</li>
-<li>让读者先猜“多写一句 Prompt 能不能解决”。</li>
-<li>说明旧结构为什么已经不够。</li>
-<li>只加入一个新机制。</li>
-<li>用同一个失败案例重新运行。</li>
-<li>讲清收益以及新增代价。</li>
-<li>用仍未解决的问题预告下一节点。</li>
-</ol>
-<p>避免：</p>
+<p>约定：</p>
 <ul>
-<li>开头先定义框架。</li>
-<li>一篇同时介绍五个新概念。</li>
-<li>为了展示技术，制造现实中不会出现的需求。</li>
-<li>把框架能力当成业务收益。</li>
-<li>只展示成功路径，不保留失败输入。</li>
-<li>每篇更换例子，导致读者无法比较增量。</li>
+<li>Python 项目统一用 <code>uv</code> 管理。</li>
+<li>一开始不建 <code>app/</code>、数据库、完整 Web 界面和十四份代码快照。</li>
+<li>每写一篇，只加当篇需要的最小实验、Prompt 和输出。</li>
+<li>文章发布后再打 Tag，不为还没有发生的节点预留版本。</li>
+<li>如果后来的框架版本与早期示例差异太大，优先让当篇代码可运行，不为了维持一条虚构的演进线而牺牲清晰度。</li>
 </ul>
-<h2>系列的核心权衡线</h2>
-<p>整个系列不应只展示“能力越来越多”，还要持续追踪这些代价：</p>
-<table>
-<thead>
-<tr>
-<th>新能力</th>
-<th>获得什么</th>
-<th>同时付出什么</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Prompt 版本</td>
-<td>可比较、可回滚</td>
-<td>管理与评测成本</td>
-</tr>
-<tr>
-<td>Workflow</td>
-<td>稳定、可预测</td>
-<td>对未知情况不灵活</td>
-</tr>
-<tr>
-<td>Agent</td>
-<td>动态探索</td>
-<td>成本、延迟与不确定性</td>
-</tr>
-<tr>
-<td>LangChain</td>
-<td>少写胶水代码</td>
-<td>框架抽象与升级成本</td>
-</tr>
-<tr>
-<td>LangGraph</td>
-<td>显式状态与恢复</td>
-<td>节点和状态设计复杂度</td>
-</tr>
-<tr>
-<td>Langfuse</td>
-<td>可观测、可比较</td>
-<td>数据量、隐私与平台成本</td>
-</tr>
-<tr>
-<td>Memory</td>
-<td>跨任务个性化</td>
-<td>污染、隐私与过期问题</td>
-</tr>
-<tr>
-<td>多 Agent</td>
-<td>并行与上下文隔离</td>
-<td>协调、重复劳动与冲突</td>
-</tr>
-<tr>
-<td>Checkpoint</td>
-<td>中断恢复</td>
-<td>存储与状态兼容成本</td>
-</tr>
-<tr>
-<td>沙箱与审批</td>
-<td>降低错误半径</td>
-<td>自动化程度下降</td>
-</tr>
-<tr>
-<td>Eval</td>
-<td>有依据地迭代</td>
-<td>评测集维护与指标偏差</td>
-</tr>
-</tbody>
-</table>
-<h2>系列发布策略</h2>
-<h3>先区分两种顺序</h3>
-<p>内部按照 N00 → N14 推进，因为代码必须逐层演化；对外不强调编号，也不把十五篇目录一次性扔给读者。</p>
-<p>读者点开一篇文章，首先关心的是眼前的问题，不是作者的课程规划。因而每篇标题都应是一个可以独立成立的真实疑问，例如：</p>
-<pre><code class="language-text">为什么模型一升级，昨天好用的 Prompt 今天就失效了？
-Prompt 改到第八版，为什么反而不知道哪版最好？
-什么时候只需要 Workflow，什么时候才值得交给 Agent？
-一次 Agent 运行了六分钟，最后到底坏在哪一步？
-</code></pre>
-<p>节点编号只用于内部管理和代码版本，不进入标题。文章末尾也只抛出紧邻的下一个问题，不预告整张技术路线图。</p>
-<h3>第一批：先验证这条主线值不值得追</h3>
-<p>第一批只规划三篇，不宣布“十五篇大型教程”。</p>
-<table>
-<thead>
-<tr>
-<th>发布位置</th>
-<th>文章</th>
-<th>读者获得什么</th>
-<th>承担的任务</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>入口</td>
-<td>N00 俄罗斯方块</td>
-<td>稳定规则为什么能让经验积累</td>
-<td>建立观察视角，不负责教 Agent</td>
-</tr>
-<tr>
-<td>冲突</td>
-<td>N01 Prompt 失效</td>
-<td>Prompt 为什么会随模型一起变化</td>
-<td>把经典问题自然落到 AI 现场</td>
-</tr>
-<tr>
-<td>回应</td>
-<td>N02 Prompt 版本与回归</td>
-<td>如何把一次次调参变成可比较的改进</td>
-<td>第一次给出可执行做法</td>
-</tr>
-</tbody>
-</table>
-<p>三篇形成一个完整的小闭环：</p>
-<pre><code class="language-text">稳定规则让经验能够积累
-→ Prompt 的行为边界却在移动
-→ 所以真正需要管理的不是一句话，而是变化本身
-</code></pre>
-<p>即使系列到这里暂停，读者也已经获得一个完整判断，而不是只看了三篇铺垫。</p>
-<h3>第二批：让同一个例子真正长成应用</h3>
-<p>读者确认对这条主线有兴趣后，再进入 N03～N06：</p>
-<pre><code class="language-text">一个 Prompt 顾此失彼
-→ 拆成确定的 Workflow
-→ 只把未知路径交给 Agent
-→ 工具增多后引入 LangChain
-→ 状态、分支和回退增多后引入 LangGraph
-→ 系统变长后，用 Langfuse 看清它为何失败
-</code></pre>
-<p>这批文章的卖点不是“学会三个框架”，而是看到每个框架在什么时刻才有存在的理由。框架名可以出现在副标题或正文中，主标题仍优先写问题和冲突。</p>
-<p>建议发布结构为：</p>
-<ol>
-<li>N03 先讲判断：Workflow 与 Agent 的边界。</li>
-<li>N04、N05 连续讲实现，让读者看到相邻代码版本的变化。</li>
-<li>N06 做一次阶段复盘：系统已经会跑，但我们仍不知道它为何偶尔跑错。</li>
-</ol>
-<h3>第三批：不再增加聪明，而是偿还可靠性</h3>
-<p>N07～N14 不宜机械地一周一个概念。按真实失败组成三个小单元：</p>
-<table>
-<thead>
-<tr>
-<th>小单元</th>
-<th>节点</th>
-<th>共同问题</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>信息边界</td>
-<td>N07 Context、N08 Memory</td>
-<td>哪些信息该进入当下，哪些经验值得留下</td>
-</tr>
-<tr>
-<td>任务组织</td>
-<td>N09 Plan、N10 多 Agent</td>
-<td>长任务如何拆解，什么时候分工反而更糟</td>
-</tr>
-<tr>
-<td>生产可靠性</td>
-<td>N11 Checkpoint、N12 权限、N13 Eval</td>
-<td>中断怎样恢复，动作怎样受控，升级怎样避免回归</td>
-</tr>
-</tbody>
-</table>
-<p>N14 不是再介绍一张“大而全架构图”，而是让最终版本重新跑过全系列的固定失败案例，回答三个问题：</p>
-<ol>
-<li>哪些复杂度确实解决了问题？</li>
-<li>哪些能力只有规模上来以后才值得加入？</li>
-<li>如果从头再做一次，最小版本会保留什么？</li>
-</ol>
-<h3>每次只承诺下一步</h3>
-<p>对外预告最多只说下一篇，不说“接下来还有十二篇”。结尾钩子来自当前版本仍未解决的问题，例如：</p>
-<pre><code class="language-text">我们终于能比较两个 Prompt 的好坏了。
-但还有一个问题没有消失：搜索、判断和写作，全塞在一次调用里，任何一步改善都可能让另一步退化。
-</code></pre>
-<p>这比“下一篇将介绍 Workflow”更自然，因为读者期待的是问题如何被解决，不是等一个新名词登场。</p>
-<h3>什么时候继续，什么时候调整</h3>
-<p>每一批结束后再判断下一批，而不是为了路线图完整强行写完：</p>
+<h2>发布节奏</h2>
+<p>工程系列不需要连续发完。可以与「被历史遗忘的未来」交替：一篇解决当下工程问题，一篇拉开历史视角。</p>
+<p>对外不宣布「十五篇大型系列」，也不在标题里放 N01、N02。读者点开任意一篇，都应该能单独读懂。</p>
+<p>前两篇发布后，先停一次，检查：</p>
 <ul>
-<li>第一批看：读者是否对“经验为何失效、怎样积累”产生共鸣。</li>
-<li>第二批看：读者是否愿意持续跟随同一个例子和代码仓库。</li>
-<li>第三批看：读者更关心 Context、Memory，还是恢复、权限和评测；据此调整小单元的先后。</li>
+<li>读者更在意 Prompt 技巧，还是「经验怎样积累」这条主线？</li>
+<li>代码与实验是增加了信息，还是让文章变成了工具说明？</li>
+<li>第二篇留下的真问题，是 Workflow 与 Agent，还是 Eval、Context 或别的东西？</li>
 </ul>
-<p>路线图允许增删节点，但有一条不能变：只有当前版本真的撞上了某个问题，下一种机制才可以登场。</p>
-<h2>官方参考</h2>
+<p>第三篇从这些答案里选，不从旧目录里选。</p>
+<h2>现在的待办</h2>
+<ul>
+<li>[ ] 为 Prompt 失效草稿选定一组真实资料。</li>
+<li>[ ] 保留两个模型或版本的原始输出。</li>
+<li>[ ] 根据实验改写开头与关键例子。</li>
+<li>[ ] 完成事实核对和 <code>humanizer-zh</code> 编辑。</li>
+<li>[ ] 发布首篇，记录读者留言中真正被追问的问题。</li>
+<li>[ ] 建立三到四组最小回归样例。</li>
+<li>[ ] 开始写《Prompt 改到第八版，为什么反而不知道哪版最好？》。</li>
+</ul>
+<p>如果这七件事还没有做完，暂时不需要规划 LangGraph、Memory 或多 Agent 的文章细节。</p>
+<h2>写到后面时再查的参考</h2>
+<p>不需要现在全部读完。哪篇真正开写，再读哪一组。</p>
 <ol>
-<li>
-<p>LangChain Agents：<a href="https://docs.langchain.com/oss/python/langchain/agents">https://docs.langchain.com/oss/python/langchain/agents</a></p>
-</li>
-<li>
-<p>LangGraph Overview：<a href="https://docs.langchain.com/oss/python/langgraph/overview">https://docs.langchain.com/oss/python/langgraph/overview</a></p>
-</li>
-<li>
-<p>LangGraph Persistence：<a href="https://docs.langchain.com/oss/python/langgraph/persistence">https://docs.langchain.com/oss/python/langgraph/persistence</a></p>
-</li>
-<li>
-<p>Langfuse Documentation：<a href="https://langfuse.com/docs">https://langfuse.com/docs</a></p>
-</li>
-<li>
-<p>Langfuse Prompt Management：<a href="https://langfuse.com/docs/prompt-management">https://langfuse.com/docs/prompt-management</a></p>
-</li>
-<li>
-<p>Langfuse Evaluation：<a href="https://langfuse.com/docs/evaluation/overview">https://langfuse.com/docs/evaluation/overview</a></p>
-</li>
+<li>LangChain Agents：<a href="https://docs.langchain.com/oss/python/langchain/agents">https://docs.langchain.com/oss/python/langchain/agents</a></li>
+<li>LangGraph Overview：<a href="https://docs.langchain.com/oss/python/langgraph/overview">https://docs.langchain.com/oss/python/langgraph/overview</a></li>
+<li>LangGraph Persistence：<a href="https://docs.langchain.com/oss/python/langgraph/persistence">https://docs.langchain.com/oss/python/langgraph/persistence</a></li>
+<li>Langfuse Documentation：<a href="https://langfuse.com/docs">https://langfuse.com/docs</a></li>
+<li>Langfuse Prompt Management：<a href="https://langfuse.com/docs/prompt-management">https://langfuse.com/docs/prompt-management</a></li>
+<li>Langfuse Evaluation：<a href="https://langfuse.com/docs/evaluation/overview">https://langfuse.com/docs/evaluation/overview</a></li>
 </ol>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-psJvmegQ.js"></script>
+  <script type="module" crossorigin src="/assets/index-BFW0hW8i.js"></script>
 </body>
 </html>
