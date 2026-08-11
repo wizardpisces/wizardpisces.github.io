@@ -11583,6 +11583,61 @@
     "originalTitle": "AI 为什么没把你写进答案？从一句产品推荐读懂 GEO"
   },
   {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%83%BD%E8%B7%91%E8%B5%B7%E6%9D%A5%E4%BB%A5%E5%90%8E%EF%BC%8C%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E5%AE%83%E7%9C%9F%E7%9A%84%E5%81%9A%E5%AF%B9%E4%BA%86%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20Agent%20%E8%AF%84%E4%BC%B0#chunk-0",
+    "title": "Agent 能跑起来以后，怎么知道它真的做对了？一个天气例子看懂 Agent 评估",
+    "content": "Agent 能跑起来以后，怎么知道它真的做对了？一个天气例子看懂 Agent 评估\n上一篇里，天气 Agent 已经会跨轮对话了。\n用户先问：\n明天要不要带伞？\n它追问城市。用户补一句“北京”，它从保存的 State 接着查天气，再给出回答。\n自己试一次，流程很顺：\n北京明天要不要带伞？\n北京明天小雨，建议带伞。\n可以上线了吗？\n人工试一次，不等于它真的做对了\n第二天，有用户问同一个问题，Agent 回答“不用带伞”。再过几天，你把模型换新了；北京的案例还是对的，上海大雨却开始答错。\n靠人随手问两句有一个根本问题：每次问的条件都不一样。天气会变，模型会变，Prompt 也会变。你无法分清是这次改动让它变好，还是刚好问到了一个容易的问题。\n先把“看起来对”变成一句能检查的话：",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%83%BD%E8%B7%91%E8%B5%B7%E6%9D%A5%E4%BB%A5%E5%90%8E%EF%BC%8C%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E5%AE%83%E7%9C%9F%E7%9A%84%E5%81%9A%E5%AF%B9%E4%BA%86%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20Agent%20%E8%AF%84%E4%BC%B0",
+    "chunkIndex": 0,
+    "totalChunks": 5,
+    "startPos": 0,
+    "endPos": 342,
+    "originalTitle": "Agent 能跑起来以后，怎么知道它真的做对了？一个天气例子看懂 Agent 评估"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%83%BD%E8%B7%91%E8%B5%B7%E6%9D%A5%E4%BB%A5%E5%90%8E%EF%BC%8C%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E5%AE%83%E7%9C%9F%E7%9A%84%E5%81%9A%E5%AF%B9%E4%BA%86%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20Agent%20%E8%AF%84%E4%BC%B0#chunk-1",
+    "title": "Agent 能跑起来以后，怎么知道它真的做对了？一个天气例子看懂 Agent 评估 (第2段)",
+    "content": "...到了一个容易的问题。\n先把“看起来对”变成一句能检查的话： 当天气工具返回“小雨”时，回答必须建议带伞。\n这已经是一个验收规则了。\n只有问题和答案，还不能测试\n我们很自然会写下：\n然后让 Agent 重跑。可它这次去查的是明天的真实天气，工具可能返回晴天。即使它答“不用带伞”，你也没法说它错了。\n要让同一个测试每次都能比，不能只固定用户的问题，还要固定 Agent 当时看到的世界：\n运行测试时，天气工具不再访问真实接口，而是返回这份写好的结果。\n这一步很要紧。Agent 的答案往往不只由 Prompt 决定，还取决于检索到的资料、工具返回的数据、用户前几轮说过的话。要验收一次改动，先把这些会变化的条件钉住；否则你测到的是外部世界，不是 Agent 的行为。\n一条测试，只能证明一条测试\n修好“小雨要带伞”后，别急着宣布成功。\n再加两条：",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%83%BD%E8%B7%91%E8%B5%B7%E6%9D%A5%E4%BB%A5%E5%90%8E%EF%BC%8C%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E5%AE%83%E7%9C%9F%E7%9A%84%E5%81%9A%E5%AF%B9%E4%BA%86%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20Agent%20%E8%AF%84%E4%BC%B0",
+    "chunkIndex": 1,
+    "totalChunks": 5,
+    "startPos": 342,
+    "endPos": 685,
+    "originalTitle": "Agent 能跑起来以后，怎么知道它真的做对了？一个天气例子看懂 Agent 评估"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%83%BD%E8%B7%91%E8%B5%B7%E6%9D%A5%E4%BB%A5%E5%90%8E%EF%BC%8C%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E5%AE%83%E7%9C%9F%E7%9A%84%E5%81%9A%E5%AF%B9%E4%BA%86%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20Agent%20%E8%AF%84%E4%BC%B0#chunk-2",
+    "title": "Agent 能跑起来以后，怎么知道它真的做对了？一个天气例子看懂 Agent 评估 (第3段)",
+    "content": "...条测试\n修好“小雨要带伞”后，别急着宣布成功。\n再加两条： 这几条放在一起，才是一个很小的测试集。以后改 Prompt、换模型、替换天气服务，新的版本都跑一遍。\n这时“新版本更好”就不能成立。它修了什么、又弄坏了什么，表格会直接说出来。\n测试集不需要一开始就凑一百条。最有价值的第一批，往往来自用户真的遇到过的问题：一次“小雨却说不用带伞”，就是一条以后不能再犯的案例。\n不是所有回答都该用同一种尺子\n“有没有建议带伞”很适合写成明确规则。\n但“提醒注意安全”是否说得清楚，答案就没那么非黑即白。强行规定它必须包含某几个字，Agent 只会学会堆关键词。\n所以验收也要分开：\n先写能写清楚的规则。只有规则无法覆盖的部分，才值得引入人工或 LLM 评审。否则会得到一个看似聪明、实际很飘的“万能裁判”。\nGraph 改动，怎么测？",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%83%BD%E8%B7%91%E8%B5%B7%E6%9D%A5%E4%BB%A5%E5%90%8E%EF%BC%8C%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E5%AE%83%E7%9C%9F%E7%9A%84%E5%81%9A%E5%AF%B9%E4%BA%86%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20Agent%20%E8%AF%84%E4%BC%B0",
+    "chunkIndex": 2,
+    "totalChunks": 5,
+    "startPos": 685,
+    "endPos": 1020,
+    "originalTitle": "Agent 能跑起来以后，怎么知道它真的做对了？一个天气例子看懂 Agent 评估"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%83%BD%E8%B7%91%E8%B5%B7%E6%9D%A5%E4%BB%A5%E5%90%8E%EF%BC%8C%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E5%AE%83%E7%9C%9F%E7%9A%84%E5%81%9A%E5%AF%B9%E4%BA%86%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20Agent%20%E8%AF%84%E4%BC%B0#chunk-3",
+    "title": "Agent 能跑起来以后，怎么知道它真的做对了？一个天气例子看懂 Agent 评估 (第4段)",
+    "content": "...聪明、实际很飘的“万能裁判”。\nGraph 改动，怎么测？ 到这里，测试的对象还是一问一答。可我们的天气 Agent 已经有了 LangGraph：它可能先追问城市，暂停，再恢复。\n于是再加一条多轮案例：\n现在测的不只是最终答案，还包括这条工作流有没有正确地暂停和恢复。\n这就是评估和 LangGraph 配合的地方：LangGraph 负责把任务拆成可以暂停、恢复、分叉的流程；评估负责确认每一种重要路径没有被后来的一次修改弄坏。\nTrace 放在哪里\n线上用户遇到一个新错误时，先需要看到它当时调用了什么工具、拿到了什么结果。这是 Trace 的用处。\n但 Trace 不是下一篇必须单讲的主角。它更像测试案例的原材料：从一次真实失败里取出问题、工具结果和错误回答，放进测试集。下一次改动前后，再用同样条件重跑。",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%83%BD%E8%B7%91%E8%B5%B7%E6%9D%A5%E4%BB%A5%E5%90%8E%EF%BC%8C%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E5%AE%83%E7%9C%9F%E7%9A%84%E5%81%9A%E5%AF%B9%E4%BA%86%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20Agent%20%E8%AF%84%E4%BC%B0",
+    "chunkIndex": 3,
+    "totalChunks": 5,
+    "startPos": 1020,
+    "endPos": 1349,
+    "originalTitle": "Agent 能跑起来以后，怎么知道它真的做对了？一个天气例子看懂 Agent 评估"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%83%BD%E8%B7%91%E8%B5%B7%E6%9D%A5%E4%BB%A5%E5%90%8E%EF%BC%8C%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E5%AE%83%E7%9C%9F%E7%9A%84%E5%81%9A%E5%AF%B9%E4%BA%86%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20Agent%20%E8%AF%84%E4%BC%B0#chunk-4",
+    "title": "Agent 能跑起来以后，怎么知道它真的做对了？一个天气例子看懂 Agent 评估 (第5段)",
+    "content": "...和错误回答，放进测试集。下一次改动前后，再用同样条件重跑。 LangSmith、Langfuse 这类工具都能帮你记录线上运行、把案例加入数据集、比较实验结果；它们解决的是这条闭环的基础设施。真正先要想清楚的，是：**你的 Agent 到底要通过什么验收。**\n从这里回看三篇文章：ReAct 让模型能借工具行动；LangGraph 让任务能跨轮继续；评估让每次改动不再靠“我刚刚试了下，好像没问题”。",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%83%BD%E8%B7%91%E8%B5%B7%E6%9D%A5%E4%BB%A5%E5%90%8E%EF%BC%8C%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E5%AE%83%E7%9C%9F%E7%9A%84%E5%81%9A%E5%AF%B9%E4%BA%86%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20Agent%20%E8%AF%84%E4%BC%B0",
+    "chunkIndex": 4,
+    "totalChunks": 5,
+    "startPos": 1349,
+    "endPos": 1520,
+    "originalTitle": "Agent 能跑起来以后，怎么知道它真的做对了？一个天气例子看懂 Agent 评估"
+  },
+  {
     "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FClaude%20Dreaming%20vs%20Hermes%20Skill%EF%BC%9A%E5%B8%AE%E4%BD%A0%E5%85%A5%E5%9D%91%20Agent%20Memory#chunk-0",
     "title": "Claude Dreaming vs Hermes Skill：帮你入坑 Agent Memory",
     "content": "Claude Dreaming vs Hermes Skill：帮你入坑 Agent Memory\nClaude 有 Dreaming，Hermes 有 Skill。\n看着都在做同一件事：\n让 AI 从经验中学习。\n从 Agent Architecture 来看，它们其实属于两个完全不同的层级：\n**Dreaming 关心的是：哪些经验值得长期记住？**\n**Skill 关心的是：哪些经验值得固化成能力？**\n换句话说，一个优化的是 **Memory**，另一个优化的是 **Capability**。\n更准确一点说：\nClaude Dreaming 更接近 **Semantic Memory**，也就是“知道什么”。",
@@ -11814,6 +11869,83 @@
     "originalTitle": "Claude Sonnet 5 的 Token 消耗更多了？一文看懂 Token 的演化"
   },
   {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FLangGraph%20%E5%88%B0%E5%BA%95%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F%E7%94%A8%E4%B8%80%E4%B8%AA%E6%9F%A5%E5%A4%A9%E6%B0%94%E7%9A%84%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82#chunk-0",
+    "title": "LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂",
+    "content": "LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂\n上一篇《什么是 ReAct？一个例子看懂 AI Agent 原理》里，我们做出了一个会查天气的 Agent。\n模型发现自己不知道实时天气，就调用工具；工具返回结果，模型再回答。任务没结束，就继续循环。\n这已经是 Agent 了。LangGraph 又多解决了什么？\n还是从查天气开始。\n一句话里什么都有，事情很简单\n用户问：\n北京明天要不要带伞？\n城市、日期和问题都在一句话里。Agent 查完天气，直接回答。\n整个过程是一条直线：\n这种情况用普通函数就够了。特意套一层图，代码只会更绕。\n用户少说了一个城市\n现在用户问：\n明天要不要带伞？\nAgent 发现缺少城市，只好追问：\n你想查哪个城市？\n用户回答：\n北京。",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FLangGraph%20%E5%88%B0%E5%BA%95%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F%E7%94%A8%E4%B8%80%E4%B8%AA%E6%9F%A5%E5%A4%A9%E6%B0%94%E7%9A%84%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82",
+    "chunkIndex": 0,
+    "totalChunks": 7,
+    "startPos": 0,
+    "endPos": 343,
+    "originalTitle": "LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FLangGraph%20%E5%88%B0%E5%BA%95%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F%E7%94%A8%E4%B8%80%E4%B8%AA%E6%9F%A5%E5%A4%A9%E6%B0%94%E7%9A%84%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82#chunk-1",
+    "title": "LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂 (第2段)",
+    "content": "...缺少城市，只好追问：\n你想查哪个城市？\n用户回答：\n北京。 这时才有真正的麻烦。\n“明天”在第一轮，“北京”在第二轮。如果程序只看当前这句话，它永远凑不齐查询天气所需的信息。\n所以它要留下一张任务便签：日期是明天，城市还不知道。用户补充北京以后，只需把便签上的城市补齐。\n这张便签就是 State。\nState 不是模型的思考，也不一定是完整聊天记录。它记录的是：这件事做到现在，哪些信息已经确定。\n记住信息还不够\n假设 Agent 识别出北京后，需要先让用户确认定位：\n将查询北京的天气，是否继续？\n用户可能十分钟以后才回复“继续”。原来的程序早就结束了。再次收到消息时，系统除了要找回城市和日期，还得知道上次停在哪。\n于是任务便签上又多了一行：\n现在它既保存了任务数据，也保存了恢复位置。把这份便签存进数据库，服务重启后，任务还能从“查询天气”接着走。",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FLangGraph%20%E5%88%B0%E5%BA%95%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F%E7%94%A8%E4%B8%80%E4%B8%AA%E6%9F%A5%E5%A4%A9%E6%B0%94%E7%9A%84%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82",
+    "chunkIndex": 1,
+    "totalChunks": 7,
+    "startPos": 343,
+    "endPos": 692,
+    "originalTitle": "LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FLangGraph%20%E5%88%B0%E5%BA%95%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F%E7%94%A8%E4%B8%80%E4%B8%AA%E6%9F%A5%E5%A4%A9%E6%B0%94%E7%9A%84%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82#chunk-2",
+    "title": "LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂 (第3段)",
+    "content": "...便签存进数据库，服务重启后，任务还能从“查询天气”接着走。 这就是 checkpoint 最朴素的样子。\n再加两个要求，直线开始分叉\n产品经理又加了两个要求：天气接口失败可以重试；涉及极端天气时，回答要先经过人工确认。\n流程变成了这样：\n这时再用一串  也能写。只是重试会藏在查询函数里，判断会散在提示词里，暂停位置又单独放进数据库。想知道一个任务接下来会去哪，得翻好几个文件。\n程序早已是一张图，只是这张图散落在代码里。\n把图摆到明面上\nLangGraph 把每个步骤单独拿出来，再把步骤之间的去向写清楚。\n“提取信息”“追问城市”“查询天气”“人工确认”都是 Node。Node 可以调用 LLM，也可以只是普通函数，甚至可以由人完成。",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FLangGraph%20%E5%88%B0%E5%BA%95%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F%E7%94%A8%E4%B8%80%E4%B8%AA%E6%9F%A5%E5%A4%A9%E6%B0%94%E7%9A%84%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82",
+    "chunkIndex": 2,
+    "totalChunks": 7,
+    "startPos": 692,
+    "endPos": 983,
+    "originalTitle": "LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FLangGraph%20%E5%88%B0%E5%BA%95%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F%E7%94%A8%E4%B8%80%E4%B8%AA%E6%9F%A5%E5%A4%A9%E6%B0%94%E7%9A%84%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82#chunk-3",
+    "title": "LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂 (第4段)",
+    "content": "...可以调用 LLM，也可以只是普通函数，甚至可以由人完成。 Node 之间的连线是 Edge。“查询成功后生成回答”是一条固定的边；“信息提取后，缺城市就追问，否则去查天气”要根据 State 判断，所以是一条条件边。\n到这里，三个最常见的词都有了来处：\nLangGraph 沿着这些边运行 Node。每一步结束后更新 State；遇到暂停就保存现场，收到新输入后从保存的位置恢复。\n它没有让模型变聪明。它只是让任务的执行过程不再靠一堆隐含的  维持。\n它和 ReAct 的分界：不是固定与自由\n常见的说法是：ReAct 用来探索，LangGraph 用来跑固定 workflow。这个说法不够准确。",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FLangGraph%20%E5%88%B0%E5%BA%95%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F%E7%94%A8%E4%B8%80%E4%B8%AA%E6%9F%A5%E5%A4%A9%E6%B0%94%E7%9A%84%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82",
+    "chunkIndex": 3,
+    "totalChunks": 7,
+    "startPos": 983,
+    "endPos": 1254,
+    "originalTitle": "LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FLangGraph%20%E5%88%B0%E5%BA%95%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F%E7%94%A8%E4%B8%80%E4%B8%AA%E6%9F%A5%E5%A4%A9%E6%B0%94%E7%9A%84%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82#chunk-4",
+    "title": "LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂 (第5段)",
+    "content": "...raph 用来跑固定 workflow。这个说法不够准确。 ReAct 自己也有一层固定流程：思考、行动、观察，再回到思考。它不知道的是具体行动序列。模型这次该搜网页、读文件，还是直接回答；要跑几轮；什么时候认为资料够了，都是运行时决定的。\nLangGraph 预先知道的是另一件事：这个任务有哪些合法步骤，步骤之间允许怎么跳。实际会走哪条路径仍然可以未知。\n拿“研究一个竞品”来说，外层图可以规定：先澄清范围，再研究，接着整理，最后人工审核。进入“研究”这个 Node 后，里面完全可以是一个 ReAct Agent：它自己决定搜几次、读哪些资料、是否还要补搜。\n这张图不替 Agent 决定研究时该搜什么。它只规定边界：研究可以反复尝试，发布前必须审核，运行也得有停止条件。\n什么时候不用 LangGraph",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FLangGraph%20%E5%88%B0%E5%BA%95%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F%E7%94%A8%E4%B8%80%E4%B8%AA%E6%9F%A5%E5%A4%A9%E6%B0%94%E7%9A%84%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82",
+    "chunkIndex": 4,
+    "totalChunks": 7,
+    "startPos": 1254,
+    "endPos": 1581,
+    "originalTitle": "LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FLangGraph%20%E5%88%B0%E5%BA%95%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F%E7%94%A8%E4%B8%80%E4%B8%AA%E6%9F%A5%E5%A4%A9%E6%B0%94%E7%9A%84%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82#chunk-5",
+    "title": "LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂 (第6段)",
+    "content": "...核，运行也得有停止条件。\n什么时候不用 LangGraph 如果你的应用只是一次问答、一次 RAG 检索，或者调用一个工具后直接返回，普通函数通常更清楚。\n当任务开始需要等用户、等人工审核，或在失败后回到特定步骤时，显式的图才值得引入。还有一个信号：你已经说不清“这个任务下一步允许去哪”。\n天气 Agent 里，跨轮信息不能丢，于是有了 State；任务会暂停，于是要 checkpoint；路径开始分叉，才需要 Node 和 Edge。\n当 Agent 不再只是一个循环，而是一套会暂停、重试、分叉的流程时，LangGraph 帮你把这套流程写清楚、管起来。\n想把暂停和恢复拆成代码看，完整的极简示例在站点源码 。它只实现了 ，用来说明状态图的骨架。",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FLangGraph%20%E5%88%B0%E5%BA%95%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F%E7%94%A8%E4%B8%80%E4%B8%AA%E6%9F%A5%E5%A4%A9%E6%B0%94%E7%9A%84%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82",
+    "chunkIndex": 5,
+    "totalChunks": 7,
+    "startPos": 1581,
+    "endPos": 1879,
+    "originalTitle": "LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FLangGraph%20%E5%88%B0%E5%BA%95%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F%E7%94%A8%E4%B8%80%E4%B8%AA%E6%9F%A5%E5%A4%A9%E6%B0%94%E7%9A%84%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82#chunk-6",
+    "title": "LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂 (第7段)",
+    "content": "...极简示例在站点源码 。它只实现了 ，用来说明状态图的骨架。 任务能跑起来以后，线上当然还需要记录每一步实际调用了什么工具、拿到了什么结果，方便排查错误。这类执行记录通常叫 Trace；它和保存 State 是两件事：State 用来让任务继续，Trace 用来事后还原任务怎么走到这里。\n但更早也更难的问题是：改了 Prompt、模型或图上的一个节点以后，怎么知道它没有在别的路径上变差？接着读《Agent 能跑起来以后，怎么知道它真的做对了？一个天气例子看懂 Agent 评估》。\n如果任务还会分成多条支线，最后再汇合，可以继续看《从 Loop 到 Graph：一个例子看懂多 Agent 怎么协作》。",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FLangGraph%20%E5%88%B0%E5%BA%95%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F%E7%94%A8%E4%B8%80%E4%B8%AA%E6%9F%A5%E5%A4%A9%E6%B0%94%E7%9A%84%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82",
+    "chunkIndex": 6,
+    "totalChunks": 7,
+    "startPos": 1879,
+    "endPos": 2151,
+    "originalTitle": "LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂"
+  },
+  {
     "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E4%B8%BA%E4%BB%80%E4%B9%88%20AI%20%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E6%9B%B4%E9%9C%80%E8%A6%81%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%80%9D%E6%83%B3%EF%BC%9F#chunk-0",
     "title": "为什么 AI 应用开发更需要贝叶斯思想？",
     "content": "AI 应用研发比传统软件研发更需要贝叶斯决策思想。原因不是 AI 更复杂，而是 AI 产品的不确定性远高于传统软件。\n传统软件实现的是确定需求：\n用户点击按钮 → 后端计算 → 返回结果。\nAI 应用在不断验证概率问题：\n用户真的需要这个能力吗？（需求不确定）\nPrompt 是否有效？（方案不确定）\nModel A 还是 Model B 更好？（模型不确定）\nAgent 是否应该拆成多个工具？（架构不确定）\n用户为什么满意或不满意？（反馈不确定）\n研发过程就是不断更新这些概率。\n贝叶斯思想的核心公式是：\n**‌后验概率 ∝ 先验概率 × 似然‌**\n翻译成产品语言就是：\n**‌更新后的判断 ∝ 之前的判断 × 新观察到的证据**\n以下通过几个例子说明这个现象\n例子一：AI Router",
@@ -11904,12 +12036,12 @@
   {
     "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E4%BB%80%E4%B9%88%E6%98%AF%20ReAct%EF%BC%9F%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20Agent%20%E5%8E%9F%E7%90%86#chunk-5",
     "title": "什么是 ReAct？一个例子看懂 AI Agent 原理 (第6段)",
-    "content": "...状态 → 再思考\"，直到任务完成。\n可以把它总结成一句话： **Agent 并不是一种新的模型，而是在 LLM 外面包了一层能够持续决策、调用工具和维护状态的执行循环。**\n理解了这四个组件，再去看 LangGraph、OpenAI Agents SDK、CrewAI 或 AutoGen 等框架，会发现它们做的事情其实高度一致：只是把这套循环封装得更完善、更易扩展而已。真正的 Agent 原理，并没有想象中复杂。",
+    "content": "...状态 → 再思考\"，直到任务完成。\n可以把它总结成一句话： **Agent 并不是一种新的模型，而是在 LLM 外面包了一层能够持续决策、调用工具和维护状态的执行循环。**\n理解了这四个组件，再去看 LangGraph、OpenAI Agents SDK、CrewAI 或 AutoGen 等框架，会发现它们做的事情其实高度一致：只是把这套循环封装得更完善、更易扩展而已。真正的 Agent 原理，并没有想象中复杂。\n当这个循环开始有分支、暂停、重试和恢复时，可以继续读《LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂》。",
     "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E4%BB%80%E4%B9%88%E6%98%AF%20ReAct%EF%BC%9F%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20Agent%20%E5%8E%9F%E7%90%86",
     "chunkIndex": 5,
     "totalChunks": 6,
     "startPos": 1683,
-    "endPos": 1861,
+    "endPos": 1924,
     "originalTitle": "什么是 ReAct？一个例子看懂 AI Agent 原理"
   },
   {

@@ -13,7 +13,7 @@
   <meta property="og:description" content="公众号 一定要用 humanizer 去除 AI 味（npx skills add https://github.com/op7418/Humanizer zh.git） 对于新闻 现象 → 问题 → 分析 → 判断，要体现出，冲突在哪，读者需要知道为啥关心，然后跟上，不然就会划走？ 观点最重要，AI 无法拿走你的判断力（对于观点类型的，不要贬低别人，制造…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E5%9F%BA%E7%A1%80">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"基础","description":"公众号 一定要用 humanizer 去除 AI 味（npx skills add https://github.com/op7418/Humanizer zh.git） 对于新闻 现象 → 问题 → 分析 → 判断，要体现出，冲突在哪，读者需要知道为啥关心，然后跟上，不然就会划走？ 观点最重要，AI 无法拿走你的判断力（对于观点类型的，不要贬低别人，制造…","url":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E5%9F%BA%E7%A1%80","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E5%9F%BA%E7%A1%80","dateModified":"2026-08-10","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"基础","description":"公众号 一定要用 humanizer 去除 AI 味（npx skills add https://github.com/op7418/Humanizer zh.git） 对于新闻 现象 → 问题 → 分析 → 判断，要体现出，冲突在哪，读者需要知道为啥关心，然后跟上，不然就会划走？ 观点最重要，AI 无法拿走你的判断力（对于观点类型的，不要贬低别人，制造…","url":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E5%9F%BA%E7%A1%80","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E5%9F%BA%E7%A1%80","dateModified":"2026-08-11","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>基础</h1><p>公众号</p>
@@ -34,6 +34,16 @@
 找地方做已有精华分享，导流
 找地方做即将发布文章精华分享，预热，吸引关注</p>
 <p>选题？</p>
+<h3>写作前内容审计：把重复变成显性选择</h3>
+<p>文章变多以后，最容易重复的通常不是标题，而是同一个问题换了案例又讲一遍。不要靠记忆避免重复。项目里的 <code>writing-content-audit</code> Skill 会在 Codex 收到新选题、系列规划、提纲、初稿或大幅改稿请求时自动运行：它扫描 <code>src/blog</code> 下的已发布文章、未发布素材和公众号策略，用标题、小标题与正文的中文词组召回最相近的内容。</p>
+<p>它不替人裁决「重复」：相似标题可能是合理的续篇，不同标题也可能在回答同一个问题。Skill 会对前几条结果做一次判断：</p>
+<ul>
+<li><strong>重复</strong>：核心问题、关键案例、最终判断都相同，合并或放弃。</li>
+<li><strong>续篇</strong>：沿用同一问题，但加入新证据、反例或工程层面的下一步；在开头明确它接续哪篇。</li>
+<li><strong>交叉</strong>：同一案例服务于不同问题；保留，但在文中链接旧文并说明这次换了什么视角。</li>
+<li><strong>新篇</strong>：核心张力和读者带走的判断都不同，正常推进。</li>
+</ul>
+<p>每次写作前都即时扫描内容库，因此新增、移动或删除文章后不会留下需要手工维护的目录。它处理的是词面与主题词召回，碰到换了一套词的深层重复时，Skill 仍应读取前几篇候选并比较「问题—案例—判断」三项。底层命令保留给维护和排错，不是日常写作步骤。</p>
 <p>具体工程问题 + 真实约束 + 方案取舍 + 反直觉结果
 写作提示词保持短且稳定就行。更值得投入的是建立一份“工程素材账本”：每次记录问题、约束、错误判断、关键数据、决策和结果。选题基本都会从这里长出来。</p>
 <p>选题
@@ -189,6 +199,6 @@
 任何文字、中文、英文、Logo、水印、边框、网页 UI、App UI、Dashboard、浏览器窗口、白色底栏、卡片布局、图表、真实照片、人物、机器人、实体物品、复杂背景、3D 拟物、大面积渐变、密集粒子、装饰花纹、通用 AI 圆环徽章。</p>
 <p>输入文章为：</p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-BbxjQNQk.js"></script>
+  <script type="module" crossorigin src="/assets/index-CBWBYs_U.js"></script>
 </body>
 </html>
