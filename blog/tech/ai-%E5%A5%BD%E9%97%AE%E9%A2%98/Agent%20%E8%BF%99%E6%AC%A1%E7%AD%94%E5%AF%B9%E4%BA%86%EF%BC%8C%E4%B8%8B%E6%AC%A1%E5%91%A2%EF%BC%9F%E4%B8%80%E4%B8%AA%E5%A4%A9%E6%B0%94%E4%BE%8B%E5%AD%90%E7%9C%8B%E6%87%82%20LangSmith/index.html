@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith | LZ AI NOTE</title>
+  <meta name="description" content="Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith 上一篇[《LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂》]里，天气 Agent 已经会跨轮补信息、暂停等待，也会在天气接口失败时重试。 它看起来能用了。 有一天，用户问： 北京明天要不要带伞？ 天气工具返回： 小雨，降雨概率 70%。 Agent 最终却说： 晴天，…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Agent%20%E8%BF%99%E6%AC%A1%E7%AD%94%E5%AF%B9%E4%BA%86%EF%BC%8C%E4%B8%8B%E6%AC%A1%E5%91%A2%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20LangSmith">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith | LZ AI NOTE">
+  <meta property="og:description" content="Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith 上一篇[《LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂》]里，天气 Agent 已经会跨轮补信息、暂停等待，也会在天气接口失败时重试。 它看起来能用了。 有一天，用户问： 北京明天要不要带伞？ 天气工具返回： 小雨，降雨概率 70%。 Agent 最终却说： 晴天，…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Agent%20%E8%BF%99%E6%AC%A1%E7%AD%94%E5%AF%B9%E4%BA%86%EF%BC%8C%E4%B8%8B%E6%AC%A1%E5%91%A2%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20LangSmith">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith","description":"Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith 上一篇[《LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂》]里，天气 Agent 已经会跨轮补信息、暂停等待，也会在天气接口失败时重试。 它看起来能用了。 有一天，用户问： 北京明天要不要带伞？ 天气工具返回： 小雨，降雨概率 70%。 Agent 最终却说： 晴天，…","url":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Agent%20%E8%BF%99%E6%AC%A1%E7%AD%94%E5%AF%B9%E4%BA%86%EF%BC%8C%E4%B8%8B%E6%AC%A1%E5%91%A2%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20LangSmith","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Agent%20%E8%BF%99%E6%AC%A1%E7%AD%94%E5%AF%B9%E4%BA%86%EF%BC%8C%E4%B8%8B%E6%AC%A1%E5%91%A2%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20LangSmith","dateModified":"2026-08-12","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith</h1><h1>Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith</h1>
+<p>上一篇<a href="./LangGraph%20%E5%88%B0%E5%BA%95%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F%E7%94%A8%E4%B8%80%E4%B8%AA%E6%9F%A5%E5%A4%A9%E6%B0%94%E7%9A%84%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82.md">《LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂》</a>里，天气 Agent 已经会跨轮补信息、暂停等待，也会在天气接口失败时重试。</p>
+<p>它看起来能用了。</p>
+<p>有一天，用户问：</p>
+<blockquote>
+<p>北京明天要不要带伞？</p>
+</blockquote>
+<p>天气工具返回：</p>
+<blockquote>
+<p>小雨，降雨概率 70%。</p>
+</blockquote>
+<p>Agent 最终却说：</p>
+<blockquote>
+<p>晴天，不用带伞。</p>
+</blockquote>
+<p>这时最自然的反应是改 Prompt：加一句“必须根据天气工具的结果回答”。改完再问一遍，它说“建议带伞”。</p>
+<p>问题解决了吗？</p>
+<p>还没有。我们甚至不知道刚才究竟错在哪里。</p>
+<h2>只有最终答案，找不到错误发生在哪</h2>
+<p>天气 Agent 并不是只做了一件事。它先从问题里提取城市和日期，再调用天气工具，最后组织回答。</p>
+<pre><code class="language-text">北京明天要不要带伞？
+        ↓
+提取信息：北京、明天
+        ↓
+查询天气：小雨，70%
+        ↓
+生成回答：晴天，不用带伞
+</code></pre>
+<p>最终答案是错的，但还存在几种不同的原因：</p>
+<pre><code class="language-text">“北京”被识别成了别的地方
+天气工具拿到的是旧数据
+工具结果没有传给回答节点
+模型看到了“小雨”，却没有据此回答
+</code></pre>
+<p>只看最后一句，四种错误长得一模一样。直接改 Prompt，也许恰好修对，也许只是把问题暂时盖住。</p>
+<p>所以，我们需要留下这次运行的过程：每一步收到了什么、输出了什么、花了多久。它就是 Trace。</p>
+<pre><code class="language-text">Trace #1847
+
+extract_info
+  输入：北京明天要不要带伞？
+  输出：city=北京，date=明天
+
+get_weather
+  输入：北京，明天
+  输出：condition=小雨，rain_probability=70%
+
+write_answer
+  输入：condition=小雨，rain_probability=70%
+  输出：晴天，不用带伞
+</code></pre>
+<p>现在不用猜了。城市、日期和工具回包都没问题，错误出在 <code>write_answer</code>。可能是这个节点的 Prompt 写得太松，也可能是它拿到的字段格式和我们以为的不一样。</p>
+<p>LangSmith 做的第一件事，就是替每次 Agent 运行留下这样的 Trace。它不负责让 Agent 答对；它让你知道 Agent 这一次到底怎么答错的。<a href="https://docs.langchain.com/langsmith/evaluation">LangSmith 的可观测与评估说明</a></p>
+<h2>Trace 看明白了，为什么还不够</h2>
+<p>我们修复 <code>write_answer</code>，再次运行同一个问题。它终于回答：</p>
+<blockquote>
+<p>北京明天有小雨，建议带伞。</p>
+</blockquote>
+<p>这依然不能证明修复有效。</p>
+<p>明天北京可能放晴；天气接口可能换了字段；即使条件一样，模型也可能因为采样给出不同表述。第二次运行并不是第一次的重放。</p>
+<p>要验证一次修改，得固定 Agent 当时看到的世界。把刚才那条错误的 Trace 摘出来：</p>
+<pre><code class="language-text">问题：北京明天要不要带伞？
+天气工具固定返回：小雨，降雨概率 70%
+期望：建议带伞
+</code></pre>
+<p>运行测试时，<code>get_weather</code> 不再访问真实接口，而是只返回这份写好的回包。现在无论是改 Prompt、换模型，还是调整 LangGraph 上的节点，大家面对的都是同一场“小雨”。</p>
+<p>这条被固定下来的案例，叫作 Example。几条 Example 放在一起，就是 Dataset。</p>
+<pre><code class="language-text">天气 Agent 的 Dataset
+
+1. 北京 + 小雨       → 建议带伞
+2. 北京 + 晴         → 不建议带伞
+3. 北京 + 暴雨       → 建议带伞，并进入人工确认
+4. 天气接口持续失败  → 不编造天气，说明查询失败
+5. 缺少城市          → 追问城市，并保留“明天”
+</code></pre>
+<p>Dataset 不是为了收集一大堆问题。它是我们对“这个 Agent 至少不能错什么”的共同记忆。线上出现一次有代表性的错误，就加一条；以后谁改了系统，都要重新面对它。</p>
+<h2>有了 Dataset，怎么判断回答通过了没有</h2>
+<p>先跑第一条：工具返回小雨，Agent 输出“明天可能会有降水，出门带上雨具比较稳妥”。</p>
+<p>它没有逐字写“建议带伞”，但显然是对的。拿字符串逐字比较会误伤它。</p>
+<p>再跑第四条：天气接口失败，Agent 写了“北京明天大概率晴”。它的语气很自然，行为却不能接受。</p>
+<p>这两条不能靠同一种判断。</p>
+<pre><code class="language-python">def has_made_up_weather(answer, tool_failed):
+    return tool_failed and any(word in answer for word in [&quot;晴&quot;, &quot;雨&quot;, &quot;多云&quot;])
+
+
+def needs_human_review(weather, graph_state):
+    return weather == &quot;暴雨&quot; and graph_state.next == &quot;human_review&quot;
+</code></pre>
+<p>“接口失败时不能编造天气”“暴雨必须进入人工确认”是确定规则，交给代码。</p>
+<p>“小雨时是否给出了清楚、可执行的建议”没有标准答案。可以让人抽样打分，也可以请另一个模型按照事先写好的量表判断。它不是绝对裁判，尤其不能替代前面的硬规则。</p>
+<p>这些用来判断一条 Example 是否通过的东西，叫 Evaluator。</p>
+<pre><code class="language-text">Dataset 提供题目和固定的天气世界
+Agent 交出回答与运行过程
+Evaluator 给出通过、失败或分数
+</code></pre>
+<p>到这里，“看起来回答得不错”终于变成可重复的检查。</p>
+<h2>一次重跑，不叫比较</h2>
+<p>我们修改 <code>write_answer</code> 的 Prompt 后，拿整个 Dataset 跑一遍：</p>
+<pre><code class="language-text">                 小雨    晴天    暴雨    接口失败    缺城市
+旧版              失败    通过    通过      通过      通过
+新版              通过    通过    失败      通过      通过
+</code></pre>
+<p>新版修好了小雨，却让暴雨不再转人工确认。它不能上线。</p>
+<p>这次“让一个版本在同一份 Dataset 上跑完，再和另一个版本逐项对照”的过程，叫 Experiment。它比较的不是两句碰巧不同的回答，而是两套配置在同一批固定案例上的表现：</p>
+<pre><code class="language-text">Dataset
+   ├── 旧 Prompt + 旧模型 + 旧图 → Experiment A
+   └── 新 Prompt + 新模型 + 新图 → Experiment B
+</code></pre>
+<p>LangSmith 把 Trace、Dataset、Evaluator 和 Experiment 串在一起。它们并非四个需要死记的功能名，而是同一个问题自然长出的四个东西：</p>
+<pre><code class="language-text">只看到答案，不知道哪里错了
+        ↓
+Trace：还原一次运行
+        ↓
+修好了也无法稳定复现
+        ↓
+Dataset：固定当时的世界
+        ↓
+有案例却不知道怎么算通过
+        ↓
+Evaluator：给出验收规则
+        ↓
+改动前后无法公平比较
+        ↓
+Experiment：在同一批案例上对照版本
+</code></pre>
+<p>LangSmith 的官方工作流也是这条线：先用数据集组织案例，给案例配置评估器，再运行实验比较版本；生产中的失败运行可以回流为下一条测试案例。<a href="https://docs.langchain.com/langsmith/evaluation">LangSmith Evaluation</a></p>
+<h2>它和 LangGraph 分别管什么</h2>
+<p>这两个名字经常一起出现，很容易混掉。</p>
+<p>LangGraph 关心的是这一次任务怎么走：缺城市就追问，工具失败就重试，暴雨就转人工。它让 Agent 的流程可以暂停、恢复和分支。</p>
+<p>LangSmith 关心的是任务走完以后，我们怎样还原它走过的路，并确认改动没有把别的路径弄坏。</p>
+<pre><code class="language-text">LangGraph：让天气 Agent 跑起来
+LangSmith：知道它跑过什么，并验证它没有跑错
+</code></pre>
+<p>刚开始不必建立几百条案例。第一版只要保住五件事：小雨、晴天、暴雨、工具失败、缺城市。以后每抓到一次新的错误，就让它成为 Dataset 里的一条新案例。</p>
+<p>这样，Agent 才不是每次修改后都靠人再问一句“现在好了吗”。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-CR4HInmT.js"></script>
+</body>
+</html>

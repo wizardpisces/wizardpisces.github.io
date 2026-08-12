@@ -11583,70 +11583,70 @@
     "originalTitle": "AI 为什么没把你写进答案？从一句产品推荐读懂 GEO"
   },
   {
-    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%83%BD%E8%B7%91%E8%B5%B7%E6%9D%A5%E4%BB%A5%E5%90%8E%EF%BC%8C%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E5%AE%83%E7%9C%9F%E7%9A%84%E5%81%9A%E5%AF%B9%E4%BA%86%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20Agent%20%E8%AF%84%E4%BC%B0#chunk-0",
-    "title": "Agent 能跑起来以后，怎么知道它真的做对了？一个天气例子看懂 LangSmith",
-    "content": "Agent 能跑起来以后，怎么知道它真的做对了？一个天气例子看懂 LangSmith\n上一篇《LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂》里，天气 Agent 已经会跨轮补信息、暂停等待，也会在天气接口失败时重试。\n它看起来能用了。\n有一天，用户问：\n北京明天要不要带伞？\n天气工具返回：\n小雨，降雨概率 70%。\nAgent 最终却说：\n晴天，不用带伞。\n这时最自然的反应是改 Prompt：加一句“必须根据天气工具的结果回答”。改完再问一遍，它说“建议带伞”。\n问题解决了吗？\n还没有。我们甚至不知道刚才究竟错在哪里。\n只有最终答案，找不到错误发生在哪\n天气 Agent 并不是只做了一件事。它先从问题里提取城市和日期，再调用天气工具，最后组织回答。",
-    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%83%BD%E8%B7%91%E8%B5%B7%E6%9D%A5%E4%BB%A5%E5%90%8E%EF%BC%8C%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E5%AE%83%E7%9C%9F%E7%9A%84%E5%81%9A%E5%AF%B9%E4%BA%86%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20Agent%20%E8%AF%84%E4%BC%B0",
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%BF%99%E6%AC%A1%E7%AD%94%E5%AF%B9%E4%BA%86%EF%BC%8C%E4%B8%8B%E6%AC%A1%E5%91%A2%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20LangSmith#chunk-0",
+    "title": "Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith",
+    "content": "Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith\n上一篇《LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂》里，天气 Agent 已经会跨轮补信息、暂停等待，也会在天气接口失败时重试。\n它看起来能用了。\n有一天，用户问：\n北京明天要不要带伞？\n天气工具返回：\n小雨，降雨概率 70%。\nAgent 最终却说：\n晴天，不用带伞。\n这时最自然的反应是改 Prompt：加一句“必须根据天气工具的结果回答”。改完再问一遍，它说“建议带伞”。\n问题解决了吗？\n还没有。我们甚至不知道刚才究竟错在哪里。\n只有最终答案，找不到错误发生在哪\n天气 Agent 并不是只做了一件事。它先从问题里提取城市和日期，再调用天气工具，最后组织回答。",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%BF%99%E6%AC%A1%E7%AD%94%E5%AF%B9%E4%BA%86%EF%BC%8C%E4%B8%8B%E6%AC%A1%E5%91%A2%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20LangSmith",
     "chunkIndex": 0,
     "totalChunks": 6,
     "startPos": 0,
-    "endPos": 340,
-    "originalTitle": "Agent 能跑起来以后，怎么知道它真的做对了？一个天气例子看懂 LangSmith"
+    "endPos": 332,
+    "originalTitle": "Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith"
   },
   {
-    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%83%BD%E8%B7%91%E8%B5%B7%E6%9D%A5%E4%BB%A5%E5%90%8E%EF%BC%8C%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E5%AE%83%E7%9C%9F%E7%9A%84%E5%81%9A%E5%AF%B9%E4%BA%86%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20Agent%20%E8%AF%84%E4%BC%B0#chunk-1",
-    "title": "Agent 能跑起来以后，怎么知道它真的做对了？一个天气例子看懂 LangSmith (第2段)",
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%BF%99%E6%AC%A1%E7%AD%94%E5%AF%B9%E4%BA%86%EF%BC%8C%E4%B8%8B%E6%AC%A1%E5%91%A2%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20LangSmith#chunk-1",
+    "title": "Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith (第2段)",
     "content": "...它先从问题里提取城市和日期，再调用天气工具，最后组织回答。 最终答案是错的，但还存在几种不同的原因：\n只看最后一句，四种错误长得一模一样。直接改 Prompt，也许恰好修对，也许只是把问题暂时盖住。\n所以，我们需要留下这次运行的过程：每一步收到了什么、输出了什么、花了多久。它就是 Trace。\n现在不用猜了。城市、日期和工具回包都没问题，错误出在 。可能是这个节点的 Prompt 写得太松，也可能是它拿到的字段格式和我们以为的不一样。\nLangSmith 做的第一件事，就是替每次 Agent 运行留下这样的 Trace。它不负责让 Agent 答对；它让你知道 Agent 这一次到底怎么答错的。LangSmith 的可观测与评估说明\nTrace 看明白了，为什么还不够\n我们修复 ，再次运行同一个问题。它终于回答：\n北京明天有小雨，建议带伞。",
-    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%83%BD%E8%B7%91%E8%B5%B7%E6%9D%A5%E4%BB%A5%E5%90%8E%EF%BC%8C%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E5%AE%83%E7%9C%9F%E7%9A%84%E5%81%9A%E5%AF%B9%E4%BA%86%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20Agent%20%E8%AF%84%E4%BC%B0",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%BF%99%E6%AC%A1%E7%AD%94%E5%AF%B9%E4%BA%86%EF%BC%8C%E4%B8%8B%E6%AC%A1%E5%91%A2%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20LangSmith",
     "chunkIndex": 1,
     "totalChunks": 6,
-    "startPos": 340,
-    "endPos": 686,
-    "originalTitle": "Agent 能跑起来以后，怎么知道它真的做对了？一个天气例子看懂 LangSmith"
+    "startPos": 332,
+    "endPos": 678,
+    "originalTitle": "Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith"
   },
   {
-    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%83%BD%E8%B7%91%E8%B5%B7%E6%9D%A5%E4%BB%A5%E5%90%8E%EF%BC%8C%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E5%AE%83%E7%9C%9F%E7%9A%84%E5%81%9A%E5%AF%B9%E4%BA%86%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20Agent%20%E8%AF%84%E4%BC%B0#chunk-2",
-    "title": "Agent 能跑起来以后，怎么知道它真的做对了？一个天气例子看懂 LangSmith (第3段)",
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%BF%99%E6%AC%A1%E7%AD%94%E5%AF%B9%E4%BA%86%EF%BC%8C%E4%B8%8B%E6%AC%A1%E5%91%A2%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20LangSmith#chunk-2",
+    "title": "Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith (第3段)",
     "content": "...次运行同一个问题。它终于回答：\n北京明天有小雨，建议带伞。 这依然不能证明修复有效。\n明天北京可能放晴；天气接口可能换了字段；即使条件一样，模型也可能因为采样给出不同表述。第二次运行并不是第一次的重放。\n要验证一次修改，得固定 Agent 当时看到的世界。把刚才那条错误的 Trace 摘出来：\n运行测试时， 不再访问真实接口，而是只返回这份写好的回包。现在无论是改 Prompt、换模型，还是调整 LangGraph 上的节点，大家面对的都是同一场“小雨”。\n这条被固定下来的案例，叫作 Example。几条 Example 放在一起，就是 Dataset。\nDataset 不是为了收集一大堆问题。它是我们对“这个 Agent 至少不能错什么”的共同记忆。线上出现一次有代表性的错误，就加一条；以后谁改了系统，都要重新面对它。",
-    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%83%BD%E8%B7%91%E8%B5%B7%E6%9D%A5%E4%BB%A5%E5%90%8E%EF%BC%8C%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E5%AE%83%E7%9C%9F%E7%9A%84%E5%81%9A%E5%AF%B9%E4%BA%86%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20Agent%20%E8%AF%84%E4%BC%B0",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%BF%99%E6%AC%A1%E7%AD%94%E5%AF%B9%E4%BA%86%EF%BC%8C%E4%B8%8B%E6%AC%A1%E5%91%A2%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20LangSmith",
     "chunkIndex": 2,
     "totalChunks": 6,
-    "startPos": 686,
-    "endPos": 1022,
-    "originalTitle": "Agent 能跑起来以后，怎么知道它真的做对了？一个天气例子看懂 LangSmith"
+    "startPos": 678,
+    "endPos": 1014,
+    "originalTitle": "Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith"
   },
   {
-    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%83%BD%E8%B7%91%E8%B5%B7%E6%9D%A5%E4%BB%A5%E5%90%8E%EF%BC%8C%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E5%AE%83%E7%9C%9F%E7%9A%84%E5%81%9A%E5%AF%B9%E4%BA%86%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20Agent%20%E8%AF%84%E4%BC%B0#chunk-3",
-    "title": "Agent 能跑起来以后，怎么知道它真的做对了？一个天气例子看懂 LangSmith (第4段)",
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%BF%99%E6%AC%A1%E7%AD%94%E5%AF%B9%E4%BA%86%EF%BC%8C%E4%B8%8B%E6%AC%A1%E5%91%A2%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20LangSmith#chunk-3",
+    "title": "Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith (第4段)",
     "content": "...有代表性的错误，就加一条；以后谁改了系统，都要重新面对它。 有了 Dataset，怎么判断回答通过了没有\n先跑第一条：工具返回小雨，Agent 输出“明天可能会有降水，出门带上雨具比较稳妥”。\n它没有逐字写“建议带伞”，但显然是对的。拿字符串逐字比较会误伤它。\n再跑第四条：天气接口失败，Agent 写了“北京明天大概率晴”。它的语气很自然，行为却不能接受。\n这两条不能靠同一种判断。\n“接口失败时不能编造天气”“暴雨必须进入人工确认”是确定规则，交给代码。\n“小雨时是否给出了清楚、可执行的建议”没有标准答案。可以让人抽样打分，也可以请另一个模型按照事先写好的量表判断。它不是绝对裁判，尤其不能替代前面的硬规则。\n这些用来判断一条 Example 是否通过的东西，叫 Evaluator。\n到这里，“看起来回答得不错”终于变成可重复的检查。",
-    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%83%BD%E8%B7%91%E8%B5%B7%E6%9D%A5%E4%BB%A5%E5%90%8E%EF%BC%8C%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E5%AE%83%E7%9C%9F%E7%9A%84%E5%81%9A%E5%AF%B9%E4%BA%86%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20Agent%20%E8%AF%84%E4%BC%B0",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%BF%99%E6%AC%A1%E7%AD%94%E5%AF%B9%E4%BA%86%EF%BC%8C%E4%B8%8B%E6%AC%A1%E5%91%A2%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20LangSmith",
     "chunkIndex": 3,
     "totalChunks": 6,
-    "startPos": 1022,
-    "endPos": 1364,
-    "originalTitle": "Agent 能跑起来以后，怎么知道它真的做对了？一个天气例子看懂 LangSmith"
+    "startPos": 1014,
+    "endPos": 1356,
+    "originalTitle": "Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith"
   },
   {
-    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%83%BD%E8%B7%91%E8%B5%B7%E6%9D%A5%E4%BB%A5%E5%90%8E%EF%BC%8C%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E5%AE%83%E7%9C%9F%E7%9A%84%E5%81%9A%E5%AF%B9%E4%BA%86%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20Agent%20%E8%AF%84%E4%BC%B0#chunk-4",
-    "title": "Agent 能跑起来以后，怎么知道它真的做对了？一个天气例子看懂 LangSmith (第5段)",
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%BF%99%E6%AC%A1%E7%AD%94%E5%AF%B9%E4%BA%86%EF%BC%8C%E4%B8%8B%E6%AC%A1%E5%91%A2%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20LangSmith#chunk-4",
+    "title": "Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith (第5段)",
     "content": "...or。\n到这里，“看起来回答得不错”终于变成可重复的检查。 一次重跑，不叫比较\n我们修改  的 Prompt 后，拿整个 Dataset 跑一遍：\n新版修好了小雨，却让暴雨不再转人工确认。它不能上线。\n这次“让一个版本在同一份 Dataset 上跑完，再和另一个版本逐项对照”的过程，叫 Experiment。它比较的不是两句碰巧不同的回答，而是两套配置在同一批固定案例上的表现：\nLangSmith 把 Trace、Dataset、Evaluator 和 Experiment 串在一起。它们并非四个需要死记的功能名，而是同一个问题自然长出的四个东西：\nLangSmith 的官方工作流也是这条线：先用数据集组织案例，给案例配置评估器，再运行实验比较版本；生产中的失败运行可以回流为下一条测试案例。LangSmith Evaluation",
-    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%83%BD%E8%B7%91%E8%B5%B7%E6%9D%A5%E4%BB%A5%E5%90%8E%EF%BC%8C%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E5%AE%83%E7%9C%9F%E7%9A%84%E5%81%9A%E5%AF%B9%E4%BA%86%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20Agent%20%E8%AF%84%E4%BC%B0",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%BF%99%E6%AC%A1%E7%AD%94%E5%AF%B9%E4%BA%86%EF%BC%8C%E4%B8%8B%E6%AC%A1%E5%91%A2%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20LangSmith",
     "chunkIndex": 4,
     "totalChunks": 6,
-    "startPos": 1364,
-    "endPos": 1705,
-    "originalTitle": "Agent 能跑起来以后，怎么知道它真的做对了？一个天气例子看懂 LangSmith"
+    "startPos": 1356,
+    "endPos": 1697,
+    "originalTitle": "Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith"
   },
   {
-    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%83%BD%E8%B7%91%E8%B5%B7%E6%9D%A5%E4%BB%A5%E5%90%8E%EF%BC%8C%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E5%AE%83%E7%9C%9F%E7%9A%84%E5%81%9A%E5%AF%B9%E4%BA%86%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20Agent%20%E8%AF%84%E4%BC%B0#chunk-5",
-    "title": "Agent 能跑起来以后，怎么知道它真的做对了？一个天气例子看懂 LangSmith (第6段)",
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%BF%99%E6%AC%A1%E7%AD%94%E5%AF%B9%E4%BA%86%EF%BC%8C%E4%B8%8B%E6%AC%A1%E5%91%A2%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20LangSmith#chunk-5",
+    "title": "Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith (第6段)",
     "content": "...为下一条测试案例。LangSmith Evaluation 它和 LangGraph 分别管什么\n这两个名字经常一起出现，很容易混掉。\nLangGraph 关心的是这一次任务怎么走：缺城市就追问，工具失败就重试，暴雨就转人工。它让 Agent 的流程可以暂停、恢复和分支。\nLangSmith 关心的是任务走完以后，我们怎样还原它走过的路，并确认改动没有把别的路径弄坏。\n刚开始不必建立几百条案例。第一版只要保住五件事：小雨、晴天、暴雨、工具失败、缺城市。以后每抓到一次新的错误，就让它成为 Dataset 里的一条新案例。\n这样，Agent 才不是每次修改后都靠人再问一句“现在好了吗”。",
-    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%83%BD%E8%B7%91%E8%B5%B7%E6%9D%A5%E4%BB%A5%E5%90%8E%EF%BC%8C%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E5%AE%83%E7%9C%9F%E7%9A%84%E5%81%9A%E5%AF%B9%E4%BA%86%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20Agent%20%E8%AF%84%E4%BC%B0",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FAgent%20%E8%BF%99%E6%AC%A1%E7%AD%94%E5%AF%B9%E4%BA%86%EF%BC%8C%E4%B8%8B%E6%AC%A1%E5%91%A2%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20LangSmith",
     "chunkIndex": 5,
     "totalChunks": 6,
-    "startPos": 1705,
-    "endPos": 1970,
-    "originalTitle": "Agent 能跑起来以后，怎么知道它真的做对了？一个天气例子看懂 LangSmith"
+    "startPos": 1697,
+    "endPos": 1962,
+    "originalTitle": "Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith"
   },
   {
     "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FClaude%20Dreaming%20vs%20Hermes%20Skill%EF%BC%9A%E5%B8%AE%E4%BD%A0%E5%85%A5%E5%9D%91%20Agent%20Memory#chunk-0",
