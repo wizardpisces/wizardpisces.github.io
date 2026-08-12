@@ -5,142 +5,335 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex,nofollow">
   <title>从一句 Prompt 到可靠 Agent：系列节点 | LZ AI NOTE</title>
-  <meta name="description" content="从一句 Prompt 到可靠 Agent：系列节点 这张表只记录从 Prompt 走向 Agent 时可能遇到的问题。 它有一条大致的认知线，但没有固定顺序。实际先撞上哪个问题，就可以先从哪里写。技术名词只是落点，不代表文章必须使用某个框架。 序号 话题引子（标题方向） 可以碰到的启发 概念落点 1 [Prompt 没变，为什么换个模型，行为就变了？] P…">
+  <meta name="description" content="从一句 Prompt 到可靠 Agent：系列节点 系列角色：知识主干·Agent 系统。 当前活跃主链，负责解释模型之外的系统如何从可运行走向可检查、可恢复、可授权。整体归属与交叉规则见[内容系列总图]。 系列判断 这个方向足以形成长期系列。它既不是 Agent 术语课程，也不是只讲工程道理的问题文；它追踪一次模型调用如何在真实失败中，逐步长出流程、工具…">
   <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E4%B8%80%E5%8F%A5%20Prompt%20%E5%88%B0%E5%8F%AF%E9%9D%A0%20Agent%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
   <meta property="og:title" content="从一句 Prompt 到可靠 Agent：系列节点 | LZ AI NOTE">
-  <meta property="og:description" content="从一句 Prompt 到可靠 Agent：系列节点 这张表只记录从 Prompt 走向 Agent 时可能遇到的问题。 它有一条大致的认知线，但没有固定顺序。实际先撞上哪个问题，就可以先从哪里写。技术名词只是落点，不代表文章必须使用某个框架。 序号 话题引子（标题方向） 可以碰到的启发 概念落点 1 [Prompt 没变，为什么换个模型，行为就变了？] P…">
+  <meta property="og:description" content="从一句 Prompt 到可靠 Agent：系列节点 系列角色：知识主干·Agent 系统。 当前活跃主链，负责解释模型之外的系统如何从可运行走向可检查、可恢复、可授权。整体归属与交叉规则见[内容系列总图]。 系列判断 这个方向足以形成长期系列。它既不是 Agent 术语课程，也不是只讲工程道理的问题文；它追踪一次模型调用如何在真实失败中，逐步长出流程、工具…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E4%B8%80%E5%8F%A5%20Prompt%20%E5%88%B0%E5%8F%AF%E9%9D%A0%20Agent%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"从一句 Prompt 到可靠 Agent：系列节点","description":"从一句 Prompt 到可靠 Agent：系列节点 这张表只记录从 Prompt 走向 Agent 时可能遇到的问题。 它有一条大致的认知线，但没有固定顺序。实际先撞上哪个问题，就可以先从哪里写。技术名词只是落点，不代表文章必须使用某个框架。 序号 话题引子（标题方向） 可以碰到的启发 概念落点 1 [Prompt 没变，为什么换个模型，行为就变了？] P…","url":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E4%B8%80%E5%8F%A5%20Prompt%20%E5%88%B0%E5%8F%AF%E9%9D%A0%20Agent%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E4%B8%80%E5%8F%A5%20Prompt%20%E5%88%B0%E5%8F%AF%E9%9D%A0%20Agent%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","dateModified":"2026-08-10","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"从一句 Prompt 到可靠 Agent：系列节点","description":"从一句 Prompt 到可靠 Agent：系列节点 系列角色：知识主干·Agent 系统。 当前活跃主链，负责解释模型之外的系统如何从可运行走向可检查、可恢复、可授权。整体归属与交叉规则见[内容系列总图]。 系列判断 这个方向足以形成长期系列。它既不是 Agent 术语课程，也不是只讲工程道理的问题文；它追踪一次模型调用如何在真实失败中，逐步长出流程、工具…","url":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E4%B8%80%E5%8F%A5%20Prompt%20%E5%88%B0%E5%8F%AF%E9%9D%A0%20Agent%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E4%B8%80%E5%8F%A5%20Prompt%20%E5%88%B0%E5%8F%AF%E9%9D%A0%20Agent%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","dateModified":"2026-08-12","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>从一句 Prompt 到可靠 Agent：系列节点</h1><h1>从一句 Prompt 到可靠 Agent：系列节点</h1>
-<p>这张表只记录从 Prompt 走向 Agent 时可能遇到的问题。</p>
-<p>它有一条大致的认知线，但没有固定顺序。实际先撞上哪个问题，就可以先从哪里写。技术名词只是落点，不代表文章必须使用某个框架。</p>
+<blockquote>
+<p><strong>系列角色：知识主干·Agent 系统。</strong> 当前活跃主链，负责解释模型之外的系统如何从可运行走向可检查、可恢复、可授权。整体归属与交叉规则见<a href="./LZ%20AI%20Note%EF%BC%9A%E5%86%85%E5%AE%B9%E7%B3%BB%E5%88%97%E6%80%BB%E5%9B%BE.md">内容系列总图</a>。</p>
+</blockquote>
+<h2>系列判断</h2>
+<p>这个方向足以形成长期系列。它既不是 Agent 术语课程，也不是只讲工程道理的问题文；它追踪一次模型调用如何在真实失败中，逐步长出流程、工具、状态、记忆、恢复和权限边界，并让每一次失败都带出一个可迁移的核心概念或框架。</p>
+<p>固定承诺：</p>
+<blockquote>
+<p>每篇先让一个真实失败出现，再由失败逼出一个核心概念或框架：既讲清它为什么需要，也拆开它怎样运转、解决什么、不解决什么。最后留下的不只是一条从不可控到可检查、可恢复、可授权的工程路径，还有一张可以迁移到其他 Agent 系统的概念地图。</p>
+</blockquote>
+<p>读者收益：</p>
+<ul>
+<li>普通读者先跟着具体任务和失败进入，不会觉得文章在抽象说教，也能看见 Agent 是模型与外部系统一层层组合的结果。</li>
+<li>技术读者能获得稳定的概念坐标，判断什么时候普通函数就够，什么失败真的需要 Workflow、Graph、Memory、Checkpoint 或 Human in the Loop。</li>
+</ul>
+<h2>系列边界</h2>
+<ul>
+<li>模型内部的 Attention、残差、MoE 等结构，交给「模型为什么这样设计」。</li>
+<li>某个开源仓库的反常实现与取舍，交给「从源码里看懂 AI 工程」；本系列只解释稳定的问题主线。</li>
+<li>自然、小说或组织与 Agent 的共同机制，交给「不是比喻」。</li>
+<li>框架安装、API 列表和功能横评不属于本系列。框架只在暴露一个问题时才成为案例。</li>
+</ul>
+<h2>单篇文章必须同时完成两层任务</h2>
+<p>这个系列表现好的关键，不只是“前一篇留下问题，后一篇继续解决”，而是每篇都同时有两层：</p>
+<ul>
+<li><strong>问题层</strong>：一个已经能运行的具体系统遇到新的失败，普通读者能看懂“为什么现在非解决不可”。</li>
+<li><strong>知识层</strong>：用一个核心概念或框架解释失败从哪里来、机制怎样运转，以及它的适用边界。</li>
+</ul>
+<p>标准推进方式是：</p>
+<pre><code class="language-text">具体任务已经能跑
+↓
+出现一个新的真实失败
+↓
+旧方法为什么解释不了、解决不了
+↓
+引出一个核心概念或框架
+↓
+拆成最小组成、运行过程与可观察证据
+↓
+说明它解决什么、不解决什么、什么时候不必用
+↓
+暴露下一阶段的问题
+</code></pre>
+<p>这里的“框架”不只指 LangGraph、LangSmith 这样的软件框架，也包括 ReAct、Context Engineering、状态机、幂等、授权边界等概念框架。不是每篇都必须挂一个产品名，但每篇主线文章都必须给读者留下一个清晰、可复用的认知结构。</p>
+<p>判断一篇是否成立，可以看两条：</p>
+<ul>
+<li>只有“应该少塞资料”“应该加评估”之类结论，没有解释核心对象、组成和边界，容易退化成说教。</li>
+<li>只有框架功能和 API，没有先让失败发生，容易退化成文档复述。</li>
+</ul>
+<h2>问题节点图</h2>
+<pre><code class="language-text">第一阶段：让 Agent 跑起来，并知道它有没有做对
+
+Prompt 依赖模型猜测隐含默契
+        ↓
+怎样把期望变成可观察的行为？
+        ↓
+行为协议 + 确定性代码
+        ↓
+搜索、判断和写作挤在一次调用里，怎样分开？
+        ↓
+Workflow
+        ↓
+下一步无法提前写死时，谁来决定？
+        ↓
+Agent Loop + Tool Calling
+        ↓
+任务出现分支、暂停和回退，怎样继续？
+        ↓
+State + Graph
+        ↓
+系统跑完了，怎样知道哪一步先坏掉，换个输入还会不会坏？
+        ↓
+Trace + Dataset + Evaluator + 回归比较
+
+第二阶段：让 Agent 在长任务里不被信息淹没、不忘记目标
+
+对话、工具结果和资料越来越多，这一步到底该看什么？
+        ↓
+Context Engineering + 信息外部化
+        ↓
+任务跑得越久，为什么越容易忘记最初要做什么？
+        ↓
+Goal + Plan + Evidence + 外部控制状态
+        ↓
+当前任务的上下文装不下过去经验，什么才值得长期留下？
+        ↓
+Memory 的写入、更新、过期与冲突
+        ↓
+哪些过去是事实，哪些经验应该固化成做事方法？
+        ↓
+Semantic Memory + Skill / Procedural Memory
+
+第三阶段：让 Agent 面对中断和真实副作用时仍可恢复、可授权
+
+工具其实已经执行成功，Agent 为什么不能放心重试？
+        ↓
+Retry + Checkpoint + Idempotency
+        ↓
+系统已经能行动，怎样限制它不该做的事？
+        ↓
+Identity + Least Privilege + Human in the Loop + Audit
+
+第四阶段：当单个 Agent 真的成为瓶颈，再谈拆分
+
+一个 Agent 忙不过来，是否真的应该拆开？
+        ↓
+任务独立性 + 上下文隔离 + 通信成本 + 共因失效
+        ↓
+一个可靠 Agent 最后应该留下多少复杂度？
+</code></pre>
+<p>这是问题的认知依赖，不是必须照顺序发布的课程。真实工程先撞上哪个失败，就可以先从哪个节点写。</p>
+<h2>核心节点池</h2>
 <table>
 <thead>
 <tr>
-<th>序号</th>
 <th>话题引子（标题方向）</th>
-<th>可以碰到的启发</th>
+<th>真正要追问什么</th>
 <th>概念落点</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>1</td>
-<td>[Prompt 没变，为什么换个模型，行为就变了？](…/…/tech/ai-好问题/模型一换，Prompt 为什么会失效？<a href="http://xn--siqwns0g36am5a71sp32g9wfho1a03s.md">从隐含默契到行为协议.md</a>)</td>
-<td>Prompt 里有大量没有写出来的默契，模型变化会让这些默契失效</td>
+<td><a href="../../tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%8D%A2%EF%BC%8CPrompt%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%A4%B1%E6%95%88%EF%BC%9F%E4%BB%8E%E9%9A%90%E5%90%AB%E9%BB%98%E5%A5%91%E5%88%B0%E8%A1%8C%E4%B8%BA%E5%8D%8F%E8%AE%AE.md">Prompt 没变，为什么换个模型，行为就变了？</a></td>
+<td>Prompt 里有多少从未写出的默契，怎样把它们改成可观察行为</td>
 <td>行为协议</td>
 </tr>
 <tr>
-<td>2</td>
 <td>Prompt 写得越长，为什么不一定越可靠？</td>
-<td>增加要求不等于减少歧义，规则之间还可能互相冲突</td>
+<td>增加要求为什么不等于减少歧义，规则又如何互相冲突</td>
 <td>指令边界</td>
 </tr>
 <tr>
-<td>3</td>
 <td>哪些要求应该写进 Prompt，哪些应该交给代码？</td>
-<td>能被确定检查的事情，没有必要继续依赖模型自觉</td>
+<td>可确定检查的事情为什么不应继续依赖模型自觉</td>
 <td>确定性代码</td>
 </tr>
 <tr>
-<td>4</td>
 <td>Prompt 改到第八版，为什么反而不知道哪版最好？</td>
-<td>只有固定样例和判断标准，版本变化才有积累</td>
+<td>版本变化如何在固定样例和判断标准上积累</td>
 <td>Prompt 版本与回归</td>
 </tr>
 <tr>
-<td>5</td>
 <td>Demo 明明成功了，为什么换个输入就坏了？</td>
-<td>一次成功只能说明样例能跑，不能说明行为稳定</td>
+<td>一次成功和稳定行为之间差了哪些证据</td>
 <td>Eval</td>
 </tr>
 <tr>
-<td>6</td>
 <td>一次模型调用，什么时候应该拆成 Workflow？</td>
-<td>搜索、判断和写作混在一起时，一个修改很容易伤到其他能力</td>
+<td>搜索、判断和写作混在一起时，为什么一个修改容易伤到其他能力</td>
 <td>Workflow</td>
 </tr>
 <tr>
-<td>7</td>
 <td>什么时候只需要 Workflow，什么时候才值得交给 Agent？</td>
-<td>确定的步骤适合写死，无法提前知道下一步的局部问题才需要 Agent</td>
+<td>确定的步骤与无法预知的局部问题应如何分工</td>
 <td>Agent 决策循环</td>
 </tr>
 <tr>
-<td>8</td>
 <td>模型会回答问题，为什么还需要工具？</td>
-<td>会说不等于能查、能算、能执行，工具把语言连接到外部世界</td>
+<td>会说与能查、能算、能执行之间差了什么</td>
 <td>Tool Calling</td>
 </tr>
 <tr>
-<td>9</td>
-<td>一个例子读懂 LangChain：它到底封装了什么？</td>
-<td>框架处理的是模型、消息和工具之间的连接，不会让模型自动变聪明</td>
-<td>Agent 框架</td>
-</tr>
-<tr>
-<td>10</td>
 <td>流程什么时候需要「走回头路」？</td>
-<td>出现分支、循环和暂停以后，状态怎么变化比步骤列表更重要</td>
+<td>出现分支、循环和暂停以后，为什么状态变化比步骤列表更重要</td>
 <td>Graph / State</td>
 </tr>
 <tr>
-<td>11</td>
 <td>Agent 最后答错了，究竟是哪一步先坏的？</td>
-<td>最终答案只留下结果，执行轨迹才能还原错误路径</td>
+<td>只有最终答案时，为什么无法还原错误路径</td>
 <td>Trace / Observability</td>
 </tr>
 <tr>
-<td>12</td>
 <td>资料越多，Agent 为什么反而越容易答错？</td>
-<td>Context Engineering 关心的是这一步该看什么，不是最多能塞多少</td>
+<td>上下文工程为什么关心这一步该看什么，而不是最多能塞多少</td>
 <td>Context Engineering</td>
 </tr>
 <tr>
-<td>13</td>
-<td>Agent 应该记住什么，又该忘掉什么？</td>
-<td>记忆的难点是决定哪些旧信息应该继续影响未来</td>
-<td>Memory</td>
-</tr>
-<tr>
-<td>14</td>
 <td>任务变长后，Agent 为什么越来越容易跑偏？</td>
-<td>长任务需要一个可以反复对照的目标，也需要可复用的做事方法</td>
-<td>Plan / Skill</td>
+<td>当前目标、计划、证据和停止条件为什么不能只寄托在聊天记录里</td>
+<td>Goal / Plan / Control State</td>
 </tr>
 <tr>
-<td>15</td>
+<td>上下文窗口越来越长，Agent 为什么还需要 Memory？</td>
+<td>当前任务要看的内容，与值得跨任务留下的经验有什么不同</td>
+<td>Context / State / Memory</td>
+</tr>
+<tr>
+<td>Agent 应该记住什么，又该忘掉什么？</td>
+<td>哪些旧信息值得继续影响未来，错误又如何不被固化</td>
+<td>Memory Governance</td>
+</tr>
+<tr>
 <td>一个 Agent 忙不过来，就应该拆成多个吗？</td>
-<td>多 Agent 适合可以独立推进、最后再合并的任务，不是角色越多越智能</td>
+<td>哪些任务真能独立推进后再合并，数量为什么不等于智能</td>
 <td>Multi-Agent</td>
 </tr>
 <tr>
-<td>16</td>
-<td>Agent 做到一半断了，为什么不能从头再来？</td>
-<td>重试解决再做一次，检查点解决从哪里继续</td>
-<td>Retry / Checkpoint</td>
+<td>工具已经执行成功，Agent 为什么不能放心重试？</td>
+<td>重试与检查点各自解决什么，已经发生的副作用又如何避免被重复执行</td>
+<td>Retry / Checkpoint / Idempotency</td>
 </tr>
 <tr>
-<td>17</td>
 <td>Agent 能写完文章，为什么还不能让它直接发布？</td>
-<td>能力和授权是两件事，真实副作用需要权限边界和人工确认</td>
+<td>能力和授权为什么是两件事，真实副作用如何设置权限边界</td>
 <td>Guardrails / Human in the Loop</td>
 </tr>
 <tr>
-<td>18</td>
 <td>一个可靠 Agent 最后应该留下多少复杂度？</td>
-<td>每一个机制都该对应一个已经发生的失败，框架提供的能力不必全用</td>
+<td>每个机制是否都能对应一个已发生的失败</td>
 <td>可靠性与复杂度</td>
 </tr>
 </tbody>
 </table>
-<p>可以把整条线暂时理解成：Prompt 先变成可检查的行为，单次调用再长出流程、工具和状态，最后才面对记忆、恢复、权限这些长期运行问题。它是方向感，不是文章目录。</p>
+<h2>已有文章与节点状态</h2>
+<p>现有文章不是一条严格按概念顺序发布的课程，而是三条可互相接续的叙事链。</p>
+<h3>当前主链：天气 Agent 如何从会调工具走到可评估</h3>
+<pre><code class="language-text">[什么是 ReAct？]
+循环 + 工具 + 状态
+        ↓
+[LangGraph 到底解决了什么问题？]
+分支 + 暂停 + 恢复
+        ↓
+[Agent 能跑起来以后，怎么知道它做对了？]
+Trace + Dataset + Evaluator + Experiment
+</code></pre>
+<ul>
+<li><a href="../../tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E4%BB%80%E4%B9%88%E6%98%AF%20ReAct%EF%BC%9F%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20Agent%20%E5%8E%9F%E7%90%86.md">《什么是 ReAct？》</a>已覆盖 Agent Loop 与 Tool Calling 的基本关系。</li>
+<li><a href="../../tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/LangGraph%20%E5%88%B0%E5%BA%95%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F%E7%94%A8%E4%B8%80%E4%B8%AA%E6%9F%A5%E5%A4%A9%E6%B0%94%E7%9A%84%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82.md">《LangGraph 到底解决了什么问题？》</a>已覆盖 State、Graph、暂停与 Checkpoint 的入口。</li>
+<li><a href="../../tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Agent%20%E8%83%BD%E8%B7%91%E8%B5%B7%E6%9D%A5%E4%BB%A5%E5%90%8E%EF%BC%8C%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E5%AE%83%E7%9C%9F%E7%9A%84%E5%81%9A%E5%AF%B9%E4%BA%86%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20Agent%20%E8%AF%84%E4%BC%B0.md">《Agent 能跑起来以后，怎么知道它真的做对了？》</a>已把 Trace、Dataset、Evaluator 与 Experiment 连成一条回归路径。「Prompt 第八版」和「Demo 换输入就坏」默认合并到这条线，不重复造两篇基础科普。</li>
+</ul>
+<p>这是当前最适合继续串的主链。它的优势不只是概念连续：三篇复用同一个天气 Agent，每篇都从上一篇已经成功的系统里找到一个新失败，不需要读者重新学习场景。</p>
+<p>它们之所以成立，也不只是案例连续。每篇都让问题落到一个可以带走的框架上：</p>
+<table>
+<thead>
+<tr>
+<th>文章</th>
+<th>先出现的问题</th>
+<th>带出的核心概念或框架</th>
+<th>同时讲清的边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ReAct</td>
+<td>模型知道天气知识，却拿不到实时天气，也不会自主推进</td>
+<td><code>Agent = LLM + Tool + State + Loop</code></td>
+<td>不是所有工具调用都需要 Agent 循环</td>
+</tr>
+<tr>
+<td>LangGraph</td>
+<td>循环开始分支、暂停、恢复，普通控制流越来越难维护</td>
+<td><code>State + Node + Edge + Checkpoint</code></td>
+<td>简单线性任务不必为了“像 Agent”而上图</td>
+</tr>
+<tr>
+<td>Agent 评估</td>
+<td>最终答案看似正确，但不知道中间过程是否可靠</td>
+<td><code>Trace → Dataset → Evaluator → Experiment</code></td>
+<td>评估负责暴露失败，不负责自动让模型变好</td>
+</tr>
+</tbody>
+</table>
+<h3>工程边界支线：一场读书会怎样长出 Loop 与 Graph</h3>
+<ul>
+<li><a href="../../tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E4%BB%8E%20Prompt%20%E5%88%B0%20Loop%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%E7%9A%84%E5%9B%9B%E6%AC%A1%E5%8D%87%E7%BA%A7.md">《从 Prompt 到 Loop Engineering》</a>是一篇横切全系列的总览，说明 Prompt、Context、Harness 与 Loop 的工程边界如何向外移。</li>
+<li><a href="../../tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E4%BB%8E%20Loop%20%E5%88%B0%20Graph%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%E5%A4%9A%20Agent%20%E6%80%8E%E4%B9%88%E5%8D%8F%E4%BD%9C.md">《从 Loop 到 Graph Engineering》</a>已建立分叉、并行、汇合与局部返工的关系。后续 Multi-Agent 篇必须进入任务独立性、上下文隔离、通信成本或共因失效，不再重复“拆成多条支线”。</li>
+</ul>
+<h3>回看与前置支线</h3>
+<ul>
+<li><a href="../../tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%8D%A2%EF%BC%8CPrompt%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%A4%B1%E6%95%88%EF%BC%9F%E4%BB%8E%E9%9A%90%E5%90%AB%E9%BB%98%E5%A5%91%E5%88%B0%E8%A1%8C%E4%B8%BA%E5%8D%8F%E8%AE%AE.md">《Prompt 没变，为什么换个模型，行为就变了？》</a>已建立“隐含默契 → 行为协议 → 确定性检查”的入口。「哪些要求交给代码」已被部分覆盖，只有找到更强的边界冲突时才单独成篇。</li>
+<li><a href="../../tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Claude%20Dreaming%20vs%20Hermes%20Skill%EF%BC%9A%E5%B8%AE%E4%BD%A0%E5%85%A5%E5%9D%91%20Agent%20Memory.md">《Claude Dreaming vs Hermes Skill：帮你入坑 Agent Memory》</a>已经区分了“把经验留为事实”与“把经验固化成做事方法”。后续 Memory 主链不再重新介绍 Semantic / Procedural Memory，而应先说清 Context、State 与 Memory 的不同生命周期，再进入记忆治理。</li>
+</ul>
+<p>「一个例子读懂 LangChain 到底封装了什么」暂不作为核心节点。如果只能说明模型、消息与工具怎样连接，ReAct 与已有框架文章已经足够；只有找到一个“抽象层隐藏了哪种失败或代价”的新问题时，才恢复为独立篇。</p>
+<h2>当前阶段与下一批文章</h2>
+<p>第一阶段“让 Agent 跑起来，并知道它有没有做对”已基本完成。现在应顺着天气 Agent 主链，进入第二阶段“让 Agent 在长任务里不被信息淹没、不忘记目标”。</p>
+<h3>主链第一篇</h3>
+<blockquote>
+<p><strong>资料越多，Agent 为什么反而越容易答错？</strong></p>
+</blockquote>
+<p>继续使用天气 Agent：它现在已经会调工具、保存状态、暂停恢复，也能被评估。新失败是，对话、多次天气查询、工具回包、用户偏好和风险规则全部进入上下文后，它开始引用旧城市、旧日期或无关规则。</p>
+<p>这篇真正要讲清：</p>
+<ul>
+<li>Prompt 是要求，Context 是这一步实际看到的全部信息。</li>
+<li>Context Window 是容量上限，Context Engineering 是信息选择。</li>
+<li>State 保存任务已经确定的事，不等于把全部聊天历史都塞回模型。</li>
+<li>更多信息会同时增加成本、延迟与干扰；关键不是删得越多，而是这一步只看当前需要的东西。</li>
+</ul>
+<p>它的核心概念落点是 <strong>Context Engineering</strong>。文章不能只得到“资料不是越多越好”这个结论，还要给出一张最小框架：Prompt、当前状态、历史消息、工具结果和检索材料分别是什么，它们如何被选择、压缩、隔离和淘汰，以及 Context 与 State、Memory 的边界在哪里。</p>
+<h3>后续主链</h3>
+<ol>
+<li>
+<p><strong>任务变长后，Agent 为什么越来越容易跑偏？</strong></p>
+<p>从信息选择进入目标保真：长任务不只要减少上下文，还要在对话之外保存目标、当前计划、证据、预算和停止条件。核心概念落点是长任务控制面：<code>Goal → Plan → Evidence → Gate / Stop</code>。</p>
+</li>
+<li>
+<p><strong>上下文窗口越来越长，Agent 为什么还需要 Memory？</strong></p>
+<p>区分当前推理的 Context、任务执行的 State 与跨任务保留的 Memory。核心概念落点是 <code>Context / State / Memory / Skill</code> 四类对象及其生命周期；文末接入已有 Dreaming / Skill 文章，不重复讲记忆类型。</p>
+</li>
+<li>
+<p><strong>工具已经执行成功，Agent 为什么不能放心重试？</strong></p>
+<p>从一个已经发送成功、但响应丢失的真实动作进入 Retry、Checkpoint 与 Idempotency。核心概念落点是失败恢复框架，以及“重算”和“重复执行副作用”的区别；避免重复 LangGraph 中已经讲过的“从哪里恢复”。</p>
+</li>
+<li>
+<p><strong>Agent 能写完文章，为什么还不能让它直接发布？</strong></p>
+<p>从真实副作用进入身份、最小权限、可撤销委托、人工确认与审计。核心概念落点是 <code>Capability / Identity / Authorization / Approval / Audit</code>。</p>
+</li>
+</ol>
+<h3>穿插篇</h3>
+<p><strong>Prompt 写得越长，为什么不一定越可靠？</strong> 仍然值得写，但不紧接在当前工程主链后面。它适合在两篇长任务文章之后作为低门槛回看篇，从单条规则推进到规则冲突、优先级和指令边界。</p>
+<h2>发布节奏</h2>
+<p>现有反馈说明，读者愿意跟随一个具体 Agent 连续撞上新问题。后续保持以下节奏：</p>
+<ol>
+<li><strong>两至三篇连续主链</strong>：复用同一案例，每篇完成“一个新失败 + 一个核心概念或框架”，并在结尾明确暴露下一篇的问题。</li>
+<li><strong>一篇低门槛回看或旁证</strong>：用 Prompt、经典软件或开源仓库重新照亮主线，但不另起一套概念目录。</li>
+<li><strong>再回主链</strong>：穿插篇不连续超过一篇，避免读者失去“这个 Agent 接下来还会遇到什么”的期待。</li>
+</ol>
+<p>发布顺序不追求把概念补齐。一篇只有在上一篇的系统里发生了新失败，并且这个失败值得带出一个可复用的认知结构，才继续占据主链。</p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-DjvITeCp.js"></script>
+  <script type="module" crossorigin src="/assets/index-BJ134Q5f.js"></script>
 </body>
 </html>

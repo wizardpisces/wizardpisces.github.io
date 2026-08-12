@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>从源码里看懂 AI 工程：系列节点路线图 | LZ AI NOTE</title>
+  <meta name="description" content="从源码里看懂 AI 工程：系列节点路线图 系列角色：知识主干·软件实现。 负责从源码证据还原 AI 基础设施与当下项目的工程取舍；只有源码、测试、Issue、RFC 或提交历史不可替代时才主归本系列。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不负责告诉读者“本周又火了什么”，而是借一份真正经受过使用的源码，讲透一个会长期存在的 AI 工程问…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E6%BA%90%E7%A0%81%E9%87%8C%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="从源码里看懂 AI 工程：系列节点路线图 | LZ AI NOTE">
+  <meta property="og:description" content="从源码里看懂 AI 工程：系列节点路线图 系列角色：知识主干·软件实现。 负责从源码证据还原 AI 基础设施与当下项目的工程取舍；只有源码、测试、Issue、RFC 或提交历史不可替代时才主归本系列。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不负责告诉读者“本周又火了什么”，而是借一份真正经受过使用的源码，讲透一个会长期存在的 AI 工程问…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E6%BA%90%E7%A0%81%E9%87%8C%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"从源码里看懂 AI 工程：系列节点路线图","description":"从源码里看懂 AI 工程：系列节点路线图 系列角色：知识主干·软件实现。 负责从源码证据还原 AI 基础设施与当下项目的工程取舍；只有源码、测试、Issue、RFC 或提交历史不可替代时才主归本系列。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不负责告诉读者“本周又火了什么”，而是借一份真正经受过使用的源码，讲透一个会长期存在的 AI 工程问…","url":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E6%BA%90%E7%A0%81%E9%87%8C%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E6%BA%90%E7%A0%81%E9%87%8C%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","dateModified":"2026-08-12","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>从源码里看懂 AI 工程：系列节点路线图</h1><h1>从源码里看懂 AI 工程：系列节点路线图</h1>
+<blockquote>
+<p><strong>系列角色：知识主干·软件实现。</strong> 负责从源码证据还原 AI 基础设施与当下项目的工程取舍；只有源码、测试、Issue、RFC 或提交历史不可替代时才主归本系列。整体归属与交叉规则见<a href="./LZ%20AI%20Note%EF%BC%9A%E5%86%85%E5%AE%B9%E7%B3%BB%E5%88%97%E6%80%BB%E5%9B%BE.md">内容系列总图</a>。</p>
+</blockquote>
+<h2>系列定位</h2>
+<p>这个系列不负责告诉读者“本周又火了什么”，而是借一份真正经受过使用的源码，讲透一个会长期存在的 AI 工程问题。源码可以来自近期活跃的新项目，也可以来自 PyTorch、TensorFlow、JAX 等历经多年演化的基础框架。</p>
+<pre><code class="language-text">源码里的反常结构是入口
+反常设计是抓手
+真实失败是矛盾
+机制与代价才是正文
+</code></pre>
+<p>每篇只拆一个问题。仓库可以过时，文章留下的判断不能跟着过时。</p>
+<p>默认以一个仓库、一个子系统或一条关键演化路径为主证据。若同一个问题在几种框架里形成了不同取舍，也可以做比较篇，但必须围绕同一个尚未闭合的问题，不能写成项目盘点。</p>
+<p>系列名暂定为：<strong>从源码里看懂 AI 工程</strong>。</p>
+<p>固定承诺：<strong>不做项目说明书；从一个删掉就会出事的设计，还原它面对的失败、采用的机制和付出的代价，最后留下一个可以分析其他系统的工程决策模型。</strong></p>
+<p>这个方向足以形成长期系列。它不依靠某一批热门仓库持续有效，而依靠一个稳定的证据方法：用源码、测试、Issue、设计文档、RFC 和提交历史，找到一个“删掉就会出事”的结构。</p>
+<p>读者收益：</p>
+<ul>
+<li>普通读者不需要追踪所有项目，只需借一个具体实现看见 AI 能力怎样被框架托住，又会在走向真实系统时撞上什么失败。</li>
+<li>技术读者能从实现、接口、状态和测试中还原设计取舍，而不停在 README 与架构图。</li>
+</ul>
+<h2>系列边界</h2>
+<ul>
+<li>Agent 系列负责建立 Prompt、Workflow、Tool、State、Memory 与权限的递进主线；本系列只在一个仓库提供了足够源码证据和独特取舍时成篇。</li>
+<li>模型架构系列负责解释残差、Attention、MoE、LoRA 等稳定机制；本系列不因为某个仓库实现了它们就再讲一遍。</li>
+<li>技术历史系列负责还原时代条件与产品路径；本系列可以使用提交历史，但最终必须落回一个可在源码中验证的软件结构。</li>
+<li>不写安装教程、功能列表、周报、Star 排行和“值得关注的十个项目”。</li>
+<li>一个问题若完全不需要源码证据就能讲清，优先回到对应主线，不为了留在本系列硬挂一个仓库。</li>
+</ul>
+<h2>两条问题主线</h2>
+<h3>第一条：当下项目怎样把 AI 接进真实世界</h3>
+<p>仓库会变，但 AI 工程从模型走向现实系统时，会反复经过这条路：</p>
+<pre><code class="language-text">模型能输出一个动作
+为什么还不等于能完成任务？
+        ↓
+工具只解决一次调用
+文件、环境与执行器怎样在多次动作之间保持连续？
+        ↓
+执行器可以消失
+目标、证据、预算与人类决策应该存在哪里？
+        ↓
+外部控制面能让任务继续
+上下文、缓存与运行成本又怎样反过来塑造架构？
+        ↓
+对话已经容纳不下长期经验
+记忆如何变成可治理、可更新的组织资产？
+        ↓
+记住资料还不够
+检索结构怎样贴合代码、图和业务之间的真实关系？
+        ↓
+系统能力已经接入真实账号
+谁的身份、哪份凭证、什么授权和多少副作用由谁控制？
+</code></pre>
+<p>这是长期母题，不是对某一批仓库的事后排序。新仓库只有提供了比已有案例更强的证据，或暴露了新的长期失败，才会改变这张图。</p>
+<h3>第二条：基础框架为什么长成今天这样</h3>
+<pre><code class="language-text">数组已经能计算
+为什么还要抽象出 Tensor、Storage、Device 与 DType？
+        ↓
+模型写成普通程序
+框架怎样记录依赖并自动计算梯度？
+        ↓
+同一个算子要面对 CPU、GPU、Autograd 与扩展后端
+谁负责找到真正应该执行的实现？
+        ↓
+Eager 模式容易理解和调试
+为什么性能优化又不断要求重新得到一张图？
+        ↓
+Python 控制流可以随时变化
+编译器怎样用 Guard、Graph Break 与重编译守住语义？
+        ↓
+单卡程序已经正确
+分布式训练怎样重新安排状态、计算与通信？
+        ↓
+模型在原框架中可以运行
+为什么导出、部署和跨后端执行仍然困难？
+</code></pre>
+<p>这条线不是按 TensorFlow、PyTorch、JAX 逐个介绍产品，而是追踪深度学习框架反复面对的几组矛盾：易用与优化、动态与静态、抽象与硬件、可变程序与可移植表示。成熟框架的价值正在于，这些取舍经过了多年真实负载、兼容性和生态约束的检验。</p>
+<p>但“演化成今天这样”不等于“今天这样就是最优解”。每篇都要区分四件事：它最初解决了什么失败、当时受什么条件限制、后来为什么难以替换，以及今天留下的是稳定抽象还是历史债务。源码考古负责解释设计，不负责替设计辩护。</p>
+<h2>什么源码对象值得写</h2>
+<p>新项目可以从 Trending、短期 Star 增长、密集发布和社区讨论进入候选池；成熟框架则从一个反复出现的异常行为、复杂抽象或历史转向进入。正式写之前，都要依次通过下面几关：</p>
+<ol>
+<li><strong>有问题</strong>：能指出一个具体而反常的设计，而不只是功能多或数据漂亮。</li>
+<li><strong>有失败</strong>：能找到这个设计试图避免的真实失败模式。</li>
+<li><strong>有证据</strong>：README 之外还有源码、设计文档、Issue、提交记录、测试或可复现实验。</li>
+<li><strong>有取舍</strong>：能够说明它获得了什么，也牺牲了什么。</li>
+<li><strong>有余量</strong>：用三句话介绍完项目后，仍有一个值得写成长文的问题。</li>
+<li><strong>有新意</strong>：与内容库里的旧文相比，核心问题、机制或最终判断至少有一项明显不同。</li>
+</ol>
+<p>以下仓库原则上不写：套壳项目、Prompt 合集、Awesome List、只有营销口号的仓库、无法复现的榜单项目，以及只有 Star 上涨却没有独特设计的项目。</p>
+<p>成熟框架也不因“经典”自动值得写。只会介绍目录结构、公共 API 或版本历史的题目同样退出；一个框架可以反复出现，但每篇只能拆一个独立问题。不能用“它存在很多年”证明设计正确，也不能把兼容成本和技术债包装成深谋远虑。</p>
+<h2>单篇结构</h2>
+<p>每篇都从源码和文档出发，但正文不必按源码目录讲：</p>
+<pre><code class="language-text">一个看起来多余的设计
+        ↓
+删掉它会发生什么
+        ↓
+源码如何拆分数据、状态、控制与执行
+        ↓
+这种方案付出了什么代价
+        ↓
+它改变了我们对哪类 AI 问题的理解
+</code></pre>
+<p>标题优先写问题，不把仓库名放在最前面。开头可以交代它为何最近受关注，但热度只占很小篇幅。</p>
+<p>这套结构也有明确的双层价值：普通读者从“为什么要多这一层”进入，技术读者从源码证据中带走一个工程模型。仓库只是证据载体，不是知识终点。</p>
+<p>当下项目候选对应的认知落点是：</p>
+<ul>
+<li>Cloudflare Computer：<code>持久状态 / 稳定接口 / 可替换执行器</code>。</li>
+<li>LoopX：<code>Objective / Todo / Evidence / Gate / Handoff</code> 组成的外部控制面。</li>
+<li>DeepSeek-Reasonix：上下文同时具有语义生命周期和缓存、延迟、成本生命周期。</li>
+<li>TencentDB Agent Memory：从个人聊天记录到可写入、更新、遗忘和共享的组织记忆。</li>
+<li>Code-Graph-RAG：检索结构必须匹配问题结构，代码依赖问题不能只靠文本相似度。</li>
+<li>OpenConnector：<code>Tool Schema / Identity / Credential / Scope / Policy / Audit</code> 构成动态委托链。</li>
+<li>页面还原比较篇：<code>Pixel → Component → Schema → Render → Visual Diff</code> 的闭环。</li>
+</ul>
+<p>正式入选时必须写出这样的认知落点。若删掉仓库名以后只剩“这个项目做得不错”，说明文章仍是项目介绍；若工程模型完全不需要源码、测试或 Issue 才能成立，则应迁移回对应主线。</p>
+<h2>第一章候选：当下项目的工程现场</h2>
+<p>下面是 2026 年 8 月的候选池，不是必须依次发布的课程目录。热度会变，真正的问题确定后才进入写作。</p>
+<table>
+<thead>
+<tr>
+<th>节点</th>
+<th>暂定题目</th>
+<th>具体仓库与反常设计</th>
+<th>真正要讲透的问题</th>
+<th>与旧文的关系</th>
+<th>主维度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Agent 已经会调用工具，为什么还要给它一台电脑？</td>
+<td><a href="https://github.com/cloudflare/computer">Cloudflare Computer</a>：把 SQLite 中的持久文件状态与 Container、Isolate Shell、Isolate JavaScript 三种执行后端分开</td>
+<td>工具调用解决一次动作，计算环境还要解决跨动作状态、文件语义和可替换执行；“电脑”是一层稳定接口，不等于一台虚拟机</td>
+<td>接续 Tool Calling；与 Bubblewrap 旧文交叉，但不再讲隔离，而讲“持久状态为何要与执行分离”</td>
+<td>工程</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Agent 能一直跑，为什么不能只靠聊天记录和定时器？</td>
+<td><a href="https://github.com/huangruiteng/loopx">LoopX</a>：把 objective、gates、todos、evidence、quota 和 handoff 放进模型外的持久控制面</td>
+<td>长任务丢失的不是几段对话，而是目标、证据、预算和人类决策之间的约束关系</td>
+<td>接续 Loop、Plan、Checkpoint，重点转向“运行时之外的控制面”</td>
+<td>工程</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Coding Agent 为什么要故意保持 Prompt 前缀不变？</td>
+<td><a href="https://github.com/esengine/DeepSeek-Reasonix">DeepSeek-Reasonix</a>：围绕 prefix-cache stability 组织会话、工具输出裁剪与上下文压缩</td>
+<td>Prompt 不只是指令，也是会影响缓存命中、延迟和成本的数据结构；上下文维护开始反过来塑造 Agent 架构</td>
+<td>接续 Context Engineering，但从语义质量推进到系统成本</td>
+<td>黑箱 / 工程</td>
+</tr>
+<tr>
+<td>4</td>
+<td>团队记忆为什么不能只是保存聊天记录？</td>
+<td><a href="https://github.com/TencentCloud/TencentDB-Agent-Memory">TencentDB Agent Memory</a>：把经验分成 Chat Memory、Skill、LLM-Wiki 与 Code-Graph，并允许跨 Agent 共享</td>
+<td>“记住过去”与“把经验加工成团队资产”是两件事，后者还涉及结构、治理、更新与遗忘</td>
+<td>接续 Memory，从单 Agent 记忆推进到组织记忆</td>
+<td>工程</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Agent 读代码，为什么相似度搜索还不够？</td>
+<td><a href="https://github.com/vitali87/code-graph-rag">Code-Graph-RAG</a>：用 Tree-sitter 抽取符号与依赖关系，形成跨语言代码图</td>
+<td>代码问题往往问的是调用、依赖和数据流，不只是“哪段文字最像”；检索结构必须贴合问题结构</td>
+<td>接续 RAG 与 Context，但改讲代码关系而非文档相似度</td>
+<td>黑箱</td>
+</tr>
+<tr>
+<td>6</td>
+<td>有了 MCP，Agent 为什么还是不能替你办事？</td>
+<td><a href="https://github.com/oomol-lab/open-connector">OpenConnector</a>：把 Provider Action 与用户连接、OAuth 凭证、Scope、Policy、幂等和运行日志放在 Agent 进程之外</td>
+<td>MCP 主要统一“工具怎样被发现和调用”，真实 SaaS 自动化还要回答“以谁的身份、拿哪份凭证、在什么授权下执行”；连接层本质上是一套动态委托系统</td>
+<td>接续 MCP 与 Human in the Loop，从工具协议推进到多租户身份和授权边界</td>
+<td>工程 / 对齐</td>
+</tr>
+<tr>
+<td>7</td>
+<td>AI 已经能看图写页面，为什么设计稿还原仍然很难？</td>
+<td>比较 <a href="https://github.com/abi/screenshot-to-code">screenshot-to-code</a>、<a href="https://github.com/figma/code-connect">Figma Code Connect</a> 与 <a href="https://github.com/open-pencil/open-pencil">OpenPencil</a>：看图生成、设计—代码映射、可编辑节点树分别解决不同环节</td>
+<td>截图只有像素，没有组件身份、合法 Props、响应式规则和交互语义；精准还原不是一次生成，而是视觉解析、现有物料召回、Schema 映射、真实渲染和差异修正组成的闭环</td>
+<td>与内部 Material-first 方案高度相关；若公开成篇，应提炼通用机制，不暴露具体业务方案，也不能再写一份工具清单</td>
+<td>黑箱 / 工程</td>
+</tr>
+</tbody>
+</table>
+<h2>第二章候选：经典框架的基础设施考古</h2>
+<p>这一章先以 PyTorch 为主要观察对象，因为同一个仓库里同时保留了易用性、自动微分、硬件路由、编译和分布式之间的张力。TensorFlow、JAX、ONNX 等只在同一问题需要另一种取舍作对照时进入，不单独写成品牌史。</p>
+<table>
+<thead>
+<tr>
+<th>标题方向</th>
+<th>源码抓手</th>
+<th>可迁移的认知结构</th>
+<th>与其他系列的边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PyTorch 明明边写边算，为什么背后仍离不开计算图？</td>
+<td>Tensor 的 <code>grad_fn</code>、Autograd Node、依赖与反向执行</td>
+<td><code>命令式前端 → 动态记录依赖 → 反向调度</code></td>
+<td>模型架构系列解释链式法则；本篇解释框架怎样保存并执行这条关系</td>
+</tr>
+<tr>
+<td>Tensor 转置一下，为什么数据常常没有搬家？</td>
+<td>Tensor、Storage、size、stride、view 与 contiguous</td>
+<td><code>逻辑视图 / 物理存储 / 索引规则</code> 分离</td>
+<td>不写成张量 API 教程，重点是零拷贝收益、别名与连续性代价</td>
+</tr>
+<tr>
+<td>同一个 <code>add</code>，PyTorch 怎么知道该跑 CPU、GPU 还是 Autograd？</td>
+<td>Operator Registry、Dispatch Key 与后端实现</td>
+<td><code>稳定算子接口 → 路由策略 → 可替换内核</code></td>
+<td>不讲某个 CUDA Kernel 的数学优化，而讲框架扩展性的控制面</td>
+</tr>
+<tr>
+<td>改了一个 Tensor，为什么 <code>backward</code> 有时会拒绝继续？</td>
+<td>原地操作、Alias、Version Counter 与 Saved Tensor</td>
+<td><code>可变状态 / 依赖快照 / 正确性检查</code></td>
+<td>与语言层面的可变性文章交叉，但必须落回梯度正确性</td>
+</tr>
+<tr>
+<td>动态图更好调试，PyTorch 为什么又要把 Python 编译掉？</td>
+<td>图捕获、Guard、Graph Break、重编译与后端编译链</td>
+<td><code>动态语义 / 可观察假设 / 全局优化</code> 的交换</td>
+<td>技术历史只解释路线为何分化；本篇用实现解释怎样兼得及其失败边界</td>
+</tr>
+<tr>
+<td>多卡训练为什么不是把模型复制几份就够了？</td>
+<td>参数副本、梯度同步、Bucket 与计算通信重叠</td>
+<td><code>副本状态 / 同步时机 / 通信调度</code></td>
+<td>不做分布式训练教程，解释正确性与吞吐为何同时改变结构</td>
+</tr>
+<tr>
+<td>模型明明能训练，为什么导出以后就可能变成另一个程序？</td>
+<td>Trace、Export、IR、控制流与算子覆盖</td>
+<td><code>运行中的程序 / 被观察到的图 / 可移植表示</code></td>
+<td>复用 <code>AiNotes</code> 中 ONNX 素材，但重新查证并以源码边界成篇</td>
+</tr>
+</tbody>
+</table>
+<h2>首批文章</h2>
+<p>首批不再全部来自近期仓库，而是用三篇基础框架考古建立深度，再用三篇当下项目检验这些认知结构：</p>
+<ol>
+<li>
+<p><strong>PyTorch 明明边写边算，为什么背后仍离不开计算图？</strong></p>
+<p>用一次前向与反向过程建立系列方法：不讲 Autograd 功能表，而是看一个普通程序怎样留下可执行的依赖关系。</p>
+</li>
+<li>
+<p><strong>Agent 已经会调用工具，为什么还要给它一台电脑？</strong></p>
+<p>用 Cloudflare Computer 检验“执行器可以替换，工作状态必须延续”这个长期问题。</p>
+</li>
+<li>
+<p><strong>Tensor 转置一下，为什么数据常常没有搬家？</strong></p>
+<p>从一个可观察的小现象进入 Tensor、Storage 与 stride，证明经典框架篇也能兼顾低门槛和源码深度。</p>
+</li>
+<li>
+<p><strong>Agent 能一直跑，为什么不能只靠聊天记录和定时器？</strong></p>
+<p>用 LoopX 进入运行时之外的持久控制面，展示一个看似多余的结构如何保住目标、证据与人类决策。</p>
+</li>
+<li>
+<p><strong>同一个 <code>add</code>，PyTorch 怎么知道该跑 CPU、GPU 还是 Autograd？</strong></p>
+<p>用 Dispatcher 解释稳定接口下面为什么需要一层复杂路由，并为编译、扩展后端和分布式留下入口。</p>
+</li>
+<li>
+<p><strong>有了 MCP，Agent 为什么还是不能替你办事？</strong></p>
+<p>用 OpenConnector 把工具协议推进到真实账号、凭证、Scope、Policy、幂等和审计，确立本系列不只会讲模型运行时。</p>
+</li>
+</ol>
+<p>这不是严格交替发布的课表。基础框架篇构成可长期复用的主干，当下项目篇负责把同一套源码方法带回正在发生的工程现场。Reasonix、团队记忆和代码图检索仍作为第二批；页面还原保留为跨模态软件生产支线。</p>
+<h2>首篇建议</h2>
+<p>首篇优先选择 PyTorch 的 Autograd 计算图。</p>
+<p>它有一个普通读者也能理解、技术读者又能继续下钻的表面矛盾：PyTorch 常被认为是“像普通 Python 一样边写边算”，为什么自动求导仍然离不开一张计算图？向下追，会遇到命令式程序、动态依赖记录与反向调度之间的关系。</p>
+<p>文章的核心判断暂定为：</p>
+<blockquote>
+<p>“动态图”不是没有图，而是图随着这一次真实执行被建立；PyTorch 用命令式前端换取可理解性，再用运行时记录保住自动微分需要的依赖关系。</p>
+</blockquote>
+<p>这篇必须避开两个写法：一是写成 <code>requires_grad</code>、<code>backward</code> 的入门教程；二是重复模型架构系列对链式法则的解释。真正的主线是“一段普通程序怎样在运行时变成一份可反向执行的结构”。旧 <code>AiNotes</code> 的动静态图与 ONNX 笔记只作为素材，不能直接扩写成稿。</p>
+<p>如果首篇验证后发现源码门槛过高，第二篇不继续追 Dispatcher，而是回到 Cloudflare Computer 或 OpenConnector，让读者先在更熟悉的 Agent 场景里再次看见“抽象为什么存在”。经典框架篇不连续超过两篇，避免系列被误认成 PyTorch 源码课程。</p>
+<p>页面还原节点暂定为比较篇，不绑定某一个仓库。当前成熟项目分别覆盖了自由生成、显式组件映射和可编辑原型，但尚未看到一个近期活跃且证据充分的开源仓库，同时做好“截图识别 → 现有组件召回 → Props 映射 → 页面组合 → 视觉回归”。在完整闭环出现前，这篇最有价值的不是宣布方案已经成熟，而是解释这几步为什么不能被“多模态模型看一眼”替代。</p>
+<h2>更新节奏</h2>
+<p>当下项目线可以每周看一次近期活跃仓库，只维护候选池；不承诺每周从中发一篇。基础框架线不按更新频率维护，而按问题补齐源码、测试、RFC 和关键提交。两条线都只有在问题、证据和取舍闭合时才进入写作。</p>
+<p>候选节点维护四种状态：</p>
+<pre><code class="language-text">候选：发现了反常设计，证据还不足
+入选：失败、机制、证据和取舍已经闭合
+迁移：问题成立，但更适合 Agent、模型架构或其他主线
+退出：仓库过期、证据消失，或最终只剩功能介绍
+</code></pre>
+<p>动笔前必须重新核对当前源码、文档、Issue 和测试，不因为候选池曾经记录过就假设事实仍然有效。</p>
+<p>该系列适合作为现有主线之间的穿插篇：其他主线负责建立体系，源码解剖负责用成熟框架与正在发生的项目检验体系。它们共享概念，但不能重复结论。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-BJ134Q5f.js"></script>
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>模型为什么这样设计：架构系列节点 | LZ AI NOTE</title>
+  <meta name="description" content="模型为什么这样设计：架构系列节点 系列角色：知识主干·模型内部。 负责解释模型结构改变了哪条信息、梯度、计算或参数路径；不承担软件框架实现与 Agent 系统工程。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不按架构名词写百科，也不把论文摘要换成通俗说法。它只追问一个问题： 今天看似理所当然的模型结构，当初是在解决什么失败？ 每篇从一个可感知…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="模型为什么这样设计：架构系列节点 | LZ AI NOTE">
+  <meta property="og:description" content="模型为什么这样设计：架构系列节点 系列角色：知识主干·模型内部。 负责解释模型结构改变了哪条信息、梯度、计算或参数路径；不承担软件框架实现与 Agent 系统工程。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不按架构名词写百科，也不把论文摘要换成通俗说法。它只追问一个问题： 今天看似理所当然的模型结构，当初是在解决什么失败？ 每篇从一个可感知…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"模型为什么这样设计：架构系列节点","description":"模型为什么这样设计：架构系列节点 系列角色：知识主干·模型内部。 负责解释模型结构改变了哪条信息、梯度、计算或参数路径；不承担软件框架实现与 Agent 系统工程。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不按架构名词写百科，也不把论文摘要换成通俗说法。它只追问一个问题： 今天看似理所当然的模型结构，当初是在解决什么失败？ 每篇从一个可感知…","url":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","dateModified":"2026-08-12","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>模型为什么这样设计：架构系列节点</h1><h1>模型为什么这样设计：架构系列节点</h1>
+<blockquote>
+<p><strong>系列角色：知识主干·模型内部。</strong> 负责解释模型结构改变了哪条信息、梯度、计算或参数路径；不承担软件框架实现与 Agent 系统工程。整体归属与交叉规则见<a href="./LZ%20AI%20Note%EF%BC%9A%E5%86%85%E5%AE%B9%E7%B3%BB%E5%88%97%E6%80%BB%E5%9B%BE.md">内容系列总图</a>。</p>
+</blockquote>
+<h2>系列定位</h2>
+<p>这个系列不按架构名词写百科，也不把论文摘要换成通俗说法。它只追问一个问题：</p>
+<blockquote>
+<p>今天看似理所当然的模型结构，当初是在解决什么失败？</p>
+</blockquote>
+<p>每篇从一个可感知的反常现象进入，再向下拆解旧结构的限制、新机制的改变、它付出的代价，以及这个代价如何长出下一个问题。</p>
+<p>系列名暂定为：<strong>模型为什么这样设计</strong>。</p>
+<p>它对两类读者同时做出承诺：</p>
+<ul>
+<li>没有机器学习背景的读者，可以从具体现象进入，建立一个不失真的最小心智模型。</li>
+<li>有技术背景的读者，不只得到定义，还能看到机制、历史来路、工程取舍和适用边界。</li>
+</ul>
+<p>已有但未发布的架构笔记只视为素材池。它们不占据选题，可以根据新的问题重写、拆分、合并或放弃。</p>
+<h2>问题入口与机制模型</h2>
+<p>这个系列天然适合“问题驱动 + 认知框架”，但这里的框架不是 PyTorch、Transformers 之类的软件，而是一张足够小、又不失真的机制模型：信息从哪里来，沿什么路径变化，哪条旧路径出了问题，新结构改了什么，又把代价转移到了哪里。</p>
+<p>每篇必须同时完成两件事：</p>
+<ul>
+<li><strong>问题层</strong>：先让读者看见一个违背直觉的结果，例如网络更深，训练误差反而更高。</li>
+<li><strong>机制层</strong>：再留下一个可以分析其他结构的模型，例如残差连接同时提供信息捷径与梯度捷径，而不只是“加上输入效果更好”。</li>
+</ul>
+<p>判断文章是否写完，不看术语讲了多少，而看读者能否用同一张机制图回答一个新问题。只有“这个结构很重要”的结论会变成说教；只有定义、公式和优点会变成教材摘录。</p>
+<h2>什么样的题值得独立写</h2>
+<p>一个节点至少要同时满足以下几点：</p>
+<ol>
+<li>有一个不需要先懂术语就能感受到的奇怪现象。</li>
+<li>能指出旧结构在什么条件下真的会失败。</li>
+<li>新结构改变了信息、梯度、计算或参数的哪条路径。</li>
+<li>不只说它的好处，还能说清代价与适用边界。</li>
+<li>读完后，读者对“模型在做什么”的理解发生一次变化。</li>
+</ol>
+<p>以下内容默认不单独成篇：</p>
+<ul>
+<li>只有全称、定义和优点的术语介绍。</li>
+<li>没有围绕同一问题的架构横向盘点。</li>
+<li>只比较 ReLU、GELU、SiLU 等选项，却没有解释为什么需要非线性。</li>
+<li>只因为某篇新论文改了一个模块，就把它写成模型架构的新章节。</li>
+<li>不同 Attention 变体的连续说明；只有当它暴露了一个新的长期瓶颈时，才值得独立写。</li>
+</ul>
+<h2>单篇的固定闭环</h2>
+<pre><code class="language-text">一个反常现象
+        ↓
+直觉上应该可行的旧方案，为什么失败
+        ↓
+新结构改变了哪条路径
+        ↓
+用最少公式或代码跑一次具体过程
+        ↓
+它换来了什么，又牺牲了什么
+        ↓
+当模型继续变深、变长或变大，下一个问题从哪里出现
+</code></pre>
+<p>普通读者不需要看懂全部公式才能跟上主线；专业读者也不应只得到一个比喻。公式、代码、图示和类比都只服务于同一次机制解释。</p>
+<p>每篇最后应能压缩出一句机制判断或一张最小路径图。它是这一篇真正交给读者的“框架”，也是下一篇能够继续追问的共同语言。</p>
+<h2>总问题节点图</h2>
+<pre><code class="language-text">只有线性变换
+为什么堆再多层也没有用？
+        ↓
+非线性与深度
+模型开始组合复杂特征
+        ↓
+模型最后答错了
+它怎么知道前面每个参数错了多少？
+        ↓
+反向传播
+误差可以逐层分配，深网络却仍然难以优化
+        ↓
+层数增加
+为什么训练结果反而更差？
+        ↓
+残差连接与归一化
+信息、梯度和数值尺度终于能穿过深层网络
+        ↓
+输入变成序列
+模型怎样保存和寻找上下文？
+        ↓
+RNN、LSTM 与 Attention
+从顺序压缩记忆，走向按内容直接读取
+        ↓
+Attention 能在 Token 之间搬运信息
+谁负责真正加工每个 Token？
+        ↓
+FFN、激活函数与 Transformer Block
+        ↓
+序列本身没有坐标
+模型怎么知道先后、距离与相对位置？
+        ↓
+位置编码与 RoPE
+        ↓
+模型继续扩大
+算力、显存和带宽为什么先撑不住？
+        ↓
+MoE、KV Cache、MQA、GQA、MLA 与量化
+        ↓
+大模型已经训练完成
+怎样用很少的参数获得新能力？
+        ↓
+微调、LoRA 与 QLoRA
+        ↓
+语言之外还有图片、声音和动作
+不同模态怎么接进同一个模型？
+        ↓
+视觉编码器、多模态投影与统一 Token
+</code></pre>
+<p>这是认知上的依赖关系，不是必须照顺序发布的课程目录。</p>
+<h2>核心候选节点</h2>
+<table>
+<thead>
+<tr>
+<th>标题方向</th>
+<th>从哪个反常现象进入</th>
+<th>真正要讲透的问题</th>
+<th>概念落点</th>
+<th>主维度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>100 层神经网络，为什么可能和 1 层没有区别？</td>
+<td>层数增加却没有获得更强的表达能力</td>
+<td>没有非线性，多次线性变换仍可合并为一次；深度的价值在于组合中间表示</td>
+<td>非线性、激活函数、深度</td>
+<td>黑箱</td>
+</tr>
+<tr>
+<td>模型最后答错了，它怎么知道前面每个参数错了多少？</td>
+<td>训练只有一个最终误差，中间却有海量参数</td>
+<td>反向传播如何通过局部导数和链式法则分配误差责任</td>
+<td>计算图、梯度、反向传播</td>
+<td>黑箱</td>
+</tr>
+<tr>
+<td>网络更深、参数更多，为什么训练结果反而更差？</td>
+<td>更深网络的训练误差也可能更高</td>
+<td>残差如何把“重新学出完整映射”改成“只学习相对输入的变化”，并建立直接的信息与梯度通路</td>
+<td>深度退化、恒等映射、残差连接</td>
+<td>黑箱</td>
+</tr>
+<tr>
+<td>残差已经打通道路，为什么每层还要做归一化？</td>
+<td>信息可以通过，数值尺度却仍会漂移</td>
+<td>归一化如何改变优化条件，以及 BatchNorm 为什么在语言模型中让位于 LayerNorm 和 RMSNorm</td>
+<td>LayerNorm、RMSNorm、Pre-Norm</td>
+<td>黑箱</td>
+</tr>
+<tr>
+<td>LSTM 已经能记忆，Transformer 为什么还要抛弃循环？</td>
+<td>每个时刻都要把过去压进一个状态，还必须依次计算</td>
+<td>长距离传递路径与串行计算瓶颈，如何推动模型转向按内容直接寻址</td>
+<td>RNN、LSTM、Self-Attention</td>
+<td>黑箱</td>
+</tr>
+<tr>
+<td>Attention 为什么非要分成 Q、K、V？</td>
+<td>同一个 Token 为什么要变成三份不同的向量</td>
+<td>Attention 不只是计算重要性，而是查询、匹配和取值三种角色组成的动态读取</td>
+<td>QKV、点积注意力、Multi-Head</td>
+<td>黑箱</td>
+</tr>
+<tr>
+<td>Transformer 为什么每层都有 Attention 和 FFN？</td>
+<td>既然 Attention 是核心，为什么 FFN 往往占了更多参数</td>
+<td>Attention 负责 Token 之间的信息交换，FFN 负责每个 Token 内部的特征转换</td>
+<td>Token Mixing、Channel Mixing、SwiGLU</td>
+<td>黑箱</td>
+</tr>
+<tr>
+<td>词已经变成向量，模型为什么还会分不清顺序？</td>
+<td>Self-Attention 对输入排列本身没有天然的位置感</td>
+<td>位置信息如何进入向量，RoPE 又如何把相对位置转成旋转关系</td>
+<td>位置编码、相对位置、RoPE</td>
+<td>黑箱</td>
+</tr>
+<tr>
+<td>既然 Transformer 同时有 Encoder 和 Decoder，为什么今天的大模型多数只留 Decoder？</td>
+<td>原始架构有两半，通用语言模型却大量采用 Decoder-only</td>
+<td>自回归目标如何统一输入与输出，以及这个选择不擅长什么</td>
+<td>Encoder-only、Encoder-Decoder、Decoder-only</td>
+<td>黑箱</td>
+</tr>
+<tr>
+<td>参数越多越强，为什么 MoE 偏偏不让每个参数都工作？</td>
+<td>模型扩大以后，每个 Token 调用全部参数的成本过高</td>
+<td>如何让总参数与单次激活参数分离，以及专家路由为什么会失衡</td>
+<td>Sparse MoE、Router、Load Balancing</td>
+<td>黑箱 / 工程</td>
+</tr>
+<tr>
+<td>大模型推理时，为什么最先不够用的常常不是算力？</td>
+<td>生成越长，历史 Token 留下的状态越多</td>
+<td>KV Cache 如何从加速手段变成带宽与显存瓶颈，并推动 MQA、GQA 和 MLA</td>
+<td>KV Cache、MQA、GQA、MLA</td>
+<td>工程</td>
+</tr>
+<tr>
+<td>为什么只训练不到 1% 的参数，也能改变一个大模型？</td>
+<td>新任务并不总需要重写全部预训练知识</td>
+<td>任务所需的权重增量为什么可能存在于低维子空间，以及这个假设的边界</td>
+<td>参数高效微调、低秩更新、LoRA</td>
+<td>黑箱 / 工程</td>
+</tr>
+<tr>
+<td>把权重压成 4 位，模型为什么还没有立刻变傻？</td>
+<td>每个参数的数值精度大幅降低，整体能力却可以保留</td>
+<td>权重分布、动态范围、异常值与量化误差如何共同决定精度损失</td>
+<td>量化、低比特权重、QLoRA</td>
+<td>黑箱 / 工程</td>
+</tr>
+<tr>
+<td>语言模型接上一层投影，为什么就能开始“看图”？</td>
+<td>图片不是文字，却可以被送入相同的 Transformer</td>
+<td>视觉特征如何被切分、编码并对齐到语言模型可处理的表示空间</td>
+<td>Vision Encoder、Projector、多模态 Token</td>
+<td>黑箱</td>
+</tr>
+<tr>
+<td>扩散模型为什么要先把图片毁掉，才能学会生成图片？</td>
+<td>生成任务从主动加噪开始</td>
+<td>直接学习复杂数据分布为什么困难，逐步去噪如何把它改写成一条可学习的路径</td>
+<td>加噪、去噪、扩散生成</td>
+<td>黑箱</td>
+</tr>
+</tbody>
+</table>
+<h2>经典架构支线</h2>
+<p>主线不必按年代遍历所有经典模型，但有几个问题值得在适当时机插入：</p>
+<ul>
+<li><strong>卷积为什么敢用同一组参数扫遍整张图片？</strong><br>
+从一个边缘检测器不应只在左上角有效进入，解释局部连接、权重共享与平移等变性。</li>
+<li><strong>记忆为什么需要一扇门？</strong><br>
+从普通 RNN 不断覆盖状态进入，解释 LSTM 为什么要分出写入、保留和输出。</li>
+<li><strong>图像模型里诞生的残差连接，为什么后来成了大模型的默认骨架？</strong><br>
+不重复残差原理，而是追问一种信息通路如何穿越任务和模型类型。</li>
+</ul>
+<p>支线不负责补齐历史，只在它能让读者看到一种独立的结构假设时成篇。</p>
+<h2>第一季：先建立共同底座</h2>
+<p>第一季暂定六个问题：</p>
+<ol>
+<li><strong>100 层神经网络，为什么可能和 1 层没有区别？</strong>——非线性与深度。</li>
+<li><strong>模型最后答错了，它怎么知道前面每个参数错了多少？</strong>——反向传播。</li>
+<li><strong>网络更深、参数更多，为什么训练结果反而更差？</strong>——残差连接。</li>
+<li><strong>残差已经打通道路，为什么每层还要做归一化？</strong>——LayerNorm 与 RMSNorm。</li>
+<li><strong>Attention 为什么非要分成 Q、K、V？</strong>——按内容寻址。</li>
+<li><strong>Transformer 为什么每层都有 Attention 和 FFN？</strong>——信息交换与特征加工。</li>
+</ol>
+<p>这六篇一起回答三个根问题：</p>
+<pre><code class="language-text">模型为什么能表达复杂关系？
+模型为什么真的训练得动？
+大模型的一层究竟在做什么？
+</code></pre>
+<p>第一季的终点不是“学完 Transformer”，而是让两类读者获得一套能继续向下追问的共同语言。发布时不必严格照六篇的逻辑顺序；哪个问题先在真实案例中出现，就可以先写。</p>
+<h2>后续分支</h2>
+<p>第一季之后，根据写作过程和读者反馈进入不同分支：</p>
+<h3>架构演化</h3>
+<pre><code class="language-text">CNN 的局部性与权重共享
+        ↓
+RNN 的顺序状态
+        ↓
+LSTM 的门控记忆
+        ↓
+Attention 的内容寻址
+        ↓
+Transformer 的全局交互
+</code></pre>
+<h3>模型扩展</h3>
+<pre><code class="language-text">位置编码与 RoPE
+        ↓
+上下文变长后的 KV Cache 瓶颈
+        ↓
+MQA、GQA 与 MLA
+        ↓
+模型变大后的 MoE 稀疏激活
+</code></pre>
+<h3>低成本改造</h3>
+<pre><code class="language-text">全量微调的资源与遗忘问题
+        ↓
+LoRA 的低秩权重增量
+        ↓
+量化带来的精度与动态范围问题
+        ↓
+QLoRA 如何把两条路线合在一起
+</code></pre>
+<h3>语言之外</h3>
+<pre><code class="language-text">图片如何变成可被 Transformer 处理的表示
+        ↓
+不同模态如何对齐
+        ↓
+模型为什么能从理解走向生成
+        ↓
+扩散、自回归与统一多模态架构
+</code></pre>
+<h2>首篇建议</h2>
+<p>首篇优先选择：</p>
+<blockquote>
+<p><strong>100 层神经网络，为什么可能和 1 层没有区别？</strong></p>
+</blockquote>
+<p>它的表面矛盾不需要技术背景就能理解，向下又能准确进入线性变换、激活函数、中间表示和深度的价值。它还会自然暴露下一个问题：就算深度有价值，误差怎么穿过这么多层？</p>
+<p>这个节点的主路线是“系列递进”，主维度是“黑箱”。与已有未发布笔记的关系是重新组织和提取素材，不是在旧文之后续写。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-BJ134Q5f.js"></script>
+</body>
+</html>
