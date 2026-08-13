@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>从 GC 到所有权：一文看懂语言如何管理对象生命周期 | LZ AI NOTE</title>
+  <meta name="description" content="很多人把 Go 和 Rust 的差别说成一句话：Go 有 GC，Rust 有所有权。 这句话没错，却没有回答真正的问题。看一段 Go： newRequest 已经返回了， request 为什么还能被调用方使用？它不能随着函数栈帧一起消失。 一个对象从创建到释放，始终有四笔账：放在哪里、活到什么时候、谁能引用或修改它、什么时候可以释放。GC、所有权、借用和…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/backend/%E4%BB%8E%20GC%20%E5%88%B0%E6%89%80%E6%9C%89%E6%9D%83%EF%BC%9A%E4%B8%80%E6%96%87%E7%9C%8B%E6%87%82%E8%AF%AD%E8%A8%80%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E5%AF%B9%E8%B1%A1%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="从 GC 到所有权：一文看懂语言如何管理对象生命周期 | LZ AI NOTE">
+  <meta property="og:description" content="很多人把 Go 和 Rust 的差别说成一句话：Go 有 GC，Rust 有所有权。 这句话没错，却没有回答真正的问题。看一段 Go： newRequest 已经返回了， request 为什么还能被调用方使用？它不能随着函数栈帧一起消失。 一个对象从创建到释放，始终有四笔账：放在哪里、活到什么时候、谁能引用或修改它、什么时候可以释放。GC、所有权、借用和…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/backend/%E4%BB%8E%20GC%20%E5%88%B0%E6%89%80%E6%9C%89%E6%9D%83%EF%BC%9A%E4%B8%80%E6%96%87%E7%9C%8B%E6%87%82%E8%AF%AD%E8%A8%80%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E5%AF%B9%E8%B1%A1%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"从 GC 到所有权：一文看懂语言如何管理对象生命周期","description":"很多人把 Go 和 Rust 的差别说成一句话：Go 有 GC，Rust 有所有权。 这句话没错，却没有回答真正的问题。看一段 Go： newRequest 已经返回了， request 为什么还能被调用方使用？它不能随着函数栈帧一起消失。 一个对象从创建到释放，始终有四笔账：放在哪里、活到什么时候、谁能引用或修改它、什么时候可以释放。GC、所有权、借用和…","url":"https://wizardpisces.github.io/blog/tech/backend/%E4%BB%8E%20GC%20%E5%88%B0%E6%89%80%E6%9C%89%E6%9D%83%EF%BC%9A%E4%B8%80%E6%96%87%E7%9C%8B%E6%87%82%E8%AF%AD%E8%A8%80%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E5%AF%B9%E8%B1%A1%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/backend/%E4%BB%8E%20GC%20%E5%88%B0%E6%89%80%E6%9C%89%E6%9D%83%EF%BC%9A%E4%B8%80%E6%96%87%E7%9C%8B%E6%87%82%E8%AF%AD%E8%A8%80%E5%A6%82%E4%BD%95%E7%AE%A1%E7%90%86%E5%AF%B9%E8%B1%A1%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F","dateModified":"2026-08-12","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>从 GC 到所有权：一文看懂语言如何管理对象生命周期</h1><p>很多人把 Go 和 Rust 的差别说成一句话：Go 有 GC，Rust 有所有权。</p>
+<p>这句话没错，却没有回答真正的问题。看一段 Go：</p>
+<pre><code class="language-go">func newRequest() *Request {
+	request := Request{ID: &quot;42&quot;}
+	return &amp;request
+}
+</code></pre>
+<p><code>newRequest</code> 已经返回了，<code>request</code> 为什么还能被调用方使用？它不能随着函数栈帧一起消失。</p>
+<p>一个对象从创建到释放，始终有四笔账：放在哪里、活到什么时候、谁能引用或修改它、什么时候可以释放。GC、所有权、借用和逃逸分析，其实都在回答这同一组问题。</p>
+<h2>先别急着问它在栈上还是堆上</h2>
+<p>把 <code>Request</code> 想成一次 HTTP 请求的上下文。处理函数会读它，日志 goroutine 可能稍后还要写它，缓存也可能暂时保留它的一部分。</p>
+<pre><code class="language-text">创建 Request → 被多个位置使用 → 最后一个使用者离开 → 释放资源
+</code></pre>
+<p>“栈还是堆”只回答第一问的一部分。真正棘手的是：程序还在跑时，最后一个使用者到底是谁？</p>
+<p>如果语言允许任意地方保留引用，又不要求程序员写出引用之间的关系，编译器通常无法只靠源码证明“这里一定是最后一次使用”。它需要在运行时继续观察对象是否仍可达。这是 Go 的选择。</p>
+<h2>Go：先决定怎样放，再在运行时决定能否回收</h2>
+<p>Go 编译器并非把一切都留给 runtime。它会发现 <code>request</code> 的指针离开了函数，于是不能把对象只留在函数返回后会消失的栈帧里。这类判断通常叫逃逸分析。</p>
+<pre><code class="language-text">编译期：引用会离开函数 → 选择能继续存活的分配方式
+运行期：从 root 出发仍能到达对象吗？→ 能则保留，不能则 GC 回收
+</code></pre>
+<p>这里有个重要边界：**逃逸分析不等于垃圾回收。**前者主要回答“这个值能否只活在当前栈帧”；后者回答“现在还有活着的引用能到它吗”。前者尽量把分配决策前移，后者处理运行中不断变化的引用图。</p>
+<p>因此 Go 可以让你自然地把请求上下文交给 goroutine、channel 或容器，不必在每次传递时声明所有权如何转移。代价是 runtime 要维护堆、扫描可达对象，并在合适的时候完成回收。</p>
+<p>这也是《<a href="./%E4%B8%80%E6%96%87%E8%AF%BB%E6%87%82%20Go%20Runtime.md">一文读懂 Go Runtime</a>》中 GC 与调度器为什么都属于 runtime：它们都在维持源码没有显式写出的运行状态。</p>
+<h2>Rust：把能证明的关系，变成能否编译的条件</h2>
+<p>同一个对象在 Rust 中可以写成：</p>
+<pre><code class="language-rust">struct Request { id: String }
+
+fn new_request() -&gt; Request {
+    Request { id: String::from(&quot;42&quot;) }
+}
+</code></pre>
+<p>这里返回的不是局部变量的引用，而是 <code>Request</code> 的所有权。调用方可以把所有权交给别人，或者临时借给别人使用；借用者不能活得比 owner 更久，所有权移动后旧变量也不能继续使用它。</p>
+<pre><code class="language-text">owner：对象的唯一负责人
+borrow：可以临时使用，但不延长 owner 的生命
+move：把责任交给另一个绑定
+drop：责任终结时执行清理
+</code></pre>
+<p>例如下面的代码无法通过编译：</p>
+<pre><code class="language-rust">fn invalid() -&gt; &amp;String {
+    let request = String::from(&quot;42&quot;);
+    &amp;request
+}
+</code></pre>
+<p>不是 Rust 猜出了对象会在第几行死亡；而是它要求代码组织成可证明的形状。这个引用比 <code>request</code> 活得久，因此程序被拒绝。</p>
+<p>对于单一所有者的对象，runtime 不需要在未来某次扫描中再寻找“最后一条引用”：所有者结束时，Rust 运行 <code>Drop</code>。程序执行到那一刻才会真正清理；编译器提前保证的是不会存在合法的悬垂引用。</p>
+<h2>静态证明没有消灭运行时</h2>
+<p>假如同一个请求需要同时被审计模块和缓存长期持有：</p>
+<pre><code class="language-text">审计模块 ──┐
+           ├── Request
+缓存模块 ──┘
+</code></pre>
+<p>单一所有者模型不再贴合问题。Rust 不会假装编译器能够知道两个模块何时都放手，而是让你显式选择 <code>Rc</code> 或多线程下的 <code>Arc</code>：</p>
+<pre><code class="language-rust">use std::sync::Arc;
+
+let request = Arc::new(Request { id: String::from(&quot;42&quot;) });
+let for_audit = Arc::clone(&amp;request);
+let for_cache = Arc::clone(&amp;request);
+</code></pre>
+<p>引用计数在运行时增减，计数归零时才释放对象。它没有集中式 tracing GC，却仍是动态的生命周期管理；强引用形成环时，计数也不会归零，需要 <code>Weak</code> 或重新设计关系来打破环。</p>
+<p>网络何时收到数据、哪个任务先被调度、哈希表是否扩容，同样只会在运行时发生。所有权只静态化了一部分生命周期问题，不能把未来输入搬进编译器。</p>
+<h2>真正的分界：状态由谁负责证明</h2>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>Go 的主要分工</th>
+<th>Rust 的主要分工</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>值是否能只放在当前栈帧</td>
+<td>编译器做逃逸分析</td>
+<td>类型、所有权与布局共同约束</td>
+</tr>
+<tr>
+<td>引用是否仍有效</td>
+<td>runtime 保持可达对象</td>
+<td>借用检查拒绝悬垂引用</td>
+</tr>
+<tr>
+<td>多处共享时何时释放</td>
+<td>GC 根据可达性判断</td>
+<td>显式选择 <code>Rc</code>/<code>Arc</code> 等动态机制，或重构所有权</td>
+</tr>
+<tr>
+<td>普通资源何时清理</td>
+<td>对象不可达后由 GC 回收</td>
+<td>owner 结束时执行 <code>Drop</code></td>
+</tr>
+</tbody>
+</table>
+<p>Rust 不是“把 GC 换成 <code>free</code>”，Go 也不是“全部由 runtime 决定”。两者都在做编译期分析，也都要在运行时处理真实输入；差别是它们让哪一部分关系成为语言强制的静态约束。</p>
+<blockquote>
+<p>语言 runtime 的设计，首先是在划分：哪些关于程序状态的判断可以提前证明，哪些必须留给程序运行时承担。</p>
+</blockquote>
+<p>Go 让 GC 接住更多动态引用关系，换取较轻的生命周期心智负担；Rust 让所有权和借用检查接住更多关系，换取更严格的表达方式。它们没有消灭复杂度，只是把复杂度安放在不同的位置。</p>
+<p>当你再看到“为什么逃逸”“为什么这里要 <code>Arc</code>”“为什么这个引用过不了借用检查”，就可以把它们还原成同一个问题：<strong>这个对象此刻还能由谁安全地使用，又由谁负责让它结束。</strong></p>
+<h2>参考</h2>
+<ul>
+<li><a href="https://go.dev/doc/gc-guide">A Guide to the Go Garbage Collector</a></li>
+<li><a href="https://go.dev/doc/faq#stack_or_heap">Go FAQ：stack or heap</a></li>
+<li><a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html">The Rust Programming Language：What Is Ownership?</a></li>
+<li><a href="https://doc.rust-lang.org/book/ch15-04-rc.html">The Rust Programming Language：Rc<T></a></li>
+</ul>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-DSeJ2n4W.js"></script>
+</body>
+</html>
