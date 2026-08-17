@@ -4,334 +4,206 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex,nofollow">
-  <title>RN Visual Material Lab 与 MCP 视觉检索方案 | LZ AI NOTE</title>
-  <meta name="description" content="面向 web-affiliate-rn，以可执行视觉物料库、MCP 检索和 Native 截图反馈完成 Figma 设计稿还原。">
+  <title>RN Figma → Page Demo 技术方案 | LZ AI NOTE</title>
+  <meta name="description" content="面向 web-affiliate-rn，通过现有 RN 物料、可视化候选选择和 Native 验收，验证 Figma 到页面的 AI 生成闭环。">
   <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN-Visual-Material-Lab%E4%B8%8EMCP%E8%A7%86%E8%A7%89%E6%A3%80%E7%B4%A2%E6%96%B9%E6%A1%88">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
-  <meta property="og:title" content="RN Visual Material Lab 与 MCP 视觉检索方案 | LZ AI NOTE">
-  <meta property="og:description" content="面向 web-affiliate-rn，以可执行视觉物料库、MCP 检索和 Native 截图反馈完成 Figma 设计稿还原。">
+  <meta property="og:title" content="RN Figma → Page Demo 技术方案 | LZ AI NOTE">
+  <meta property="og:description" content="面向 web-affiliate-rn，通过现有 RN 物料、可视化候选选择和 Native 验收，验证 Figma 到页面的 AI 生成闭环。">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN-Visual-Material-Lab%E4%B8%8EMCP%E8%A7%86%E8%A7%89%E6%A3%80%E7%B4%A2%E6%96%B9%E6%A1%88">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"RN Visual Material Lab 与 MCP 视觉检索方案","description":"面向 web-affiliate-rn，以可执行视觉物料库、MCP 检索和 Native 截图反馈完成 Figma 设计稿还原。","url":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN-Visual-Material-Lab%E4%B8%8EMCP%E8%A7%86%E8%A7%89%E6%A3%80%E7%B4%A2%E6%96%B9%E6%A1%88","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN-Visual-Material-Lab%E4%B8%8EMCP%E8%A7%86%E8%A7%89%E6%A3%80%E7%B4%A2%E6%96%B9%E6%A1%88","dateModified":"2026-08-10","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"RN Figma → Page Demo 技术方案","description":"面向 web-affiliate-rn，通过现有 RN 物料、可视化候选选择和 Native 验收，验证 Figma 到页面的 AI 生成闭环。","url":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN-Visual-Material-Lab%E4%B8%8EMCP%E8%A7%86%E8%A7%89%E6%A3%80%E7%B4%A2%E6%96%B9%E6%A1%88","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN-Visual-Material-Lab%E4%B8%8EMCP%E8%A7%86%E8%A7%89%E6%A3%80%E7%B4%A2%E6%96%B9%E6%A1%88","dateModified":"2026-08-17","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
 </head>
 <body>
-  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>RN Visual Material Lab 与 MCP 视觉检索方案</h1><h1>RN Visual Material Lab 与 MCP 视觉检索方案</h1>
-<h2>结论</h2>
-<p>这套思路可行，而且值得作为 <code>web-affiliate-rn</code> 设计稿还原的主方向。</p>
-<p>它比“先为每个组件补全大量文字描述，再让 Agent 静态检索组件”更适合当前 RN 仓库。旧组件的文档、命名和 Props 可能不完整，但组件在真实 Native 环境中的渲染结果是直接证据。让 Codex 先看现有物料真正长什么样，再选择、运行和复核，比只依赖组件名称或自然语言描述更可靠。</p>
-<p>不过，方案不应被定义成完全排斥结构化信息的“纯视觉”。更准确的表述是：</p>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>RN Figma → Page Demo 技术方案</h1><h1>RN Figma → Page Demo 技术方案</h1>
+<h2>这是什么</h2>
+<p>这是一套面向 <code>web-affiliate-rn</code> 的 Figma 页面还原方案。</p>
+<p>它不是让 AI 看着截图自由编写 RN 页面，也不是直接照搬 Web 的 Storybook 和无头浏览器流程，而是让 AI 优先从仓库已有组件中选择合适物料，组合成可运行页面，再通过真实 Native 画面验收。</p>
+<p>核心思路是：</p>
 <blockquote>
-<p>以真实 Native 视觉为主要判断依据，以业务场景、Props、运行状态和源码位置作为检索约束，并用结构化映射结果驱动代码生成。</p>
+<p>把现有 RN 组件变成 AI 可以查看、选择和组合的可执行物料，用结构化映射连接 Figma 与页面生成，用真实 Native 页面完成最终验证。</p>
 </blockquote>
-<p>优化后的核心流程是：</p>
-<pre><code class="language-text">已有 RN Components
-  → 可执行的 Visual Material Lab
-  → 预生成组件视觉样本与索引
-
-Figma 截图 + 业务场景
-  → MCP 检索 Top-K 候选
-  → Codex 定向打开候选 Fixture
-  → Native 截图复核
-  → Material Mapping JSON
-  → RN Page Plan / 普通 RN Code
-  → 整页 Native 截图复核
+<h2>整体方案</h2>
+<pre><code class="language-text">Figma + 业务需求
+        ↓
+AI 拆解页面区域
+        ↓
+从 RN Material Catalog 缩小候选范围
+        ↓
+在 Native Candidate Board 中查看真实组件
+        ↓
+形成 Material Mapping
+        ↓
+生成 RN Demo Page
+        ↓
+Native 整页截图验收
+        ↓
+修正 Mapping / 补充物料
 </code></pre>
-<p>这里最重要的改进是：<strong>不让自动化工具在 App 中盲目遍历组件，而是先离线检索，再只运行和截图少量候选。</strong> App 自动化负责验证，不负责低效地“找组件”。</p>
-<h2>为什么这条路线有价值</h2>
-<h3>现有 RN 组件更适合成为“可执行知识”</h3>
-<p>当前 <code>web-affiliate-rn</code> 已经积累了大量公共组件和业务组件，也广泛使用了 <code>testID</code>。真正缺少的不是组件源码，而是一个让人和 Agent 都能回答以下问题的入口：</p>
+<p>这条链路解决三个核心问题：</p>
+<ol>
+<li>AI 如何知道仓库里已经有哪些组件；</li>
+<li>AI 如何判断 Figma 区域应该使用哪个组件；</li>
+<li>生成页面后如何确认它在真实 InApp 环境中是正确的。</li>
+</ol>
+<h2>核心设计</h2>
+<h3>现有组件成为可执行物料</h3>
+<p>方案不复制、不迁移现有 RN 组件。</p>
+<p>组件仍然保留在原业务目录中，Material Catalog 只补充 AI 选择组件需要的关键信息，并为组件准备能够稳定运行的 Fixture。</p>
+<p>因此，Material Catalog 不是第二套组件库，而是现有组件的可执行索引。</p>
+<h3>Metadata 用于缩小范围</h3>
+<p>组件数量增加后，不能把所有组件一次性展示给 AI。</p>
+<p>系统先根据业务域、UI 类型和少量页面信息，将候选缩小到一个可观察范围。Metadata 的职责只是过滤候选，不直接决定最终映射。</p>
+<h3>真实画面用于选择组件</h3>
+<p>候选组件会在 Native Candidate Board 中运行，并在组件旁显示稳定标识。</p>
+<p>AI 看到的是：</p>
 <ul>
-<li>这个组件实际长什么样；</li>
-<li>它属于哪个业务域和 UI 类型；</li>
-<li>有哪些可复现的状态；</li>
-<li>怎样以确定的 Props 独立运行；</li>
-<li>它是否适合当前 Figma 区域；</li>
-<li>选择它以后应如何 import 和生成代码。</li>
+<li>真实 RN 组件画面；</li>
+<li>组件和 Fixture 的身份；</li>
+<li>当前状态和必要使用信息。</li>
 </ul>
-<p>传统 Catalog 往往主要记录名称、描述和 Props。本方案再向前一步：Catalog 中的每一个有效物料都必须尽可能拥有可运行 Fixture 和真实 Native 截图。物料知识不只是说明文档，而是可以被 Agent 调用和验证的程序。</p>
-<h3>视觉搜索比业务命名更接近设计稿还原</h3>
-<p>设计稿表达的是容器、层级、排版、颜色、图标和状态，并不知道仓库里把相似结构命名成了什么。仅靠 <code>OfferCard</code>、<code>ConversionCard</code> 之类的名称检索，很容易受历史命名和业务词影响。</p>
-<p>视觉召回可以先找到外观和结构相似的组件，业务场景再排除语义不合适的候选。两种信号结合，比单独依赖任何一种都更稳：</p>
-<pre><code class="language-text">视觉相似度：解决“长得像什么”
-业务域与场景：解决“这里应该是什么”
-Props 与运行约束：解决“能否这样使用”
-源码使用证据：解决“仓库中通常怎样使用”
-</code></pre>
-<h3>它不是另一个截图直接生成代码方案</h3>
-<p>截图直接生成代码容易重新造出仓库已有组件，也很难保证输出符合 ShopeeRN 的导航、样式和维护约定。</p>
-<p>本方案先从仓库已有物料中检索和验证。只有确认没有合适物料时，才进入基础组件组合、页面局部实现或新物料候选。因此它更接近“以视觉证据驱动复用”，而不是“看图自由发挥”。</p>
-<h2>Visual Material Lab 应该是什么</h2>
-<h3>第一阶段：直接引用组件，封装关键信息</h3>
-<p>第一阶段不搬运、不复制，也不改造已有组件。Material Lab 直接 import 原组件，只在旁路封装 Codex 检索、运行和生成代码需要的关键信息。</p>
-<p>建议在 RN 仓库建立开发态 <code>material-lab</code>：</p>
-<pre><code class="language-text">src/material-lab/
-  registry/       # materialId、业务域、UI 形态、源码和 import 等关键信息
-  fixtures/       # 确定 Props、Mock 数据和视觉状态
-  screens/        # Material Lab 浏览与单物料渲染入口
-  adapters/       # 可选：只隔离少量无法绕开的外部依赖
-</code></pre>
-<p>Registry 首期只需记录：</p>
+<p>AI 将 Figma 区域与候选面板进行视觉比较，再选择最终组件。这样既保留视觉判断，也不会脱离真实代码资产。</p>
+<h3>Mapping 是核心中间产物</h3>
+<p>Figma 不直接生成代码，而是先形成 Material Mapping。</p>
+<p>Mapping 表达：</p>
 <ul>
-<li>稳定的 <code>materialId</code>；</li>
-<li>domain 和 UI 形态；</li>
-<li>原组件源码位置与正确 import；</li>
-<li>可用于检索的简短场景、限制和关键词；</li>
-<li>合法 Props 或 Props 类型来源；</li>
-<li>可运行的 <code>fixtureId</code>、variant 和稳定 <code>testID</code>；</li>
-<li>对应的 Native 预览截图。</li>
+<li>页面区域；</li>
+<li>选择的 Material 和 Fixture；</li>
+<li>展示 Props；</li>
+<li>没有物料覆盖的区域；</li>
+<li>选择理由和验证状态。</li>
 </ul>
-<p>能直接通过 Props 渲染的组件不增加 Wrapper。只有组件依赖少量 Redux、Navigator 或 Host Context，且隔离成本很低时才增加薄 Adapter；依赖复杂 API、业务状态或 Native SDK 的组件暂不纳入首批物料。这样第一阶段建设的是原组件的“可执行索引”，不是新的组件抽象层。</p>
-<h3>业务域与 UI 形态同时分类</h3>
-<p>可以沿用当前业务认知建立 <code>shared</code>、<code>offer</code>、<code>payment</code>、<code>income</code>、<code>free-sample</code>、<code>partnership</code>、<code>storefront</code>、<code>collection</code>、<code>performance</code> 等业务域，但不能只按业务域分类。</p>
-<p>每个物料还应标记其 UI 形态，例如：</p>
-<ul>
-<li>navigation；</li>
-<li>form；</li>
-<li>filter；</li>
-<li>card；</li>
-<li>list-item；</li>
-<li>status；</li>
-<li>action；</li>
-<li>data-display。</li>
-</ul>
-<p>业务域帮助 Codex 缩小搜索范围，UI 形态帮助发现跨业务域的可复用结构。否则相同的展示卡片很容易在不同业务目录中被重复建设。</p>
-<h3>界面标识只出现在浏览模式</h3>
-<p>Material Lab 界面可以为每个组件显示：</p>
-<ul>
-<li>业务域颜色和标签；</li>
-<li><code>materialId</code>；</li>
-<li>组件来源；</li>
-<li>当前 variant 和 state；</li>
-<li>是否为 Adapter；</li>
-<li>是否允许进入页面生成。</li>
-</ul>
-<p>单物料根节点使用稳定标识，例如：</p>
-<pre><code class="language-text">material:offer:offer-card:default
-material:payment:settlement-card:error
-</code></pre>
-<p>这些标识便于自动化工具定向查找。进入 Capture Mode 后，业务标签、边框和调试信息全部隐藏，保证截图反映组件本身，而不是 Lab 外壳。</p>
-<h3>不是所有 Component 都应该映射</h3>
-<p>首批物料至少应满足：</p>
-<ul>
-<li>能通过确定的 Fixture 独立渲染；</li>
-<li>展示 Props 相对稳定；</li>
-<li>不依赖实时 API 和不可控状态；</li>
-<li>Redux、Navigator、Tracking 等依赖可以移除或薄适配；</li>
-<li>同一输入能够得到稳定截图；</li>
-<li>有明确的 import 和使用边界。</li>
-</ul>
-<p>强业务流程组件、整页 Container、依赖复杂 Native SDK 的组件不宜为了“全量覆盖”强行纳入。Visual Material Lab 的质量比组件数量更重要。</p>
-<h2>Codex 如何从截图找到组件</h2>
-<h3>第一步：提前生成视觉物料索引</h3>
-<p>系统先批量运行每个 Fixture，保存固定设备、平台、语言和数据状态下的 Native 截图，并建立索引：</p>
-<ul>
-<li>视觉特征：颜色、轮廓、布局、视觉 embedding；</li>
-<li>文本特征：标题类型、标签结构和 OCR 结果；</li>
-<li>结构特征：单项、列表、卡片、表单、操作区等；</li>
-<li>业务特征：domain、scene、platform 和允许状态；</li>
-<li>工程特征：组件路径、import、Props、已有页面使用位置。</li>
-</ul>
-<p>这一步可以离线完成。日常检索不需要每次启动 App 并逐个打开组件。</p>
-<h3>第二步：将 Figma 截图拆成待匹配区域</h3>
-<p>用户提供完整 Figma 截图和业务场景后，Codex 先识别页面中的稳定视觉区块，例如导航、筛选、内容卡片、空状态和底部操作区。</p>
-<p>首期不需要追求完全自动分区。Codex 自动建议区域，人可以调整关键裁剪。一个错误的区域边界会让后续检索和比较都失去意义，因此这里允许轻量人工确认。</p>
-<h3>第三步：MCP 返回 Top-K 候选，而不是直接宣布答案</h3>
-<p>检索服务综合视觉、业务和工程约束，为每个区域返回少量候选：</p>
-<pre><code class="language-text">Figma 区域
-  → 视觉向量召回
-  → domain / scene / component type 过滤
-  → Props、平台与使用证据重排
-  → Top-K 候选及理由
-</code></pre>
-<p>业务描述在这里是先验条件，不是最终事实。即使用户说“这是 Offer 卡片”，系统也仍然需要用实际画面验证到底是 <code>OfferCard</code>、<code>ProductItemOfferCardRow</code>，还是一个新的组合结构。</p>
-<h3>第四步：定向运行候选并重新截图</h3>
-<p>Codex 根据候选的 <code>fixtureId</code> 直接打开单物料入口，例如通过开发态 Deep Link、Lab Route 或 Storybook 的远程选中能力跳转到指定状态，而不是模拟人工从首页层层点击。</p>
-<p>打开后使用固定设备重新截图，再与 Figma 区域比较。这样可以验证离线样本是否过期，也能发现字体、图片、Safe Area 和平台实现造成的真实差异。</p>
-<h3>第五步：生成可审计的映射</h3>
-<p>最终结果不是一句“看起来像”，而是一份可以继续驱动 Page Plan 和代码生成的映射：</p>
-<pre><code class="language-json">{
-  &quot;regionId&quot;: &quot;offer-list/item-1&quot;,
-  &quot;targetImage&quot;: &quot;figma://frame-123/crop-4&quot;,
-  &quot;materialId&quot;: &quot;offer.offer-card&quot;,
-  &quot;source&quot;: &quot;src/components/OfferCard&quot;,
-  &quot;import&quot;: &quot;@/components/OfferCard&quot;,
-  &quot;fixtureId&quot;: &quot;offer.offer-card/default&quot;,
-  &quot;variant&quot;: &quot;default&quot;,
-  &quot;props&quot;: {
-    &quot;showCommission&quot;: true,
-    &quot;showAction&quot;: true
-  },
-  &quot;evidence&quot;: {
-    &quot;visualScore&quot;: 0.89,
-    &quot;domainMatched&quot;: true,
-    &quot;nativeVerified&quot;: true,
-    &quot;preview&quot;: &quot;artifact://material/offer.offer-card/default.png&quot;,
-    &quot;diff&quot;: &quot;artifact://comparison/offer-list-item-1.png&quot;
-  },
-  &quot;status&quot;: &quot;accepted&quot;,
-  &quot;alternatives&quot;: [&quot;offer.product-item-offer-card-row&quot;]
-}
-</code></pre>
-<p>其中 <code>props</code> 必须来自物料定义，不允许 Codex 根据截图编造不存在的 API。低置信度区域应保留候选和未解决原因，交给人工 Review 或物料补漏流程。</p>
-<h2>MCP 应怎样设计</h2>
-<p>MCP 是 Codex 使用这套能力的接口，不应该成为一个同时承担识图、运行 App、比较截图和生成代码的巨大黑盒。</p>
-<p>建议先提供五个可组合工具：</p>
-<table>
-<thead>
-<tr>
-<th>工具</th>
-<th>职责</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>search_materials</code></td>
-<td>根据截图引用、业务域、场景、UI 类型和平台返回 Top-K 候选。</td>
-</tr>
-<tr>
-<td><code>get_material</code></td>
-<td>返回组件路径、合法 Props、Fixtures、使用限制和已有使用证据。</td>
-</tr>
-<tr>
-<td><code>open_material_fixture</code></td>
-<td>让测试 App 定向打开一个确定的物料状态。</td>
-</tr>
-<tr>
-<td><code>capture_material</code></td>
-<td>在固定设备配置下截图，并返回截图 artifact。</td>
-</tr>
-<tr>
-<td><code>compare_visual</code></td>
-<td>比较目标区域和 Native 截图，返回差异图、结构差异和建议分类。</td>
-</tr>
-</tbody>
-</table>
-<p>Codex 负责串联这些工具、处理候选和形成最终判断。后端检索实现可以迭代，MCP 契约保持稳定。</p>
-<p>这也让问题更容易排查：搜不到是索引或检索问题，打不开是 Fixture 问题，截图不稳定是环境问题，长得不对是映射或物料问题，而不是所有失败都藏在一个 Agent 调用里。</p>
-<h2>Native 自动化如何选择</h2>
-<h3>首选路径：直接入口 + 轻量设备自动化</h3>
-<p>首期推荐为 Material Lab 提供一个开发态单物料 Route 或 Deep Link，再使用 Maestro 启动 App、打开链接和截图。Maestro 已提供 <a href="https://docs.maestro.dev/reference/commands-available/launchapp"><code>launchApp</code></a>、<a href="https://docs.maestro.dev/api-reference/commands/openlink"><code>openLink</code></a>、<a href="https://docs.maestro.dev/reference/commands-available/takescreenshot"><code>takeScreenshot</code></a> 和截图断言能力，适合搭建这一条短链路。</p>
-<p>如果当前老 RN 工程能以可控成本接入 React Native Storybook，也可以用它隔离渲染 Fixture。React Native Storybook 运行在 Native/Metro 环境中，而不是浏览器 iframe；它还支持通过 WebSocket 从外部选择 Story。但其官方文档目前仍明确说明没有内建完整视觉测试能力，截图与比较仍需 Maestro、Detox 等外部工具完成：<a href="https://storybookjs.github.io/react-native/docs/intro/">React Native Storybook</a>、<a href="https://storybookjs.github.io/react-native/docs/intro/configuration/websocket-configuration/">远程控制</a>、<a href="https://storybookjs.github.io/react-native/docs/intro/testing/">测试说明</a>。</p>
-<p>考虑到 <code>web-affiliate-rn</code> 的 RN 和 React 版本较旧，Storybook 只做限时兼容性验证。接入代价过高时，直接使用轻量 Fixture Screen，不升级整个工程来迁就工具。</p>
-<h3>Appium 不是首期主链路</h3>
-<p>Appium 基于平台 Driver 暴露完整的移动端自动化协议，适合复杂交互、跨页面流程和 Native 元素树检查，但安装、Driver 管理和执行链路更重：<a href="https://appium.io/docs/en/latest/reference/api/appium/">Appium Protocol</a>、<a href="https://appium.io/docs/en/3.2/reference/cli/setup/">移动端环境配置</a>。</p>
+<p>它是可 Review、可修改、可重复生成的中间结果。组件选错时修改 Mapping，不需要重新推翻整套页面代码。</p>
+<h3>Native 页面是最终事实</h3>
+<p>Web 页面可以用 DOM 和浏览器作为运行事实，RN 页面最终运行在 iOS/Android Native Runtime 中。</p>
 <p>因此：</p>
 <ul>
-<li>组件定向打开、截图和简单断言，优先 Deep Link + Maestro；</li>
-<li>复杂手势、系统弹窗和跨 App 流程，再评估 Appium；</li>
-<li>如果仓库未来形成稳定 E2E 测试体系，也可以复用 Detox 的截图能力。</li>
+<li>Candidate Board 必须运行真实 RN 组件；</li>
+<li>Demo Page 必须进入真实 RN Bundle；</li>
+<li>最终验收必须基于 Native 页面截图。</li>
 </ul>
-<p>工具只是执行器。无论使用哪一种，稳定的 Fixture、确定的 Route 和统一设备基线才是视觉闭环的基础。</p>
-<h2>视觉比较不能只看一个总分</h2>
-<p>完全逐像素比较会被字体抗锯齿、图片加载、系统版本和平台差异干扰；只看视觉 embedding，又可能忽略间距和对齐错误。</p>
-<p>建议分三层判断：</p>
-<ol>
-<li>召回阶段使用视觉 embedding、颜色、轮廓、OCR 和大致布局，目标是不要漏掉正确候选；</li>
-<li>候选验证阶段比较组件边界、层级、间距、对齐、文本区域和感知差异；</li>
-<li>整页阶段输出 Figma、RN 截图、Overlay 和 Diff，由 Codex 分类问题，关键页面保留人工确认。</li>
-</ol>
-<p>截图环境必须固定设备尺寸、Pixel Ratio、平台版本、语言、字体缩放、Mock 数据、动画和图片缓存。iOS 和 Android 应分别建立基线，不能用一个平台的像素结果替代另一个平台。</p>
-<h2>如何接入现有 Material-first 流程</h2>
-<p>Visual Material Lab 不替代已有的 RN Page Plan 和代码生成，而是补上它们之前最薄弱的“物料发现与验证”环节：</p>
-<pre><code class="language-text">Figma 截图 + 业务场景
-  → Visual Material Retrieval
-  → Native Candidate Verification
-  → Material Mapping JSON
-  → RN Page Plan
-  → RN Code Emitter
-  → Generated View
-  → Host Container 接入 API / State / Navigator / Tracking
-  → Full-page Native Visual Verification
+<p>浏览器预览可以辅助，但不能替代 InApp 验收。</p>
+<h2>系统组成</h2>
+<h3>RN Material Catalog</h3>
+<p>描述哪些现有组件可以被 AI 使用，以及它们有哪些稳定状态。</p>
+<h3>Fixture</h3>
+<p>为组件提供确定的 Props 和 Mock 状态，使相同输入能够重复得到相同画面。</p>
+<h3>Candidate Board</h3>
+<p>只展示当前任务相关的少量候选组件，并把组件身份直接标在真实画面旁边，供 AI 和人快速比较。</p>
+<h3>Material MCP</h3>
+<p>向 Codex 提供查询候选、读取组件信息和生成 Demo 的能力。它负责提供仓库事实，不负责成为一个包含所有推理和自动化的大型黑盒。</p>
+<h3>Demo Renderer</h3>
+<p>读取 Material Mapping，将选中的真实 RN 组件组合成整页 Demo。</p>
+<h3>Native Verification</h3>
+<p>在模拟器或真机中打开 Demo，截取整页画面，与 Figma 比较，并把问题归类为组件选择、布局、状态或物料缺口。</p>
+<h2>为什么这样设计</h2>
+<h3>复用 Web 的思想，不复制 Web 的运行时</h3>
+<p>Web 与 RN 可以共享：</p>
+<ul>
+<li>Material Catalog；</li>
+<li>组件映射；</li>
+<li>结构化中间产物；</li>
+<li>AI 生成与 Review 流程。</li>
+</ul>
+<p>但两者的渲染和验收环境不同：</p>
+<pre><code class="language-text">Web：React Component → DOM/CSS → Browser Screenshot
+RN：RN Component → Native View → Simulator/Device Screenshot
 </code></pre>
-<p>原方案中值得保留的部分继续保留：</p>
+<p>所以 RN 需要自己的 Candidate Board 和 Native Verification。</p>
+<h3>优先复用，而不是截图生成代码</h3>
+<p>直接 Screenshot-to-Code 很容易重新实现仓库已有组件，输出也难以符合项目约定。</p>
+<p>这套方案先找已有物料，确认没有合适组件后才记录缺口。生成页面因此天然复用现有设计系统和工程资产。</p>
+<h3>先验证闭环，再建设平台</h3>
+<p>第一阶段的关键不是拥有复杂的识图算法，而是验证：</p>
 <ul>
-<li>Page Plan 作为可 Review、可 Diff 的编译期中间产物；</li>
-<li>输出普通 TSX 和项目样式，而不是建立线上 Schema Runtime；</li>
-<li>Generated View 与 Host Container 分离；</li>
-<li>无合适物料时进入基础组合、页面特例或物料新增 Review；</li>
-<li>最终使用真实 Native 截图闭环。</li>
+<li>AI 能否找到正确候选；</li>
+<li>看真实组件画面后能否选对；</li>
+<li>Mapping 能否生成可运行页面；</li>
+<li>Native 截图能否发现并修正问题。</li>
 </ul>
-<p>变化在于，Catalog 不再主要靠人工补写描述，而是优先从可执行 Fixture、截图、源码和使用证据中生长。后续 Material-first 原型也直接消费同一套物料定义和 Fixtures，因此这部分投入不会只服务一次 Figma 还原。</p>
-<h2>推荐的试点范围</h2>
-<p>首期不要扫描整个仓库，建议选择一个业务域加 <code>shared</code>：</p>
+<p>只有这些基本假设成立，视觉检索、自动 Diff 和设备自动化才有投入价值。</p>
+<h2>Demo 范围</h2>
+<p>本期 Demo 包含：</p>
 <ul>
-<li>20～30 个易解耦组件；</li>
-<li>每个组件 2～4 个有业务价值的 Fixture；</li>
-<li>一个平台作为 Golden Baseline，另一个平台做可运行验证；</li>
-<li>一个中等复杂度 Figma 页面；</li>
-<li>一份人工 Golden Mapping，用于测量自动检索是否真的变好。</li>
+<li>一组真实 RN Material 和 Fixture；</li>
+<li>按业务域和 UI 类型筛选候选；</li>
+<li>带组件标识的 Native Candidate Board；</li>
+<li>Material Mapping 生成；</li>
+<li>RN Demo Page 生成；</li>
+<li>Native Bundle 编译和整页验收入口。</li>
 </ul>
-<p>推进分为四段：</p>
-<table>
-<thead>
-<tr>
-<th>阶段</th>
-<th style="text-align:right">时间</th>
-<th>核心结果</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Visual Lab 基础</td>
-<td style="text-align:right">1 周</td>
-<td>Registry、Fixture Screen、定向 Route、首批组件与界面标识。</td>
-</tr>
-<tr>
-<td>视觉样本与检索</td>
-<td style="text-align:right">1～2 周</td>
-<td>Native 截图语料、索引、截图 + 场景的 Top-K 召回。</td>
-</tr>
-<tr>
-<td>MCP 与自动复核</td>
-<td style="text-align:right">1～2 周</td>
-<td>五个核心 MCP 工具、定向启动、截图和差异报告。</td>
-</tr>
-<tr>
-<td>单页生成闭环</td>
-<td style="text-align:right">1～2 周</td>
-<td>Mapping JSON 接入 Page Plan/Emitter，并完成整页 Native 复核。</td>
-</tr>
-</tbody>
-</table>
-<p>在 1 名主力工程师和 1 名兼职 RN Reviewer 的前提下，可演示的技术 POC 约 3～4 周，可用于真实单页试点的 MVP 约 5～7 周。再用 2～4 周验证第二业务域、双平台稳定性和组件样本维护，才能判断是否适合扩大覆盖。</p>
-<h2>怎样判断方案真的有效</h2>
-<p>首期不以“收录了多少组件”作为核心指标，而看：</p>
+<p>本期不包含：</p>
 <ul>
-<li>Golden Mapping 中正确组件是否进入 Top-K；</li>
-<li>最终 Material 选择正确率；</li>
-<li>每个 Figma 区域需要真实启动多少个候选；</li>
-<li>从输入截图到得到映射的耗时；</li>
-<li>生成页面复用已有组件的比例；</li>
-<li>生成代码的人工修改量；</li>
-<li>视觉差异需要多少轮才能收敛；</li>
-<li>第二个页面或业务域是否明显复用首期成果。</li>
+<li>全仓库组件覆盖；</li>
+<li>全量组件截图平台；</li>
+<li>视觉向量数据库；</li>
+<li>自动像素 Diff；</li>
+<li>复杂设备自动化；</li>
+<li>正式 RN 代码生成器；</li>
+<li>FE Code Agent / AI Code Agent 主流程集成；</li>
+<li>线上动态 Schema Runtime。</li>
 </ul>
-<p>如果检索总能找到“长得像但语义错误”的组件，说明业务约束和使用证据不足；如果正确组件根本进不了 Top-K，说明视觉索引或 Fixture 覆盖不足；如果组件正确但整页仍不接近，则问题已经转移到布局生成和页面组合，不能继续误判为检索问题。</p>
-<h2>主要风险与规避方式</h2>
-<h3>物料目录变成第二套组件库</h3>
-<p>只保存 Registry、Fixture 和 Adapter，引用唯一源码；禁止复制组件实现。</p>
-<h3>业务域分类限制跨域复用</h3>
-<p>业务域只是检索标签，同时维护 UI 形态标签和 <code>shared</code> 候选；相同视觉骨架仍按物料泛化标准 Review。</p>
-<h3>Fixture 与真实页面逐渐不一致</h3>
-<p>物料变更时自动重跑截图；Registry 记录源码版本或样本时间；真实页面的使用位置作为辅助证据。</p>
-<h3>视觉分数很高但组件选择错误</h3>
-<p>视觉负责召回，业务场景、Props、平台约束和源码使用证据负责重排；最终映射保留证据和候选，不以单一分数自动拍板。</p>
-<h3>状态组合无限增长</h3>
-<p>只为具有业务意义的稳定视觉状态建立 Fixture，不穷举所有 Props 笛卡尔积。真实需求出现新状态时再补样本。</p>
-<h3>Native 自动化不稳定</h3>
-<p>优先定向 Route，减少点击链路；固定设备和 Mock 数据；隐藏动画与异步噪声；将检索、启动、截图和比较拆开，以便单独重试。</p>
-<h2>最终判断</h2>
-<p>这不是一个已经被业界统一定义的标准流程，但它使用的组件隔离、视觉回归、向量检索、MCP 工具和设备自动化都有成熟基础。真正有前瞻性的地方，是把它们组合成一套“可执行视觉物料库 + Agent 主动验证”的页面生产方式。</p>
-<p>它的潜在效果会明显强于纯文本 Catalog，也比自由的 Screenshot-to-Code 更容易复用现有工程资产和定位问题。前提是坚持三个边界：</p>
+<h2>Demo 如何判断成功</h2>
+<p>选择一个真实 Figma 页面进行验证。</p>
+<p>成功不是“生成了一张看起来还可以的页面”，而是同时满足：</p>
 <ol>
-<li>视觉是主要证据，但不是唯一约束；</li>
-<li>App 自动化负责验证候选，不负责盲目搜索；</li>
-<li>Material Lab 是原组件的可执行索引，不是第二套源码。</li>
+<li>页面主要区域都能得到明确 Material 或物料缺口；</li>
+<li>每个区域的候选数量能够控制在可观察范围；</li>
+<li>AI 能根据 Candidate Board 选择正确组件；</li>
+<li>Mapping 能稳定生成可运行的 RN Demo；</li>
+<li>Native 整页截图能暴露组件选择和布局问题；</li>
+<li>修改 Mapping 后可以快速重新生成；</li>
+<li>第二个页面能够复用首个页面的 Catalog 和流程。</li>
 </ol>
-<p>如果首个业务域的 Top-K 召回、Native 复核和单页代码闭环能够稳定成立，这条路线就不仅能解决当前 Figma 还原，也会成为后续 Material-first 原型生产的底座。</p>
-<p>相关方案：<a href="./web-affiliate-rn-%E8%AE%BE%E8%AE%A1%E7%A8%BF%E8%BF%98%E5%8E%9F%E6%8E%A8%E8%BF%9B%E8%B7%AF%E7%BA%BF.md">《web-affiliate-rn 设计稿还原推进路线》</a>、<a href="./%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5-%E5%8D%95%E9%A1%B5%E5%9E%82%E7%9B%B4%E5%88%87%E7%89%87%E5%AE%9E%E6%96%BD%E6%89%8B%E5%86%8C.md">《第一阶段：单页垂直切片实施方案》</a>。</p>
+<p>如果这些条件不成立，应先修正基本方案，而不是继续增加平台能力。</p>
+<h2>当前状态</h2>
+<p>当前 Demo 已经完成：</p>
+<ul>
+<li>独立 TypeScript Material MCP；</li>
+<li>RN Material Catalog 与 Fixture；</li>
+<li>候选筛选和 Candidate Board；</li>
+<li>Mapping 与 Demo Page 生成；</li>
+<li>Material Lab 开发态入口；</li>
+<li>真实 ShopeeRN Metro iOS Bundle 编译验证。</li>
+</ul>
+<p>下一步应直接选择一个真实页面跑完整流程，而不是继续扩展基础设施。</p>
+<h2>后续演进</h2>
+<p>当真实页面验证出现明确瓶颈后，再按问题增加能力：</p>
+<pre><code class="language-text">候选太多
+  → 完善分类和使用证据
+
+正确组件经常召回不到
+  → 补充 Fixture 和识别信息
+
+相似组件仍难判断
+  → 增加版本化截图或视觉检索
+
+整页人工比较成本过高
+  → 增加 Overlay 和视觉 Diff
+
+设备操作重复
+  → 接入 Maestro / Appium
+
+闭环稳定
+  → 接入 FE Code Agent / AI Code Agent
+</code></pre>
+<p>未来可以进一步从 Figma 还原演进到 Material-first 原型生产，但前提仍然是同一套 Material、Mapping 和 Native 验证能够被真实项目证明有效。</p>
+<h2>后续细化项</h2>
+<p>以下内容不在整体方案阶段锁死，等真实页面试点后再讨论：</p>
+<ul>
+<li>Material Catalog 的完整字段；</li>
+<li>Fixture 覆盖和维护方式；</li>
+<li>Candidate Board 每批候选数量；</li>
+<li>MCP Tool 的最终参数；</li>
+<li>Mapping Schema；</li>
+<li>页面布局表达；</li>
+<li>截图设备和环境基线；</li>
+<li>自动 Diff 算法；</li>
+<li>人工 Review 位置；</li>
+<li>与现有 Agent 工作流的集成方式。</li>
+</ul>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-DSeJ2n4W.js"></script>
+  <script type="module" crossorigin src="/assets/index-DnNV27tr.js"></script>
 </body>
 </html>

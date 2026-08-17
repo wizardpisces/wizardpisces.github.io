@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>Agent 为什么会“记错”？问题可能出在它看到的世界 | LZ AI NOTE</title>
+  <meta name="description" content="Agent 为什么会“记错”？问题可能出在它看到的世界 你先问天气 Agent：“北京明天要不要带伞？”它查到北京有小雨，建议带伞。接着你问：“那上海呢？” 天气工具明明查到上海晴，Agent 却回答： 北京明天有小雨，建议带伞。 如果你在排查这个问题，很容易先怀疑多轮记忆：Agent 是不是把北京记得太牢了？可重试天气接口没有用，城市提取和工具结果都是对…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E2%80%9C%E8%AE%B0%E9%94%99%E2%80%9D%EF%BC%9F%E9%97%AE%E9%A2%98%E5%8F%AF%E8%83%BD%E5%87%BA%E5%9C%A8%E5%AE%83%E7%9C%8B%E5%88%B0%E7%9A%84%E4%B8%96%E7%95%8C">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="Agent 为什么会“记错”？问题可能出在它看到的世界 | LZ AI NOTE">
+  <meta property="og:description" content="Agent 为什么会“记错”？问题可能出在它看到的世界 你先问天气 Agent：“北京明天要不要带伞？”它查到北京有小雨，建议带伞。接着你问：“那上海呢？” 天气工具明明查到上海晴，Agent 却回答： 北京明天有小雨，建议带伞。 如果你在排查这个问题，很容易先怀疑多轮记忆：Agent 是不是把北京记得太牢了？可重试天气接口没有用，城市提取和工具结果都是对…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E2%80%9C%E8%AE%B0%E9%94%99%E2%80%9D%EF%BC%9F%E9%97%AE%E9%A2%98%E5%8F%AF%E8%83%BD%E5%87%BA%E5%9C%A8%E5%AE%83%E7%9C%8B%E5%88%B0%E7%9A%84%E4%B8%96%E7%95%8C">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Agent 为什么会“记错”？问题可能出在它看到的世界","description":"Agent 为什么会“记错”？问题可能出在它看到的世界 你先问天气 Agent：“北京明天要不要带伞？”它查到北京有小雨，建议带伞。接着你问：“那上海呢？” 天气工具明明查到上海晴，Agent 却回答： 北京明天有小雨，建议带伞。 如果你在排查这个问题，很容易先怀疑多轮记忆：Agent 是不是把北京记得太牢了？可重试天气接口没有用，城市提取和工具结果都是对…","url":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E2%80%9C%E8%AE%B0%E9%94%99%E2%80%9D%EF%BC%9F%E9%97%AE%E9%A2%98%E5%8F%AF%E8%83%BD%E5%87%BA%E5%9C%A8%E5%AE%83%E7%9C%8B%E5%88%B0%E7%9A%84%E4%B8%96%E7%95%8C","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E2%80%9C%E8%AE%B0%E9%94%99%E2%80%9D%EF%BC%9F%E9%97%AE%E9%A2%98%E5%8F%AF%E8%83%BD%E5%87%BA%E5%9C%A8%E5%AE%83%E7%9C%8B%E5%88%B0%E7%9A%84%E4%B8%96%E7%95%8C","dateModified":"2026-08-17","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Agent 为什么会“记错”？问题可能出在它看到的世界</h1><h1>Agent 为什么会“记错”？问题可能出在它看到的世界</h1>
+<p>你先问天气 Agent：“北京明天要不要带伞？”它查到北京有小雨，建议带伞。接着你问：“那上海呢？”</p>
+<p>天气工具明明查到上海晴，Agent 却回答：</p>
+<blockquote>
+<p>北京明天有小雨，建议带伞。</p>
+</blockquote>
+<p>如果你在排查这个问题，很容易先怀疑多轮记忆：Agent 是不是把北京记得太牢了？可重试天气接口没有用，城市提取和工具结果都是对的，错误只出现在最终回答。</p>
+<p>上一篇<a href="./Agent%20%E8%BF%99%E6%AC%A1%E7%AD%94%E5%AF%B9%E4%BA%86%EF%BC%8C%E4%B8%8B%E6%AC%A1%E5%91%A2%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20LangSmith.md">《Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith》</a>里，我们给天气 Agent 留下了 Trace。现在正好用它看看：正确的上海天气，是在哪一步又变回北京的？</p>
+<h2>错误发生在最后一步</h2>
+<p>打开这次 Trace：</p>
+<pre><code class="language-text">提取查询（extract_info）
+  输出：city=上海，date=明天
+
+查询天气（get_weather）
+  输出：上海，晴，降雨概率 10%
+
+生成回答（write_answer）
+  输入：全部对话 + 历次工具结果 + 当前任务状态（State）
+  输出：北京明天有小雨，建议带伞
+</code></pre>
+<p>问题出在最后的“生成回答”。模型当时看到了两份天气：历史对话里的“北京、小雨”，以及刚刚查到的“上海、晴”。正确答案没有缺席，只是和旧答案混在了一起。</p>
+<p>程序原本想防止 Agent 忘事，于是把能找到的内容都交给模型。结果信息越完整，当前事实反而越不突出。</p>
+<h2>模型没有记错，是程序又把北京发给了它</h2>
+<p>我们常说“Agent 还记得北京”，听起来像模型内部一直保存着一段经历。</p>
+<p>对这一次模型调用来说：它能依据的，只是程序刚刚发来的输入。北京再次出现，是因为历史消息和旧工具结果又被发了一遍，并非模型主动回忆。</p>
+<p>如果反过来只发送：</p>
+<blockquote>
+<p>那上海呢？</p>
+</blockquote>
+<p>北京是消失了，上一轮的“明天”也会一起消失。所谓 Agent 遗忘，有时只是系统没有把相关信息重新放进来。</p>
+<p>多轮对话看起来像一段连续经历，模型看到的却是程序每一轮重新拼装的现场。Agent 的连续性，很大一部分存在于模型外面。</p>
+<h2>补一句 Prompt 为什么不够</h2>
+<p>最省事的修法，是给 Prompt 加一句：</p>
+<blockquote>
+<p>必须回答当前城市，不要使用历史查询结果。</p>
+</blockquote>
+<p>它可能有效，但选择当前事实的责任仍在模型身上。以后连续查询北京、上海、深圳，它还是要从多份结果里猜哪份属于现在。</p>
+<p>全部保留会混，全部删除会忘。真正的问题不是再写一句什么，而是生成最终答案时，模型究竟应该看见什么。</p>
+<p>这就是 Context Engineering 处理的问题。</p>
+<p>Prompt Engineering 告诉模型，在它看到的世界里应该怎样做。Context Engineering 决定这一次模型能看到怎样的世界。</p>
+<p>要求模型“忽略北京”，是在现有世界里增加一条规则；生成答案时不再传入北京天气，则直接改变了它面对的世界。前者依赖模型遵守，后者由程序保证。</p>
+<h2>State 是现实，Context 是当前视图</h2>
+<p>天气 Agent 的 State 里可以保留完整任务现场：</p>
+<pre><code class="language-text">State
+├── 当前查询：上海、明天
+├── 查询历史：北京、上海
+├── 北京天气：小雨
+├── 上海天气：晴
+├── 用户偏好：下雨时提醒带伞
+└── 流程位置：生成回答
+</code></pre>
+<p>但 State 存在内存或数据库里，不代表模型自动知道它。模型在一次调用中实际收到的 Prompt、历史消息、工具结果和检索资料，才构成这一次的 Context。</p>
+<p>程序走到不同步骤时，只需从 State 中取出当前有用的部分：</p>
+<pre><code class="language-text">补全查询：最近一轮对话 + 已知日期
+查询天气：当前城市 + 当前日期
+生成回答：当前查询 + 本次天气 + 回答规则
+</code></pre>
+<p>查询历史没有被删除，仍可用于审计；北京天气也可以留在 State 里，等用户再次查询北京时取回。它们只是不必进入这次生成回答所用的 Context。</p>
+<p>修复以后，模型生成回答时不再接收“全部对话 + 历次工具结果”，而只看到：</p>
+<pre><code class="language-text">当前查询：上海、明天
+本次天气：晴，降雨概率 10%
+用户偏好：下雨时提醒带伞
+回答规则：极端天气必须提醒风险
+</code></pre>
+<p>这时北京仍在系统里，却不再是当前回答的候选项。修复没有让模型变得更聪明，只是程序不再要求它从新旧两份天气中自行辨认现在。</p>
+<p>如果有些信息还要留给未来的对话或任务，可以另外存进 Memory。模型一次最多能接收的信息量叫 Context Window。State、Memory 和 Context 的关系可以压成一条数据流：</p>
+<pre><code class="language-text">State / Memory
+      │  筛选、压缩、按需取回
+      ▼
+   Context ──装入 Context Window──▶ 模型调用
+      ▲                                  │
+      └──────── 结果写回 State ──────────┘
+</code></pre>
+<p>State 保存当前任务现场，Memory 留下以后可能复用的信息；只有被取回并放进本轮输入的部分，才成为 Context。Context Window 不会替系统决定应该装什么。即使窗口足够放下北京和上海两份天气，容量变大也不会自动判断哪份已经过期。</p>
+<p>内容太多时，可以筛掉过期结果，把长历史压成摘要，或者将网页、完整工具回包和中间产物留在文件系统里，需要时再读取。暂时不交给模型，不等于永久删除。</p>
+<h2>同一个模型，可以活在不同的世界里</h2>
+<p>这和 Linux Namespace 有一点相像。Namespace 是一种隔离机制：操作系统拥有完整文件，沙箱里的进程只看到允许它看见的部分。对进程来说，视图之外的目录等于不存在；对一次模型调用来说，没有进入 Context 的信息也无法参与判断。</p>
+<p>之前这篇<a href="../ai-%E7%AC%94%E8%AE%B0/%E4%BB%8E%20AI%20Agent%20%E7%9A%84%20BubbleWrap%20%E6%B2%99%E7%AE%B1%EF%BC%8C%E7%9C%8B%E2%80%9C%E4%B8%96%E7%95%8C%E4%B8%8E%E5%9C%B0%E5%9B%BE%E2%80%9D%E7%9A%84%E9%9A%94%E7%A6%BB.md">《从 AI Agent 的 BubbleWrap 沙箱，看“世界与地图”的隔离》</a>讨论过：系统不仅能限制一个进程做什么，还能改变它看见什么。Context Engineering 在模型侧遇到了相似的问题。</p>
+<p>当然，两者并不完全一样。Namespace 由操作系统强制隔离；Context 只能限制模型拿到哪些输入，不能保证它一定理解正确。但有一点是确定的：没有进入 Context 的旧天气，不会被误认成当前答案。</p>
+<p>回头看开头的错误，程序明明拥有正确的 State，却在生成最终答案时，把北京和上海两份天气都交给了模型。Context Engineering 所做的，就是在每次模型调用之前重新回答：</p>
+<blockquote>
+<p>这一刻，什么应该成为它眼里的现实？</p>
+</blockquote>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-DnNV27tr.js"></script>
+</body>
+</html>

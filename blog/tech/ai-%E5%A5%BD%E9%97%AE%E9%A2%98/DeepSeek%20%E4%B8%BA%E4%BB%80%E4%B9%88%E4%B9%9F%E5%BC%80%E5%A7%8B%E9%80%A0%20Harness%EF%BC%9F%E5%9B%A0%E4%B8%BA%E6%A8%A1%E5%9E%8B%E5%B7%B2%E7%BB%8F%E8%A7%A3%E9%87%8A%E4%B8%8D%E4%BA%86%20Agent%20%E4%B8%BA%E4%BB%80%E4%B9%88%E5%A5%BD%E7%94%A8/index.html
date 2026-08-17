@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>DeepSeek 为什么也开始造 Harness？因为模型已经解释不了 Agent 为什么好用 | LZ AI NOTE</title>
+  <meta name="description" content="DeepSeek 为什么也开始造 Harness？因为模型已经解释不了 Agent 为什么好用 看到一个 Agent 很好用，我们通常会先问： 它背后是什么模型？ 这个问题正变得不够用了。 同一个模型，放进不同产品里，一个只能告诉你“代码应该怎么改”，另一个却能自己读文件、运行测试、发现失败、继续修改，最后交出可以验证的结果。 模型没有变。后者多出来的，是…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/DeepSeek%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E5%BC%80%E5%A7%8B%E9%80%A0%20Harness%EF%BC%9F%E5%9B%A0%E4%B8%BA%E6%A8%A1%E5%9E%8B%E5%B7%B2%E7%BB%8F%E8%A7%A3%E9%87%8A%E4%B8%8D%E4%BA%86%20Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A5%BD%E7%94%A8">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="DeepSeek 为什么也开始造 Harness？因为模型已经解释不了 Agent 为什么好用 | LZ AI NOTE">
+  <meta property="og:description" content="DeepSeek 为什么也开始造 Harness？因为模型已经解释不了 Agent 为什么好用 看到一个 Agent 很好用，我们通常会先问： 它背后是什么模型？ 这个问题正变得不够用了。 同一个模型，放进不同产品里，一个只能告诉你“代码应该怎么改”，另一个却能自己读文件、运行测试、发现失败、继续修改，最后交出可以验证的结果。 模型没有变。后者多出来的，是…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/DeepSeek%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E5%BC%80%E5%A7%8B%E9%80%A0%20Harness%EF%BC%9F%E5%9B%A0%E4%B8%BA%E6%A8%A1%E5%9E%8B%E5%B7%B2%E7%BB%8F%E8%A7%A3%E9%87%8A%E4%B8%8D%E4%BA%86%20Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A5%BD%E7%94%A8">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"DeepSeek 为什么也开始造 Harness？因为模型已经解释不了 Agent 为什么好用","description":"DeepSeek 为什么也开始造 Harness？因为模型已经解释不了 Agent 为什么好用 看到一个 Agent 很好用，我们通常会先问： 它背后是什么模型？ 这个问题正变得不够用了。 同一个模型，放进不同产品里，一个只能告诉你“代码应该怎么改”，另一个却能自己读文件、运行测试、发现失败、继续修改，最后交出可以验证的结果。 模型没有变。后者多出来的，是…","url":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/DeepSeek%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E5%BC%80%E5%A7%8B%E9%80%A0%20Harness%EF%BC%9F%E5%9B%A0%E4%B8%BA%E6%A8%A1%E5%9E%8B%E5%B7%B2%E7%BB%8F%E8%A7%A3%E9%87%8A%E4%B8%8D%E4%BA%86%20Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A5%BD%E7%94%A8","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/DeepSeek%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E5%BC%80%E5%A7%8B%E9%80%A0%20Harness%EF%BC%9F%E5%9B%A0%E4%B8%BA%E6%A8%A1%E5%9E%8B%E5%B7%B2%E7%BB%8F%E8%A7%A3%E9%87%8A%E4%B8%8D%E4%BA%86%20Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A5%BD%E7%94%A8","dateModified":"2026-08-17","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>DeepSeek 为什么也开始造 Harness？因为模型已经解释不了 Agent 为什么好用</h1><h1>DeepSeek 为什么也开始造 Harness？因为模型已经解释不了 Agent 为什么好用</h1>
+<p>看到一个 Agent 很好用，我们通常会先问：</p>
+<blockquote>
+<p>它背后是什么模型？</p>
+</blockquote>
+<p>这个问题正变得不够用了。</p>
+<p>同一个模型，放进不同产品里，一个只能告诉你“代码应该怎么改”，另一个却能自己读文件、运行测试、发现失败、继续修改，最后交出可以验证的结果。</p>
+<p>模型没有变。后者多出来的，是一套把判断变成行动、再把结果送回模型的闭环。</p>
+<p>差别发生在哪里？</p>
+<h2>一家模型公司，造了一个可以换模型的系统</h2>
+<p>最近 DeepSeek 开源了 DeepSeek Harness。</p>
+<p>第一眼看，它很像又一个 Agent Framework：有工具、Session、沙箱、权限和 Agent Loop，底下还有一套叫 Cordis 的插件系统。</p>
+<p>单看这些名词，没有几个是新的。</p>
+<p>反常的是：DeepSeek 是一家模型公司，造出的系统却没有把模型放在中心。</p>
+<p>在它的架构里，模型适配器是插件，工具注册表是插件，Session Log 是插件，连负责决定 Agent 下一步怎么运行的 Agent Loop 也是插件。官方文档直接写道，这些部分都可以通过配置替换，系统里不存在一个需要不断打补丁的特权内核。</p>
+<p>一个模型公司，为什么要把自己的模型也变成可替换部件？</p>
+<h2>模型越来越强，产品差距却开始发生在模型外</h2>
+<p>聊天产品的运行链路很短：</p>
+<pre><code class="language-text">用户提问
+   ↓
+模型生成
+   ↓
+返回答案
+</code></pre>
+<p>模型能力几乎直接出现在用户面前。模型换代，回答质量通常也会跟着变化。</p>
+<p>Agent 多了一个很厚的中间层：</p>
+<pre><code class="language-text">目标
+ ↓
+选择上下文
+ ↓
+调用模型
+ ↓
+执行工具
+ ↓
+观察结果
+ ↓
+继续、重试或停止
+</code></pre>
+<p>模型仍然负责理解和决策，但它已经不能独自决定结果。</p>
+<p>上下文选错了，再强的模型也会稳定跑偏；工具只能读取，模型就无法完成修改；权限过大，一次错误判断可能变成真实事故；任务中断后没有 Session 和恢复机制，模型再聪明也只能从头再来。</p>
+<p><a href="./%E4%BB%8E%20Prompt%20%E5%88%B0%20Loop%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%E7%9A%84%E5%9B%9B%E6%AC%A1%E5%8D%87%E7%BA%A7.md">《从 Prompt 到 Loop：一个例子看懂 AI 工程的四次升级》</a>曾把 Harness 称为 Agent 的工作台。现在再看，工作台已经不只是给模型摆几件工具。</p>
+<p>它开始决定：</p>
+<pre><code class="language-text">模型能看见什么
+模型可以影响哪个世界
+一次行动怎样留下状态
+失败之后系统还做什么
+</code></pre>
+<p>DeepSeek 的 Session Log 是个很具体的例子。它先记录 Agent 做过什么，再从这份历史里生成模型看到的消息。任务恢复、分叉和回放，都建立在同一份运行记录上。</p>
+<p>当上下文可以从历史中重建，Agent 就不再只是一次模型调用，而是一段能够继续的运行过程。</p>
+<blockquote>
+<p><strong>模型决定了能力上限，Harness 决定这些能力能有多少变成稳定结果。</strong></p>
+</blockquote>
+<p>这就是为什么只问“用了什么模型”，已经解释不了一个 Agent 为什么好用。</p>
+<h2>Agent 的各部分，本来就不该一起升级</h2>
+<p>模型、工具和运行环境的变化节奏完全不同。</p>
+<p>模型可能暂时保持不变，业务工具却要跟着接口每天调整；沙箱发现漏洞，需要立刻收紧；Session 存储要从本地文件迁到数据库；一次任务的 Agent Loop，也可能从简单 ReAct 换成带计划、审核和人工确认的流程。</p>
+<p>如果这些东西都焊在同一个大循环里，每替换一部分，整个 Agent 都要跟着修改。</p>
+<p>DeepSeek Harness 用插件和稳定接口拆开这些变化。它带来的价值可以压缩成一句话：</p>
+<blockquote>
+<p><strong>它让 Agent 的各部分能够以不同速度演化。</strong></p>
+</blockquote>
+<p>这句话也解释了为什么 Runtime 开始变得重要。</p>
+<p>Runtime 是模型外面的组织层。它不替模型思考，而是让模型、工具、状态、权限和执行环境在各自变化时，仍然能够组成同一个 Agent。</p>
+<p>过去我们把 LLM 当成一个 API。到了 Agent 产品里，它依然重要，却只是运行系统中的一个组件。</p>
+<h2>模型公司的竞争，正在向模型外移动</h2>
+<p>OpenAI 的 Agents SDK 已经负责工具、Handoff、Guardrail、Session 和 Trace。2026 年 4 月，OpenAI 又把 Agent Loop 的 Harness 与执行环境进一步分开，理由包括安全、持久运行和扩展性。</p>
+<p>Anthropic 的 Claude Agent SDK 同样不只是一个模型客户端。它提供 Agent Loop、工具、Session、权限控制、Hook 和上下文管理，让开发者直接使用 Claude Code 背后的运行方式。</p>
+<p>它们的做法并不相同，但都在把原本藏在产品内部的 Agent Loop、工具、Session 和权限，变成开发者可以使用和编排的基础设施。</p>
+<blockquote>
+<p>模型公司开始设计“模型怎样持续做事”，而不再满足于提供一次推理。</p>
+</blockquote>
+<p>这背后有一个很现实的变化：Agent 的用户体验、运行数据和开发者入口，越来越多地掌握在 Harness 手里。</p>
+<p>如果模型公司只提供推理 API，那么下游产品将决定模型看到哪些数据、能调用哪些工具、怎样处理失败，也决定用户最终把功劳或责任归给谁。</p>
+<p>模型仍然可能是最昂贵、最难替代的部分，却不再天然拥有整个产品的控制权。</p>
+<p>如果这个方向继续发展，一个自然的战略结果是：谁掌握 Runtime，谁就掌握了模型、工具和用户任务之间的编排层。</p>
+<p>DeepSeek 把模型也做成插件，至少说明它没有把模型当成整个系统唯一不变的中心。模型会换，Runtime 仍然可能留下。</p>
+<h2>以后判断 Agent，要同时看两层</h2>
+<p>模型依然重要。</p>
+<p>模型能力不足，Harness 不能凭空补出推理能力；模型足够强，也不代表 Agent 就能可靠地完成任务。</p>
+<p>以后看一个 Agent 产品，可以把问题拆成两层：</p>
+<pre><code class="language-text">模型层
+它能不能理解问题、提出有效行动？
+
+运行层
+它看到了什么、能做什么、失败后怎样继续？
+</code></pre>
+<p>前者决定它有没有可能做成，后者决定这种可能性能否反复兑现。</p>
+<p>插件、事件和依赖注入都不是新技术。DeepSeek Harness 值得关注，是因为一家模型公司开始认真建设模型外面的系统。</p>
+<p>这释放了一个比产品功能更有意思的信号：</p>
+<blockquote>
+<p>Agent 时代，模型仍然是能力的来源，但光靠模型，已经解释不了能力怎样变成结果。</p>
+</blockquote>
+<p>下一次再遇到一个表现惊人的 Agent，除了问它用了什么模型，也许还应该问一句：</p>
+<blockquote>
+<p>是什么 Harness，让这个模型能够这样工作？</p>
+</blockquote>
+<h2>参考资料</h2>
+<ol>
+<li>DeepSeek，DeepSeek Harness README（访问于 2026-08-17）：<a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/README.zh.md">https://github.com/deepseek-ai/deepseek-harness/blob/master/README.zh.md</a></li>
+<li>DeepSeek，DeepSeek Harness 架构（访问于 2026-08-17）：<a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.zh.md">https://github.com/deepseek-ai/deepseek-harness/blob/master/docs/architecture.zh.md</a></li>
+<li>OpenAI，The next evolution of the Agents SDK（2026-04-15）：<a href="https://openai.com/index/the-next-evolution-of-the-agents-sdk/">https://openai.com/index/the-next-evolution-of-the-agents-sdk/</a></li>
+<li>OpenAI，OpenAI Agents SDK：<a href="https://openai.github.io/openai-agents-python/">https://openai.github.io/openai-agents-python/</a></li>
+<li>Anthropic，Claude Agent SDK Overview：<a href="https://platform.claude.com/docs/en/agent-sdk/overview">https://platform.claude.com/docs/en/agent-sdk/overview</a></li>
+</ol>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-DnNV27tr.js"></script>
+</body>
+</html>

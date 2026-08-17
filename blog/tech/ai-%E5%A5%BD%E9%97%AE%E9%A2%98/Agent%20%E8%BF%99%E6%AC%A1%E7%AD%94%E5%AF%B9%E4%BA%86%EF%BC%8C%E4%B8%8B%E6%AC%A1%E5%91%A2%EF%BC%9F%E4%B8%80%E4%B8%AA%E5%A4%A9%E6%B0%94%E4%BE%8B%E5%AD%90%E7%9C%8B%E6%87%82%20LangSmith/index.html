@@ -13,7 +13,7 @@
   <meta property="og:description" content="Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith 上一篇[《LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂》]里，天气 Agent 已经会跨轮补信息、暂停等待，也会在天气接口失败时重试。 它看起来能用了。 有一天，用户问： 北京明天要不要带伞？ 天气工具返回： 小雨，降雨概率 70%。 Agent 最终却说： 晴天，…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Agent%20%E8%BF%99%E6%AC%A1%E7%AD%94%E5%AF%B9%E4%BA%86%EF%BC%8C%E4%B8%8B%E6%AC%A1%E5%91%A2%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20LangSmith">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith","description":"Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith 上一篇[《LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂》]里，天气 Agent 已经会跨轮补信息、暂停等待，也会在天气接口失败时重试。 它看起来能用了。 有一天，用户问： 北京明天要不要带伞？ 天气工具返回： 小雨，降雨概率 70%。 Agent 最终却说： 晴天，…","url":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Agent%20%E8%BF%99%E6%AC%A1%E7%AD%94%E5%AF%B9%E4%BA%86%EF%BC%8C%E4%B8%8B%E6%AC%A1%E5%91%A2%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20LangSmith","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Agent%20%E8%BF%99%E6%AC%A1%E7%AD%94%E5%AF%B9%E4%BA%86%EF%BC%8C%E4%B8%8B%E6%AC%A1%E5%91%A2%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20LangSmith","dateModified":"2026-08-12","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith","description":"Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith 上一篇[《LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂》]里，天气 Agent 已经会跨轮补信息、暂停等待，也会在天气接口失败时重试。 它看起来能用了。 有一天，用户问： 北京明天要不要带伞？ 天气工具返回： 小雨，降雨概率 70%。 Agent 最终却说： 晴天，…","url":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Agent%20%E8%BF%99%E6%AC%A1%E7%AD%94%E5%AF%B9%E4%BA%86%EF%BC%8C%E4%B8%8B%E6%AC%A1%E5%91%A2%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20LangSmith","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Agent%20%E8%BF%99%E6%AC%A1%E7%AD%94%E5%AF%B9%E4%BA%86%EF%BC%8C%E4%B8%8B%E6%AC%A1%E5%91%A2%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20LangSmith","dateModified":"2026-08-17","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith</h1><h1>Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith</h1>
@@ -150,8 +150,8 @@ LangSmith：知道它跑过什么，并验证它没有跑错
 </code></pre>
 <p>刚开始不必建立几百条案例。第一版只要保住五件事：小雨、晴天、暴雨、工具失败、缺城市。以后每抓到一次新的错误，就让它成为 Dataset 里的一条新案例。</p>
 <p>这样，Agent 才不是每次修改后都靠人再问一句“现在好了吗”。</p>
-<p>Trace 还能继续暴露另一类问题：城市提取和天气工具都没错，回答节点却从历史消息里拿错了城市。接着读<a href="./%E5%A4%A9%E6%B0%94%20Agent%20%E7%AD%94%E9%94%99%E5%9F%8E%E5%B8%82%E4%B8%8E%20Context%20Engineering.md">《天气 Agent 查的是上海，为什么回答的还是北京？一个例子看懂 Context Engineering》</a>。</p>
+<p>Trace 还能继续暴露另一类问题：城市提取和天气工具都没错，回答节点却从历史消息里拿错了城市。接着读<a href="./Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E2%80%9C%E8%AE%B0%E9%94%99%E2%80%9D%EF%BC%9F%E9%97%AE%E9%A2%98%E5%8F%AF%E8%83%BD%E5%87%BA%E5%9C%A8%E5%AE%83%E7%9C%8B%E5%88%B0%E7%9A%84%E4%B8%96%E7%95%8C.md">《Agent 为什么会“记错”？问题可能出在它看到的世界》</a>。</p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-DSeJ2n4W.js"></script>
+  <script type="module" crossorigin src="/assets/index-DnNV27tr.js"></script>
 </body>
 </html>

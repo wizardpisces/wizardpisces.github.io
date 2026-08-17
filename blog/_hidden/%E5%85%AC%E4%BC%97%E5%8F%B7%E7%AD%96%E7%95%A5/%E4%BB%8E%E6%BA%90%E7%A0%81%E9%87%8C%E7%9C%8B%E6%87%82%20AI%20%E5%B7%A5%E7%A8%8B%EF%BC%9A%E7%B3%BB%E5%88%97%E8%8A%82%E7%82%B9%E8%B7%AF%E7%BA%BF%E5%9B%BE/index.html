@@ -13,7 +13,7 @@
   <meta property="og:description" content="从源码里看懂 AI 工程：系列节点路线图 系列角色：知识主干·软件实现。 负责从源码证据还原 AI 基础设施与当下项目的工程取舍；只有源码、测试、Issue、RFC 或提交历史不可替代时才主归本系列。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不负责告诉读者“本周又火了什么”，而是借一份真正经受过使用的源码，讲透一个会长期存在的 AI 工程问…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E6%BA%90%E7%A0%81%E9%87%8C%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"从源码里看懂 AI 工程：系列节点路线图","description":"从源码里看懂 AI 工程：系列节点路线图 系列角色：知识主干·软件实现。 负责从源码证据还原 AI 基础设施与当下项目的工程取舍；只有源码、测试、Issue、RFC 或提交历史不可替代时才主归本系列。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不负责告诉读者“本周又火了什么”，而是借一份真正经受过使用的源码，讲透一个会长期存在的 AI 工程问…","url":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E6%BA%90%E7%A0%81%E9%87%8C%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E6%BA%90%E7%A0%81%E9%87%8C%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","dateModified":"2026-08-12","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"从源码里看懂 AI 工程：系列节点路线图","description":"从源码里看懂 AI 工程：系列节点路线图 系列角色：知识主干·软件实现。 负责从源码证据还原 AI 基础设施与当下项目的工程取舍；只有源码、测试、Issue、RFC 或提交历史不可替代时才主归本系列。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不负责告诉读者“本周又火了什么”，而是借一份真正经受过使用的源码，讲透一个会长期存在的 AI 工程问…","url":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E6%BA%90%E7%A0%81%E9%87%8C%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E6%BA%90%E7%A0%81%E9%87%8C%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","dateModified":"2026-08-17","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>从源码里看懂 AI 工程：系列节点路线图</h1><h1>从源码里看懂 AI 工程：系列节点路线图</h1>
@@ -124,6 +124,7 @@ Python 控制流可以随时变化
 <ul>
 <li>Cloudflare Computer：<code>持久状态 / 稳定接口 / 可替换执行器</code>。</li>
 <li>LoopX：<code>Objective / Todo / Evidence / Gate / Handoff</code> 组成的外部控制面。</li>
+<li>DeepSeek Harness：<code>append-only Session Event Log → Context / Trace / State 投影 → Resume / Fork / Replay</code>。</li>
 <li>DeepSeek-Reasonix：上下文同时具有语义生命周期和缓存、延迟、成本生命周期。</li>
 <li>TencentDB Agent Memory：从个人聊天记录到可写入、更新、遗忘和共享的组织记忆。</li>
 <li>Code-Graph-RAG：检索结构必须匹配问题结构，代码依赖问题不能只靠文本相似度。</li>
@@ -200,6 +201,140 @@ Python 控制流可以随时变化
 <td>截图只有像素，没有组件身份、合法 Props、响应式规则和交互语义；精准还原不是一次生成，而是视觉解析、现有物料召回、Schema 映射、真实渲染和差异修正组成的闭环</td>
 <td>与内部 Material-first 方案高度相关；若公开成篇，应提炼通用机制，不暴露具体业务方案，也不能再写一份工具清单</td>
 <td>黑箱 / 工程</td>
+</tr>
+</tbody>
+</table>
+<h3>DeepSeek Harness 素材池</h3>
+<p>DeepSeek Harness 不单独建立产品系列。当前只把它作为“从源码里看懂 AI 工程”的一个素材对象：源码和设计文档能够证明独特取舍时独立成篇；稳定问题不依赖 DeepSeek 才成立时，迁回可靠 Agent 主线。</p>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>标题方向</th>
+<th>源码抓手与真正问题</th>
+<th>处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>已成稿</td>
+<td><a href="../../tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/DeepSeek%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E5%BC%80%E5%A7%8B%E9%80%A0%20Harness%EF%BC%9F%E5%9B%A0%E4%B8%BA%E6%A8%A1%E5%9E%8B%E5%B7%B2%E7%BB%8F%E8%A7%A3%E9%87%8A%E4%B8%8D%E4%BA%86%20Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A5%BD%E7%94%A8.md">DeepSeek 为什么也开始造 Harness？因为模型已经解释不了 Agent 为什么好用</a></td>
+<td>模型公司开始建设模型外的运行层；同一模型的 Agent 表现越来越由 Context、工具、状态、权限和 Loop 共同决定</td>
+<td>作为本次热点首发；DeepSeek 是趋势证据，不展开 Cordis API，主讲模型对 Agent 产品的“解释权”正在分散</td>
+</tr>
+<tr>
+<td>素材</td>
+<td><a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Agent%20%E7%BC%BA%E5%B7%A5%E5%85%B7%E6%97%B6%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%AE%A9%E5%AE%83%E8%87%AA%E5%B7%B1%E5%86%99%E4%B8%80%E4%B8%AA%EF%BC%9FDeepSeek%20Harness%20%E7%9A%84%E6%BF%80%E8%BF%9B%E5%B0%9D%E8%AF%95.md">Agent 缺工具时，为什么不让它自己写一个？</a></td>
+<td><code>tool-cordis</code> 让模型检查 Runtime、定义和运行进程内插件，并在后续轮次获得新的工具、提示词或监听器</td>
+<td>机制成立，但单独写容易落回产品功能解读；保留给以后讨论 Agent 如何修改自己的动作空间</td>
+</tr>
+<tr>
+<td>合并</td>
+<td>DeepSeek 为什么突然开始造 Agent Runtime？</td>
+<td>capability seam 让接口、提供方和使用方以不同速度变化</td>
+<td>“各部分能够以不同速度演化”已作为现象稿的关键因果，不再独立写模块化教程</td>
+</tr>
+<tr>
+<td>暂缓</td>
+<td><a href="../../tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E5%B7%A5%E5%85%B7%E5%88%B0%E5%BA%95%E6%89%A7%E8%A1%8C%E4%BA%86%E6%B2%A1%E6%9C%89%EF%BC%9FDeepSeek%20Harness%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BF%9D%E7%95%99%E2%80%9C%E6%9C%AA%E7%9F%A5%E7%BB%93%E6%9E%9C%E2%80%9D%EF%BC%9F.md">工具到底执行了没有？DeepSeek Harness 为什么保留“未知结果”？</a></td>
+<td>已持久化 <code>tool/call</code> 缺少结果时追加 <code>TOOL_OUTCOME_UNKNOWN</code>，而不是截断历史；Event Sourcing 如何保留不确定性</td>
+<td>机制准确但不足以代表 Harness 的主要架构判断；保留为 Retry / Checkpoint / Idempotency 的候选侧篇</td>
+</tr>
+<tr>
+<td>合并</td>
+<td><a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/DeepSeek%20Harness%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AA%E4%BF%9D%E5%AD%98%E4%B8%80%E4%BB%BD%E5%8E%86%E5%8F%B2%EF%BC%9F.md">DeepSeek Harness 为什么只保存一份历史？</a></td>
+<td>append-only Session Event；Context、Trace 和恢复位置共享运行事实</td>
+<td>Event Sourcing 定义与 Session Log 机制已收进“未知结果”篇，不再独立发布</td>
+</tr>
+<tr>
+<td>暂缓</td>
+<td><a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/DeepSeek%20Harness%20%E7%9A%84%E5%86%85%E6%A0%B8%E4%B8%BA%E4%BB%80%E4%B9%88%E2%80%9C%E4%BB%80%E4%B9%88%E9%83%BD%E4%B8%8D%E4%BC%9A%E2%80%9D%EF%BC%9F.md">DeepSeek Harness 的内核为什么“什么都不会”？</a></td>
+<td>Cordis 只管理插件加载、卸载、依赖与可逆 effect</td>
+<td>插件架构仍有素材，但当前缺少比 Event Sourcing 更强的首发冲突</td>
+</tr>
+<tr>
+<td>迁移</td>
+<td><a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Agent%20%E8%A6%81%E6%89%A7%E8%A1%8C%E5%8D%B1%E9%99%A9%E5%91%BD%E4%BB%A4%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%20DeepSeek%20%E4%B8%8D%E8%AE%A9%20Loop%20%E8%87%AA%E5%B7%B1%E5%86%B3%E5%AE%9A%EF%BC%9F.md">Agent 要执行危险命令，为什么 DeepSeek 不让 Loop 自己决定？</a></td>
+<td><code>tools/pre-execute</code> 与单调 <code>guard()</code> 让权限只能继续收紧</td>
+<td>迁入可靠 Agent 的权限、审批和最小授权主线，不作为 DeepSeek 首发</td>
+</tr>
+<tr>
+<td>合并</td>
+<td>为什么 DeepSeek 连 Agent Loop 都做成了插件？</td>
+<td><code>core/agent</code> 定义接口，<code>core/agent-loop</code> 是默认具体驱动</td>
+<td>作为 Cordis 内核篇的架构背景；单独成篇只有分类，没有足够知识增量</td>
+</tr>
+<tr>
+<td>合并</td>
+<td>一切皆插件：DeepSeek Harness 为什么只留下一个 Cordis 内核？</td>
+<td>Cordis 负责插件生命周期、依赖、Service、Event 与可逆 effect</td>
+<td>已收进“内核为什么什么都不会”，不再单独成篇</td>
+</tr>
+<tr>
+<td>候选</td>
+<td>模型已经会调用工具，为什么 DeepSeek Harness 还要让它写代码？</td>
+<td>PTC 让模型生成代码组合多步工具；真正问题是代码编排相对连续 Tool Call 获得了什么，又增加哪些安全与调试成本</td>
+<td>证据闭合后可独立成篇，不与 Event Log 篇合并</td>
+</tr>
+<tr>
+<td>合并</td>
+<td>DeepSeek Harness 到底是 Agent 产品、框架还是 Runtime？</td>
+<td>Agent 接口、默认 Loop、Profile、Bundle 与可替换能力共同构成运行环境</td>
+<td>作为 Agent Loop 篇的最终定位，不单写一篇术语分类</td>
+</tr>
+<tr>
+<td>合并</td>
+<td>为什么 DeepSeek 把 Agent 做成 Event-driven Runtime？</td>
+<td><code>agent/*</code>、<code>tools/*</code>、<code>session/event</code> 让 Context、审批、重试和遥测成为横切插件</td>
+<td>先作为 Agent Loop / Cordis 两篇的运行机制，不单独写事件列表</td>
+</tr>
+<tr>
+<td>合并</td>
+<td>同一个 Agent，为什么要有标准、极简、PTC 和创作四种模式？</td>
+<td>Profile 与 Bundle 组合不同插件</td>
+<td>暂并入 Cordis 篇作为可观察结果；只有模式切换暴露独立失败时再拆</td>
+</tr>
+<tr>
+<td>合并</td>
+<td>Agent 有了工具，为什么还要把 Skill、Sandbox 和 Subagent 分开装配？</td>
+<td>Skill、Sandbox、Subagent 都以插件进入运行时</td>
+<td>范围过宽，先作为 Cordis 篇的边界材料，不写功能清单</td>
+</tr>
+<tr>
+<td>迁移</td>
+<td>Agent 能恢复对话，为什么恢复不了已经改过的文件？</td>
+<td>Session 事件能恢复运行轨迹，文件与外部副作用仍需要快照、幂等和授权</td>
+<td>迁入可靠 Agent 的 Retry / Checkpoint / Idempotency 节点</td>
+</tr>
+<tr>
+<td>迁移</td>
+<td>子 Agent 已经能分工，为什么还要共享一条 Session 轨迹？</td>
+<td>子 Agent 调度与事件记录进入同一运行历史</td>
+<td>等 Multi-Agent 主线进入上下文隔离、通信和失败归因时再使用</td>
+</tr>
+<tr>
+<td>候选</td>
+<td>换一个模型只改 Adapter，为什么 Agent 行为还是可能变？</td>
+<td>Model Adapter 统一接口，但工具协议、推理字段与多轮行为仍可能不同</td>
+<td>与行为协议旧文交叉；只有找到 Harness 源码或 Issue 中的具体兼容失败才成篇</td>
+</tr>
+<tr>
+<td>合并</td>
+<td>Agent 能不能修改自己的 Harness，再比较哪套运行方式更好？</td>
+<td>Everything is a Plugin 为 Harness evolution 提供可操作表面</td>
+<td>自修改能力已收进 <code>tool-cordis</code> 稿；“自动比较并改进 Harness”仍缺实验依据，不继续外推</td>
+</tr>
+<tr>
+<td>观察</td>
+<td>Harness 会不会成为 Agent 世界的标准 ABI？</td>
+<td>Agent、Model、Tool、Session、Sandbox 等已有内部接口</td>
+<td>当前只是单项目内部约定；除非出现跨 Runtime 兼容证据，否则不成篇</td>
+</tr>
+<tr>
+<td>暂缓</td>
+<td>DeepSeek Harness vs Claude Code vs Codex vs OpenCode vs LangGraph</td>
+<td>比较 Product、Framework、Runtime 与 Protocol 的层次</td>
+<td>范围过宽；只有收紧到一个共同问题和同一证据维度时再比较</td>
 </tr>
 </tbody>
 </table>
@@ -309,6 +444,6 @@ Python 控制流可以随时变化
 <p>动笔前必须重新核对当前源码、文档、Issue 和测试，不因为候选池曾经记录过就假设事实仍然有效。</p>
 <p>该系列适合作为现有主线之间的穿插篇：其他主线负责建立体系，源码解剖负责用成熟框架与正在发生的项目检验体系。它们共享概念，但不能重复结论。</p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-DSeJ2n4W.js"></script>
+  <script type="module" crossorigin src="/assets/index-DnNV27tr.js"></script>
 </body>
 </html>
