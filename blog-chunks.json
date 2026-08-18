@@ -12144,6 +12144,72 @@
     "originalTitle": "LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂"
   },
   {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FPlan%20%E5%86%B3%E5%AE%9A%E6%80%8E%E4%B9%88%E8%B5%B0%EF%BC%8CGoal%20%E5%86%B3%E5%AE%9A%E6%98%AF%E5%90%A6%E5%AE%8C%E6%88%90%EF%BC%9AAgent%20%E4%B8%BA%E4%BD%95%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9F#chunk-0",
+    "title": "Plan 决定怎么走，Goal 决定是否完成：Agent 为何选错城市？",
+    "content": "Plan 决定怎么走，Goal 决定是否完成：Agent 为何选错城市？\n你让一个旅行 Agent 在杭州、苏州、宁波里挑一个周末目的地。最初，它只需要比较往返车票：\n查一下杭州、苏州、宁波的往返车票，推荐最便宜的城市。\nAgent 列出三项 Todo：\n杭州 180 元，宁波 260 元，苏州 360 元。Agent 推荐杭州，没有问题。\n在这个任务里，“比较完价格”和“找到最便宜的城市”几乎是同一件事。Todo 全部完成，任务也就完成了。\nPlan 起初没有问题\n用户随后加上天气和预算限制：\n从三个城市里选一个适合户外活动的地方。降雨概率不能超过 20%，往返车票不能超过 300 元；如果都不满足，就建议我延期。\nAgent 正确理解了要求，生成了这份 Plan：",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FPlan%20%E5%86%B3%E5%AE%9A%E6%80%8E%E4%B9%88%E8%B5%B0%EF%BC%8CGoal%20%E5%86%B3%E5%AE%9A%E6%98%AF%E5%90%A6%E5%AE%8C%E6%88%90%EF%BC%9AAgent%20%E4%B8%BA%E4%BD%95%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9F",
+    "chunkIndex": 0,
+    "totalChunks": 6,
+    "startPos": 0,
+    "endPos": 339,
+    "originalTitle": "Plan 决定怎么走，Goal 决定是否完成：Agent 为何选错城市？"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FPlan%20%E5%86%B3%E5%AE%9A%E6%80%8E%E4%B9%88%E8%B5%B0%EF%BC%8CGoal%20%E5%86%B3%E5%AE%9A%E6%98%AF%E5%90%A6%E5%AE%8C%E6%88%90%EF%BC%9AAgent%20%E4%B8%BA%E4%BD%95%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9F#chunk-1",
+    "title": "Plan 决定怎么走，Goal 决定是否完成：Agent 为何选错城市？ (第2段)",
+    "content": "...延期。\nAgent 正确理解了要求，生成了这份 Plan： 天气查询很顺利，杭州和宁波的车票也拿到了，只有苏州票价接口超时：\n杭州和宁波已经被天气条件淘汰。苏州天气合格，但票价未知。按照原 Plan，任务还不能结束。\n一次重规划，把终点也改掉了\nAgent 决定重试苏州票价接口。重新规划时，它把注意力放在“怎样处理剩余步骤”，生成了一个更短的新 Plan：\n重试成功，苏州往返 360 元。至此，天气和车票都查对了：\n三个城市都不符合原始条件，Agent 却回答：\n推荐杭州。票价最便宜，周末下雨的话带伞即可。\n上一篇《Agent 为什么会“记错”？问题可能出在它看到的世界》解决的是另一层错误：程序把旧天气混进 Context，Agent 看见了错误的世界。",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FPlan%20%E5%86%B3%E5%AE%9A%E6%80%8E%E4%B9%88%E8%B5%B0%EF%BC%8CGoal%20%E5%86%B3%E5%AE%9A%E6%98%AF%E5%90%A6%E5%AE%8C%E6%88%90%EF%BC%9AAgent%20%E4%B8%BA%E4%BD%95%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9F",
+    "chunkIndex": 1,
+    "totalChunks": 6,
+    "startPos": 339,
+    "endPos": 641,
+    "originalTitle": "Plan 决定怎么走，Goal 决定是否完成：Agent 为何选错城市？"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FPlan%20%E5%86%B3%E5%AE%9A%E6%80%8E%E4%B9%88%E8%B5%B0%EF%BC%8CGoal%20%E5%86%B3%E5%AE%9A%E6%98%AF%E5%90%A6%E5%AE%8C%E6%88%90%EF%BC%9AAgent%20%E4%B8%BA%E4%BD%95%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9F#chunk-2",
+    "title": "Plan 决定怎么走，Goal 决定是否完成：Agent 为何选错城市？ (第3段)",
+    "content": "...旧天气混进 Context，Agent 看见了错误的世界。 这一次，模型看到的城市和工具结果都正确。变化发生在 Plan 里：重规划保留了“继续查票”，却丢掉了“没有合格城市就延期”。\n新 Plan 也执行成功了，但它完成的已经不是用户最初交代的任务：\nContext Engineering 保证这一步看见正确的事实；接下来还要保证任务走到一半时，验收标准不会被 Agent 顺手改掉。\nPlan 可以变，Goal 不能跟着变\n重新规划本身没有问题。接口超时以后增加重试，甚至改成先查票再查天气，都只是路线变化。\n不能跟着 Plan 一起重写的是完成条件，也就是 Goal：",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FPlan%20%E5%86%B3%E5%AE%9A%E6%80%8E%E4%B9%88%E8%B5%B0%EF%BC%8CGoal%20%E5%86%B3%E5%AE%9A%E6%98%AF%E5%90%A6%E5%AE%8C%E6%88%90%EF%BC%9AAgent%20%E4%B8%BA%E4%BD%95%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9F",
+    "chunkIndex": 2,
+    "totalChunks": 6,
+    "startPos": 641,
+    "endPos": 900,
+    "originalTitle": "Plan 决定怎么走，Goal 决定是否完成：Agent 为何选错城市？"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FPlan%20%E5%86%B3%E5%AE%9A%E6%80%8E%E4%B9%88%E8%B5%B0%EF%BC%8CGoal%20%E5%86%B3%E5%AE%9A%E6%98%AF%E5%90%A6%E5%AE%8C%E6%88%90%EF%BC%9AAgent%20%E4%B8%BA%E4%BD%95%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9F#chunk-3",
+    "title": "Plan 决定怎么走，Goal 决定是否完成：Agent 为何选错城市？ (第4段)",
+    "content": "...能跟着 Plan 一起重写的是完成条件，也就是 Goal： Goal 应当从用户原始要求中提取并单独保存。Agent 可以重新生成 Plan，却不能因为“必须给出一个推荐”更容易交付，就把硬条件改成综合排序。只有用户主动把预算提高到 400 元，Goal 才会改变。\n系统再用 Goal 验收 Plan 的结果。杭州即使综合排名第一，也会因为降雨概率超标被拒绝。\nEvidence 决定现在能不能停\n回到苏州票价超时的时刻，Goal 已经很清楚，系统仍然不能判断成功还是无解。当时已经确认的事实，也就是 Evidence，只有这些：\n苏州仍可能合格，所以 Status 只能是“进行中”。重试拿到 360 元以后，Evidence 才完整，Status 随之变成“无解”：\n这时 Agent 不必硬挑一个城市，而是按照 Goal 正常结束：",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FPlan%20%E5%86%B3%E5%AE%9A%E6%80%8E%E4%B9%88%E8%B5%B0%EF%BC%8CGoal%20%E5%86%B3%E5%AE%9A%E6%98%AF%E5%90%A6%E5%AE%8C%E6%88%90%EF%BC%9AAgent%20%E4%B8%BA%E4%BD%95%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9F",
+    "chunkIndex": 3,
+    "totalChunks": 6,
+    "startPos": 900,
+    "endPos": 1241,
+    "originalTitle": "Plan 决定怎么走，Goal 决定是否完成：Agent 为何选错城市？"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FPlan%20%E5%86%B3%E5%AE%9A%E6%80%8E%E4%B9%88%E8%B5%B0%EF%BC%8CGoal%20%E5%86%B3%E5%AE%9A%E6%98%AF%E5%90%A6%E5%AE%8C%E6%88%90%EF%BC%9AAgent%20%E4%B8%BA%E4%BD%95%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9F#chunk-4",
+    "title": "Plan 决定怎么走，Goal 决定是否完成：Agent 为何选错城市？ (第5段)",
+    "content": "...gent 不必硬挑一个城市，而是按照 Goal 正常结束： 三个城市都无法同时满足天气和预算条件，建议延期。\n“无解”不是执行失败，而是 Goal 允许的一种结果。系统如果只认识“成功”和“继续”，就容易把无解当成还没努力够，继续搜索，或者偷偷放宽条件。\n四项数据组成任务的控制状态\n现在可以把这次运行压成一条线：\nPlan 管下一步，Goal 管验收，Evidence 保存事实，Status 表示当前能不能结束。这四项共同构成任务的控制状态，也就是 Control State。它是应用自己的设计，不是 LangGraph 内置的类型。\nLangGraph 可以用 State 和 checkpoint 保存这些数据，却不会替业务定义什么才算成功。LangGraph 管任务接下来可以怎么走，Control State 则让系统知道现在是否已经走完。",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FPlan%20%E5%86%B3%E5%AE%9A%E6%80%8E%E4%B9%88%E8%B5%B0%EF%BC%8CGoal%20%E5%86%B3%E5%AE%9A%E6%98%AF%E5%90%A6%E5%AE%8C%E6%88%90%EF%BC%9AAgent%20%E4%B8%BA%E4%BD%95%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9F",
+    "chunkIndex": 4,
+    "totalChunks": 6,
+    "startPos": 1241,
+    "endPos": 1589,
+    "originalTitle": "Plan 决定怎么走，Goal 决定是否完成：Agent 为何选错城市？"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FPlan%20%E5%86%B3%E5%AE%9A%E6%80%8E%E4%B9%88%E8%B5%B0%EF%BC%8CGoal%20%E5%86%B3%E5%AE%9A%E6%98%AF%E5%90%A6%E5%AE%8C%E6%88%90%EF%BC%9AAgent%20%E4%B8%BA%E4%BD%95%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9F#chunk-5",
+    "title": "Plan 决定怎么走，Goal 决定是否完成：Agent 为何选错城市？ (第6段)",
+    "content": "...Control State 则让系统知道现在是否已经走完。 如果任务只是选最低票价，Todo 已经够用。等任务出现硬约束、中途重新规划，或者允许“无解”正常结束时，系统才需要把验收条件和执行步骤分开。\n以后看到一个 Agent 宣布“任务完成”，可以先问三个问题：\n1. 完成的是当前 Plan，还是用户的 Goal？\n2. Evidence 已经完整，还是只有眼下能拿到的部分？\n3. 系统是否允许用“无解”正常结束？\n能回答这三件事，才能判断 Agent 是真的完成了任务，还是只把清单走到了最后。\n这三问也适用于研究、代码修复和商品筛选。只要任务允许重新规划，就要防止系统把“当前步骤做完了”误当成“用户的要求满足了”。",
+    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2FPlan%20%E5%86%B3%E5%AE%9A%E6%80%8E%E4%B9%88%E8%B5%B0%EF%BC%8CGoal%20%E5%86%B3%E5%AE%9A%E6%98%AF%E5%90%A6%E5%AE%8C%E6%88%90%EF%BC%9AAgent%20%E4%B8%BA%E4%BD%95%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9F",
+    "chunkIndex": 5,
+    "totalChunks": 6,
+    "startPos": 1589,
+    "endPos": 1872,
+    "originalTitle": "Plan 决定怎么走，Goal 决定是否完成：Agent 为何选错城市？"
+  },
+  {
     "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E4%B8%BA%E4%BB%80%E4%B9%88%20AI%20%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E6%9B%B4%E9%9C%80%E8%A6%81%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%80%9D%E6%83%B3%EF%BC%9F#chunk-0",
     "title": "为什么 AI 应用开发更需要贝叶斯思想？",
     "content": "AI 应用研发比传统软件研发更需要贝叶斯决策思想。原因不是 AI 更复杂，而是 AI 产品的不确定性远高于传统软件。\n传统软件实现的是确定需求：\n用户点击按钮 → 后端计算 → 返回结果。\nAI 应用在不断验证概率问题：\n用户真的需要这个能力吗？（需求不确定）\nPrompt 是否有效？（方案不确定）\nModel A 还是 Model B 更好？（模型不确定）\nAgent 是否应该拆成多个工具？（架构不确定）\n用户为什么满意或不满意？（反馈不确定）\n研发过程就是不断更新这些概率。\n贝叶斯思想的核心公式是：\n**‌后验概率 ∝ 先验概率 × 似然‌**\n翻译成产品语言就是：\n**‌更新后的判断 ∝ 之前的判断 × 新观察到的证据**\n以下通过几个例子说明这个现象\n例子一：AI Router",
@@ -12562,72 +12628,6 @@
     "originalTitle": "只让 Claude 改了几句话，也会被当成 AI 代写吗？"
   },
   {
-    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%A4%A9%E6%B0%94%E8%BD%A6%E7%A5%A8%E9%83%BD%E5%AF%B9%E4%BA%86%EF%BC%8CAgent%20%E8%BF%98%E6%98%AF%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9APlan%20%E4%B8%8D%E7%AD%89%E4%BA%8E%20Goal#chunk-0",
-    "title": "天气车票都对了，Agent 还是选错城市：Plan 不等于 Goal",
-    "content": "天气车票都对了，Agent 还是选错城市：Plan 不等于 Goal\n你让一个旅行 Agent 在杭州、苏州、宁波里挑一个周末目的地。最初，它只需要比较往返车票：\n查一下杭州、苏州、宁波的往返车票，推荐最便宜的城市。\nAgent 列出三项 Todo：\n杭州 180 元，宁波 260 元，苏州 360 元。Agent 推荐杭州，没有问题。\n在这个任务里，“比较完价格”和“找到最便宜的城市”几乎是同一件事。Todo 全部完成，任务也就完成了。\nPlan 起初没有问题\n用户随后加上天气和预算限制：\n从三个城市里选一个适合户外活动的地方。降雨概率不能超过 20%，往返车票不能超过 300 元；如果都不满足，就建议我延期。\nAgent 正确理解了要求，生成了这份 Plan：",
-    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%A4%A9%E6%B0%94%E8%BD%A6%E7%A5%A8%E9%83%BD%E5%AF%B9%E4%BA%86%EF%BC%8CAgent%20%E8%BF%98%E6%98%AF%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9APlan%20%E4%B8%8D%E7%AD%89%E4%BA%8E%20Goal",
-    "chunkIndex": 0,
-    "totalChunks": 6,
-    "startPos": 0,
-    "endPos": 337,
-    "originalTitle": "天气车票都对了，Agent 还是选错城市：Plan 不等于 Goal"
-  },
-  {
-    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%A4%A9%E6%B0%94%E8%BD%A6%E7%A5%A8%E9%83%BD%E5%AF%B9%E4%BA%86%EF%BC%8CAgent%20%E8%BF%98%E6%98%AF%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9APlan%20%E4%B8%8D%E7%AD%89%E4%BA%8E%20Goal#chunk-1",
-    "title": "天气车票都对了，Agent 还是选错城市：Plan 不等于 Goal (第2段)",
-    "content": "...延期。\nAgent 正确理解了要求，生成了这份 Plan： 天气查询很顺利，杭州和宁波的车票也拿到了，只有苏州票价接口超时：\n杭州和宁波已经被天气条件淘汰。苏州天气合格，但票价未知。按照原 Plan，任务还不能结束。\n一次重规划，把终点也改掉了\nAgent 决定重试苏州票价接口。重新规划时，它把注意力放在“怎样处理剩余步骤”，生成了一个更短的新 Plan：\n重试成功，苏州往返 360 元。至此，天气和车票都查对了：\n三个城市都不符合原始条件，Agent 却回答：\n推荐杭州。票价最便宜，周末下雨的话带伞即可。\n上一篇《Agent 为什么会“记错”？问题可能出在它看到的世界》解决的是另一层错误：程序把旧天气混进 Context，Agent 看见了错误的世界。",
-    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%A4%A9%E6%B0%94%E8%BD%A6%E7%A5%A8%E9%83%BD%E5%AF%B9%E4%BA%86%EF%BC%8CAgent%20%E8%BF%98%E6%98%AF%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9APlan%20%E4%B8%8D%E7%AD%89%E4%BA%8E%20Goal",
-    "chunkIndex": 1,
-    "totalChunks": 6,
-    "startPos": 337,
-    "endPos": 639,
-    "originalTitle": "天气车票都对了，Agent 还是选错城市：Plan 不等于 Goal"
-  },
-  {
-    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%A4%A9%E6%B0%94%E8%BD%A6%E7%A5%A8%E9%83%BD%E5%AF%B9%E4%BA%86%EF%BC%8CAgent%20%E8%BF%98%E6%98%AF%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9APlan%20%E4%B8%8D%E7%AD%89%E4%BA%8E%20Goal#chunk-2",
-    "title": "天气车票都对了，Agent 还是选错城市：Plan 不等于 Goal (第3段)",
-    "content": "...旧天气混进 Context，Agent 看见了错误的世界。 这一次，模型看到的城市和工具结果都正确。变化发生在 Plan 里：重规划保留了“继续查票”，却丢掉了“没有合格城市就延期”。\n新 Plan 也执行成功了，但它完成的已经不是用户最初交代的任务：\nContext Engineering 保证这一步看见正确的事实；接下来还要保证任务走到一半时，验收标准不会被 Agent 顺手改掉。\nPlan 可以变，Goal 不能跟着变\n重新规划本身没有问题。接口超时以后增加重试，甚至改成先查票再查天气，都只是路线变化。\n不能跟着 Plan 一起重写的是完成条件，也就是 Goal：",
-    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%A4%A9%E6%B0%94%E8%BD%A6%E7%A5%A8%E9%83%BD%E5%AF%B9%E4%BA%86%EF%BC%8CAgent%20%E8%BF%98%E6%98%AF%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9APlan%20%E4%B8%8D%E7%AD%89%E4%BA%8E%20Goal",
-    "chunkIndex": 2,
-    "totalChunks": 6,
-    "startPos": 639,
-    "endPos": 898,
-    "originalTitle": "天气车票都对了，Agent 还是选错城市：Plan 不等于 Goal"
-  },
-  {
-    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%A4%A9%E6%B0%94%E8%BD%A6%E7%A5%A8%E9%83%BD%E5%AF%B9%E4%BA%86%EF%BC%8CAgent%20%E8%BF%98%E6%98%AF%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9APlan%20%E4%B8%8D%E7%AD%89%E4%BA%8E%20Goal#chunk-3",
-    "title": "天气车票都对了，Agent 还是选错城市：Plan 不等于 Goal (第4段)",
-    "content": "...能跟着 Plan 一起重写的是完成条件，也就是 Goal： Goal 应当从用户原始要求中提取并单独保存。Agent 可以重新生成 Plan，却不能因为“必须给出一个推荐”更容易交付，就把硬条件改成综合排序。只有用户主动把预算提高到 400 元，Goal 才会改变。\n系统再用 Goal 验收 Plan 的结果。杭州即使综合排名第一，也会因为降雨概率超标被拒绝。\nEvidence 决定现在能不能停\n回到苏州票价超时的时刻，Goal 已经很清楚，系统仍然不能判断成功还是无解。当时已经确认的事实，也就是 Evidence，只有这些：\n苏州仍可能合格，所以 Status 只能是“进行中”。重试拿到 360 元以后，Evidence 才完整，Status 随之变成“无解”：\n这时 Agent 不必硬挑一个城市，而是按照 Goal 正常结束：",
-    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%A4%A9%E6%B0%94%E8%BD%A6%E7%A5%A8%E9%83%BD%E5%AF%B9%E4%BA%86%EF%BC%8CAgent%20%E8%BF%98%E6%98%AF%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9APlan%20%E4%B8%8D%E7%AD%89%E4%BA%8E%20Goal",
-    "chunkIndex": 3,
-    "totalChunks": 6,
-    "startPos": 898,
-    "endPos": 1239,
-    "originalTitle": "天气车票都对了，Agent 还是选错城市：Plan 不等于 Goal"
-  },
-  {
-    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%A4%A9%E6%B0%94%E8%BD%A6%E7%A5%A8%E9%83%BD%E5%AF%B9%E4%BA%86%EF%BC%8CAgent%20%E8%BF%98%E6%98%AF%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9APlan%20%E4%B8%8D%E7%AD%89%E4%BA%8E%20Goal#chunk-4",
-    "title": "天气车票都对了，Agent 还是选错城市：Plan 不等于 Goal (第5段)",
-    "content": "...gent 不必硬挑一个城市，而是按照 Goal 正常结束： 三个城市都无法同时满足天气和预算条件，建议延期。\n“无解”不是执行失败，而是 Goal 允许的一种结果。系统如果只认识“成功”和“继续”，就容易把无解当成还没努力够，继续搜索，或者偷偷放宽条件。\n四项数据组成任务的控制状态\n现在可以把这次运行压成一条线：\nPlan 管下一步，Goal 管验收，Evidence 保存事实，Status 表示当前能不能结束。这四项共同构成任务的控制状态，也就是 Control State。它是应用自己的设计，不是 LangGraph 内置的类型。\nLangGraph 可以用 State 和 checkpoint 保存这些数据，却不会替业务定义什么才算成功。LangGraph 管任务接下来可以怎么走，Control State 则让系统知道现在是否已经走完。",
-    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%A4%A9%E6%B0%94%E8%BD%A6%E7%A5%A8%E9%83%BD%E5%AF%B9%E4%BA%86%EF%BC%8CAgent%20%E8%BF%98%E6%98%AF%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9APlan%20%E4%B8%8D%E7%AD%89%E4%BA%8E%20Goal",
-    "chunkIndex": 4,
-    "totalChunks": 6,
-    "startPos": 1239,
-    "endPos": 1587,
-    "originalTitle": "天气车票都对了，Agent 还是选错城市：Plan 不等于 Goal"
-  },
-  {
-    "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%A4%A9%E6%B0%94%E8%BD%A6%E7%A5%A8%E9%83%BD%E5%AF%B9%E4%BA%86%EF%BC%8CAgent%20%E8%BF%98%E6%98%AF%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9APlan%20%E4%B8%8D%E7%AD%89%E4%BA%8E%20Goal#chunk-5",
-    "title": "天气车票都对了，Agent 还是选错城市：Plan 不等于 Goal (第6段)",
-    "content": "...Control State 则让系统知道现在是否已经走完。 如果任务只是选最低票价，Todo 已经够用。等任务出现硬约束、中途重新规划，或者允许“无解”正常结束时，系统才需要把验收条件和执行步骤分开。\n以后看到一个 Agent 宣布“任务完成”，可以先问三个问题：\n1. 完成的是当前 Plan，还是用户的 Goal？\n2. Evidence 已经完整，还是只有眼下能拿到的部分？\n3. 系统是否允许用“无解”正常结束？\n能回答这三件事，才能判断 Agent 是真的完成了任务，还是只把清单走到了最后。\n这三问也适用于研究、代码修复和商品筛选。只要任务允许重新规划，就要防止系统把“当前步骤做完了”误当成“用户的要求满足了”。",
-    "url": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%A4%A9%E6%B0%94%E8%BD%A6%E7%A5%A8%E9%83%BD%E5%AF%B9%E4%BA%86%EF%BC%8CAgent%20%E8%BF%98%E6%98%AF%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9APlan%20%E4%B8%8D%E7%AD%89%E4%BA%8E%20Goal",
-    "chunkIndex": 5,
-    "totalChunks": 6,
-    "startPos": 1587,
-    "endPos": 1870,
-    "originalTitle": "天气车票都对了，Agent 还是选错城市：Plan 不等于 Goal"
-  },
-  {
     "chunkId": "/blog/tech%2Fai-%E5%A5%BD%E9%97%AE%E9%A2%98%2F%E5%BD%93%E5%8D%81%E4%B8%AA%E9%93%BE%E6%8E%A5%E8%A2%AB%E5%8E%8B%E6%88%90%E4%B8%80%E5%8F%A5%E8%AF%9D%EF%BC%9AGoogle%20%E4%B8%8E%20ChatGPT%20%E5%9C%A8%E4%BA%89%E5%A4%BA%E4%BB%80%E4%B9%88%EF%BC%9F#chunk-0",
     "title": "当十个链接被压成一句话：Google 与 ChatGPT 在争夺什么？",
     "content": "当十个链接被压成一句话：Google 与 ChatGPT 在争夺什么？\n假设有一款虚构的代码审查工具，叫 PatchPilot。它支持 GitLab Merge Request 自动审查和私有化部署。\n一个 20 人的 GitLab 团队想判断它是否适合自己，于是向 AI 提问。AI 搜索了官网、价格页、第三方评测和用户讨论，给出了十个引用链接。\n最后答案只留下一句：\nPatchPilot 支持 GitLab Merge Request 自动审查和私有化部署，适合对代码安全要求较高的团队。\n这句话没有明显错误。但十个网页里，还有人说私有化部署很麻烦，有人质疑它的价格，也有文档提到一项未被写进答案的外部依赖。\n引用了十个来源，为什么最后会变成一句语气这么确定的话？\n十个网页怎样只剩一句话",
@@ -12923,6 +12923,72 @@
     "startPos": 1839,
     "endPos": 1991,
     "originalTitle": "Prompt 没变，为什么换个模型，行为就变了？"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84%2F%E6%A8%A1%E5%9E%8B%E4%B8%8D%E6%98%AF%E5%85%88%E6%83%B3%E5%A5%BD%E5%86%8D%E5%9B%9E%E7%AD%94%EF%BC%9A%E6%AF%8F%E4%B8%AA%20Token%20%E9%83%BD%E5%9C%A8%E6%94%B9%E5%8F%98%E4%B8%8B%E4%B8%80%E6%AD%A5#chunk-0",
+    "title": "模型不是先想好再回答：每个 Token 都在改变下一步",
+    "content": "模型不是先想好再回答：每个 Token 都在改变下一步\n大模型回答问题时，总是一个 Token 接一个 Token 地往外生成。\n你按下停止，句子可能断在一半。重新问同一个问题，开头只换了几个字，后面的论证却走向完全不同的方向。\n这不只是聊天界面的打字动画。\n主流大模型通常不会先在内部写好整段答案，再逐字显示。它每一步只解决一个问题：\n根据目前已经出现的内容，下一个 Token 最可能是什么？\nToken 是模型处理文本的基本单位，可能是一个字、半个词、一个标点或一小段字符。更重要的是，每个刚生成的 Token 不只会显示给用户，也会立刻成为下一步的新输入。\n回答就是这样一步步长出来的。\n模型每次只往前走一小步\n为了看清过程，假设一个极小的模型收到问题：\n周末去哪里？",
+    "url": "/blog/tech%2Fai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84%2F%E6%A8%A1%E5%9E%8B%E4%B8%8D%E6%98%AF%E5%85%88%E6%83%B3%E5%A5%BD%E5%86%8D%E5%9B%9E%E7%AD%94%EF%BC%9A%E6%AF%8F%E4%B8%AA%20Token%20%E9%83%BD%E5%9C%A8%E6%94%B9%E5%8F%98%E4%B8%8B%E4%B8%80%E6%AD%A5",
+    "chunkIndex": 0,
+    "totalChunks": 6,
+    "startPos": 0,
+    "endPos": 339,
+    "originalTitle": "模型不是先想好再回答：每个 Token 都在改变下一步"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84%2F%E6%A8%A1%E5%9E%8B%E4%B8%8D%E6%98%AF%E5%85%88%E6%83%B3%E5%A5%BD%E5%86%8D%E5%9B%9E%E7%AD%94%EF%BC%9A%E6%AF%8F%E4%B8%AA%20Token%20%E9%83%BD%E5%9C%A8%E6%94%B9%E5%8F%98%E4%B8%8B%E4%B8%80%E6%AD%A5#chunk-1",
+    "title": "模型不是先想好再回答：每个 Token 都在改变下一步 (第2段)",
+    "content": "...为了看清过程，假设一个极小的模型收到问题：\n周末去哪里？ 第一步，它没有一份已经写好的旅游建议，只有一组候选概率：\n假设这次选中了“如果”。\n输入随即从：\n变成：\n模型重新计算下一步：\n如果第一步选中的不是“如果”，而是“建议”，第二步看到的候选可能已经变成：\n这些数字只是为了展示机制而简化的例子。关键不在具体概率，而在两次计算面对的输入已经不同。\n第一个 Token 看起来只是一个开头，实际上已经改写了后面有哪些路可以走。\n一个输出，为什么会变成下一步的条件\n《代码定义结构，权重存储知识：一个例子看懂大模型如何推理》讲过：代码规定怎样计算，权重保存训练中学到的模式。\n语言模型推理时，这些权重不会直接取出一条完整答案。它们根据当前序列，为下一个 Token 计算分数，再转换成概率。\n生成三步，可以写成：\n对应的概率关系是：",
+    "url": "/blog/tech%2Fai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84%2F%E6%A8%A1%E5%9E%8B%E4%B8%8D%E6%98%AF%E5%85%88%E6%83%B3%E5%A5%BD%E5%86%8D%E5%9B%9E%E7%AD%94%EF%BC%9A%E6%AF%8F%E4%B8%AA%20Token%20%E9%83%BD%E5%9C%A8%E6%94%B9%E5%8F%98%E4%B8%8B%E4%B8%80%E6%AD%A5",
+    "chunkIndex": 1,
+    "totalChunks": 6,
+    "startPos": 339,
+    "endPos": 677,
+    "originalTitle": "模型不是先想好再回答：每个 Token 都在改变下一步"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84%2F%E6%A8%A1%E5%9E%8B%E4%B8%8D%E6%98%AF%E5%85%88%E6%83%B3%E5%A5%BD%E5%86%8D%E5%9B%9E%E7%AD%94%EF%BC%9A%E6%AF%8F%E4%B8%AA%20Token%20%E9%83%BD%E5%9C%A8%E6%94%B9%E5%8F%98%E4%B8%8B%E4%B8%80%E6%AD%A5#chunk-2",
+    "title": "模型不是先想好再回答：每个 Token 都在改变下一步 (第3段)",
+    "content": "...，再转换成概率。\n生成三步，可以写成：\n对应的概率关系是： 每一步都依赖此前已经选中的结果。过去的选择改变未来还可能发生什么，这叫路径依赖。\n直到模型生成结束标记，或者系统要求它停下。\n创造力和跑偏，来自同一个地方\n路径依赖让大模型不必从数据库里取出一条固定回答。\n同一个开头可以继续成解释、故事、代码或反驳；只要早期选择不同，后面就可能展开成另一条完整路径。这是生成具有开放性的原因之一。\n代价也来自这里。\n假设模型在开头生成了一条没有依据的陈述：\n这项研究发表于 2018 年……\n这句话一旦进入当前序列，下一步预测面对的上下文里，就已经出现了“研究确实存在，而且发表于 2018 年”。\n后面的 Token 更容易继续补出作者、期刊和实验结论。新内容未必更接近事实，却会越来越符合前面那条错误陈述。",
+    "url": "/blog/tech%2Fai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84%2F%E6%A8%A1%E5%9E%8B%E4%B8%8D%E6%98%AF%E5%85%88%E6%83%B3%E5%A5%BD%E5%86%8D%E5%9B%9E%E7%AD%94%EF%BC%9A%E6%AF%8F%E4%B8%AA%20Token%20%E9%83%BD%E5%9C%A8%E6%94%B9%E5%8F%98%E4%B8%8B%E4%B8%80%E6%AD%A5",
+    "chunkIndex": 2,
+    "totalChunks": 6,
+    "startPos": 677,
+    "endPos": 1000,
+    "originalTitle": "模型不是先想好再回答：每个 Token 都在改变下一步"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84%2F%E6%A8%A1%E5%9E%8B%E4%B8%8D%E6%98%AF%E5%85%88%E6%83%B3%E5%A5%BD%E5%86%8D%E5%9B%9E%E7%AD%94%EF%BC%9A%E6%AF%8F%E4%B8%AA%20Token%20%E9%83%BD%E5%9C%A8%E6%94%B9%E5%8F%98%E4%B8%8B%E4%B8%80%E6%AD%A5#chunk-3",
+    "title": "模型不是先想好再回答：每个 Token 都在改变下一步 (第4段)",
+    "content": "...论。新内容未必更接近事实，却会越来越符合前面那条错误陈述。 模型不是先拿到一份错误答案，再把它完整念出来。错误也可能在生成过程中逐步长大：\n流畅只能说明后文接得上前文，不能证明最初那一步是对的。\n为什么“先列计划”有时真的有用\n让模型先列计划，并没有给它增加新的知识。\n计划的作用，是先往上下文里写入一条更稳定的生成路径：\n后续 Token 都会在这条结构之后生成，比直接冲向结论更不容易漏步骤。\n但路径稳定不等于方向正确。如果计划一开始就误解了目标，模型也可能沿着错误路线执行得非常完整。\n这也解释了为什么重试有时能得到更好的答案，却不代表模型已经学会。重新采样只是回到某个分叉口，换了一条路径；模型参数没有因为上次失败自动改变。",
+    "url": "/blog/tech%2Fai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84%2F%E6%A8%A1%E5%9E%8B%E4%B8%8D%E6%98%AF%E5%85%88%E6%83%B3%E5%A5%BD%E5%86%8D%E5%9B%9E%E7%AD%94%EF%BC%9A%E6%AF%8F%E4%B8%AA%20Token%20%E9%83%BD%E5%9C%A8%E6%94%B9%E5%8F%98%E4%B8%8B%E4%B8%80%E6%AD%A5",
+    "chunkIndex": 3,
+    "totalChunks": 6,
+    "startPos": 1000,
+    "endPos": 1287,
+    "originalTitle": "模型不是先想好再回答：每个 Token 都在改变下一步"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84%2F%E6%A8%A1%E5%9E%8B%E4%B8%8D%E6%98%AF%E5%85%88%E6%83%B3%E5%A5%BD%E5%86%8D%E5%9B%9E%E7%AD%94%EF%BC%9A%E6%AF%8F%E4%B8%AA%20Token%20%E9%83%BD%E5%9C%A8%E6%94%B9%E5%8F%98%E4%B8%8B%E4%B8%80%E6%AD%A5#chunk-4",
+    "title": "模型不是先想好再回答：每个 Token 都在改变下一步 (第5段)",
+    "content": "...个分叉口，换了一条路径；模型参数没有因为上次失败自动改变。 而外部验证之所以重要，是因为它能从生成路径之外检查事实。让模型只根据自己刚写出的内容继续判断，很容易得到一段前后一致、起点却是错的答案。\n下次别只看最后一句\n主流大模型的生成过程可以压成一句话：\n每个 Token 既是这一步的结果，也是下一步的条件。\n这张图可以解释很多表面上不同的现象：\n所以，看到一段漂亮答案时，除了检查最后的结论，还可以追问：\n它是从哪一步开始走上这条路的？\n模型的能力不只体现在最后选中了哪些词，也体现在一连串选择怎样把它带到了这里。\n参考资料",
+    "url": "/blog/tech%2Fai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84%2F%E6%A8%A1%E5%9E%8B%E4%B8%8D%E6%98%AF%E5%85%88%E6%83%B3%E5%A5%BD%E5%86%8D%E5%9B%9E%E7%AD%94%EF%BC%9A%E6%AF%8F%E4%B8%AA%20Token%20%E9%83%BD%E5%9C%A8%E6%94%B9%E5%8F%98%E4%B8%8B%E4%B8%80%E6%AD%A5",
+    "chunkIndex": 4,
+    "totalChunks": 6,
+    "startPos": 1287,
+    "endPos": 1522,
+    "originalTitle": "模型不是先想好再回答：每个 Token 都在改变下一步"
+  },
+  {
+    "chunkId": "/blog/tech%2Fai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84%2F%E6%A8%A1%E5%9E%8B%E4%B8%8D%E6%98%AF%E5%85%88%E6%83%B3%E5%A5%BD%E5%86%8D%E5%9B%9E%E7%AD%94%EF%BC%9A%E6%AF%8F%E4%B8%AA%20Token%20%E9%83%BD%E5%9C%A8%E6%94%B9%E5%8F%98%E4%B8%8B%E4%B8%80%E6%AD%A5#chunk-5",
+    "title": "模型不是先想好再回答：每个 Token 都在改变下一步 (第6段)",
+    "content": "...了哪些词，也体现在一连串选择怎样把它带到了这里。\n参考资料 1. OpenAI，Language Models are Unsupervised Multitask Learners（2019）：https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf\n2. Hugging Face，Text generation strategies：https://huggingface.co/docs/transformers/generation_strategies",
+    "url": "/blog/tech%2Fai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84%2F%E6%A8%A1%E5%9E%8B%E4%B8%8D%E6%98%AF%E5%85%88%E6%83%B3%E5%A5%BD%E5%86%8D%E5%9B%9E%E7%AD%94%EF%BC%9A%E6%AF%8F%E4%B8%AA%20Token%20%E9%83%BD%E5%9C%A8%E6%94%B9%E5%8F%98%E4%B8%8B%E4%B8%80%E6%AD%A5",
+    "chunkIndex": 5,
+    "totalChunks": 6,
+    "startPos": 1522,
+    "endPos": 1797,
+    "originalTitle": "模型不是先想好再回答：每个 Token 都在改变下一步"
   },
   {
     "chunkId": "/blog/tech%2Fai-%E7%AC%94%E8%AE%B0%2FAAR%20-%20%E8%87%AA%E5%8A%A8%E5%8C%96%E5%AF%B9%E9%BD%90%E7%A0%94%E7%A9%B6%E7%9A%84%E5%90%AF%E7%A4%BA%E4%B8%8E%E9%99%B7%E9%98%B1#chunk-0",

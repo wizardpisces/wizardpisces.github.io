@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>RN Figma → Page Demo 操作手册 | LZ AI NOTE</title>
+  <meta name="description" content="配置并运行 Material MCP、Native Candidate Board、RN Demo Page 和整页验收闭环。">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN-Figma-Page-Demo-%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="RN Figma → Page Demo 操作手册 | LZ AI NOTE">
+  <meta property="og:description" content="配置并运行 Material MCP、Native Candidate Board、RN Demo Page 和整页验收闭环。">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN-Figma-Page-Demo-%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"RN Figma → Page Demo 操作手册","description":"配置并运行 Material MCP、Native Candidate Board、RN Demo Page 和整页验收闭环。","url":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN-Figma-Page-Demo-%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN-Figma-Page-Demo-%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8C","dateModified":"2026-08-17","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>RN Figma → Page Demo 操作手册</h1><h1>RN Figma → Page Demo 操作手册</h1>
+<p>按照这一份文档即可运行 Demo。整体设计见<a href="./RN-Visual-Material-Lab%E4%B8%8EMCP%E8%A7%86%E8%A7%89%E6%A3%80%E7%B4%A2%E6%96%B9%E6%A1%88.md">《RN Figma → Page Demo 技术方案》</a>。</p>
+<p>整个 Demo 需要两个终端环境：</p>
+<pre><code class="language-text">终端 A：Node 20+，构建并提供 Material MCP
+终端 B：Node 14.19.x + pnpm 6.32.25，运行 ShopeeRN Host
+</code></pre>
+<h2>一次性准备</h2>
+<h3>1. 在终端 A 构建 MCP 模块</h3>
+<p>确认 Node 版本：</p>
+<pre><code class="language-bash">node --version
+</code></pre>
+<p>需要 Node 20 或更高版本。</p>
+<pre><code class="language-bash">cd /Users/liuze/workspace/shopee-fe/fe-code-agent/modules/rn-visual-material-agent
+pnpm install
+pnpm test
+</code></pre>
+<p>测试通过后应生成：</p>
+<pre><code class="language-text">dist/src/server.js
+</code></pre>
+<h3>2. 配置 Codex MCP</h3>
+<pre><code class="language-toml">[mcp_servers.rn_material_lab]
+command = &quot;node&quot;
+args = [&quot;/Users/liuze/workspace/shopee-fe/fe-code-agent/modules/rn-visual-material-agent/dist/src/server.js&quot;]
+env = { RN_MATERIAL_WORKSPACE_ROOT = &quot;/Users/liuze/workspace/shopee-fe/web-affiliate-rn&quot; }
+startup_timeout_sec = 10
+tool_timeout_sec = 30
+enabled = true
+</code></pre>
+<p>重启 Codex 后应看到：</p>
+<pre><code class="language-text">list_rn_materials
+get_rn_material
+write_rn_demo_page
+</code></pre>
+<h3>3. 在终端 B 准备 ShopeeRN 环境</h3>
+<p>当前 Host 要求：</p>
+<pre><code class="language-text">Node 14.19.x
+pnpm 6.32.25
+</code></pre>
+<p>本机可执行：</p>
+<pre><code class="language-bash">source &quot;$HOME/.nvm/nvm.sh&quot;
+nvm use 14.19.2
+node --version
+
+# Node 14 的全局包与其他 Node 版本隔离。
+npm install -g pnpm@6.32.25
+pnpm --version
+</code></pre>
+<p>确认输出为 <code>v14.19.x</code> 和 <code>6.32.25</code>。</p>
+<p>生成开发 Bundle 需要的版本文件：</p>
+<pre><code class="language-bash">cd /Users/liuze/workspace/shopee-fe/web-affiliate-rn
+npm run bundleVersionSync
+</code></pre>
+<p>确认 Host 已经引用当前 RN 仓库：</p>
+<pre><code class="language-bash">readlink /Users/liuze/workspace/shopee-fe/host/react-native/node_modules/@shopee-rn/affiliate-network
+</code></pre>
+<p>当前机器应输出：</p>
+<pre><code class="language-text">../../../../web-affiliate-rn
+</code></pre>
+<h3>4. 启动 ShopeeRN Host</h3>
+<p>继续在 Node 14 + pnpm 6 的终端中执行：</p>
+<pre><code class="language-bash">cd /Users/liuze/workspace/shopee-fe/host/react-native
+yarn dev --scope @shopee-rn/affiliate-network
+</code></pre>
+<p>看到以下内容说明 Metro 已启动：</p>
+<pre><code class="language-text">Running with these preload plugin [ '@shopee-rn/affiliate-network' ]
+Welcome to React Native!
+port: 8081
+</code></pre>
+<p>准备可运行的模拟器或真机。只有链接但 Codex 无权读取 Figma 时，需要同时提供截图。</p>
+<h2>每次生成 Demo</h2>
+<h3>1. 提交任务</h3>
+<pre><code class="language-text">请读取：
+/Users/liuze/workspace/shopee-fe/fe-code-agent/modules/rn-visual-material-agent/prompt.md
+
+taskId: commission-summary-v1
+Figma: &lt;Figma Link&gt;
+需求：&lt;业务需求&gt;
+
+请执行区域拆解、候选筛选、候选面板视觉选择和 Demo Page 生成。
+</code></pre>
+<h3>2. 查看候选面板</h3>
+<p>Codex 会调用 <code>list_rn_materials</code>。工具结果包含：</p>
+<pre><code class="language-json">{
+  &quot;candidateBoard&quot;: {
+    &quot;pageName&quot;: &quot;MATERIAL_LAB&quot;,
+    &quot;propsData&quot;: {
+      &quot;fixtureIds&quot;: [&quot;payment.status.pending&quot;]
+    },
+    &quot;deepLinkPath&quot;: &quot;/material-lab?fixtureIds=payment.status.pending&quot;,
+    &quot;testID&quot;: &quot;material-lab:candidates&quot;
+  }
+}
+</code></pre>
+<p>打开该页面后，候选的真实 RN 画面旁会显示：</p>
+<ul>
+<li>序号；</li>
+<li><code>materialId</code>；</li>
+<li><code>fixtureId</code>；</li>
+<li><code>domain / kind</code>；</li>
+<li>Fixture Props；</li>
+<li>源码路径。</li>
+</ul>
+<p>Codex 将候选面板截图与 Figma 区域对比后选择 Fixture。候选过多时继续限定 <code>domain</code>、<code>kind</code>、<code>query</code>，或使用 <code>offset</code> 分页；每批最多 20 个。</p>
+<p>使用工具返回的 <code>deepLinkPath</code> 打开 App 页面。例如：</p>
+<pre><code class="language-text">https://affiliate.&lt;environment-domain&gt;/material-lab?fixtureIds=payment.commission-bill-status.pending
+</code></pre>
+<h3>3. 生成 Demo</h3>
+<p>选定 Fixture 后调用 <code>write_rn_demo_page</code>，产物位于：</p>
+<pre><code class="language-text">web-affiliate-rn/src/material-lab/generated/&lt;taskId&gt;/input.json
+web-affiliate-rn/src/material-lab/generated/&lt;taskId&gt;/material-mapping.json
+web-affiliate-rn/src/material-lab/generated/&lt;taskId&gt;/result.json
+web-affiliate-rn/src/material-lab/generated-page.json
+</code></pre>
+<h3>4. 打开整页 Demo</h3>
+<pre><code class="language-text">Forbidden Zone -&gt; Demo Pages -&gt; Generated Material Demo
+</code></pre>
+<p>或：</p>
+<pre><code class="language-text">https://affiliate.&lt;environment-domain&gt;/material-lab?demo=true
+</code></pre>
+<p>稳定标识：</p>
+<pre><code class="language-text">material-demo:&lt;taskId&gt;
+material-demo-region:&lt;regionId&gt;
+</code></pre>
+<h3>5. 整页验收</h3>
+<p>截取 Generated Material Demo 的真实 Native 画面，与 Figma 比较：</p>
+<ul>
+<li>组件是否选错；</li>
+<li>区块是否缺失；</li>
+<li>顺序、间距和背景是否正确；</li>
+<li>文案、状态和 Props 是否正确；</li>
+<li>是否存在没有物料覆盖的区域。</li>
+</ul>
+<p>修改 Mapping 或布局后重新生成。第一阶段不要求自动像素 Diff，只保留 Figma 原图、RN 整页截图和 Codex/人工差异结论。</p>
+<h2>已验证状态</h2>
+<p>当前版本已经验证：</p>
+<ul>
+<li>Material MCP TypeScript 构建和协议测试通过；</li>
+<li>真实 <code>web-affiliate-rn</code> Catalog 可被 MCP 读取；</li>
+<li>Candidate Board Fixture 筛选与顺序测试通过；</li>
+<li>Material Lab 定向 ESLint 和相关 TypeScript 检查通过；</li>
+<li>ShopeeRN Metro 能加载当前插件；</li>
+<li>Material Lab 独立 iOS Bundle 编译成功。</li>
+</ul>
+<p>全应用 Bundle 当前仍会被 Host 中未构建的
+<code>@shopee/phone-utils-standalone</code> 阻塞，这与 Material Lab 无关。Material Lab 独立 Bundle 已验证成功。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-CSJjPKOE.js"></script>
+</body>
+</html>

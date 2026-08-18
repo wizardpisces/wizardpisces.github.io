@@ -289,7 +289,7 @@ Trace + Dataset + Evaluator + Experiment
 <h3 id="&#x540E;&#x7EED;&#x4E3B;&#x94FE;"><a href="#&#x540E;&#x7EED;&#x4E3B;&#x94FE;"></a>&#x540E;&#x7EED;&#x4E3B;&#x94FE;</h3>
 <ol>
 <li>
-<p><a href="../../tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E5%A4%A9%E6%B0%94%E8%BD%A6%E7%A5%A8%E9%83%BD%E5%AF%B9%E4%BA%86%EF%BC%8CAgent%20%E8%BF%98%E6%98%AF%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9APlan%20%E4%B8%8D%E7%AD%89%E4%BA%8E%20Goal.md"><strong>&#x5929;&#x6C14;&#x8F66;&#x7968;&#x90FD;&#x5BF9;&#x4E86;&#xFF0C;Agent &#x8FD8;&#x662F;&#x9009;&#x9519;&#x57CE;&#x5E02;&#xFF1A;Plan &#x4E0D;&#x7B49;&#x4E8E; Goal</strong></a></p>
+<p><a href="../../tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Plan%20%E5%86%B3%E5%AE%9A%E6%80%8E%E4%B9%88%E8%B5%B0%EF%BC%8CGoal%20%E5%86%B3%E5%AE%9A%E6%98%AF%E5%90%A6%E5%AE%8C%E6%88%90%EF%BC%9AAgent%20%E4%B8%BA%E4%BD%95%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9F.md"><strong>Plan &#x51B3;&#x5B9A;&#x600E;&#x4E48;&#x8D70;&#xFF0C;Goal &#x51B3;&#x5B9A;&#x662F;&#x5426;&#x5B8C;&#x6210;&#xFF1A;Agent &#x4E3A;&#x4F55;&#x9009;&#x9519;&#x57CE;&#x5E02;&#xFF1F;</strong></a></p>
 <p>&#x4ECE;&#x4FE1;&#x606F;&#x9009;&#x62E9;&#x8FDB;&#x5165;&#x76EE;&#x6807;&#x4FDD;&#x771F;&#xFF1A;&#x957F;&#x4EFB;&#x52A1;&#x4E0D;&#x53EA;&#x8981;&#x51CF;&#x5C11;&#x4E0A;&#x4E0B;&#x6587;&#xFF0C;&#x8FD8;&#x8981;&#x5728;&#x5BF9;&#x8BDD;&#x4E4B;&#x5916;&#x4FDD;&#x5B58;&#x76EE;&#x6807;&#x3001;&#x5F53;&#x524D;&#x8BA1;&#x5212;&#x3001;&#x8BC1;&#x636E;&#x3001;&#x9884;&#x7B97;&#x548C;&#x505C;&#x6B62;&#x6761;&#x4EF6;&#x3002;&#x6838;&#x5FC3;&#x6982;&#x5FF5;&#x843D;&#x70B9;&#x662F;&#x957F;&#x4EFB;&#x52A1;&#x63A7;&#x5236;&#x9762;&#xFF1A;<code>Goal &#x2192; Plan &#x2192; Evidence &#x2192; Gate / Stop</code>&#x3002;</p>
 </li>
 <li>

@@ -13,7 +13,7 @@
   <meta property="og:description" content="模型为什么这样设计：架构系列节点 系列角色：知识主干·模型内部。 负责解释模型结构改变了哪条信息、梯度、计算或参数路径；不承担软件框架实现与 Agent 系统工程。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不按架构名词写百科，也不把论文摘要换成通俗说法。它只追问一个问题： 今天看似理所当然的模型结构，当初是在解决什么失败？ 每篇从一个可感知…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"模型为什么这样设计：架构系列节点","description":"模型为什么这样设计：架构系列节点 系列角色：知识主干·模型内部。 负责解释模型结构改变了哪条信息、梯度、计算或参数路径；不承担软件框架实现与 Agent 系统工程。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不按架构名词写百科，也不把论文摘要换成通俗说法。它只追问一个问题： 今天看似理所当然的模型结构，当初是在解决什么失败？ 每篇从一个可感知…","url":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","dateModified":"2026-08-12","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"模型为什么这样设计：架构系列节点","description":"模型为什么这样设计：架构系列节点 系列角色：知识主干·模型内部。 负责解释模型结构改变了哪条信息、梯度、计算或参数路径；不承担软件框架实现与 Agent 系统工程。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不按架构名词写百科，也不把论文摘要换成通俗说法。它只追问一个问题： 今天看似理所当然的模型结构，当初是在解决什么失败？ 每篇从一个可感知…","url":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","dateModified":"2026-08-17","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>模型为什么这样设计：架构系列节点</h1><h1>模型为什么这样设计：架构系列节点</h1>
@@ -27,6 +27,19 @@
 </blockquote>
 <p>每篇从一个可感知的反常现象进入，再向下拆解旧结构的限制、新机制的改变、它付出的代价，以及这个代价如何长出下一个问题。</p>
 <p>系列名暂定为：<strong>模型为什么这样设计</strong>。</p>
+<p>公开成稿统一放在 <code>src/blog/tech/ai-模型结构/</code>。<code>ai-LLM</code> 继续保存论文解读与深度资料，<code>ai-笔记</code> 保留笔记型内容，避免三种内容在同一目录里失去边界。</p>
+<p>系列的阅读顺序不从数学前置知识开始，而从用户已经观察到的模型行为开始。先回答“它为什么一个 Token 一个 Token 地输出”“为什么同一个问题会得到不同答案”，再沿着答案生成过程进入 Attention、FFN、激活函数、残差和训练。激活函数与反向传播仍是机制底座，但不承担第一篇的阅读入口。</p>
+<h2>信息增量门槛</h2>
+<p>“把标准原理讲得更通俗”不自动构成一篇文章，但市场上是否有人讲过，也不是唯一标准。信息增量有两种有效来源：</p>
+<pre><code class="language-text">新判断
+机制 → 二阶后果、能力与缺陷、边界或新连接
+
+认知压缩
+复杂主题 → 一个可运行、可记住、可迁移的最小模型
+</code></pre>
+<p>《代码定义结构，权重存储知识》走的是第二条路：事实并不新，但“结构规定怎么算，权重保存用什么数字算”让读者可以继续解释模型文件、加载权重、参数规模和推理过程。</p>
+<p>逐 Token 生成可以走第一条路：每个输出又会成为下一步输入，因此生成具有路径依赖；同一个机制既带来开放式创造，也会让早期错误越说越顺。</p>
+<p>若一篇读完只能复述标准定义，既没有新判断，也没有获得更简单的心智模型，降级为笔记或并入其他文章。</p>
 <p>它对两类读者同时做出承诺：</p>
 <ul>
 <li>没有机器学习背景的读者，可以从具体现象进入，建立一个不失真的最小心智模型。</li>
@@ -74,6 +87,27 @@
 <p>普通读者不需要看懂全部公式才能跟上主线；专业读者也不应只得到一个比喻。公式、代码、图示和类比都只服务于同一次机制解释。</p>
 <p>每篇最后应能压缩出一句机制判断或一张最小路径图。它是这一篇真正交给读者的“框架”，也是下一篇能够继续追问的共同语言。</p>
 <h2>总问题节点图</h2>
+<p>下面这张图表达机制依赖，不等于发布顺序。读者入口采用“外部体感 → 内部运行 → 底层结构”的路线：</p>
+<pre><code class="language-text">为什么答案一个 Token 一个 Token 出现？
+        ↓
+每个输出成为下一步输入：自回归生成的路径依赖
+        ↓
+同一个问题为什么每次回答不同？
+        ↓
+Softmax + Sampling + Temperature
+        ↓
+模型怎样从前文找到当前需要的信息？
+        ↓
+Attention + QKV
+        ↓
+找到信息以后，谁负责加工？
+        ↓
+FFN + 激活函数
+        ↓
+模型越来越深，为什么还能训练？
+        ↓
+反向传播 + 残差 + 归一化
+</code></pre>
 <pre><code class="language-text">只有线性变换
 为什么堆再多层也没有用？
         ↓
@@ -137,9 +171,23 @@ MoE、KV Cache、MQA、GQA、MLA 与量化
 </thead>
 <tbody>
 <tr>
-<td>100 层神经网络，为什么可能和 1 层没有区别？</td>
-<td>层数增加却没有获得更强的表达能力</td>
-<td>没有非线性，多次线性变换仍可合并为一次；深度的价值在于组合中间表示</td>
+<td><a href="../../tech/ai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84/%E6%A8%A1%E5%9E%8B%E4%B8%8D%E6%98%AF%E5%85%88%E6%83%B3%E5%A5%BD%E5%86%8D%E5%9B%9E%E7%AD%94%EF%BC%9A%E6%AF%8F%E4%B8%AA%20Token%20%E9%83%BD%E5%9C%A8%E6%94%B9%E5%8F%98%E4%B8%8B%E4%B8%80%E6%AD%A5.md">模型不是先想好再回答：每个 Token 都在改变下一步</a></td>
+<td>回答逐 Token 出现，同一句开头又会走向不同答案</td>
+<td>每个已生成 Token 如何成为下一步输入并改变后续概率；路径依赖为何同时带来创造力与错误累积</td>
+<td>Token、Logits、自回归生成、路径依赖</td>
+<td>黑箱</td>
+</tr>
+<tr>
+<td>同一个问题，模型为什么每次回答不一样？</td>
+<td>输入没有变化，输出却会变化</td>
+<td>概率分布如何通过 Temperature、Top-k、Top-p 和采样变成具体 Token</td>
+<td>概率分布、采样、Temperature</td>
+<td>黑箱</td>
+</tr>
+<tr>
+<td><a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E7%BA%BF%E6%80%A7%E5%B1%82%E7%94%BB%E7%9B%B4%E7%BA%BF%EF%BC%8C%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%E8%B4%9F%E8%B4%A3%E6%8B%90%E5%BC%AF%EF%BC%9A%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E9%9D%9E%E7%BA%BF%E6%80%A7.md">线性层画直线，激活函数负责拐弯：神经网络为什么需要非线性</a></td>
+<td>模型为什么连“中间最好”这种普通关系都画不出来</td>
+<td>线性层只负责重新组合；激活函数制造转折，使深度可以逐层组合新关系；已成稿，暂缓发布</td>
 <td>非线性、激活函数、深度</td>
 <td>黑箱</td>
 </tr>
@@ -254,22 +302,22 @@ MoE、KV Cache、MQA、GQA、MLA 与量化
 不重复残差原理，而是追问一种信息通路如何穿越任务和模型类型。</li>
 </ul>
 <p>支线不负责补齐历史，只在它能让读者看到一种独立的结构假设时成篇。</p>
-<h2>第一季：先建立共同底座</h2>
+<h2>第一季：从用户看到的行为进入</h2>
 <p>第一季暂定六个问题：</p>
 <ol>
-<li><strong>100 层神经网络，为什么可能和 1 层没有区别？</strong>——非线性与深度。</li>
-<li><strong>模型最后答错了，它怎么知道前面每个参数错了多少？</strong>——反向传播。</li>
-<li><strong>网络更深、参数更多，为什么训练结果反而更差？</strong>——残差连接。</li>
-<li><strong>残差已经打通道路，为什么每层还要做归一化？</strong>——LayerNorm 与 RMSNorm。</li>
-<li><strong>Attention 为什么非要分成 Q、K、V？</strong>——按内容寻址。</li>
-<li><strong>Transformer 为什么每层都有 Attention 和 FFN？</strong>——信息交换与特征加工。</li>
+<li><a href="../../tech/ai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84/%E6%A8%A1%E5%9E%8B%E4%B8%8D%E6%98%AF%E5%85%88%E6%83%B3%E5%A5%BD%E5%86%8D%E5%9B%9E%E7%AD%94%EF%BC%9A%E6%AF%8F%E4%B8%AA%20Token%20%E9%83%BD%E5%9C%A8%E6%94%B9%E5%8F%98%E4%B8%8B%E4%B8%80%E6%AD%A5.md"><strong>模型不是先想好再回答：每个 Token 都在改变下一步</strong></a>——自回归生成与路径依赖。</li>
+<li><strong>同一个问题，模型为什么每次回答不一样？</strong>——概率分布与采样。</li>
+<li><strong>Attention 为什么非要分成 Q、K、V？</strong>——按内容寻找信息。</li>
+<li><strong>词序一换意思就变，模型从哪里知道位置？</strong>——位置编码与 RoPE。</li>
+<li><strong>Attention 负责找信息，FFN 负责加工信息：Transformer 一层究竟在做什么？</strong>——信息交换与特征加工。</li>
+<li><strong>线性层画直线，激活函数负责拐弯：神经网络为什么需要非线性</strong>——回到 FFN 内部理解非线性与深度；已有素材稿，等 FFN 篇后再发布。</li>
 </ol>
 <p>这六篇一起回答三个根问题：</p>
-<pre><code class="language-text">模型为什么能表达复杂关系？
-模型为什么真的训练得动？
-大模型的一层究竟在做什么？
+<pre><code class="language-text">模型怎样一步步生成回答？
+为什么同一个模型不会永远给出同一答案？
+输入的信息怎样被寻找、加工和重新组合？
 </code></pre>
-<p>第一季的终点不是“学完 Transformer”，而是让两类读者获得一套能继续向下追问的共同语言。发布时不必严格照六篇的逻辑顺序；哪个问题先在真实案例中出现，就可以先写。</p>
+<p>第一季的终点不是“学完 Transformer”，而是让读者从每天可见的模型行为，走到一层 Transformer 内部。反向传播、残差和归一化进入第二季，继续回答这些结构为什么真的训练得动。</p>
 <h2>后续分支</h2>
 <p>第一季之后，根据写作过程和读者反馈进入不同分支：</p>
 <h3>架构演化</h3>
@@ -313,11 +361,12 @@ QLoRA 如何把两条路线合在一起
 <h2>首篇建议</h2>
 <p>首篇优先选择：</p>
 <blockquote>
-<p><strong>100 层神经网络，为什么可能和 1 层没有区别？</strong></p>
+<p><a href="../../tech/ai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84/%E6%A8%A1%E5%9E%8B%E4%B8%8D%E6%98%AF%E5%85%88%E6%83%B3%E5%A5%BD%E5%86%8D%E5%9B%9E%E7%AD%94%EF%BC%9A%E6%AF%8F%E4%B8%AA%20Token%20%E9%83%BD%E5%9C%A8%E6%94%B9%E5%8F%98%E4%B8%8B%E4%B8%80%E6%AD%A5.md"><strong>模型不是先想好再回答：每个 Token 都在改变下一步</strong></a></p>
 </blockquote>
-<p>它的表面矛盾不需要技术背景就能理解，向下又能准确进入线性变换、激活函数、中间表示和深度的价值。它还会自然暴露下一个问题：就算深度有价值，误差怎么穿过这么多层？</p>
-<p>这个节点的主路线是“系列递进”，主维度是“黑箱”。与已有未发布笔记的关系是重新组织和提取素材，不是在旧文之后续写。</p>
+<p>读者已经见过回答逐字出现、按下停止后句子戛然而止，也见过一个不同开头把整段回答带向另一条路。这些体验可以直接进入自回归生成，但文章不止解释流程，而要让读者看见：每个已生成 Token 都会改写下一步的概率空间。</p>
+<p>同一个机制会同时解释两件事：模型为什么可以开放式续写，也为什么会沿着早期错误继续生成越来越完整的故事。它还会自然暴露下一篇的问题：既然每一步都有多条路，系统怎样选择其中一条？</p>
+<p>这个节点的主路线是“系列递进”，主维度是“黑箱”。激活函数稿保留为第一季后段的下钻篇，不再作为系列入口。</p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-DnNV27tr.js"></script>
+  <script type="module" crossorigin src="/assets/index-CSJjPKOE.js"></script>
 </body>
 </html>

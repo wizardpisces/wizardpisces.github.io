@@ -4,19 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
-  <title>天气车票都对了，Agent 还是选错城市：Plan 不等于 Goal | LZ AI NOTE</title>
-  <meta name="description" content="天气车票都对了，Agent 还是选错城市：Plan 不等于 Goal 你让一个旅行 Agent 在杭州、苏州、宁波里挑一个周末目的地。最初，它只需要比较往返车票： 查一下杭州、苏州、宁波的往返车票，推荐最便宜的城市。 Agent 列出三项 Todo： 杭州 180 元，宁波 260 元，苏州 360 元。Agent 推荐杭州，没有问题。 在这个任务里，“比…">
-  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E5%A4%A9%E6%B0%94%E8%BD%A6%E7%A5%A8%E9%83%BD%E5%AF%B9%E4%BA%86%EF%BC%8CAgent%20%E8%BF%98%E6%98%AF%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9APlan%20%E4%B8%8D%E7%AD%89%E4%BA%8E%20Goal">
+  <title>Plan 决定怎么走，Goal 决定是否完成：Agent 为何选错城市？ | LZ AI NOTE</title>
+  <meta name="description" content="Plan 决定怎么走，Goal 决定是否完成：Agent 为何选错城市？ 你让一个旅行 Agent 在杭州、苏州、宁波里挑一个周末目的地。最初，它只需要比较往返车票： 查一下杭州、苏州、宁波的往返车票，推荐最便宜的城市。 Agent 列出三项 Todo： 杭州 180 元，宁波 260 元，苏州 360 元。Agent 推荐杭州，没有问题。 在这个任务里，…">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Plan%20%E5%86%B3%E5%AE%9A%E6%80%8E%E4%B9%88%E8%B5%B0%EF%BC%8CGoal%20%E5%86%B3%E5%AE%9A%E6%98%AF%E5%90%A6%E5%AE%8C%E6%88%90%EF%BC%9AAgent%20%E4%B8%BA%E4%BD%95%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9F">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
-  <meta property="og:title" content="天气车票都对了，Agent 还是选错城市：Plan 不等于 Goal | LZ AI NOTE">
-  <meta property="og:description" content="天气车票都对了，Agent 还是选错城市：Plan 不等于 Goal 你让一个旅行 Agent 在杭州、苏州、宁波里挑一个周末目的地。最初，它只需要比较往返车票： 查一下杭州、苏州、宁波的往返车票，推荐最便宜的城市。 Agent 列出三项 Todo： 杭州 180 元，宁波 260 元，苏州 360 元。Agent 推荐杭州，没有问题。 在这个任务里，“比…">
-  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E5%A4%A9%E6%B0%94%E8%BD%A6%E7%A5%A8%E9%83%BD%E5%AF%B9%E4%BA%86%EF%BC%8CAgent%20%E8%BF%98%E6%98%AF%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9APlan%20%E4%B8%8D%E7%AD%89%E4%BA%8E%20Goal">
+  <meta property="og:title" content="Plan 决定怎么走，Goal 决定是否完成：Agent 为何选错城市？ | LZ AI NOTE">
+  <meta property="og:description" content="Plan 决定怎么走，Goal 决定是否完成：Agent 为何选错城市？ 你让一个旅行 Agent 在杭州、苏州、宁波里挑一个周末目的地。最初，它只需要比较往返车票： 查一下杭州、苏州、宁波的往返车票，推荐最便宜的城市。 Agent 列出三项 Todo： 杭州 180 元，宁波 260 元，苏州 360 元。Agent 推荐杭州，没有问题。 在这个任务里，…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Plan%20%E5%86%B3%E5%AE%9A%E6%80%8E%E4%B9%88%E8%B5%B0%EF%BC%8CGoal%20%E5%86%B3%E5%AE%9A%E6%98%AF%E5%90%A6%E5%AE%8C%E6%88%90%EF%BC%9AAgent%20%E4%B8%BA%E4%BD%95%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9F">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"天气车票都对了，Agent 还是选错城市：Plan 不等于 Goal","description":"天气车票都对了，Agent 还是选错城市：Plan 不等于 Goal 你让一个旅行 Agent 在杭州、苏州、宁波里挑一个周末目的地。最初，它只需要比较往返车票： 查一下杭州、苏州、宁波的往返车票，推荐最便宜的城市。 Agent 列出三项 Todo： 杭州 180 元，宁波 260 元，苏州 360 元。Agent 推荐杭州，没有问题。 在这个任务里，“比…","url":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E5%A4%A9%E6%B0%94%E8%BD%A6%E7%A5%A8%E9%83%BD%E5%AF%B9%E4%BA%86%EF%BC%8CAgent%20%E8%BF%98%E6%98%AF%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9APlan%20%E4%B8%8D%E7%AD%89%E4%BA%8E%20Goal","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E5%A4%A9%E6%B0%94%E8%BD%A6%E7%A5%A8%E9%83%BD%E5%AF%B9%E4%BA%86%EF%BC%8CAgent%20%E8%BF%98%E6%98%AF%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9APlan%20%E4%B8%8D%E7%AD%89%E4%BA%8E%20Goal","dateModified":"2026-08-17","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Plan 决定怎么走，Goal 决定是否完成：Agent 为何选错城市？","description":"Plan 决定怎么走，Goal 决定是否完成：Agent 为何选错城市？ 你让一个旅行 Agent 在杭州、苏州、宁波里挑一个周末目的地。最初，它只需要比较往返车票： 查一下杭州、苏州、宁波的往返车票，推荐最便宜的城市。 Agent 列出三项 Todo： 杭州 180 元，宁波 260 元，苏州 360 元。Agent 推荐杭州，没有问题。 在这个任务里，…","url":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Plan%20%E5%86%B3%E5%AE%9A%E6%80%8E%E4%B9%88%E8%B5%B0%EF%BC%8CGoal%20%E5%86%B3%E5%AE%9A%E6%98%AF%E5%90%A6%E5%AE%8C%E6%88%90%EF%BC%9AAgent%20%E4%B8%BA%E4%BD%95%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Plan%20%E5%86%B3%E5%AE%9A%E6%80%8E%E4%B9%88%E8%B5%B0%EF%BC%8CGoal%20%E5%86%B3%E5%AE%9A%E6%98%AF%E5%90%A6%E5%AE%8C%E6%88%90%EF%BC%9AAgent%20%E4%B8%BA%E4%BD%95%E9%80%89%E9%94%99%E5%9F%8E%E5%B8%82%EF%BC%9F","dateModified":"2026-08-17","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
 </head>
 <body>
-  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>天气车票都对了，Agent 还是选错城市：Plan 不等于 Goal</h1><h1>天气车票都对了，Agent 还是选错城市：Plan 不等于 Goal</h1>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Plan 决定怎么走，Goal 决定是否完成：Agent 为何选错城市？</h1><h1>Plan 决定怎么走，Goal 决定是否完成：Agent 为何选错城市？</h1>
 <p>你让一个旅行 Agent 在杭州、苏州、宁波里挑一个周末目的地。最初，它只需要比较往返车票：</p>
 <blockquote>
 <p>查一下杭州、苏州、宁波的往返车票，推荐最便宜的城市。</p>
@@ -113,6 +113,6 @@
 <p>能回答这三件事，才能判断 Agent 是真的完成了任务，还是只把清单走到了最后。</p>
 <p>这三问也适用于研究、代码修复和商品筛选。只要任务允许重新规划，就要防止系统把“当前步骤做完了”误当成“用户的要求满足了”。</p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-DnNV27tr.js"></script>
+  <script type="module" crossorigin src="/assets/index-CSJjPKOE.js"></script>
 </body>
 </html>
