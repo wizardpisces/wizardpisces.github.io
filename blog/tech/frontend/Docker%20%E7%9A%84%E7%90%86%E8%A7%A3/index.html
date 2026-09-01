@@ -6,14 +6,22 @@
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <title>Docker 镜像 | LZ AI NOTE</title>
   <meta name="description" content="Docker 镜像 层次关系 Docker 镜像的层次关系原理基于联合文件系统（Union File System），这种文件系统允许多个文件系统层次叠加在一起，表现为一个单一的文件系统。Docker 利用这一特性来构建和管理镜像和容器。 联合文件系统（Union File System） 联合文件系统（如 AUFS、OverlayFS、btrfs 等）是…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="Docker 镜像">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2025-06-20">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/tech/frontend/Docker%20%E7%9A%84%E7%90%86%E8%A7%A3">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
   <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/frontend/Docker%20%E7%9A%84%E7%90%86%E8%A7%A3">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
   <meta property="og:title" content="Docker 镜像 | LZ AI NOTE">
   <meta property="og:description" content="Docker 镜像 层次关系 Docker 镜像的层次关系原理基于联合文件系统（Union File System），这种文件系统允许多个文件系统层次叠加在一起，表现为一个单一的文件系统。Docker 利用这一特性来构建和管理镜像和容器。 联合文件系统（Union File System） 联合文件系统（如 AUFS、OverlayFS、btrfs 等）是…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/frontend/Docker%20%E7%9A%84%E7%90%86%E8%A7%A3">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Docker 镜像","description":"Docker 镜像 层次关系 Docker 镜像的层次关系原理基于联合文件系统（Union File System），这种文件系统允许多个文件系统层次叠加在一起，表现为一个单一的文件系统。Docker 利用这一特性来构建和管理镜像和容器。 联合文件系统（Union File System） 联合文件系统（如 AUFS、OverlayFS、btrfs 等）是…","url":"https://wizardpisces.github.io/blog/tech/frontend/Docker%20%E7%9A%84%E7%90%86%E8%A7%A3","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/frontend/Docker%20%E7%9A%84%E7%90%86%E8%A7%A3","dateModified":"2025-06-20","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Docker 镜像","description":"Docker 镜像 层次关系 Docker 镜像的层次关系原理基于联合文件系统（Union File System），这种文件系统允许多个文件系统层次叠加在一起，表现为一个单一的文件系统。Docker 利用这一特性来构建和管理镜像和容器。 联合文件系统（Union File System） 联合文件系统（如 AUFS、OverlayFS、btrfs 等）是…","url":"https://wizardpisces.github.io/blog/tech/frontend/Docker%20%E7%9A%84%E7%90%86%E8%A7%A3","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/frontend/Docker%20%E7%9A%84%E7%90%86%E8%A7%A3","dateModified":"2025-06-20","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：Docker 镜像，LZ AI NOTE，https://wizardpisces.github.io/blog/tech/frontend/Docker%20%E7%9A%84%E7%90%86%E8%A7%A3","about":["frontend"]}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Docker 镜像</h1><h1>Docker 镜像</h1>
@@ -248,6 +256,6 @@ CMD [&quot;node&quot;, &quot;app.js&quot;]
 <h3>总结</h3>
 <p>在联合文件系统中，通过写时复制机制，文件系统可以在只读层中保持文件的原始状态不变，同时允许用户对文件进行修改。这种机制在保持数据完整性和一致性的同时，提供了灵活的文件管理能力。虽然底层可能存在两份文件（原始和副本），但用户看到的是一个统一的、合并的文件系统视图。</p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-CSJjPKOE.js"></script>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
 </body>
 </html>

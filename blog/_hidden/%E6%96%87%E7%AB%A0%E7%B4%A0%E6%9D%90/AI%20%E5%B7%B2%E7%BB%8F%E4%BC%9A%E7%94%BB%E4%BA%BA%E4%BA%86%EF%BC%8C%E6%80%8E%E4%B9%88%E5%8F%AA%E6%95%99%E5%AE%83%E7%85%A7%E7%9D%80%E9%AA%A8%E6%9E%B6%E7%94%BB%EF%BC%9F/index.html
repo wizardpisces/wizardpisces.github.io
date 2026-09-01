@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>AI 已经会画人了，怎么只教它照着骨架画？ | LZ AI NOTE</title>
+  <meta name="description" content="AI 已经会画人了，怎么只教它照着骨架画？ 一个生图模型已经会画人。 它知道眼睛大致长什么样，手臂怎样连接身体，也能根据提示词生成舞者、宇航员或者动画角色。 现在我们想增加一个新能力： 给它一张骨架图，让人物照着这个姿势生成。 最直接的想法，是拿大量“人物图片 + 骨架图”重新训练整个模型。 但这相当于为了教一个已经会画画的人看懂骨架，把他过去学过的东西全…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="AI 已经会画人了，怎么只教它照着骨架画？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-09-01">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E5%B7%B2%E7%BB%8F%E4%BC%9A%E7%94%BB%E4%BA%BA%E4%BA%86%EF%BC%8C%E6%80%8E%E4%B9%88%E5%8F%AA%E6%95%99%E5%AE%83%E7%85%A7%E7%9D%80%E9%AA%A8%E6%9E%B6%E7%94%BB%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E5%B7%B2%E7%BB%8F%E4%BC%9A%E7%94%BB%E4%BA%BA%E4%BA%86%EF%BC%8C%E6%80%8E%E4%B9%88%E5%8F%AA%E6%95%99%E5%AE%83%E7%85%A7%E7%9D%80%E9%AA%A8%E6%9E%B6%E7%94%BB%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="AI 已经会画人了，怎么只教它照着骨架画？ | LZ AI NOTE">
+  <meta property="og:description" content="AI 已经会画人了，怎么只教它照着骨架画？ 一个生图模型已经会画人。 它知道眼睛大致长什么样，手臂怎样连接身体，也能根据提示词生成舞者、宇航员或者动画角色。 现在我们想增加一个新能力： 给它一张骨架图，让人物照着这个姿势生成。 最直接的想法，是拿大量“人物图片 + 骨架图”重新训练整个模型。 但这相当于为了教一个已经会画画的人看懂骨架，把他过去学过的东西全…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E5%B7%B2%E7%BB%8F%E4%BC%9A%E7%94%BB%E4%BA%BA%E4%BA%86%EF%BC%8C%E6%80%8E%E4%B9%88%E5%8F%AA%E6%95%99%E5%AE%83%E7%85%A7%E7%9D%80%E9%AA%A8%E6%9E%B6%E7%94%BB%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI 已经会画人了，怎么只教它照着骨架画？","description":"AI 已经会画人了，怎么只教它照着骨架画？ 一个生图模型已经会画人。 它知道眼睛大致长什么样，手臂怎样连接身体，也能根据提示词生成舞者、宇航员或者动画角色。 现在我们想增加一个新能力： 给它一张骨架图，让人物照着这个姿势生成。 最直接的想法，是拿大量“人物图片 + 骨架图”重新训练整个模型。 但这相当于为了教一个已经会画画的人看懂骨架，把他过去学过的东西全…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E5%B7%B2%E7%BB%8F%E4%BC%9A%E7%94%BB%E4%BA%BA%E4%BA%86%EF%BC%8C%E6%80%8E%E4%B9%88%E5%8F%AA%E6%95%99%E5%AE%83%E7%85%A7%E7%9D%80%E9%AA%A8%E6%9E%B6%E7%94%BB%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E5%B7%B2%E7%BB%8F%E4%BC%9A%E7%94%BB%E4%BA%BA%E4%BA%86%EF%BC%8C%E6%80%8E%E4%B9%88%E5%8F%AA%E6%95%99%E5%AE%83%E7%85%A7%E7%9D%80%E9%AA%A8%E6%9E%B6%E7%94%BB%EF%BC%9F","dateModified":"2026-09-01","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：AI 已经会画人了，怎么只教它照着骨架画？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E5%B7%B2%E7%BB%8F%E4%BC%9A%E7%94%BB%E4%BA%BA%E4%BA%86%EF%BC%8C%E6%80%8E%E4%B9%88%E5%8F%AA%E6%95%99%E5%AE%83%E7%85%A7%E7%9D%80%E9%AA%A8%E6%9E%B6%E7%94%BB%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>AI 已经会画人了，怎么只教它照着骨架画？</h1><h1>AI 已经会画人了，怎么只教它照着骨架画？</h1>
+<p>一个生图模型已经会画人。</p>
+<p>它知道眼睛大致长什么样，手臂怎样连接身体，也能根据提示词生成舞者、宇航员或者动画角色。</p>
+<p>现在我们想增加一个新能力：</p>
+<blockquote>
+<p>给它一张骨架图，让人物照着这个姿势生成。</p>
+</blockquote>
+<p>最直接的想法，是拿大量“人物图片 + 骨架图”重新训练整个模型。</p>
+<p>但这相当于为了教一个已经会画画的人看懂骨架，把他过去学过的东西全部重新教一遍。</p>
+<p>训练成本会很高，模型原来稳定的生图能力也可能受到影响。</p>
+<p>有没有办法保留它已经学会的东西，只训练“怎样使用骨架”这一小部分？</p>
+<p>ControlNet 解决的正是这个问题。</p>
+<h2>模型会画人，不等于会看骨架</h2>
+<p>原来的生图模型生成图片时，主要读取三类信息：</p>
+<pre><code class="language-text">当前仍然带噪的画面
+当前进行到哪一步
+文字提示
+</code></pre>
+<p>它已经学会根据这些信息，判断画面下一步应该怎样变化。</p>
+<p>可骨架图是一种新输入。</p>
+<p>原模型没有专门接收它的位置，也不知道一条连接肩膀和手腕的线，应该怎样改变正在生成的画面。</p>
+<p>如果完全冻结原模型，再把骨架图硬塞进去，它也不会自动获得新能力。</p>
+<p>所以第一个缺口出现了：</p>
+<p><strong>旧模型要保持不动，但系统必须增加一条能够读懂骨架的新路径。</strong></p>
+<h2>在主模型旁边，加一条控制分支</h2>
+<p>ControlNet 保留原来的生图模型，不再更新它的参数。</p>
+<p>主模型继续负责自己已经擅长的部分：</p>
+<pre><code class="language-text">人物长什么样
+衣服和背景怎样形成
+文字描述对应哪些画面内容
+当前噪声应该怎样调整
+</code></pre>
+<p>然后在旁边增加一条可以训练的控制分支，专门处理骨架带来的影响。</p>
+<pre><code class="language-text">主模型
+保留已有生图能力
+参数冻结
+
+控制分支
+学习怎样使用骨架
+参数可以训练
+</code></pre>
+<p>但这里又有一个问题。</p>
+<p>骨架不只决定画面里“有没有一个人”，还要决定头、肩、手腕和膝盖分别落在哪里。</p>
+<p>如果控制分支最后只给主模型一句笼统结论：</p>
+<blockquote>
+<p>这是一张举手的姿势图。</p>
+</blockquote>
+<p>那些具体位置还是会丢掉。</p>
+<h2>控制分支必须跟着主模型逐层工作</h2>
+<p>主模型内部不是直接保存一张完整图片。</p>
+<p>画面会经过多个处理阶段，变成一组组数字网格，通常叫特征图。它们不是最终像素，但仍然保留大致的空间位置。</p>
+<p>ControlNet 复制主模型中负责提取这些多层信息的一部分，作为可训练的控制分支。</p>
+<p>这样做有两个作用。</p>
+<p>第一，控制分支一开始就采用主模型熟悉的处理方式，不需要从零学习怎样理解当前的带噪画面。</p>
+<p>第二，它可以在主模型的多个处理阶段，提供形状相匹配的控制信息。</p>
+<pre><code class="language-text">主模型某一阶段的特征图
+        +
+控制分支输出的同尺寸特征图
+        ↓
+加入骨架影响后的内部状态
+</code></pre>
+<p>假设骨架右上方有一段抬起的手臂。</p>
+<p>控制分支不会直接在那里画一只手。它会在对应区域产生一组数字变化，加入主模型正在处理的特征图，让后续生成更倾向于在那里形成手臂。</p>
+<p>主模型有多个处理阶段，控制分支也会提供多组这样的变化。</p>
+<p>骨架因此不是只在入口处被看一眼，而是在不同阶段持续影响生成。</p>
+<p>这时候，ControlNet 的主体已经出现了：</p>
+<pre><code class="language-text">冻结的主模型
+保留原有能力
+        +
+可训练的控制分支
+提供骨架带来的变化
+</code></pre>
+<p>但这套结构刚接上时还不能直接训练。</p>
+<h2>新分支不能一开始就胡乱干预</h2>
+<p>控制分支刚加入时，还不知道什么样的骨架应该产生什么影响。</p>
+<p>如果它立刻向主模型输出一堆随机数字，主模型原本稳定的生成过程会被打乱。</p>
+<p>所以连接两边的地方，一开始不能传递任何影响。</p>
+<p>ControlNet 使用了一种很直接的设计：把连接处的参数初始化为零。</p>
+<p>训练刚开始时：</p>
+<pre><code class="language-text">控制分支产生内部结果
+        ↓
+连接处输出为 0
+        ↓
+主模型没有受到影响
+        ↓
+仍然按照原来的方式生成
+</code></pre>
+<p>论文把这种连接称为 Zero Convolution。</p>
+<p>名字不重要，它解决的问题很具体：</p>
+<p><strong>新分支先从“什么都不改变”开始，再慢慢学会应该改变什么。</strong></p>
+<h2>它怎样学会骨架应该改变什么？</h2>
+<p>训练时，需要准备能够对应起来的材料：</p>
+<pre><code class="language-text">一张真实人物图片
+        +
+从图片中提取的骨架
+        +
+描述图片的文字
+</code></pre>
+<p>程序给真实图片加入噪声，让模型根据文字和骨架，预测应该怎样去掉这些噪声。</p>
+<p>一开始，控制分支没有提供有效帮助，结果主要依靠原模型。</p>
+<p>预测出现误差时，原模型保持冻结，只调整控制分支和连接处：</p>
+<pre><code class="language-text">当前骨架没有帮助模型预测正确
+        ↓
+调整控制分支
+        ↓
+下次看到类似骨架
+输出更合适的内部变化
+</code></pre>
+<p>经过大量对应样本，控制分支逐渐学会：</p>
+<pre><code class="language-text">骨架在什么位置出现什么结构
+        ↓
+主模型的哪些处理阶段
+需要增加哪些数字变化
+        ↓
+最终生成结果更接近骨架
+</code></pre>
+<p>它学到的不是一套人工编写的坐标规则，也不会在生成时计算“手腕距离目标还差多少像素”。</p>
+<p>它学到的是：<strong>看到这种骨架，应该给原模型的生成过程增加哪些影响。</strong></p>
+<h2>生成时，两条路径一起运行</h2>
+<p>训练完成后，一轮图片生成会同时经过两条路径。</p>
+<pre><code class="language-text">当前带噪画面
+        ↓
+主模型根据文字
+产生原来的生成判断
+        ↓
+控制分支根据骨架
+产生多组控制增量
+        ↓
+两边在模型内部相加
+        ↓
+更新一轮画面
+</code></pre>
+<p>图片更新以后，下一轮再次重复。</p>
+<p>ControlNet 不是等人物画完，再检查手脚是否偏离骨架。它从生成开始，就在每一轮、多个处理阶段加入骨架带来的变化。</p>
+<p>很多工具里的“控制强度”，调节的就是这些控制增量产生多大影响。</p>
+<pre><code class="language-text">控制较弱
+→ 更接近主模型自由生成
+
+控制较强
+→ 更贴近骨架，但也可能变得僵硬
+</code></pre>
+<p>ControlNet 能控制的内容，也取决于输入条件提供了什么。</p>
+<p>骨架没有描述手指、表情和衣服褶皱，这些部分仍然主要由主模型决定。骨架提取错了，控制分支也可能把错误结构稳定地带进生成过程。</p>
+<h2>回到最开始的问题</h2>
+<p>一个已经会画人的模型，怎样只学习照着骨架画，而不用把所有能力重新训练一遍？</p>
+<p>整套设计可以压缩成：</p>
+<pre><code class="language-text">冻结原来的生图模型
+保留已经学会的能力
+        ↓
+复制一条可训练的控制分支
+专门读取骨架
+        ↓
+连接从零影响开始
+避免破坏原模型
+        ↓
+逐渐学会多层控制增量
+加入每一轮生成
+</code></pre>
+<p>ControlNet 的本质不是重新训练一个更听话的生图模型。</p>
+<p>它保留已经稳定的能力，只训练骨架带来的变化；主模型继续负责画图，控制分支负责告诉它，这一次应该在哪些位置作出不同的调整。</p>
+<h2>参考资料</h2>
+<ol>
+<li>Zhang、Rao、Agrawala，Adding Conditional Control to Text-to-Image Diffusion Models（ICCV，2023）：<a href="https://arxiv.org/abs/2302.05543">https://arxiv.org/abs/2302.05543</a></li>
+<li>ControlNet 官方实现，lllyasviel/ControlNet：<a href="https://github.com/lllyasviel/ControlNet">https://github.com/lllyasviel/ControlNet</a></li>
+<li>Rombach 等，High-Resolution Image Synthesis with Latent Diffusion Models（CVPR，2022）：<a href="https://arxiv.org/abs/2112.10752">https://arxiv.org/abs/2112.10752</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
+</body>
+</html>

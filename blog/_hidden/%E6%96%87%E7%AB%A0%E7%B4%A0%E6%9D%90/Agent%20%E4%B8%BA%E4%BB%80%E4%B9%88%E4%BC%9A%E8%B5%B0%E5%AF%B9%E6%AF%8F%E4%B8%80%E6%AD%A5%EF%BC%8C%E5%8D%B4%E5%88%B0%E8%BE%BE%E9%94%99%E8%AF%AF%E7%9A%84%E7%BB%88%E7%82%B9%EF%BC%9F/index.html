@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Agent 为什么会走对每一步，却到达错误的终点？ | LZ AI NOTE</title>
+  <meta name="description" content="Agent 为什么会走对每一步，却到达错误的终点？ 你让一个旅行 Agent 在杭州、苏州、宁波里挑一个周末目的地。最初，它只需要比较往返车票： 查一下杭州、苏州、宁波的往返车票，推荐最便宜的城市。 Agent 列出三项 Todo： 杭州 180 元，宁波 260 元，苏州 360 元。Agent 推荐杭州，没有问题。 在这个任务里，“比较完价格”和“找到…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="Agent 为什么会走对每一步，却到达错误的终点？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-08-31">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%B5%B0%E5%AF%B9%E6%AF%8F%E4%B8%80%E6%AD%A5%EF%BC%8C%E5%8D%B4%E5%88%B0%E8%BE%BE%E9%94%99%E8%AF%AF%E7%9A%84%E7%BB%88%E7%82%B9%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%B5%B0%E5%AF%B9%E6%AF%8F%E4%B8%80%E6%AD%A5%EF%BC%8C%E5%8D%B4%E5%88%B0%E8%BE%BE%E9%94%99%E8%AF%AF%E7%9A%84%E7%BB%88%E7%82%B9%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="Agent 为什么会走对每一步，却到达错误的终点？ | LZ AI NOTE">
+  <meta property="og:description" content="Agent 为什么会走对每一步，却到达错误的终点？ 你让一个旅行 Agent 在杭州、苏州、宁波里挑一个周末目的地。最初，它只需要比较往返车票： 查一下杭州、苏州、宁波的往返车票，推荐最便宜的城市。 Agent 列出三项 Todo： 杭州 180 元，宁波 260 元，苏州 360 元。Agent 推荐杭州，没有问题。 在这个任务里，“比较完价格”和“找到…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%B5%B0%E5%AF%B9%E6%AF%8F%E4%B8%80%E6%AD%A5%EF%BC%8C%E5%8D%B4%E5%88%B0%E8%BE%BE%E9%94%99%E8%AF%AF%E7%9A%84%E7%BB%88%E7%82%B9%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Agent 为什么会走对每一步，却到达错误的终点？","description":"Agent 为什么会走对每一步，却到达错误的终点？ 你让一个旅行 Agent 在杭州、苏州、宁波里挑一个周末目的地。最初，它只需要比较往返车票： 查一下杭州、苏州、宁波的往返车票，推荐最便宜的城市。 Agent 列出三项 Todo： 杭州 180 元，宁波 260 元，苏州 360 元。Agent 推荐杭州，没有问题。 在这个任务里，“比较完价格”和“找到…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%B5%B0%E5%AF%B9%E6%AF%8F%E4%B8%80%E6%AD%A5%EF%BC%8C%E5%8D%B4%E5%88%B0%E8%BE%BE%E9%94%99%E8%AF%AF%E7%9A%84%E7%BB%88%E7%82%B9%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%B5%B0%E5%AF%B9%E6%AF%8F%E4%B8%80%E6%AD%A5%EF%BC%8C%E5%8D%B4%E5%88%B0%E8%BE%BE%E9%94%99%E8%AF%AF%E7%9A%84%E7%BB%88%E7%82%B9%EF%BC%9F","dateModified":"2026-08-31","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：Agent 为什么会走对每一步，却到达错误的终点？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%B5%B0%E5%AF%B9%E6%AF%8F%E4%B8%80%E6%AD%A5%EF%BC%8C%E5%8D%B4%E5%88%B0%E8%BE%BE%E9%94%99%E8%AF%AF%E7%9A%84%E7%BB%88%E7%82%B9%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Agent 为什么会走对每一步，却到达错误的终点？</h1><h1>Agent 为什么会走对每一步，却到达错误的终点？</h1>
+<p>你让一个旅行 Agent 在杭州、苏州、宁波里挑一个周末目的地。最初，它只需要比较往返车票：</p>
+<blockquote>
+<p>查一下杭州、苏州、宁波的往返车票，推荐最便宜的城市。</p>
+</blockquote>
+<p>Agent 列出三项 Todo：</p>
+<pre><code class="language-text">[完成] 查询三个城市的车票
+[完成] 比较价格
+[完成] 推荐最便宜的城市
+</code></pre>
+<p>杭州 180 元，宁波 260 元，苏州 360 元。Agent 推荐杭州，没有问题。</p>
+<p>在这个任务里，“比较完价格”和“找到最便宜的城市”几乎是同一件事。Todo 全部完成，任务也就完成了。</p>
+<h2>Plan 起初没有问题</h2>
+<p>用户随后加上天气和预算限制：</p>
+<blockquote>
+<p>从三个城市里选一个适合户外活动的地方。降雨概率不能超过 20%，往返车票不能超过 300 元；如果都不满足，就建议我延期。</p>
+</blockquote>
+<p>Agent 正确理解了要求，生成了这份 Plan：</p>
+<pre><code class="language-text">[待执行] 查询三个城市的天气
+[待执行] 查询三个城市的车票
+[待执行] 过滤掉不符合条件的城市
+[待执行] 有合格城市就推荐，否则建议延期
+</code></pre>
+<p>天气查询很顺利，杭州和宁波的车票也拿到了，只有苏州票价接口超时：</p>
+<pre><code class="language-text">杭州：降雨概率 60%，往返 180 元
+宁波：降雨概率 40%，往返 260 元
+苏州：降雨概率 10%，票价未知
+</code></pre>
+<p>杭州和宁波已经被天气条件淘汰。苏州天气合格，但票价未知。按照原 Plan，任务还不能结束。</p>
+<h2>一次重规划，把终点也改掉了</h2>
+<p>Agent 决定重试苏州票价接口。重新规划时，它把注意力放在“怎样处理剩余步骤”，生成了一个更短的新 Plan：</p>
+<pre><code class="language-text">[待执行] 重试苏州票价查询
+[待执行] 汇总三个城市的数据
+[待执行] 推荐当前综合最优的城市
+</code></pre>
+<p>重试成功，苏州往返 360 元。至此，天气和车票都查对了：</p>
+<pre><code class="language-text">杭州：降雨概率 60%，往返 180 元
+苏州：降雨概率 10%，往返 360 元
+宁波：降雨概率 40%，往返 260 元
+</code></pre>
+<p>三个城市都不符合原始条件，Agent 却回答：</p>
+<blockquote>
+<p>推荐杭州。票价最便宜，周末下雨的话带伞即可。</p>
+</blockquote>
+<p>城市、天气和票价都没有查错。变化发生在 Plan 里：重规划保留了“继续查票”，却丢掉了“没有合格城市就延期”。</p>
+<pre><code class="language-text">Plan 的结果：杭州综合排名第一
+用户的条件：杭州降雨概率超标
+</code></pre>
+<h2>Plan 可以变，Goal 不能跟着变</h2>
+<p>重新规划本身没有问题。接口超时以后增加重试，甚至改成先查票再查天气，都只是路线变化。</p>
+<p>不能跟着 Plan 一起重写的是完成条件，也就是 Goal：</p>
+<pre><code class="language-text">成功：找到降雨概率 ≤ 20%、往返票价 ≤ 300 元的城市
+无解：三个城市都检查完，仍然没有合格项
+无解时：建议延期，不降低用户条件
+</code></pre>
+<p>Goal 应当从用户原始要求中提取并单独保存。Agent 可以重新生成 Plan，却不能因为“必须给出一个推荐”更容易交付，就把硬条件改成综合排序。只有用户主动把预算提高到 400 元，Goal 才会改变。</p>
+<p>系统再用 Goal 检查已经拿到的结果。</p>
+<p>苏州票价超时时：</p>
+<pre><code class="language-text">杭州：降雨概率 60%
+宁波：降雨概率 40%
+苏州：降雨概率 10%，票价未知
+</code></pre>
+<p>苏州仍可能合格，任务不能结束。</p>
+<p>重试拿到 360 元以后：</p>
+<pre><code class="language-text">杭州：天气不合格
+宁波：天气不合格
+苏州：票价不合格
+</code></pre>
+<p>Goal 允许“没有城市合格”作为正常结果。Agent 此时应该回答：</p>
+<blockquote>
+<p>三个城市都无法同时满足天气和预算条件，建议延期。</p>
+</blockquote>
+<p>如果系统只认识“必须推荐一个”，它就会把无解当成还没努力够，继续搜索，或者偷偷放宽条件。</p>
+<h2>最后，把整条路串起来</h2>
+<pre><code class="language-text">Goal：定义成功与无解
+↓
+Plan：查询天气和票价
+↓
+Goal：检查结果
+├─ 信息不足 → 继续查询
+├─ 有城市合格 → 推荐城市
+└─ 全部不合格 → 建议延期
+</code></pre>
+<p>Plan 决定下一步怎么走，Goal 决定是否已经到达。</p>
+<p>这个 Agent 走对了新 Plan 里的每一步，却在重规划时换掉了 Goal。它到达的是当前计划的终点，不是用户要求的终点。</p>
+<p><em>LZ AI Note｜记录现象，追问本质</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
+</body>
+</html>

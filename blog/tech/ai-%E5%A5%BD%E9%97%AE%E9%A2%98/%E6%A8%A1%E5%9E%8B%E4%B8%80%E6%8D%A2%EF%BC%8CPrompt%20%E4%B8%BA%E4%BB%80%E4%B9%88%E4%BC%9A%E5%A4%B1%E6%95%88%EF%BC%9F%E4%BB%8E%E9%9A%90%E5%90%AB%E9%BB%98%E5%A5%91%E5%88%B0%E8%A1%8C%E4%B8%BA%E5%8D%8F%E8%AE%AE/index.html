@@ -6,14 +6,22 @@
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <title>Prompt 没变，为什么换个模型，行为就变了？ | LZ AI NOTE</title>
   <meta name="description" content="Prompt 没变，为什么换个模型，行为就变了？ 假设我们做了一个技术简报助手。 输入五篇资料，它负责写一篇 500～800 字的中文简报。Prompt 很普通： 它稳定运行了一段时间。事实基本准确，遇到互相矛盾的资料，也知道把分歧留下来。 后来模型升级了。 新模型写得明显更顺，标题也更像人写的。可仔细一看，两个来源原本还在争论，它却替双方总结出了一个确定…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="Prompt 没变，为什么换个模型，行为就变了？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-08-10">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%8D%A2%EF%BC%8CPrompt%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%A4%B1%E6%95%88%EF%BC%9F%E4%BB%8E%E9%9A%90%E5%90%AB%E9%BB%98%E5%A5%91%E5%88%B0%E8%A1%8C%E4%B8%BA%E5%8D%8F%E8%AE%AE">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
   <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%8D%A2%EF%BC%8CPrompt%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%A4%B1%E6%95%88%EF%BC%9F%E4%BB%8E%E9%9A%90%E5%90%AB%E9%BB%98%E5%A5%91%E5%88%B0%E8%A1%8C%E4%B8%BA%E5%8D%8F%E8%AE%AE">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
   <meta property="og:title" content="Prompt 没变，为什么换个模型，行为就变了？ | LZ AI NOTE">
   <meta property="og:description" content="Prompt 没变，为什么换个模型，行为就变了？ 假设我们做了一个技术简报助手。 输入五篇资料，它负责写一篇 500～800 字的中文简报。Prompt 很普通： 它稳定运行了一段时间。事实基本准确，遇到互相矛盾的资料，也知道把分歧留下来。 后来模型升级了。 新模型写得明显更顺，标题也更像人写的。可仔细一看，两个来源原本还在争论，它却替双方总结出了一个确定…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%8D%A2%EF%BC%8CPrompt%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%A4%B1%E6%95%88%EF%BC%9F%E4%BB%8E%E9%9A%90%E5%90%AB%E9%BB%98%E5%A5%91%E5%88%B0%E8%A1%8C%E4%B8%BA%E5%8D%8F%E8%AE%AE">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Prompt 没变，为什么换个模型，行为就变了？","description":"Prompt 没变，为什么换个模型，行为就变了？ 假设我们做了一个技术简报助手。 输入五篇资料，它负责写一篇 500～800 字的中文简报。Prompt 很普通： 它稳定运行了一段时间。事实基本准确，遇到互相矛盾的资料，也知道把分歧留下来。 后来模型升级了。 新模型写得明显更顺，标题也更像人写的。可仔细一看，两个来源原本还在争论，它却替双方总结出了一个确定…","url":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%8D%A2%EF%BC%8CPrompt%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%A4%B1%E6%95%88%EF%BC%9F%E4%BB%8E%E9%9A%90%E5%90%AB%E9%BB%98%E5%A5%91%E5%88%B0%E8%A1%8C%E4%B8%BA%E5%8D%8F%E8%AE%AE","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%8D%A2%EF%BC%8CPrompt%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%A4%B1%E6%95%88%EF%BC%9F%E4%BB%8E%E9%9A%90%E5%90%AB%E9%BB%98%E5%A5%91%E5%88%B0%E8%A1%8C%E4%B8%BA%E5%8D%8F%E8%AE%AE","dateModified":"2026-08-10","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Prompt 没变，为什么换个模型，行为就变了？","description":"Prompt 没变，为什么换个模型，行为就变了？ 假设我们做了一个技术简报助手。 输入五篇资料，它负责写一篇 500～800 字的中文简报。Prompt 很普通： 它稳定运行了一段时间。事实基本准确，遇到互相矛盾的资料，也知道把分歧留下来。 后来模型升级了。 新模型写得明显更顺，标题也更像人写的。可仔细一看，两个来源原本还在争论，它却替双方总结出了一个确定…","url":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%8D%A2%EF%BC%8CPrompt%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%A4%B1%E6%95%88%EF%BC%9F%E4%BB%8E%E9%9A%90%E5%90%AB%E9%BB%98%E5%A5%91%E5%88%B0%E8%A1%8C%E4%B8%BA%E5%8D%8F%E8%AE%AE","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%8D%A2%EF%BC%8CPrompt%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%A4%B1%E6%95%88%EF%BC%9F%E4%BB%8E%E9%9A%90%E5%90%AB%E9%BB%98%E5%A5%91%E5%88%B0%E8%A1%8C%E4%B8%BA%E5%8D%8F%E8%AE%AE","dateModified":"2026-08-10","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：Prompt 没变，为什么换个模型，行为就变了？，LZ AI NOTE，https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%8D%A2%EF%BC%8CPrompt%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%A4%B1%E6%95%88%EF%BC%9F%E4%BB%8E%E9%9A%90%E5%90%AB%E9%BB%98%E5%A5%91%E5%88%B0%E8%A1%8C%E4%B8%BA%E5%8D%8F%E8%AE%AE","about":["ai-好问题"]}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Prompt 没变，为什么换个模型，行为就变了？</h1><h1>Prompt 没变，为什么换个模型，行为就变了？</h1>
@@ -97,6 +105,6 @@
 <p>为了修复前面的失败，Prompt 已经从 v1 改到了 v5。v5 在这五篇资料上表现更好，换一批资料，却可能还不如 v3。如果最后仍靠“读起来不错”挑版本，我们和最开始凭感觉写下“请保持严谨”，其实没有走出多远。</p>
 <p>Prompt 工程的下一步，可能不是写出 v6，而是先找一把不会跟着模型一起漂移的尺子。</p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-CSJjPKOE.js"></script>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
 </body>
 </html>

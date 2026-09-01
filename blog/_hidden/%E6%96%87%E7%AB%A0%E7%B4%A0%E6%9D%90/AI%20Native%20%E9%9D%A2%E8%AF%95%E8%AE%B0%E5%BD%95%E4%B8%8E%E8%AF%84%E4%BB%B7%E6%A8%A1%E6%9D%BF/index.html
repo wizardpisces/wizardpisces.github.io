@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>AI Native 面试模板 | LZ AI NOTE</title>
+  <meta name="description" content="AI Native 面试模板 选候选人简历中的一个真实项目，沿着下面的问题追问。重点记录具体事实，不记录大段原话。 使用原则 不从术语开始。 候选人写了 RAG、Agent 或 Skill，就问它解决了什么真实问题，不要求先背定义。 只选一个项目问到底。 答案可以不同，但所有候选人都沿着“做法、失败、取舍、验证”这条证据链回答。 AI 用得多不等于 AI …">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="AI Native 面试模板">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-08-20">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20Native%20%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95%E4%B8%8E%E8%AF%84%E4%BB%B7%E6%A8%A1%E6%9D%BF">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20Native%20%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95%E4%B8%8E%E8%AF%84%E4%BB%B7%E6%A8%A1%E6%9D%BF">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="AI Native 面试模板 | LZ AI NOTE">
+  <meta property="og:description" content="AI Native 面试模板 选候选人简历中的一个真实项目，沿着下面的问题追问。重点记录具体事实，不记录大段原话。 使用原则 不从术语开始。 候选人写了 RAG、Agent 或 Skill，就问它解决了什么真实问题，不要求先背定义。 只选一个项目问到底。 答案可以不同，但所有候选人都沿着“做法、失败、取舍、验证”这条证据链回答。 AI 用得多不等于 AI …">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20Native%20%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95%E4%B8%8E%E8%AF%84%E4%BB%B7%E6%A8%A1%E6%9D%BF">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI Native 面试模板","description":"AI Native 面试模板 选候选人简历中的一个真实项目，沿着下面的问题追问。重点记录具体事实，不记录大段原话。 使用原则 不从术语开始。 候选人写了 RAG、Agent 或 Skill，就问它解决了什么真实问题，不要求先背定义。 只选一个项目问到底。 答案可以不同，但所有候选人都沿着“做法、失败、取舍、验证”这条证据链回答。 AI 用得多不等于 AI …","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20Native%20%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95%E4%B8%8E%E8%AF%84%E4%BB%B7%E6%A8%A1%E6%9D%BF","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20Native%20%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95%E4%B8%8E%E8%AF%84%E4%BB%B7%E6%A8%A1%E6%9D%BF","dateModified":"2026-08-20","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：AI Native 面试模板，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20Native%20%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95%E4%B8%8E%E8%AF%84%E4%BB%B7%E6%A8%A1%E6%9D%BF","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>AI Native 面试模板</h1><h1>AI Native 面试模板</h1>
+<blockquote>
+<p>选候选人简历中的一个真实项目，沿着下面的问题追问。重点记录具体事实，不记录大段原话。</p>
+</blockquote>
+<h2>使用原则</h2>
+<ul>
+<li><strong>不从术语开始。</strong> 候选人写了 RAG、Agent 或 Skill，就问它解决了什么真实问题，不要求先背定义。</li>
+<li><strong>只选一个项目问到底。</strong> 答案可以不同，但所有候选人都沿着“做法、失败、取舍、验证”这条证据链回答。</li>
+<li><strong>AI 用得多不等于 AI Native。</strong> 重点看 AI 是否改变了任务拆分和工作流，以及候选人是否仍然掌握关键判断。</li>
+<li><strong>人必须对结果负责。</strong> 成熟的候选人能说清什么交给 AI、什么必须人工确认，以及失败后由谁处理。</li>
+</ul>
+<p>核心追问链：</p>
+<pre><code class="language-text">做了什么 → 为什么用 AI → 怎么用 → 哪里失败
+→ 怎么取舍 → 如何验证 → 重来会怎么做 → 拿掉 AI 会怎样
+</code></pre>
+<h2>基本信息</h2>
+<ul>
+<li>候选人：</li>
+<li>岗位 / 职级：</li>
+<li>面试官：</li>
+<li>日期：</li>
+<li>讨论的项目：</li>
+</ul>
+<h2>1. 做了什么</h2>
+<blockquote>
+<p>这个项目解决什么问题？你本人具体负责什么？</p>
+</blockquote>
+<p>记录：</p>
+<p>判断：贡献边界是否清楚？</p>
+<h2>2. 为什么使用 AI</h2>
+<blockquote>
+<p>为什么选择 AI？不用 AI 能不能完成？</p>
+</blockquote>
+<p>记录：</p>
+<p>判断：AI 是必要能力，还是为了使用而使用？</p>
+<h2>3. 具体怎么使用</h2>
+<blockquote>
+<p>完整工作流是什么？AI 做什么，人负责什么？</p>
+</blockquote>
+<p>记录：</p>
+<p>判断：AI 只是局部工具，还是已经进入工作流？</p>
+<h2>4. 遇到了什么问题</h2>
+<blockquote>
+<p>第一次效果怎么样？具体哪里失败了？后来怎么解决？</p>
+</blockquote>
+<p>记录：</p>
+<p>判断：能否讲出真实失败，而不是只讲成功结果？</p>
+<h2>5. 做了什么取舍</h2>
+<blockquote>
+<p>考虑过哪些方案？为什么选现在这个？接受了什么代价？</p>
+</blockquote>
+<p>记录：</p>
+<p>判断：是否具备 Trade-off 意识？</p>
+<h2>6. 如何验证</h2>
+<blockquote>
+<p>你怎么证明 AI 提高了效率或质量？哪些结果仍然需要人工检查？</p>
+</blockquote>
+<p>记录：</p>
+<p>判断：有数据、测试或验收方法，还是只凭感觉？</p>
+<h2>7. 如果重新做一次</h2>
+<blockquote>
+<p>哪个判断会改变？哪一步会提前验证？</p>
+</blockquote>
+<p>记录：</p>
+<p>判断：是否形成了可以复用的经验？</p>
+<h2>8. 把 AI 拿掉</h2>
+<blockquote>
+<p>如果把项目里的 AI 全部拿掉，你完成这件事的方式会发生什么变化？</p>
+</blockquote>
+<p>记录：</p>
+<p>判断：</p>
+<ul>
+<li>[ ] 只是速度变慢，原有流程没有变化</li>
+<li>[ ] 部分任务分工发生变化</li>
+<li>[ ] 整个工作流需要重新设计</li>
+<li>[ ] 候选人已经无法解释底层问题</li>
+</ul>
+<h2>最终评价</h2>
+<p>评分锚点：</p>
+<ul>
+<li><code>1 分</code>：只能描述使用了什么工具，无法说明过程和证据。</li>
+<li><code>3 分</code>：能讲清工作流、边界、取舍和基本验证。</li>
+<li><code>5 分</code>：AI 已改变完整工作方式，同时保留明确的人类责任和可验证机制。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>能力</th>
+<th>评分</th>
+<th>一句话证据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AI 使用深度</td>
+<td>/5</td>
+<td></td>
+</tr>
+<tr>
+<td>AI 边界意识</td>
+<td>/5</td>
+<td></td>
+</tr>
+<tr>
+<td>取舍与验证</td>
+<td>/5</td>
+<td></td>
+</tr>
+<tr>
+<td>工作流重构</td>
+<td>/5</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3>最强信号</h3>
+<blockquote></blockquote>
+<h3>最大疑问</h3>
+<blockquote></blockquote>
+<h3>面试结论</h3>
+<ul>
+<li>[ ] Strong Hire</li>
+<li>[ ] Hire</li>
+<li>[ ] Lean Hire</li>
+<li>[ ] Lean No Hire</li>
+<li>[ ] No Hire</li>
+</ul>
+<h3>一句话理由</h3>
+<blockquote></blockquote>
+<p>以上内容填写完成，本次面试结束。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
+</body>
+</html>

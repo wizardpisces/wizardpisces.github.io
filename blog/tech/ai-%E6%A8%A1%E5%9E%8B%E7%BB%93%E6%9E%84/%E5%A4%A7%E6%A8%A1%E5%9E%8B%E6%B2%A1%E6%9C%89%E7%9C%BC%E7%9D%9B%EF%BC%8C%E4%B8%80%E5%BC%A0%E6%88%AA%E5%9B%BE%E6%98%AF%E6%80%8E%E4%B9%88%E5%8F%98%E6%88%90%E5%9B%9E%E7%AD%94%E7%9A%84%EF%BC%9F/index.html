@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>大模型没有眼睛，一张截图是怎么变成回答的？ | LZ AI NOTE</title>
+  <meta name="description" content="大模型没有眼睛，一张截图是怎么变成回答的？ 你上传一张应用截图，然后问： 这个页面哪里不对？ 模型可能指出按钮没有对齐、文字被截断，甚至能发现弹窗挡住了下面的操作。 这件事有点奇怪。 语言模型原本处理的是文字。它接收前面的 Token，预测下一个 Token。图片既没有词语，也没有句子，只有排列在二维网格里的像素。 一台只会接收文字的模型，是怎样开始看图的…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="大模型没有眼睛，一张截图是怎么变成回答的？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-08-26">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/tech/ai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%B2%A1%E6%9C%89%E7%9C%BC%E7%9D%9B%EF%BC%8C%E4%B8%80%E5%BC%A0%E6%88%AA%E5%9B%BE%E6%98%AF%E6%80%8E%E4%B9%88%E5%8F%98%E6%88%90%E5%9B%9E%E7%AD%94%E7%9A%84%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%B2%A1%E6%9C%89%E7%9C%BC%E7%9D%9B%EF%BC%8C%E4%B8%80%E5%BC%A0%E6%88%AA%E5%9B%BE%E6%98%AF%E6%80%8E%E4%B9%88%E5%8F%98%E6%88%90%E5%9B%9E%E7%AD%94%E7%9A%84%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="大模型没有眼睛，一张截图是怎么变成回答的？ | LZ AI NOTE">
+  <meta property="og:description" content="大模型没有眼睛，一张截图是怎么变成回答的？ 你上传一张应用截图，然后问： 这个页面哪里不对？ 模型可能指出按钮没有对齐、文字被截断，甚至能发现弹窗挡住了下面的操作。 这件事有点奇怪。 语言模型原本处理的是文字。它接收前面的 Token，预测下一个 Token。图片既没有词语，也没有句子，只有排列在二维网格里的像素。 一台只会接收文字的模型，是怎样开始看图的…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%B2%A1%E6%9C%89%E7%9C%BC%E7%9D%9B%EF%BC%8C%E4%B8%80%E5%BC%A0%E6%88%AA%E5%9B%BE%E6%98%AF%E6%80%8E%E4%B9%88%E5%8F%98%E6%88%90%E5%9B%9E%E7%AD%94%E7%9A%84%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"大模型没有眼睛，一张截图是怎么变成回答的？","description":"大模型没有眼睛，一张截图是怎么变成回答的？ 你上传一张应用截图，然后问： 这个页面哪里不对？ 模型可能指出按钮没有对齐、文字被截断，甚至能发现弹窗挡住了下面的操作。 这件事有点奇怪。 语言模型原本处理的是文字。它接收前面的 Token，预测下一个 Token。图片既没有词语，也没有句子，只有排列在二维网格里的像素。 一台只会接收文字的模型，是怎样开始看图的…","url":"https://wizardpisces.github.io/blog/tech/ai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%B2%A1%E6%9C%89%E7%9C%BC%E7%9D%9B%EF%BC%8C%E4%B8%80%E5%BC%A0%E6%88%AA%E5%9B%BE%E6%98%AF%E6%80%8E%E4%B9%88%E5%8F%98%E6%88%90%E5%9B%9E%E7%AD%94%E7%9A%84%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%B2%A1%E6%9C%89%E7%9C%BC%E7%9D%9B%EF%BC%8C%E4%B8%80%E5%BC%A0%E6%88%AA%E5%9B%BE%E6%98%AF%E6%80%8E%E4%B9%88%E5%8F%98%E6%88%90%E5%9B%9E%E7%AD%94%E7%9A%84%EF%BC%9F","dateModified":"2026-08-26","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：大模型没有眼睛，一张截图是怎么变成回答的？，LZ AI NOTE，https://wizardpisces.github.io/blog/tech/ai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%B2%A1%E6%9C%89%E7%9C%BC%E7%9D%9B%EF%BC%8C%E4%B8%80%E5%BC%A0%E6%88%AA%E5%9B%BE%E6%98%AF%E6%80%8E%E4%B9%88%E5%8F%98%E6%88%90%E5%9B%9E%E7%AD%94%E7%9A%84%EF%BC%9F","about":["ai-模型结构"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>大模型没有眼睛，一张截图是怎么变成回答的？</h1><h1>大模型没有眼睛，一张截图是怎么变成回答的？</h1>
+<p>你上传一张应用截图，然后问：</p>
+<blockquote>
+<p>这个页面哪里不对？</p>
+</blockquote>
+<p>模型可能指出按钮没有对齐、文字被截断，甚至能发现弹窗挡住了下面的操作。</p>
+<p>这件事有点奇怪。</p>
+<p>语言模型原本处理的是文字。它接收前面的 Token，预测下一个 Token。图片既没有词语，也没有句子，只有排列在二维网格里的像素。</p>
+<p>一台只会接收文字的模型，是怎样开始看图的？</p>
+<p>我们只用一张被切成四块的小图，跑完整个过程。</p>
+<h2>语言模型只认识一种规格的卡片</h2>
+<p>语言模型接收的不是汉字本身，而是一排长度相同的向量。</p>
+<p>例如：</p>
+<pre><code class="language-text">“这个” → [0.2, 0.7, 0.1, ...]
+“页面” → [0.8, 0.3, 0.5, ...]
+“哪里” → [0.4, 0.6, 0.9, ...]
+“不对” → [0.5, 0.1, 0.7, ...]
+</code></pre>
+<p>每个 Token 都像一张固定规格的卡片。卡片上的数字不同，长度却相同。语言模型只知道怎样处理这样一排卡片。</p>
+<p>图片不是这种结构。</p>
+<p>一张 <code>224 × 224</code> 的 RGB 图片包含十几万个颜色数值。这些数字按宽和高排列，语言模型不知道应该从哪里开始读，也不知道怎样把它们插进文本 Token 中间。</p>
+<p>要让图片进入语言模型，首先得把它整理成同样的队形。</p>
+<h2>把一张图片切成四块</h2>
+<p>假设图片只有这么大：</p>
+<pre><code class="language-text">┌────────┬────────┐
+│ 蓝天   │ 乌云   │
+├────────┼────────┤
+│ 行人   │ 雨伞   │
+└────────┴────────┘
+</code></pre>
+<p>系统先把图片切成四个小块。这样的图像小块通常叫 Patch。</p>
+<p>每个 Patch 内部仍然只是一小块像素。</p>
+<p>假设 Patch 的大小是 <code>16 × 16</code>，每个像素有红、绿、蓝三个颜色值，那么一块里共有：</p>
+<pre><code class="language-text">16 × 16 × 3 = 768
+</code></pre>
+<p>个数字。</p>
+<p>模型先把这 768 个颜色值排成一行，再用一组训练出来的权重重新组合，得到一张固定长度的数字卡片：</p>
+<pre><code class="language-text">一块 Patch 的 768 个颜色值
+              ↓
+      一张固定长度的数字卡片
+</code></pre>
+<p>这一步通常叫 Patch Embedding。它和文字 Token 变成词向量很像：输入的原始形式不同，最后都被整理成固定长度的数字。</p>
+<p>卡片上的某一个数字并不直接等于“蓝天”或“雨伞”。很多数字合在一起，才描述这块区域有哪些颜色、边缘和纹理。</p>
+<p>到这里，每张卡片仍然只了解自己所在的小块。右下角的卡片可能记录了一条弧线和一根竖线，却不知道那是一把雨伞。</p>
+<p>接下来，模型让四张卡片互相读取：</p>
+<pre><code class="language-text">右下角卡片：我这里有弧线和竖线
+左下角卡片：我这里像一个人
+右上角卡片：我这里颜色很暗
+</code></pre>
+<p>几轮交换以后，右下角的表示不再只有局部形状，还带上了“旁边有人”“上方有乌云”“位于画面下方”等信息。模型才更有机会把这些局部特征组合成“人在撑伞”。</p>
+<p>负责反复更新这些卡片、让不同区域建立关系的网络，叫视觉编码器。</p>
+<pre><code class="language-text">图片
+  ↓ 切成 Patch
+一排像素块
+  ↓ Patch Embedding
+一排局部数字卡片
+  ↓ 视觉编码器
+一排带有周围信息的视觉卡片
+</code></pre>
+<p>此时依然没有生成“天空中有乌云，一个人撑着雨伞”这样的句子。视觉编码器输出的还是数字，只是这些数字已经不再局限于一小块像素。</p>
+<h2>还差一个转接头</h2>
+<p>四张视觉卡片已经排好了，但它们不一定能直接插进语言模型。</p>
+<p>视觉编码器可能输出一张长度为 <code>1024</code> 的卡片，语言模型接收的文本卡片却都是 <code>4096</code> 个数字。两边就像接口形状不同的插头。</p>
+<p>中间的转接层做一次尺寸转换：</p>
+<pre><code class="language-text">[视觉卡片：1024 个数字]
+             ↓
+       乘一组转接权重
+             ↓
+[新卡片：4096 个数字]
+</code></pre>
+<p>这个转接层在论文和代码里经常叫 Projector，也就是投影层。</p>
+<p>例如，右下角那张卡片原本记录了弧线、竖线和周围区域。转接以后，这些信息仍然是数字，但已经换成了语言模型能够继续使用的规格。</p>
+<p>经过转接以后，语言模型终于拿到一排规格统一的卡片：</p>
+<pre><code class="language-text">[视觉 1][视觉 2][视觉 3][视觉 4]
+[这个][页面][哪里][不对][？]
+</code></pre>
+<p>图片没有变成一段文字。它变成了一串语言模型能够参与计算的视觉表示。</p>
+<h2>同一张图，问题决定模型看哪里</h2>
+<p>现在让同一张图运行三次：</p>
+<pre><code class="language-text">问题：图片里写了什么？
+主要需要：文字形状所在的卡片
+
+问题：哪个元素没有对齐？
+主要需要：组件位置和相互关系
+
+问题：这是什么天气？
+主要需要：乌云、雨伞和地面状态
+</code></pre>
+<p>图片没有变化，模型拿到的视觉向量也没有变化。变化的是问题。</p>
+<p>语言模型会计算问题里的文字卡片与视觉卡片之间的关系。不同问题建立的关系不同，同一张图才可以被反复追问，而不必先压成一份固定的图片描述。</p>
+<p>固定描述很容易漏掉当时没有被问到的细节。视觉表示保留下来后，文字问题可以决定这一次从中读取什么。</p>
+<h2>回答仍然是一个 Token 一个 Token 长出来的</h2>
+<p>视觉卡片和问题排到一起后，语言模型的生成方式没有改变。</p>
+<p>它仍然根据当前看到的全部内容，预测下一个 Token：</p>
+<pre><code class="language-text">视觉卡片
++ 用户的问题
++ 已经生成的回答
+        ↓
+下一个 Token
+</code></pre>
+<p>假设它先生成：</p>
+<blockquote>
+<p>右下角的按钮……</p>
+</blockquote>
+<p>这几个 Token 会追加到当前输入里。模型再结合视觉信息，继续预测“没有对齐”“被遮挡”或“离边缘太近”。</p>
+<h2>这也解释了模型为什么会看错</h2>
+<p>视觉卡片是压缩后的表示，不是原始图片的完整备份。</p>
+<p>常见的失败可以沿着输入过程往回找：</p>
+<pre><code class="language-text">小字
+→ 图片缩放后只剩几个像素
+→ 视觉卡片里的文字证据很弱
+→ 容易读错
+
+超长截图
+→ 整张图被缩到固定尺寸
+→ 局部按钮和提示变小
+→ 容易漏掉
+
+相似图标
+→ 压缩后的视觉特征接近
+→ 语言模型根据常见布局补全
+→ 可能说出图片里没有的功能
+</code></pre>
+<p>裁剪关键区域、把长图分段，或者在模型支持时提高输入分辨率，改变的是这条链的前半段：视觉编码器拿到的证据更清楚了。</p>
+<p>但图片切得越细，产生的视觉卡片越多：</p>
+<pre><code class="language-text">更多视觉卡片
+→ 保留更多局部细节
+→ 后续计算更重
+</code></pre>
+<p>文字输入要在信息量和成本之间取舍，图片同样如此。</p>
+<h2>最后，把整条路串起来</h2>
+<p>从图片到回答，只有这几步：</p>
+<pre><code class="language-text">像素
+  ↓ 切成小块
+Patch
+  ↓ 整理局部与周围信息
+视觉卡片
+  ↓ 转成语言模型认识的规格
+视觉卡片 + 文字问题
+  ↓
+逐 Token 生成回答
+</code></pre>
+<p>语言模型没有突然学会读取原始像素。</p>
+<p>图片先被整理成它能接收的数字卡片，问题决定这次从卡片中读取什么，回答仍然一个 Token 接一个 Token 地长出来。</p>
+<h2>参考资料</h2>
+<ol>
+<li>Dosovitskiy 等，An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale（ICLR，2021）：<a href="https://arxiv.org/abs/2010.11929">https://arxiv.org/abs/2010.11929</a></li>
+<li>Liu 等，Visual Instruction Tuning（NeurIPS，2023）：<a href="https://arxiv.org/abs/2304.08485">https://arxiv.org/abs/2304.08485</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
+</body>
+</html>

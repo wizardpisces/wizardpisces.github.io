@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>模型能认出一只猫，为什么不能沿原路把原图画回来？ | LZ AI NOTE</title>
+  <meta name="description" content="模型能认出一只猫，为什么不能沿原路把原图画回来？ 桌上有三张照片： 把它们交给识别模型，答案可能完全一样： 现在只留下“猫”这个答案，再让模型沿原路走回去。 它应该画橘猫、黑猫还是白猫？背景是沙发、草地，还是一扇窗？ 模型明明认出了照片 A，为什么不能从“猫”重新画回那张原图？ 认出猫，恰恰要学会忽略它是哪一只 识别模型关心的是： 至于猫是什么颜色、尾巴朝…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="模型能认出一只猫，为什么不能沿原路把原图画回来？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-08-25">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E8%83%BD%E8%AE%A4%E5%87%BA%E4%B8%80%E5%8F%AA%E7%8C%AB%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E6%B2%BF%E5%8E%9F%E8%B7%AF%E6%8A%8A%E5%8E%9F%E5%9B%BE%E7%94%BB%E5%9B%9E%E6%9D%A5%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E8%83%BD%E8%AE%A4%E5%87%BA%E4%B8%80%E5%8F%AA%E7%8C%AB%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E6%B2%BF%E5%8E%9F%E8%B7%AF%E6%8A%8A%E5%8E%9F%E5%9B%BE%E7%94%BB%E5%9B%9E%E6%9D%A5%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="模型能认出一只猫，为什么不能沿原路把原图画回来？ | LZ AI NOTE">
+  <meta property="og:description" content="模型能认出一只猫，为什么不能沿原路把原图画回来？ 桌上有三张照片： 把它们交给识别模型，答案可能完全一样： 现在只留下“猫”这个答案，再让模型沿原路走回去。 它应该画橘猫、黑猫还是白猫？背景是沙发、草地，还是一扇窗？ 模型明明认出了照片 A，为什么不能从“猫”重新画回那张原图？ 认出猫，恰恰要学会忽略它是哪一只 识别模型关心的是： 至于猫是什么颜色、尾巴朝…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E8%83%BD%E8%AE%A4%E5%87%BA%E4%B8%80%E5%8F%AA%E7%8C%AB%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E6%B2%BF%E5%8E%9F%E8%B7%AF%E6%8A%8A%E5%8E%9F%E5%9B%BE%E7%94%BB%E5%9B%9E%E6%9D%A5%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"模型能认出一只猫，为什么不能沿原路把原图画回来？","description":"模型能认出一只猫，为什么不能沿原路把原图画回来？ 桌上有三张照片： 把它们交给识别模型，答案可能完全一样： 现在只留下“猫”这个答案，再让模型沿原路走回去。 它应该画橘猫、黑猫还是白猫？背景是沙发、草地，还是一扇窗？ 模型明明认出了照片 A，为什么不能从“猫”重新画回那张原图？ 认出猫，恰恰要学会忽略它是哪一只 识别模型关心的是： 至于猫是什么颜色、尾巴朝…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E8%83%BD%E8%AE%A4%E5%87%BA%E4%B8%80%E5%8F%AA%E7%8C%AB%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E6%B2%BF%E5%8E%9F%E8%B7%AF%E6%8A%8A%E5%8E%9F%E5%9B%BE%E7%94%BB%E5%9B%9E%E6%9D%A5%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E8%83%BD%E8%AE%A4%E5%87%BA%E4%B8%80%E5%8F%AA%E7%8C%AB%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E6%B2%BF%E5%8E%9F%E8%B7%AF%E6%8A%8A%E5%8E%9F%E5%9B%BE%E7%94%BB%E5%9B%9E%E6%9D%A5%EF%BC%9F","dateModified":"2026-08-25","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：模型能认出一只猫，为什么不能沿原路把原图画回来？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E8%83%BD%E8%AE%A4%E5%87%BA%E4%B8%80%E5%8F%AA%E7%8C%AB%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E6%B2%BF%E5%8E%9F%E8%B7%AF%E6%8A%8A%E5%8E%9F%E5%9B%BE%E7%94%BB%E5%9B%9E%E6%9D%A5%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>模型能认出一只猫，为什么不能沿原路把原图画回来？</h1><h1>模型能认出一只猫，为什么不能沿原路把原图画回来？</h1>
+<p>桌上有三张照片：</p>
+<pre><code class="language-text">照片 A：橘猫趴在灰色沙发上
+照片 B：黑猫站在绿色草地里
+照片 C：白猫坐在窗边
+</code></pre>
+<p>把它们交给识别模型，答案可能完全一样：</p>
+<pre><code class="language-text">照片 A → 猫
+照片 B → 猫
+照片 C → 猫
+</code></pre>
+<p>现在只留下“猫”这个答案，再让模型沿原路走回去。</p>
+<p>它应该画橘猫、黑猫还是白猫？背景是沙发、草地，还是一扇窗？</p>
+<p>模型明明认出了照片 A，为什么不能从“猫”重新画回那张原图？</p>
+<h2>认出猫，恰恰要学会忽略它是哪一只</h2>
+<p>识别模型关心的是：</p>
+<pre><code class="language-text">有没有猫的耳朵
+有没有猫的脸部结构
+身体和四肢是否像猫
+</code></pre>
+<p>至于猫是什么颜色、尾巴朝哪边、沙发有几道褶皱，通常不会改变类别。</p>
+<p>这只猫换个背景，答案仍然应该是猫；光线暗一点，答案也不该立刻变成狗。</p>
+<pre><code class="language-text">橘猫 + 沙发  → 猫
+黑猫 + 草地  → 猫
+白猫 + 窗户  → 猫
+</code></pre>
+<p>一个好用的识别模型，必须允许大量细节发生变化，仍然给出稳定答案。</p>
+<p>所以“认出来”不意味着它在内部保存了原图的每个像素。很多时候，识别之所以成功，正是因为那些与类别无关的差异没有继续影响答案。</p>
+<h2>三条路汇到一个出口，出口后就分不回去了</h2>
+<p>把刚才的过程压成一张图：</p>
+<pre><code class="language-text">照片 A ─┐
+照片 B ─┼→ 猫
+照片 C ─┘
+</code></pre>
+<p>三张不同照片走到了同一个出口。</p>
+<p>现在从“猫”向回走：</p>
+<pre><code class="language-text">猫 → ？
+</code></pre>
+<p>前面至少有三条路，却没有任何信息告诉模型原来走的是哪一条。</p>
+<p>这就是多对一。</p>
+<p>只要两个不同输入能够得到同一个结果，结果就不再拥有唯一的返回路径。它可以证明“原图里有一只猫”，却不能证明那只猫的毛色、姿势和背景分别是什么。</p>
+<h2>生成不是倒放，它是在补回缺失的细节</h2>
+<p>如果只给模型一句：</p>
+<blockquote>
+<p>画一只猫。</p>
+</blockquote>
+<p>它必须自己决定：</p>
+<pre><code class="language-text">猫是什么颜色？
+身体是什么姿势？
+背景放在哪里？
+光从哪个方向照过来？
+</code></pre>
+<p>这些答案不在“猫”这个词里。</p>
+<p>生成模型只能根据训练中见过的大量图片，选择一组彼此说得通的细节：</p>
+<pre><code class="language-text">“猫”
++ 从训练数据学到的常见外观
++ 一次随机选择
+        ↓
+一张新的猫图
+</code></pre>
+<p>它画出的图片可以很像真的，也可以与照片 A 风格接近，但没有理由自动等于照片 A。</p>
+<p>扩散模型从噪声开始，逐步生成符合条件的图像。这个过程是在许多可能答案中构造一张图，不是在寻找某个识别步骤的倒放按钮。</p>
+<h2>为什么有些模型又能把图片还原出来？</h2>
+<p>因为它们保存的往往不只是“猫”。</p>
+<p>自动编码器会给图片留下一份更丰富的中间表示，再训练一个解码器把它还原：</p>
+<pre><code class="language-text">原图
+  ↓ 编码
+包含颜色、姿势和布局的中间表示
+  ↓ 解码
+近似原图
+</code></pre>
+<p>图像编辑模型也会继续拿着原图或它的中间表示。你让它“把橘猫换成黑猫”时，沙发、姿势和构图可以保留下来，是因为这些信息从来没有离开输入。</p>
+<p>但中间表示越小，必须舍弃的细节通常越多。想精确恢复每个像素，就得保留足够的信息；如果最后只剩下“猫”，已经没有什么可以解码了。</p>
+<h2>最后，让照片 A 再走一次</h2>
+<pre><code class="language-text">照片 A
+橘猫 + 灰色沙发 + 当前姿势 + 当前光线
+        ↓ 识别
+猫
+        ↓ 生成
+重新选择颜色、背景、姿势和光线
+        ↓
+一张可能的猫图
+</code></pre>
+<p>模型沿着“猫”继续向前，可以画出另一只合理的猫；它却不能只靠“猫”走回照片 A。</p>
+<p>返回路径并不是被藏了起来。识别过程中没有保留下来的细节，已经不在答案里了。</p>
+<h2>参考资料</h2>
+<ol>
+<li>Mahendran、Vedaldi，Understanding Deep Image Representations by Inverting Them（CVPR，2015）：<a href="https://arxiv.org/abs/1412.0035">https://arxiv.org/abs/1412.0035</a></li>
+<li>Kingma、Welling，Auto-Encoding Variational Bayes（ICLR，2014）：<a href="https://arxiv.org/abs/1312.6114">https://arxiv.org/abs/1312.6114</a></li>
+<li>Ho、Jain、Abbeel，Denoising Diffusion Probabilistic Models（NeurIPS，2020）：<a href="https://arxiv.org/abs/2006.11239">https://arxiv.org/abs/2006.11239</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
+</body>
+</html>

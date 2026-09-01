@@ -6,14 +6,22 @@
   <meta name="robots" content="noindex,nofollow">
   <title>模型为什么这样设计：架构系列节点 | LZ AI NOTE</title>
   <meta name="description" content="模型为什么这样设计：架构系列节点 系列角色：知识主干·模型内部。 负责解释模型结构改变了哪条信息、梯度、计算或参数路径；不承担软件框架实现与 Agent 系统工程。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不按架构名词写百科，也不把论文摘要换成通俗说法。它只追问一个问题： 今天看似理所当然的模型结构，当初是在解决什么失败？ 每篇从一个可感知…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="模型为什么这样设计：架构系列节点">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-09-01">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
   <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
   <meta property="og:title" content="模型为什么这样设计：架构系列节点 | LZ AI NOTE">
   <meta property="og:description" content="模型为什么这样设计：架构系列节点 系列角色：知识主干·模型内部。 负责解释模型结构改变了哪条信息、梯度、计算或参数路径；不承担软件框架实现与 Agent 系统工程。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不按架构名词写百科，也不把论文摘要换成通俗说法。它只追问一个问题： 今天看似理所当然的模型结构，当初是在解决什么失败？ 每篇从一个可感知…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"模型为什么这样设计：架构系列节点","description":"模型为什么这样设计：架构系列节点 系列角色：知识主干·模型内部。 负责解释模型结构改变了哪条信息、梯度、计算或参数路径；不承担软件框架实现与 Agent 系统工程。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不按架构名词写百科，也不把论文摘要换成通俗说法。它只追问一个问题： 今天看似理所当然的模型结构，当初是在解决什么失败？ 每篇从一个可感知…","url":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","dateModified":"2026-08-17","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"模型为什么这样设计：架构系列节点","description":"模型为什么这样设计：架构系列节点 系列角色：知识主干·模型内部。 负责解释模型结构改变了哪条信息、梯度、计算或参数路径；不承担软件框架实现与 Agent 系统工程。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不按架构名词写百科，也不把论文摘要换成通俗说法。它只追问一个问题： 今天看似理所当然的模型结构，当初是在解决什么失败？ 每篇从一个可感知…","url":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","dateModified":"2026-09-01","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：模型为什么这样设计：架构系列节点，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","about":["_hidden","公众号策略"]}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>模型为什么这样设计：架构系列节点</h1><h1>模型为什么这样设计：架构系列节点</h1>
@@ -38,6 +46,20 @@
 复杂主题 → 一个可运行、可记住、可迁移的最小模型
 </code></pre>
 <p>《代码定义结构，权重存储知识》走的是第二条路：事实并不新，但“结构规定怎么算，权重保存用什么数字算”让读者可以继续解释模型文件、加载权重、参数规模和推理过程。</p>
+<p>这篇也是本系列的表达基准。它的力量来自四件事同时发生：</p>
+<pre><code class="language-text">一个人人能感知的反常现象
+→ 代码只有几十 KB，权重却有几个 GB
+
+一个可以亲手算完的最小模型
+→ 两个输入、三个参数、一次完整推理
+
+同一个机制不断放大
+→ 加载权重、参数规模、显存与 GPU 都能由它继续解释
+
+一个可带走的压缩判断
+→ 代码规定怎么算，权重保存用什么数字算
+</code></pre>
+<p>后续模型文章要复现的不是天气例子、数字计算或“一个例子看懂”的句式，而是这种解释密度：同一个最小机制至少解释两个读者已经见过的现象，并让读者能拿它预测另一个问题。只有定义与优点、只有公式推导、或只能解释当前案例的题目，不进入活跃主线。</p>
 <p>逐 Token 生成可以走第一条路：每个输出又会成为下一步输入，因此生成具有路径依赖；同一个机制既带来开放式创造，也会让早期错误越说越顺。</p>
 <p>若一篇读完只能复述标准定义，既没有新判断，也没有获得更简单的心智模型，降级为笔记或并入其他文章。</p>
 <p>它对两类读者同时做出承诺：</p>
@@ -171,7 +193,7 @@ MoE、KV Cache、MQA、GQA、MLA 与量化
 </thead>
 <tbody>
 <tr>
-<td><a href="../../tech/ai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84/%E6%A8%A1%E5%9E%8B%E4%B8%8D%E6%98%AF%E5%85%88%E6%83%B3%E5%A5%BD%E5%86%8D%E5%9B%9E%E7%AD%94%EF%BC%9A%E6%AF%8F%E4%B8%AA%20Token%20%E9%83%BD%E5%9C%A8%E6%94%B9%E5%8F%98%E4%B8%8B%E4%B8%80%E6%AD%A5.md">模型不是先想好再回答：每个 Token 都在改变下一步</a></td>
+<td><a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E4%B8%8D%E6%98%AF%E5%85%88%E6%83%B3%E5%A5%BD%E5%86%8D%E5%9B%9E%E7%AD%94%EF%BC%9A%E6%AF%8F%E4%B8%AA%20Token%20%E9%83%BD%E5%9C%A8%E6%94%B9%E5%8F%98%E4%B8%8B%E4%B8%80%E6%AD%A5.md">模型不是先想好再回答：每个 Token 都在改变下一步</a></td>
 <td>回答逐 Token 出现，同一句开头又会走向不同答案</td>
 <td>每个已生成 Token 如何成为下一步输入并改变后续概率；路径依赖为何同时带来创造力与错误累积</td>
 <td>Token、Logits、自回归生成、路径依赖</td>
@@ -220,10 +242,10 @@ MoE、KV Cache、MQA、GQA、MLA 与量化
 <td>黑箱</td>
 </tr>
 <tr>
-<td>Attention 为什么非要分成 Q、K、V？</td>
-<td>同一个 Token 为什么要变成三份不同的向量</td>
-<td>Attention 不只是计算重要性，而是查询、匹配和取值三种角色组成的动态读取</td>
-<td>QKV、点积注意力、Multi-Head</td>
+<td>图片已经被切成小块，AI 为什么还能认出完整的雨伞？</td>
+<td>每个 Patch 只拥有局部边缘，模型却能识别跨区域物体</td>
+<td>用四块图片完整运行一次 Attention：Q 表示寻找什么，K 用于判断去哪里找，V 是匹配后拿回的信息</td>
+<td>QKV、Self-Attention、全局关系</td>
 <td>黑箱</td>
 </tr>
 <tr>
@@ -276,14 +298,21 @@ MoE、KV Cache、MQA、GQA、MLA 与量化
 <td>黑箱 / 工程</td>
 </tr>
 <tr>
-<td>语言模型接上一层投影，为什么就能开始“看图”？</td>
-<td>图片不是文字，却可以被送入相同的 Transformer</td>
-<td>视觉特征如何被切分、编码并对齐到语言模型可处理的表示空间</td>
-<td>Vision Encoder、Projector、多模态 Token</td>
+<td><a href="../../tech/ai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%B2%A1%E6%9C%89%E7%9C%BC%E7%9D%9B%EF%BC%8C%E4%B8%80%E5%BC%A0%E6%88%AA%E5%9B%BE%E6%98%AF%E6%80%8E%E4%B9%88%E5%8F%98%E6%88%90%E5%9B%9E%E7%AD%94%E7%9A%84%EF%BC%9F.md">大模型没有眼睛，一张截图是怎么变成回答的？</a></td>
+<td>语言模型原本只接收文本向量，却可以根据截图回答布局、文字和物体问题</td>
+<td>图片怎样被切成一串视觉表示，再经过转接层进入语言模型；同一份视觉表示为什么能回答不同问题</td>
+<td>Patch、视觉编码器、转接层、视觉与文字卡片</td>
 <td>黑箱</td>
 </tr>
 <tr>
-<td>扩散模型为什么要先把图片毁掉，才能学会生成图片？</td>
+<td>[一句提示词里没有像素，AI 怎么把它变成一张图？](…/文章素材/一句提示词里没有像素，AI 怎么把它变成一张图？.md)</td>
+<td>用户只输入一句文字，系统却生成完整图片</td>
+<td>文字条件、随机潜空间、迭代更新和解码器怎样协作，把一句提示词变成像素</td>
+<td>文字编码器、潜空间、条件生成、解码器</td>
+<td>黑箱</td>
+</tr>
+<tr>
+<td><a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%85%88%E6%8A%8A%E5%9B%BE%E7%89%87%E6%AF%81%E6%8E%89%EF%BC%8C%E6%89%8D%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87%EF%BC%9F.md">扩散模型为什么要先把图片毁掉，才能学会生成图片？</a></td>
 <td>生成任务从主动加噪开始</td>
 <td>直接学习复杂数据分布为什么困难，逐步去噪如何把它改写成一条可学习的路径</td>
 <td>加噪、去噪、扩散生成</td>
@@ -305,13 +334,24 @@ MoE、KV Cache、MQA、GQA、MLA 与量化
 <h2>第一季：从用户看到的行为进入</h2>
 <p>第一季暂定六个问题：</p>
 <ol>
-<li><a href="../../tech/ai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84/%E6%A8%A1%E5%9E%8B%E4%B8%8D%E6%98%AF%E5%85%88%E6%83%B3%E5%A5%BD%E5%86%8D%E5%9B%9E%E7%AD%94%EF%BC%9A%E6%AF%8F%E4%B8%AA%20Token%20%E9%83%BD%E5%9C%A8%E6%94%B9%E5%8F%98%E4%B8%8B%E4%B8%80%E6%AD%A5.md"><strong>模型不是先想好再回答：每个 Token 都在改变下一步</strong></a>——自回归生成与路径依赖。</li>
+<li><a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E4%B8%8D%E6%98%AF%E5%85%88%E6%83%B3%E5%A5%BD%E5%86%8D%E5%9B%9E%E7%AD%94%EF%BC%9A%E6%AF%8F%E4%B8%AA%20Token%20%E9%83%BD%E5%9C%A8%E6%94%B9%E5%8F%98%E4%B8%8B%E4%B8%80%E6%AD%A5.md"><strong>模型不是先想好再回答：每个 Token 都在改变下一步</strong></a>——自回归生成与路径依赖。</li>
 <li><strong>同一个问题，模型为什么每次回答不一样？</strong>——概率分布与采样。</li>
-<li><strong>Attention 为什么非要分成 Q、K、V？</strong>——按内容寻找信息。</li>
+<li><strong>图片已经被切成小块，AI 为什么还能认出完整的雨伞？</strong>——用视觉 Patch 讲清 Q、K、V 怎样完成按内容读取。</li>
 <li><strong>词序一换意思就变，模型从哪里知道位置？</strong>——位置编码与 RoPE。</li>
 <li><strong>Attention 负责找信息，FFN 负责加工信息：Transformer 一层究竟在做什么？</strong>——信息交换与特征加工。</li>
 <li><strong>线性层画直线，激活函数负责拐弯：神经网络为什么需要非线性</strong>——回到 FFN 内部理解非线性与深度；已有素材稿，等 FFN 篇后再发布。</li>
 </ol>
+<p>从 2026 年 9 月 10 日起，本系列成为周四活跃主线。首批先连续验证三个低门槛节点：</p>
+<pre><code class="language-text">模型不是先想好再回答
+→ 一个输出怎样变成下一步的条件
+
+同一个问题为什么每次回答不一样
+→ 一组概率怎样变成一个具体选择
+
+Attention 为什么分成 Q、K、V
+→ 模型怎样把“寻找什么、拿什么回来”拆成不同角色
+</code></pre>
+<p>三篇之后重新比较读者反馈与候选成熟度，不预先承诺把整套 Transformer 按章节讲完。</p>
 <p>这六篇一起回答三个根问题：</p>
 <pre><code class="language-text">模型怎样一步步生成回答？
 为什么同一个模型不会永远给出同一答案？
@@ -358,15 +398,110 @@ QLoRA 如何把两条路线合在一起
         ↓
 扩散、自回归与统一多模态架构
 </code></pre>
-<h2>首篇建议</h2>
-<p>首篇优先选择：</p>
-<blockquote>
-<p><a href="../../tech/ai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84/%E6%A8%A1%E5%9E%8B%E4%B8%8D%E6%98%AF%E5%85%88%E6%83%B3%E5%A5%BD%E5%86%8D%E5%9B%9E%E7%AD%94%EF%BC%9A%E6%AF%8F%E4%B8%AA%20Token%20%E9%83%BD%E5%9C%A8%E6%94%B9%E5%8F%98%E4%B8%8B%E4%B8%80%E6%AD%A5.md"><strong>模型不是先想好再回答：每个 Token 都在改变下一步</strong></a></p>
-</blockquote>
-<p>读者已经见过回答逐字出现、按下停止后句子戛然而止，也见过一个不同开头把整段回答带向另一条路。这些体验可以直接进入自回归生成，但文章不止解释流程，而要让读者看见：每个已生成 Token 都会改写下一步的概率空间。</p>
-<p>同一个机制会同时解释两件事：模型为什么可以开放式续写，也为什么会沿着早期错误继续生成越来越完整的故事。它还会自然暴露下一篇的问题：既然每一步都有多条路，系统怎样选择其中一条？</p>
-<p>这个节点的主路线是“系列递进”，主维度是“黑箱”。激活函数稿保留为第一季后段的下钻篇，不再作为系列入口。</p>
+<p>这一分支可以形成一个多模态小专题，但不按术语顺序讲课。每篇都从普通用户已经遇到的视觉现象进入，并留下一个可运行的最小机制。</p>
+<pre><code class="language-text">[大模型没有眼睛，一张截图是怎么变成回答的？]
+图片 → Patch → 视觉编码器 → 转接层 → 语言模型
+        ↓
+[图片已经被切成小块，AI 为什么还能认出完整的雨伞？]
+Patch 提出查询 → 匹配其他区域 → 取回信息 → 获得全局关系
+        ↓
+[三张图片、三句话，AI 怎么知道谁和谁是一对？]
+一批图文配对 → 匹配项拉近、错误项推远 → 共享表示
+        ↓
+[AI 明明看见四根手指，为什么还会回答“五根”？]
+分开实例 → 一一标记 → 去重补漏 → 映射成数字
+        ↓
+[模型能叫出按钮的名字，为什么指不准它在哪里？]
+识别类别 → 保留边界 → 位置监督 → Visual Grounding
+        ↓
+[给按钮画上框和编号，模型为什么突然指得更准了？]
+候选区域 → 编号标记 → 选择 ID → 映射回坐标
+</code></pre>
+<p>核心节点：</p>
+<table>
+<thead>
+<tr>
+<th>标题方向</th>
+<th>普通读者看到的反常现象</th>
+<th>最小机制模型</th>
+<th>边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>[图片已经被切成小块，AI 为什么还能认出完整的雨伞？](…/文章素材/图片已经被切成小块，AI 为什么还能认出完整的雨伞？.md)</td>
+<td>Patch 很小，模型却能识别跨区域物体</td>
+<td>四个 Patch 运行 QKV：查询、匹配、取回信息</td>
+<td>同时承担原 QKV 节点，不再另写术语科普</td>
+</tr>
+<tr>
+<td>[三张图片、三句话，AI 怎么知道谁和谁是一对？](…/文章素材/三张图片、三句话，AI 怎么知道谁和谁是一对？.md)</td>
+<td>模型可以判断一张图片和哪句话最匹配</td>
+<td>同一批图文中，匹配项得分升高，不匹配项得分降低</td>
+<td>不把 CLIP 对齐等同于完整视觉问答</td>
+</tr>
+<tr>
+<td>[AI 明明看见四根手指，为什么还会回答“五根”？](…/文章素材/AI 明明看见四根手指，为什么还会回答“五根”？.md)</td>
+<td>能识别整只手，却会把可见手指数错</td>
+<td>计数要先分开实例、建立一一标记，再把数量表示映射成数字</td>
+<td>只讲看图计数，不讨论生成模型为什么画出六根手指</td>
+</tr>
+<tr>
+<td><a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E8%83%BD%E5%8F%AB%E5%87%BA%E6%8C%89%E9%92%AE%E7%9A%84%E5%90%8D%E5%AD%97%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8C%87%E4%B8%8D%E5%87%86%E5%AE%83%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.md">模型能叫出按钮的名字，为什么指不准它在哪里？</a></td>
+<td>能说出物体类别，却给不准边界</td>
+<td>识别允许位置变化，定位必须保留边缘并把坐标作为训练答案</td>
+<td>当前产品能力与外部工具只作为边界，不展开 Computer Use 工程</td>
+</tr>
+<tr>
+<td><a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E7%BB%99%E6%8C%89%E9%92%AE%E7%94%BB%E4%B8%8A%E6%A1%86%E5%92%8C%E7%BC%96%E5%8F%B7%EF%BC%8C%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E7%AA%81%E7%84%B6%E6%8C%87%E5%BE%97%E6%9B%B4%E5%87%86%E4%BA%86%EF%BC%9F.md">给按钮画上框和编号，模型为什么突然指得更准了？</a></td>
+<td>模型知道目标按钮，却容易把坐标报偏</td>
+<td>候选区域生成器保存边界，Set-of-Mark 让模型从生成坐标改为选择区域 ID</td>
+<td>候选框漏检、切错或遮挡时，编号无法补回正确区域</td>
+</tr>
+</tbody>
+</table>
+<p>当前把这六篇作为一轮连续的图像短季。前三篇虽然承担机制层任务，但都从用户能看见的能力进入：截图为何能回答、碎片为何能组成雨伞、图片与句子为何能正确配对；后三篇解释“看懂”为什么仍不等于数清、定位和稳定执行。前三篇发布完成后检查反馈，若读者关系或认知增量不足，可以在进入后三篇前暂停。</p>
+<h2>当前发布顺序</h2>
+<pre><code class="language-text">2026-08-27  大模型没有眼睛，一张截图是怎么变成回答的？
+2026-09-01  图片已经被切成小块，AI 为什么还能认出完整的雨伞？
+2026-09-03  三张图片、三句话，AI 怎么知道谁和谁是一对？
+2026-09-08  AI 明明看见四根手指，为什么还会回答“五根”？
+2026-09-10  模型能叫出按钮的名字，为什么指不准它在哪里？
+2026-09-15  给按钮画上框和编号，模型为什么突然指得更准了？
+</code></pre>
+<p>这一轮结束后，再由 Agent、Skill 或 Token 节点竞争下一轮周四技术主线，不在图像短季中穿插无关文章。</p>
+<h3>下一候选短季：AI 生图</h3>
+<p>这轮坚持“单篇从现象起手，系列按机制递进”。先解释开放生成为什么会产生不同结果，再解释怎样增加空间条件，让生成变得更可控。</p>
+<p>先用两篇完成一次最小闭环：</p>
+<pre><code class="language-text">[同一句提示词，为什么每次生成的图片都不一样？]
+提示词没有规定唯一画面 → Seed 生成不同随机起点 → 模型依据训练规律逐步形成合理结构
+        ↓
+[为什么加一张姿势图，AI 生图就突然更听话了？]
+文字条件难以固定空间关系 → 姿势图提供逐位置的结构约束 → 开放生成变成受控生成
+</code></pre>
+<p>第一篇不能只回答“因为随机”。它需要说明随机起点没有预先选择构图，模型也不是依据清晰度评分往前走，而是根据当前状态、生成进度和提示词，使用训练中学到的规律预测下一步调整。</p>
+<p>第二篇复用首篇留下的边界：文字可以描述“什么”，却很难精确固定“在哪里”。姿势图提供更直接的空间约束，让系列从开放生成推进到受控生成。两篇之后暂停连续发布，不把三个平行失败硬接成课程。</p>
+<pre><code class="language-text">身份与局部编辑
+→ [AI 换了你的衣服，为什么连脸也一起换了？]
+→ 图生图强度、身份条件与局部重绘边界
+
+对象关系与数量
+→ [AI 为什么总会多画或少画一根手指？]
+→ 局部纹理生成为什么不等于稳定维护对象数量
+
+分辨率与细节
+→ [为什么有些 AI 图片缩小很惊艳，一放大就糊了？]
+→ 生成分辨率、潜空间压缩、解码与放大
+</code></pre>
+<p>素材处理：</p>
+<ul>
+<li><a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E4%B8%80%E5%8F%A5%E6%8F%90%E7%A4%BA%E8%AF%8D%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E6%AC%A1%E7%94%9F%E6%88%90%E7%9A%84%E5%9B%BE%E7%89%87%E9%83%BD%E4%B8%8D%E4%B8%80%E6%A0%B7%EF%BC%9F.md">《同一句提示词，为什么每次生成的图片都不一样？》</a>已经完成重写；长文增量是回答“随机起点怎样产生”和“模型依据什么逐步形成结构”，不只解释 Seed。</li>
+<li>[《为什么加一张姿势图，AI 生图就突然更听话了？》](…/文章素材/为什么加一张姿势图，AI 生图就突然更听话了？.md)已经成稿；它复用首篇的开放生成机制，引出与画面位置对应的结构条件。</li>
+<li><code>只把红伞改成蓝伞，为什么整张图都变了？</code>不独立发布。改变提示词会改变后续生成路径，但这个结论是首篇机制的直接推论，没有形成新的结构。</li>
+<li><code>一句提示词里没有像素，AI 怎么把它变成一张图？</code>提供首篇需要的文字条件、随机状态、逐步更新和解码总地图。</li>
+<li><code>扩散模型为什么要先把图片毁掉，才能学会生成图片？</code>只向首篇提供最小训练依据；完整加噪训练仍保留为下钻稿，不提前发布成教材章节。</li>
+</ul>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-CSJjPKOE.js"></script>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
 </body>
 </html>

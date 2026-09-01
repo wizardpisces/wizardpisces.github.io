@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>任务结束后，Agent 应该忘掉什么，又带走什么？ | LZ AI NOTE</title>
+  <meta name="description" content="任务结束后，Agent 应该忘掉什么，又带走什么？ 一个旅行 Agent 刚完成周末目的地筛选。 杭州下雨，宁波下雨，苏州车票超预算。三个城市都不符合条件，Agent 最终建议延期。 任务结束得很正确。 一周后，用户又发来一个新请求： 下周去上海出差，帮我安排高铁和酒店。 Agent 查完天气，却回答： 上海降雨概率超过 20%，不建议出行，可以考虑延期。…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="任务结束后，Agent 应该忘掉什么，又带走什么？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-08-24">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%BB%BB%E5%8A%A1%E7%BB%93%E6%9D%9F%E5%90%8E%EF%BC%8CAgent%20%E5%BA%94%E8%AF%A5%E5%BF%98%E6%8E%89%E4%BB%80%E4%B9%88%EF%BC%8C%E5%8F%88%E5%B8%A6%E8%B5%B0%E4%BB%80%E4%B9%88%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%BB%BB%E5%8A%A1%E7%BB%93%E6%9D%9F%E5%90%8E%EF%BC%8CAgent%20%E5%BA%94%E8%AF%A5%E5%BF%98%E6%8E%89%E4%BB%80%E4%B9%88%EF%BC%8C%E5%8F%88%E5%B8%A6%E8%B5%B0%E4%BB%80%E4%B9%88%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="任务结束后，Agent 应该忘掉什么，又带走什么？ | LZ AI NOTE">
+  <meta property="og:description" content="任务结束后，Agent 应该忘掉什么，又带走什么？ 一个旅行 Agent 刚完成周末目的地筛选。 杭州下雨，宁波下雨，苏州车票超预算。三个城市都不符合条件，Agent 最终建议延期。 任务结束得很正确。 一周后，用户又发来一个新请求： 下周去上海出差，帮我安排高铁和酒店。 Agent 查完天气，却回答： 上海降雨概率超过 20%，不建议出行，可以考虑延期。…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%BB%BB%E5%8A%A1%E7%BB%93%E6%9D%9F%E5%90%8E%EF%BC%8CAgent%20%E5%BA%94%E8%AF%A5%E5%BF%98%E6%8E%89%E4%BB%80%E4%B9%88%EF%BC%8C%E5%8F%88%E5%B8%A6%E8%B5%B0%E4%BB%80%E4%B9%88%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"任务结束后，Agent 应该忘掉什么，又带走什么？","description":"任务结束后，Agent 应该忘掉什么，又带走什么？ 一个旅行 Agent 刚完成周末目的地筛选。 杭州下雨，宁波下雨，苏州车票超预算。三个城市都不符合条件，Agent 最终建议延期。 任务结束得很正确。 一周后，用户又发来一个新请求： 下周去上海出差，帮我安排高铁和酒店。 Agent 查完天气，却回答： 上海降雨概率超过 20%，不建议出行，可以考虑延期。…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%BB%BB%E5%8A%A1%E7%BB%93%E6%9D%9F%E5%90%8E%EF%BC%8CAgent%20%E5%BA%94%E8%AF%A5%E5%BF%98%E6%8E%89%E4%BB%80%E4%B9%88%EF%BC%8C%E5%8F%88%E5%B8%A6%E8%B5%B0%E4%BB%80%E4%B9%88%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%BB%BB%E5%8A%A1%E7%BB%93%E6%9D%9F%E5%90%8E%EF%BC%8CAgent%20%E5%BA%94%E8%AF%A5%E5%BF%98%E6%8E%89%E4%BB%80%E4%B9%88%EF%BC%8C%E5%8F%88%E5%B8%A6%E8%B5%B0%E4%BB%80%E4%B9%88%EF%BC%9F","dateModified":"2026-08-24","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：任务结束后，Agent 应该忘掉什么，又带走什么？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%BB%BB%E5%8A%A1%E7%BB%93%E6%9D%9F%E5%90%8E%EF%BC%8CAgent%20%E5%BA%94%E8%AF%A5%E5%BF%98%E6%8E%89%E4%BB%80%E4%B9%88%EF%BC%8C%E5%8F%88%E5%B8%A6%E8%B5%B0%E4%BB%80%E4%B9%88%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>任务结束后，Agent 应该忘掉什么，又带走什么？</h1><h1>任务结束后，Agent 应该忘掉什么，又带走什么？</h1>
+<p>一个旅行 Agent 刚完成周末目的地筛选。</p>
+<p>杭州下雨，宁波下雨，苏州车票超预算。三个城市都不符合条件，Agent 最终建议延期。</p>
+<p>任务结束得很正确。</p>
+<p>一周后，用户又发来一个新请求：</p>
+<blockquote>
+<p>下周去上海出差，帮我安排高铁和酒店。</p>
+</blockquote>
+<p>Agent 查完天气，却回答：</p>
+<blockquote>
+<p>上海降雨概率超过 20%，不建议出行，可以考虑延期。</p>
+</blockquote>
+<p>这条规则来自上一次周末旅行。那次用户想安排户外活动，才要求降雨概率不能超过 20%。出差没有这个条件，Agent 却把旧任务的 Goal 带进了新任务。</p>
+<p>它没有忘记，反而记得太多了。</p>
+<h2>已经结束的任务，还在干扰下一次判断</h2>
+<p>上一次旅行留下了不少数据：</p>
+<pre><code class="language-text">Goal：找到适合户外活动的周末城市
+Plan：查询天气和车票，过滤不合格城市
+Evidence：三个城市的天气与票价
+Status：无解，建议延期
+</code></pre>
+<p>这些数据在任务进行时很重要。Agent 需要靠它们判断下一步做什么、证据是否完整，以及什么时候可以结束。</p>
+<p>但任务一旦结束，它们的使命也结束了。</p>
+<p>上一篇<a href="./Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%B5%B0%E5%AF%B9%E6%AF%8F%E4%B8%80%E6%AD%A5%EF%BC%8C%E5%8D%B4%E5%88%B0%E8%BE%BE%E9%94%99%E8%AF%AF%E7%9A%84%E7%BB%88%E7%82%B9%EF%BC%9F.md">《Agent 为什么会走对每一步，却到达错误的终点？》</a>讨论的是任务进行中如何守住 Goal。这次的问题正好相反：旧 Goal 守得太久，越过了自己的任务边界。</p>
+<p>最直接的修复是：任务完成以后，把相关数据全部清空。</p>
+<p>上海出差不再受“降雨概率不能超过 20%”影响，问题似乎解决了。</p>
+<p>直到用户看见 Agent 推荐的车次：</p>
+<blockquote>
+<p>早上 6:20 出发，价格最低。</p>
+</blockquote>
+<p>用户只好再次提醒：</p>
+<blockquote>
+<p>我说过很多次，不要推荐早上 8 点以前的车。</p>
+</blockquote>
+<p>全部保留会污染新任务，全部删除又会让 Agent 每次都像第一次见到用户。</p>
+<h2>State 应该结束，偏好不一定</h2>
+<p>“苏州票价 360 元”和“不坐早于 8 点的车”看起来都只是两条数据，生命周期却完全不同。</p>
+<p>苏州票价属于一次任务的现场。日期一变，它就可能失效；任务结束后，最多留在日志里供审计，没有必要自动参与下一次推理。</p>
+<p>不坐早班车是跨任务仍可能成立的稳定偏好。它不属于上海出差，也不属于上一次周末旅行，而属于用户。</p>
+<p>两者的差别不在存储位置，而在生命周期：</p>
+<pre><code class="language-text">State：这个任务进行到哪里，当前已经确定了什么
+Memory：跨过任务边界以后，仍可能影响未来判断的事实
+</code></pre>
+<p>区分它们不能只看内容长什么样，而要看它属于谁、有效到什么时候。</p>
+<pre><code class="language-text">杭州降雨概率 60%        → 属于一次查询
+本次预算不超过 300 元    → 属于当前任务
+用户不坐早于 8 点的车    → 可能跨任务稳定
+用户这次愿意早起赶车     → 只覆盖当前任务
+</code></pre>
+<p>最后一组最容易出错。用户为了赶航班接受一次早班车，不代表长期偏好已经改变。系统如果把每句话都升级成 Memory，很快就会同时记住互相冲突的“稳定偏好”。</p>
+<p>Memory 不是保存得更久的 State。它需要来源、适用范围、更新时间和置信度，也要允许用户纠正。</p>
+<h2>模型这一刻看到的，只是 Context</h2>
+<p>数据被保存下来，不代表每次都应该交给模型。</p>
+<p>上海出差的 State 可以包含日期、预算、候选车次、酒店和当前 Plan；Memory 可以保存用户不坐早班车、偏好地铁附近酒店。生成推荐时，程序再从两边选出这一步真正需要的部分：</p>
+<pre><code class="language-text">当前请求：上海出差
+当前候选：三趟高铁、四家酒店
+相关偏好：不坐早于 8 点的车
+当前约束：酒店靠近会场
+</code></pre>
+<p>这份本轮实际输入才是 Context。</p>
+<p>Context 的生命周期最短，只服务一次模型调用；State 服务一个任务；Memory 可以跨越多个任务。</p>
+<p>上下文窗口即使足够长，也不会自动替系统判断哪些信息已经过期。把上一次旅行、过去十次出差和所有用户偏好一起塞进去，只是把生命周期判断重新交给模型猜。</p>
+<p>窗口能装多少是容量问题；本轮该装什么，才是系统需要负责的选择。</p>
+<p>这里使用的是一套按任务边界划分的设计语言。不同框架可能把 State 放在线程、会话或 checkpoint 中，名称并不统一。重要的是系统能否明确每类信息何时生效、何时退出，以及是否允许跨任务复用。</p>
+<h2>有些经验不是事实，而是做法</h2>
+<p>上海出差结束后，Agent 又学到了一些东西：</p>
+<pre><code class="language-text">先确认出发时段和会场位置
+再查询交通与酒店
+分别检查时间、距离和预算
+最后给出一个主方案和一个备选
+</code></pre>
+<p>这些内容描述的不是用户，而是一套经过验证的做事方法。</p>
+<p>如果只把它写进 Memory，下一次 Agent 仍要从几条零散描述里重新规划。反复出现、边界清楚、成功标准稳定的流程，更适合沉淀为 Skill。</p>
+<pre><code class="language-text">Memory：什么长期为真
+Skill：遇到某类任务时，怎样做更可靠
+</code></pre>
+<p>Skill 也不能因为一次成功就自动生成。一次偶然有效的方法可能只适合当时的城市、接口和约束。流程至少要经过重复验证，并且知道什么时候不适用，才值得从经验升级成能力。</p>
+<p>这也是它和 Memory 风险不同的地方。记错一个偏好会影响判断，固化一个错误 Skill 会让 Agent 稳定地重复错误。</p>
+<h2>任务结束，需要一次收尾</h2>
+<p>一个任务从“进行中”变成“成功”或“无解”时，系统不应该只是停止循环。它还需要处理这次运行留下的东西：</p>
+<pre><code class="language-text">当前 Goal、Plan、临时 Evidence  → 结束，不再进入新任务
+完整 Trace 与工具结果          → 归档，供审计或复盘
+跨任务仍稳定的事实与偏好        → 候选 Memory，验证后保存
+重复成功且边界清楚的做法        → 候选 Skill，评审后复用
+</code></pre>
+<p>任务收尾首先要做分类。</p>
+<p>Context、State、Memory 和 Skill 并不是四种不同格式的文本。它们代表四种不同的时间尺度：</p>
+<pre><code class="language-text">一次调用
+一个任务
+多个任务
+一类任务
+</code></pre>
+<p>边界分清以后，系统才能同时做到两件看起来矛盾的事：不让过去污染现在，也不让每次任务都从零开始。</p>
+<p>以后看到一个 Agent 宣布任务完成，可以再多问一句：</p>
+<blockquote>
+<p>这次运行留下的东西，接下来会去哪里？</p>
+</blockquote>
+<p>如果答案是“全部塞进历史”，下一次任务迟早会被旧信息淹没。如果答案是“全部删除”，这个 Agent 永远不会真正积累经验。</p>
+<p>成熟的 Agent 需要记忆，但更需要遗忘。它带走的不应该是全部过去，而是未来仍有用的那一部分。</p>
+<p>当系统终于学会跨任务保存状态，另一个风险也会随之出现：如果一次订票已经成功，只是接口响应丢了，恢复任务以后还能不能放心重试？</p>
+<p><em>LZ AI Note｜记录现象，追问本质</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂 | LZ AI NOTE</title>
+  <meta name="description" content="LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂 上一篇[《什么是 ReAct？一个例子看懂 AI Agent 原理》]里，我们做出了一个会查天气的 Agent。 模型发现自己不知道实时天气，就调用工具；工具返回结果，模型再回答。任务没结束，就继续循环。 这已经是 Agent 了。LangGraph 又多解决了什么？ 还是从查天气开始。 …">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-08-24">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/tech/ai-%E5%8F%AF%E9%9D%A0Agent/LangGraph%20%E5%88%B0%E5%BA%95%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F%E7%94%A8%E4%B8%80%E4%B8%AA%E6%9F%A5%E5%A4%A9%E6%B0%94%E7%9A%84%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-%E5%8F%AF%E9%9D%A0Agent/LangGraph%20%E5%88%B0%E5%BA%95%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F%E7%94%A8%E4%B8%80%E4%B8%AA%E6%9F%A5%E5%A4%A9%E6%B0%94%E7%9A%84%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂 | LZ AI NOTE">
+  <meta property="og:description" content="LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂 上一篇[《什么是 ReAct？一个例子看懂 AI Agent 原理》]里，我们做出了一个会查天气的 Agent。 模型发现自己不知道实时天气，就调用工具；工具返回结果，模型再回答。任务没结束，就继续循环。 这已经是 Agent 了。LangGraph 又多解决了什么？ 还是从查天气开始。 …">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E5%8F%AF%E9%9D%A0Agent/LangGraph%20%E5%88%B0%E5%BA%95%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F%E7%94%A8%E4%B8%80%E4%B8%AA%E6%9F%A5%E5%A4%A9%E6%B0%94%E7%9A%84%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂","description":"LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂 上一篇[《什么是 ReAct？一个例子看懂 AI Agent 原理》]里，我们做出了一个会查天气的 Agent。 模型发现自己不知道实时天气，就调用工具；工具返回结果，模型再回答。任务没结束，就继续循环。 这已经是 Agent 了。LangGraph 又多解决了什么？ 还是从查天气开始。 …","url":"https://wizardpisces.github.io/blog/tech/ai-%E5%8F%AF%E9%9D%A0Agent/LangGraph%20%E5%88%B0%E5%BA%95%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F%E7%94%A8%E4%B8%80%E4%B8%AA%E6%9F%A5%E5%A4%A9%E6%B0%94%E7%9A%84%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E5%8F%AF%E9%9D%A0Agent/LangGraph%20%E5%88%B0%E5%BA%95%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F%E7%94%A8%E4%B8%80%E4%B8%AA%E6%9F%A5%E5%A4%A9%E6%B0%94%E7%9A%84%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82","dateModified":"2026-08-24","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂，LZ AI NOTE，https://wizardpisces.github.io/blog/tech/ai-%E5%8F%AF%E9%9D%A0Agent/LangGraph%20%E5%88%B0%E5%BA%95%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F%E7%94%A8%E4%B8%80%E4%B8%AA%E6%9F%A5%E5%A4%A9%E6%B0%94%E7%9A%84%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82","about":["ai-可靠Agent"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂</h1><h1>LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂</h1>
+<p>上一篇<a href="./%E4%BB%80%E4%B9%88%E6%98%AF%20ReAct%EF%BC%9F%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20Agent%20%E5%8E%9F%E7%90%86.md">《什么是 ReAct？一个例子看懂 AI Agent 原理》</a>里，我们做出了一个会查天气的 Agent。</p>
+<p>模型发现自己不知道实时天气，就调用工具；工具返回结果，模型再回答。任务没结束，就继续循环。</p>
+<p>这已经是 Agent 了。LangGraph 又多解决了什么？</p>
+<p>还是从查天气开始。</p>
+<h2>一句话里什么都有，事情很简单</h2>
+<p>用户问：</p>
+<blockquote>
+<p>北京明天要不要带伞？</p>
+</blockquote>
+<p>城市、日期和问题都在一句话里。Agent 查完天气，直接回答。</p>
+<p>整个过程是一条直线：</p>
+<pre><code class="language-text">理解问题 → 查询天气 → 回答
+</code></pre>
+<p>这种情况用普通函数就够了。特意套一层图，代码只会更绕。</p>
+<h2>用户少说了一个城市</h2>
+<p>现在用户问：</p>
+<blockquote>
+<p>明天要不要带伞？</p>
+</blockquote>
+<p>Agent 发现缺少城市，只好追问：</p>
+<blockquote>
+<p>你想查哪个城市？</p>
+</blockquote>
+<p>用户回答：</p>
+<blockquote>
+<p>北京。</p>
+</blockquote>
+<p>这时才有真正的麻烦。</p>
+<p>“明天”在第一轮，“北京”在第二轮。如果程序只看当前这句话，它永远凑不齐查询天气所需的信息。</p>
+<p>所以它要留下一张任务便签：日期是明天，城市还不知道。用户补充北京以后，只需把便签上的城市补齐。</p>
+<p>这张便签就是 State。</p>
+<p>State 不是模型的思考，也不一定是完整聊天记录。它记录的是：这件事做到现在，哪些信息已经确定。</p>
+<h2>记住信息还不够</h2>
+<p>假设 Agent 识别出北京后，需要先让用户确认定位：</p>
+<blockquote>
+<p>将查询北京的天气，是否继续？</p>
+</blockquote>
+<p>用户可能十分钟以后才回复“继续”。原来的程序早就结束了。再次收到消息时，系统除了要找回城市和日期，还得知道上次停在哪。</p>
+<p>于是任务便签上又多了一行：</p>
+<pre><code class="language-text">城市：北京
+日期：明天
+下一步：查询天气
+</code></pre>
+<p>现在它既保存了任务数据，也保存了恢复位置。把这份便签存进数据库，服务重启后，任务还能从“查询天气”接着走。</p>
+<p>这就是 checkpoint 最朴素的样子。</p>
+<h2>再加两个要求，直线开始分叉</h2>
+<p>产品经理又加了两个要求：天气接口失败可以重试；涉及极端天气时，回答要先经过人工确认。</p>
+<p>流程变成了这样：</p>
+<pre><code class="language-text">收到问题
+   │
+   ├── 缺城市 → 追问 → 暂停
+   ├── 缺日期 → 追问 → 暂停
+   │
+   └── 信息齐全 → 查询天气
+                    │
+                    ├── 失败 → 重试
+                    │
+                    └── 成功 → 生成回答
+                                  │
+                                  ├── 极端天气 → 人工确认 → 发布
+                                  └── 普通天气 → 发布
+</code></pre>
+<p>这时再用一串 <code>if</code> 也能写。只是重试会藏在查询函数里，判断会散在提示词里，暂停位置又单独放进数据库。想知道一个任务接下来会去哪，得翻好几个文件。</p>
+<p>程序早已是一张图，只是这张图散落在代码里。</p>
+<h2>把图摆到明面上</h2>
+<p>LangGraph 把每个步骤单独拿出来，再把步骤之间的去向写清楚。</p>
+<p>“提取信息”“追问城市”“查询天气”“人工确认”都是 Node。Node 可以调用 LLM，也可以只是普通函数，甚至可以由人完成。</p>
+<p>Node 之间的连线是 Edge。“查询成功后生成回答”是一条固定的边；“信息提取后，缺城市就追问，否则去查天气”要根据 State 判断，所以是一条条件边。</p>
+<p>到这里，三个最常见的词都有了来处：</p>
+<pre><code class="language-text">State：任务已经知道什么，以及停在哪里
+Node：当前要做哪一步
+Edge：做完以后可以去哪里
+</code></pre>
+<p>LangGraph 沿着这些边运行 Node。每一步结束后更新 State；遇到暂停就保存现场，收到新输入后从保存的位置恢复。</p>
+<p>它没有让模型变聪明。它只是让任务的执行过程不再靠一堆隐含的 <code>if</code> 维持。</p>
+<h2>它和 ReAct 的分界：不是固定与自由</h2>
+<p>常见的说法是：ReAct 用来探索，LangGraph 用来跑固定 workflow。这个说法不够准确。</p>
+<p>ReAct 自己也有一层固定流程：思考、行动、观察，再回到思考。它不知道的是具体行动序列。模型这次该搜网页、读文件，还是直接回答；要跑几轮；什么时候认为资料够了，都是运行时决定的。</p>
+<p>LangGraph 预先知道的是另一件事：这个任务有哪些合法步骤，步骤之间允许怎么跳。实际会走哪条路径仍然可以未知。</p>
+<pre><code class="language-text">ReAct
+固定：思考 → 行动 → 观察 的循环
+未知：本轮具体做什么、做多少轮
+
+LangGraph
+固定：有哪些 Node、哪些 Edge 可以走
+未知：这次运行实际会走哪一条路径
+</code></pre>
+<p>拿“研究一个竞品”来说，外层图可以规定：先澄清范围，再研究，接着整理，最后人工审核。进入“研究”这个 Node 后，里面完全可以是一个 ReAct Agent：它自己决定搜几次、读哪些资料、是否还要补搜。</p>
+<pre><code class="language-text">澄清范围 → 研究（ReAct 自主探索）→ 整理 → 人工审核
+</code></pre>
+<p>这张图不替 Agent 决定研究时该搜什么。它只规定边界：研究可以反复尝试，发布前必须审核，运行也得有停止条件。</p>
+<h2>什么时候不用 LangGraph</h2>
+<p>如果你的应用只是一次问答、一次 RAG 检索，或者调用一个工具后直接返回，普通函数通常更清楚。</p>
+<p>当任务开始需要等用户、等人工审核，或在失败后回到特定步骤时，显式的图才值得引入。还有一个信号：你已经说不清“这个任务下一步允许去哪”。</p>
+<p>天气 Agent 里，跨轮信息不能丢，于是有了 State；任务会暂停，于是要 checkpoint；路径开始分叉，才需要 Node 和 Edge。</p>
+<p>当 Agent 不再只是一个循环，而是一套会暂停、重试、分叉的流程时，LangGraph 帮你把这套流程写清楚、管起来。</p>
+<p>想把暂停和恢复拆成代码看，完整的极简示例在站点源码 <code>examples/tiny-langgraph/main.py</code>。它只实现了 <code>State + next + 执行循环</code>，用来说明状态图的骨架。</p>
+<p>任务能跑起来以后，线上当然还需要记录每一步实际调用了什么工具、拿到了什么结果，方便排查错误。这类执行记录通常叫 Trace；它和保存 State 是两件事：State 用来让任务继续，Trace 用来事后还原任务怎么走到这里。</p>
+<p>但更早也更难的问题是：改了 Prompt、模型或图上的一个节点以后，怎么知道它没有在别的路径上变差？接着读<a href="./Agent%20%E8%BF%99%E6%AC%A1%E7%AD%94%E5%AF%B9%E4%BA%86%EF%BC%8C%E4%B8%8B%E6%AC%A1%E5%91%A2%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20LangSmith.md">《Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith》</a>。</p>
+<p>如果任务还会分成多条支线，最后再汇合，可以继续看<a href="../ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E4%BB%8E%20Loop%20%E5%88%B0%20Graph%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%E5%A4%9A%20Agent%20%E6%80%8E%E4%B9%88%E5%8D%8F%E4%BD%9C.md">《从 Loop 到 Graph：一个例子看懂多 Agent 怎么协作》</a>。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
+</body>
+</html>

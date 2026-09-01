@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>三张图片、三句话，AI 怎么知道谁和谁是一对？ | LZ AI NOTE</title>
+  <meta name="description" content="三张图片、三句话，AI 怎么知道谁和谁是一对？ 假设桌上有三张图片： 旁边还有三句话： 人很容易完成配对： 模型面对的却是两种完全不同的输入。图片由像素组成，文字由 Token 组成。它们没有可以直接比较的共同单位。 模型怎么知道，图片 A 和句子 2 说的是同一件事？ 先把图片和文字各自变成一张卡片 [《大模型没有眼睛，一张截图是怎么变成回答的？》]里，…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="三张图片、三句话，AI 怎么知道谁和谁是一对？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-08-26">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%B8%89%E5%BC%A0%E5%9B%BE%E7%89%87%E3%80%81%E4%B8%89%E5%8F%A5%E8%AF%9D%EF%BC%8CAI%20%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E8%B0%81%E5%92%8C%E8%B0%81%E6%98%AF%E4%B8%80%E5%AF%B9%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%B8%89%E5%BC%A0%E5%9B%BE%E7%89%87%E3%80%81%E4%B8%89%E5%8F%A5%E8%AF%9D%EF%BC%8CAI%20%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E8%B0%81%E5%92%8C%E8%B0%81%E6%98%AF%E4%B8%80%E5%AF%B9%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="三张图片、三句话，AI 怎么知道谁和谁是一对？ | LZ AI NOTE">
+  <meta property="og:description" content="三张图片、三句话，AI 怎么知道谁和谁是一对？ 假设桌上有三张图片： 旁边还有三句话： 人很容易完成配对： 模型面对的却是两种完全不同的输入。图片由像素组成，文字由 Token 组成。它们没有可以直接比较的共同单位。 模型怎么知道，图片 A 和句子 2 说的是同一件事？ 先把图片和文字各自变成一张卡片 [《大模型没有眼睛，一张截图是怎么变成回答的？》]里，…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%B8%89%E5%BC%A0%E5%9B%BE%E7%89%87%E3%80%81%E4%B8%89%E5%8F%A5%E8%AF%9D%EF%BC%8CAI%20%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E8%B0%81%E5%92%8C%E8%B0%81%E6%98%AF%E4%B8%80%E5%AF%B9%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"三张图片、三句话，AI 怎么知道谁和谁是一对？","description":"三张图片、三句话，AI 怎么知道谁和谁是一对？ 假设桌上有三张图片： 旁边还有三句话： 人很容易完成配对： 模型面对的却是两种完全不同的输入。图片由像素组成，文字由 Token 组成。它们没有可以直接比较的共同单位。 模型怎么知道，图片 A 和句子 2 说的是同一件事？ 先把图片和文字各自变成一张卡片 [《大模型没有眼睛，一张截图是怎么变成回答的？》]里，…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%B8%89%E5%BC%A0%E5%9B%BE%E7%89%87%E3%80%81%E4%B8%89%E5%8F%A5%E8%AF%9D%EF%BC%8CAI%20%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E8%B0%81%E5%92%8C%E8%B0%81%E6%98%AF%E4%B8%80%E5%AF%B9%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%B8%89%E5%BC%A0%E5%9B%BE%E7%89%87%E3%80%81%E4%B8%89%E5%8F%A5%E8%AF%9D%EF%BC%8CAI%20%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E8%B0%81%E5%92%8C%E8%B0%81%E6%98%AF%E4%B8%80%E5%AF%B9%EF%BC%9F","dateModified":"2026-08-26","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：三张图片、三句话，AI 怎么知道谁和谁是一对？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%B8%89%E5%BC%A0%E5%9B%BE%E7%89%87%E3%80%81%E4%B8%89%E5%8F%A5%E8%AF%9D%EF%BC%8CAI%20%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E8%B0%81%E5%92%8C%E8%B0%81%E6%98%AF%E4%B8%80%E5%AF%B9%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>三张图片、三句话，AI 怎么知道谁和谁是一对？</h1><h1>三张图片、三句话，AI 怎么知道谁和谁是一对？</h1>
+<p>假设桌上有三张图片：</p>
+<pre><code class="language-text">图片 A：一个人在雨中撑伞
+图片 B：一辆红色汽车
+图片 C：一碗牛肉面
+</code></pre>
+<p>旁边还有三句话：</p>
+<pre><code class="language-text">句子 1：一碗热气腾腾的面
+句子 2：雨天走在街上的人
+句子 3：停在路边的红色轿车
+</code></pre>
+<p>人很容易完成配对：</p>
+<pre><code class="language-text">A ↔ 2
+B ↔ 3
+C ↔ 1
+</code></pre>
+<p>模型面对的却是两种完全不同的输入。图片由像素组成，文字由 Token 组成。它们没有可以直接比较的共同单位。</p>
+<p>模型怎么知道，图片 A 和句子 2 说的是同一件事？</p>
+<h2>先把图片和文字各自变成一张卡片</h2>
+<p><a href="../../tech/ai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%B2%A1%E6%9C%89%E7%9C%BC%E7%9D%9B%EF%BC%8C%E4%B8%80%E5%BC%A0%E6%88%AA%E5%9B%BE%E6%98%AF%E6%80%8E%E4%B9%88%E5%8F%98%E6%88%90%E5%9B%9E%E7%AD%94%E7%9A%84%EF%BC%9F.md">《大模型没有眼睛，一张截图是怎么变成回答的？》</a>里，图片被切成 Patch，再经过视觉编码器，变成一串视觉卡片。</p>
+<p>这一次，我们暂时不关心图片内部有多少块，只把整张图片压成一张总卡片：</p>
+<pre><code class="language-text">图片 A → 图片卡片 A
+图片 B → 图片卡片 B
+图片 C → 图片卡片 C
+</code></pre>
+<p>文字走另一条路：</p>
+<pre><code class="language-text">句子 1 → 文字卡片 1
+句子 2 → 文字卡片 2
+句子 3 → 文字卡片 3
+</code></pre>
+<p>图片由图像编码器处理，句子由文本编码器处理。两边最后都输出相同长度的数字卡片：</p>
+<pre><code class="language-text">图片 A → [0.8, 0.1, 0.4, ...]
+句子 2 → [0.7, 0.2, 0.5, ...]
+</code></pre>
+<p>每个数字单独看没有“雨伞”或“街道”的意思。模型只需要让表达相近内容的两张卡片，在数字上更相似。</p>
+<h2>三张图片，要和三句话全部比较</h2>
+<p>训练时，模型不会只看正确答案。</p>
+<p>图片 A 要分别和三个句子比较：</p>
+<pre><code class="language-text">图片 A ↔ 句子 1
+图片 A ↔ 句子 2
+图片 A ↔ 句子 3
+</code></pre>
+<p>三张图片与三句话组合后，会得到九个分数：</p>
+<pre><code class="language-text">              句子 1    句子 2    句子 3
+图片 A          0.2       0.9       0.3
+图片 B          0.1       0.2       0.8
+图片 C          0.9       0.1       0.2
+</code></pre>
+<p>分数越高，表示两张卡片越接近。</p>
+<p>正确配对正好落在三个位置：</p>
+<pre><code class="language-text">图片 A ↔ 句子 2
+图片 B ↔ 句子 3
+图片 C ↔ 句子 1
+</code></pre>
+<p>如果图片 A 与句子 1 的分数反而最高，模型就配错了。</p>
+<h2>训练就是把正确配对拉近</h2>
+<p>模型一开始并不知道哪张图对应哪句话，九个分数可能接近随机。</p>
+<p>训练程序知道原始配对关系，于是不断调整两边编码器的权重：</p>
+<pre><code class="language-text">正确配对
+→ 分数应该更高
+
+错误配对
+→ 分数应该更低
+</code></pre>
+<p>一次训练可以压成：</p>
+<pre><code class="language-text">图片 → 图像编码器 → 图片卡片
+                         ↘
+                          比较分数 → 计算配对错误
+                         ↗
+文字 → 文本编码器 → 文字卡片
+                              ↓
+                    调整两边编码器的权重
+</code></pre>
+<p>下一次再看到雨伞、乌云和行人时，图片卡片会更靠近“雨天走在街上的人”，远离“一碗热气腾腾的面”。</p>
+<p>这种训练方式叫对比学习。它不是直接告诉模型“第 17 个数字代表雨伞”，而是让大量正确与错误的配对，共同塑造卡片之间的距离。</p>
+<h2>对齐的不是单词，而是关系</h2>
+<p>经过大量训练后，可以把图片卡片和文字卡片想成放在同一张地图上：</p>
+<pre><code class="language-text">        雨天走在街上的人
+                 ●
+               图片 A
+
+
+  图片 C ●
+         一碗热气腾腾的面
+
+
+                         图片 B ●
+                           红色轿车
+</code></pre>
+<p>“雨伞”并不固定住在某一个坐标。颜色、动作、物体和场景共同决定一张卡片落在哪里。</p>
+<p>因此，模型即使没有为“雨天通勤”单独训练一个分类按钮，也可以把相关图片与文字放到相近区域。</p>
+<p>这就是图文对齐的核心：两边不需要变成同一种原始数据，只需要能够进入同一套比较关系。</p>
+<h2>对齐以后，能做什么？</h2>
+<p>最直接的用途是图文检索。</p>
+<p>输入一句：</p>
+<blockquote>
+<p>一只在雪地奔跑的狗</p>
+</blockquote>
+<p>文本编码器先生成一张文字卡片，再到图片卡片中寻找最接近的结果。</p>
+<p>分类也可以改成同一个问题。面对一张新图片，准备几句话：</p>
+<pre><code class="language-text">一张猫的照片
+一张狗的照片
+一辆汽车的照片
+</code></pre>
+<p>哪句话与图片得分最高，就把它当作分类结果。</p>
+<p>CLIP 的核心训练方法就是这样：在一批图文配对中，预测哪段文字与哪张图片原本属于一对。它不需要为每个新任务重新规定一套固定类别。</p>
+<p>但“能够匹配”还不等于“能够回答问题”。CLIP 可以判断图片更接近“雨天街道”还是“晴天海滩”，却不会自然生成一段完整解释。</p>
+<p>要让模型回答“这个页面哪里不对”，还需要把视觉信息接进语言模型，再用图文问答数据教它按照指令生成回答。</p>
+<h2>最后，把整个过程串起来</h2>
+<pre><code class="language-text">图片 → 图像编码器 → 图片卡片
+                         │
+                         ├─ 正确配对：分数升高
+                         └─ 错误配对：分数降低
+                         │
+文字 → 文本编码器 → 文字卡片
+</code></pre>
+<p>图片仍然是像素，文字仍然是 Token。模型没有把图片翻译成句子，也没有把句子还原成图片。</p>
+<p>它只学会了一件事：让表达同一内容的图片卡片和文字卡片，在数字空间里彼此靠近。</p>
+<h2>参考资料</h2>
+<ol>
+<li>OpenAI，CLIP: Connecting Text and Images（2021）：<a href="https://openai.com/index/clip/">https://openai.com/index/clip/</a></li>
+<li>Radford 等，Learning Transferable Visual Models From Natural Language Supervision（ICML，2021）：<a href="https://arxiv.org/abs/2103.00020">https://arxiv.org/abs/2103.00020</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
+</body>
+</html>

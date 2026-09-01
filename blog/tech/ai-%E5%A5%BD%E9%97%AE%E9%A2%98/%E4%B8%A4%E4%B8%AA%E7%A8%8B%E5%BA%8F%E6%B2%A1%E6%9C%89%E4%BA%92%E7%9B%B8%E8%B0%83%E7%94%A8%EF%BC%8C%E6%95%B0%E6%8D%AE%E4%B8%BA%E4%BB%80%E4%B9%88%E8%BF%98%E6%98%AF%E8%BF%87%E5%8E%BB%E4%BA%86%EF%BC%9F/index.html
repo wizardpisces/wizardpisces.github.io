@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>两个程序没有互相调用，数据为什么还是过去了？ | LZ AI NOTE</title>
+  <meta name="description" content="两个程序没有互相调用，数据为什么还是过去了？ 在终端里运行 Claude Code，几秒后打开用于查看 AI 运行过程的 Langfuse，页面上出现了模型请求、工具调用和耗时。 这件事第一眼有点不讲道理。 Claude Code 没装 Langfuse SDK，两个程序也不在同一个进程。代码里找不到谁调用了谁，数据却过去了。 如果把它只当成 OpenTe…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="两个程序没有互相调用，数据为什么还是过去了？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-08-26">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E4%B8%A4%E4%B8%AA%E7%A8%8B%E5%BA%8F%E6%B2%A1%E6%9C%89%E4%BA%92%E7%9B%B8%E8%B0%83%E7%94%A8%EF%BC%8C%E6%95%B0%E6%8D%AE%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E6%98%AF%E8%BF%87%E5%8E%BB%E4%BA%86%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E4%B8%A4%E4%B8%AA%E7%A8%8B%E5%BA%8F%E6%B2%A1%E6%9C%89%E4%BA%92%E7%9B%B8%E8%B0%83%E7%94%A8%EF%BC%8C%E6%95%B0%E6%8D%AE%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E6%98%AF%E8%BF%87%E5%8E%BB%E4%BA%86%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="两个程序没有互相调用，数据为什么还是过去了？ | LZ AI NOTE">
+  <meta property="og:description" content="两个程序没有互相调用，数据为什么还是过去了？ 在终端里运行 Claude Code，几秒后打开用于查看 AI 运行过程的 Langfuse，页面上出现了模型请求、工具调用和耗时。 这件事第一眼有点不讲道理。 Claude Code 没装 Langfuse SDK，两个程序也不在同一个进程。代码里找不到谁调用了谁，数据却过去了。 如果把它只当成 OpenTe…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E4%B8%A4%E4%B8%AA%E7%A8%8B%E5%BA%8F%E6%B2%A1%E6%9C%89%E4%BA%92%E7%9B%B8%E8%B0%83%E7%94%A8%EF%BC%8C%E6%95%B0%E6%8D%AE%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E6%98%AF%E8%BF%87%E5%8E%BB%E4%BA%86%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"两个程序没有互相调用，数据为什么还是过去了？","description":"两个程序没有互相调用，数据为什么还是过去了？ 在终端里运行 Claude Code，几秒后打开用于查看 AI 运行过程的 Langfuse，页面上出现了模型请求、工具调用和耗时。 这件事第一眼有点不讲道理。 Claude Code 没装 Langfuse SDK，两个程序也不在同一个进程。代码里找不到谁调用了谁，数据却过去了。 如果把它只当成 OpenTe…","url":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E4%B8%A4%E4%B8%AA%E7%A8%8B%E5%BA%8F%E6%B2%A1%E6%9C%89%E4%BA%92%E7%9B%B8%E8%B0%83%E7%94%A8%EF%BC%8C%E6%95%B0%E6%8D%AE%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E6%98%AF%E8%BF%87%E5%8E%BB%E4%BA%86%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E4%B8%A4%E4%B8%AA%E7%A8%8B%E5%BA%8F%E6%B2%A1%E6%9C%89%E4%BA%92%E7%9B%B8%E8%B0%83%E7%94%A8%EF%BC%8C%E6%95%B0%E6%8D%AE%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E6%98%AF%E8%BF%87%E5%8E%BB%E4%BA%86%EF%BC%9F","dateModified":"2026-08-26","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：两个程序没有互相调用，数据为什么还是过去了？，LZ AI NOTE，https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E4%B8%A4%E4%B8%AA%E7%A8%8B%E5%BA%8F%E6%B2%A1%E6%9C%89%E4%BA%92%E7%9B%B8%E8%B0%83%E7%94%A8%EF%BC%8C%E6%95%B0%E6%8D%AE%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E6%98%AF%E8%BF%87%E5%8E%BB%E4%BA%86%EF%BC%9F","about":["ai-好问题"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>两个程序没有互相调用，数据为什么还是过去了？</h1><h1>两个程序没有互相调用，数据为什么还是过去了？</h1>
+<p>在终端里运行 Claude Code，几秒后打开用于查看 AI 运行过程的 Langfuse，页面上出现了模型请求、工具调用和耗时。</p>
+<p>这件事第一眼有点不讲道理。</p>
+<p>Claude Code 没装 Langfuse SDK，两个程序也不在同一个进程。代码里找不到谁调用了谁，数据却过去了。</p>
+<p>如果把它只当成 OpenTelemetry 的配置问题，很快会掉进一串缩写。真正值得追问的是另一件事：</p>
+<blockquote>
+<p>两个系统不认识对方，为什么仍然能协作？</p>
+</blockquote>
+<p>答案藏在软件工程里一个很常见、却容易被忽略的变化中：系统一旦离开同一个进程，就不能再传对象，只能传消息。</p>
+<h2>直接调用，走不出一个进程</h2>
+<p>同一个程序里的两个模块，沟通很简单。</p>
+<pre><code class="language-text">A 调用 B
+传入一个对象
+B 返回结果
+</code></pre>
+<p>A 知道 B 的函数名、参数和返回值。双方共享同一块内存，甚至可以拿到同一个对象。</p>
+<p>这种关系直接、清楚，也很高效。</p>
+<p>问题出现在 B 被搬到另一个进程以后。</p>
+<p>内存地址只对当前进程有意义。A 手里的对象，不能原样塞进 B 的内存；A 也不能再像调用本地函数一样，直接跳进 B 的代码。</p>
+<p>原来的动作必须改写成一条消息：</p>
+<pre><code class="language-text">我要做什么
+需要哪些数据
+结果应该怎样返回
+</code></pre>
+<p>消息再被编码，通过网络送到另一个进程。</p>
+<p>这一步，才是协议开始出现的地方。</p>
+<h2>对象过不去，只能把动作写成消息</h2>
+<p>回到 Claude Code。</p>
+<p>它完成一次任务时，会经历模型请求、文件读取和命令执行。Langfuse 想展示这段过程，Claude Code 不可能把内存里的执行对象直接交给它。</p>
+<p>它只能把过程写成记录：</p>
+<pre><code class="language-text">发生了什么
+什么时候开始、什么时候结束
+这一步属于哪次任务
+上一层步骤是谁
+</code></pre>
+<p>这些记录按照共同约定组织，再发到一个网络地址。Langfuse 收到以后，才能把零散步骤拼回一条运行轨迹。</p>
+<p>今天这套约定常由 OpenTelemetry 提供，通常简称 OTel；跨网络传输时使用的协议叫 OTLP。</p>
+<p>名词可以先放在一边。它们在这次通信里只承担两个角色：</p>
+<pre><code class="language-text">OTel：规定运行记录怎么写
+OTLP：规定运行记录怎么寄
+</code></pre>
+<p>Claude Code 负责写和寄，Langfuse 负责收和展示。两边没有共享代码，也没有共享内存，只是都遵守同一份规则。</p>
+<p>所谓 Trace Endpoint，也只是 Langfuse 留给这些记录的收件地址。</p>
+<h2>协议省掉的是成对适配</h2>
+<p>如果没有共同协议，Claude Code 想支持三个观测平台，就要维护三套适配：</p>
+<pre><code class="language-text">Claude Code → Langfuse
+Claude Code → LangSmith
+Claude Code → 其他平台
+</code></pre>
+<p>再增加两个能产生运行记录的 Agent，适配关系很快会变成一张网。</p>
+<p>假设有 3 个发送方、3 个接收方，最直接的办法需要维护 9 组连接：</p>
+<pre><code class="language-text">3 × 3 = 9
+</code></pre>
+<p>引入共同协议以后，发送方只需要学会按标准发送，接收方只需要学会按标准接收：</p>
+<pre><code class="language-text">3 个发送实现 + 3 个接收实现 = 6
+</code></pre>
+<p>规模继续扩大，差距会更明显。</p>
+<p>协议真正省掉的，不是一次请求里的几行代码，而是每增加一个产品，都要让它和所有现有产品互相认识的成本。</p>
+<p>这也是为什么很多框架喜欢把模型、工具、存储和观测做成可替换组件。组件不再依赖某个具体实现，只依赖一份相对稳定的契约。</p>
+<p>模型可以换，观测平台可以换，只要双方仍然说同一种“语言”，系统就不必整体重写。</p>
+<h2>不是所有连接都值得协议化</h2>
+<p>协议也会带来成本。</p>
+<p>如果两个模块始终运行在同一个进程，由同一个团队维护，也不会被单独替换，一次普通函数调用通常更简单。为了“架构漂亮”强行增加消息格式、版本兼容和网络错误，只会把原本清楚的关系绕远。</p>
+<p>协议开始值得，是因为边界真的发生了变化：</p>
+<pre><code class="language-text">组件需要独立部署
+双方由不同团队维护
+同一能力存在多种实现
+发送方和接收方会各自升级
+</code></pre>
+<p>这时，直接依赖具体代码才会成为负担。协议买来的不是高级感，而是让两边可以在不同时刻、以不同速度变化。</p>
+<h2>协议没有消除依赖，只是换了依赖对象</h2>
+<p>这里很容易产生另一个误解：有了协议，系统就解耦了。</p>
+<p>没有这么彻底。</p>
+<p>Claude Code 不再依赖 Langfuse 的代码，却开始依赖协议规定的字段、版本和语义；Langfuse也必须正确理解这些约定。</p>
+<p>原来的依赖是：</p>
+<pre><code class="language-text">我必须知道你是谁，以及怎样调用你
+</code></pre>
+<p>协议化之后变成：</p>
+<pre><code class="language-text">我不必知道你是谁，但我们必须同意这条消息是什么意思
+</code></pre>
+<p>耦合没有消失，只是从具体产品移到了共同规则。</p>
+<p>这也是协议设计最难的地方。</p>
+<p>格式统一，不代表语义一定一致。一次工具调用在技术上返回成功，不代表它完成了用户真正想要的事情；一条运行记录完整送达，也不代表系统行为就是正确的。</p>
+<p>协议能保证消息可以被交换，却不能替参与者判断业务结果。</p>
+<p>规则定得太少，不同系统会各自解释；规则定得太细，又会把所有实现锁在同一种做法上。协议必须在“大家都能接入”和“接入以后不会各说各话”之间找平衡。</p>
+<h2>框架设计的重点，是让谁不必认识谁</h2>
+<p>再看 Claude Code 和 Langfuse，整条链路其实很短：</p>
+<pre><code class="language-text">Claude Code
+把运行过程写成标准消息
+        ↓
+通过协议发送
+        ↓
+Langfuse
+按同一规则接收和还原
+</code></pre>
+<p>它们能够协作，不是因为藏着一条我们没找到的直接调用，而是因为双方都认识第三样东西：协议。</p>
+<p>这给框架设计留下一个很实用的判断。</p>
+<p>当两个组件总要一起修改、增加一种实现就要改遍整个系统时，问题可能不在模块拆得不够多，而在它们仍然通过彼此的具体代码连接。</p>
+<p>真正稳定的边界，需要回答：</p>
+<pre><code class="language-text">跨边界传递的究竟是什么？
+双方最少需要共同理解什么？
+哪些实现细节可以留在边界后面？
+</code></pre>
+<p>一个好的协议不会让系统完全没有依赖。它只是让发送方不必理解接收方内部怎么实现，接收方也不必参与发送方怎样运行。</p>
+<p>同一个进程里，程序可以共享对象。</p>
+<p>离开进程以后，系统只能共享约定。</p>
+<p>这就是数据明明没有经过直接调用，却仍然能够到达另一边的原因。</p>
+<h2>参考资料</h2>
+<ol>
+<li>Anthropic，Monitoring Claude Code：<a href="https://code.claude.com/docs/en/monitoring-usage">https://code.claude.com/docs/en/monitoring-usage</a></li>
+<li>OpenTelemetry，Concepts：<a href="https://opentelemetry.io/docs/concepts/">https://opentelemetry.io/docs/concepts/</a></li>
+<li>OpenTelemetry，Components：<a href="https://opentelemetry.io/docs/concepts/components/">https://opentelemetry.io/docs/concepts/components/</a></li>
+<li>Langfuse，Native OpenTelemetry Integration：<a href="https://langfuse.com/integrations/native/opentelemetry">https://langfuse.com/integrations/native/opentelemetry</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质</em></p>
+<h2>往期推荐</h2>
+<ul>
+<li><a href="./DeepSeek%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E5%BC%80%E5%A7%8B%E9%80%A0%20Harness%EF%BC%9F%E5%9B%A0%E4%B8%BA%E6%A8%A1%E5%9E%8B%E5%B7%B2%E7%BB%8F%E8%A7%A3%E9%87%8A%E4%B8%8D%E4%BA%86%20Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A5%BD%E7%94%A8.md">DeepSeek 为什么也开始造 Harness？因为模型已经解释不了 Agent 为什么好用</a></li>
+<li><a href="../ai-%E7%AC%94%E8%AE%B0/MCP%20%E5%8D%87%E7%BA%A7%E5%90%8E%EF%BC%8CAI%20%E4%BA%A7%E5%93%81%E8%83%BD%E7%9C%9F%E6%AD%A3%E8%B5%B0%E5%87%BA%E8%81%8A%E5%A4%A9%E6%A1%86%E5%90%97%EF%BC%9F.md">MCP 升级后，AI 产品如何走出聊天框？</a></li>
+</ul>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
+</body>
+</html>

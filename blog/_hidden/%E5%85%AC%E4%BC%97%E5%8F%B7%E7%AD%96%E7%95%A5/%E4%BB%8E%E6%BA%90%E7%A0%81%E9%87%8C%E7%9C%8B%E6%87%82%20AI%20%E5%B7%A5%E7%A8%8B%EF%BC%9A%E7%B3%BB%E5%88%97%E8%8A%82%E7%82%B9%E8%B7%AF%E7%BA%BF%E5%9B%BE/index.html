@@ -6,14 +6,22 @@
   <meta name="robots" content="noindex,nofollow">
   <title>从源码里看懂 AI 工程：系列节点路线图 | LZ AI NOTE</title>
   <meta name="description" content="从源码里看懂 AI 工程：系列节点路线图 系列角色：知识主干·软件实现。 负责从源码证据还原 AI 基础设施与当下项目的工程取舍；只有源码、测试、Issue、RFC 或提交历史不可替代时才主归本系列。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不负责告诉读者“本周又火了什么”，而是借一份真正经受过使用的源码，讲透一个会长期存在的 AI 工程问…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="从源码里看懂 AI 工程：系列节点路线图">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-08-18">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E6%BA%90%E7%A0%81%E9%87%8C%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
   <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E6%BA%90%E7%A0%81%E9%87%8C%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
   <meta property="og:title" content="从源码里看懂 AI 工程：系列节点路线图 | LZ AI NOTE">
   <meta property="og:description" content="从源码里看懂 AI 工程：系列节点路线图 系列角色：知识主干·软件实现。 负责从源码证据还原 AI 基础设施与当下项目的工程取舍；只有源码、测试、Issue、RFC 或提交历史不可替代时才主归本系列。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不负责告诉读者“本周又火了什么”，而是借一份真正经受过使用的源码，讲透一个会长期存在的 AI 工程问…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E6%BA%90%E7%A0%81%E9%87%8C%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"从源码里看懂 AI 工程：系列节点路线图","description":"从源码里看懂 AI 工程：系列节点路线图 系列角色：知识主干·软件实现。 负责从源码证据还原 AI 基础设施与当下项目的工程取舍；只有源码、测试、Issue、RFC 或提交历史不可替代时才主归本系列。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不负责告诉读者“本周又火了什么”，而是借一份真正经受过使用的源码，讲透一个会长期存在的 AI 工程问…","url":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E6%BA%90%E7%A0%81%E9%87%8C%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E6%BA%90%E7%A0%81%E9%87%8C%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","dateModified":"2026-08-18","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"从源码里看懂 AI 工程：系列节点路线图","description":"从源码里看懂 AI 工程：系列节点路线图 系列角色：知识主干·软件实现。 负责从源码证据还原 AI 基础设施与当下项目的工程取舍；只有源码、测试、Issue、RFC 或提交历史不可替代时才主归本系列。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不负责告诉读者“本周又火了什么”，而是借一份真正经受过使用的源码，讲透一个会长期存在的 AI 工程问…","url":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E6%BA%90%E7%A0%81%E9%87%8C%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E6%BA%90%E7%A0%81%E9%87%8C%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","dateModified":"2026-08-18","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：从源码里看懂 AI 工程：系列节点路线图，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E6%BA%90%E7%A0%81%E9%87%8C%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","about":["_hidden","公众号策略"]}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>从源码里看懂 AI 工程：系列节点路线图</h1><h1>从源码里看懂 AI 工程：系列节点路线图</h1>
@@ -94,6 +102,54 @@ Python 控制流可以随时变化
 </code></pre>
 <p>这条线不是按 TensorFlow、PyTorch、JAX 逐个介绍产品，而是追踪深度学习框架反复面对的几组矛盾：易用与优化、动态与静态、抽象与硬件、可变程序与可移植表示。成熟框架的价值正在于，这些取舍经过了多年真实负载、兼容性和生态约束的检验。</p>
 <p>但“演化成今天这样”不等于“今天这样就是最优解”。每篇都要区分四件事：它最初解决了什么失败、当时受什么条件限制、后来为什么难以替换，以及今天留下的是稳定抽象还是历史债务。源码考古负责解释设计，不负责替设计辩护。</p>
+<h2>支线：AI 系统是怎么接起来的</h2>
+<p>这是一条隶属于「从源码里看懂 AI 工程」的博客技术支线，不新增第六个顶级系列，也不默认进入公众号发布计划。</p>
+<p>固定承诺：</p>
+<blockquote>
+<p>每篇从两个组件“明明没有直接关系，为什么还能协作”的反常现象进入，让一份数据、状态或控制信号完整跨过边界，再解释途中不可缺少的协议、格式、端点与运行时对象。</p>
+</blockquote>
+<p>它不写名词词典。标题仍然写具体问题，名词只在运行过程中出现：</p>
+<pre><code class="language-text">同一进程怎样共享运行时对象？
+        ↓
+跨进程怎样通过协议传输？
+        ↓
+跨组织怎样处理发现、身份与授权？
+        ↓
+长任务怎样保存事实、恢复与回放？
+</code></pre>
+<p>首批核心节点：</p>
+<table>
+<thead>
+<tr>
+<th>具体问题</th>
+<th>关键名词</th>
+<th>最终要留下的判断</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../../tech/ai-%E5%B7%A5%E7%A8%8B%E6%8B%86%E8%A7%A3/Claude%20Code%20%E6%B2%A1%E8%A3%85%20Langfuse%20SDK%EF%BC%8C%E8%BF%90%E8%A1%8C%E8%AE%B0%E5%BD%95%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8D%E4%BC%9A%E5%87%BA%E7%8E%B0%EF%BC%9F.md">Claude Code 没装 Langfuse SDK，运行记录为什么仍会出现？</a></td>
+<td>Span / OTel / OTLP / Trace Endpoint</td>
+<td>同进程可以共享对象，跨进程只能共享数据协议</td>
+</tr>
+<tr>
+<td>一个 Agent 为什么不能只把另一个 Agent 当工具？</td>
+<td>Tool / Subagent / Remote Agent / MCP / A2A</td>
+<td>接口相似不等于生命周期、身份与控制权相同</td>
+</tr>
+<tr>
+<td>DeepSeek 的 Session Log 和 Trace 是同一种记录吗？</td>
+<td>Event Log / Source of Truth / Projection / Trace</td>
+<td>运行事实负责恢复，观测副本负责解释，两者不能互相替代</td>
+</tr>
+<tr>
+<td>有了 MCP，Agent 为什么还是不能直接替用户操作 SaaS？</td>
+<td>OAuth / Credential / Scope / Policy / Audit</td>
+<td>能发现工具与有权代表用户执行是两层协议</td>
+</tr>
+</tbody>
+</table>
+<p>这条支线默认作为博客技术档，不占公众号发布日期。只有完成一次面向普通读者的重新选题与降维改写后，才可能替换周四技术篇。只有一个名词能和至少两个相邻概念组成可运行关系时才进入；单纯缩写解释保留为正文中的局部说明。</p>
 <h2>什么源码对象值得写</h2>
 <p>新项目可以从 Trending、短期 Star 增长、密集发布和社区讨论进入候选池；成熟框架则从一个反复出现的异常行为、复杂抽象或历史转向进入。正式写之前，都要依次通过下面几关：</p>
 <ol>
@@ -201,6 +257,14 @@ Python 控制流可以随时变化
 <td>截图只有像素，没有组件身份、合法 Props、响应式规则和交互语义；精准还原不是一次生成，而是视觉解析、现有物料召回、Schema 映射、真实渲染和差异修正组成的闭环</td>
 <td>与内部 Material-first 方案高度相关；若公开成篇，应提炼通用机制，不暴露具体业务方案，也不能再写一份工具清单</td>
 <td>黑箱 / 工程</td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="../../tech/ai-%E5%B7%A5%E7%A8%8B%E6%8B%86%E8%A7%A3/Claude%20Code%20%E6%B2%A1%E8%A3%85%20Langfuse%20SDK%EF%BC%8C%E8%BF%90%E8%A1%8C%E8%AE%B0%E5%BD%95%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8D%E4%BC%9A%E5%87%BA%E7%8E%B0%EF%BC%9F.md">Claude Code 没装 Langfuse SDK，运行记录为什么仍会出现？</a></td>
+<td>Claude Code 内置 OpenTelemetry tracing、OTLP Exporter 与 Langfuse <code>/v1/traces</code> 接收端</td>
+<td>同进程集成可以共享 Provider，跨进程系统只能共享数据协议；用一条 Span 的创建、编码、HTTP 发送与接收解释 OTel、OTLP 和 Trace Endpoint</td>
+<td>博客技术档；与 LangSmith 评估文只共享 Trace 名词，不进入公众号发布计划</td>
+<td>黑箱</td>
 </tr>
 </tbody>
 </table>
@@ -444,6 +508,6 @@ Python 控制流可以随时变化
 <p>动笔前必须重新核对当前源码、文档、Issue 和测试，不因为候选池曾经记录过就假设事实仍然有效。</p>
 <p>该系列适合作为现有主线之间的穿插篇：其他主线负责建立体系，源码解剖负责用成熟框架与正在发生的项目检验体系。它们共享概念，但不能重复结论。</p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-CSJjPKOE.js"></script>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
 </body>
 </html>

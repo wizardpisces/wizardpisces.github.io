@@ -6,7 +6,15 @@
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <title>一次服药，还是连吃五天：从两种流感药看 AI 系统设计 | LZ AI NOTE</title>
   <meta name="description" content="一次服药，还是连吃五天：从两种流感药看 AI 系统设计 最近比较两种流感药时，我注意到一个很直观的差别。 奥司他韦通常一天两次，连续吃五天；玛巴洛沙韦则按体重单次服用。对患者而言，差别很实际：一种要记住十次，另一种只要吃一次。 人很容易把“一次服药”理解成药效更强、技术更先进。但继续看药物机制，结论没有这么简单。 这件事也让我想到 AI 产品。我们常用模型…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="一次服药，还是连吃五天：从两种流感药看 AI 系统设计">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-07-28">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%B8%80%E6%AC%A1%E6%9C%8D%E8%8D%AF%EF%BC%8C%E8%BF%98%E6%98%AF%E8%BF%9E%E5%90%83%E4%BA%94%E5%A4%A9%EF%BC%9A%E4%BB%8E%E4%B8%A4%E7%A7%8D%E6%B5%81%E6%84%9F%E8%8D%AF%E7%9C%8B%20AI%20%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
   <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%B8%80%E6%AC%A1%E6%9C%8D%E8%8D%AF%EF%BC%8C%E8%BF%98%E6%98%AF%E8%BF%9E%E5%90%83%E4%BA%94%E5%A4%A9%EF%BC%9A%E4%BB%8E%E4%B8%A4%E7%A7%8D%E6%B5%81%E6%84%9F%E8%8D%AF%E7%9C%8B%20AI%20%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
   <meta property="og:title" content="一次服药，还是连吃五天：从两种流感药看 AI 系统设计 | LZ AI NOTE">
@@ -14,7 +22,7 @@
   <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%B8%80%E6%AC%A1%E6%9C%8D%E8%8D%AF%EF%BC%8C%E8%BF%98%E6%98%AF%E8%BF%9E%E5%90%83%E4%BA%94%E5%A4%A9%EF%BC%9A%E4%BB%8E%E4%B8%A4%E7%A7%8D%E6%B5%81%E6%84%9F%E8%8D%AF%E7%9C%8B%20AI%20%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1">
   <meta property="og:image" content="https://wizardpisces.github.io/covers/once-vs-five-days-ai-system-design-v4.png">
   <meta name="twitter:image" content="https://wizardpisces.github.io/covers/once-vs-five-days-ai-system-design-v4.png">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"一次服药，还是连吃五天：从两种流感药看 AI 系统设计","description":"一次服药，还是连吃五天：从两种流感药看 AI 系统设计 最近比较两种流感药时，我注意到一个很直观的差别。 奥司他韦通常一天两次，连续吃五天；玛巴洛沙韦则按体重单次服用。对患者而言，差别很实际：一种要记住十次，另一种只要吃一次。 人很容易把“一次服药”理解成药效更强、技术更先进。但继续看药物机制，结论没有这么简单。 这件事也让我想到 AI 产品。我们常用模型…","url":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%B8%80%E6%AC%A1%E6%9C%8D%E8%8D%AF%EF%BC%8C%E8%BF%98%E6%98%AF%E8%BF%9E%E5%90%83%E4%BA%94%E5%A4%A9%EF%BC%9A%E4%BB%8E%E4%B8%A4%E7%A7%8D%E6%B5%81%E6%84%9F%E8%8D%AF%E7%9C%8B%20AI%20%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%B8%80%E6%AC%A1%E6%9C%8D%E8%8D%AF%EF%BC%8C%E8%BF%98%E6%98%AF%E8%BF%9E%E5%90%83%E4%BA%94%E5%A4%A9%EF%BC%9A%E4%BB%8E%E4%B8%A4%E7%A7%8D%E6%B5%81%E6%84%9F%E8%8D%AF%E7%9C%8B%20AI%20%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1","dateModified":"2026-07-28","image":"https://wizardpisces.github.io/covers/once-vs-five-days-ai-system-design-v4.png","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"一次服药，还是连吃五天：从两种流感药看 AI 系统设计","description":"一次服药，还是连吃五天：从两种流感药看 AI 系统设计 最近比较两种流感药时，我注意到一个很直观的差别。 奥司他韦通常一天两次，连续吃五天；玛巴洛沙韦则按体重单次服用。对患者而言，差别很实际：一种要记住十次，另一种只要吃一次。 人很容易把“一次服药”理解成药效更强、技术更先进。但继续看药物机制，结论没有这么简单。 这件事也让我想到 AI 产品。我们常用模型…","url":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%B8%80%E6%AC%A1%E6%9C%8D%E8%8D%AF%EF%BC%8C%E8%BF%98%E6%98%AF%E8%BF%9E%E5%90%83%E4%BA%94%E5%A4%A9%EF%BC%9A%E4%BB%8E%E4%B8%A4%E7%A7%8D%E6%B5%81%E6%84%9F%E8%8D%AF%E7%9C%8B%20AI%20%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%B8%80%E6%AC%A1%E6%9C%8D%E8%8D%AF%EF%BC%8C%E8%BF%98%E6%98%AF%E8%BF%9E%E5%90%83%E4%BA%94%E5%A4%A9%EF%BC%9A%E4%BB%8E%E4%B8%A4%E7%A7%8D%E6%B5%81%E6%84%9F%E8%8D%AF%E7%9C%8B%20AI%20%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1","dateModified":"2026-07-28","image":"https://wizardpisces.github.io/covers/once-vs-five-days-ai-system-design-v4.png","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：一次服药，还是连吃五天：从两种流感药看 AI 系统设计，LZ AI NOTE，https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%B8%80%E6%AC%A1%E6%9C%8D%E8%8D%AF%EF%BC%8C%E8%BF%98%E6%98%AF%E8%BF%9E%E5%90%83%E4%BA%94%E5%A4%A9%EF%BC%9A%E4%BB%8E%E4%B8%A4%E7%A7%8D%E6%B5%81%E6%84%9F%E8%8D%AF%E7%9C%8B%20AI%20%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1","about":["ai-笔记"]}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>一次服药，还是连吃五天：从两种流感药看 AI 系统设计</h1><h1>一次服药，还是连吃五天：从两种流感药看 AI 系统设计</h1>
@@ -79,6 +87,6 @@ AI 系统也是一样。模型架构之外，算力配置、业务流程、人�
 <p>CDC. Influenza Antiviral Drug Baloxavir Marboxil
 <a href="https://www.cdc.gov/flu/treatment/baloxavir-marboxil.html">https://www.cdc.gov/flu/treatment/baloxavir-marboxil.html</a></p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-CSJjPKOE.js"></script>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
 </body>
 </html>

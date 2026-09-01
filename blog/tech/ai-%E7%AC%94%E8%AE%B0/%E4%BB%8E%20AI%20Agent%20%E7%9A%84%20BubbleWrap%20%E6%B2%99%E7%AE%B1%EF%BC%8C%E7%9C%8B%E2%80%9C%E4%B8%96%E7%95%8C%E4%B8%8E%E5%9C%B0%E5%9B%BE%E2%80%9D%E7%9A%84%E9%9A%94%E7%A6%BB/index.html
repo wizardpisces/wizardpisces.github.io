@@ -6,14 +6,22 @@
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <title>从 AI Agent 的 BubbleWrap 沙箱，看“世界与地图”的隔离哲学 | LZ AI NOTE</title>
   <meta name="description" content="从 AI Agent 的 BubbleWrap 沙箱，看“世界与地图”的隔离哲学 在研究 AI Agent 的运行环境时，经常会看到一个工具： 从定义上来说，它是一个基于 Linux Namespace 的轻量级沙箱工具。很多桌面应用、容器运行时以及 AI Agent 的执行环境都会使用它来限制程序能够访问的资源。 不过，如果只把 Bubblewrap 理…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="从 AI Agent 的 BubbleWrap 沙箱，看“世界与地图”的隔离哲学">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-06-29">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%BB%8E%20AI%20Agent%20%E7%9A%84%20BubbleWrap%20%E6%B2%99%E7%AE%B1%EF%BC%8C%E7%9C%8B%E2%80%9C%E4%B8%96%E7%95%8C%E4%B8%8E%E5%9C%B0%E5%9B%BE%E2%80%9D%E7%9A%84%E9%9A%94%E7%A6%BB">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
   <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%BB%8E%20AI%20Agent%20%E7%9A%84%20BubbleWrap%20%E6%B2%99%E7%AE%B1%EF%BC%8C%E7%9C%8B%E2%80%9C%E4%B8%96%E7%95%8C%E4%B8%8E%E5%9C%B0%E5%9B%BE%E2%80%9D%E7%9A%84%E9%9A%94%E7%A6%BB">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
   <meta property="og:title" content="从 AI Agent 的 BubbleWrap 沙箱，看“世界与地图”的隔离哲学 | LZ AI NOTE">
   <meta property="og:description" content="从 AI Agent 的 BubbleWrap 沙箱，看“世界与地图”的隔离哲学 在研究 AI Agent 的运行环境时，经常会看到一个工具： 从定义上来说，它是一个基于 Linux Namespace 的轻量级沙箱工具。很多桌面应用、容器运行时以及 AI Agent 的执行环境都会使用它来限制程序能够访问的资源。 不过，如果只把 Bubblewrap 理…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%BB%8E%20AI%20Agent%20%E7%9A%84%20BubbleWrap%20%E6%B2%99%E7%AE%B1%EF%BC%8C%E7%9C%8B%E2%80%9C%E4%B8%96%E7%95%8C%E4%B8%8E%E5%9C%B0%E5%9B%BE%E2%80%9D%E7%9A%84%E9%9A%94%E7%A6%BB">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"从 AI Agent 的 BubbleWrap 沙箱，看“世界与地图”的隔离哲学","description":"从 AI Agent 的 BubbleWrap 沙箱，看“世界与地图”的隔离哲学 在研究 AI Agent 的运行环境时，经常会看到一个工具： 从定义上来说，它是一个基于 Linux Namespace 的轻量级沙箱工具。很多桌面应用、容器运行时以及 AI Agent 的执行环境都会使用它来限制程序能够访问的资源。 不过，如果只把 Bubblewrap 理…","url":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%BB%8E%20AI%20Agent%20%E7%9A%84%20BubbleWrap%20%E6%B2%99%E7%AE%B1%EF%BC%8C%E7%9C%8B%E2%80%9C%E4%B8%96%E7%95%8C%E4%B8%8E%E5%9C%B0%E5%9B%BE%E2%80%9D%E7%9A%84%E9%9A%94%E7%A6%BB","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%BB%8E%20AI%20Agent%20%E7%9A%84%20BubbleWrap%20%E6%B2%99%E7%AE%B1%EF%BC%8C%E7%9C%8B%E2%80%9C%E4%B8%96%E7%95%8C%E4%B8%8E%E5%9C%B0%E5%9B%BE%E2%80%9D%E7%9A%84%E9%9A%94%E7%A6%BB","dateModified":"2026-06-29","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"从 AI Agent 的 BubbleWrap 沙箱，看“世界与地图”的隔离哲学","description":"从 AI Agent 的 BubbleWrap 沙箱，看“世界与地图”的隔离哲学 在研究 AI Agent 的运行环境时，经常会看到一个工具： 从定义上来说，它是一个基于 Linux Namespace 的轻量级沙箱工具。很多桌面应用、容器运行时以及 AI Agent 的执行环境都会使用它来限制程序能够访问的资源。 不过，如果只把 Bubblewrap 理…","url":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%BB%8E%20AI%20Agent%20%E7%9A%84%20BubbleWrap%20%E6%B2%99%E7%AE%B1%EF%BC%8C%E7%9C%8B%E2%80%9C%E4%B8%96%E7%95%8C%E4%B8%8E%E5%9C%B0%E5%9B%BE%E2%80%9D%E7%9A%84%E9%9A%94%E7%A6%BB","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%BB%8E%20AI%20Agent%20%E7%9A%84%20BubbleWrap%20%E6%B2%99%E7%AE%B1%EF%BC%8C%E7%9C%8B%E2%80%9C%E4%B8%96%E7%95%8C%E4%B8%8E%E5%9C%B0%E5%9B%BE%E2%80%9D%E7%9A%84%E9%9A%94%E7%A6%BB","dateModified":"2026-06-29","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：从 AI Agent 的 BubbleWrap 沙箱，看“世界与地图”的隔离哲学，LZ AI NOTE，https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%BB%8E%20AI%20Agent%20%E7%9A%84%20BubbleWrap%20%E6%B2%99%E7%AE%B1%EF%BC%8C%E7%9C%8B%E2%80%9C%E4%B8%96%E7%95%8C%E4%B8%8E%E5%9C%B0%E5%9B%BE%E2%80%9D%E7%9A%84%E9%9A%94%E7%A6%BB","about":["ai-笔记"]}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>从 AI Agent 的 BubbleWrap 沙箱，看“世界与地图”的隔离哲学</h1><h1>从 AI Agent 的 BubbleWrap 沙箱，看“世界与地图”的隔离哲学</h1>
@@ -155,6 +163,6 @@ usr
 <p>世界还是那个世界。</p>
 <p>只是每个进程看到的地图不一样。</p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-CSJjPKOE.js"></script>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
 </body>
 </html>

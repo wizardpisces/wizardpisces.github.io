@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>从 Loop 到 Graph Engineering：当一件事变成多条支线 | LZ AI NOTE</title>
+  <meta name="description" content="从 Loop 到 Graph Engineering：当一件事变成多条支线 这篇接着[《从 Prompt 到 Loop Engineering：一个简单例子看懂 AI 工程的四次升级》]往外讲。先把 Loop 理解成“做、检查、不合格就重试”的小循环就够了。 还是“夏日读书会”，只是任务多了一点。 只要一条文案：一个 Loop 运营给出活动资料，文案 Ag…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="从 Loop 到 Graph Engineering：当一件事变成多条支线">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-08-24">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/tech/ai-%E5%8F%AF%E9%9D%A0Agent/%E4%BB%8E%20Loop%20%E5%88%B0%20Graph%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%E5%A4%9A%20Agent%20%E6%80%8E%E4%B9%88%E5%8D%8F%E4%BD%9C">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-%E5%8F%AF%E9%9D%A0Agent/%E4%BB%8E%20Loop%20%E5%88%B0%20Graph%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%E5%A4%9A%20Agent%20%E6%80%8E%E4%B9%88%E5%8D%8F%E4%BD%9C">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="从 Loop 到 Graph Engineering：当一件事变成多条支线 | LZ AI NOTE">
+  <meta property="og:description" content="从 Loop 到 Graph Engineering：当一件事变成多条支线 这篇接着[《从 Prompt 到 Loop Engineering：一个简单例子看懂 AI 工程的四次升级》]往外讲。先把 Loop 理解成“做、检查、不合格就重试”的小循环就够了。 还是“夏日读书会”，只是任务多了一点。 只要一条文案：一个 Loop 运营给出活动资料，文案 Ag…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E5%8F%AF%E9%9D%A0Agent/%E4%BB%8E%20Loop%20%E5%88%B0%20Graph%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%E5%A4%9A%20Agent%20%E6%80%8E%E4%B9%88%E5%8D%8F%E4%BD%9C">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"从 Loop 到 Graph Engineering：当一件事变成多条支线","description":"从 Loop 到 Graph Engineering：当一件事变成多条支线 这篇接着[《从 Prompt 到 Loop Engineering：一个简单例子看懂 AI 工程的四次升级》]往外讲。先把 Loop 理解成“做、检查、不合格就重试”的小循环就够了。 还是“夏日读书会”，只是任务多了一点。 只要一条文案：一个 Loop 运营给出活动资料，文案 Ag…","url":"https://wizardpisces.github.io/blog/tech/ai-%E5%8F%AF%E9%9D%A0Agent/%E4%BB%8E%20Loop%20%E5%88%B0%20Graph%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%E5%A4%9A%20Agent%20%E6%80%8E%E4%B9%88%E5%8D%8F%E4%BD%9C","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E5%8F%AF%E9%9D%A0Agent/%E4%BB%8E%20Loop%20%E5%88%B0%20Graph%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%E5%A4%9A%20Agent%20%E6%80%8E%E4%B9%88%E5%8D%8F%E4%BD%9C","dateModified":"2026-08-24","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：从 Loop 到 Graph Engineering：当一件事变成多条支线，LZ AI NOTE，https://wizardpisces.github.io/blog/tech/ai-%E5%8F%AF%E9%9D%A0Agent/%E4%BB%8E%20Loop%20%E5%88%B0%20Graph%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%E5%A4%9A%20Agent%20%E6%80%8E%E4%B9%88%E5%8D%8F%E4%BD%9C","about":["ai-可靠Agent"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>从 Loop 到 Graph Engineering：当一件事变成多条支线</h1><h1>从 Loop 到 Graph Engineering：当一件事变成多条支线</h1>
+<p>这篇接着<a href="../ai-%E5%8F%AF%E9%9D%A0Agent/%E4%BB%8E%20Prompt%20%E5%88%B0%20Loop%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%E7%9A%84%E5%9B%9B%E6%AC%A1%E5%8D%87%E7%BA%A7.md">《从 Prompt 到 Loop Engineering：一个简单例子看懂 AI 工程的四次升级》</a>往外讲。先把 Loop 理解成“做、检查、不合格就重试”的小循环就够了。</p>
+<p>还是“夏日读书会”，只是任务多了一点。</p>
+<h2>只要一条文案：一个 Loop</h2>
+<p>运营给出活动资料，文案 Agent 写稿。程序检查字数和禁用词；不合格就带着问题重写，最多三次。合格后交运营。</p>
+<pre><code class="language-text">活动资料
+   │
+   ▼
+写文案
+   │
+   ▼
+检查 ── 合格 ──→ 运营审核
+   │
+   └── 不合格 ──→ 带着问题重写
+                         │
+                         └──→ 检查
+</code></pre>
+<p>这就是 Loop：同一件事反复做、反复检查，直到通过或停止。</p>
+<p>文案没过，只有文案需要重写。到这里不需要 Graph，更不需要为了凑数拆出几个 Agent。</p>
+<h2>同一场活动，要同时上线三样东西</h2>
+<p>现在运营的要求变成：公众号文案、活动海报、小程序报名页都准备好，才能发布。</p>
+<pre><code class="language-text">活动资料
+   │
+   ├─→ 写文案 → 合规检查 ──┐
+   ├─→ 出海报 → 尺寸检查 ──┼─→ 运营审核 → 发布
+   └─→ 配报名页 → 链接检查 ─┘
+</code></pre>
+<p>三条线可以同时跑。谁先完成都不能单独发布，运营只能在三项齐全时审核。</p>
+<p>周四下午，合规检查发现文案里有“错过再等一年”。海报和报名页已经通过。</p>
+<p>这时只需要把问题退给文案 Agent：“删掉‘错过再等一年’，语气别制造稀缺感。”它修改当前草稿，再做一次合规检查。海报和报名页不需要动。</p>
+<pre><code class="language-text">合规不通过
+   │
+   ▼
+带着问题修改当前草稿 → 合规检查
+   │                       │
+   │                       └── 不通过：继续修改
+   │
+   └── 通过 ──→ 等海报、报名页
+
+海报、报名页：保留已通过的结果，不重做
+</code></pre>
+<p>读图时抓住三点：</p>
+<pre><code class="language-text">一条支线没通过，只在这条支线里修改和复查。
+其他已经完成的支线保留结果。
+三条支线全通过，才能进入审核和发布。
+</code></pre>
+<p>把这些关系写进系统，就是这里所说的 Graph Engineering。</p>
+<h2>Graph 和 Loop 的关系</h2>
+<p>把两层放在一起看：</p>
+<pre><code class="language-text">Graph：安排多条支线如何分叉、等待、汇合
+
+活动资料
+   ├── 文案支线 ─────────┐
+   ├── 海报支线 ─────────┼─→ 审核 → 发布
+   └── 报名页支线 ───────┘
+
+Loop：让其中一条支线自己做到合格
+
+文案支线：写 → 检查 → 修改 → 通过
+</code></pre>
+<p>Graph 在外面安排关系，Loop 在里面处理返工。一个 Graph 里常有多个 Loop，这很正常。</p>
+<p>节点也不必全是 Agent：</p>
+<pre><code class="language-text">写文案：Agent
+出海报：设计师或图像模型
+配报名页、检查链接：普通程序
+运营审核：人
+</code></pre>
+<p>Graph Engineering 关心的不是 Agent 数量，而是这些节点的关系。状态机、任务队列，甚至一个 <code>while</code> 循环都能实现；关键是把谁依赖谁、谁等谁、失败退到哪里，明确保存下来。</p>
+<h2>什么时候需要它</h2>
+<pre><code class="language-text">只有一个结果：生成 → 检查 → 重试
+                         │
+                         └── 一个 Loop 通常够用
+
+多个结果：分叉 → 各自检查和重试 → 汇合 → 发布
+                         │
+                         └── 值得显式设计成 Graph
+</code></pre>
+<p>Graph Engineering 这个名字有炒作成分。工作流、状态机和 DAG 早就在处理分叉、汇合与回退。这个新词至少把一个老问题重新摆到眼前：多条支线开始互相等待时，控制逻辑不能再全塞进一个大 Prompt 或一个大循环。</p>
+<h2>放回完整地图</h2>
+<pre><code class="language-text">Graph Engineering
+多条任务如何分叉、汇合和回退
+│
+└── Loop Engineering
+    一条任务如何检查、重试和停止
+    │
+    └── Harness Engineering
+        这次运行允许模型做什么
+        │
+        └── Context Engineering
+            这次给模型看什么
+            │
+            └── Prompt Engineering
+                这次怎么说
+                │
+                └── Model
+                    生成内容或选择下一步动作
+</code></pre>
+<p>上一篇讲的是“把一件事做好”，这篇讲的是“几件事怎样一起做完”。这不是五次升级，只是从模型往外逐层划出的工程边界。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
+</body>
+</html>

@@ -6,14 +6,22 @@
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <title>详细解析 | LZ AI NOTE</title>
   <meta name="description" content="Claude 的 JIT 检索其实就是“在对话时临时做索引”，因此有冷启动成本； 而类似 zilliz/claude context 的 MCP 插件提供“预构建、持久化、高质量索引”，让 Claude 可以跳过 JIT 的昂贵推理步骤，直接走“高质量捷径”。 换句话说： JIT = 模型现算现查（token 贵、慢、有概率错） MCP = 给模型准备好的…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="详细解析">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2025-11-19">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/Claude%20code%20JIT%20%E7%B4%A2%E5%BC%95%E5%AF%B9%E6%AF%94%E9%A2%84%E6%9E%84%E5%BB%BA%E7%B4%A2%E5%BC%95">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
   <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/Claude%20code%20JIT%20%E7%B4%A2%E5%BC%95%E5%AF%B9%E6%AF%94%E9%A2%84%E6%9E%84%E5%BB%BA%E7%B4%A2%E5%BC%95">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
   <meta property="og:title" content="详细解析 | LZ AI NOTE">
   <meta property="og:description" content="Claude 的 JIT 检索其实就是“在对话时临时做索引”，因此有冷启动成本； 而类似 zilliz/claude context 的 MCP 插件提供“预构建、持久化、高质量索引”，让 Claude 可以跳过 JIT 的昂贵推理步骤，直接走“高质量捷径”。 换句话说： JIT = 模型现算现查（token 贵、慢、有概率错） MCP = 给模型准备好的…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/Claude%20code%20JIT%20%E7%B4%A2%E5%BC%95%E5%AF%B9%E6%AF%94%E9%A2%84%E6%9E%84%E5%BB%BA%E7%B4%A2%E5%BC%95">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"详细解析","description":"Claude 的 JIT 检索其实就是“在对话时临时做索引”，因此有冷启动成本； 而类似 zilliz/claude context 的 MCP 插件提供“预构建、持久化、高质量索引”，让 Claude 可以跳过 JIT 的昂贵推理步骤，直接走“高质量捷径”。 换句话说： JIT = 模型现算现查（token 贵、慢、有概率错） MCP = 给模型准备好的…","url":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/Claude%20code%20JIT%20%E7%B4%A2%E5%BC%95%E5%AF%B9%E6%AF%94%E9%A2%84%E6%9E%84%E5%BB%BA%E7%B4%A2%E5%BC%95","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/Claude%20code%20JIT%20%E7%B4%A2%E5%BC%95%E5%AF%B9%E6%AF%94%E9%A2%84%E6%9E%84%E5%BB%BA%E7%B4%A2%E5%BC%95","dateModified":"2025-11-19","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"详细解析","description":"Claude 的 JIT 检索其实就是“在对话时临时做索引”，因此有冷启动成本； 而类似 zilliz/claude context 的 MCP 插件提供“预构建、持久化、高质量索引”，让 Claude 可以跳过 JIT 的昂贵推理步骤，直接走“高质量捷径”。 换句话说： JIT = 模型现算现查（token 贵、慢、有概率错） MCP = 给模型准备好的…","url":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/Claude%20code%20JIT%20%E7%B4%A2%E5%BC%95%E5%AF%B9%E6%AF%94%E9%A2%84%E6%9E%84%E5%BB%BA%E7%B4%A2%E5%BC%95","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/Claude%20code%20JIT%20%E7%B4%A2%E5%BC%95%E5%AF%B9%E6%AF%94%E9%A2%84%E6%9E%84%E5%BB%BA%E7%B4%A2%E5%BC%95","dateModified":"2025-11-19","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：详细解析，LZ AI NOTE，https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/Claude%20code%20JIT%20%E7%B4%A2%E5%BC%95%E5%AF%B9%E6%AF%94%E9%A2%84%E6%9E%84%E5%BB%BA%E7%B4%A2%E5%BC%95","about":["ai-笔记"]}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>详细解析</h1><p><strong>Claude 的 JIT 检索其实就是“在对话时临时做索引”，因此有冷启动成本；
@@ -93,6 +101,6 @@
 </ul>
 <p>这才是为何 MCP 能显著提升 Claude 的 Code Intelligence。</p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-CSJjPKOE.js"></script>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
 </body>
 </html>

@@ -6,7 +6,15 @@
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <title>Claude Sonnet 5 的 Token 消耗更多了？一文看懂 Token 的演化 | LZ AI NOTE</title>
   <meta name="description" content="Claude Sonnet 5 的 Token 消耗更多了？一文看懂 Token 的演化 Anthropic 发布 Claude Sonnet 5 后，在更新说明里专门提到一件事： Claude Sonnet 5 uses a new tokenizer. The same input text produces approximately 30% mor…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="Claude Sonnet 5 的 Token 消耗更多了？一文看懂 Token 的演化">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-07-08">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Claude%20Sonnet%205%20%E7%9A%84%20Token%20%E6%B6%88%E8%80%97%E6%9B%B4%E5%A4%9A%E4%BA%86%EF%BC%9F%E4%B8%80%E6%96%87%E7%9C%8B%E6%87%82%20Token%20%E7%9A%84%E6%BC%94%E5%8C%96">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
   <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Claude%20Sonnet%205%20%E7%9A%84%20Token%20%E6%B6%88%E8%80%97%E6%9B%B4%E5%A4%9A%E4%BA%86%EF%BC%9F%E4%B8%80%E6%96%87%E7%9C%8B%E6%87%82%20Token%20%E7%9A%84%E6%BC%94%E5%8C%96">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
   <meta property="og:title" content="Claude Sonnet 5 的 Token 消耗更多了？一文看懂 Token 的演化 | LZ AI NOTE">
@@ -14,7 +22,7 @@
   <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Claude%20Sonnet%205%20%E7%9A%84%20Token%20%E6%B6%88%E8%80%97%E6%9B%B4%E5%A4%9A%E4%BA%86%EF%BC%9F%E4%B8%80%E6%96%87%E7%9C%8B%E6%87%82%20Token%20%E7%9A%84%E6%BC%94%E5%8C%96">
   <meta property="og:image" content="https://wizardpisces.github.io/covers/claude-sonnet-5-tokenizer-evolution.png">
   <meta name="twitter:image" content="https://wizardpisces.github.io/covers/claude-sonnet-5-tokenizer-evolution.png">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Claude Sonnet 5 的 Token 消耗更多了？一文看懂 Token 的演化","description":"Claude Sonnet 5 的 Token 消耗更多了？一文看懂 Token 的演化 Anthropic 发布 Claude Sonnet 5 后，在更新说明里专门提到一件事： Claude Sonnet 5 uses a new tokenizer. The same input text produces approximately 30% mor…","url":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Claude%20Sonnet%205%20%E7%9A%84%20Token%20%E6%B6%88%E8%80%97%E6%9B%B4%E5%A4%9A%E4%BA%86%EF%BC%9F%E4%B8%80%E6%96%87%E7%9C%8B%E6%87%82%20Token%20%E7%9A%84%E6%BC%94%E5%8C%96","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Claude%20Sonnet%205%20%E7%9A%84%20Token%20%E6%B6%88%E8%80%97%E6%9B%B4%E5%A4%9A%E4%BA%86%EF%BC%9F%E4%B8%80%E6%96%87%E7%9C%8B%E6%87%82%20Token%20%E7%9A%84%E6%BC%94%E5%8C%96","dateModified":"2026-07-08","image":"https://wizardpisces.github.io/covers/claude-sonnet-5-tokenizer-evolution.png","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Claude Sonnet 5 的 Token 消耗更多了？一文看懂 Token 的演化","description":"Claude Sonnet 5 的 Token 消耗更多了？一文看懂 Token 的演化 Anthropic 发布 Claude Sonnet 5 后，在更新说明里专门提到一件事： Claude Sonnet 5 uses a new tokenizer. The same input text produces approximately 30% mor…","url":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Claude%20Sonnet%205%20%E7%9A%84%20Token%20%E6%B6%88%E8%80%97%E6%9B%B4%E5%A4%9A%E4%BA%86%EF%BC%9F%E4%B8%80%E6%96%87%E7%9C%8B%E6%87%82%20Token%20%E7%9A%84%E6%BC%94%E5%8C%96","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Claude%20Sonnet%205%20%E7%9A%84%20Token%20%E6%B6%88%E8%80%97%E6%9B%B4%E5%A4%9A%E4%BA%86%EF%BC%9F%E4%B8%80%E6%96%87%E7%9C%8B%E6%87%82%20Token%20%E7%9A%84%E6%BC%94%E5%8C%96","dateModified":"2026-07-08","image":"https://wizardpisces.github.io/covers/claude-sonnet-5-tokenizer-evolution.png","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：Claude Sonnet 5 的 Token 消耗更多了？一文看懂 Token 的演化，LZ AI NOTE，https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Claude%20Sonnet%205%20%E7%9A%84%20Token%20%E6%B6%88%E8%80%97%E6%9B%B4%E5%A4%9A%E4%BA%86%EF%BC%9F%E4%B8%80%E6%96%87%E7%9C%8B%E6%87%82%20Token%20%E7%9A%84%E6%BC%94%E5%8C%96","about":["ai-好问题"]}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Claude Sonnet 5 的 Token 消耗更多了？一文看懂 Token 的演化</h1><h1>Claude Sonnet 5 的 Token 消耗更多了？一文看懂 Token 的演化</h1>
@@ -282,6 +290,6 @@ apply
 <p>完成同一个任务，到底需要多少成本。</p>
 </blockquote>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-CSJjPKOE.js"></script>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
 </body>
 </html>

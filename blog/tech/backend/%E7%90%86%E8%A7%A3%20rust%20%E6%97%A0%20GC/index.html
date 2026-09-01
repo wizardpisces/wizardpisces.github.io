@@ -6,14 +6,22 @@
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <title>Rust 的“无 GC”到底是什么意思 | LZ AI NOTE</title>
   <meta name="description" content="Rust 的“无 GC”到底是什么意思 “Rust 没有 GC”很容易被听成另一句话：它不需要在运行时管理内存。这并不准确。 更准确地说，Rust 没有由语言 runtime 统一追踪对象可达性、再批量回收不可达对象的 tracing GC。它把最常见的资源释放时机绑定到所有权结束，并把所有权与借用是否合法放进编译期检查。 message 所持有的堆内存不…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="Rust 的“无 GC”到底是什么意思">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-08-12">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/tech/backend/%E7%90%86%E8%A7%A3%20rust%20%E6%97%A0%20GC">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
   <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/backend/%E7%90%86%E8%A7%A3%20rust%20%E6%97%A0%20GC">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
   <meta property="og:title" content="Rust 的“无 GC”到底是什么意思 | LZ AI NOTE">
   <meta property="og:description" content="Rust 的“无 GC”到底是什么意思 “Rust 没有 GC”很容易被听成另一句话：它不需要在运行时管理内存。这并不准确。 更准确地说，Rust 没有由语言 runtime 统一追踪对象可达性、再批量回收不可达对象的 tracing GC。它把最常见的资源释放时机绑定到所有权结束，并把所有权与借用是否合法放进编译期检查。 message 所持有的堆内存不…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/backend/%E7%90%86%E8%A7%A3%20rust%20%E6%97%A0%20GC">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Rust 的“无 GC”到底是什么意思","description":"Rust 的“无 GC”到底是什么意思 “Rust 没有 GC”很容易被听成另一句话：它不需要在运行时管理内存。这并不准确。 更准确地说，Rust 没有由语言 runtime 统一追踪对象可达性、再批量回收不可达对象的 tracing GC。它把最常见的资源释放时机绑定到所有权结束，并把所有权与借用是否合法放进编译期检查。 message 所持有的堆内存不…","url":"https://wizardpisces.github.io/blog/tech/backend/%E7%90%86%E8%A7%A3%20rust%20%E6%97%A0%20GC","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/backend/%E7%90%86%E8%A7%A3%20rust%20%E6%97%A0%20GC","dateModified":"2026-08-12","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Rust 的“无 GC”到底是什么意思","description":"Rust 的“无 GC”到底是什么意思 “Rust 没有 GC”很容易被听成另一句话：它不需要在运行时管理内存。这并不准确。 更准确地说，Rust 没有由语言 runtime 统一追踪对象可达性、再批量回收不可达对象的 tracing GC。它把最常见的资源释放时机绑定到所有权结束，并把所有权与借用是否合法放进编译期检查。 message 所持有的堆内存不…","url":"https://wizardpisces.github.io/blog/tech/backend/%E7%90%86%E8%A7%A3%20rust%20%E6%97%A0%20GC","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/backend/%E7%90%86%E8%A7%A3%20rust%20%E6%97%A0%20GC","dateModified":"2026-08-12","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：Rust 的“无 GC”到底是什么意思，LZ AI NOTE，https://wizardpisces.github.io/blog/tech/backend/%E7%90%86%E8%A7%A3%20rust%20%E6%97%A0%20GC","about":["backend"]}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Rust 的“无 GC”到底是什么意思</h1><h1>Rust 的“无 GC”到底是什么意思</h1>
@@ -55,6 +63,6 @@ let consumer = Rc::clone(&amp;shared);
 <li><a href="https://doc.rust-lang.org/book/ch15-05-interior-mutability.html">The Rust Programming Language：RefCell<T></a></li>
 </ul>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-CSJjPKOE.js"></script>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
 </body>
 </html>

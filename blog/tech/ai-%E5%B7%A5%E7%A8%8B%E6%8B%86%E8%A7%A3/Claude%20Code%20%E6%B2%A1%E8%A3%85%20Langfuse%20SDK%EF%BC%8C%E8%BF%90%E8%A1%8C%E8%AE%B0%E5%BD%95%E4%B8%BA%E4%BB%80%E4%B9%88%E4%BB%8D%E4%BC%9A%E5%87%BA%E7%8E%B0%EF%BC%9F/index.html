@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>Claude Code 没装 Langfuse SDK，运行记录为什么仍会出现？ | LZ AI NOTE</title>
+  <meta name="description" content="Claude Code 没装 Langfuse SDK，运行记录为什么仍会出现？ 先在终端里执行： 几秒后打开 Langfuse，页面里出现了一棵完整的调用树：Claude Code 发起了几次模型请求、用了哪些工具、每一步花了多久。 奇怪的是，Claude Code 没有安装 Langfuse SDK，也没有和我们的 Python 应用运行在同一个进程里…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="Claude Code 没装 Langfuse SDK，运行记录为什么仍会出现？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-08-18">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/tech/ai-%E5%B7%A5%E7%A8%8B%E6%8B%86%E8%A7%A3/Claude%20Code%20%E6%B2%A1%E8%A3%85%20Langfuse%20SDK%EF%BC%8C%E8%BF%90%E8%A1%8C%E8%AE%B0%E5%BD%95%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8D%E4%BC%9A%E5%87%BA%E7%8E%B0%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-%E5%B7%A5%E7%A8%8B%E6%8B%86%E8%A7%A3/Claude%20Code%20%E6%B2%A1%E8%A3%85%20Langfuse%20SDK%EF%BC%8C%E8%BF%90%E8%A1%8C%E8%AE%B0%E5%BD%95%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8D%E4%BC%9A%E5%87%BA%E7%8E%B0%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="Claude Code 没装 Langfuse SDK，运行记录为什么仍会出现？ | LZ AI NOTE">
+  <meta property="og:description" content="Claude Code 没装 Langfuse SDK，运行记录为什么仍会出现？ 先在终端里执行： 几秒后打开 Langfuse，页面里出现了一棵完整的调用树：Claude Code 发起了几次模型请求、用了哪些工具、每一步花了多久。 奇怪的是，Claude Code 没有安装 Langfuse SDK，也没有和我们的 Python 应用运行在同一个进程里…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E5%B7%A5%E7%A8%8B%E6%8B%86%E8%A7%A3/Claude%20Code%20%E6%B2%A1%E8%A3%85%20Langfuse%20SDK%EF%BC%8C%E8%BF%90%E8%A1%8C%E8%AE%B0%E5%BD%95%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8D%E4%BC%9A%E5%87%BA%E7%8E%B0%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Claude Code 没装 Langfuse SDK，运行记录为什么仍会出现？","description":"Claude Code 没装 Langfuse SDK，运行记录为什么仍会出现？ 先在终端里执行： 几秒后打开 Langfuse，页面里出现了一棵完整的调用树：Claude Code 发起了几次模型请求、用了哪些工具、每一步花了多久。 奇怪的是，Claude Code 没有安装 Langfuse SDK，也没有和我们的 Python 应用运行在同一个进程里…","url":"https://wizardpisces.github.io/blog/tech/ai-%E5%B7%A5%E7%A8%8B%E6%8B%86%E8%A7%A3/Claude%20Code%20%E6%B2%A1%E8%A3%85%20Langfuse%20SDK%EF%BC%8C%E8%BF%90%E8%A1%8C%E8%AE%B0%E5%BD%95%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8D%E4%BC%9A%E5%87%BA%E7%8E%B0%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E5%B7%A5%E7%A8%8B%E6%8B%86%E8%A7%A3/Claude%20Code%20%E6%B2%A1%E8%A3%85%20Langfuse%20SDK%EF%BC%8C%E8%BF%90%E8%A1%8C%E8%AE%B0%E5%BD%95%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8D%E4%BC%9A%E5%87%BA%E7%8E%B0%EF%BC%9F","dateModified":"2026-08-18","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：Claude Code 没装 Langfuse SDK，运行记录为什么仍会出现？，LZ AI NOTE，https://wizardpisces.github.io/blog/tech/ai-%E5%B7%A5%E7%A8%8B%E6%8B%86%E8%A7%A3/Claude%20Code%20%E6%B2%A1%E8%A3%85%20Langfuse%20SDK%EF%BC%8C%E8%BF%90%E8%A1%8C%E8%AE%B0%E5%BD%95%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8D%E4%BC%9A%E5%87%BA%E7%8E%B0%EF%BC%9F","about":["ai-工程拆解"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Claude Code 没装 Langfuse SDK，运行记录为什么仍会出现？</h1><h1>Claude Code 没装 Langfuse SDK，运行记录为什么仍会出现？</h1>
+<p>先在终端里执行：</p>
+<pre><code class="language-bash">claude -p &quot;读一下当前项目，告诉我它在做什么&quot;
+</code></pre>
+<p>几秒后打开 Langfuse，页面里出现了一棵完整的调用树：Claude Code 发起了几次模型请求、用了哪些工具、每一步花了多久。</p>
+<p>奇怪的是，Claude Code 没有安装 Langfuse SDK，也没有和我们的 Python 应用运行在同一个进程里。</p>
+<p>Langfuse 是怎么拿到这些记录的？</p>
+<p>最容易想到的解释是“监听”。也许 Langfuse 在本机盯着 Claude Code，等它产生日志以后再把数据拿走。</p>
+<p>实际方向正好相反。</p>
+<p>不是 Langfuse 来取，而是 Claude Code 主动把记录发了出去。</p>
+<h2>两个程序不共享内存，也可以交换数据</h2>
+<p>浏览器打开一个网页，不需要和服务器共享变量。它只需要知道请求应该怎么写，以及发到哪个地址。</p>
+<p>Claude Code 与 Langfuse 也是这层关系：</p>
+<pre><code class="language-text">Claude Code
+生成运行记录
+     ↓
+按约定格式编码
+     ↓
+通过 HTTP 发送
+     ↓
+Langfuse 接收
+</code></pre>
+<p>两边可以运行在不同进程，甚至不同机器上。它们不共享对象，只共享一套数据约定。</p>
+<p>Claude Code 所说的“内置 OpenTelemetry”，说的就是它已经具备前半段能力：知道该在哪些步骤留下记录，也知道怎样把记录交给一个远端观测系统。</p>
+<p>这里还没有 Langfuse。换成另一个兼容的后台，前半段依然可以工作。</p>
+<h2>一次模型调用，先变成一条标准记录</h2>
+<p>Claude Code 执行任务时，不是只留下最终回答。</p>
+<p>一次完整运行可能包含：</p>
+<pre><code class="language-text">收到用户任务
+调用模型
+执行文件读取工具
+再次调用模型
+返回结果
+</code></pre>
+<p>其中每一步记录叫 Span，属于同一次任务的一组 Span 叫 Trace。</p>
+<p>例如：</p>
+<pre><code class="language-text">interaction
+├── llm_request
+├── tool
+└── llm_request
+</code></pre>
+<p>每条 Span 会记录自己的名称、开始和结束时间、执行状态，还会携带三个重要编号：</p>
+<pre><code class="language-text">trace_id        属于哪一次完整运行
+span_id         当前步骤自己的编号
+parent_span_id  当前步骤的父节点是谁
+</code></pre>
+<p>Claude Code 发送的不是一张画好的树，而是一批带编号的 Span。Langfuse 收到后，用 <code>trace_id</code> 把它们归到一起，再通过 <code>parent_span_id</code> 还原父子关系。</p>
+<p>所以编号负责的是“这些记录怎样组成一次运行”，不是“记录怎样到达 Langfuse”。</p>
+<p>数据还得先跨过网络。</p>
+<h2>OTel 管记录，OTLP 管运输</h2>
+<p>OpenTelemetry 通常简称 OTel。</p>
+<p>它不是某一家 AI 公司的产品，而是一套通用的可观测标准。普通服务器可以用它记录 HTTP 请求、数据库查询和错误；Claude Code 则用它记录模型请求和工具调用。</p>
+<p>OTel 解决的是：</p>
+<blockquote>
+<p>一条运行记录应该怎样创建和组织？</p>
+</blockquote>
+<p>真正负责跨进程传输的协议叫 OTLP，全称 OpenTelemetry Protocol。</p>
+<p>OTLP 解决的是：</p>
+<blockquote>
+<p>这些记录应该怎样编码，再通过网络发送？</p>
+</blockquote>
+<p>两者容易混在一起，可以压缩成一句话：</p>
+<pre><code class="language-text">OTel 负责记，OTLP 负责寄。
+</code></pre>
+<p>Claude Code 内部的 Exporter 会把 Span 编码，再通过 HTTP 发往一个指定地址。这个接收 Trace 的地址，就叫 Trace Endpoint。</p>
+<p>在 Langfuse 中，它类似：</p>
+<pre><code class="language-text">https://&lt;langfuse-host&gt;/api/public/otel/v1/traces
+</code></pre>
+<p>Endpoint 没有新的神秘含义。它就是收件地址。</p>
+<h2>配置没有建立共享，只是填写了地址</h2>
+<p>要让 Claude Code 把 Trace 发到 Langfuse，需要开启追踪，并告诉它发送方式、地址和认证信息：</p>
+<pre><code class="language-bash">export CLAUDE_CODE_ENABLE_TELEMETRY=1
+export CLAUDE_CODE_ENHANCED_TELEMETRY_BETA=1
+
+export OTEL_TRACES_EXPORTER=otlp
+export OTEL_EXPORTER_OTLP_TRACES_PROTOCOL=http/protobuf
+
+export OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=&quot;https://&lt;langfuse-host&gt;/api/public/otel/v1/traces&quot;
+export OTEL_EXPORTER_OTLP_TRACES_HEADERS=&quot;Authorization=Basic &lt;认证信息&gt;,x-langfuse-ingestion-version=4&quot;
+</code></pre>
+<p>这些配置分别回答：</p>
+<pre><code class="language-text">要不要产生 Trace？
+使用什么协议发送？
+发送到哪里？
+数据属于哪个 Langfuse 项目？
+</code></pre>
+<p>Claude Code 仍然使用自己的 OpenTelemetry Provider 和 Exporter。远端 Langfuse 也没有获得 Claude Code 的内存对象。</p>
+<p>它们只是通过一次普通的网络请求完成交接。</p>
+<h2>同进程和跨进程，是两种不同的集成</h2>
+<p>之前把 Pydantic AI 接入 Langfuse 时，两者可以运行在同一个 Python 进程：</p>
+<pre><code class="language-text">Pydantic AI
+     ↓
+共享的 OpenTelemetry Provider
+     ↓
+Langfuse Processor
+     ↓
+远端 Langfuse
+</code></pre>
+<p>Claude Code 是独立进程，无法读取这份 Provider：</p>
+<pre><code class="language-text">Claude Code
+     ↓
+自己的 OpenTelemetry Provider
+     ↓
+自己的 OTLP Exporter
+     ↓ HTTP
+远端 Langfuse
+</code></pre>
+<p>前一种方式共享运行时对象，后一种方式共享数据协议。</p>
+<p>最终它们都能进入同一个 Langfuse 项目，是因为远端服务只关心收到的 Trace 是否符合 OTLP，以及认证信息是否正确。它不要求所有发送方使用同一个 SDK。</p>
+<h2>为什么越来越多 AI 工具选择这条路</h2>
+<p>如果 Claude Code 只支持 Langfuse，它需要维护一套 Langfuse 适配；再支持 LangSmith、Datadog 和企业自建平台，还得继续增加适配。</p>
+<p>使用 OpenTelemetry 后，Claude Code 只负责产生标准 Trace。数据最后去哪里，由 Exporter、Endpoint 或中间的 Collector 决定。</p>
+<pre><code class="language-text">Claude Code
+     ↓
+标准 Trace
+     ├──→ Langfuse
+     ├──→ LangSmith
+     └──→ 企业观测平台
+</code></pre>
+<p>这件事比“Claude Code 支持了 Langfuse”更值得关注。</p>
+<p>AI 工具正在接入一套早已存在的软件基础设施：日志、Trace、指标和网络传输不再由每个 AI 产品重新发明。模型调用虽然新，跨进程记录一次运行的问题并不新。</p>
+<p>以后再看到某个产品宣布“支持 OpenTelemetry”，可以先问三个问题：</p>
+<pre><code class="language-text">它会产生哪些记录？
+使用什么协议发送？
+可以发送到哪些 Endpoint？
+</code></pre>
+<p>这三个问题，比“它集成了哪个观测平台”更接近底层。</p>
+<p>同一个进程里的程序可以共享对象。</p>
+<p>离开进程以后，真正让系统连接起来的，是协议。</p>
+<h2>参考资料</h2>
+<ol>
+<li>Anthropic，Monitoring Claude Code：<a href="https://code.claude.com/docs/en/monitoring-usage">https://code.claude.com/docs/en/monitoring-usage</a></li>
+<li>Langfuse，Native OpenTelemetry Integration：<a href="https://langfuse.com/integrations/native/opentelemetry">https://langfuse.com/integrations/native/opentelemetry</a></li>
+<li>OpenTelemetry，Components：<a href="https://opentelemetry.io/docs/concepts/components/">https://opentelemetry.io/docs/concepts/components/</a></li>
+<li>OpenTelemetry，OTLP Specification：<a href="https://opentelemetry.io/docs/specs/otlp/">https://opentelemetry.io/docs/specs/otlp/</a></li>
+</ol>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
+</body>
+</html>

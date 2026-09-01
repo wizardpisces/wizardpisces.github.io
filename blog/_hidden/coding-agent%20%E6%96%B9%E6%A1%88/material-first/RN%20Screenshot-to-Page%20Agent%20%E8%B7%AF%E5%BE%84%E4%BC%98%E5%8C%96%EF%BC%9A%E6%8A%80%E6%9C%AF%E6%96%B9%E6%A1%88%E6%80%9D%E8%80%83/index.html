@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>RN Screenshot-to-Page Agent 路径优化：技术方案思考 | LZ AI NOTE</title>
+  <meta name="description" content="当前并行推进 Web Schema 到 RN 的移植、Codex Direct 探索和公共基础建设，获得结果后再决定融合方式。">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="RN Screenshot-to-Page Agent 路径优化：技术方案思考">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-08-31">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN%20Screenshot-to-Page%20Agent%20%E8%B7%AF%E5%BE%84%E4%BC%98%E5%8C%96%EF%BC%9A%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88%E6%80%9D%E8%80%83">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN%20Screenshot-to-Page%20Agent%20%E8%B7%AF%E5%BE%84%E4%BC%98%E5%8C%96%EF%BC%9A%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88%E6%80%9D%E8%80%83">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="RN Screenshot-to-Page Agent 路径优化：技术方案思考 | LZ AI NOTE">
+  <meta property="og:description" content="当前并行推进 Web Schema 到 RN 的移植、Codex Direct 探索和公共基础建设，获得结果后再决定融合方式。">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN%20Screenshot-to-Page%20Agent%20%E8%B7%AF%E5%BE%84%E4%BC%98%E5%8C%96%EF%BC%9A%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88%E6%80%9D%E8%80%83">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"RN Screenshot-to-Page Agent 路径优化：技术方案思考","description":"当前并行推进 Web Schema 到 RN 的移植、Codex Direct 探索和公共基础建设，获得结果后再决定融合方式。","url":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN%20Screenshot-to-Page%20Agent%20%E8%B7%AF%E5%BE%84%E4%BC%98%E5%8C%96%EF%BC%9A%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88%E6%80%9D%E8%80%83","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN%20Screenshot-to-Page%20Agent%20%E8%B7%AF%E5%BE%84%E4%BC%98%E5%8C%96%EF%BC%9A%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88%E6%80%9D%E8%80%83","dateModified":"2026-08-31","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：RN Screenshot-to-Page Agent 路径优化：技术方案思考，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN%20Screenshot-to-Page%20Agent%20%E8%B7%AF%E5%BE%84%E4%BC%98%E5%8C%96%EF%BC%9A%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88%E6%80%9D%E8%80%83","about":["_hidden","coding-agent 方案","material-first"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>RN Screenshot-to-Page Agent 路径优化：技术方案思考</h1><h1>RN Screenshot-to-Page Agent 路径优化：技术方案思考</h1>
+<h2>当前现象</h2>
+<p>当前观察到，Codex 直接接收设计截图、需求和 RN 仓库时，已经能够在部分需求中较好地完成页面还原，甚至一次得到接近可用的结果。</p>
+<p>但这种能力还不稳定。在另一些任务中，Codex 可能找错组件、遗漏业务状态、采用不同实现方式，或者生成后难以完成 Native 视觉验收。</p>
+<p>因此当前的问题不是“Codex 能不能还原页面”，而是：</p>
+<blockquote>
+<p>哪些额外信息和工程能力，能够稳定改善它失败的场景？</p>
+</blockquote>
+<h2>核心取舍</h2>
+<p>这套方案真正需要回答的问题只有一个：</p>
+<blockquote>
+<p>Web Schema 迁移和 Codex Direct 两条路径分别能做到什么，后续应该如何融合？</p>
+</blockquote>
+<p>当前不提前选择其中一条，也不提前要求 Schema 迁移成 Codex Tool，而是三线并行：</p>
+<pre><code class="language-text">主交付线：Web Schema 方案 → 迁移到 RN → 尽快产出并上线
+探索线：截图 + 需求 + 仓库 → Codex Direct → 积累真实结果
+公共基础线：Trace / Material 呈现 / 评测 → 同时服务两条路径
+</code></pre>
+<p>当前选择：<strong>以 Schema 迁移满足近期交付，以 Direct 探索未来路径，同时建设两边共用的基础能力。</strong></p>
+<p>等两条路径都有真实页面和执行数据后，再判断哪些 Schema 能力继续保持独立流程，哪些适合迁移成 Agent Tool，哪些可以移除。</p>
+<h2>为什么并行探索 Direct</h2>
+<p>截图、需求和仓库是原始事实；Meta、Mapping 和 Todo 是对原始事实的再次推断。</p>
+<p>如果这些推断在 Codex 探索仓库之前生成，容易出现几个问题：</p>
+<ul>
+<li>不准确的组件映射被包装成确定事实；</li>
+<li>过早拆解的 Todo 限制了更合理的实现路径；</li>
+<li>派生信息与截图、源码重复甚至冲突；</li>
+<li>Codex 被前置结论锚定，忽略仓库中的真实组件和约束；</li>
+<li>上下文变长了，但有效信息密度和最终页面质量不一定提高。</li>
+</ul>
+<p>因此，优化对象应该从中间 JSON 的完整度，转向 Agent 的端到端任务成功率。我们需要基于真实执行结果，判断哪些派生信息确实提供了增量，哪些只是重复、噪声或错误锚点，再持续优化输入、工具与约束。</p>
+<p>这属于对 Agent 执行轨迹的反馈驱动优化，也是在为未来更系统的策略优化积累数据；</p>
+<h2>输入边界：提取 RN 事实，暂不预拆 Todo（可选）</h2>
+<p>完整 PRD 往往同时包含多端需求和大量业务背景。第一阶段可以从 PRD 中提取一个轻量的 <code>RN Task Brief</code>：</p>
+<pre><code class="language-text">页面目标
+页面入口
+展示状态
+交互行为
+关键数据
+平台约束
+验收条件
+原 PRD 引用
+</code></pre>
+<p><code>RN Task Brief</code> 只是对原始需求的提取和压缩，不决定组件、不生成楼层 Mapping，也不预先拆解实现 Todo。原 PRD 仍然保留为事实来源。</p>
+<h2>整体方案</h2>
+<pre><code class="language-mermaid">flowchart LR
+  Schema[&quot;Web Schema 方案&quot;] --&gt; RN[&quot;RN 移植页面&quot;]
+  Direct[&quot;截图 + 需求 + 仓库&quot;] --&gt; Agent[&quot;Codex Direct 样本&quot;]
+  Foundation[&quot;Trace / Material / 评测&quot;] -.-&gt; RN
+  Foundation -.-&gt; Agent
+  RN --&gt; Evidence[&quot;真实结果&quot;]
+  Agent --&gt; Evidence
+  Evidence --&gt; Fusion[&quot;决定后续融合方式&quot;]
+</code></pre>
+<p>当前核心不是先设计最终架构，而是：</p>
+<pre><code class="language-text">尽快完成 Schema 移植结果
++ 积累 Direct 真实样本
++ 建设两边共用的观察和评测能力
+→ 再决定最终路径
+</code></pre>
+<p>未来可能将部分 Schema 能力迁移为 Agent Tool，但这是验证后的演进方向，不是当前阶段的前置要求。</p>
+<h2>Material 能力的正确位置</h2>
+<p>Material Catalog、Fixture 和 Candidate Board 属于公共基础：Schema 迁移可以用它建立组件映射，Direct 探索可以通过 MCP 查询同一份组件事实。</p>
+<p>它们首先解决两条路径共用的组件事实和真实视觉呈现问题：</p>
+<table>
+<thead>
+<tr>
+<th>使用场景</th>
+<th>最小能力</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Schema 需要建立组件映射</td>
+<td>Material Catalog</td>
+</tr>
+<tr>
+<td>Codex 找不到已有组件</td>
+<td>Material 查询</td>
+</tr>
+<tr>
+<td>Codex 编造组件路径或 Props</td>
+<td>组件事实查询</td>
+</tr>
+<tr>
+<td>多次选择的组件不稳定</td>
+<td>Candidate Board 或候选约束</td>
+</tr>
+<tr>
+<td>人需要判断组件真实效果</td>
+<td>Native Fixture 与 Candidate Board</td>
+</tr>
+</tbody>
+</table>
+<p>这里的关键是：<strong>Material 呈现与查询方式应成为公共能力；Schema 当前仍按独立迁移线推进，后续是否 Tool 化由真实结果决定。</strong></p>
+<h3>普通仓库如何 Material 化</h3>
+<p>现有 Material 不能长期依赖人工逐个登记。可以探索一个 <code>Material Generator Skill</code>，把普通 FE/RN 仓库中已有的可复用组件转成 Agent 可查询、开发者可验证的 Material：</p>
+<pre><code class="language-text">普通 FE/RN 仓库
+→ 识别已有可复用组件
+→ 引用原组件并补充 Fixture
+→ 生成最小 Catalog
+→ 在 Candidate Board 中真实渲染
+→ 人工确认
+→ 成为可用 Material
+</code></pre>
+<p>它不复制组件，也不自动搬迁业务代码。第一版只需要产出 Catalog、Fixture、Candidate Board 和覆盖情况；实际召回效果仍由真实页面 Case 验证。</p>
+<h3>从组件复用扩展到工程复用</h3>
+<p>Material 解决的是“有没有现成组件可以直接使用”，但页面生成还会反复遇到另一类问题：没有现成组件时，新代码应该采用什么组织方式、实现惯例和验证标准。</p>
+<p>这类复用不应全部塞进 Material，而应形成更通用的工程复用知识：</p>
+<pre><code class="language-text">Asset：可直接复用的组件、Hook、Library 或 API
+Pattern：经过验证的代码组织与实现方式
+Recipe：可执行的创建、重构或迁移步骤
+Contract：必须满足的测试、约束与验收条件
+</code></pre>
+<p>可以进一步探索 <code>Engineering Reuse Generator Skill</code>：</p>
+<pre><code class="language-text">已验证的工程代码与 Case
+→ 提议 Asset / Pattern / Recipe / Contract
+→ 人工 Review
+→ 形成 Golden Example 和可检索知识
+→ Agent 在后续任务中按需复用
+</code></pre>
+<p>它和 <code>Material Generator Skill</code> 的关系是：</p>
+<ul>
+<li>Material Generator 面向 FE/RN 的可运行视觉资产；</li>
+<li>Engineering Reuse Generator 面向 FE、BE、Test 都适用的工程模式；</li>
+<li>Component Material 本身属于 Asset 的一种；</li>
+<li>Pattern 不是要求所有相同业务代码完全一致，而是默认遵循已验证模式，确有差异时允许偏离并说明原因。</li>
+</ul>
+<p>该方向先作为公共基础探索。只有 Pattern 或 Recipe 在真实 Case 中证明能降低错误和人工修正，才进入默认 Agent Context 或 Tool。</p>
+<p>更完整的横向方案见<a href="./AI%20Engineering%20Golden%20Path%EF%BC%9A%E9%9D%A2%E5%90%91%20Agent%20%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%A4%8D%E7%94%A8%E6%9C%BA%E5%88%B6.md">《AI Engineering Golden Path：面向 Agent 的工程复用机制》</a>。</p>
+<h2>保留的最小辅助能力</h2>
+<p>第一版公共实现先保持两项能力：</p>
+<pre><code class="language-text">只读 Material MCP
+→ list_rn_materials
+→ get_rn_material
+
+真实 RN Candidate Board
+→ 渲染少量已登记 Fixture
+→ 展示源码路径、Props 和真实 Native 画面
+</code></pre>
+<p>Schema 迁移和 Direct 探索共用同一份 Catalog 与 Fixture，避免分别维护两套组件事实。</p>
+<h2>代码归属</h2>
+<p>实验能力不进入 <code>fe-code-agent</code> 主服务，当前按运行边界拆分：</p>
+<pre><code class="language-text">workbench/services/coding_agent
+├── core
+│   └── Decision Event / Execution Report / Run Store
+├── rn_page
+│   └── RN Material Catalog 与查询
+├── mcp
+│   └── Core 与 RN Page Profile
+└── skills/rn-screenshot-to-page
+
+web-affiliate-rn/src/material-lab
+├── Material Catalog
+├── 真实 RN Fixture
+└── Native Candidate Board
+
+Langfuse
+└── Turn Traces、Session 聚合与人工评分
+</code></pre>
+<p>通用 MCP 能力与 RN 页面专属能力位于同一 Workbench 工程，但通过独立模块和 HTTP 端点暴露。Skill 的唯一源码位于 Workbench，通过链接安装到 <code>~/.codex/skills</code>。Material MCP 使用独立 uv 环境运行，读取 RN 仓库中的 Catalog，但不写入 RN 页面。</p>
+<p>此前位于 <code>fe-code-agent/modules/rn-visual-material-agent</code> 的临时 TypeScript 模块已经迁出。</p>
+<h2>Codex Execution Trace 与结果评分</h2>
+<p>Direct 执行不能成为黑盒，但 Trace 也不等于保存模型内部思维链。</p>
+<p>第一阶段使用 Langfuse 记录可观察、可复核的执行轨迹：</p>
+<pre><code class="language-text">任务输入
+简短计划
+读取过的关键文件和调用过的工具
+关键发现
+组件与实现决策及其证据
+代码修改
+运行与验证结果
+失败点和仍不确定的内容
+</code></pre>
+<p>一个页面还原任务使用一个独立 Codex thread。Langfuse 为每个 Turn 建立一条 Trace，并用嵌套 Span 记录模型调用、工具调用、Token 和耗时；同一 thread 的 Trace 通过相同 <code>sessionId</code> 聚合。Codex 完成后仍输出一份简短 Trace Summary，补充组件选择依据、最终修改和验证结论。</p>
+<p>Trace 不等于模型内部逐字思维链，也不单独代表任务成功。完整证据由三部分组成：</p>
+<pre><code class="language-text">Langfuse Session：按 `sessionId` 聚合的 Turn Traces
+Git Diff / 命令结果 / RN 截图：工程和视觉证据
+Session Score：人工结果判断
+</code></pre>
+<p>第一阶段不自建 Trace 页面和埋点系统，直接使用 Langfuse Codex Plugin。</p>
+<h2>下一步：三线并行</h2>
+<p>选择一个准备上线的真实 RN 页面：</p>
+<pre><code class="language-text">Schema 迁移：以 Web 现有链路为基础尽快完成 RN 页面
+Direct 探索：将截图、需求和 RN 仓库交给 Codex，保留真实样本
+公共基础：同步验证 Trace、Material 呈现和结果评分
+</code></pre>
+<p>两条路径都应留下：</p>
+<pre><code class="language-text">最终代码
+RN 页面截图
+Langfuse Session / sessionId
+人工评分与问题结论
+</code></pre>
+<p>当前优先保证 Schema 迁移尽快出结果，同时避免 Direct 和公共基础停止推进。待真实结果足够后，再确定 Schema 与 Codex 的融合方式。</p>
+<h2>判断标准</h2>
+<p>只看五个结果：</p>
+<ul>
+<li>页面视觉是否接近设计稿；</li>
+<li>页面是否满足需求并能够运行；</li>
+<li>人工需要修正多少次；</li>
+<li>完成耗时是否下降。</li>
+<li>完成 token 是否下降。</li>
+</ul>
+<p>如果某项 Meta、Mapping、Todo 或 Tool 不能稳定改善以上结果，就不作为默认上下文或能力接入。</p>
+<h2>结论</h2>
+<p>推进方式是：</p>
+<blockquote>
+<p>当前以 Web Schema 迁移作为主要交付线，Codex Direct 作为并行探索线，Trace、Material 呈现和评测作为公共基础线。三条线先共同产出真实结果，再决定哪些 Schema 能力迁移为 Agent Tool，以及最终如何融合。</p>
+</blockquote>
+<h2>后续启发：任务拆解与验收</h2>
+<p>Todo 可能也需要重新理解：不必用一份固定列表同时描述需求、约束 Agent 执行并服务人工验收。</p>
+<p>更值得继续观察的方向是：</p>
+<pre><code class="language-text">稳定定义“做成什么”
+→ Agent 根据真实仓库动态决定“怎么做”
+→ 人根据最终结果和证据判断“是否做成”
+</code></pre>
+<p>当前不建设 Task Schema、Todo 生成器或验收平台。先在真实页面任务中观察：哪些信息需要提前明确，Agent 通常如何拆解，人最终依赖哪些证据，再决定是否沉淀为稳定结构。</p>
+<p>视觉感知能力的下一阶段方案见<a href="./RN%20Screenshot%20Perception%20Layer%EF%BC%9A%E4%B8%8B%E4%B8%80%E9%98%B6%E6%AE%B5%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88.md">《RN Screenshot Perception Layer：从“模型看图”到可评测视觉事实》</a>。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
+</body>
+</html>

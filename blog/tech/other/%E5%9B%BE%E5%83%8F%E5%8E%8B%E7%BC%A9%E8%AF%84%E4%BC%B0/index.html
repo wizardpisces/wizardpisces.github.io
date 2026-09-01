@@ -6,14 +6,22 @@
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <title>图像压缩质量评估 | LZ AI NOTE</title>
   <meta name="description" content="图像压缩质量评估 压缩后的图像质量是评估压缩算法的重要指标。常用的图像质量评估方法包括主观评估和客观评估。这里只进行客观评估的讨论 客观评估： 峰值信噪比（PSNR） 结构相似性指数（SSIM） 峰值信噪比（PSNR） 公式中最大像素值（MAX）的作用对于全面理解 PSNR 的计算过程至关重要。让我们详细解释一下这个概念。 1. PSNR 公式 PSNR …">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="图像压缩质量评估">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2025-06-20">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/tech/other/%E5%9B%BE%E5%83%8F%E5%8E%8B%E7%BC%A9%E8%AF%84%E4%BC%B0">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
   <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/other/%E5%9B%BE%E5%83%8F%E5%8E%8B%E7%BC%A9%E8%AF%84%E4%BC%B0">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
   <meta property="og:title" content="图像压缩质量评估 | LZ AI NOTE">
   <meta property="og:description" content="图像压缩质量评估 压缩后的图像质量是评估压缩算法的重要指标。常用的图像质量评估方法包括主观评估和客观评估。这里只进行客观评估的讨论 客观评估： 峰值信噪比（PSNR） 结构相似性指数（SSIM） 峰值信噪比（PSNR） 公式中最大像素值（MAX）的作用对于全面理解 PSNR 的计算过程至关重要。让我们详细解释一下这个概念。 1. PSNR 公式 PSNR …">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/other/%E5%9B%BE%E5%83%8F%E5%8E%8B%E7%BC%A9%E8%AF%84%E4%BC%B0">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"图像压缩质量评估","description":"图像压缩质量评估 压缩后的图像质量是评估压缩算法的重要指标。常用的图像质量评估方法包括主观评估和客观评估。这里只进行客观评估的讨论 客观评估： 峰值信噪比（PSNR） 结构相似性指数（SSIM） 峰值信噪比（PSNR） 公式中最大像素值（MAX）的作用对于全面理解 PSNR 的计算过程至关重要。让我们详细解释一下这个概念。 1. PSNR 公式 PSNR …","url":"https://wizardpisces.github.io/blog/tech/other/%E5%9B%BE%E5%83%8F%E5%8E%8B%E7%BC%A9%E8%AF%84%E4%BC%B0","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/other/%E5%9B%BE%E5%83%8F%E5%8E%8B%E7%BC%A9%E8%AF%84%E4%BC%B0","dateModified":"2025-06-20","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"图像压缩质量评估","description":"图像压缩质量评估 压缩后的图像质量是评估压缩算法的重要指标。常用的图像质量评估方法包括主观评估和客观评估。这里只进行客观评估的讨论 客观评估： 峰值信噪比（PSNR） 结构相似性指数（SSIM） 峰值信噪比（PSNR） 公式中最大像素值（MAX）的作用对于全面理解 PSNR 的计算过程至关重要。让我们详细解释一下这个概念。 1. PSNR 公式 PSNR …","url":"https://wizardpisces.github.io/blog/tech/other/%E5%9B%BE%E5%83%8F%E5%8E%8B%E7%BC%A9%E8%AF%84%E4%BC%B0","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/other/%E5%9B%BE%E5%83%8F%E5%8E%8B%E7%BC%A9%E8%AF%84%E4%BC%B0","dateModified":"2025-06-20","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：图像压缩质量评估，LZ AI NOTE，https://wizardpisces.github.io/blog/tech/other/%E5%9B%BE%E5%83%8F%E5%8E%8B%E7%BC%A9%E8%AF%84%E4%BC%B0","about":["other"]}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>图像压缩质量评估</h1><h1>图像压缩质量评估</h1>
@@ -128,6 +136,6 @@ $$</p>
 <h3>总结</h3>
 <p>SSIM 通过综合考虑图像的亮度、对比度和结构信息，能够更全面地评估图像的质量，特别是在反映人类视觉感知方面具有优势。相比于只关注像素差异的 PSNR，SSIM 更加适合用于评估图像压缩效果，因为它能够更准确地反映压缩对图像整体视觉质量的影响。</p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-CSJjPKOE.js"></script>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
 </body>
 </html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>AI 明明看见四根手指，为什么还会回答“五根”？ | LZ AI NOTE</title>
+  <meta name="description" content="AI 明明看见四根手指，为什么还会回答“五根”？ 给模型看一张手的照片。小拇指藏在手掌后面，画面里只能看到四根。 它可以说出这是左手，手掌朝向镜头，甚至能描述哪根手指弯了。 可你再问： 图里能看到几根手指？ 答案却可能是五根，甚至六根。 模型明明认出了整只手，为什么反而数不清每根手指？ 认出一只手，不需要数完手指 识别“这是一只手”，只需要抓住一组整体特征…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="AI 明明看见四根手指，为什么还会回答“五根”？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-08-26">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E6%98%8E%E6%98%8E%E7%9C%8B%E8%A7%81%E5%9B%9B%E6%A0%B9%E6%89%8B%E6%8C%87%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E4%BC%9A%E5%9B%9E%E7%AD%94%E2%80%9C%E4%BA%94%E6%A0%B9%E2%80%9D%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E6%98%8E%E6%98%8E%E7%9C%8B%E8%A7%81%E5%9B%9B%E6%A0%B9%E6%89%8B%E6%8C%87%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E4%BC%9A%E5%9B%9E%E7%AD%94%E2%80%9C%E4%BA%94%E6%A0%B9%E2%80%9D%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="AI 明明看见四根手指，为什么还会回答“五根”？ | LZ AI NOTE">
+  <meta property="og:description" content="AI 明明看见四根手指，为什么还会回答“五根”？ 给模型看一张手的照片。小拇指藏在手掌后面，画面里只能看到四根。 它可以说出这是左手，手掌朝向镜头，甚至能描述哪根手指弯了。 可你再问： 图里能看到几根手指？ 答案却可能是五根，甚至六根。 模型明明认出了整只手，为什么反而数不清每根手指？ 认出一只手，不需要数完手指 识别“这是一只手”，只需要抓住一组整体特征…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E6%98%8E%E6%98%8E%E7%9C%8B%E8%A7%81%E5%9B%9B%E6%A0%B9%E6%89%8B%E6%8C%87%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E4%BC%9A%E5%9B%9E%E7%AD%94%E2%80%9C%E4%BA%94%E6%A0%B9%E2%80%9D%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI 明明看见四根手指，为什么还会回答“五根”？","description":"AI 明明看见四根手指，为什么还会回答“五根”？ 给模型看一张手的照片。小拇指藏在手掌后面，画面里只能看到四根。 它可以说出这是左手，手掌朝向镜头，甚至能描述哪根手指弯了。 可你再问： 图里能看到几根手指？ 答案却可能是五根，甚至六根。 模型明明认出了整只手，为什么反而数不清每根手指？ 认出一只手，不需要数完手指 识别“这是一只手”，只需要抓住一组整体特征…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E6%98%8E%E6%98%8E%E7%9C%8B%E8%A7%81%E5%9B%9B%E6%A0%B9%E6%89%8B%E6%8C%87%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E4%BC%9A%E5%9B%9E%E7%AD%94%E2%80%9C%E4%BA%94%E6%A0%B9%E2%80%9D%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E6%98%8E%E6%98%8E%E7%9C%8B%E8%A7%81%E5%9B%9B%E6%A0%B9%E6%89%8B%E6%8C%87%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E4%BC%9A%E5%9B%9E%E7%AD%94%E2%80%9C%E4%BA%94%E6%A0%B9%E2%80%9D%EF%BC%9F","dateModified":"2026-08-26","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：AI 明明看见四根手指，为什么还会回答“五根”？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E6%98%8E%E6%98%8E%E7%9C%8B%E8%A7%81%E5%9B%9B%E6%A0%B9%E6%89%8B%E6%8C%87%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E4%BC%9A%E5%9B%9E%E7%AD%94%E2%80%9C%E4%BA%94%E6%A0%B9%E2%80%9D%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>AI 明明看见四根手指，为什么还会回答“五根”？</h1><h1>AI 明明看见四根手指，为什么还会回答“五根”？</h1>
+<p>给模型看一张手的照片。小拇指藏在手掌后面，画面里只能看到四根。</p>
+<p>它可以说出这是左手，手掌朝向镜头，甚至能描述哪根手指弯了。</p>
+<p>可你再问：</p>
+<blockquote>
+<p>图里能看到几根手指？</p>
+</blockquote>
+<p>答案却可能是五根，甚至六根。</p>
+<p>模型明明认出了整只手，为什么反而数不清每根手指？</p>
+<h2>认出一只手，不需要数完手指</h2>
+<p>识别“这是一只手”，只需要抓住一组整体特征：</p>
+<pre><code class="language-text">手掌的轮廓
++ 与手腕相连
++ 向外伸出的细长部分
+= 手
+</code></pre>
+<p>其中一根手指被遮住，结论通常也不会改变。人戴着手套、握着拳头，甚至只露出半只手，模型仍然可能认出它。</p>
+<p>这正是识别需要的能力：细节发生变化，类别保持稳定。</p>
+<p>计数的要求刚好相反。它不能把几根相似的手指压成“手的特征”，而要始终保留每一根之间的区别。</p>
+<h2>数数的第一步，不是加一</h2>
+<p>数手指不是先从 <code>1</code> 开始，而是先确定哪些区域分别属于不同的手指。</p>
+<pre><code class="language-text">看到一段细长区域
+        ↓
+它是一根新手指
+还是刚才那根手指的另一部分？
+</code></pre>
+<p>两种错误都会把数量带偏：</p>
+<pre><code class="language-text">一根手指被分成两个区域
+→ 同一根算了两次
+
+两根手指贴在一起
+→ 两根合成了一根
+</code></pre>
+<p>所以在真正开始 <code>1、2、3……</code> 以前，模型必须先解决“什么算一个”。</p>
+<p>这一步叫实例分离。名字听起来很专业，实际就是给每根可见手指一个独立标记。</p>
+<h2>模型可能直接猜“五”，根本没有逐根数</h2>
+<p>看见手以后，最容易出现一条捷径：</p>
+<pre><code class="language-text">这是一只手
+        ↓
+手通常有五根手指
+        ↓
+回答：五
+</code></pre>
+<p>照片里的小拇指即使被遮住，模型仍可能回答五根。它说的是关于“手”的常识，不是对当前图片的计数结果。</p>
+<p>真正的计数应该留下可以检查的中间过程：</p>
+<pre><code class="language-text">拇指      → 1
+食指      → 2
+中指      → 3
+无名指    → 4
+小拇指被遮住
+
+可见数量  → 4
+</code></pre>
+<p>普通视觉问答通常只展示最后一个数字。它没有告诉我们，自己究竟逐根标记过，还是直接根据整只手猜了一个最常见的答案。</p>
+<p>这也是为什么把问题改成“请先指出每根可见手指，再报告数量”，往往比只问“有几根”更可靠。模型被迫把数字落回图片中的具体对象。</p>
+<h2>分清每一根以后，还要选对数字</h2>
+<p>即使视觉表示里已经留下了数量差异，模型最后仍要把它转换成一个数字词：</p>
+<pre><code class="language-text">四个独立对象
+        ↓
+语言答案“四”
+</code></pre>
+<p>近期对多模态模型的内部分析发现，一些模型的视觉表示里能够解码出数量大小，但把这份表示转换成数字词时仍会出错。也就是说，模型未必完全没有“看到数量”，失败可能发生在最后的符号映射。</p>
+<h2>让计数变得可靠，必须留下标记</h2>
+<p>只让模型回答一个数字，很难知道错误发生在哪里。</p>
+<p>更可检查的过程是：</p>
+<pre><code class="language-text">图片
+  ↓ 找到每根可见手指
+手指 A、B、C、D
+  ↓ 检查是否重复或遗漏
+四个独立标记
+  ↓
+数字 4
+</code></pre>
+<p>标记可以是点、框、分割区域，也可以是一张编号后的图片。形式不重要，重要的是建立一一对应：</p>
+<pre><code class="language-text">一根手指
+↕
+一个标记
+</code></pre>
+<p>已有视觉计数研究也反复采用这种思路：先输出每个目标的位置或离散选择，再根据这些中间结果计算数量。复杂场景中，生成位置与标签等中间表示，通常比直接猜一个数字更稳定。</p>
+<h2>最后，再数一次</h2>
+<pre><code class="language-text">整张图片
+    ↓
+认出这是一只手
+    ↓
+分开每根可见手指
+    ↓
+一根对应一个标记
+    ↓
+去掉重复，避免遗漏
+    ↓
+把数量映射成数字
+</code></pre>
+<p>模型认得整只手，是因为它能把很多局部特征合成一个类别。</p>
+<p>数清每根手指，却要求这些相似的局部始终保持独立。认出整体，允许细节被合并；数清部件，恰恰不能让它们混在一起。</p>
+<h2>参考资料</h2>
+<ol>
+<li>Acharya、Kafle、Kanan，TallyQA: Answering Complex Counting Questions（AAAI，2019）：<a href="https://arxiv.org/abs/1810.12440">https://arxiv.org/abs/1810.12440</a></li>
+<li>Trott、Xiong、Socher，Interpretable Counting for Visual Question Answering（ICLR，2018）：<a href="https://arxiv.org/abs/1712.08697">https://arxiv.org/abs/1712.08697</a></li>
+<li>Hou 等，Assessing the Visual Enumeration Abilities of Specialized Counting Architectures and Vision-Language Models（2025）：<a href="https://arxiv.org/abs/2512.15254">https://arxiv.org/abs/2512.15254</a></li>
+<li>Ailem 等，Count and Sense: Probing Counting Abilities in Large Vision-Language Models Through Explanation-Based Methods（2026）：<a href="https://arxiv.org/abs/2605.30170">https://arxiv.org/abs/2605.30170</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
+</body>
+</html>

@@ -6,14 +6,22 @@
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <title>UC Berkeley - MemGPT - Towards LLMs as Operating Systems | LZ AI NOTE</title>
   <meta name="description" content="论文发布时间：2023 10 12（ICML 2024） UC Berkeley 发布的 MemGPT （论文标题为《[MemGPT: Towards LLMs as Operating Systems]》，项目地址 [research.memgpt.ai]）提出了一个核心类比： LLM 的上下文窗口就像计算机的物理内存，大小是固定的——但操作系统通过虚拟…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="UC Berkeley - MemGPT - Towards LLMs as Operating Systems">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-03-09">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/tech/ai-agent/paper/UC%20Berkeley%20-%20MemGPT%20-%20Towards%20LLMs%20as%20Operating%20Systems">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
   <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-agent/paper/UC%20Berkeley%20-%20MemGPT%20-%20Towards%20LLMs%20as%20Operating%20Systems">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
   <meta property="og:title" content="UC Berkeley - MemGPT - Towards LLMs as Operating Systems | LZ AI NOTE">
   <meta property="og:description" content="论文发布时间：2023 10 12（ICML 2024） UC Berkeley 发布的 MemGPT （论文标题为《[MemGPT: Towards LLMs as Operating Systems]》，项目地址 [research.memgpt.ai]）提出了一个核心类比： LLM 的上下文窗口就像计算机的物理内存，大小是固定的——但操作系统通过虚拟…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-agent/paper/UC%20Berkeley%20-%20MemGPT%20-%20Towards%20LLMs%20as%20Operating%20Systems">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"UC Berkeley - MemGPT - Towards LLMs as Operating Systems","description":"论文发布时间：2023 10 12（ICML 2024） UC Berkeley 发布的 MemGPT （论文标题为《[MemGPT: Towards LLMs as Operating Systems]》，项目地址 [research.memgpt.ai]）提出了一个核心类比： LLM 的上下文窗口就像计算机的物理内存，大小是固定的——但操作系统通过虚拟…","url":"https://wizardpisces.github.io/blog/tech/ai-agent/paper/UC%20Berkeley%20-%20MemGPT%20-%20Towards%20LLMs%20as%20Operating%20Systems","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-agent/paper/UC%20Berkeley%20-%20MemGPT%20-%20Towards%20LLMs%20as%20Operating%20Systems","dateModified":"2026-03-09","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"UC Berkeley - MemGPT - Towards LLMs as Operating Systems","description":"论文发布时间：2023 10 12（ICML 2024） UC Berkeley 发布的 MemGPT （论文标题为《[MemGPT: Towards LLMs as Operating Systems]》，项目地址 [research.memgpt.ai]）提出了一个核心类比： LLM 的上下文窗口就像计算机的物理内存，大小是固定的——但操作系统通过虚拟…","url":"https://wizardpisces.github.io/blog/tech/ai-agent/paper/UC%20Berkeley%20-%20MemGPT%20-%20Towards%20LLMs%20as%20Operating%20Systems","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-agent/paper/UC%20Berkeley%20-%20MemGPT%20-%20Towards%20LLMs%20as%20Operating%20Systems","dateModified":"2026-03-09","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：UC Berkeley - MemGPT - Towards LLMs as Operating Systems，LZ AI NOTE，https://wizardpisces.github.io/blog/tech/ai-agent/paper/UC%20Berkeley%20-%20MemGPT%20-%20Towards%20LLMs%20as%20Operating%20Systems","about":["ai-agent","paper"]}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>UC Berkeley - MemGPT - Towards LLMs as Operating Systems</h1><p><em>论文发布时间：2023-10-12（ICML 2024）</em></p>
@@ -407,6 +415,6 @@ MemGPT:
 <h2>总结</h2>
 <p>MemGPT 通过操作系统的虚拟内存类比，让 LLM 自主管理自己的上下文——在固定大小的主上下文（RAM）和无限的外部存储（磁盘）之间分页换入换出信息。它的核心贡献不是&quot;给 LLM 加了个数据库&quot;（那是 RAG），而是<strong>让 LLM 自己决定读什么、存什么、丢什么</strong>——从被动的信息消费者变成主动的内存管理者。在深度记忆检索任务上，MemGPT 把 GPT-4 的准确率从 32% 提升到 93%，在嵌套键值检索上成为唯一不受嵌套深度限制的方案。这个&quot;LLM 即操作系统&quot;的思路为 Agent 的长期记忆问题开辟了一个全新的架构范式。</p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-CSJjPKOE.js"></script>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
 </body>
 </html>

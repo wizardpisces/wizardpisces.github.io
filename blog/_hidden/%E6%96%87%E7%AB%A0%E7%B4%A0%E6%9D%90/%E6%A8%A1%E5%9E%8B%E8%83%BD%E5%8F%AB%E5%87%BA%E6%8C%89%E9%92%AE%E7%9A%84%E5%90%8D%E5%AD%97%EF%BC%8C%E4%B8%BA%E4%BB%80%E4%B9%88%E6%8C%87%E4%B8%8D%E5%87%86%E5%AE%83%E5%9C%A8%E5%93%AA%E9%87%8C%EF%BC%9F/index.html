@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>模型能叫出按钮的名字，为什么指不准它在哪里？ | LZ AI NOTE</title>
+  <meta name="description" content="模型能叫出按钮的名字，为什么指不准它在哪里？ 给模型看一张登录页截图： 你问： 最下面是什么？ 它会回答： 登录按钮。 可你让它把按钮准确框出来，边界有时会偏到输入框上，或者只框住“登录”两个字。 模型能叫出按钮的名字，为什么指不准它在哪里？ 叫出名字，不需要记住按钮放在哪 模型认出登录按钮，靠的是几条线索： 把按钮向左挪一点，变宽一点，甚至换一种颜色，它…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="模型能叫出按钮的名字，为什么指不准它在哪里？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-08-26">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E8%83%BD%E5%8F%AB%E5%87%BA%E6%8C%89%E9%92%AE%E7%9A%84%E5%90%8D%E5%AD%97%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8C%87%E4%B8%8D%E5%87%86%E5%AE%83%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E8%83%BD%E5%8F%AB%E5%87%BA%E6%8C%89%E9%92%AE%E7%9A%84%E5%90%8D%E5%AD%97%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8C%87%E4%B8%8D%E5%87%86%E5%AE%83%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="模型能叫出按钮的名字，为什么指不准它在哪里？ | LZ AI NOTE">
+  <meta property="og:description" content="模型能叫出按钮的名字，为什么指不准它在哪里？ 给模型看一张登录页截图： 你问： 最下面是什么？ 它会回答： 登录按钮。 可你让它把按钮准确框出来，边界有时会偏到输入框上，或者只框住“登录”两个字。 模型能叫出按钮的名字，为什么指不准它在哪里？ 叫出名字，不需要记住按钮放在哪 模型认出登录按钮，靠的是几条线索： 把按钮向左挪一点，变宽一点，甚至换一种颜色，它…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E8%83%BD%E5%8F%AB%E5%87%BA%E6%8C%89%E9%92%AE%E7%9A%84%E5%90%8D%E5%AD%97%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8C%87%E4%B8%8D%E5%87%86%E5%AE%83%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"模型能叫出按钮的名字，为什么指不准它在哪里？","description":"模型能叫出按钮的名字，为什么指不准它在哪里？ 给模型看一张登录页截图： 你问： 最下面是什么？ 它会回答： 登录按钮。 可你让它把按钮准确框出来，边界有时会偏到输入框上，或者只框住“登录”两个字。 模型能叫出按钮的名字，为什么指不准它在哪里？ 叫出名字，不需要记住按钮放在哪 模型认出登录按钮，靠的是几条线索： 把按钮向左挪一点，变宽一点，甚至换一种颜色，它…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E8%83%BD%E5%8F%AB%E5%87%BA%E6%8C%89%E9%92%AE%E7%9A%84%E5%90%8D%E5%AD%97%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8C%87%E4%B8%8D%E5%87%86%E5%AE%83%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E8%83%BD%E5%8F%AB%E5%87%BA%E6%8C%89%E9%92%AE%E7%9A%84%E5%90%8D%E5%AD%97%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8C%87%E4%B8%8D%E5%87%86%E5%AE%83%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F","dateModified":"2026-08-26","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：模型能叫出按钮的名字，为什么指不准它在哪里？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E8%83%BD%E5%8F%AB%E5%87%BA%E6%8C%89%E9%92%AE%E7%9A%84%E5%90%8D%E5%AD%97%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8C%87%E4%B8%8D%E5%87%86%E5%AE%83%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>模型能叫出按钮的名字，为什么指不准它在哪里？</h1><h1>模型能叫出按钮的名字，为什么指不准它在哪里？</h1>
+<p>给模型看一张登录页截图：</p>
+<pre><code class="language-text">┌────────────────┐
+│ 手机号         │
+├────────────────┤
+│ 密码           │
+├────────────────┤
+│      登录      │
+└────────────────┘
+</code></pre>
+<p>你问：</p>
+<blockquote>
+<p>最下面是什么？</p>
+</blockquote>
+<p>它会回答：</p>
+<blockquote>
+<p>登录按钮。</p>
+</blockquote>
+<p>可你让它把按钮准确框出来，边界有时会偏到输入框上，或者只框住“登录”两个字。</p>
+<p>模型能叫出按钮的名字，为什么指不准它在哪里？</p>
+<h2>叫出名字，不需要记住按钮放在哪</h2>
+<p>模型认出登录按钮，靠的是几条线索：</p>
+<pre><code class="language-text">一个矩形区域
++ 中间写着“登录”
++ 位于账号和密码下方
+= 登录按钮
+</code></pre>
+<p>把按钮向左挪一点，变宽一点，甚至换一种颜色，它仍然是登录按钮。</p>
+<pre><code class="language-text">按钮在左边  → 登录按钮
+按钮在中间  → 登录按钮
+按钮在右边  → 登录按钮
+</code></pre>
+<p>位置不断变化，答案却始终只有一个。</p>
+<p>所以在识别任务里，模型忘掉一部分位置并不一定是坏事。它需要越过大小、颜色和摆放方式的变化，抓住“这是什么”。</p>
+<h2>指出位置，不能只留下“像按钮”</h2>
+<p>[《图片已经被切成小块，AI 为什么还能认出完整的雨伞？》](./图片已经被切成小块，AI 为什么还能认出完整的雨伞？.md)里，图片会被切成 Patch，再变成一排视觉卡片。</p>
+<p>登录按钮横跨几块 Patch 时，大概会变成：</p>
+<pre><code class="language-text">[背景][按钮左边][按钮中间][按钮右边][背景]
+</code></pre>
+<p>左右两张卡片里既有按钮，也有背景。Attention 可以让这些卡片互相读取：</p>
+<pre><code class="language-text">蓝色矩形
++ “登录”文字
++ 下方位置
+= 登录按钮
+</code></pre>
+<p>这些证据足够认出按钮。</p>
+<p>可画出边界还要回答：</p>
+<pre><code class="language-text">按钮从哪一列开始？
+在哪一列结束？
+上下两条边分别在哪？
+</code></pre>
+<p>“像什么”可以由几块信息共同决定，“从哪里到哪里”却不能含糊。</p>
+<h2>模型会认真学习被检查的答案</h2>
+<p>假设训练时只问：</p>
+<pre><code class="language-text">问题：图里有什么？
+答案：登录按钮
+</code></pre>
+<p>无论按钮位于左边还是右边，只要类别答对，模型就完成了任务。边界偏十个像素，不会让这个答案变错。</p>
+<p>定位训练会多给一个答案：</p>
+<pre><code class="language-text">类别：登录按钮
+位置：[x1, y1, x2, y2]
+</code></pre>
+<p>预测框偏了，位置答案就会出错。经过这样的训练，模型才会逐渐学会把“这是按钮”和“按钮具体在哪”同时留下来。</p>
+<p>这类把文字或类别落到图片区域上的能力，通常叫视觉定位，也叫 Visual Grounding。</p>
+<p>它没有给模型装上一双更好的眼睛，只是改变了什么结果会被判错。</p>
+<h2>现在的模型已经解决了吗？</h2>
+<p>解决了一部分。</p>
+<p>经过定位训练的多模态模型已经可以返回边界框、分割区域和点击坐标。Gemini 的图像接口就直接提供边界框和 Mask；Computer Use 模型也会根据截图提出点击位置。</p>
+<p>但“能返回坐标”不等于坐标已经成为稳定的像素真值。OpenAI 的视觉文档仍把精确空间定位列为已知限制。小目标、密集布局和低清晰度图片，都会让边界更容易漂移。</p>
+<p>真正需要精确操作时，通常会补一层工具：</p>
+<pre><code class="language-text">只有图片
+→ 检测或分割模型给出框和 Mask
+
+网页有 DOM
+→ 浏览器直接找到“登录”按钮
+</code></pre>
+<p>工具不是替模型看懂页面，而是把模型已经理解的“登录按钮”，落到一个可以执行的具体对象上。</p>
+<h2>最后，让按钮回答两个问题</h2>
+<pre><code class="language-text">问题一：这是什么？
+视觉特征 + 页面关系
+        ↓
+登录按钮
+
+问题二：它在哪里？
+局部边缘 + 空间位置
+        ↓
+[x1, y1, x2, y2]
+</code></pre>
+<p>模型能叫出按钮的名字，是因为很多不同位置和样式最终都可以归到同一个类别。</p>
+<p>要准确指出它在哪里，模型必须保留识别时可以忽略的那些细节。名字允许按钮移动，边界不允许。</p>
+<h2>参考资料</h2>
+<ol>
+<li>Dosovitskiy 等，An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale（ICLR，2021）：<a href="https://arxiv.org/abs/2010.11929">https://arxiv.org/abs/2010.11929</a></li>
+<li>Carion 等，End-to-End Object Detection with Transformers（ECCV，2020）：<a href="https://arxiv.org/abs/2005.12872">https://arxiv.org/abs/2005.12872</a></li>
+<li>Liu 等，Grounding DINO: Marrying DINO with Grounded Pre-Training for Open-Set Object Detection（ECCV，2024）：<a href="https://arxiv.org/abs/2303.05499">https://arxiv.org/abs/2303.05499</a></li>
+<li>OpenAI，Images and vision，OpenAI API 文档：<a href="https://developers.openai.com/api/docs/guides/images-vision">https://developers.openai.com/api/docs/guides/images-vision</a></li>
+<li>Google，Image understanding，Gemini API 文档：<a href="https://ai.google.dev/gemini-api/docs/image-understanding">https://ai.google.dev/gemini-api/docs/image-understanding</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
+</body>
+</html>

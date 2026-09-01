@@ -6,7 +6,15 @@
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <title>问题有多难？一个例子 | LZ AI NOTE</title>
   <meta name="description" content="跨文档知识更新 场景：两个不同 PRD 中的某些段落描述的是 同一个业务事实/规则 ，但后来新 PRD 更新了描述。RAG 已经把旧文档切成 chunk 存入向量库，这时如何 精准替换或抑制旧知识 。 这与普通&quot;文档版本更新&quot;不同，本质问题是： RAG 的索引单位是 chunk，而不是&quot;知识点&quot;。 向量数据库只知道&quot;这个向量和查询向量有多近&quot;，它不知道两个…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="问题有多难？一个例子">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-03-12">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/RAG%20-%20%E8%B7%A8%E6%96%87%E6%A1%A3%E7%9F%A5%E8%AF%86%E6%9B%B4%E6%96%B0">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
   <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/RAG%20-%20%E8%B7%A8%E6%96%87%E6%A1%A3%E7%9F%A5%E8%AF%86%E6%9B%B4%E6%96%B0">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
   <meta property="og:title" content="问题有多难？一个例子 | LZ AI NOTE">
@@ -14,7 +22,7 @@
   <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/RAG%20-%20%E8%B7%A8%E6%96%87%E6%A1%A3%E7%9F%A5%E8%AF%86%E6%9B%B4%E6%96%B0">
   <meta property="og:image" content="https://wizardpisces.github.io/covers/rag-stateless-guardrail.png">
   <meta name="twitter:image" content="https://wizardpisces.github.io/covers/rag-stateless-guardrail.png">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"问题有多难？一个例子","description":"跨文档知识更新 场景：两个不同 PRD 中的某些段落描述的是 同一个业务事实/规则 ，但后来新 PRD 更新了描述。RAG 已经把旧文档切成 chunk 存入向量库，这时如何 精准替换或抑制旧知识 。 这与普通\"文档版本更新\"不同，本质问题是： RAG 的索引单位是 chunk，而不是\"知识点\"。 向量数据库只知道\"这个向量和查询向量有多近\"，它不知道两个…","url":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/RAG%20-%20%E8%B7%A8%E6%96%87%E6%A1%A3%E7%9F%A5%E8%AF%86%E6%9B%B4%E6%96%B0","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/RAG%20-%20%E8%B7%A8%E6%96%87%E6%A1%A3%E7%9F%A5%E8%AF%86%E6%9B%B4%E6%96%B0","dateModified":"2026-03-12","image":"https://wizardpisces.github.io/covers/rag-stateless-guardrail.png","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"问题有多难？一个例子","description":"跨文档知识更新 场景：两个不同 PRD 中的某些段落描述的是 同一个业务事实/规则 ，但后来新 PRD 更新了描述。RAG 已经把旧文档切成 chunk 存入向量库，这时如何 精准替换或抑制旧知识 。 这与普通\"文档版本更新\"不同，本质问题是： RAG 的索引单位是 chunk，而不是\"知识点\"。 向量数据库只知道\"这个向量和查询向量有多近\"，它不知道两个…","url":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/RAG%20-%20%E8%B7%A8%E6%96%87%E6%A1%A3%E7%9F%A5%E8%AF%86%E6%9B%B4%E6%96%B0","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/RAG%20-%20%E8%B7%A8%E6%96%87%E6%A1%A3%E7%9F%A5%E8%AF%86%E6%9B%B4%E6%96%B0","dateModified":"2026-03-12","image":"https://wizardpisces.github.io/covers/rag-stateless-guardrail.png","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：问题有多难？一个例子，LZ AI NOTE，https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/RAG%20-%20%E8%B7%A8%E6%96%87%E6%A1%A3%E7%9F%A5%E8%AF%86%E6%9B%B4%E6%96%B0","about":["ai-笔记"]}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>问题有多难？一个例子</h1><p><strong>跨文档知识更新</strong></p>
@@ -297,6 +305,6 @@ Agent 对比文档时间、来源、内容 → 判断 B 为最新
 <p><strong>没有银弹。</strong> 前面五个方案描述的“知识图谱层”是一种可行路径，但不是唯一路径，甚至不一定是最优路径。对于大多数团队，<strong>文档治理 + 知识点 ID + LLM 兜底</strong>的组合就足够了。只有知识库规模大、知识点之间依赖关系复杂、且更新频繁的场景，才值得投入关系建模。</p>
 <p>知识管理从来都是<strong>人 + 系统</strong>协作的事。LLM 可以辅助标注和审查，但知识体系的定义、关键关系的确认、冲突的最终裁定，仍然需要懂业务的人来把关。</p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-CSJjPKOE.js"></script>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
 </body>
 </html>

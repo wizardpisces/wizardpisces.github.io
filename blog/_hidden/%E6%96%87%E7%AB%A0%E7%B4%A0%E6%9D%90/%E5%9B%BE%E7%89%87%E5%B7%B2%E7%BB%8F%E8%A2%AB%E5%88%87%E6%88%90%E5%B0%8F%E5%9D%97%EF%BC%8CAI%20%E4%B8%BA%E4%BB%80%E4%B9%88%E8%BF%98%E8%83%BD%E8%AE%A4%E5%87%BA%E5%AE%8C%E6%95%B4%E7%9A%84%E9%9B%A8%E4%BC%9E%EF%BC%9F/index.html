@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>图片已经被切成小块，AI 为什么还能认出完整的雨伞？ | LZ AI NOTE</title>
+  <meta name="description" content="图片已经被切成小块，AI 为什么还能认出完整的雨伞？ 把一张图片切成四块： 右下角的 D 只包含一段弧线和一根竖线。单独看，它可能是路牌、伞柄，也可能只是背景里的线条。 可模型最后会说： 画面里有人撑着雨伞。 图片已经被切碎了，模型怎么还认得出整把雨伞？ 单看右下角，它没有答案 [《大模型没有眼睛，一张截图是怎么变成回答的？》]里，每个 Patch 最终会…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="图片已经被切成小块，AI 为什么还能认出完整的雨伞？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-08-31">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%9B%BE%E7%89%87%E5%B7%B2%E7%BB%8F%E8%A2%AB%E5%88%87%E6%88%90%E5%B0%8F%E5%9D%97%EF%BC%8CAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%83%BD%E8%AE%A4%E5%87%BA%E5%AE%8C%E6%95%B4%E7%9A%84%E9%9B%A8%E4%BC%9E%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%9B%BE%E7%89%87%E5%B7%B2%E7%BB%8F%E8%A2%AB%E5%88%87%E6%88%90%E5%B0%8F%E5%9D%97%EF%BC%8CAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%83%BD%E8%AE%A4%E5%87%BA%E5%AE%8C%E6%95%B4%E7%9A%84%E9%9B%A8%E4%BC%9E%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="图片已经被切成小块，AI 为什么还能认出完整的雨伞？ | LZ AI NOTE">
+  <meta property="og:description" content="图片已经被切成小块，AI 为什么还能认出完整的雨伞？ 把一张图片切成四块： 右下角的 D 只包含一段弧线和一根竖线。单独看，它可能是路牌、伞柄，也可能只是背景里的线条。 可模型最后会说： 画面里有人撑着雨伞。 图片已经被切碎了，模型怎么还认得出整把雨伞？ 单看右下角，它没有答案 [《大模型没有眼睛，一张截图是怎么变成回答的？》]里，每个 Patch 最终会…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%9B%BE%E7%89%87%E5%B7%B2%E7%BB%8F%E8%A2%AB%E5%88%87%E6%88%90%E5%B0%8F%E5%9D%97%EF%BC%8CAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%83%BD%E8%AE%A4%E5%87%BA%E5%AE%8C%E6%95%B4%E7%9A%84%E9%9B%A8%E4%BC%9E%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"图片已经被切成小块，AI 为什么还能认出完整的雨伞？","description":"图片已经被切成小块，AI 为什么还能认出完整的雨伞？ 把一张图片切成四块： 右下角的 D 只包含一段弧线和一根竖线。单独看，它可能是路牌、伞柄，也可能只是背景里的线条。 可模型最后会说： 画面里有人撑着雨伞。 图片已经被切碎了，模型怎么还认得出整把雨伞？ 单看右下角，它没有答案 [《大模型没有眼睛，一张截图是怎么变成回答的？》]里，每个 Patch 最终会…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%9B%BE%E7%89%87%E5%B7%B2%E7%BB%8F%E8%A2%AB%E5%88%87%E6%88%90%E5%B0%8F%E5%9D%97%EF%BC%8CAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%83%BD%E8%AE%A4%E5%87%BA%E5%AE%8C%E6%95%B4%E7%9A%84%E9%9B%A8%E4%BC%9E%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%9B%BE%E7%89%87%E5%B7%B2%E7%BB%8F%E8%A2%AB%E5%88%87%E6%88%90%E5%B0%8F%E5%9D%97%EF%BC%8CAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%83%BD%E8%AE%A4%E5%87%BA%E5%AE%8C%E6%95%B4%E7%9A%84%E9%9B%A8%E4%BC%9E%EF%BC%9F","dateModified":"2026-08-31","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：图片已经被切成小块，AI 为什么还能认出完整的雨伞？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%9B%BE%E7%89%87%E5%B7%B2%E7%BB%8F%E8%A2%AB%E5%88%87%E6%88%90%E5%B0%8F%E5%9D%97%EF%BC%8CAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%83%BD%E8%AE%A4%E5%87%BA%E5%AE%8C%E6%95%B4%E7%9A%84%E9%9B%A8%E4%BC%9E%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>图片已经被切成小块，AI 为什么还能认出完整的雨伞？</h1><h1>图片已经被切成小块，AI 为什么还能认出完整的雨伞？</h1>
+<p>把一张图片切成四块：</p>
+<pre><code class="language-text">┌────────┬────────┐
+│ 蓝天 A │ 乌云 B │
+├────────┼────────┤
+│ 行人 C │ 弧线 D │
+└────────┴────────┘
+</code></pre>
+<p>右下角的 D 只包含一段弧线和一根竖线。单独看，它可能是路牌、伞柄，也可能只是背景里的线条。</p>
+<p>可模型最后会说：</p>
+<blockquote>
+<p>画面里有人撑着雨伞。</p>
+</blockquote>
+<p>图片已经被切碎了，模型怎么还认得出整把雨伞？</p>
+<h2>单看右下角，它没有答案</h2>
+<p><a href="../../tech/ai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%B2%A1%E6%9C%89%E7%9C%BC%E7%9D%9B%EF%BC%8C%E4%B8%80%E5%BC%A0%E6%88%AA%E5%9B%BE%E6%98%AF%E6%80%8E%E4%B9%88%E5%8F%98%E6%88%90%E5%9B%9E%E7%AD%94%E7%9A%84%EF%BC%9F.md">《大模型没有眼睛，一张截图是怎么变成回答的？》</a>里，每个 Patch 最终会变成一张数字卡片。</p>
+<p>右下角卡片记为 <code>D</code>。它记录了这块区域里的颜色、边缘和纹理，也带着自己在图片中的位置。</p>
+<p>但这些信息还不够。</p>
+<pre><code class="language-text">卡片 D
+  = 一段弧线
+  + 一根竖线
+  + 位于图片右下角
+</code></pre>
+<p>它可能属于雨伞，也可能属于路牌。只在 D 内部继续计算，无法排除另一种答案。</p>
+<p>缺少的证据在其他碎片里。</p>
+<h2>它先不猜，而是去整张图里找证据</h2>
+<p>D 要读取整张图里的卡片，先从自己生成一份查询：</p>
+<pre><code class="language-text">D 的 Q：我现在应该关注哪些区域？
+</code></pre>
+<p>每张卡片，包括 D 自己，也会提供两份信息：</p>
+<pre><code class="language-text">K：我是否和你的查询匹配？
+V：如果匹配，我能提供什么？
+</code></pre>
+<p>Q、K、V 分别叫 Query、Key、Value。它们来自同一张卡片，却承担不同角色：</p>
+<pre><code class="language-text">Q 负责寻找
+K 负责匹配
+V 负责传递内容
+</code></pre>
+<p>用来判断“该不该读取”的特征，不一定就是最后需要取回的内容，所以 K 和 V 要分开。</p>
+<p>现在，让 D 的 Q 与四张卡片的 K 比较。为了看清过程，假设最后得到这样的读取比例：</p>
+<pre><code class="language-text">A 蓝天    5%
+B 乌云   20%
+C 行人   40%
+D 弧线   35%
+</code></pre>
+<p>D 按照这个比例取回各张卡片的 V：</p>
+<pre><code class="language-text">新的 D
+= 5%  × 蓝天的信息
++ 20% × 乌云的信息
++ 40% × 行人的信息
++ 35% × 本地弧线的信息
+</code></pre>
+<p>这些比例只是为了说明计算过程，并不是程序员写下的识别规则。模型训练以后，Q 与 K 的比较会让当前卡片更重视有用的区域。</p>
+<p>更新后的 D 不再只表示“弧线和竖线”。它还带回了三条线索：</p>
+<pre><code class="language-text">左边有人
+弧线靠近人的手
+上方像是乌云
+</code></pre>
+<p>局部形状第一次有了上下文。</p>
+<p>这种“每张卡片根据自己的 Q，匹配其他卡片的 K，再取回 V”的计算，就是 Self-Attention。</p>
+<h2>找到证据，还不等于已经认出雨伞</h2>
+<p>Attention 不会直接输出“雨伞”两个字。它只负责让原本分散的证据碰到一起。</p>
+<p>视觉编码器会反复更新同一张卡片。继续跟着 D 看：</p>
+<pre><code class="language-text">刚进入模型
+→ 一段弧线和一根竖线
+
+读取周围区域以后
+→ 弧线靠近人的手
+
+经过后续层继续组合
+→ 人手上方的弧面
+  + 向下延伸的伞柄
+  + 雨天场景
+</code></pre>
+<p>D 仍然是一串数字，没有在内部变成一句“这是一把雨伞”。变化的是：最初无法判断的局部线条，现在已经带上了足以区分物体的关系。</p>
+<p>如果模型做图片分类，后面的计算会把这组表示转换成各个类别的分数；如果用户问“图里有什么”，语言模型会读取这些视觉卡片，再生成“雨伞”这个回答。</p>
+<p>Attention 解决的是识别之前的一步：让判断一个物体所需的证据，不再被困在不同碎片里。</p>
+<h2>最后，再跟着 D 走一遍</h2>
+<pre><code class="language-text">右下角 Patch
+只有弧线和竖线
+        ↓ 生成 Q
+与所有 Patch 的 K 比较
+        ↓ 得到匹配比例
+按比例取回各自的 V
+        ↓
+加入人物、乌云和位置信息
+        ↓ 多层重复
+得到带有全局关系的视觉表示
+        ↓ 后续模型读取
+“画面里有人撑着雨伞”
+</code></pre>
+<p>Q 提出这次要找什么，K 与它比较后决定读取比例，V 提供真正带回的信息。</p>
+<p>所谓把雨伞“拼”出来，并不是把切开的像素重新粘回去。模型拼起来的是证据：弧线、伞柄、人的手和雨天背景，沿着 Attention 进入同一组表示，后面的模型才有依据认出整把雨伞。</p>
+<h2>参考资料</h2>
+<ol>
+<li>Vaswani 等，Attention Is All You Need（NeurIPS，2017）：<a href="https://arxiv.org/abs/1706.03762">https://arxiv.org/abs/1706.03762</a></li>
+<li>Dosovitskiy 等，An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale（ICLR，2021）：<a href="https://arxiv.org/abs/2010.11929">https://arxiv.org/abs/2010.11929</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
+</body>
+</html>

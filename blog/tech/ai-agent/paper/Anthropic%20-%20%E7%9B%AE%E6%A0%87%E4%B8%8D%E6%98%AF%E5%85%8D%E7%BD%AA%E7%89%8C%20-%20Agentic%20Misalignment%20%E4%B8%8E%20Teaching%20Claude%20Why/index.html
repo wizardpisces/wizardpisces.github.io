@@ -6,14 +6,22 @@
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <title>目标不是免罪牌：AI 为什么要学会“不该赢” | LZ AI NOTE</title>
   <meta name="description" content="文章来源：Anthropic Research 本文讨论 Anthropic 的两篇对齐研究文章： [Agentic Misalignment: How LLMs could be insider threats] [Teaching Claude why] 目标不是免罪牌：AI 为什么要学会“不该赢” 过去谈 AI 安全，很容易把问题想成“用户提出危险请…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="目标不是免罪牌：AI 为什么要学会“不该赢”">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-05-19">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/tech/ai-agent/paper/Anthropic%20-%20%E7%9B%AE%E6%A0%87%E4%B8%8D%E6%98%AF%E5%85%8D%E7%BD%AA%E7%89%8C%20-%20Agentic%20Misalignment%20%E4%B8%8E%20Teaching%20Claude%20Why">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
   <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-agent/paper/Anthropic%20-%20%E7%9B%AE%E6%A0%87%E4%B8%8D%E6%98%AF%E5%85%8D%E7%BD%AA%E7%89%8C%20-%20Agentic%20Misalignment%20%E4%B8%8E%20Teaching%20Claude%20Why">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
   <meta property="og:title" content="目标不是免罪牌：AI 为什么要学会“不该赢” | LZ AI NOTE">
   <meta property="og:description" content="文章来源：Anthropic Research 本文讨论 Anthropic 的两篇对齐研究文章： [Agentic Misalignment: How LLMs could be insider threats] [Teaching Claude why] 目标不是免罪牌：AI 为什么要学会“不该赢” 过去谈 AI 安全，很容易把问题想成“用户提出危险请…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-agent/paper/Anthropic%20-%20%E7%9B%AE%E6%A0%87%E4%B8%8D%E6%98%AF%E5%85%8D%E7%BD%AA%E7%89%8C%20-%20Agentic%20Misalignment%20%E4%B8%8E%20Teaching%20Claude%20Why">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"目标不是免罪牌：AI 为什么要学会“不该赢”","description":"文章来源：Anthropic Research 本文讨论 Anthropic 的两篇对齐研究文章： [Agentic Misalignment: How LLMs could be insider threats] [Teaching Claude why] 目标不是免罪牌：AI 为什么要学会“不该赢” 过去谈 AI 安全，很容易把问题想成“用户提出危险请…","url":"https://wizardpisces.github.io/blog/tech/ai-agent/paper/Anthropic%20-%20%E7%9B%AE%E6%A0%87%E4%B8%8D%E6%98%AF%E5%85%8D%E7%BD%AA%E7%89%8C%20-%20Agentic%20Misalignment%20%E4%B8%8E%20Teaching%20Claude%20Why","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-agent/paper/Anthropic%20-%20%E7%9B%AE%E6%A0%87%E4%B8%8D%E6%98%AF%E5%85%8D%E7%BD%AA%E7%89%8C%20-%20Agentic%20Misalignment%20%E4%B8%8E%20Teaching%20Claude%20Why","dateModified":"2026-05-19","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"目标不是免罪牌：AI 为什么要学会“不该赢”","description":"文章来源：Anthropic Research 本文讨论 Anthropic 的两篇对齐研究文章： [Agentic Misalignment: How LLMs could be insider threats] [Teaching Claude why] 目标不是免罪牌：AI 为什么要学会“不该赢” 过去谈 AI 安全，很容易把问题想成“用户提出危险请…","url":"https://wizardpisces.github.io/blog/tech/ai-agent/paper/Anthropic%20-%20%E7%9B%AE%E6%A0%87%E4%B8%8D%E6%98%AF%E5%85%8D%E7%BD%AA%E7%89%8C%20-%20Agentic%20Misalignment%20%E4%B8%8E%20Teaching%20Claude%20Why","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-agent/paper/Anthropic%20-%20%E7%9B%AE%E6%A0%87%E4%B8%8D%E6%98%AF%E5%85%8D%E7%BD%AA%E7%89%8C%20-%20Agentic%20Misalignment%20%E4%B8%8E%20Teaching%20Claude%20Why","dateModified":"2026-05-19","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：目标不是免罪牌：AI 为什么要学会“不该赢”，LZ AI NOTE，https://wizardpisces.github.io/blog/tech/ai-agent/paper/Anthropic%20-%20%E7%9B%AE%E6%A0%87%E4%B8%8D%E6%98%AF%E5%85%8D%E7%BD%AA%E7%89%8C%20-%20Agentic%20Misalignment%20%E4%B8%8E%20Teaching%20Claude%20Why","about":["ai-agent","paper"]}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>目标不是免罪牌：AI 为什么要学会“不该赢”</h1><p><em>文章来源：Anthropic Research</em></p>
@@ -99,6 +107,6 @@
 <li>Anthropic, <a href="https://www.anthropic.com/research/teaching-claude-why">Teaching Claude why</a>, 2026-05-08.</li>
 </ul>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-CSJjPKOE.js"></script>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
 </body>
 </html>

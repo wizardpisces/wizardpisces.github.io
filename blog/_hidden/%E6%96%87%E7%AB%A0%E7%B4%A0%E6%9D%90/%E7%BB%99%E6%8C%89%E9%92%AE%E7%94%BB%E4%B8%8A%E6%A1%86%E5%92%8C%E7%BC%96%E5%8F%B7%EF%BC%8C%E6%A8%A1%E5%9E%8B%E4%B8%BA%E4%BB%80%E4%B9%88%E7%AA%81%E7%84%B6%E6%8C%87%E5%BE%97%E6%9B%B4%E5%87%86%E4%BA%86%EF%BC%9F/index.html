@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>给按钮画上框和编号，模型为什么突然指得更准了？ | LZ AI NOTE</title>
+  <meta name="description" content="给按钮画上框和编号，模型为什么突然指得更准了？ 你让一个操作电脑的 Agent 点击登录按钮。 它看懂了页面，也回答对了目标： 点击下方蓝色的“登录”按钮。 可真正执行时，鼠标却落在密码输入框的边缘。 模型明明知道要点哪个按钮，为什么一报坐标就容易偏？ 现在换一种做法。先在截图里的每个可操作区域外面画框，再标上编号： 不再问模型“登录按钮的坐标是多少”，而…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="给按钮画上框和编号，模型为什么突然指得更准了？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-08-25">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E7%BB%99%E6%8C%89%E9%92%AE%E7%94%BB%E4%B8%8A%E6%A1%86%E5%92%8C%E7%BC%96%E5%8F%B7%EF%BC%8C%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E7%AA%81%E7%84%B6%E6%8C%87%E5%BE%97%E6%9B%B4%E5%87%86%E4%BA%86%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E7%BB%99%E6%8C%89%E9%92%AE%E7%94%BB%E4%B8%8A%E6%A1%86%E5%92%8C%E7%BC%96%E5%8F%B7%EF%BC%8C%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E7%AA%81%E7%84%B6%E6%8C%87%E5%BE%97%E6%9B%B4%E5%87%86%E4%BA%86%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="给按钮画上框和编号，模型为什么突然指得更准了？ | LZ AI NOTE">
+  <meta property="og:description" content="给按钮画上框和编号，模型为什么突然指得更准了？ 你让一个操作电脑的 Agent 点击登录按钮。 它看懂了页面，也回答对了目标： 点击下方蓝色的“登录”按钮。 可真正执行时，鼠标却落在密码输入框的边缘。 模型明明知道要点哪个按钮，为什么一报坐标就容易偏？ 现在换一种做法。先在截图里的每个可操作区域外面画框，再标上编号： 不再问模型“登录按钮的坐标是多少”，而…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E7%BB%99%E6%8C%89%E9%92%AE%E7%94%BB%E4%B8%8A%E6%A1%86%E5%92%8C%E7%BC%96%E5%8F%B7%EF%BC%8C%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E7%AA%81%E7%84%B6%E6%8C%87%E5%BE%97%E6%9B%B4%E5%87%86%E4%BA%86%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"给按钮画上框和编号，模型为什么突然指得更准了？","description":"给按钮画上框和编号，模型为什么突然指得更准了？ 你让一个操作电脑的 Agent 点击登录按钮。 它看懂了页面，也回答对了目标： 点击下方蓝色的“登录”按钮。 可真正执行时，鼠标却落在密码输入框的边缘。 模型明明知道要点哪个按钮，为什么一报坐标就容易偏？ 现在换一种做法。先在截图里的每个可操作区域外面画框，再标上编号： 不再问模型“登录按钮的坐标是多少”，而…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E7%BB%99%E6%8C%89%E9%92%AE%E7%94%BB%E4%B8%8A%E6%A1%86%E5%92%8C%E7%BC%96%E5%8F%B7%EF%BC%8C%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E7%AA%81%E7%84%B6%E6%8C%87%E5%BE%97%E6%9B%B4%E5%87%86%E4%BA%86%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E7%BB%99%E6%8C%89%E9%92%AE%E7%94%BB%E4%B8%8A%E6%A1%86%E5%92%8C%E7%BC%96%E5%8F%B7%EF%BC%8C%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E7%AA%81%E7%84%B6%E6%8C%87%E5%BE%97%E6%9B%B4%E5%87%86%E4%BA%86%EF%BC%9F","dateModified":"2026-08-25","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：给按钮画上框和编号，模型为什么突然指得更准了？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E7%BB%99%E6%8C%89%E9%92%AE%E7%94%BB%E4%B8%8A%E6%A1%86%E5%92%8C%E7%BC%96%E5%8F%B7%EF%BC%8C%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E7%AA%81%E7%84%B6%E6%8C%87%E5%BE%97%E6%9B%B4%E5%87%86%E4%BA%86%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>给按钮画上框和编号，模型为什么突然指得更准了？</h1><h1>给按钮画上框和编号，模型为什么突然指得更准了？</h1>
+<p>你让一个操作电脑的 Agent 点击登录按钮。</p>
+<p>它看懂了页面，也回答对了目标：</p>
+<blockquote>
+<p>点击下方蓝色的“登录”按钮。</p>
+</blockquote>
+<p>可真正执行时，鼠标却落在密码输入框的边缘。</p>
+<p>模型明明知道要点哪个按钮，为什么一报坐标就容易偏？</p>
+<p>现在换一种做法。先在截图里的每个可操作区域外面画框，再标上编号：</p>
+<pre><code class="language-text">┌────────────────────┐
+│ [1] 手机号输入框    │
+├────────────────────┤
+│ [2] 密码输入框      │
+├────────────────────┤
+│ [3]     登录        │
+└────────────────────┘
+</code></pre>
+<p>不再问模型“登录按钮的坐标是多少”，而是问：</p>
+<blockquote>
+<p>应该操作哪个编号？</p>
+</blockquote>
+<p>模型回答：</p>
+<blockquote>
+<p>3</p>
+</blockquote>
+<p>程序再查出编号 3 对应的区域，点击它的中心。按钮还是那个按钮，模型也没有更换，为什么加上框和编号以后，定位突然变准了？</p>
+<h2>报坐标和选编号，不是同一道题</h2>
+<p>直接报坐标时，模型需要完成一连串判断：</p>
+<pre><code class="language-text">认出登录按钮
+→ 判断它在截图中的精确边界
+→ 换算到坐标系
+→ 生成 x、y 数字
+</code></pre>
+<p>假设截图宽 1080、高 1920，模型最后要从大量可能的坐标中给出一组数字。边界稍微理解错一点，坐标原点或缩放比例再有一点偏差，鼠标就可能落到按钮外面。</p>
+<p><a href="./%E6%A8%A1%E5%9E%8B%E8%83%BD%E5%8F%AB%E5%87%BA%E6%8C%89%E9%92%AE%E7%9A%84%E5%90%8D%E5%AD%97%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8C%87%E4%B8%8D%E5%87%86%E5%AE%83%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.md">《模型能叫出按钮的名字，为什么指不准它在哪里？》</a>解释了这个缺口：认出“这是什么”，允许位置和大小发生变化；指出“它在哪里”，却必须保留精确边界。</p>
+<p>编号没有让模型突然获得更精细的像素感。它改变了模型要回答的问题：</p>
+<pre><code class="language-text">原来的任务：
+登录按钮 → 生成一组坐标
+
+现在的任务：
+登录按钮 → 在 [1] [2] [3] 中选择一个编号
+</code></pre>
+<p>模型不再从整张截图里直接构造连续坐标，只需要在有限候选项里做选择。</p>
+<h2>精确位置其实已经提前藏在框里</h2>
+<p>这些框不是语言模型凭空画出来的。</p>
+<p>系统会先运行一个候选区域生成器，把截图拆成一组可能被操作的区域。不同场景可以使用不同方法：</p>
+<pre><code class="language-text">文字和输入框
+→ OCR 或界面元素检测器
+
+图标和按钮
+→ 可交互区域检测器
+
+普通图片中的物体
+→ 分割模型生成 Mask
+</code></pre>
+<p>例如，SAM 这类分割模型可以为普通图片提出区域；面向图形界面的 OmniParser 则训练了可交互图标检测器，并用描述模型补充每个区域的功能语义。它们不是同一条固定流水线，只是在不同场景里承担“先把候选区域找出来”的职责。</p>
+<p>系统同时保存一张映射表：</p>
+<pre><code class="language-text">[1] → 手机号输入框 → [90, 180, 990, 300]
+[2] → 密码输入框   → [90, 330, 990, 450]
+[3] → 登录按钮     → [90, 500, 990, 620]
+</code></pre>
+<p>随后，它把编号画回截图，让模型能够在视觉区域和文字编号之间建立关系。</p>
+<p>这种给候选区域添加可引用标记的方法，通常叫 Set-of-Mark。相关研究会先用框、Mask 或其他方式划出区域，再覆盖数字或字母，让多模态模型直接用标记指向目标。</p>
+<p>现在，精确坐标来自候选框。语言模型负责的是：</p>
+<pre><code class="language-text">“登录按钮”
+→ 对应 [3]
+</code></pre>
+<p>程序负责的是：</p>
+<pre><code class="language-text">[3]
+→ 查表得到边界
+→ 计算点击位置
+</code></pre>
+<p>看起来是模型指得更准了，实际上是系统把“理解目标”和“保存精确位置”拆给了更适合的部件。</p>
+<h2>编号把空间问题变成了选择题</h2>
+<p>有了编号，截图中的区域获得了可以直接出现在回答里的名字。模型可以把“页面下方、蓝色矩形、中间写着登录”对应到 <code>[3]</code>，不必再把这份空间判断翻译成两个坐标数字。</p>
+<p>Set-of-Mark 研究发现，给图片区域加入标记，可以改善多模态模型在多类视觉定位任务上的表现。OmniParser 的实验还说明，光有编号未必够；补上区域里的文字或图标含义，模型更容易把操作意图分配到正确编号。</p>
+<p>编号在模型和屏幕之间增加了一个共同对象：视觉工具保存 <code>[3]</code> 的边界，语言模型选择 <code>[3]</code>，执行器再点击 <code>[3]</code> 对应的位置。</p>
+<h2>如果候选框错了，编号也救不回来</h2>
+<p>再让登录页运行一次。假设候选区域生成器把按钮拆成了两块：</p>
+<pre><code class="language-text">[3] → “登录”两个字
+[4] → 蓝色按钮背景
+</code></pre>
+<p>模型可能正确理解“要点击登录按钮”，却不知道应该选择文字还是背景。更糟的是，如果检测器根本没有框出登录按钮，候选列表里就不存在正确答案。</p>
+<p>密集页面还会出现另一个问题：编号太多，标记可能遮住原本的文字和图标。区域彼此重叠时，点击框的中心也不一定是安全的操作点。</p>
+<p>所以这套方案只是移动了误差的位置：</p>
+<pre><code class="language-text">直接报坐标
+→ 误差主要在模型的空间判断和数字生成
+
+先画框再编号
+→ 误差主要在候选区域是否完整、边界是否正确
+  以及模型有没有选对编号
+</code></pre>
+<p>它没有消灭定位问题，而是把一个开放的坐标生成问题，改造成了候选区域生成加编号选择的问题。</p>
+<h2>最后，让登录按钮再走一次</h2>
+<pre><code class="language-text">登录页截图
+    ↓
+检测或分割出候选区域
+    ↓
+保存区域边界，画上编号
+    ↓
+模型选择 [3]
+    ↓
+程序查表并点击 [3]
+</code></pre>
+<p>给按钮加框和编号以后，模型之所以指得更准，不是因为编号提高了它的视觉分辨率。</p>
+<p>精确位置已经由前面的视觉工具保存下来。模型只需要在几个被明确标出的对象中选出目标，再由程序把编号还原成坐标。</p>
+<h2>参考资料</h2>
+<ol>
+<li>Yang 等，Set-of-Mark Prompting Unleashes Extraordinary Visual Grounding in GPT-4V（2023）：<a href="https://arxiv.org/abs/2310.11441">https://arxiv.org/abs/2310.11441</a></li>
+<li>Lu 等，OmniParser for Pure Vision Based GUI Agent（2024）：<a href="https://arxiv.org/abs/2408.00203">https://arxiv.org/abs/2408.00203</a></li>
+<li>Kirillov 等，Segment Anything（ICCV，2023）：<a href="https://arxiv.org/abs/2304.02643">https://arxiv.org/abs/2304.02643</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
+</body>
+</html>

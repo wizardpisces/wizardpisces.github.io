@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>什么是 ReAct？一个例子看懂 AI Agent 原理 | LZ AI NOTE</title>
+  <meta name="description" content="什么是 ReAct？一个例子看懂 AI Agent 原理 Agent 不是一种神秘技术。 先把 LangGraph、AutoGen、OpenAI Agents SDK、CrewAI 这些框架放到一边，只看最里面的运行逻辑： Agent = LLM + 循环（Loop）+ 工具（Tool）+ 状态（State） 这篇文章不用任何框架。我们从一个只有十几行代码…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="什么是 ReAct？一个例子看懂 AI Agent 原理">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-09-01">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/tech/ai-%E5%8F%AF%E9%9D%A0Agent/%E4%BB%80%E4%B9%88%E6%98%AF%20ReAct%EF%BC%9F%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20Agent%20%E5%8E%9F%E7%90%86">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-%E5%8F%AF%E9%9D%A0Agent/%E4%BB%80%E4%B9%88%E6%98%AF%20ReAct%EF%BC%9F%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20Agent%20%E5%8E%9F%E7%90%86">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="什么是 ReAct？一个例子看懂 AI Agent 原理 | LZ AI NOTE">
+  <meta property="og:description" content="什么是 ReAct？一个例子看懂 AI Agent 原理 Agent 不是一种神秘技术。 先把 LangGraph、AutoGen、OpenAI Agents SDK、CrewAI 这些框架放到一边，只看最里面的运行逻辑： Agent = LLM + 循环（Loop）+ 工具（Tool）+ 状态（State） 这篇文章不用任何框架。我们从一个只有十几行代码…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E5%8F%AF%E9%9D%A0Agent/%E4%BB%80%E4%B9%88%E6%98%AF%20ReAct%EF%BC%9F%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20Agent%20%E5%8E%9F%E7%90%86">
+  <meta property="og:image" content="https://wizardpisces.github.io/covers/react-agent-loop.png">
+  <meta name="twitter:image" content="https://wizardpisces.github.io/covers/react-agent-loop.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"什么是 ReAct？一个例子看懂 AI Agent 原理","description":"什么是 ReAct？一个例子看懂 AI Agent 原理 Agent 不是一种神秘技术。 先把 LangGraph、AutoGen、OpenAI Agents SDK、CrewAI 这些框架放到一边，只看最里面的运行逻辑： Agent = LLM + 循环（Loop）+ 工具（Tool）+ 状态（State） 这篇文章不用任何框架。我们从一个只有十几行代码…","url":"https://wizardpisces.github.io/blog/tech/ai-%E5%8F%AF%E9%9D%A0Agent/%E4%BB%80%E4%B9%88%E6%98%AF%20ReAct%EF%BC%9F%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20Agent%20%E5%8E%9F%E7%90%86","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E5%8F%AF%E9%9D%A0Agent/%E4%BB%80%E4%B9%88%E6%98%AF%20ReAct%EF%BC%9F%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20Agent%20%E5%8E%9F%E7%90%86","dateModified":"2026-09-01","image":"https://wizardpisces.github.io/covers/react-agent-loop.png","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：什么是 ReAct？一个例子看懂 AI Agent 原理，LZ AI NOTE，https://wizardpisces.github.io/blog/tech/ai-%E5%8F%AF%E9%9D%A0Agent/%E4%BB%80%E4%B9%88%E6%98%AF%20ReAct%EF%BC%9F%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20Agent%20%E5%8E%9F%E7%90%86","about":["ai-可靠Agent"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>什么是 ReAct？一个例子看懂 AI Agent 原理</h1><h1>什么是 ReAct？一个例子看懂 AI Agent 原理</h1>
+<p>Agent 不是一种神秘技术。</p>
+<p>先把 LangGraph、AutoGen、OpenAI Agents SDK、CrewAI 这些框架放到一边，只看最里面的运行逻辑：</p>
+<blockquote>
+<p><strong>Agent = LLM + 循环（Loop）+ 工具（Tool）+ 状态（State）</strong></p>
+</blockquote>
+<p>这篇文章不用任何框架。我们从一个只有十几行代码的小例子开始，一步一步把 Agent 演化出来。</p>
+<p>还是从查天气开始。</p>
+<hr>
+<h2>第一阶段：普通 LLM，其实不是 Agent</h2>
+<p>先看最普通的调用。</p>
+<pre><code class="language-python">from openai import OpenAI
+
+client = OpenAI()
+
+response = client.responses.create(
+    model=&quot;gpt-4.1&quot;,
+    input=&quot;北京今天天气怎么样？&quot;
+)
+
+print(response.output_text)
+</code></pre>
+<p>整个流程很简单：</p>
+<pre><code>用户
+   │
+   ▼
+Prompt
+   │
+   ▼
+LLM
+   │
+   ▼
+Answer
+</code></pre>
+<p>特点只有一个：</p>
+<blockquote>
+<p><strong>输入一次，输出一次。</strong></p>
+</blockquote>
+<p>模型并不知道：</p>
+<ul>
+<li>有没有工具</li>
+<li>能不能查询天气</li>
+<li>是否需要继续执行</li>
+</ul>
+<p>它只负责根据这次输入生成回答。</p>
+<p>例如：</p>
+<pre><code>抱歉，我无法获取实时天气。
+</code></pre>
+<p>这就是普通 Chat。</p>
+<p>距离 Agent 还差得远。</p>
+<hr>
+<h1>第二阶段：给 LLM 一把工具</h1>
+<p>现在告诉模型：</p>
+<blockquote>
+<p>你可以调用一个天气函数。</p>
+</blockquote>
+<p>例如：</p>
+<pre><code class="language-python">def get_weather(city):
+    return &quot;北京：26℃，晴&quot;
+</code></pre>
+<p>然后告诉模型：</p>
+<pre><code>你有一个工具：
+
+get_weather(city)
+
+需要天气时，请调用它。
+</code></pre>
+<p>模型可能返回：</p>
+<pre><code class="language-json">{
+    &quot;tool&quot;: &quot;get_weather&quot;,
+    &quot;args&quot;: {
+        &quot;city&quot;: &quot;北京&quot;
+    }
+}
+</code></pre>
+<p>注意，这时<strong>工具还没有执行。</strong></p>
+<p>LLM 只是说：</p>
+<blockquote>
+<p>我建议调用这个工具。</p>
+</blockquote>
+<p>所以目前流程变成：</p>
+<pre><code>用户
+   │
+   ▼
+LLM
+   │
+   ▼
+告诉程序：
+调用 get_weather
+</code></pre>
+<p>模型只是一个&quot;决策者&quot;。</p>
+<p>真正执行工具的是你的程序。</p>
+<hr>
+<h1>第三阶段：程序替模型执行工具</h1>
+<p>于是程序多做一步：</p>
+<pre><code class="language-python">tool_call = llm(prompt)
+
+result = get_weather(tool_call[&quot;city&quot;])
+
+print(result)
+</code></pre>
+<p>流程变成：</p>
+<pre><code>用户
+ │
+ ▼
+LLM
+ │
+ ▼
+Tool Call
+ │
+ ▼
+Python
+ │
+ ▼
+执行工具
+ │
+ ▼
+结果
+</code></pre>
+<p>例如：</p>
+<pre><code>get_weather(&quot;北京&quot;)
+</code></pre>
+<p>得到：</p>
+<pre><code>北京：26℃
+</code></pre>
+<p>但是问题来了。</p>
+<p>程序拿到了天气。</p>
+<p><strong>模型不知道。</strong></p>
+<p>因为天气是在 Python 世界里发生的，结果还没有放回模型的上下文。</p>
+<hr>
+<h1>第四阶段：把工具结果再喂回模型</h1>
+<p>所以还要再调用一次模型。</p>
+<p>第一次：</p>
+<pre><code>LLM：
+
+调用 get_weather(&quot;北京&quot;)
+</code></pre>
+<p>Python：</p>
+<pre><code>北京：26℃
+</code></pre>
+<p>第二次：</p>
+<pre><code>LLM：
+
+工具返回：
+
+北京：26℃
+
+请继续回答用户。
+</code></pre>
+<p>于是模型输出：</p>
+<pre><code>北京今天26℃，天气晴朗。
+</code></pre>
+<p>整个流程：</p>
+<pre><code>第一次
+
+用户
+ │
+ ▼
+LLM
+ │
+ ▼
+Tool Call
+
+↓
+
+Python执行
+
+↓
+
+第二次
+
+LLM
+ │
+ ▼
+最终回答
+</code></pre>
+<p>到这里，已经越来越像 Agent 了。</p>
+<p>但是还有问题：现在的代码只能处理一次工具调用。</p>
+<hr>
+<h1>第五阶段：如果需要多个工具怎么办？</h1>
+<p>例如：</p>
+<p>用户说：</p>
+<pre><code>上海天气怎么样？
+
+顺便告诉我美元汇率。
+</code></pre>
+<p>模型第一次返回：</p>
+<pre><code>调用：
+
+get_weather()
+
+</code></pre>
+<p>程序执行。</p>
+<p>得到：</p>
+<pre><code>天气……
+</code></pre>
+<p>再次发给模型。</p>
+<p>模型又说：</p>
+<pre><code>调用：
+
+get_exchange_rate()
+</code></pre>
+<p>程序继续执行。</p>
+<p>得到：</p>
+<pre><code>7.16
+</code></pre>
+<p>再次发回模型。</p>
+<p>模型最后回答：</p>
+<pre><code>上海今天……
+美元汇率……
+</code></pre>
+<p>发现了吗？</p>
+<p>这里出现了一个新东西。</p>
+<p><strong>循环。</strong></p>
+<p>程序开始不断：</p>
+<pre><code>LLM
+
+↓
+
+Tool
+
+↓
+
+LLM
+
+↓
+
+Tool
+
+↓
+
+LLM
+
+↓
+
+……
+</code></pre>
+<p>直到模型不再请求工具：</p>
+<pre><code>没有工具要调用了。
+</code></pre>
+<p>循环结束。</p>
+<hr>
+<h1>第六阶段：真正的 Agent Loop 出现了</h1>
+<p>于是代码开始变成经典的 Agent Loop：</p>
+<pre><code class="language-python">messages = [user_message]
+
+while True:
+
+    response = llm(messages)
+
+    if response.need_tool():
+
+        result = call_tool(response)
+
+        messages.append(result)
+
+    else:
+
+        print(response.text)
+        break
+</code></pre>
+<p>注意。</p>
+<p>整个 Agent 最核心的东西，就是这个 <code>while</code>。</p>
+<p>各种框架封装得各不相同，里面通常都能找到类似的逻辑：</p>
+<pre><code>while True
+
+    问 LLM
+
+    如果要工具：
+
+        调工具
+
+        放回上下文
+
+    否则：
+
+        结束
+</code></pre>
+<p>Agent 能够持续行动，就来自这个循环。</p>
+<hr>
+<h1>第七阶段：为什么需要 State（状态）？</h1>
+<p>继续思考。</p>
+<p>如果每次都只有：</p>
+<pre><code>response = llm(prompt)
+</code></pre>
+<p>第二次调用时，模型就不知道第一次发生过什么。</p>
+<p>所以程序必须保存历史。</p>
+<p>例如：</p>
+<pre><code class="language-python">messages = [
+    {
+        &quot;role&quot;: &quot;user&quot;,
+        &quot;content&quot;: &quot;北京天气&quot;
+    }
+]
+</code></pre>
+<p>调用工具以后：</p>
+<pre><code class="language-python">messages.append(
+    {
+        &quot;role&quot;: &quot;tool&quot;,
+        &quot;content&quot;: &quot;26℃&quot;
+    }
+)
+</code></pre>
+<p>再次调用：</p>
+<pre><code class="language-python">response = llm(messages)
+</code></pre>
+<p>这次模型看到的是：</p>
+<pre><code>User：
+
+北京天气
+
+↓
+
+Tool：
+
+26℃
+</code></pre>
+<p>它这才知道：</p>
+<blockquote>
+<p>哦，我已经查过天气了。</p>
+</blockquote>
+<p>这就是 Agent 的 State。</p>
+<p>在这个例子里，State 做的事情很直接：</p>
+<blockquote>
+<p><strong>让模型记住已经发生过什么。</strong></p>
+</blockquote>
+<hr>
+<h1>第八阶段：为什么 Agent 可以规划？</h1>
+<p>继续升级。</p>
+<p>例如：</p>
+<pre><code>帮我分析苹果股票。
+
+如果上涨，
+看看新闻；
+
+如果下跌，
+看看财报。
+</code></pre>
+<p>模型第一次可能输出：</p>
+<pre><code>Step1：
+
+查询股价
+</code></pre>
+<p>Python执行。</p>
+<p>回来。</p>
+<p>模型继续：</p>
+<pre><code>Step2：
+
+查询新闻
+</code></pre>
+<p>回来。</p>
+<p>模型继续：</p>
+<pre><code>Step3：
+
+总结
+</code></pre>
+<p>你会发现，代码里没有写死：</p>
+<pre><code>第一步……
+第二步……
+第三步……
+</code></pre>
+<p>每一步做什么，都是模型根据当前状态决定的。</p>
+<p>所以：</p>
+<p>Agent 并不是程序会规划。</p>
+<p>真正规划的是 <strong>LLM</strong>。</p>
+<p>程序负责把模型的决定执行下去，再把结果送回来：</p>
+<pre><code>执行
+
+↓
+
+反馈
+
+↓
+
+执行
+
+↓
+
+反馈
+</code></pre>
+<hr>
+<h1>第九阶段：再加一个 Memory</h1>
+<p>如果每次开始任务都执行：</p>
+<pre><code>messages=[]
+</code></pre>
+<p>模型自然不知道以前聊过什么。</p>
+<p>于是增加：</p>
+<pre><code class="language-python">memory = []
+
+memory.append(user)
+
+memory.append(tool)
+
+memory.append(ai)
+</code></pre>
+<p>下一次：</p>
+<pre><code>response = llm(memory)
+</code></pre>
+<p>于是，Agent 开始有了长期记忆，可以在新一轮任务中用到过去的信息。</p>
+<p>常见的：</p>
+<ul>
+<li>Memory</li>
+<li>Long Context</li>
+<li>RAG</li>
+<li>Vector Database</li>
+</ul>
+<p>解决的都是同一类问题：如何把需要的信息重新放进当前 State。</p>
+<p>它们并不完全等价。长上下文直接携带历史，RAG 和向量数据库负责检索相关信息，Memory 则更强调信息的保存、筛选和使用。</p>
+<hr>
+<h1>第十阶段：完整的极简 Agent</h1>
+<p>最后，把所有东西拼起来。</p>
+<pre><code class="language-python">messages = []
+
+while True:
+
+    response = llm(messages)
+
+    if response.has_tool_call():
+
+        result = call_tool(response.tool)
+
+        messages.append(result)
+
+    else:
+
+        print(response.text)
+        break
+</code></pre>
+<p>是不是很眼熟？</p>
+<p>LangGraph</p>
+<p>↓</p>
+<p>AutoGen</p>
+<p>↓</p>
+<p>OpenAI Agents SDK</p>
+<p>↓</p>
+<p>CrewAI</p>
+<p>↓</p>
+<p>各种 AI Agent 框架……</p>
+<p>实现方式虽然不同，但拆到最里面，通常都绕不开这段逻辑：</p>
+<pre><code class="language-python">while True:
+
+    response = llm(messages)
+
+    if tool_call:
+
+        result = tool()
+
+        messages.append(result)
+
+    else:
+
+        break
+</code></pre>
+<p>代码不到二十行，却已经包含了 Agent 最重要的几个组成部分。</p>
+<p>当然，离真正可用还差错误处理、权限控制、超时、重试和持久化等工程能力。</p>
+<hr>
+<h1>Agent 的本质，其实只有四个组件</h1>
+<p>很多人第一次接触 Agent，会觉得它是一种全新的 AI 技术。</p>
+<p>把框架和工程细节暂时剥开，Agent 的核心其实很简单：</p>
+<pre><code>          +----------------+
+          |      LLM       |
+          +-------+--------+
+                  |
+          判断下一步做什么
+                  |
+                  v
+        +------------------+
+        |     Tool Call    |
+        +--------+---------+
+                 |
+            执行真实操作
+                 |
+                 v
+        +------------------+
+        |      State       |
+        +--------+---------+
+                 |
+          更新上下文信息
+                 |
+                 v
+        +------------------+
+        |      Loop        |
+        +------------------+
+                 |
+          继续问 LLM？
+</code></pre>
+<p>四个组件各有分工：</p>
+<ul>
+<li><strong>LLM</strong>：根据当前上下文判断下一步做什么。</li>
+<li><strong>Tool</strong>：负责与外部世界交互，例如搜索、数据库、API、文件系统等。</li>
+<li><strong>State</strong>：记录已经发生的事情，避免每一步都从零开始。</li>
+<li><strong>Loop</strong>：反复执行&quot;判断 → 调用工具 → 更新状态&quot;，直到任务完成或触发停止条件。</li>
+</ul>
+<p>可以把它总结成一句话：</p>
+<blockquote>
+<p><strong>Agent 并不是一种新的模型，而是在 LLM 外面包了一层能够持续决策、调用工具和维护状态的执行循环。</strong></p>
+</blockquote>
+<p>理解了这四个组件，再去看 LangGraph、OpenAI Agents SDK、CrewAI 或 AutoGen，就不会只看到一堆 API。它们都在处理这套循环，只是各自选择了不同的状态组织方式、控制方式和扩展边界。真正的 Agent 原理，并没有想象中复杂。</p>
+<p>当这个循环开始有分支、暂停、重试和恢复时，可以继续读<a href="./LangGraph%20%E5%88%B0%E5%BA%95%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F%E7%94%A8%E4%B8%80%E4%B8%AA%E6%9F%A5%E5%A4%A9%E6%B0%94%E7%9A%84%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82.md">《LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂》</a>。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
+</body>
+</html>

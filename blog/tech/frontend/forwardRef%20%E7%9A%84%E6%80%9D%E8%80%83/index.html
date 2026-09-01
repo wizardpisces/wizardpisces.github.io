@@ -6,14 +6,22 @@
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <title>为什么 ref 没法直接传递？ | LZ AI NOTE</title>
   <meta name="description" content="为什么 ref 没法直接传递？ 可能原因： 1. 封装 ：React 强调组件的封装，即组件应该管理和控制自己的状态和行为。 ref 是访问组件内部 DOM 节点的一种方式，如果 ref 能够像普通的 prop 那样传递，那么组件的内部节点就可以被外部的父组件随意访问和修改，这破坏了封装性。 2. 所有权原则 ：在 React 中，每个 ref 有一个拥有…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="为什么 ref 没法直接传递？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2025-06-20">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/tech/frontend/forwardRef%20%E7%9A%84%E6%80%9D%E8%80%83">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
   <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/frontend/forwardRef%20%E7%9A%84%E6%80%9D%E8%80%83">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
   <meta property="og:title" content="为什么 ref 没法直接传递？ | LZ AI NOTE">
   <meta property="og:description" content="为什么 ref 没法直接传递？ 可能原因： 1. 封装 ：React 强调组件的封装，即组件应该管理和控制自己的状态和行为。 ref 是访问组件内部 DOM 节点的一种方式，如果 ref 能够像普通的 prop 那样传递，那么组件的内部节点就可以被外部的父组件随意访问和修改，这破坏了封装性。 2. 所有权原则 ：在 React 中，每个 ref 有一个拥有…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/frontend/forwardRef%20%E7%9A%84%E6%80%9D%E8%80%83">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"为什么 ref 没法直接传递？","description":"为什么 ref 没法直接传递？ 可能原因： 1. 封装 ：React 强调组件的封装，即组件应该管理和控制自己的状态和行为。 ref 是访问组件内部 DOM 节点的一种方式，如果 ref 能够像普通的 prop 那样传递，那么组件的内部节点就可以被外部的父组件随意访问和修改，这破坏了封装性。 2. 所有权原则 ：在 React 中，每个 ref 有一个拥有…","url":"https://wizardpisces.github.io/blog/tech/frontend/forwardRef%20%E7%9A%84%E6%80%9D%E8%80%83","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/frontend/forwardRef%20%E7%9A%84%E6%80%9D%E8%80%83","dateModified":"2025-06-20","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"为什么 ref 没法直接传递？","description":"为什么 ref 没法直接传递？ 可能原因： 1. 封装 ：React 强调组件的封装，即组件应该管理和控制自己的状态和行为。 ref 是访问组件内部 DOM 节点的一种方式，如果 ref 能够像普通的 prop 那样传递，那么组件的内部节点就可以被外部的父组件随意访问和修改，这破坏了封装性。 2. 所有权原则 ：在 React 中，每个 ref 有一个拥有…","url":"https://wizardpisces.github.io/blog/tech/frontend/forwardRef%20%E7%9A%84%E6%80%9D%E8%80%83","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/frontend/forwardRef%20%E7%9A%84%E6%80%9D%E8%80%83","dateModified":"2025-06-20","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：为什么 ref 没法直接传递？，LZ AI NOTE，https://wizardpisces.github.io/blog/tech/frontend/forwardRef%20%E7%9A%84%E6%80%9D%E8%80%83","about":["frontend"]}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>为什么 ref 没法直接传递？</h1><h1>为什么 ref 没法直接传递？</h1>
@@ -72,6 +80,6 @@ class Parent extends React.Component {
 <p>在 <code>Parent</code> 组件中，我们创建了一个 ref (<code>this.buttonRef</code>) 并将其作为 <code>forwardedRef</code> 属性传递给 <code>FancyButton</code>。因为 <code>FancyButton</code> 是用我们的简化版 <code>forwardRef</code> 创建的，它能够接收并使用这个 <code>ref</code>。</p>
 <p>这个简化的实现演示了 <code>forwardRef</code> 的核心概念，但请注意，这并不是 React 实际上如何实现 <code>forwardRef</code> 的。React的实现包含更多的细节和优化，以确保正确处理生命周期方法、hooks 等。如果你想要在生产环境中使用 <code>forwardRef</code>，请使用 React 提供的官方 <code>forwardRef</code> API。</p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-CSJjPKOE.js"></script>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
 </body>
 </html>

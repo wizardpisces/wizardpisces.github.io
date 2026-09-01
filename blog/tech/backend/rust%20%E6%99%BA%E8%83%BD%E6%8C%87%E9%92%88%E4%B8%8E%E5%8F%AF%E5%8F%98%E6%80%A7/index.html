@@ -6,14 +6,22 @@
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <title>参考 | LZ AI NOTE</title>
   <meta name="description" content="Rust 的智能指针是一种封装了指针行为的数据结构，它不仅能像普通指针那样访问数据，还附加了更多的功能，比如所有权管理、引用计数或内存自动回收。常见的智能指针有 Box 、 Rc 、 Arc 和 RefCell 。下面通过具体例子讲解这些智能指针及其使用场景。 智能指针 1. Box&lt;T : 堆上存储数据的智能指针 Box 是最简单的智能指针，用于将数据存…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="参考">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2025-06-20">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/tech/backend/rust%20%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%E4%B8%8E%E5%8F%AF%E5%8F%98%E6%80%A7">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
   <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/backend/rust%20%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%E4%B8%8E%E5%8F%AF%E5%8F%98%E6%80%A7">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
   <meta property="og:title" content="参考 | LZ AI NOTE">
   <meta property="og:description" content="Rust 的智能指针是一种封装了指针行为的数据结构，它不仅能像普通指针那样访问数据，还附加了更多的功能，比如所有权管理、引用计数或内存自动回收。常见的智能指针有 Box 、 Rc 、 Arc 和 RefCell 。下面通过具体例子讲解这些智能指针及其使用场景。 智能指针 1. Box&lt;T : 堆上存储数据的智能指针 Box 是最简单的智能指针，用于将数据存…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/backend/rust%20%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%E4%B8%8E%E5%8F%AF%E5%8F%98%E6%80%A7">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"参考","description":"Rust 的智能指针是一种封装了指针行为的数据结构，它不仅能像普通指针那样访问数据，还附加了更多的功能，比如所有权管理、引用计数或内存自动回收。常见的智能指针有 Box 、 Rc 、 Arc 和 RefCell 。下面通过具体例子讲解这些智能指针及其使用场景。 智能指针 1. Box\u003cT : 堆上存储数据的智能指针 Box 是最简单的智能指针，用于将数据存…","url":"https://wizardpisces.github.io/blog/tech/backend/rust%20%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%E4%B8%8E%E5%8F%AF%E5%8F%98%E6%80%A7","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/backend/rust%20%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%E4%B8%8E%E5%8F%AF%E5%8F%98%E6%80%A7","dateModified":"2025-06-20","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"参考","description":"Rust 的智能指针是一种封装了指针行为的数据结构，它不仅能像普通指针那样访问数据，还附加了更多的功能，比如所有权管理、引用计数或内存自动回收。常见的智能指针有 Box 、 Rc 、 Arc 和 RefCell 。下面通过具体例子讲解这些智能指针及其使用场景。 智能指针 1. Box\u003cT : 堆上存储数据的智能指针 Box 是最简单的智能指针，用于将数据存…","url":"https://wizardpisces.github.io/blog/tech/backend/rust%20%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%E4%B8%8E%E5%8F%AF%E5%8F%98%E6%80%A7","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/backend/rust%20%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%E4%B8%8E%E5%8F%AF%E5%8F%98%E6%80%A7","dateModified":"2025-06-20","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：参考，LZ AI NOTE，https://wizardpisces.github.io/blog/tech/backend/rust%20%E6%99%BA%E8%83%BD%E6%8C%87%E9%92%88%E4%B8%8E%E5%8F%AF%E5%8F%98%E6%80%A7","about":["backend"]}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>参考</h1><p>Rust 的智能指针是一种封装了指针行为的数据结构，它不仅能像普通指针那样访问数据，还附加了更多的功能，比如所有权管理、引用计数或内存自动回收。常见的智能指针有 <code>Box</code>、<code>Rc</code>、<code>Arc</code> 和 <code>RefCell</code>。下面通过具体例子讲解这些智能指针及其使用场景。</p>
@@ -146,6 +154,6 @@ fn main() {
 <li>gpt</li>
 </ul>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-CSJjPKOE.js"></script>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
 </body>
 </html>

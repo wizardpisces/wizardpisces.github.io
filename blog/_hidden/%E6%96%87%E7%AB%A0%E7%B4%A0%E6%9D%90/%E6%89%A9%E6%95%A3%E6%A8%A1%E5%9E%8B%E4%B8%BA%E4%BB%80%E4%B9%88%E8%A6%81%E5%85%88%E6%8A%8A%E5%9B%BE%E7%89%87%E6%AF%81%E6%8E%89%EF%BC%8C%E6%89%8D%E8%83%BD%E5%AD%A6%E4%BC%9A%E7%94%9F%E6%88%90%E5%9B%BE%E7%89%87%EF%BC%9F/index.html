@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>扩散模型为什么要先把图片毁掉，才能学会生成图片？ | LZ AI NOTE</title>
+  <meta name="description" content="扩散模型为什么要先把图片毁掉，才能学会生成图片？ 你输入一句： 雨夜里，一把撑开的红色雨伞。 几秒后，AI 生成了一张从未存在过的图片。 直觉上，训练这样的模型应该不断给它看图片，教它怎样把物体画出来。 扩散模型却多做了一件看起来完全相反的事：先拿一张清晰图片，不断往里面加入噪声，直到红伞、行人和街道全部消失，只剩下一片杂乱的颜色。 模型想学会生成图片，为…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="扩散模型为什么要先把图片毁掉，才能学会生成图片？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-08-26">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%85%88%E6%8A%8A%E5%9B%BE%E7%89%87%E6%AF%81%E6%8E%89%EF%BC%8C%E6%89%8D%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%85%88%E6%8A%8A%E5%9B%BE%E7%89%87%E6%AF%81%E6%8E%89%EF%BC%8C%E6%89%8D%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="扩散模型为什么要先把图片毁掉，才能学会生成图片？ | LZ AI NOTE">
+  <meta property="og:description" content="扩散模型为什么要先把图片毁掉，才能学会生成图片？ 你输入一句： 雨夜里，一把撑开的红色雨伞。 几秒后，AI 生成了一张从未存在过的图片。 直觉上，训练这样的模型应该不断给它看图片，教它怎样把物体画出来。 扩散模型却多做了一件看起来完全相反的事：先拿一张清晰图片，不断往里面加入噪声，直到红伞、行人和街道全部消失，只剩下一片杂乱的颜色。 模型想学会生成图片，为…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%85%88%E6%8A%8A%E5%9B%BE%E7%89%87%E6%AF%81%E6%8E%89%EF%BC%8C%E6%89%8D%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"扩散模型为什么要先把图片毁掉，才能学会生成图片？","description":"扩散模型为什么要先把图片毁掉，才能学会生成图片？ 你输入一句： 雨夜里，一把撑开的红色雨伞。 几秒后，AI 生成了一张从未存在过的图片。 直觉上，训练这样的模型应该不断给它看图片，教它怎样把物体画出来。 扩散模型却多做了一件看起来完全相反的事：先拿一张清晰图片，不断往里面加入噪声，直到红伞、行人和街道全部消失，只剩下一片杂乱的颜色。 模型想学会生成图片，为…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%85%88%E6%8A%8A%E5%9B%BE%E7%89%87%E6%AF%81%E6%8E%89%EF%BC%8C%E6%89%8D%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%85%88%E6%8A%8A%E5%9B%BE%E7%89%87%E6%AF%81%E6%8E%89%EF%BC%8C%E6%89%8D%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87%EF%BC%9F","dateModified":"2026-08-26","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：扩散模型为什么要先把图片毁掉，才能学会生成图片？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%85%88%E6%8A%8A%E5%9B%BE%E7%89%87%E6%AF%81%E6%8E%89%EF%BC%8C%E6%89%8D%E8%83%BD%E5%AD%A6%E4%BC%9A%E7%94%9F%E6%88%90%E5%9B%BE%E7%89%87%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>扩散模型为什么要先把图片毁掉，才能学会生成图片？</h1><h1>扩散模型为什么要先把图片毁掉，才能学会生成图片？</h1>
+<p>你输入一句：</p>
+<blockquote>
+<p>雨夜里，一把撑开的红色雨伞。</p>
+</blockquote>
+<p>几秒后，AI 生成了一张从未存在过的图片。</p>
+<p>直觉上，训练这样的模型应该不断给它看图片，教它怎样把物体画出来。</p>
+<p>扩散模型却多做了一件看起来完全相反的事：先拿一张清晰图片，不断往里面加入噪声，直到红伞、行人和街道全部消失，只剩下一片杂乱的颜色。</p>
+<p>模型想学会生成图片，为什么第一步却是把图片毁掉？</p>
+<h2>直接从噪声画图，问题大得没有抓手</h2>
+<p>先准备一张训练图片：</p>
+<pre><code class="language-text">清晰图片
+雨夜 + 红伞 + 行人 + 路灯
+</code></pre>
+<p>如果把一团随机噪声交给模型，要求它一步变回这张图，模型要同时决定：</p>
+<pre><code class="language-text">红伞放在哪里
+行人是什么姿势
+街道怎样延伸
+光线从哪里照过来
+每个像素应该是什么颜色
+</code></pre>
+<p>这不是一道只有一个自然答案的题。噪声本身没有指定它应该变成红伞、一只猫还是一座城市。图片中需要补齐的关系太多，训练过程也缺少一条清楚的中间路线。</p>
+<p>扩散模型换了一个办法：不直接教模型完成整幅图，而是先制造许多“只坏了一点”的图片。</p>
+<h2>主动加噪以后，每道题都有答案</h2>
+<p>现在让红伞图片分四步变坏：</p>
+<pre><code class="language-text">第 0 步：红伞、行人和街道都很清楚
+第 1 步：出现少量颗粒
+第 2 步：轮廓开始模糊
+第 3 步：只剩隐约的明暗结构
+第 4 步：接近随机噪声
+</code></pre>
+<p>每一步加入多少噪声，由程序自己决定。它知道原图是什么，也保留着用于构造当前带噪图片的那份随机噪声。</p>
+<p>于是训练任务变得很具体：</p>
+<pre><code class="language-text">输入：
+一张带噪图片 + 当前噪声程度
+
+目标：
+预测当前图片里混入的噪声
+</code></pre>
+<p>程序可以把模型的预测与真正加入的噪声直接比较。猜错了，就调整参数；猜得更接近，就保留这个方向。</p>
+<p>“毁掉图片”在这里不是副作用，而是在自动制造训练题和标准答案。</p>
+<p>经典 DDPM 的概念图常画成逐步加噪。实际训练时，不必每次真的从第 1 步走到第 4 步。程序可以随机选一个时间步，直接算出原图在这个噪声程度下的样子，再让模型预测其中的噪声。</p>
+<h2>一次只修一点，整张图才有了路线</h2>
+<p>模型看到第 1 步的图片时，红伞轮廓仍然清楚，只需要判断哪些颗粒不像原图。</p>
+<p>到了第 3 步，大部分细节已经消失。模型必须借助训练中见过的大量图片，判断什么样的结构更像一张合理照片。</p>
+<p>同一个模型会在不同噪声程度下反复练习：</p>
+<pre><code class="language-text">很清楚的图片
+→ 去掉少量颗粒
+
+比较模糊的图片
+→ 恢复大致边缘
+
+接近噪声的图片
+→ 找出一丁点更像真实图像的方向
+</code></pre>
+<p>它学到的不是“这张红伞图片应该怎样倒放”，而是面对不同程度的混乱时，下一小步应该往哪里修。</p>
+<p>当这样的局部修正重复很多次，一条原本过于困难的任务：</p>
+<pre><code class="language-text">随机噪声 → 完整图片
+</code></pre>
+<p>就被拆成了许多较小的任务：</p>
+<pre><code class="language-text">当前状态 → 稍微少一点噪声
+</code></pre>
+<h2>生成时走的是反方向，但不是返回训练图片</h2>
+<p>训练结束后，生成新图片不再需要那张红伞原图。</p>
+<p>系统重新采样一团噪声：</p>
+<pre><code class="language-text">随机噪声
+    ↓ 模型根据预测向更少噪声的状态更新
+稍微出现结构
+    ↓ 再预测一次
+轮廓逐渐稳定
+    ↓ 继续重复
+一张新的图片
+</code></pre>
+<p>模型每一步都根据当前状态，判断怎样调整会更接近训练数据中的图片分布。它不是在资料库里寻找某张原图，也不是沿着某张图片的加噪记录返回。</p>
+<p>起点是一团新的随机噪声，途中又有多种合理的修正方向，所以最后得到的是一张新图。</p>
+<p>文字提示词会进一步约束这些修正，让结果逐渐靠近“雨夜”和“红色雨伞”。但文字怎样参与控制，不改变这里最基本的关系：模型仍然从噪声出发，一步步把当前状态修得更像符合条件的图片。</p>
+<h2>被毁掉的不是知识，而是一张训练样本</h2>
+<p>有一个地方容易误解。</p>
+<p>扩散模型不是先学会一张图片，再把记忆中的图片擦掉。加噪发生在训练样本上，目的是构造不同难度的去噪任务。</p>
+<p>经过大量图片训练后，模型参数里留下的是怎样处理带噪图像的统计规律。某一张训练图片被加到看不见，并不等于模型内部关于雨伞、街道和光线的知识也一起消失了。</p>
+<p>为了讲清关系，上面把噪声直接加在像素上。许多现代生图系统会先把图片压缩到潜空间，再在那里加噪和去噪，以减少计算量。处理的位置变了，核心问题没有变：</p>
+<pre><code class="language-text">把复杂图片逐步变成简单噪声
+→ 学习每一步怎样往回修
+</code></pre>
+<h2>最后，让红伞再走一次</h2>
+<pre><code class="language-text">训练
+
+清晰的红伞图片
+        ↓ 程序加入已知噪声
+不同程度的带噪图片
+        ↓ 模型预测噪声
+学会每一小步怎样修正
+
+
+生成
+
+一团新的随机噪声
+        ↓ 反复应用小步修正
+结构逐渐出现
+        ↓
+一张新的红伞图片
+</code></pre>
+<p>扩散模型先把图片毁掉，是为了把“凭空生成整张图”改造成许多有输入、有答案、可以检查的去噪任务。</p>
+<p>它最终学会的不是如何找回被毁掉的那张图，而是从不同程度的混乱中，反复走出一小步更像图片的方向。</p>
+<h2>参考资料</h2>
+<ol>
+<li>Sohl-Dickstein 等，Deep Unsupervised Learning using Nonequilibrium Thermodynamics（ICML，2015）：<a href="https://arxiv.org/abs/1503.03585">https://arxiv.org/abs/1503.03585</a></li>
+<li>Ho、Jain、Abbeel，Denoising Diffusion Probabilistic Models（NeurIPS，2020）：<a href="https://arxiv.org/abs/2006.11239">https://arxiv.org/abs/2006.11239</a></li>
+<li>Rombach 等，High-Resolution Image Synthesis with Latent Diffusion Models（CVPR，2022）：<a href="https://arxiv.org/abs/2112.10752">https://arxiv.org/abs/2112.10752</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
+</body>
+</html>

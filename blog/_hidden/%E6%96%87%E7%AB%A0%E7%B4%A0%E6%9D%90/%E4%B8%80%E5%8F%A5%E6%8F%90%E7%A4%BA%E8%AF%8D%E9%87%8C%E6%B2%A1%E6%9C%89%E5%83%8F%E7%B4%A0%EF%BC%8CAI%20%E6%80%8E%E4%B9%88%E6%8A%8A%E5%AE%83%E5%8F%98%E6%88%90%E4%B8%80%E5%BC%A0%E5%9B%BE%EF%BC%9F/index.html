@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>一句提示词里没有像素，AI 怎么把它变成一张图？ | LZ AI NOTE</title>
+  <meta name="description" content="一句提示词里没有像素，AI 怎么把它变成一张图？ 你在生图工具里输入一句： 雨夜里，一把撑开的红色雨伞。 几秒后，屏幕上出现了一张从未拍摄过的图片。 可这句话里没有任何像素。它没有规定红伞占多大、放在左边还是右边，也没有写出路灯、街道和雨滴分别是什么颜色。 AI 是怎样把一句话变成一整张图的？ 不同生图模型的实现并不完全相同。下面以常见的潜空间扩散模型为例…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="一句提示词里没有像素，AI 怎么把它变成一张图？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-08-26">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%B8%80%E5%8F%A5%E6%8F%90%E7%A4%BA%E8%AF%8D%E9%87%8C%E6%B2%A1%E6%9C%89%E5%83%8F%E7%B4%A0%EF%BC%8CAI%20%E6%80%8E%E4%B9%88%E6%8A%8A%E5%AE%83%E5%8F%98%E6%88%90%E4%B8%80%E5%BC%A0%E5%9B%BE%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%B8%80%E5%8F%A5%E6%8F%90%E7%A4%BA%E8%AF%8D%E9%87%8C%E6%B2%A1%E6%9C%89%E5%83%8F%E7%B4%A0%EF%BC%8CAI%20%E6%80%8E%E4%B9%88%E6%8A%8A%E5%AE%83%E5%8F%98%E6%88%90%E4%B8%80%E5%BC%A0%E5%9B%BE%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="一句提示词里没有像素，AI 怎么把它变成一张图？ | LZ AI NOTE">
+  <meta property="og:description" content="一句提示词里没有像素，AI 怎么把它变成一张图？ 你在生图工具里输入一句： 雨夜里，一把撑开的红色雨伞。 几秒后，屏幕上出现了一张从未拍摄过的图片。 可这句话里没有任何像素。它没有规定红伞占多大、放在左边还是右边，也没有写出路灯、街道和雨滴分别是什么颜色。 AI 是怎样把一句话变成一整张图的？ 不同生图模型的实现并不完全相同。下面以常见的潜空间扩散模型为例…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%B8%80%E5%8F%A5%E6%8F%90%E7%A4%BA%E8%AF%8D%E9%87%8C%E6%B2%A1%E6%9C%89%E5%83%8F%E7%B4%A0%EF%BC%8CAI%20%E6%80%8E%E4%B9%88%E6%8A%8A%E5%AE%83%E5%8F%98%E6%88%90%E4%B8%80%E5%BC%A0%E5%9B%BE%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"一句提示词里没有像素，AI 怎么把它变成一张图？","description":"一句提示词里没有像素，AI 怎么把它变成一张图？ 你在生图工具里输入一句： 雨夜里，一把撑开的红色雨伞。 几秒后，屏幕上出现了一张从未拍摄过的图片。 可这句话里没有任何像素。它没有规定红伞占多大、放在左边还是右边，也没有写出路灯、街道和雨滴分别是什么颜色。 AI 是怎样把一句话变成一整张图的？ 不同生图模型的实现并不完全相同。下面以常见的潜空间扩散模型为例…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%B8%80%E5%8F%A5%E6%8F%90%E7%A4%BA%E8%AF%8D%E9%87%8C%E6%B2%A1%E6%9C%89%E5%83%8F%E7%B4%A0%EF%BC%8CAI%20%E6%80%8E%E4%B9%88%E6%8A%8A%E5%AE%83%E5%8F%98%E6%88%90%E4%B8%80%E5%BC%A0%E5%9B%BE%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%B8%80%E5%8F%A5%E6%8F%90%E7%A4%BA%E8%AF%8D%E9%87%8C%E6%B2%A1%E6%9C%89%E5%83%8F%E7%B4%A0%EF%BC%8CAI%20%E6%80%8E%E4%B9%88%E6%8A%8A%E5%AE%83%E5%8F%98%E6%88%90%E4%B8%80%E5%BC%A0%E5%9B%BE%EF%BC%9F","dateModified":"2026-08-26","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：一句提示词里没有像素，AI 怎么把它变成一张图？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%B8%80%E5%8F%A5%E6%8F%90%E7%A4%BA%E8%AF%8D%E9%87%8C%E6%B2%A1%E6%9C%89%E5%83%8F%E7%B4%A0%EF%BC%8CAI%20%E6%80%8E%E4%B9%88%E6%8A%8A%E5%AE%83%E5%8F%98%E6%88%90%E4%B8%80%E5%BC%A0%E5%9B%BE%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>一句提示词里没有像素，AI 怎么把它变成一张图？</h1><h1>一句提示词里没有像素，AI 怎么把它变成一张图？</h1>
+<p>你在生图工具里输入一句：</p>
+<blockquote>
+<p>雨夜里，一把撑开的红色雨伞。</p>
+</blockquote>
+<p>几秒后，屏幕上出现了一张从未拍摄过的图片。</p>
+<p>可这句话里没有任何像素。它没有规定红伞占多大、放在左边还是右边，也没有写出路灯、街道和雨滴分别是什么颜色。</p>
+<p>AI 是怎样把一句话变成一整张图的？</p>
+<p>不同生图模型的实现并不完全相同。下面以常见的潜空间扩散模型为例，让同一张“雨夜红伞”从文字走到像素。</p>
+<h2>提示词先变成一组方向</h2>
+<p>模型不能直接拿“雨夜”和“红色雨伞”几个汉字去修改图片。</p>
+<p>提示词会先被拆成 Token，再经过文字编码器，变成一组向量：</p>
+<pre><code class="language-text">“雨夜”
+“红色”
+“撑开的雨伞”
+        ↓
+一组文字向量
+</code></pre>
+<p>这些向量仍然不是图片。它们更像一组可以参与计算的条件，保留了词语及其关系，让后面的图像生成过程知道结果应该靠近什么。</p>
+<p>例如，“红色”需要和“雨伞”建立关系。如果模型把它错误地关联到街道，最后就可能出现红色路面和黑色雨伞。</p>
+<p>文字在这里没有提供像素，只提供方向。</p>
+<h2>画面不是从白纸开始，而是从噪声开始</h2>
+<p>接下来，系统准备一团随机噪声：</p>
+<pre><code class="language-text">▓░▒▓▒░░▓▒▓░▒
+░▓▒░▓▓▒░▒▓░▓
+▒░▓▒░▒▓▓░▒▓░
+</code></pre>
+<p>它看不出雨伞、行人或街道，也不是一张等待落笔的白纸。</p>
+<p>在许多现代生图系统里，这团噪声甚至不直接位于像素空间，而是在一个更紧凑的潜空间中。可以暂时把它理解成一张被压缩过、还没有形成内容的数字画布。</p>
+<p>这里先看一次生成过程。对它来说，重要的是：这团随机状态提供了画面的起点。</p>
+<h2>模型每次只把当前画面改一点</h2>
+<p>生成过程中，模型会反复接收三类信息：</p>
+<pre><code class="language-text">当前的带噪画面
++ 现在进行到哪一步
++ “雨夜里的红色雨伞”对应的文字向量
+</code></pre>
+<p>它不会一次输出所有像素，而是预测当前状态应该怎样调整。</p>
+<p>文字条件会参与这个判断。图像中的不同区域可以读取与自己相关的文字线索：</p>
+<pre><code class="language-text">某片区域正在形成弧形轮廓
+        ↓
+读取“撑开的雨伞”
+
+另一片区域正在形成暗色背景
+        ↓
+读取“雨夜”
+</code></pre>
+<p>在潜空间扩散模型中，这种图像特征读取文字条件的关系，常通过 Cross-Attention 建立。</p>
+<p>一次更新以后，噪声里出现一点结构。模型再看新的状态，继续调整：</p>
+<pre><code class="language-text">随机噪声
+    ↓
+出现大致明暗
+    ↓
+红伞和人物位置逐渐稳定
+    ↓
+街道、雨滴和光线补充进来
+    ↓
+形成较清楚的图像表示
+</code></pre>
+<p>中间负责更新画面的网络可以采用不同架构，但职责相同：结合当前状态、生成进度和文字条件，决定下一步往哪个方向变化。</p>
+<h2>提示词没有画图，它一直在影响选择</h2>
+<p>现在可以重新看那句提示词。</p>
+<p>它没有直接告诉模型某个像素应该是红色，也没有提供一张雨伞模板。它做的是在每次更新时改变哪些结果更合适：</p>
+<pre><code class="language-text">没有文字条件
+→ 许多图片方向都可能成立
+
+加入“雨夜里的红色雨伞”
+→ 与雨夜、红伞相符的方向更容易被保留
+</code></pre>
+<p>所以文字和图片不是在最后一步才碰面。提示词形成的条件会参与一轮又一轮调整，直到画面逐渐符合描述。</p>
+<p>起点的随机噪声不同，途中保留下来的细节也可能不同。即使提示词完全相同，最后的构图、人物和雨滴仍可能发生变化。</p>
+<h2>最后还要把数字画布还原成像素</h2>
+<p>反复更新结束后，系统得到的通常仍是一份潜空间表示，不能直接当成图片显示。</p>
+<p>这时需要解码器把它展开成真正的 RGB 像素：</p>
+<pre><code class="language-text">最终潜空间表示
+        ↓ 解码器
+宽 × 高 × 红绿蓝
+        ↓
+屏幕上的红伞图片
+</code></pre>
+<p>潜空间让模型不必在每一步都处理完整分辨率的像素，节省了大量计算。解码器负责在最后把压缩表示重新翻译成人能看见的图像。</p>
+<h2>最后，让一句提示词再走一次</h2>
+<pre><code class="language-text">“雨夜里的红色雨伞”
+        ↓
+文字编码器
+        ↓
+文字条件 ───────────┐
+                    ↓
+随机潜空间噪声 → 反复更新
+                    ↓
+              潜空间图像
+                    ↓
+                  解码器
+                    ↓
+              一张红伞图片
+</code></pre>
+<p>一句提示词里确实没有像素。它先被变成可以参与计算的文字条件，在生成的每一步影响画面往哪里变化。</p>
+<p>图片从随机状态开始，结构在反复更新中逐渐形成，最后再由解码器还原成像素。文字没有亲手画出图片，却始终在约束这张图片可以长成什么样。</p>
+<h2>参考资料</h2>
+<ol>
+<li>Ho、Jain、Abbeel，Denoising Diffusion Probabilistic Models（NeurIPS，2020）：<a href="https://arxiv.org/abs/2006.11239">https://arxiv.org/abs/2006.11239</a></li>
+<li>Rombach 等，High-Resolution Image Synthesis with Latent Diffusion Models（CVPR，2022）：<a href="https://arxiv.org/abs/2112.10752">https://arxiv.org/abs/2112.10752</a></li>
+<li>Radford 等，Learning Transferable Visual Models From Natural Language Supervision（ICML，2021）：<a href="https://arxiv.org/abs/2103.00020">https://arxiv.org/abs/2103.00020</a></li>
+<li>Peebles、Xie，Scalable Diffusion Models with Transformers（ICCV，2023）：<a href="https://arxiv.org/abs/2212.09748">https://arxiv.org/abs/2212.09748</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>RN 页面还原：六阶段推进 | LZ AI NOTE</title>
+  <meta name="description" content="从跑通真实页面开始，通过基线、消融实验和 Case 闭环逐步优化页面生成能力。">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="RN 页面还原：六阶段推进">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-08-31">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN%E9%A1%B5%E9%9D%A2%E8%BF%98%E5%8E%9F%EF%BC%9A%E9%98%B6%E6%AE%B5%E6%8E%A8%E8%BF%9B%E4%B8%8E%E9%AA%8C%E6%94%B6">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN%E9%A1%B5%E9%9D%A2%E8%BF%98%E5%8E%9F%EF%BC%9A%E9%98%B6%E6%AE%B5%E6%8E%A8%E8%BF%9B%E4%B8%8E%E9%AA%8C%E6%94%B6">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="RN 页面还原：六阶段推进 | LZ AI NOTE">
+  <meta property="og:description" content="从跑通真实页面开始，通过基线、消融实验和 Case 闭环逐步优化页面生成能力。">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN%E9%A1%B5%E9%9D%A2%E8%BF%98%E5%8E%9F%EF%BC%9A%E9%98%B6%E6%AE%B5%E6%8E%A8%E8%BF%9B%E4%B8%8E%E9%AA%8C%E6%94%B6">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"RN 页面还原：六阶段推进","description":"从跑通真实页面开始，通过基线、消融实验和 Case 闭环逐步优化页面生成能力。","url":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN%E9%A1%B5%E9%9D%A2%E8%BF%98%E5%8E%9F%EF%BC%9A%E9%98%B6%E6%AE%B5%E6%8E%A8%E8%BF%9B%E4%B8%8E%E9%AA%8C%E6%94%B6","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN%E9%A1%B5%E9%9D%A2%E8%BF%98%E5%8E%9F%EF%BC%9A%E9%98%B6%E6%AE%B5%E6%8E%A8%E8%BF%9B%E4%B8%8E%E9%AA%8C%E6%94%B6","dateModified":"2026-08-31","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：RN 页面还原：六阶段推进，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN%E9%A1%B5%E9%9D%A2%E8%BF%98%E5%8E%9F%EF%BC%9A%E9%98%B6%E6%AE%B5%E6%8E%A8%E8%BF%9B%E4%B8%8E%E9%AA%8C%E6%94%B6","about":["_hidden","coding-agent 方案","material-first"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>RN 页面还原：六阶段推进</h1><h1>RN 页面还原：六阶段推进</h1>
+<h2>核心思路</h2>
+<pre><code class="language-text">输入
+→ 页面生成
+→ 运行与人工验收
+→ 成功 / 失败 Case
+→ 分析
+→ 优化 Skill / Tool / Context
+→ 下一轮页面生成
+</code></pre>
+<p>当前不预设工具以及上下文最终组合，先跑通真实页面，再通过相同 Case 下的消融实验决定哪些能力保留。</p>
+<h2>六个阶段</h2>
+<h3>阶段 1：接通最小基础版本</h3>
+<p>先把 RN Screenshot-to-Page 接入现有流程节点，让一个真实页面能够从输入走到交付结果。</p>
+<pre><code class="language-text">截图 + 需求 + RN 仓库 + 验收条件
+→ 现有流程节点
+→ Codex
+→ RN 代码变更
+→ 可运行页面
+→ Native / 人工验收
+</code></pre>
+<p>本阶段只要求：</p>
+<ul>
+<li>流程节点能够创建并运行 RN 页面还原任务；</li>
+<li>Codex 能够访问真实 RN 仓库并完成代码修改；</li>
+<li>页面能够在 Native 环境运行；</li>
+<li>保存输入、执行轨迹、代码结果、人工截图和人工评价。</li>
+</ul>
+<p>阶段成果：一个真正跑通的 RN 页面，以及第一份可以分析的真实 Case。</p>
+<h3>阶段 2：固定 Baseline 和评价方式</h3>
+<p>在增加任何增强能力前，先保存一份可复现的 Direct Baseline，否则后续无法证明 Schema、Task Brief 或 Tool 是否有效。</p>
+<p>需要固定：</p>
+<ul>
+<li>同一份截图、需求和验收条件；</li>
+<li>同一个仓库 Commit；</li>
+<li>同一种模型和基础 Skill；</li>
+<li>相同的运行与人工验收方式；</li>
+<li>未注入候选增强能力时的执行结果。</li>
+</ul>
+<p>Baseline 不要求结果完美，它的作用是提供后续实验的比较基准。</p>
+<p>阶段成果：同一个 Case 能够重新运行，并可以与后续增强版本进行公平比较。</p>
+<h3>阶段 3：逐个增加增强能力</h3>
+<p>根据真实 Failure Case，每次只增加一个变量：</p>
+<pre><code class="language-text">Direct Baseline
+→ + **Page Schema**
+→ + Task Brief
+→ + Material
+→ + BBox
+→ + Skill 新规则
+</code></pre>
+<p>每个实验都需要回答：</p>
+<ul>
+<li>最终验收和首轮通过是否提升；</li>
+<li>人工修正是否减少；</li>
+<li>执行成本是否变化；</li>
+<li>是否解决了目标 Failure Case；</li>
+<li>是否对其他 Case 造成退化。</li>
+</ul>
+<p>上述顺序不是固定施工顺序。先验证哪个增强能力，由真实页面的问题决定。已有页面修改也作为独立 Case 参与验证，而不是另建一套流程。</p>
+<p>如果真实 Case 暴露的不是组件召回问题，而是页面逻辑和代码组织不稳定，可以额外提供一个同类页面的 Golden Path 做单变量验证。Golden Path 的通用建设不属于 RN 页面还原主流程。</p>
+<p>阶段成果：知道每个增强模块在哪些场景有效、无效或产生副作用。</p>
+<h3>阶段 4：建立 Skill 与 Tool 优化闭环</h3>
+<p>初版 Skill 和 Tool 的目标不是一次设计完整，而是支持下面的迭代过程：</p>
+<pre><code class="language-text">运行 Case
+→ 收集 Raw Trace、Decision Events、Execution Report 和人工结果
+→ 定位 Failure Type
+→ 提出一个改进假设
+→ 修改 Skill / Tool / Context
+→ 在原 Case 和回归 Case 上验证
+→ 人工确认
+→ 版本化发布或回滚
+</code></pre>
+<p>改进内容应按性质进入不同位置：</p>
+<ul>
+<li>经常出现的 Agent 行为约束进入 Skill；</li>
+<li>可重复执行的确定性能力进入 Tool；</li>
+<li>只对部分任务有效的信息作为按需 Context；</li>
+<li>单次经验只留在 Case 中，不进入公共能力。</li>
+</ul>
+<p>观测闭环分成三个时机：</p>
+<pre><code class="language-text">运行中：Raw Trace 自动记录，Decision Events 补充少量关键决定
+执行结束：submit_execution_report 以相同 taskId 保存本地过程与结果
+人工验收后：结合最终评分做 Case 分析，再决定是否改进 Skill、Tool 或 Context
+</code></pre>
+<p>运行时只处理能够影响本次任务的阻塞、明显错误和高风险疑虑；需要完整结果或人工判断的失败分析放在任务结束后进行。Execution Report 不重复抄写 Raw Trace 和 Decision Events，它只提交最终状态、证据和遗留问题。</p>
+<p>当前 <code>coding_agent</code> 没有数据库，也不直接读写 Langfuse。Langfuse Plugin 独立上传 Codex Trace，Core MCP 将 Event 与 Report 保存到本地；<code>taskId</code> 目前只关联本地文件。阶段 4 的实施目标才是补充 Run Finalizer，将 <code>taskId</code> 与 Langfuse Session / Trace、代码和验收证据关联起来。</p>
+<p>阶段成果：能够从一个成功或失败 Case，形成经过验证的 Skill、Tool 或 Context 改进。</p>
+<h3>阶段 5：抽取 Agent-Agnostic 公共能力</h3>
+<p>当某项能力已经在多个 RN Case 中证明有效，再判断它是否适合开放给 FE、BE、Test、Knowledge 等其他 Agent。</p>
+<p>第一批只考虑：</p>
+<ul>
+<li><code>record_run_decision_event</code>：记录关键阶段、决定、证据、疑虑和下一步；</li>
+<li><code>submit_execution_report</code>：提交状态、结果、证据、失败类型和遗留问题。</li>
+</ul>
+<p>公共化时移除 RN 专属字段，保留不同 Agent 都能理解的最小任务和结果结构。</p>
+<p>阶段成果：公共能力至少在一个非 RN Case 中证明有复用价值，而不是仅仅完成接口抽象。</p>
+<h3>阶段 6：动态选择页面生成策略</h3>
+<p>当 Case 数量和实验结果足够后，再让系统根据任务特征选择需要的能力：</p>
+<pre><code class="language-text">简单新增页面 → Direct
+稳定结构页面 → Page Schema
+组件召回困难 → Material Tool
+视觉定位困难 → BBox
+需求容易误解 → Task Brief
+</code></pre>
+<p>最终目标不是把所有中间产物都提供给 Codex，而是根据任务和历史 Failure Case，只使用当前真正需要的增强能力。</p>
+<p><strong>阶段成果：页面生成策略从固定注入全部上下文，演进为基于任务特征的按需选择。</strong></p>
+<h2>并行计划</h2>
+<p>以下能力不按六阶段串行建设，可以跟页面交付同时推进，但不能成为阶段 1 跑通页面的前置条件：</p>
+<ul>
+<li><strong>Trace 与记录 Tool</strong>：接入 Langfuse Raw Trace，完善 Decision Events 和 Execution Report；</li>
+<li><strong>RN 验证自动化</strong>：先保留人工启动和截图，再逐步探索 Deep Link、自动等待、自动截图、功能断言和视觉 Diff；</li>
+<li><strong>Material 基础</strong>：继续建设 Catalog、Fixture、Candidate Board 和查询 Tool；</li>
+<li><strong>仓库 Material 化</strong>：探索 Material Generator Skill，让已有 FE/RN 组件以引用原实现的方式进入 Catalog、Fixture 和 Candidate Board；</li>
+<li><strong>Schema 与 Context</strong>：继续迁移 Page Schema，并探索 Task Brief、BBox 等候选输入。</li>
+</ul>
+<p>并行能力可以提前实现，但只有在阶段 3 的真实 Case 对比中证明有效后，才进入默认页面生成路径。</p>
+<p>跨 Web、RN、BE 和 Test 的工程复用属于独立横向方案，见<a href="./AI%20Engineering%20Golden%20Path%EF%BC%9A%E9%9D%A2%E5%90%91%20Agent%20%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%A4%8D%E7%94%A8%E6%9C%BA%E5%88%B6.md">《AI Engineering Golden Path：面向 Agent 的工程复用机制》</a>，不列入当前 RN 页面交付任务。</p>
+<h2>评价标准</h2>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>最终验收通过率</td>
+<td>页面是否真正达到交付要求</td>
+</tr>
+<tr>
+<td>首轮通过率</td>
+<td>Agent 第一次实现的质量</td>
+</tr>
+<tr>
+<td>人工修正量</td>
+<td>人需要补充或返工多少内容</td>
+</tr>
+<tr>
+<td>执行成本</td>
+<td>时间、交互轮次和 Token 消耗</td>
+</tr>
+<tr>
+<td>相对 Baseline 增益</td>
+<td>新增能力是否比 Direct Baseline 更有效</td>
+</tr>
+</tbody>
+</table>
+<p>评价以运行结果、Native 截图、测试和人工确认作为事实依据。Raw Trace、Decision Events 和 Execution Report 只帮助分析原因，不替代结果验收。</p>
+<h2>当前推进边界</h2>
+<p>当前集中完成阶段 1，并为阶段 2 留下可复现的输入与结果。页面必须优先跑通；自动化方式尚未确定时，继续使用人工验证。</p>
+<p>阶段 3 以后都由真实 Case 和评价结果触发，不作为当前页面上线的阻塞项。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
+</body>
+</html>

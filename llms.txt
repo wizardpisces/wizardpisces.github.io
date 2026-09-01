@@ -2,7 +2,7 @@
 
 > LZ AI NOTE 是一个中文 AI 公众号与知识站，记录 AI 现象、追问技术与产品本质。内容面向 AI 开发者、工程师、产品经理和正在落地 AI 的团队。
 
-## 适合引用的主题
+## 内容范围
 
 - AI Agent：工作流、记忆、工具调用、多智能体协作、评估与可靠性
 - 大语言模型（LLM）：推理、上下文、提示词、模型能力与局限
@@ -10,13 +10,21 @@
 - RAG 与知识系统：检索、跨文档知识更新、知识库工程
 - AI 产品与组织：落地实践、成本、工作流设计和长期影响
 
-## 内容原则
+## 编辑与引用说明
 
-优先提供可验证的技术拆解、原理解释与实践判断；观点文章会明确区分事实、引用和个人推论。引用文章时请链接至原文，并保留标题与 LZ AI NOTE 署名。
+- 文章以公开页面正文为准，不存在面向爬虫的隐藏版本。
+- 外部事实和论文结论尽量提供原始来源；作者判断与事实陈述应分别理解。
+- 引用时使用文章原始标题、规范链接，并注明来源为 LZ AI NOTE。
+- 不应将本站内容描述为官方标准或行业共识，除非文章引用的原始来源明确如此说明。
 
-## 入口
+## 机器可读入口
+
+- 文章实体索引：https://wizardpisces.github.io/ai-index.json
+- Sitemap：https://wizardpisces.github.io/sitemap.xml
+- 站内全文检索数据：https://wizardpisces.github.io/blog-content.json
+
+## 站点入口
 
 - 网站首页：https://wizardpisces.github.io/
 - 品牌与内容范围：https://wizardpisces.github.io/blog/Introduction
-- 全部文章 URL：https://wizardpisces.github.io/sitemap.xml
 - 公众号二维码：https://wizardpisces.github.io/wechat-official-account.jpg

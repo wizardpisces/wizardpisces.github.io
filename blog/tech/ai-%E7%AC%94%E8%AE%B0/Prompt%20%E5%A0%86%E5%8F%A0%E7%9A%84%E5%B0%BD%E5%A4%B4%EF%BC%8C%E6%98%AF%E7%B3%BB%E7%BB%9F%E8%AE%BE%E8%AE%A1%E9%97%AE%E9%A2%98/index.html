@@ -5,204 +5,127 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <title>Prompt 堆叠的尽头，是系统设计问题 | LZ AI NOTE</title>
-  <meta name="description" content="下面是一篇基于我们前面讨论整理的文章版本，尽量保持工程表达，不使用“故事化包装”，也避免过度AI风格。 Prompt 堆叠的尽头，是系统设计问题 在很多 AI 应用（尤其是 Code Review、PRD Review、Agent 类任务）中，一个非常常见的演进路径是： 通过不断增加 Prompt 规则，修复模型在某些 Case 上的失误。 短期来看，这种…">
+  <meta name="description" content="Prompt 堆叠的尽头，是系统设计问题 做 Code Review Agent 时，最容易发生的事不是 Prompt 写错，而是 Prompt 越改越对。 某次模型漏掉了一个空指针风险，于是在 Prompt 里补一句： 不要遗漏潜在风险。 下一次，它把一个理论上可能发生、实际路径根本走不到的并发问题也报了出来。于是再补一句： 不要过度推测，只报告有充分依…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="Prompt 堆叠的尽头，是系统设计问题">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-08-27">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/Prompt%20%E5%A0%86%E5%8F%A0%E7%9A%84%E5%B0%BD%E5%A4%B4%EF%BC%8C%E6%98%AF%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E9%97%AE%E9%A2%98">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
   <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/Prompt%20%E5%A0%86%E5%8F%A0%E7%9A%84%E5%B0%BD%E5%A4%B4%EF%BC%8C%E6%98%AF%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E9%97%AE%E9%A2%98">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
   <meta property="og:title" content="Prompt 堆叠的尽头，是系统设计问题 | LZ AI NOTE">
-  <meta property="og:description" content="下面是一篇基于我们前面讨论整理的文章版本，尽量保持工程表达，不使用“故事化包装”，也避免过度AI风格。 Prompt 堆叠的尽头，是系统设计问题 在很多 AI 应用（尤其是 Code Review、PRD Review、Agent 类任务）中，一个非常常见的演进路径是： 通过不断增加 Prompt 规则，修复模型在某些 Case 上的失误。 短期来看，这种…">
+  <meta property="og:description" content="Prompt 堆叠的尽头，是系统设计问题 做 Code Review Agent 时，最容易发生的事不是 Prompt 写错，而是 Prompt 越改越对。 某次模型漏掉了一个空指针风险，于是在 Prompt 里补一句： 不要遗漏潜在风险。 下一次，它把一个理论上可能发生、实际路径根本走不到的并发问题也报了出来。于是再补一句： 不要过度推测，只报告有充分依…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/Prompt%20%E5%A0%86%E5%8F%A0%E7%9A%84%E5%B0%BD%E5%A4%B4%EF%BC%8C%E6%98%AF%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E9%97%AE%E9%A2%98">
   <meta property="og:image" content="https://wizardpisces.github.io/covers/prompt-stacking-system-design.png">
   <meta name="twitter:image" content="https://wizardpisces.github.io/covers/prompt-stacking-system-design.png">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Prompt 堆叠的尽头，是系统设计问题","description":"下面是一篇基于我们前面讨论整理的文章版本，尽量保持工程表达，不使用“故事化包装”，也避免过度AI风格。 Prompt 堆叠的尽头，是系统设计问题 在很多 AI 应用（尤其是 Code Review、PRD Review、Agent 类任务）中，一个非常常见的演进路径是： 通过不断增加 Prompt 规则，修复模型在某些 Case 上的失误。 短期来看，这种…","url":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/Prompt%20%E5%A0%86%E5%8F%A0%E7%9A%84%E5%B0%BD%E5%A4%B4%EF%BC%8C%E6%98%AF%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E9%97%AE%E9%A2%98","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/Prompt%20%E5%A0%86%E5%8F%A0%E7%9A%84%E5%B0%BD%E5%A4%B4%EF%BC%8C%E6%98%AF%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E9%97%AE%E9%A2%98","dateModified":"2026-06-26","image":"https://wizardpisces.github.io/covers/prompt-stacking-system-design.png","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Prompt 堆叠的尽头，是系统设计问题","description":"Prompt 堆叠的尽头，是系统设计问题 做 Code Review Agent 时，最容易发生的事不是 Prompt 写错，而是 Prompt 越改越对。 某次模型漏掉了一个空指针风险，于是在 Prompt 里补一句： 不要遗漏潜在风险。 下一次，它把一个理论上可能发生、实际路径根本走不到的并发问题也报了出来。于是再补一句： 不要过度推测，只报告有充分依…","url":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/Prompt%20%E5%A0%86%E5%8F%A0%E7%9A%84%E5%B0%BD%E5%A4%B4%EF%BC%8C%E6%98%AF%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E9%97%AE%E9%A2%98","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/Prompt%20%E5%A0%86%E5%8F%A0%E7%9A%84%E5%B0%BD%E5%A4%B4%EF%BC%8C%E6%98%AF%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E9%97%AE%E9%A2%98","dateModified":"2026-08-27","image":"https://wizardpisces.github.io/covers/prompt-stacking-system-design.png","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：Prompt 堆叠的尽头，是系统设计问题，LZ AI NOTE，https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/Prompt%20%E5%A0%86%E5%8F%A0%E7%9A%84%E5%B0%BD%E5%A4%B4%EF%BC%8C%E6%98%AF%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E9%97%AE%E9%A2%98","about":["ai-笔记"]}</script>
 </head>
 <body>
-  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Prompt 堆叠的尽头，是系统设计问题</h1><p>下面是一篇基于我们前面讨论整理的文章版本，尽量保持工程表达，不使用“故事化包装”，也避免过度AI风格。</p>
-<hr>
-<h1>Prompt 堆叠的尽头，是系统设计问题</h1>
-<p>在很多 AI 应用（尤其是 Code Review、PRD Review、Agent 类任务）中，一个非常常见的演进路径是：</p>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Prompt 堆叠的尽头，是系统设计问题</h1><h1>Prompt 堆叠的尽头，是系统设计问题</h1>
+<p>做 Code Review Agent 时，最容易发生的事不是 Prompt 写错，而是 Prompt 越改越对。</p>
+<p>某次模型漏掉了一个空指针风险，于是在 Prompt 里补一句：</p>
 <blockquote>
-<p>通过不断增加 Prompt 规则，修复模型在某些 Case 上的失误。</p>
+<p>不要遗漏潜在风险。</p>
 </blockquote>
-<p>短期来看，这种方式有效。但随着使用规模扩大，会逐渐进入一个稳定的困境：<strong>Prompt 变得越来越长，但效果不再稳定提升，甚至开始下降。</strong></p>
-<p>问题并不在于 Prompt 写得不够“细”，而在于它开始承担了不该由它承担的职责。</p>
-<hr>
-<h2>1. Prompt 的自然退化路径</h2>
-<p>一个典型的 Code Review Prompt 优化过程通常是这样的：</p>
-<p>最初版本：</p>
+<p>下一次，它把一个理论上可能发生、实际路径根本走不到的并发问题也报了出来。于是再补一句：</p>
 <blockquote>
-<p>请深入分析代码中的潜在问题。</p>
+<p>不要过度推测，只报告有充分依据的问题。</p>
 </blockquote>
-<p>随后发现模型遗漏问题：</p>
+<p>误报少了，但模型也变得保守。一个需要跨文件追踪的资源泄漏没有被指出，只好继续补：</p>
 <blockquote>
-<p>加入：不要遗漏潜在风险。</p>
+<p>对复杂调用链要适当深入分析。</p>
 </blockquote>
-<p>接着发现模型开始过度发挥：</p>
-<blockquote>
-<p>加入：不要过度推测。</p>
-</blockquote>
-<p>随后模型变得保守：</p>
-<blockquote>
-<p>加入：适当分析潜在风险。</p>
-</blockquote>
-<p>最终 Prompt 变成：</p>
+<p>几轮之后，Prompt 里出现了那句很熟悉的话：</p>
 <blockquote>
 <p>多分析，但不要猜；谨慎一点，但不要漏；深入一点，但不要过度。</p>
 </blockquote>
-<p>这些约束并不是独立增加能力，而是在不断调节同一个空间里的张力。</p>
-<p>本质上，它们在同时施加相互冲突的目标。</p>
-<hr>
-<h2>2. 问题的核心：冲突目标无法通过“补丁式 Prompt”解决</h2>
-<p>上述问题并不是 Prompt 不够精细，而是：</p>
-<blockquote>
-<p>多个目标本身存在不可消解的冲突。</p>
-</blockquote>
-<p>例如在 Code Review 中：</p>
-<ul>
-<li>覆盖率 vs 精确率</li>
-<li>深度分析 vs 避免臆测</li>
-<li>严格检查 vs 避免噪音</li>
-</ul>
-<p>这些目标之间不是“可以同时最大化”的关系，而是典型的 trade-off。</p>
-<p>当 Prompt 用自然语言同时表达这些目标时，会出现三个问题：</p>
-<h3>2.1 规则不可执行化</h3>
-<p>“深入但不要过度推测”本质上没有可执行边界。</p>
-<p>模型无法判断：</p>
-<ul>
-<li>什么算“深入”</li>
-<li>什么算“过度”</li>
-</ul>
-<h3>2.2 冲突不可调和</h3>
-<p>不同规则在不同上下文下会互相覆盖：</p>
-<ul>
-<li>强调风险 → 误报增加</li>
-<li>强调保守 → 漏报增加</li>
-</ul>
-<p>Prompt 无法表达优先级动态变化。</p>
-<h3>2.3 系统行为不可预测</h3>
-<p>同一 Prompt 在不同代码片段中行为不一致，导致输出不可稳定评估。</p>
-<hr>
-<h2>3. 关键转折：从 Prompt Engineering 到 System Design</h2>
-<p>当 Prompt 同时承担以下职责时：</p>
-<ul>
-<li>定义规则</li>
-<li>定义边界</li>
-<li>定义权衡</li>
-<li>定义输出策略</li>
-</ul>
-<p>问题就已经不再是 Prompt 问题，而是系统问题。</p>
-<p>更具体地说，Prompt 在错误地承担三类职责：</p>
-<h3>3.1 Policy（策略层）</h3>
-<p>例如：</p>
-<ul>
-<li>要不要深入分析</li>
-<li>要不要保守</li>
-<li>要不要优先性能</li>
-</ul>
-<p>这些属于策略决策，而不是文本规则。</p>
-<hr>
-<h3>3.2 Evaluation（评估标准）</h3>
-<p>例如：</p>
-<ul>
-<li>什么算高风险</li>
-<li>什么算值得提示</li>
-<li>什么算误报</li>
-</ul>
-<p>这些需要 benchmark 或数据定义，而不是自然语言描述。</p>
-<hr>
-<h3>3.3 Knowledge（知识层）</h3>
-<p>例如：</p>
-<ul>
-<li>React useMemo 使用场景</li>
-<li>Go context 传递规则</li>
-<li>SQL injection 风险模式</li>
-</ul>
-<p>这些应该进入 RAG 或结构化知识，而不是 Prompt 长文本。</p>
-<hr>
-<h2>4. Prompt 堆叠的本质问题</h2>
-<p>当不断通过“补丁式 Prompt”修复问题时，会出现一个结构性现象：</p>
-<blockquote>
-<p>Prompt 不再是规则集合，而变成“例外集合”。</p>
-</blockquote>
-<p>典型演化路径：</p>
-<ul>
-<li>规则 A</li>
-<li>A 的例外 A1</li>
-<li>A1 的例外 A1-1</li>
-<li>与 B 冲突的情况</li>
-<li>在 C 场景下失效的修正</li>
-</ul>
-<p>最终 Prompt 变成：</p>
-<blockquote>
-<p>一组不断相互修正的局部规则，而不是一致的系统行为描述。</p>
-</blockquote>
-<p>这会直接导致三个后果：</p>
-<ul>
-<li>难以维护</li>
-<li>难以解释</li>
-<li>难以评估</li>
-</ul>
-<hr>
-<h2>5. 一个更结构化的替代方式</h2>
-<p>要解决这个问题，关键不是“写更好的 Prompt”，而是拆分职责。</p>
-<h3>5.1 Prompt：定义角色与输出形式</h3>
-<p>Prompt 应该尽量稳定，例如：</p>
-<blockquote>
-<p>扮演 Code Reviewer，对变更进行风险分析。</p>
-</blockquote>
-<p>只保留职责边界，不承载策略细节。</p>
-<hr>
-<h3>5.2 RAG：提供按需知识</h3>
-<p>例如：</p>
-<ul>
-<li>语言特定规则（Go / TS）</li>
-<li>框架最佳实践</li>
-<li>历史失败模式</li>
-</ul>
-<p>按 diff 或上下文召回，而不是全量注入。</p>
-<hr>
-<h3>5.3 Evaluation：定义好坏标准</h3>
-<p>通过 benchmark 定义：</p>
-<ul>
-<li>false positive</li>
-<li>false negative</li>
-<li>review coverage</li>
-<li>noise ratio</li>
-</ul>
-<p>用数据控制“深入 vs 保守”的平衡，而不是 Prompt 语言控制。</p>
-<hr>
-<h3>5.4 Observability：让行为可追踪</h3>
-<p>通过 tracing / logging：</p>
-<ul>
-<li>哪些规则触发</li>
-<li>哪些知识被召回</li>
-<li>哪些判断产生</li>
-</ul>
-<p>让系统行为变得可观测，而不是依赖直觉调 Prompt。</p>
-<hr>
-<h2>6. 结论</h2>
-<p>Prompt 堆叠的问题，本质不是“写得不够好”，而是：</p>
-<blockquote>
-<p>当 Prompt 同时承载策略、知识与评估时，它必然走向冲突与膨胀。</p>
-</blockquote>
-<p>所谓“不断加规则优化 AI”，在长期会退化成：</p>
-<blockquote>
-<p>在一组无法调和的目标之间不断打补丁。</p>
-</blockquote>
-<p>真正有效的路径是把系统拆开：</p>
-<ul>
-<li>Prompt 负责角色与边界</li>
-<li>RAG 负责知识</li>
-<li>Evaluation 负责权衡</li>
-<li>Observability 负责反馈</li>
-</ul>
-<p>当这些职责分离之后，Prompt 才会重新变得稳定。</p>
-<hr>
-<p>如果用一句话总结：</p>
-<blockquote>
-<p><strong>当 Prompt 开始描述“如何权衡多个冲突目标”时，问题已经不在 Prompt，而在系统设计本身。</strong></p>
-</blockquote>
+<p>每句话单独看都合理，放在一起却没有告诉模型该怎么选。下一次遇到证据不完整的风险，它究竟应该继续推断，还是停下来避免误报？</p>
+<p>这时继续改措辞，通常已经解决不了问题了。</p>
+<h2>每个补丁都修好了一个 Case</h2>
+<p>补规则为什么这么自然？因为它确实有效。</p>
+<p>模型漏报，就加强覆盖；误报增多，就强调证据；分析太浅，就要求追踪调用链。每次修改都能在眼前的失败样例上看到改善。</p>
+<p>问题出在修改的作用范围。我们想修的是一个 Case，改动的却是模型处理所有代码时的判断方式。</p>
+<pre><code class="language-text">漏报一个空指针
+    ↓
+全局提高风险敏感度
+    ↓
+更多不确定问题被报告
+    ↓
+全局提高证据门槛
+    ↓
+需要深入推理的问题又被压掉
+</code></pre>
+<p>这些规则不是在增加彼此独立的能力，而是在反复移动同一条判断边界。覆盖率高一点，噪音往往也会增加；证据门槛抬高，误报少了，漏报可能回来。</p>
+<p>更麻烦的是，我们通常只知道“这次改完看起来更好”，不知道它在其他代码上破坏了什么。Prompt 已经改到第八版，团队仍然回答不了三个问题：哪条规则真的生效了，哪两条规则正在冲突，新版本总体上是否优于旧版本。</p>
+<p>到了这里，Prompt 不只是长，而是失去了可维护的边界。</p>
+<h2>有些检查本来就不该让模型决定</h2>
+<p>先看一次实际 Review。输入是一段 TypeScript 变更，模型需要判断：</p>
+<pre><code class="language-text">1. 代码能否通过类型检查
+2. 新增接口是否缺少权限校验
+3. useEffect 的依赖是否完整
+4. 这个问题是否严重到需要阻塞合并
+</code></pre>
+<p>这四件事看起来都叫“检查代码”，性质却不同。</p>
+<p>代码能否通过类型检查，运行 <code>tsc</code> 就有确定结果。格式、lint、单测也一样。让模型仅凭代码猜测这些结果，既慢又不可靠；再在 Prompt 里强调“务必准确检查”，也不会让猜测变成事实。</p>
+<p>所以第一步不是写出更强的指令，而是把确定性检查拿出去：</p>
+<pre><code class="language-text">代码变更
+  ├─ 类型检查、lint、测试
+  └─ 模型分析语义风险
+</code></pre>
+<p>模型仍然负责权限遗漏、状态错乱、调用链副作用这类难以穷举的问题，但它拿到的不再只有 diff，还包括类型检查和测试的真实结果。</p>
+<p>这项拆分没有让模型更聪明。它只是停止让模型承担程序已经能稳定完成的工作。换来的好处也很具体：类型错误出现在报告里时，我们知道它来自编译器，而不是模型“觉得可能有问题”。</p>
+<h2>规则写得再细，也补不出缺失的上下文</h2>
+<p>接着运行同一个 Review。模型看到某个接口没有显式鉴权，于是报出高危问题。开发者却说，这个仓库的鉴权统一在网关完成，业务代码里本来就不写。</p>
+<p>这不是“不要过度推测”没有写好，而是模型缺了一条项目事实。</p>
+<p>最直接的做法，是把所有语言规范、框架知识和仓库约定全部塞进 Prompt。小项目里可以这么做，规则一多，新的问题又出现了：React 规则会干扰 Go 服务，旧版约定会和当前架构冲突，大量无关内容还会挤占真正需要看的代码。</p>
+<p>更合适的边界是：Prompt 说明 Review 要完成什么，系统根据本次变更选择相关资料。</p>
+<pre><code class="language-text">支付目录变更 → 加载支付权限与幂等约定
+React 文件变更 → 加载当前前端规范
+数据库迁移     → 加载迁移与回滚要求
+</code></pre>
+<p>现在再遇到那个接口，模型能同时看到 diff 和“鉴权由网关统一完成”的仓库约定。它可以不报问题，也可以在证据冲突时明确指出依据来自哪里。</p>
+<p>这里新增了一层检索和选择逻辑，代价是资料要维护版本、适用范围和来源。但它买来了一条重要边界：改项目知识时，不必重新改整套行为指令。</p>
+<h2>“要不要报”是系统策略，不是写作语气</h2>
+<p>模型已经有代码、有工具结果，也有项目约定，仍然会碰到证据不足但后果严重的问题。</p>
+<p>例如，一个支付回调看起来可能重复入账，但只看当前 diff 无法确认上游是否已经去重。对普通页面，这类不确定判断也许只会制造噪音；对资金链路，哪怕证据不完整，也值得要求人工确认。</p>
+<p>同一句“只报告有充分依据的问题”无法同时适用于这两个场景。真正变化的不是模型分析能力，而是团队愿意承担的风险。</p>
+<p>因此，系统还要在模型之外保存策略：</p>
+<pre><code class="language-text">普通目录：高置信问题进入 Review
+核心链路：高影响、证据不完整的问题标记为待确认
+明确违反硬规则：直接阻塞
+</code></pre>
+<p>模型负责提出候选问题和证据，系统根据目录、影响范围和仓库策略决定它以什么级别出现。这样调整风险偏好时，改的是可见的策略，不是把“更谨慎一点”塞回 Prompt。</p>
+<h2>没有固定样例，任何优化都只是手感</h2>
+<p>系统边界拆开后，还剩一个最容易被忽略的问题：怎么知道改动真的更好？</p>
+<p>如果每次都拿刚刚失败的 Case 验证，新版本几乎一定会赢。它本来就是为这个 Case 改的。</p>
+<p>需要保留一组固定样例，里面既有应该发现的问题，也有容易误报但实际安全的代码。每次修改 Prompt、知识或策略，都在同一组样例上比较：</p>
+<pre><code class="language-text">该发现的问题发现了多少
+安全代码被误报了多少
+高风险问题是否给出了可核查证据
+</code></pre>
+<p>运行记录还要能回答：本次用了哪版 Prompt，加载了哪些项目规则，工具返回了什么，最终是哪条策略决定了严重级别。</p>
+<p>这样，漏报上升时可以回到具体环节，而不是继续往 Prompt 末尾补一句话。评估和 Trace 不会自动修好系统，它们只是让团队第一次有证据判断“哪里变好了，哪里变坏了”。</p>
+<h2>Prompt 最后只留下它擅长的部分</h2>
+<p>走到这里，一次 Code Review 已经变成：</p>
+<pre><code class="language-text">代码变更
+    ↓
+运行确定性检查，选择相关项目知识
+    ↓
+模型提出候选问题与证据
+    ↓
+系统按仓库策略分级
+    ↓
+用固定样例持续比较版本
+</code></pre>
+<p>Prompt 仍然重要。它负责告诉模型当前任务、可用证据、分析边界和输出结构。只是它不再同时充当编译器、知识库、风险制度和质量证明。</p>
+<p>这套拆分也不是免费的。它增加了检查流程、知识维护、策略配置和评估数据。一次性脚本、低风险任务，或者最终始终由人逐条判断时，一份短 Prompt 可能已经够用。</p>
+<p>当同一个 Agent 要反复运行，结果开始影响合并、发布或资金安全，团队又需要解释“为什么这次和上次不同”，这些复杂度才值得买。它买来的不是零错误，而是错误出现后，知道该改 Prompt、补资料、调策略，还是修检查程序。</p>
+<p>所以 Prompt 堆叠真正的尽头，不是再找到一句更精确的话。是承认那些彼此冲突的要求，本来就属于不同的系统职责。</p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-CSJjPKOE.js"></script>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
 </body>
 </html>

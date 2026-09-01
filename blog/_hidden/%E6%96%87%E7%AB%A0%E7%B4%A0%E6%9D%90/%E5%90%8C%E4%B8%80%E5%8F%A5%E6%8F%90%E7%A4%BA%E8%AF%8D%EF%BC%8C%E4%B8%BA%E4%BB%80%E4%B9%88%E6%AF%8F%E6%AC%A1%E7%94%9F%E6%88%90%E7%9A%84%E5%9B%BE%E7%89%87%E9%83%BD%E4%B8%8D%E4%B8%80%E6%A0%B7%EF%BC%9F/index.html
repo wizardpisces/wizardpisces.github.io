@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>同一句提示词，为什么每次生成的图片都不一样？ | LZ AI NOTE</title>
+  <meta name="description" content="同一句提示词，为什么每次生成的图片都不一样？ 在生图工具里输入： 雨夜里，一个人撑着红色雨伞走在街上。 第一次生成，人物站在画面中央，身后是模糊的路灯。 不改一个字，再生成一次，人物可能走到了左边，镜头变远，街道、衣服和灯光也换了样子。 同一句提示词交给同一个模型，为什么没有得到同一张图？ 很多人知道这和“随机”有关。 但随机起点是怎么来的？一团没有内容的…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="同一句提示词，为什么每次生成的图片都不一样？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-09-01">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E4%B8%80%E5%8F%A5%E6%8F%90%E7%A4%BA%E8%AF%8D%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E6%AC%A1%E7%94%9F%E6%88%90%E7%9A%84%E5%9B%BE%E7%89%87%E9%83%BD%E4%B8%8D%E4%B8%80%E6%A0%B7%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E4%B8%80%E5%8F%A5%E6%8F%90%E7%A4%BA%E8%AF%8D%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E6%AC%A1%E7%94%9F%E6%88%90%E7%9A%84%E5%9B%BE%E7%89%87%E9%83%BD%E4%B8%8D%E4%B8%80%E6%A0%B7%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="同一句提示词，为什么每次生成的图片都不一样？ | LZ AI NOTE">
+  <meta property="og:description" content="同一句提示词，为什么每次生成的图片都不一样？ 在生图工具里输入： 雨夜里，一个人撑着红色雨伞走在街上。 第一次生成，人物站在画面中央，身后是模糊的路灯。 不改一个字，再生成一次，人物可能走到了左边，镜头变远，街道、衣服和灯光也换了样子。 同一句提示词交给同一个模型，为什么没有得到同一张图？ 很多人知道这和“随机”有关。 但随机起点是怎么来的？一团没有内容的…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E4%B8%80%E5%8F%A5%E6%8F%90%E7%A4%BA%E8%AF%8D%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E6%AC%A1%E7%94%9F%E6%88%90%E7%9A%84%E5%9B%BE%E7%89%87%E9%83%BD%E4%B8%8D%E4%B8%80%E6%A0%B7%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"同一句提示词，为什么每次生成的图片都不一样？","description":"同一句提示词，为什么每次生成的图片都不一样？ 在生图工具里输入： 雨夜里，一个人撑着红色雨伞走在街上。 第一次生成，人物站在画面中央，身后是模糊的路灯。 不改一个字，再生成一次，人物可能走到了左边，镜头变远，街道、衣服和灯光也换了样子。 同一句提示词交给同一个模型，为什么没有得到同一张图？ 很多人知道这和“随机”有关。 但随机起点是怎么来的？一团没有内容的…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E4%B8%80%E5%8F%A5%E6%8F%90%E7%A4%BA%E8%AF%8D%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E6%AC%A1%E7%94%9F%E6%88%90%E7%9A%84%E5%9B%BE%E7%89%87%E9%83%BD%E4%B8%8D%E4%B8%80%E6%A0%B7%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E4%B8%80%E5%8F%A5%E6%8F%90%E7%A4%BA%E8%AF%8D%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E6%AC%A1%E7%94%9F%E6%88%90%E7%9A%84%E5%9B%BE%E7%89%87%E9%83%BD%E4%B8%8D%E4%B8%80%E6%A0%B7%EF%BC%9F","dateModified":"2026-09-01","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：同一句提示词，为什么每次生成的图片都不一样？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E4%B8%80%E5%8F%A5%E6%8F%90%E7%A4%BA%E8%AF%8D%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E6%AC%A1%E7%94%9F%E6%88%90%E7%9A%84%E5%9B%BE%E7%89%87%E9%83%BD%E4%B8%8D%E4%B8%80%E6%A0%B7%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>同一句提示词，为什么每次生成的图片都不一样？</h1><h1>同一句提示词，为什么每次生成的图片都不一样？</h1>
+<p>在生图工具里输入：</p>
+<blockquote>
+<p>雨夜里，一个人撑着红色雨伞走在街上。</p>
+</blockquote>
+<p>第一次生成，人物站在画面中央，身后是模糊的路灯。</p>
+<p>不改一个字，再生成一次，人物可能走到了左边，镜头变远，街道、衣服和灯光也换了样子。</p>
+<p>同一句提示词交给同一个模型，为什么没有得到同一张图？</p>
+<p>很多人知道这和“随机”有关。</p>
+<p>但随机起点是怎么来的？一团没有内容的随机数字，又凭什么逐渐变成一张合理图片？</p>
+<h2>提示词没有规定唯一画面</h2>
+<p>“雨夜里，一个人撑着红色雨伞走在街上。”</p>
+<p>这句话规定了夜晚、下雨、人物、红伞和街道。</p>
+<p>但它没有规定：</p>
+<pre><code class="language-text">人物站在哪里
+镜头离人物多远
+雨伞朝向哪边
+街道怎样延伸
+衣服是什么颜色
+灯光从哪里照过来
+</code></pre>
+<p>近景、远景、侧面、背影，都可能满足同一句话。</p>
+<p>提示词描述的是一组要求，并不对应一张等待模型还原的标准图片。</p>
+<p>系统还需要决定那些没有写出来的细节。</p>
+<h2>随机起点不是一张随机草图</h2>
+<p>下面用常见的扩散式生图过程来看。</p>
+<p>图片在模型内部是一大片数字。生成开始时，这些位置还没有颜色、人物或街道，需要先填入一组初始数字。</p>
+<p>程序不会先生成几张模糊草图，再从中挑一张构图。它只是用随机数填满这张数字画布。</p>
+<p>如果把这些数字显示出来，会像一片没有规律的噪点：</p>
+<pre><code class="language-text">▓░▒▓▒░░▓▒▓░▒
+░▓▒░▓▓▒░▒▓░▓
+▒░▓▒░▒▓▓░▒▓░
+</code></pre>
+<p>这些数也不是从任意范围里乱取。</p>
+<p>常见扩散模型会使用和训练时相同类型的噪声：大部分数值靠近 0，特别大或特别小的数较少。这通常叫正态分布。</p>
+<p>模型训练时一直在学习怎样处理这种噪声，生成时自然也要从它熟悉的噪声开始。</p>
+<p>Seed 决定程序这次会生成哪一串随机数：</p>
+<pre><code class="language-text">Seed 123
+   ↓
+得到第一串随机数
+   ↓
+填满数字画布
+   ↓
+随机起点 A
+
+Seed 456
+   ↓
+得到另一串随机数
+   ↓
+填满数字画布
+   ↓
+随机起点 B
+</code></pre>
+<p>计算机里的随机数通常由固定算法生成。Seed 是这套算法的起始值，所以同一个 Seed 可以再次得到同一串数字。</p>
+<p>但这两组数字本身都不包含红伞、人物或街道，也没有预先藏着某种构图。</p>
+<p>可随机起点没有任何画面，模型为什么不会把它越改越乱？</p>
+<h2>模型不是在计算“清晰度”</h2>
+<p>生成过程中，模型会反复接收三类信息：</p>
+<pre><code class="language-text">当前的带噪状态
++ 现在进行到哪一步
++ “雨夜里的红色雨伞”对应的文字条件
+</code></pre>
+<p>它每次预测的不是“这张图有多清晰”，也不会拿一张隐藏的正确图片进行比较。</p>
+<p>模型预测的是：<strong>当前状态下一步应该怎样调整。</strong></p>
+<p>这个依据来自训练。</p>
+<p>训练时，程序会给清晰图片加入不同程度的噪声，再让模型判断其中混入了什么噪声，或者下一步应该往哪个方向修正。</p>
+<p>模型看过大量这样的任务以后，参数里逐渐留下了一些规律：</p>
+<pre><code class="language-text">面对很乱的状态
+→ 哪些调整更可能出现大致结构
+
+面对已经出现轮廓的状态
+→ 哪些调整更可能形成合理物体
+
+加入文字条件
+→ 哪些调整更符合雨夜、人物和红伞
+</code></pre>
+<p>生成时，系统把这个过程反过来使用。</p>
+<p>模型根据当前状态、生成进度和提示词给出一次预测，采样程序按照预测更新一点，再把新状态交回模型。</p>
+<pre><code class="language-text">随机状态
+   ↓
+预测下一步调整
+   ↓
+出现大致明暗
+   ↓
+再次预测
+   ↓
+人物和雨伞逐渐形成
+   ↓
+继续重复
+   ↓
+得到完整图片
+</code></pre>
+<p>我们看到的是轮廓越来越清楚。</p>
+<p>对系统来说，它只是在重复“根据当前状态预测下一步”，并没有一个单独的清晰度按钮。</p>
+<h2>不同起点，会让整条路径逐渐分开</h2>
+<p>提示词一直没有变化，但两次生成使用了不同随机起点。</p>
+<p>第一次：</p>
+<pre><code class="language-text">同一句提示词
+      ↓
+随机起点 A
+      ↓
+早期出现居中的人物结构
+      ↓
+继续形成红伞、路灯和街道
+      ↓
+人物居中的近景
+</code></pre>
+<p>第二次：</p>
+<pre><code class="language-text">同一句提示词
+      ↓
+随机起点 B
+      ↓
+早期出现较小、偏左的人物结构
+      ↓
+继续形成红伞、建筑和积水
+      ↓
+人物偏左的远景
+</code></pre>
+<p>构图、明暗和轮廓不是最后一步才决定的。</p>
+<p>早期状态出现差异，后面的内容会沿着各自已经形成的结构继续调整。人物位置变了，镜头距离、街道布局和灯光方向也可能跟着变化。</p>
+<p>每次重新生成，并不是拿上一张图换几处颜色，而是从另一个起点重新走完一遍生成过程。</p>
+<h2>Seed 固定的是起点</h2>
+<p>只要模型、提示词、图片尺寸、采样方法和其他设置都保持一致，使用相同 Seed，通常可以得到相同或非常接近的结果。</p>
+<p>但 Seed 不是图片编号。</p>
+<p>模型不会看到 <code>123</code>，就从图库里取出第 123 张图片。它只是帮助程序重新生成相同的随机起点。</p>
+<p>复现一张图片也不能只记录 Seed。下面任何一项发生变化，结果都可能不同：</p>
+<pre><code class="language-text">模型或版本
+图片尺寸
+采样方法
+生成步数
+提示词处理方式
+计算设备和精度
+</code></pre>
+<p>如果想探索更多构图，可以保留提示词，切换 Seed。</p>
+<p>如果喜欢当前画面，准备继续调整，先保留 Seed 和主要设置。这样更容易判断后续变化究竟来自哪里。</p>
+<h2>回到最初的问题</h2>
+<p>两次生成可以压缩成：</p>
+<pre><code class="language-text">同一句提示词
+        ↓
+不同随机起点
+        ↓
+模型根据训练规律反复调整
+        ↓
+生成路径逐渐分开
+        ↓
+两张不同但都符合要求的图片
+</code></pre>
+<p>同一句提示词没有得到同一张图，不是因为模型忘了上一张，也不只是工具“故意制造惊喜”。</p>
+<p>提示词没有规定唯一画面，系统需要从随机起点开始，把未写出的构图和细节逐步确定下来。</p>
+<p>随机起点决定这次从哪里开始。</p>
+<p>模型学到的规律，决定它怎样从那里走向一张合理图片。</p>
+<h2>参考资料</h2>
+<ol>
+<li>Ho、Jain、Abbeel，Denoising Diffusion Probabilistic Models（NeurIPS，2020）：<a href="https://arxiv.org/abs/2006.11239">https://arxiv.org/abs/2006.11239</a></li>
+<li>Song、Meng、Ermon，Denoising Diffusion Implicit Models（ICLR，2021）：<a href="https://arxiv.org/abs/2010.02502">https://arxiv.org/abs/2010.02502</a></li>
+<li>Rombach 等，High-Resolution Image Synthesis with Latent Diffusion Models（CVPR，2022）：<a href="https://arxiv.org/abs/2112.10752">https://arxiv.org/abs/2112.10752</a></li>
+<li>Hugging Face，Reproducible pipelines（访问于 2026-09-01）：<a href="https://huggingface.co/docs/diffusers/using-diffusers/reusing_seeds">https://huggingface.co/docs/diffusers/using-diffusers/reusing_seeds</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
+</body>
+</html>

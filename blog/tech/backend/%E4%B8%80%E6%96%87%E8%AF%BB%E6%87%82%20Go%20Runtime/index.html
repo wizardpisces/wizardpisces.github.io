@@ -6,14 +6,22 @@
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <title>Go Runtime：理解 Go “魔法”的核心 | LZ AI NOTE</title>
   <meta name="description" content="Go Runtime：理解 Go “魔法”的核心 理解 goroutine 的运行原理，就能理解 Go 里面大量看似神奇的机制。 Go 的很多能力： goroutine channel GC 网络并发 defer interface map 本质上都来自同一个思想： Go 不只是编译代码，它还携带一个 runtime，在用户态管理程序运行时的很多机制。 一…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="Go Runtime：理解 Go “魔法”的核心">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-07-10">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/tech/backend/%E4%B8%80%E6%96%87%E8%AF%BB%E6%87%82%20Go%20Runtime">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
   <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/backend/%E4%B8%80%E6%96%87%E8%AF%BB%E6%87%82%20Go%20Runtime">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
   <meta property="og:title" content="Go Runtime：理解 Go “魔法”的核心 | LZ AI NOTE">
   <meta property="og:description" content="Go Runtime：理解 Go “魔法”的核心 理解 goroutine 的运行原理，就能理解 Go 里面大量看似神奇的机制。 Go 的很多能力： goroutine channel GC 网络并发 defer interface map 本质上都来自同一个思想： Go 不只是编译代码，它还携带一个 runtime，在用户态管理程序运行时的很多机制。 一…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/backend/%E4%B8%80%E6%96%87%E8%AF%BB%E6%87%82%20Go%20Runtime">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Go Runtime：理解 Go “魔法”的核心","description":"Go Runtime：理解 Go “魔法”的核心 理解 goroutine 的运行原理，就能理解 Go 里面大量看似神奇的机制。 Go 的很多能力： goroutine channel GC 网络并发 defer interface map 本质上都来自同一个思想： Go 不只是编译代码，它还携带一个 runtime，在用户态管理程序运行时的很多机制。 一…","url":"https://wizardpisces.github.io/blog/tech/backend/%E4%B8%80%E6%96%87%E8%AF%BB%E6%87%82%20Go%20Runtime","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/backend/%E4%B8%80%E6%96%87%E8%AF%BB%E6%87%82%20Go%20Runtime","dateModified":"2026-07-10","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Go Runtime：理解 Go “魔法”的核心","description":"Go Runtime：理解 Go “魔法”的核心 理解 goroutine 的运行原理，就能理解 Go 里面大量看似神奇的机制。 Go 的很多能力： goroutine channel GC 网络并发 defer interface map 本质上都来自同一个思想： Go 不只是编译代码，它还携带一个 runtime，在用户态管理程序运行时的很多机制。 一…","url":"https://wizardpisces.github.io/blog/tech/backend/%E4%B8%80%E6%96%87%E8%AF%BB%E6%87%82%20Go%20Runtime","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/backend/%E4%B8%80%E6%96%87%E8%AF%BB%E6%87%82%20Go%20Runtime","dateModified":"2026-07-10","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：Go Runtime：理解 Go “魔法”的核心，LZ AI NOTE，https://wizardpisces.github.io/blog/tech/backend/%E4%B8%80%E6%96%87%E8%AF%BB%E6%87%82%20Go%20Runtime","about":["backend"]}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Go Runtime：理解 Go “魔法”的核心</h1><h1>Go Runtime：理解 Go “魔法”的核心</h1>
@@ -497,6 +505,6 @@ method table
 <p>理解 Go runtime 后，Go 的很多“魔法”都会变成普通的工程设计：</p>
 <p><strong>不是代码直接跑在线程上，而是编译后的代码和 runtime 一起运行；runtime 不替代 CPU 执行代码，而是在代码执行过程中管理它的生命周期、调度关系和资源。</strong></p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-CSJjPKOE.js"></script>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
 </body>
 </html>

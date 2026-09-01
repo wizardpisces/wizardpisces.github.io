@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>代码定义结构，权重存储知识：一个例子看懂大模型如何推理 | LZ AI NOTE</title>
+  <meta name="description" content="代码定义结构，权重存储知识：一个例子看懂大模型如何推理 下载一个开源模型时，经常会看到一种奇怪现象：模型代码只有几十 KB，权重文件却有几个 GB，甚至几十 GB。 为什么会差这么多？模型的知识究竟在代码里，还是在那几个 GB 的权重文件里？输入一句话以后，两者又怎样配合得出结果？ 这些问题不必从 Transformer 或注意力机制讲起。先看一个只有 3…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="代码定义结构，权重存储知识：一个例子看懂大模型如何推理">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-08-28">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/tech/ai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84/%E4%BB%A3%E7%A0%81%E5%AE%9A%E4%B9%89%E7%BB%93%E6%9E%84%EF%BC%8C%E6%9D%83%E9%87%8D%E5%AD%98%E5%82%A8%E7%9F%A5%E8%AF%86%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%A6%82%E4%BD%95%E6%8E%A8%E7%90%86">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84/%E4%BB%A3%E7%A0%81%E5%AE%9A%E4%B9%89%E7%BB%93%E6%9E%84%EF%BC%8C%E6%9D%83%E9%87%8D%E5%AD%98%E5%82%A8%E7%9F%A5%E8%AF%86%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%A6%82%E4%BD%95%E6%8E%A8%E7%90%86">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="代码定义结构，权重存储知识：一个例子看懂大模型如何推理 | LZ AI NOTE">
+  <meta property="og:description" content="代码定义结构，权重存储知识：一个例子看懂大模型如何推理 下载一个开源模型时，经常会看到一种奇怪现象：模型代码只有几十 KB，权重文件却有几个 GB，甚至几十 GB。 为什么会差这么多？模型的知识究竟在代码里，还是在那几个 GB 的权重文件里？输入一句话以后，两者又怎样配合得出结果？ 这些问题不必从 Transformer 或注意力机制讲起。先看一个只有 3…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84/%E4%BB%A3%E7%A0%81%E5%AE%9A%E4%B9%89%E7%BB%93%E6%9E%84%EF%BC%8C%E6%9D%83%E9%87%8D%E5%AD%98%E5%82%A8%E7%9F%A5%E8%AF%86%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%A6%82%E4%BD%95%E6%8E%A8%E7%90%86">
+  <meta property="og:image" content="https://wizardpisces.github.io/covers/model-structure-weights-inference.png">
+  <meta name="twitter:image" content="https://wizardpisces.github.io/covers/model-structure-weights-inference.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"代码定义结构，权重存储知识：一个例子看懂大模型如何推理","description":"代码定义结构，权重存储知识：一个例子看懂大模型如何推理 下载一个开源模型时，经常会看到一种奇怪现象：模型代码只有几十 KB，权重文件却有几个 GB，甚至几十 GB。 为什么会差这么多？模型的知识究竟在代码里，还是在那几个 GB 的权重文件里？输入一句话以后，两者又怎样配合得出结果？ 这些问题不必从 Transformer 或注意力机制讲起。先看一个只有 3…","url":"https://wizardpisces.github.io/blog/tech/ai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84/%E4%BB%A3%E7%A0%81%E5%AE%9A%E4%B9%89%E7%BB%93%E6%9E%84%EF%BC%8C%E6%9D%83%E9%87%8D%E5%AD%98%E5%82%A8%E7%9F%A5%E8%AF%86%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%A6%82%E4%BD%95%E6%8E%A8%E7%90%86","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84/%E4%BB%A3%E7%A0%81%E5%AE%9A%E4%B9%89%E7%BB%93%E6%9E%84%EF%BC%8C%E6%9D%83%E9%87%8D%E5%AD%98%E5%82%A8%E7%9F%A5%E8%AF%86%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%A6%82%E4%BD%95%E6%8E%A8%E7%90%86","dateModified":"2026-08-28","image":"https://wizardpisces.github.io/covers/model-structure-weights-inference.png","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：代码定义结构，权重存储知识：一个例子看懂大模型如何推理，LZ AI NOTE，https://wizardpisces.github.io/blog/tech/ai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84/%E4%BB%A3%E7%A0%81%E5%AE%9A%E4%B9%89%E7%BB%93%E6%9E%84%EF%BC%8C%E6%9D%83%E9%87%8D%E5%AD%98%E5%82%A8%E7%9F%A5%E8%AF%86%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%A6%82%E4%BD%95%E6%8E%A8%E7%90%86","about":["ai-模型结构"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>代码定义结构，权重存储知识：一个例子看懂大模型如何推理</h1><h1>代码定义结构，权重存储知识：一个例子看懂大模型如何推理</h1>
+<p>下载一个开源模型时，经常会看到一种奇怪现象：模型代码只有几十 KB，权重文件却有几个 GB，甚至几十 GB。</p>
+<p>为什么会差这么多？模型的知识究竟在代码里，还是在那几个 GB 的权重文件里？输入一句话以后，两者又怎样配合得出结果？</p>
+<p>这些问题不必从 Transformer 或注意力机制讲起。先看一个只有 3 个参数的小模型，推理过程反而更容易看清。</p>
+<h2>先搭一个最小模型</h2>
+<p>假设我要做一个判断天气的小模型。</p>
+<p>它接收温度和湿度，输出一个“适合出门”的分数。分数越高，越适合出门。</p>
+<p>模型结构写出来只有几行：</p>
+<pre><code class="language-python">class WeatherModel:
+    def __init__(self):
+        self.w1 = None
+        self.w2 = None
+        self.b  = None
+
+    def forward(self, temp, humidity):
+        return temp * self.w1 + humidity * self.w2 + self.b
+</code></pre>
+<p>代码定义了这样一个公式：</p>
+<pre><code class="language-text">分数 = 温度 × w1 + 湿度 × w2 + b
+</code></pre>
+<p>代码只规定了：</p>
+<blockquote>
+<p>这里需要三个数字。</p>
+</blockquote>
+<p>却没有规定：</p>
+<blockquote>
+<p>这三个数字具体是多少。</p>
+</blockquote>
+<p>此时：</p>
+<pre><code class="language-text">w1 = ?
+w2 = ?
+b  = ?
+</code></pre>
+<p>都还是空的。</p>
+<p>模型结构更像一张蓝图：它写清楚有哪些变量、它们怎样连接，以及应该执行什么计算，却没有填入计算所需的具体数值。</p>
+<h2>训练之后，权重来了</h2>
+<p>假设我们收集了很多历史天气数据：</p>
+<pre><code class="language-text">温度  湿度  是否适合出门
+25    80    否
+23    40    是
+30    35    是
+18    95    否
+...
+</code></pre>
+<p>训练的过程，就是不断调整 w1、w2、b，让模型输出越来越接近真实结果。</p>
+<p>经过大量迭代后，得到：</p>
+<pre><code class="language-text">w1 = 0.7
+w2 = -0.3
+b  = 5.0
+</code></pre>
+<p>这三个数字就是模型权重。</p>
+<p>训练结束后，原始天气数据并不会跟着模型一起保存。</p>
+<p>保存下来的只有：</p>
+<pre><code class="language-text">0.7
+-0.3
+5.0
+</code></pre>
+<p>这三个数是模型根据历史数据调整出来的结果。单看 <code>0.7</code> 或 <code>-0.3</code>，我们很难说它记住了哪一天的天气；放回公式里，它们却会让温度提高分数、让湿度降低分数。训练数据里的规律，就这样进入了权重。</p>
+<p>GPT 的参数同样由训练得到，只是数量完全不是一个级别：</p>
+<pre><code class="language-text">天气模型
+3 个参数
+
+GPT-3
+1750 亿个参数
+</code></pre>
+<p>参数多了几百亿倍，每个参数仍然是参与计算的一个数值。</p>
+<h2>跑一遍：数字的旅程</h2>
+<p>假设今天：</p>
+<pre><code class="language-text">温度 = 25
+湿度 = 80
+</code></pre>
+<p>输入模型。</p>
+<p>首先把权重代入公式：</p>
+<pre><code class="language-text">temp × 0.7 + humidity × (-0.3) + 5.0
+</code></pre>
+<p>再把输入代进去：</p>
+<pre><code class="language-text">25 × 0.7 + 80 × (-0.3) + 5.0
+</code></pre>
+<p>开始计算：</p>
+<pre><code class="language-text">25 × 0.7 = 17.5
+
+80 × (-0.3) = -24.0
+</code></pre>
+<p>最后：</p>
+<pre><code class="language-text">17.5 + (-24.0) + 5.0
+
+= -1.5
+</code></pre>
+<p>输出：</p>
+<pre><code class="language-text">-1.5
+</code></pre>
+<p>模型认为今天不太适合出门。</p>
+<p>这就是一次完整推理。代码和权重分别做了两件事：</p>
+<pre><code class="language-text">代码决定怎么算
+
+权重决定用什么数字算
+</code></pre>
+<p>少了代码，程序不知道该怎样组合这些数；少了权重，公式里只剩一排空位。</p>
+<h2>加载权重，本质就是填空</h2>
+<p>在 PyTorch 里，加载权重时经常会写：</p>
+<pre><code class="language-python">model.load_state_dict(torch.load(&quot;weights.pth&quot;))
+</code></pre>
+<p>放到这个天气模型里，<code>weights.pth</code> 保存的可以理解为：</p>
+<pre><code class="language-text">w1 = 0.7
+w2 = -0.3
+b  = 5.0
+</code></pre>
+<p>加载时做的事情，本质等价于：</p>
+<pre><code class="language-python">model.w1 = 0.7
+model.w2 = -0.3
+model.b  = 5.0
+</code></pre>
+<p>这个过程不会重新训练模型，也不会凭空触发一次推理。它只是按照参数名找到对应位置：</p>
+<pre><code class="language-text">w1 → w1
+
+w2 → w2
+
+b → b
+</code></pre>
+<p>再把数值复制进去。</p>
+<p>加载完成后：</p>
+<pre><code class="language-text">空蓝图
++
+具体数字
+=
+完整模型
+</code></pre>
+<h2>同一套结构，为什么能得到不同模型？</h2>
+<p>同一个模型结构，可以搭配很多不同权重。</p>
+<p>例如：</p>
+<pre><code class="language-text">同一个 Transformer 架构
+↓
+预训练权重 A
+→ 英文模型
+
+预训练权重 B
+→ 中文模型
+
+预训练权重 C
+→ 代码模型
+</code></pre>
+<p>这些模型可以使用相同的计算结构，却因为训练数据和训练目标不同，得到不同权重，最终表现出不同能力。</p>
+<p>所以结构和权重很难单独比较谁更重要。结构决定可以执行哪些计算，权重决定这些计算面对具体输入时会得到什么结果。结构离开权重只是一副没有填数的空架子，权重也必须依附于匹配的结构才能使用。</p>
+<h2>参数为什么会突然爆炸？</h2>
+<p>在天气模型里：</p>
+<pre><code class="language-text">输入数量 = 2
+
+参数数量 = 2
+</code></pre>
+<p>这还很容易数清。神经网络规模一大，参数数量很快就会上去。</p>
+<p>假设：</p>
+<pre><code class="language-text">1000 个输入
+↓
+1000 个输出
+</code></pre>
+<p>如果每个输出都需要看到所有输入：</p>
+<pre><code class="language-text">1000 × 1000 = 1,000,000
+</code></pre>
+<p>就需要 100 万个权重。</p>
+<p>再进一步：</p>
+<pre><code class="language-text">8192 个输入
+↓
+8192 个输出
+</code></pre>
+<p>对应：</p>
+<pre><code class="language-text">8192 × 8192 = 67,108,864
+</code></pre>
+<p>单个矩阵就有 6700 多万个参数。</p>
+<p>而 GPT 的一层里不止一个矩阵。</p>
+<p>几十层甚至上百层叠起来之后，参数数量很快达到：</p>
+<pre><code class="language-text">70 亿
+700 亿
+1750 亿
+</code></pre>
+<p>级别。</p>
+<p>权重文件越来越大，主要不是因为代码变长了，而是因为需要保存的具体数值越来越多。</p>
+<h2>为什么代码只有几百行，权重却有几十 GB？</h2>
+<p>例如，代码里写着：</p>
+<pre><code class="language-python">nn.Linear(768, 768)
+</code></pre>
+<p>代码只有一行。</p>
+<p>但它对应的权重矩阵大小是：</p>
+<pre><code class="language-text">768 × 768 = 589,824
+</code></pre>
+<p>接近 59 万个浮点数。</p>
+<p>代码描述的是：</p>
+<pre><code class="language-text">这里有个 768×768 的矩阵
+</code></pre>
+<p>权重保存的是：</p>
+<pre><code class="language-text">矩阵第 1 个格子是多少
+矩阵第 2 个格子是多少
+...
+矩阵第 589824 个格子是多少
+</code></pre>
+<p>所以：</p>
+<pre><code class="language-text">代码负责描述规格
+
+权重负责填满内容
+</code></pre>
+<p>描述矩阵规格只需要几个数字，但矩阵中的每个位置都要保存自己的值。维度越大，要写入权重文件的数就越多。</p>
+<p>于是两类文件的大小会相差很多：</p>
+<pre><code class="language-text">模型结构
+几 KB ～ 几 MB
+
+模型权重
+几 GB ～ 几百 GB
+</code></pre>
+<h2>进入 GPU 之后发生了什么？</h2>
+<p>加载完成后，权重会被放进显存，随后才开始推理。</p>
+<p>暂时忽略底层调度细节，可以把两者的分工理解为：CPU 发起和组织计算，GPU 执行大批矩阵运算。比如 CPU 依次安排：</p>
+<pre><code class="language-text">执行第 1 层
+执行第 2 层
+执行第 3 层
+...
+</code></pre>
+<p>GPU 则负责矩阵乘法。</p>
+<p>例如：</p>
+<pre><code class="language-text">768×768 矩阵
+乘
+768×1 向量
+</code></pre>
+<p>最终得到：</p>
+<pre><code class="language-text">768 个输出
+</code></pre>
+<p>这些输出之间互不依赖。</p>
+<p>于是 GPU 可以把任务拆给大量计算单元同时执行。</p>
+<p>GPU 的优势不在于把一次乘法做得多么特别，而在于能并行完成大量结构相似的计算。</p>
+<h2>为什么推理前必须先把权重搬进显存？</h2>
+<blockquote>
+<p>权重不是放在 SSD 里吗？为什么还要占显存？</p>
+</blockquote>
+<p>因为推理会频繁访问权重。</p>
+<p>假设一个模型有：</p>
+<pre><code class="language-text">70B 参数
+</code></pre>
+<p>使用 FP16 存储：</p>
+<pre><code class="language-text">70B × 2 Byte
+
+≈ 140GB
+</code></pre>
+<p>生成一个 Token 时，几乎所有层都会访问自己的权重。</p>
+<p>如果每次都去 SSD 读取：</p>
+<pre><code class="language-text">SSD 带宽
+≈ 7GB/s
+</code></pre>
+<p>那么读完整个模型就需要十几到二十秒。</p>
+<p>而实际推理通常要达到：</p>
+<pre><code class="language-text">每秒几十个 Token
+</code></pre>
+<p>每生成一个 Token 都从 SSD 读取整套权重，这个速度远远不够。</p>
+<p>所以实际流程是：</p>
+<pre><code class="language-text">SSD
+↓
+内存
+↓
+显存
+↓
+GPU计算
+</code></pre>
+<p>推理时，权重通常常驻显存，输入数据不断经过这些权重矩阵，GPU 不必在每一步重新等待 SSD。</p>
+<h2>最后，把整个过程串起来</h2>
+<p>把前面的过程收起来，一次推理可以分成四步：</p>
+<pre><code class="language-text">1. 定义模型结构
+
+2. 加载训练好的权重
+
+3. 把权重放进显存
+
+4. 输入数据逐层经过计算
+</code></pre>
+<p>连起来是这样：</p>
+<pre><code class="language-text">模型结构
+（蓝图）
+
+        +
+
+模型权重
+（经验和知识）
+
+        ↓
+
+加载到模型
+
+        ↓
+
+搬到GPU显存
+
+        ↓
+
+输入逐层流过
+
+        ↓
+
+输出结果
+</code></pre>
+<p>GPT-3 的 1750 亿参数，并不是 1750 亿条可以直接翻阅的知识。它们仍然是一组组参与乘法和加法的数值，只是规模大得惊人。</p>
+<p>代码写清楚模型有哪些层、矩阵怎样连接；训练把从数据中学到的规律写进权重。推理时，输入按照代码规定的路线经过这些权重，逐层变换，最后得到输出。</p>
+<p>这也解释了最初那个文件大小的问题：结构文件保存的是计算规则，权重文件保存的是每个参数的具体数值。前者可以很短，后者却可能有几百亿个数。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
+</body>
+</html>

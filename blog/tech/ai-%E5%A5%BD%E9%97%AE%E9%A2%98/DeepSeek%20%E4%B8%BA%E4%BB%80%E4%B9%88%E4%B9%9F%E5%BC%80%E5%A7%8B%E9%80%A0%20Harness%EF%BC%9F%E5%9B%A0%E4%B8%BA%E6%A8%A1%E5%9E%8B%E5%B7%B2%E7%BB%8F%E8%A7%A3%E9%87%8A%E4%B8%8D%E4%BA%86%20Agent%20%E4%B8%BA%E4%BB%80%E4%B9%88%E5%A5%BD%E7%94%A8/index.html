@@ -6,14 +6,22 @@
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <title>DeepSeek 为什么也开始造 Harness？因为模型已经解释不了 Agent 为什么好用 | LZ AI NOTE</title>
   <meta name="description" content="DeepSeek 为什么也开始造 Harness？因为模型已经解释不了 Agent 为什么好用 看到一个 Agent 很好用，我们通常会先问： 它背后是什么模型？ 这个问题正变得不够用了。 同一个模型，放进不同产品里，一个只能告诉你“代码应该怎么改”，另一个却能自己读文件、运行测试、发现失败、继续修改，最后交出可以验证的结果。 模型没有变。后者多出来的，是…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="DeepSeek 为什么也开始造 Harness？因为模型已经解释不了 Agent 为什么好用">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-08-24">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/DeepSeek%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E5%BC%80%E5%A7%8B%E9%80%A0%20Harness%EF%BC%9F%E5%9B%A0%E4%B8%BA%E6%A8%A1%E5%9E%8B%E5%B7%B2%E7%BB%8F%E8%A7%A3%E9%87%8A%E4%B8%8D%E4%BA%86%20Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A5%BD%E7%94%A8">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
   <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/DeepSeek%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E5%BC%80%E5%A7%8B%E9%80%A0%20Harness%EF%BC%9F%E5%9B%A0%E4%B8%BA%E6%A8%A1%E5%9E%8B%E5%B7%B2%E7%BB%8F%E8%A7%A3%E9%87%8A%E4%B8%8D%E4%BA%86%20Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A5%BD%E7%94%A8">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
   <meta property="og:title" content="DeepSeek 为什么也开始造 Harness？因为模型已经解释不了 Agent 为什么好用 | LZ AI NOTE">
   <meta property="og:description" content="DeepSeek 为什么也开始造 Harness？因为模型已经解释不了 Agent 为什么好用 看到一个 Agent 很好用，我们通常会先问： 它背后是什么模型？ 这个问题正变得不够用了。 同一个模型，放进不同产品里，一个只能告诉你“代码应该怎么改”，另一个却能自己读文件、运行测试、发现失败、继续修改，最后交出可以验证的结果。 模型没有变。后者多出来的，是…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/DeepSeek%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E5%BC%80%E5%A7%8B%E9%80%A0%20Harness%EF%BC%9F%E5%9B%A0%E4%B8%BA%E6%A8%A1%E5%9E%8B%E5%B7%B2%E7%BB%8F%E8%A7%A3%E9%87%8A%E4%B8%8D%E4%BA%86%20Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A5%BD%E7%94%A8">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"DeepSeek 为什么也开始造 Harness？因为模型已经解释不了 Agent 为什么好用","description":"DeepSeek 为什么也开始造 Harness？因为模型已经解释不了 Agent 为什么好用 看到一个 Agent 很好用，我们通常会先问： 它背后是什么模型？ 这个问题正变得不够用了。 同一个模型，放进不同产品里，一个只能告诉你“代码应该怎么改”，另一个却能自己读文件、运行测试、发现失败、继续修改，最后交出可以验证的结果。 模型没有变。后者多出来的，是…","url":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/DeepSeek%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E5%BC%80%E5%A7%8B%E9%80%A0%20Harness%EF%BC%9F%E5%9B%A0%E4%B8%BA%E6%A8%A1%E5%9E%8B%E5%B7%B2%E7%BB%8F%E8%A7%A3%E9%87%8A%E4%B8%8D%E4%BA%86%20Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A5%BD%E7%94%A8","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/DeepSeek%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E5%BC%80%E5%A7%8B%E9%80%A0%20Harness%EF%BC%9F%E5%9B%A0%E4%B8%BA%E6%A8%A1%E5%9E%8B%E5%B7%B2%E7%BB%8F%E8%A7%A3%E9%87%8A%E4%B8%8D%E4%BA%86%20Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A5%BD%E7%94%A8","dateModified":"2026-08-17","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"DeepSeek 为什么也开始造 Harness？因为模型已经解释不了 Agent 为什么好用","description":"DeepSeek 为什么也开始造 Harness？因为模型已经解释不了 Agent 为什么好用 看到一个 Agent 很好用，我们通常会先问： 它背后是什么模型？ 这个问题正变得不够用了。 同一个模型，放进不同产品里，一个只能告诉你“代码应该怎么改”，另一个却能自己读文件、运行测试、发现失败、继续修改，最后交出可以验证的结果。 模型没有变。后者多出来的，是…","url":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/DeepSeek%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E5%BC%80%E5%A7%8B%E9%80%A0%20Harness%EF%BC%9F%E5%9B%A0%E4%B8%BA%E6%A8%A1%E5%9E%8B%E5%B7%B2%E7%BB%8F%E8%A7%A3%E9%87%8A%E4%B8%8D%E4%BA%86%20Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A5%BD%E7%94%A8","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/DeepSeek%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E5%BC%80%E5%A7%8B%E9%80%A0%20Harness%EF%BC%9F%E5%9B%A0%E4%B8%BA%E6%A8%A1%E5%9E%8B%E5%B7%B2%E7%BB%8F%E8%A7%A3%E9%87%8A%E4%B8%8D%E4%BA%86%20Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A5%BD%E7%94%A8","dateModified":"2026-08-24","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：DeepSeek 为什么也开始造 Harness？因为模型已经解释不了 Agent 为什么好用，LZ AI NOTE，https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/DeepSeek%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E5%BC%80%E5%A7%8B%E9%80%A0%20Harness%EF%BC%9F%E5%9B%A0%E4%B8%BA%E6%A8%A1%E5%9E%8B%E5%B7%B2%E7%BB%8F%E8%A7%A3%E9%87%8A%E4%B8%8D%E4%BA%86%20Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A5%BD%E7%94%A8","about":["ai-好问题"]}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>DeepSeek 为什么也开始造 Harness？因为模型已经解释不了 Agent 为什么好用</h1><h1>DeepSeek 为什么也开始造 Harness？因为模型已经解释不了 Agent 为什么好用</h1>
@@ -56,7 +64,7 @@
 </code></pre>
 <p>模型仍然负责理解和决策，但它已经不能独自决定结果。</p>
 <p>上下文选错了，再强的模型也会稳定跑偏；工具只能读取，模型就无法完成修改；权限过大，一次错误判断可能变成真实事故；任务中断后没有 Session 和恢复机制，模型再聪明也只能从头再来。</p>
-<p><a href="./%E4%BB%8E%20Prompt%20%E5%88%B0%20Loop%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%E7%9A%84%E5%9B%9B%E6%AC%A1%E5%8D%87%E7%BA%A7.md">《从 Prompt 到 Loop：一个例子看懂 AI 工程的四次升级》</a>曾把 Harness 称为 Agent 的工作台。现在再看，工作台已经不只是给模型摆几件工具。</p>
+<p><a href="../ai-%E5%8F%AF%E9%9D%A0Agent/%E4%BB%8E%20Prompt%20%E5%88%B0%20Loop%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%E7%9A%84%E5%9B%9B%E6%AC%A1%E5%8D%87%E7%BA%A7.md">《从 Prompt 到 Loop：一个例子看懂 AI 工程的四次升级》</a>曾把 Harness 称为 Agent 的工作台。现在再看，工作台已经不只是给模型摆几件工具。</p>
 <p>它开始决定：</p>
 <pre><code class="language-text">模型能看见什么
 模型可以影响哪个世界
@@ -64,6 +72,7 @@
 失败之后系统还做什么
 </code></pre>
 <p>DeepSeek 的 Session Log 是个很具体的例子。它先记录 Agent 做过什么，再从这份历史里生成模型看到的消息。任务恢复、分叉和回放，都建立在同一份运行记录上。</p>
+<p>这里的 Session Log 不是 OpenTelemetry 日志。它是 Agent 运行时的事实来源：少了它，系统可能无法恢复和重放。Trace 则是从运行事实中生成的一种观测视图，即使上报失败，Agent 本身仍应能够继续运行。</p>
 <p>当上下文可以从历史中重建，Agent 就不再只是一次模型调用，而是一段能够继续的运行过程。</p>
 <blockquote>
 <p><strong>模型决定了能力上限，Harness 决定这些能力能有多少变成稳定结果。</strong></p>
@@ -121,6 +130,6 @@
 <li>Anthropic，Claude Agent SDK Overview：<a href="https://platform.claude.com/docs/en/agent-sdk/overview">https://platform.claude.com/docs/en/agent-sdk/overview</a></li>
 </ol>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-CSJjPKOE.js"></script>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
 </body>
 </html>

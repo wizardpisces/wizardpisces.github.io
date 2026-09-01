@@ -6,14 +6,22 @@
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <title>Agent 系统的五个核心范式 | LZ AI NOTE</title>
   <meta name="description" content="Agent 系统的五个核心范式 从 deepagents 源码出发，提炼 AI Agent 系统设计的通用范式 引言 分析 deepagents 源码后，我发现 Agent 系统的核心挑战可以归结为 五个范式问题 。这些问题不依赖于具体框架——无论你用 LangGraph、CrewAI 还是自建系统，都必须面对它们。 本文不是框架教程，而是试图回答： 构建…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="Agent 系统的五个核心范式">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-04-01">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/tech/ai-agent/Agent%20Framework%20%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%20-%20deepagents%20%E6%A1%88%E4%BE%8B%E7%A0%94%E7%A9%B6">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
   <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/ai-agent/Agent%20Framework%20%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%20-%20deepagents%20%E6%A1%88%E4%BE%8B%E7%A0%94%E7%A9%B6">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
   <meta property="og:title" content="Agent 系统的五个核心范式 | LZ AI NOTE">
   <meta property="og:description" content="Agent 系统的五个核心范式 从 deepagents 源码出发，提炼 AI Agent 系统设计的通用范式 引言 分析 deepagents 源码后，我发现 Agent 系统的核心挑战可以归结为 五个范式问题 。这些问题不依赖于具体框架——无论你用 LangGraph、CrewAI 还是自建系统，都必须面对它们。 本文不是框架教程，而是试图回答： 构建…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/ai-agent/Agent%20Framework%20%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%20-%20deepagents%20%E6%A1%88%E4%BE%8B%E7%A0%94%E7%A9%B6">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Agent 系统的五个核心范式","description":"Agent 系统的五个核心范式 从 deepagents 源码出发，提炼 AI Agent 系统设计的通用范式 引言 分析 deepagents 源码后，我发现 Agent 系统的核心挑战可以归结为 五个范式问题 。这些问题不依赖于具体框架——无论你用 LangGraph、CrewAI 还是自建系统，都必须面对它们。 本文不是框架教程，而是试图回答： 构建…","url":"https://wizardpisces.github.io/blog/tech/ai-agent/Agent%20Framework%20%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%20-%20deepagents%20%E6%A1%88%E4%BE%8B%E7%A0%94%E7%A9%B6","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-agent/Agent%20Framework%20%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%20-%20deepagents%20%E6%A1%88%E4%BE%8B%E7%A0%94%E7%A9%B6","dateModified":"2026-04-01","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Agent 系统的五个核心范式","description":"Agent 系统的五个核心范式 从 deepagents 源码出发，提炼 AI Agent 系统设计的通用范式 引言 分析 deepagents 源码后，我发现 Agent 系统的核心挑战可以归结为 五个范式问题 。这些问题不依赖于具体框架——无论你用 LangGraph、CrewAI 还是自建系统，都必须面对它们。 本文不是框架教程，而是试图回答： 构建…","url":"https://wizardpisces.github.io/blog/tech/ai-agent/Agent%20Framework%20%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%20-%20deepagents%20%E6%A1%88%E4%BE%8B%E7%A0%94%E7%A9%B6","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/ai-agent/Agent%20Framework%20%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%20-%20deepagents%20%E6%A1%88%E4%BE%8B%E7%A0%94%E7%A9%B6","dateModified":"2026-04-01","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：Agent 系统的五个核心范式，LZ AI NOTE，https://wizardpisces.github.io/blog/tech/ai-agent/Agent%20Framework%20%E6%A0%B8%E5%BF%83%E6%9C%BA%E5%88%B6%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%20-%20deepagents%20%E6%A1%88%E4%BE%8B%E7%A0%94%E7%A9%B6","about":["ai-agent"]}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Agent 系统的五个核心范式</h1><h1>Agent 系统的五个核心范式</h1>
@@ -394,6 +402,6 @@ deepagents = 工程整合 + 标准约定
 <hr>
 <p><em>本文基于 deepagents 源码分析和 2026 年业界实践。核心观点：Agent 系统的本质挑战是在有限 context window 内高效完成开放式任务。所有设计模式都围绕这个约束展开。</em></p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-CSJjPKOE.js"></script>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
 </body>
 </html>

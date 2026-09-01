@@ -6,14 +6,22 @@
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <title>rust Arena内存分配 | LZ AI NOTE</title>
   <meta name="description" content="Arena 在 Rust 中， arena 是一种内存分配策略，主要用于高性能场景中高效地分配和管理一组对象。相比 Box 、 Rc 、 Arc 和 RefCell 等智能指针， arena 的优势在于它可以集中管理对象的内存，从而避免频繁的分配与释放操作。 什么是 Arena？ Arena （内存池）是一种分配器，通过在一块连续的内存区域中分配多个对象来…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="rust Arena内存分配">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2025-06-20">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/tech/backend/rust%20Arena%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
   <link rel="canonical" href="https://wizardpisces.github.io/blog/tech/backend/rust%20Arena%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
   <meta property="og:title" content="rust Arena内存分配 | LZ AI NOTE">
   <meta property="og:description" content="Arena 在 Rust 中， arena 是一种内存分配策略，主要用于高性能场景中高效地分配和管理一组对象。相比 Box 、 Rc 、 Arc 和 RefCell 等智能指针， arena 的优势在于它可以集中管理对象的内存，从而避免频繁的分配与释放操作。 什么是 Arena？ Arena （内存池）是一种分配器，通过在一块连续的内存区域中分配多个对象来…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/tech/backend/rust%20Arena%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"rust Arena内存分配","description":"Arena 在 Rust 中， arena 是一种内存分配策略，主要用于高性能场景中高效地分配和管理一组对象。相比 Box 、 Rc 、 Arc 和 RefCell 等智能指针， arena 的优势在于它可以集中管理对象的内存，从而避免频繁的分配与释放操作。 什么是 Arena？ Arena （内存池）是一种分配器，通过在一块连续的内存区域中分配多个对象来…","url":"https://wizardpisces.github.io/blog/tech/backend/rust%20Arena%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/backend/rust%20Arena%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D","dateModified":"2025-06-20","inLanguage":"zh-CN","publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"rust Arena内存分配","description":"Arena 在 Rust 中， arena 是一种内存分配策略，主要用于高性能场景中高效地分配和管理一组对象。相比 Box 、 Rc 、 Arc 和 RefCell 等智能指针， arena 的优势在于它可以集中管理对象的内存，从而避免频繁的分配与释放操作。 什么是 Arena？ Arena （内存池）是一种分配器，通过在一块连续的内存区域中分配多个对象来…","url":"https://wizardpisces.github.io/blog/tech/backend/rust%20Arena%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D","mainEntityOfPage":"https://wizardpisces.github.io/blog/tech/backend/rust%20Arena%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D","dateModified":"2025-06-20","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：rust Arena内存分配，LZ AI NOTE，https://wizardpisces.github.io/blog/tech/backend/rust%20Arena%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D","about":["backend"]}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>rust Arena内存分配</h1><h2>Arena</h2>
@@ -467,6 +475,6 @@ struct Optimized {
 <li>gpt</li>
 </ul>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-CSJjPKOE.js"></script>
+  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
 </body>
 </html>
