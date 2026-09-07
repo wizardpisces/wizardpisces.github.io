@@ -13,9 +13,9 @@ const x={},F=`<h1 id="RN Screenshot-to-Page TODO"><a href="#RN Screenshot-to-Pag
 <p>Page Schema&#x3001;Task Brief&#x3001;Material &#x548C;&#x89C6;&#x89C9; Tool &#x6682;&#x65F6;&#x4F5C;&#x4E3A;&#x5019;&#x9009;&#x589E;&#x5F3A;&#x80FD;&#x529B;&#x3002;&#x53EF;&#x4EE5;&#x7EE7;&#x7EED;&#x51C6;&#x5907;&#x548C;&#x79FB;&#x690D;&#xFF0C;&#x4F46;&#x4E0D;&#x963B;&#x585E;&#x57FA;&#x7840;&#x7248;&#x672C;&#x8DD1;&#x901A;&#xFF0C;&#x4E5F;&#x4E0D;&#x9ED8;&#x8BA4;&#x5168;&#x90E8;&#x63D0;&#x4F9B;&#x7ED9; Codex&#x3002;</p>
 <h2 id="&#x5E76;&#x884C;&#x8BA1;&#x5212;"><a href="#&#x5E76;&#x884C;&#x8BA1;&#x5212;"></a>&#x5E76;&#x884C;&#x8BA1;&#x5212;</h2>
 <ul>
-<li>[ ] <strong>Trace &#x4E0E;&#x8BB0;&#x5F55; Tool</strong>&#xFF1A;&#x5B8C;&#x5584; Raw Trace&#x3001;Decision Events &#x548C; Execution Report</li>
+<li>[ ] <strong>Trace &#x4E0E;&#x8BB0;&#x5F55; Tool</strong>&#xFF1A;Decision Event &#x5DF2;&#x533A;&#x5206; <code>uncertainty / tool_intent / tool_outcome / decision</code>&#xFF0C;Execution Report &#x5DF2;&#x5173;&#x8054;&#x672C;&#x5730;&#x4E8B;&#x4EF6;&#xFF1B;Langfuse Trace &#x5173;&#x8054;&#x4ECD;&#x5F85;&#x8865;&#x5145;</li>
 <li>[ ] <strong>Screenshot Preview Tool</strong>&#xFF1A;&#x4ECE;&#x4EBA;&#x5DE5;&#x8FDB;&#x5165;&#x9875;&#x9762;&#x5E76;&#x622A;&#x56FE;&#xFF0C;&#x9010;&#x6B65;&#x6F14;&#x8FDB;&#x5230; <code>screenshot_preview</code> &#x81EA;&#x52A8;&#x6253;&#x5F00;&#x9875;&#x9762;&#x3001;&#x7B49;&#x5F85;&#x6E32;&#x67D3;&#x5E76;&#x8FD4;&#x56DE; Native &#x622A;&#x56FE;</li>
-<li>[ ] <strong>Visual Inspect Tool</strong>&#xFF1A;&#x63A2;&#x7D22; <code>inspect_visual_target</code>&#xFF0C;&#x5728; Agent &#x770B;&#x4E0D;&#x51C6;&#x4F4D;&#x7F6E;&#x6216;&#x9700;&#x8981;&#x7D20;&#x6750;&#x65F6;&#xFF0C;&#x6309;&#x63CF;&#x8FF0;&#x8FD4;&#x56DE;&#x76EE;&#x6807;&#x533A;&#x57DF;&#x3001;&#x88C1;&#x526A;&#x56FE;&#x548C;&#x5B9A;&#x4F4D;&#x8BC1;&#x636E;</li>
+<li>[x] <strong>Visual Inspect Tool&#xFF08;v0&#xFF09;</strong>&#xFF1A;<code>inspect_visual_target</code> &#x5DF2;&#x652F;&#x6301;&#x5C06; Agent &#x5224;&#x65AD;&#x7684; BBox &#x7EDF;&#x4E00;&#x4E3A;&#x50CF;&#x7D20;/&#x6BD4;&#x4F8B;&#x5750;&#x6807;&#xFF0C;&#x5E76;&#x751F;&#x6210;&#x88C1;&#x526A;&#x56FE;&#x548C;&#x6807;&#x6CE8;&#x56FE;&#xFF1B;&#x81EA;&#x52A8;&#x89C6;&#x89C9;&#x5B9A;&#x4F4D;&#x4ECD;&#x5F85;&#x771F;&#x5B9E; Case &#x9A8C;&#x8BC1;</li>
 <li>[ ] <strong>Material &#x57FA;&#x7840;</strong>&#xFF1A;&#x7EE7;&#x7EED;&#x5EFA;&#x8BBE; Catalog&#x3001;Fixture&#x3001;Candidate Board &#x548C;&#x67E5;&#x8BE2; Tool</li>
 <li>[ ] <strong>Schema &#x4E0E; Context</strong>&#xFF1A;&#x7EE7;&#x7EED;&#x8FC1;&#x79FB; Page Schema&#xFF0C;&#x5E76;&#x63A2;&#x7D22; Task Brief &#x7B49;&#x5019;&#x9009;&#x8F93;&#x5165;</li>
 <li>[x] <strong>Material Generator Skill&#xFF08;&#x6700;&#x5C0F;&#x95ED;&#x73AF;&#xFF09;</strong>&#xFF1A;&#x5DF2;&#x652F;&#x6301;&#x5728;&#x5E72;&#x51C0; RN &#x5DE5;&#x7A0B;&#x4E2D;&#x521D;&#x59CB;&#x5316;&#x3001;&#x589E;&#x91CF;&#x7EF4;&#x62A4;&#x548C;&#x6821;&#x9A8C; Material Lab&#xFF0C;&#x5E76;&#x5728; <code>web-affiliate-rn</code> &#x8BD5;&#x70B9;</li>
@@ -46,14 +46,14 @@ const x={},F=`<h1 id="RN Screenshot-to-Page TODO"><a href="#RN Screenshot-to-Pag
 <li>[ ] <strong>&#x9A8C;&#x8BC1; Task Brief</strong>&#xFF1A;&#x53EA;&#x589E;&#x52A0;&#x6574;&#x7406;&#x540E;&#x7684;&#x4EFB;&#x52A1;&#x8868;&#x8FBE;&#xFF0C;&#x6BD4;&#x8F83;&#x9700;&#x6C42;&#x7406;&#x89E3;&#x662F;&#x5426;&#x6539;&#x5584;</li>
 <li>[ ] <strong>&#x9A8C;&#x8BC1; Material</strong>&#xFF1A;&#x53EA;&#x589E;&#x52A0;&#x7EC4;&#x4EF6;&#x67E5;&#x8BE2;&#x548C;&#x793A;&#x4F8B;&#x4FE1;&#x606F;&#xFF0C;&#x6BD4;&#x8F83;&#x7EC4;&#x4EF6;&#x9009;&#x62E9;&#x662F;&#x5426;&#x6539;&#x5584;</li>
 <li>[ ] <strong>&#x9A8C;&#x8BC1; Screenshot Preview</strong>&#xFF1A;&#x53EA;&#x589E;&#x52A0;&#x751F;&#x6210;&#x540E;&#x622A;&#x56FE;&#x53CD;&#x9988;&#xFF0C;&#x6BD4;&#x8F83; Agent &#x81EA;&#x6211;&#x4FEE;&#x6B63;&#x662F;&#x5426;&#x51CF;&#x5C11;&#x4EBA;&#x5DE5;&#x8C03;&#x6574;</li>
-<li>[ ] <strong>&#x9A8C;&#x8BC1; Visual Inspect</strong>&#xFF1A;&#x53EA;&#x5728;&#x89C6;&#x89C9;&#x5B9A;&#x4F4D;&#x6216;&#x7D20;&#x6750;&#x8BC6;&#x522B;&#x4E0D;&#x786E;&#x5B9A;&#x65F6;&#x8C03;&#x7528; <code>inspect_visual_target</code>&#xFF0C;&#x6BD4;&#x8F83;&#x6309;&#x9700;&#x8FD4;&#x56DE;&#x7684; BBox&#x3001;&#x88C1;&#x526A;&#x56FE;&#x548C;&#x6807;&#x6CE8;&#x8BC1;&#x636E;&#x662F;&#x5426;&#x6709;&#x6548;</li>
+<li>[ ] <strong>&#x9A8C;&#x8BC1; Visual Inspect</strong>&#xFF1A;&#x53EA;&#x5728;&#x89C6;&#x89C9;&#x5B9A;&#x4F4D;&#x6216;&#x7D20;&#x6750;&#x8BC6;&#x522B;&#x4E0D;&#x786E;&#x5B9A;&#x65F6;&#x8C03;&#x7528; <code>inspect_visual_target</code>&#xFF0C;&#x5148;&#x9A8C;&#x8BC1; Agent BBox + &#x88C1;&#x526A;/&#x6807;&#x6CE8;&#x662F;&#x5426;&#x6709;&#x6548;&#xFF0C;&#x518D;&#x5224;&#x65AD;&#x662F;&#x5426;&#x9700;&#x8981;&#x81EA;&#x52A8;&#x89C6;&#x89C9;&#x5B9A;&#x4F4D;&#x6A21;&#x578B;</li>
 <li>[ ] <strong>&#x6309;&#x9700;&#x9A8C;&#x8BC1; Golden Path</strong>&#xFF1A;&#x4EC5;&#x5F53;&#x9875;&#x9762;&#x903B;&#x8F91;&#x6216;&#x4EE3;&#x7801;&#x7EC4;&#x7EC7;&#x4E0D;&#x7A33;&#x5B9A;&#x65F6;&#xFF0C;&#x589E;&#x52A0;&#x4E00;&#x4E2A;&#x540C;&#x7C7B;&#x9875;&#x9762;&#x53C2;&#x8003;&#x5E76;&#x6BD4;&#x8F83;&#x7ED3;&#x679C;</li>
 <li>[ ] <strong>&#x8986;&#x76D6;&#x4FEE;&#x6539;&#x573A;&#x666F;</strong>&#xFF1A;&#x628A;&#x5DF2;&#x6709;&#x9875;&#x9762;&#x4FEE;&#x6539;&#x4F5C;&#x4E3A;&#x72EC;&#x7ACB; Case&#xFF0C;&#x9A8C;&#x8BC1;&#x589E;&#x5F3A;&#x80FD;&#x529B;&#x662F;&#x5426;&#x4ECD;&#x7136;&#x6709;&#x6548;</li>
 </ul>
 <p>&#x5B9E;&#x9A8C;&#x987A;&#x5E8F;&#x7531;&#x771F;&#x5B9E; Failure Case &#x51B3;&#x5B9A;&#xFF0C;&#x4E0D;&#x8981;&#x6C42;&#x6309;&#x4E0A;&#x8FF0;&#x5217;&#x8868;&#x5168;&#x90E8;&#x5B9E;&#x65BD;&#x3002;</p>
 <h2 id="&#x9636;&#x6BB5; 4&#xFF1A;&#x5EFA;&#x7ACB;&#x4F18;&#x5316;&#x95ED;&#x73AF;"><a href="#&#x9636;&#x6BB5; 4&#xFF1A;&#x5EFA;&#x7ACB;&#x4F18;&#x5316;&#x95ED;&#x73AF;"></a>&#x9636;&#x6BB5; 4&#xFF1A;&#x5EFA;&#x7ACB;&#x4F18;&#x5316;&#x95ED;&#x73AF;</h2>
 <ul>
-<li>[ ] <strong>&#x5347;&#x7EA7; Run Finalize</strong>&#xFF1A;&#x8BA9; <code>submit_execution_report</code> &#x5728;&#x4FDD;&#x5B58;&#x7ED3;&#x679C;&#x540E;&#xFF0C;&#x6309; <code>taskId</code> &#x5173;&#x8054; Decision Events&#x3001;Langfuse Trace &#x548C;&#x9A8C;&#x8BC1;&#x8BC1;&#x636E;&#xFF0C;&#x5E76;&#x6807;&#x8BB0;&#x672C;&#x6B21; Run &#x7ED3;&#x675F;</li>
+<li>[ ] <strong>&#x5347;&#x7EA7; Run Finalize</strong>&#xFF1A;&#x672C;&#x5730; Decision Events &#x5DF2;&#x6309; <code>taskId</code> &#x5173;&#x8054;&#xFF1B;&#x7EE7;&#x7EED;&#x5173;&#x8054; Langfuse Trace&#x3001;&#x4ED3;&#x5E93; Commit &#x548C;&#x9A8C;&#x6536;&#x7ED3;&#x679C;&#xFF0C;&#x5E76;&#x6807;&#x8BB0;&#x672C;&#x6B21; Run &#x7ED3;&#x675F;</li>
 <li>[ ] <strong>&#x63A5;&#x5165;&#x9A8C;&#x6536;&#x540E;&#x5206;&#x6790;</strong>&#xFF1A;&#x4EBA;&#x5DE5;&#x8BC4;&#x4EF7;&#x5B8C;&#x6210;&#x540E;&#x518D;&#x5206;&#x6790;&#x5B8C;&#x6574; Case&#xFF0C;&#x907F;&#x514D;&#x5728;&#x7F3A;&#x5C11;&#x6700;&#x7EC8;&#x7ED3;&#x679C;&#x65F6;&#x8FC7;&#x65E9;&#x5F52;&#x56E0;</li>
 <li>[ ] <strong>&#x5206;&#x6790; Case</strong>&#xFF1A;&#x7ED3;&#x5408;&#x7ED3;&#x679C;&#x3001;Raw Trace&#x3001;Decision Events &#x548C; Execution Report &#x5B9A;&#x4F4D;&#x95EE;&#x9898;</li>
 <li>[ ] <strong>&#x63D0;&#x51FA;&#x5355;&#x4E00;&#x6539;&#x8FDB;&#x5047;&#x8BBE;</strong>&#xFF1A;&#x660E;&#x786E;&#x5E94;&#x8BE5;&#x8C03;&#x6574; Skill&#x3001;Tool &#x8FD8;&#x662F; Context</li>
@@ -69,7 +69,7 @@ submit_execution_report
 <pre><code class="language-text">search_rn_materials
 get_rn_material
 screenshot_preview        # &#x8BA1;&#x5212;&#xFF1A;&#x83B7;&#x53D6;&#x751F;&#x6210;&#x9875;&#x9762;&#x7684; Native &#x8FD0;&#x884C;&#x622A;&#x56FE;
-inspect_visual_target     # &#x8BA1;&#x5212;&#xFF1A;&#x6309;&#x9700;&#x5B9A;&#x4F4D;&#x8BBE;&#x8BA1;&#x5143;&#x7D20;&#x6216;&#x63D0;&#x53D6;&#x89C6;&#x89C9;&#x7D20;&#x6750;
+inspect_visual_target     # &#x5DF2;&#x6709; v0&#xFF1A;&#x590D;&#x6838; Agent BBox&#xFF0C;&#x751F;&#x6210;&#x88C1;&#x526A;&#x56FE;&#x548C;&#x6807;&#x6CE8;&#x56FE;
 </code></pre>
 <p>&#x540E;&#x4E24;&#x4E2A; Tool &#x4E0D;&#x8FDB;&#x5165;&#x516C;&#x5171;&#x89C2;&#x6D4B;&#x5C42;&#xFF0C;&#x4E5F;&#x4E0D;&#x6210;&#x4E3A;&#x9875;&#x9762;&#x5B9E;&#x73B0;&#x7684;&#x5FC5;&#x7ECF;&#x6B65;&#x9AA4;&#x3002;</p>
 <h2 id="&#x9636;&#x6BB5; 5&#xFF1A;&#x62BD;&#x53D6;&#x516C;&#x5171;&#x80FD;&#x529B;"><a href="#&#x9636;&#x6BB5; 5&#xFF1A;&#x62BD;&#x53D6;&#x516C;&#x5171;&#x80FD;&#x529B;"></a>&#x9636;&#x6BB5; 5&#xFF1A;&#x62BD;&#x53D6;&#x516C;&#x5171;&#x80FD;&#x529B;</h2>
@@ -120,15 +120,16 @@ inspect_visual_target     # &#x8BA1;&#x5212;&#xFF1A;&#x6309;&#x9700;&#x5B9A;&#x4
 <p>&#x53EF;&#x80FD;&#x7684;&#x5F62;&#x6001;&#xFF1A;</p>
 <pre><code class="language-text">inspect_visual_target
 
-&#x8F93;&#x5165;&#xFF1A;&#x539F;&#x59CB;&#x622A;&#x56FE; + targetDescription
-&#x8F93;&#x51FA;&#xFF1A;bbox + croppedImage + annotatedImage&#xFF08;&#x53EF;&#x9009;&#xFF09;+ confidence
+v0 &#x8F93;&#x5165;&#xFF1A;&#x539F;&#x59CB;&#x622A;&#x56FE; + targetDescription + Agent &#x5224;&#x65AD;&#x7684; bbox
+v0 &#x8F93;&#x51FA;&#xFF1A;pixel/normalized bbox + croppedImage + annotatedImage
+&#x540E;&#x7EED;&#xFF1A;&#x6309;&#x771F;&#x5B9E; Case &#x5224;&#x65AD;&#x662F;&#x5426;&#x63A5;&#x5165;&#x81EA;&#x52A8;&#x89C6;&#x89C9;&#x5B9A;&#x4F4D;&#x6A21;&#x578B;
 </code></pre>
 <p>&#x53EF;&#x80FD;&#x7684;&#x63A8;&#x8FDB;&#x7B56;&#x7565;&#xFF1A;</p>
 <ol>
 <li>&#x9ED8;&#x8BA4;&#x4ECD;&#x8BA9; Codex &#x76F4;&#x63A5;&#x770B;&#x539F;&#x59CB;&#x622A;&#x56FE;&#xFF1B;</li>
 <li>&#x53EA;&#x5728;&#x5143;&#x7D20;&#x5B9A;&#x4F4D;&#x6216;&#x7D20;&#x6750;&#x8BC6;&#x522B;&#x4E0D;&#x7A33;&#x5B9A;&#x7684;&#x771F;&#x5B9E;&#x6848;&#x4F8B;&#x4E2D;&#x8C03;&#x7528; Visual Inspect&#xFF1B;</li>
-<li>BBox&#x3001;&#x88C1;&#x526A;&#x56FE;&#x548C;&#x6807;&#x6CE8;&#x56FE;&#x53EA;&#x662F; Tool &#x7684;&#x6309;&#x9700;&#x8FD4;&#x56DE;&#x7ED3;&#x679C;&#xFF0C;&#x4E0D;&#x518D;&#x9884;&#x5148;&#x5206;&#x6790;&#x6574;&#x5F20;&#x622A;&#x56FE;&#xFF1B;</li>
-<li>&#x5BF9;&#x6BD4;&#x8C03;&#x7528;&#x524D;&#x540E;&#x7684;&#x5B9E;&#x73B0;&#x7ED3;&#x679C;&#xFF0C;&#x6709;&#x7A33;&#x5B9A;&#x589E;&#x76CA;&#x540E;&#x624D;&#x8FDB;&#x5165;&#x53EF;&#x7528; Tool&#x3002;</li>
+<li>&#x5148;&#x7528; v0 &#x5916;&#x663E;&#x5E76;&#x590D;&#x6838; Agent &#x4F7F;&#x7528;&#x7684;&#x5750;&#x6807;&#xFF0C;&#x8BB0;&#x5F55;&#x5750;&#x6807;&#x7CFB;&#x7591;&#x8651;&#xFF1B;</li>
+<li>&#x53EA;&#x6709;&#x771F;&#x5B9E; Case &#x8BC1;&#x660E; Agent BBox &#x4E0D;&#x591F;&#x7A33;&#x5B9A;&#xFF0C;&#x624D;&#x63A5;&#x5165;&#x81EA;&#x52A8;&#x5B9A;&#x4F4D;&#x6A21;&#x578B;&#x3002;</li>
 </ol>
 <p>&#x7406;&#x8BBA;&#x57FA;&#x7840;&#x53C2;&#x8003;&#x300A;&#x6A21;&#x578B;&#x80FD;&#x53EB;&#x51FA;&#x6309;&#x94AE;&#x7684;&#x540D;&#x5B57;&#xFF0C;&#x4E3A;&#x4EC0;&#x4E48;&#x6307;&#x4E0D;&#x51C6;&#x5B83;&#x5728;&#x54EA;&#x91CC;&#xFF1F;&#x300B;&#x3002;</p>
 <h3 id="Native Screenshot Feedback"><a href="#Native Screenshot Feedback"></a>Native Screenshot Feedback</h3>
@@ -151,7 +152,7 @@ inspect_visual_target     # &#x8BA1;&#x5212;&#xFF1A;&#x6309;&#x9700;&#x5B9A;&#x4
 <p>&#x53EF;&#x80FD;&#x7684;&#x63A8;&#x8FDB;&#x7B56;&#x7565;&#xFF1A;</p>
 <ol>
 <li>&#x5148;&#x4FDD;&#x8BC1; Langfuse &#x80FD;&#x8BB0;&#x5F55;&#x771F;&#x5B9E;&#x6A21;&#x578B;&#x8C03;&#x7528;&#x548C;&#x5DE5;&#x5177;&#x8C03;&#x7528;&#xFF1B;</li>
-<li>&#x518D;&#x7528;&#x5C11;&#x91CF; Decision Events &#x8865;&#x5145;&#x5173;&#x952E;&#x9009;&#x62E9;&#x3001;&#x8BC1;&#x636E;&#x548C;&#x7591;&#x8651;&#xFF1B;</li>
+<li>&#x518D;&#x7528;&#x5C11;&#x91CF; Decision Events &#x8865;&#x5145; <code>uncertainty / tool_intent / tool_outcome / decision</code>&#xFF1B;&#x53EA;&#x6709;&#x5DE5;&#x5177;&#x7ED3;&#x679C;&#x771F;&#x6B63;&#x5F71;&#x54CD;&#x884C;&#x52A8;&#x65F6;&#x624D;&#x8BB0;&#x5F55; outcome&#xFF1B;</li>
 <li><code>submit_execution_report</code> &#x53EA;&#x63D0;&#x4EA4;&#x6700;&#x7EC8;&#x72B6;&#x6001;&#x548C;&#x8BC1;&#x636E;&#xFF0C;&#x7531;&#x57FA;&#x7840;&#x8BBE;&#x65BD;&#x6309; <code>taskId</code> &#x805A;&#x5408;&#x5B8C;&#x6574; Run&#xFF1B;</li>
 <li>&#x4EBA;&#x5DE5;&#x9A8C;&#x6536;&#x540E;&#x518D;&#x5206;&#x6790;&#x6210;&#x529F;&#x4E0E;&#x5931;&#x8D25;&#x6837;&#x672C;&#xFF0C;&#x5224;&#x65AD; Task Brief&#x3001;Material &#x6216; Tool &#x662F;&#x5426;&#x771F;&#x6B63;&#x4EA7;&#x751F;&#x589E;&#x76CA;&#x3002;</li>
 </ol>

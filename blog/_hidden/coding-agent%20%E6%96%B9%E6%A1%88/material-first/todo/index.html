@@ -9,7 +9,7 @@
   <meta name="author" content="LZ">
   <meta name="DC.title" content="RN Screenshot-to-Page TODO">
   <meta name="DC.creator" content="LZ">
-  <meta name="DC.date" content="2026-09-04">
+  <meta name="DC.date" content="2026-09-07">
   <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/todo">
   <meta name="DC.publisher" content="LZ AI NOTE">
   <meta name="DC.language" content="zh-CN">
@@ -21,7 +21,7 @@
   <meta property="og:description" content="RN Screenshot to Page TODO 本文维护六阶段路线下的执行项。阶段目标、成果和评价标准见[《RN 页面还原：六阶段推进》]。 当前目标 当前只聚焦阶段 1：把 RN Screenshot to Page 接入现有流程节点，完成一个真实、可运行、可人工验收的页面。 Page Schema、Task Brief、Material 和视觉 …">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/todo">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"RN Screenshot-to-Page TODO","description":"RN Screenshot to Page TODO 本文维护六阶段路线下的执行项。阶段目标、成果和评价标准见[《RN 页面还原：六阶段推进》]。 当前目标 当前只聚焦阶段 1：把 RN Screenshot to Page 接入现有流程节点，完成一个真实、可运行、可人工验收的页面。 Page Schema、Task Brief、Material 和视觉 …","url":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/todo","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/todo","dateModified":"2026-09-04","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：RN Screenshot-to-Page TODO，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/todo","about":["_hidden","coding-agent 方案","material-first"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"RN Screenshot-to-Page TODO","description":"RN Screenshot to Page TODO 本文维护六阶段路线下的执行项。阶段目标、成果和评价标准见[《RN 页面还原：六阶段推进》]。 当前目标 当前只聚焦阶段 1：把 RN Screenshot to Page 接入现有流程节点，完成一个真实、可运行、可人工验收的页面。 Page Schema、Task Brief、Material 和视觉 …","url":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/todo","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/todo","dateModified":"2026-09-07","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：RN Screenshot-to-Page TODO，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/todo","about":["_hidden","coding-agent 方案","material-first"]}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>RN Screenshot-to-Page TODO</h1><h1>RN Screenshot-to-Page TODO</h1>
@@ -39,9 +39,9 @@
 <p>Page Schema、Task Brief、Material 和视觉 Tool 暂时作为候选增强能力。可以继续准备和移植，但不阻塞基础版本跑通，也不默认全部提供给 Codex。</p>
 <h2>并行计划</h2>
 <ul>
-<li>[ ] <strong>Trace 与记录 Tool</strong>：完善 Raw Trace、Decision Events 和 Execution Report</li>
+<li>[ ] <strong>Trace 与记录 Tool</strong>：Decision Event 已区分 <code>uncertainty / tool_intent / tool_outcome / decision</code>，Execution Report 已关联本地事件；Langfuse Trace 关联仍待补充</li>
 <li>[ ] <strong>Screenshot Preview Tool</strong>：从人工进入页面并截图，逐步演进到 <code>screenshot_preview</code> 自动打开页面、等待渲染并返回 Native 截图</li>
-<li>[ ] <strong>Visual Inspect Tool</strong>：探索 <code>inspect_visual_target</code>，在 Agent 看不准位置或需要素材时，按描述返回目标区域、裁剪图和定位证据</li>
+<li>[x] <strong>Visual Inspect Tool（v0）</strong>：<code>inspect_visual_target</code> 已支持将 Agent 判断的 BBox 统一为像素/比例坐标，并生成裁剪图和标注图；自动视觉定位仍待真实 Case 验证</li>
 <li>[ ] <strong>Material 基础</strong>：继续建设 Catalog、Fixture、Candidate Board 和查询 Tool</li>
 <li>[ ] <strong>Schema 与 Context</strong>：继续迁移 Page Schema，并探索 Task Brief 等候选输入</li>
 <li>[x] <strong>Material Generator Skill（最小闭环）</strong>：已支持在干净 RN 工程中初始化、增量维护和校验 Material Lab，并在 <code>web-affiliate-rn</code> 试点</li>
@@ -72,14 +72,14 @@
 <li>[ ] <strong>验证 Task Brief</strong>：只增加整理后的任务表达，比较需求理解是否改善</li>
 <li>[ ] <strong>验证 Material</strong>：只增加组件查询和示例信息，比较组件选择是否改善</li>
 <li>[ ] <strong>验证 Screenshot Preview</strong>：只增加生成后截图反馈，比较 Agent 自我修正是否减少人工调整</li>
-<li>[ ] <strong>验证 Visual Inspect</strong>：只在视觉定位或素材识别不确定时调用 <code>inspect_visual_target</code>，比较按需返回的 BBox、裁剪图和标注证据是否有效</li>
+<li>[ ] <strong>验证 Visual Inspect</strong>：只在视觉定位或素材识别不确定时调用 <code>inspect_visual_target</code>，先验证 Agent BBox + 裁剪/标注是否有效，再判断是否需要自动视觉定位模型</li>
 <li>[ ] <strong>按需验证 Golden Path</strong>：仅当页面逻辑或代码组织不稳定时，增加一个同类页面参考并比较结果</li>
 <li>[ ] <strong>覆盖修改场景</strong>：把已有页面修改作为独立 Case，验证增强能力是否仍然有效</li>
 </ul>
 <p>实验顺序由真实 Failure Case 决定，不要求按上述列表全部实施。</p>
 <h2>阶段 4：建立优化闭环</h2>
 <ul>
-<li>[ ] <strong>升级 Run Finalize</strong>：让 <code>submit_execution_report</code> 在保存结果后，按 <code>taskId</code> 关联 Decision Events、Langfuse Trace 和验证证据，并标记本次 Run 结束</li>
+<li>[ ] <strong>升级 Run Finalize</strong>：本地 Decision Events 已按 <code>taskId</code> 关联；继续关联 Langfuse Trace、仓库 Commit 和验收结果，并标记本次 Run 结束</li>
 <li>[ ] <strong>接入验收后分析</strong>：人工评价完成后再分析完整 Case，避免在缺少最终结果时过早归因</li>
 <li>[ ] <strong>分析 Case</strong>：结合结果、Raw Trace、Decision Events 和 Execution Report 定位问题</li>
 <li>[ ] <strong>提出单一改进假设</strong>：明确应该调整 Skill、Tool 还是 Context</li>
@@ -95,7 +95,7 @@ submit_execution_report
 <pre><code class="language-text">search_rn_materials
 get_rn_material
 screenshot_preview        # 计划：获取生成页面的 Native 运行截图
-inspect_visual_target     # 计划：按需定位设计元素或提取视觉素材
+inspect_visual_target     # 已有 v0：复核 Agent BBox，生成裁剪图和标注图
 </code></pre>
 <p>后两个 Tool 不进入公共观测层，也不成为页面实现的必经步骤。</p>
 <h2>阶段 5：抽取公共能力</h2>
@@ -146,15 +146,16 @@ inspect_visual_target     # 计划：按需定位设计元素或提取视觉素�
 <p>可能的形态：</p>
 <pre><code class="language-text">inspect_visual_target
 
-输入：原始截图 + targetDescription
-输出：bbox + croppedImage + annotatedImage（可选）+ confidence
+v0 输入：原始截图 + targetDescription + Agent 判断的 bbox
+v0 输出：pixel/normalized bbox + croppedImage + annotatedImage
+后续：按真实 Case 判断是否接入自动视觉定位模型
 </code></pre>
 <p>可能的推进策略：</p>
 <ol>
 <li>默认仍让 Codex 直接看原始截图；</li>
 <li>只在元素定位或素材识别不稳定的真实案例中调用 Visual Inspect；</li>
-<li>BBox、裁剪图和标注图只是 Tool 的按需返回结果，不再预先分析整张截图；</li>
-<li>对比调用前后的实现结果，有稳定增益后才进入可用 Tool。</li>
+<li>先用 v0 外显并复核 Agent 使用的坐标，记录坐标系疑虑；</li>
+<li>只有真实 Case 证明 Agent BBox 不够稳定，才接入自动定位模型。</li>
 </ol>
 <p>理论基础参考《模型能叫出按钮的名字，为什么指不准它在哪里？》。</p>
 <h3>Native Screenshot Feedback</h3>
@@ -177,7 +178,7 @@ inspect_visual_target     # 计划：按需定位设计元素或提取视觉素�
 <p>可能的推进策略：</p>
 <ol>
 <li>先保证 Langfuse 能记录真实模型调用和工具调用；</li>
-<li>再用少量 Decision Events 补充关键选择、证据和疑虑；</li>
+<li>再用少量 Decision Events 补充 <code>uncertainty / tool_intent / tool_outcome / decision</code>；只有工具结果真正影响行动时才记录 outcome；</li>
 <li><code>submit_execution_report</code> 只提交最终状态和证据，由基础设施按 <code>taskId</code> 聚合完整 Run；</li>
 <li>人工验收后再分析成功与失败样本，判断 Task Brief、Material 或 Tool 是否真正产生增益。</li>
 </ol>
@@ -207,6 +208,6 @@ inspect_visual_target     # 计划：按需定位设计元素或提取视觉素�
 </ol>
 <p>完整方案见<a href="./AI%20Engineering%20Golden%20Path%EF%BC%9A%E9%9D%A2%E5%90%91%20Agent%20%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%A4%8D%E7%94%A8%E6%9C%BA%E5%88%B6.md">《AI Engineering Golden Path：面向 Agent 的工程复用机制》</a>。</p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-BhPu14PW.js"></script>
+  <script type="module" crossorigin src="/assets/index-SREZn2ex.js"></script>
 </body>
 </html>

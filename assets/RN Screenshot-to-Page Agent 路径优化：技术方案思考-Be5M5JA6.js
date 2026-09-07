@@ -138,16 +138,16 @@ Contract&#xFF1A;&#x5FC5;&#x987B;&#x6EE1;&#x8DB3;&#x7684;&#x6D4B;&#x8BD5;&#x3001;
 &#x2192; &#x6E32;&#x67D3;&#x5C11;&#x91CF;&#x5DF2;&#x767B;&#x8BB0; Fixture
 &#x2192; &#x5C55;&#x793A;&#x6E90;&#x7801;&#x8DEF;&#x5F84;&#x3001;Props &#x548C;&#x771F;&#x5B9E; Native &#x753B;&#x9762;
 </code></pre>
-<p>&#x540E;&#x7EED;&#x6309;&#x771F;&#x5B9E; Case &#x9A8C;&#x8BC1;&#x4E24;&#x4E2A; RN Page Tool&#xFF1A;</p>
+<p>RN Page Tool &#x5F53;&#x524D;&#x72B6;&#x6001;&#xFF1A;</p>
 <pre><code class="language-text">screenshot_preview
 &#x2192; &#x8F93;&#x5165;&#x76EE;&#x6807;&#x9875;&#x9762;&#x5165;&#x53E3;
 &#x2192; &#x8FD4;&#x56DE; Native &#x8FD0;&#x884C;&#x622A;&#x56FE;&#x548C;&#x6267;&#x884C;&#x72B6;&#x6001;
 &#x2192; &#x4F9B; Agent &#x5BF9;&#x7167;&#x8BBE;&#x8BA1;&#x7EE7;&#x7EED;&#x8C03;&#x6574;
 
 inspect_visual_target
-&#x2192; &#x8F93;&#x5165;&#x8BBE;&#x8BA1;&#x622A;&#x56FE;&#x548C;&#x76EE;&#x6807;&#x63CF;&#x8FF0;
-&#x2192; &#x6309;&#x9700;&#x8FD4;&#x56DE; BBox&#x3001;&#x88C1;&#x526A;&#x7D20;&#x6750;&#x548C;&#x6807;&#x6CE8;&#x8BC1;&#x636E;
-&#x2192; &#x4F9B; Agent &#x89E3;&#x51B3;&#x5B9A;&#x4F4D;&#x6216;&#x7D20;&#x6750;&#x8BC6;&#x522B;&#x7684;&#x4E0D;&#x786E;&#x5B9A;&#x6027;
+&#x2192; v0 &#x8F93;&#x5165;&#x8BBE;&#x8BA1;&#x622A;&#x56FE;&#x3001;&#x76EE;&#x6807;&#x63CF;&#x8FF0;&#x548C; Agent BBox
+&#x2192; &#x8FD4;&#x56DE;&#x7EDF;&#x4E00;&#x5750;&#x6807;&#x3001;&#x88C1;&#x526A;&#x7D20;&#x6750;&#x548C;&#x6807;&#x6CE8;&#x8BC1;&#x636E;
+&#x2192; &#x5DF2;&#x5B9E;&#x73B0;&#xFF1B;&#x81EA;&#x52A8;&#x89C6;&#x89C9;&#x5B9A;&#x4F4D;&#x6309;&#x771F;&#x5B9E; Case &#x518D;&#x51B3;&#x5B9A;
 </code></pre>
 <p><code>screenshot_preview</code> &#x4F5C;&#x7528;&#x4E8E;&#x4EE3;&#x7801;&#x751F;&#x6210;&#x540E;&#x7684;&#x7ED3;&#x679C;&#x53CD;&#x9988;&#xFF1B;<code>inspect_visual_target</code> &#x4F5C;&#x7528;&#x4E8E;&#x8BBE;&#x8BA1;&#x8F93;&#x5165;&#x4E2D;&#x7684;&#x5C40;&#x90E8;&#x4E0D;&#x786E;&#x5B9A;&#x6027;&#x3002;&#x4E8C;&#x8005;&#x90FD;&#x7531; Agent &#x6309;&#x9700;&#x8C03;&#x7528;&#xFF0C;&#x4E0D;&#x6539;&#x53D8; Direct &#x8DEF;&#x5F84;&#x7684;&#x9ED8;&#x8BA4;&#x8F93;&#x5165;&#x3002;</p>
 <p>Schema &#x8FC1;&#x79FB;&#x548C; Direct &#x63A2;&#x7D22;&#x5171;&#x7528;&#x540C;&#x4E00;&#x4EFD; Catalog &#x4E0E; Fixture&#xFF0C;&#x907F;&#x514D;&#x5206;&#x522B;&#x7EF4;&#x62A4;&#x4E24;&#x5957;&#x7EC4;&#x4EF6;&#x4E8B;&#x5B9E;&#x3002;</p>

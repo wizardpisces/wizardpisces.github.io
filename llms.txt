@@ -26,5 +26,6 @@
 ## 站点入口
 
 - 网站首页：https://wizardpisces.github.io/
+- Markdown 公众号排版工具：https://wizardpisces.github.io/wechat-editor
 - 品牌与内容范围：https://wizardpisces.github.io/blog/Introduction
 - 公众号二维码：https://wizardpisces.github.io/wechat-official-account.jpg

@@ -97,12 +97,5 @@ const x={},F=`<h1 id="AI &#x660E;&#x660E;&#x770B;&#x89C1;&#x56DB;&#x6839;&#x624B
 </blockquote>
 <p>&#x8BC6;&#x522B;&#x95EE;&#x7684;&#x662F;&#x201C;&#x8FD9;&#x50CF;&#x4EC0;&#x4E48;&#x201D;&#xFF0C;&#x8BA1;&#x6570;&#x95EE;&#x7684;&#x662F;&#x201C;&#x8FD9;&#x91CC;&#x6709;&#x51E0;&#x4E2A;&#x5F7C;&#x6B64;&#x72EC;&#x7ACB;&#x7684;&#x5BF9;&#x8C61;&#x201D;&#x3002;</p>
 <p>&#x524D;&#x8005;&#x5141;&#x8BB8;&#x5FFD;&#x7565;&#x548C;&#x5408;&#x5E76;&#x7EC6;&#x8282;&#xFF0C;&#x540E;&#x8005;&#x5FC5;&#x987B;&#x5EFA;&#x7ACB;&#x4E00;&#x4E00;&#x5BF9;&#x5E94;&#x3002;&#x5C11;&#x4E86;&#x8FD9;&#x4E00;&#x6B65;&#xFF0C;&#x201C;&#x4E94;&#x6839;&#x201D;&#x5C31;&#x53EF;&#x80FD;&#x4E0D;&#x662F;&#x6570;&#x51FA;&#x6765;&#x7684;&#xFF0C;&#x53EA;&#x662F;&#x6A21;&#x578B;&#x6700;&#x987A;&#x624B;&#x7684;&#x7B54;&#x6848;&#x3002;</p>
-<h2 id="&#x53C2;&#x8003;&#x8D44;&#x6599;"><a href="#&#x53C2;&#x8003;&#x8D44;&#x6599;"></a>&#x53C2;&#x8003;&#x8D44;&#x6599;</h2>
-<ol>
-<li>Acharya&#x3001;Kafle&#x3001;Kanan&#xFF0C;TallyQA: Answering Complex Counting Questions&#xFF08;AAAI&#xFF0C;2019&#xFF09;&#xFF1A;https://arxiv.org/abs/1810.12440</li>
-<li>Trott&#x3001;Xiong&#x3001;Socher&#xFF0C;Interpretable Counting for Visual Question Answering&#xFF08;ICLR&#xFF0C;2018&#xFF09;&#xFF1A;https://arxiv.org/abs/1712.08697</li>
-<li>Hou &#x7B49;&#xFF0C;Assessing the Visual Enumeration Abilities of Specialized Counting Architectures and Vision-Language Models&#xFF08;2025&#xFF09;&#xFF1A;https://arxiv.org/abs/2512.15254</li>
-<li>Ailem &#x7B49;&#xFF0C;Count and Sense: Probing Counting Abilities in Large Vision-Language Models Through Explanation-Based Methods&#xFF08;2026&#xFF09;&#xFF1A;https://arxiv.org/abs/2605.30170</li>
-</ol>
-<p><em>LZ AI Note&#xFF5C;&#x8BB0;&#x5F55;&#x73B0;&#x8C61;&#xFF0C;&#x8FFD;&#x95EE;&#x672C;&#x8D28;</em></p>
-`,E=[{level:1,title:"AI 明明看见四根手指，为什么还会回答“五根”？",children:[{level:2,title:"认出一只手，不需要数完手指",children:[]},{level:2,title:"数数的第一步，不是加一",children:[]},{level:2,title:"模型可能直接猜“五”，根本没有逐根数",children:[]},{level:2,title:"分清每一根以后，还要选对数字",children:[]},{level:2,title:"让计数变得可靠，必须留下标记",children:[]},{level:2,title:"最后，再数一次",children:[]},{level:2,title:"参考资料",children:[]}]}];export{x as attributes,F as html,E as nestedHeaders};
+<p>LZ AI Note&#xFF5C;&#x8BB0;&#x5F55;&#x73B0;&#x8C61;&#xFF0C;&#x8FFD;&#x95EE;&#x672C;&#x8D28;&#x3002;&#x590D;&#x6742;&#x7684;&#x4E8B;&#x60C5;&#xFF0C;&#x7B80;&#x5355;&#x8BF4;&#x3002;</p>
+`,E=[{level:1,title:"AI 明明看见四根手指，为什么还会回答“五根”？",children:[{level:2,title:"认出一只手，不需要数完手指",children:[]},{level:2,title:"数数的第一步，不是加一",children:[]},{level:2,title:"模型可能直接猜“五”，根本没有逐根数",children:[]},{level:2,title:"分清每一根以后，还要选对数字",children:[]},{level:2,title:"让计数变得可靠，必须留下标记",children:[]},{level:2,title:"最后，再数一次",children:[]}]}];export{x as attributes,F as html,E as nestedHeaders};
