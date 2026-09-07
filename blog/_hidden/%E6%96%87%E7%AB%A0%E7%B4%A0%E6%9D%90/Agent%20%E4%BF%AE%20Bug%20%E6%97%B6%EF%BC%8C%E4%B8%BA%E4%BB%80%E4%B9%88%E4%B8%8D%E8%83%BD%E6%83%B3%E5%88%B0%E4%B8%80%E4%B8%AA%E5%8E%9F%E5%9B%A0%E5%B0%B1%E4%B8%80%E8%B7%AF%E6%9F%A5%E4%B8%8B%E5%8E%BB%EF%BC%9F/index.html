@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Agent 修 Bug 时，为什么不能想到一个原因就一路查下去？ | LZ AI NOTE</title>
+  <meta name="description" content="Agent 修 Bug 时，为什么不能想到一个原因就一路查下去？ 假设一个登录接口的测试突然失败： Agent 看完报错，想到的第一个原因是：访问令牌过期了。 于是它检查令牌刷新逻辑，修改缓存时间，重新运行测试。结果还是 401。 它继续沿着这条思路往下查：是不是刷新请求没发出去？是不是新令牌没有写回？是不是重试次数不够？ 每一步都说得通。 但真正的问题可…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="Agent 修 Bug 时，为什么不能想到一个原因就一路查下去？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-09-04">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Agent%20%E4%BF%AE%20Bug%20%E6%97%B6%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E6%83%B3%E5%88%B0%E4%B8%80%E4%B8%AA%E5%8E%9F%E5%9B%A0%E5%B0%B1%E4%B8%80%E8%B7%AF%E6%9F%A5%E4%B8%8B%E5%8E%BB%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Agent%20%E4%BF%AE%20Bug%20%E6%97%B6%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E6%83%B3%E5%88%B0%E4%B8%80%E4%B8%AA%E5%8E%9F%E5%9B%A0%E5%B0%B1%E4%B8%80%E8%B7%AF%E6%9F%A5%E4%B8%8B%E5%8E%BB%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="Agent 修 Bug 时，为什么不能想到一个原因就一路查下去？ | LZ AI NOTE">
+  <meta property="og:description" content="Agent 修 Bug 时，为什么不能想到一个原因就一路查下去？ 假设一个登录接口的测试突然失败： Agent 看完报错，想到的第一个原因是：访问令牌过期了。 于是它检查令牌刷新逻辑，修改缓存时间，重新运行测试。结果还是 401。 它继续沿着这条思路往下查：是不是刷新请求没发出去？是不是新令牌没有写回？是不是重试次数不够？ 每一步都说得通。 但真正的问题可…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Agent%20%E4%BF%AE%20Bug%20%E6%97%B6%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E6%83%B3%E5%88%B0%E4%B8%80%E4%B8%AA%E5%8E%9F%E5%9B%A0%E5%B0%B1%E4%B8%80%E8%B7%AF%E6%9F%A5%E4%B8%8B%E5%8E%BB%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Agent 修 Bug 时，为什么不能想到一个原因就一路查下去？","description":"Agent 修 Bug 时，为什么不能想到一个原因就一路查下去？ 假设一个登录接口的测试突然失败： Agent 看完报错，想到的第一个原因是：访问令牌过期了。 于是它检查令牌刷新逻辑，修改缓存时间，重新运行测试。结果还是 401。 它继续沿着这条思路往下查：是不是刷新请求没发出去？是不是新令牌没有写回？是不是重试次数不够？ 每一步都说得通。 但真正的问题可…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Agent%20%E4%BF%AE%20Bug%20%E6%97%B6%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E6%83%B3%E5%88%B0%E4%B8%80%E4%B8%AA%E5%8E%9F%E5%9B%A0%E5%B0%B1%E4%B8%80%E8%B7%AF%E6%9F%A5%E4%B8%8B%E5%8E%BB%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Agent%20%E4%BF%AE%20Bug%20%E6%97%B6%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E6%83%B3%E5%88%B0%E4%B8%80%E4%B8%AA%E5%8E%9F%E5%9B%A0%E5%B0%B1%E4%B8%80%E8%B7%AF%E6%9F%A5%E4%B8%8B%E5%8E%BB%EF%BC%9F","dateModified":"2026-09-04","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：Agent 修 Bug 时，为什么不能想到一个原因就一路查下去？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Agent%20%E4%BF%AE%20Bug%20%E6%97%B6%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E6%83%B3%E5%88%B0%E4%B8%80%E4%B8%AA%E5%8E%9F%E5%9B%A0%E5%B0%B1%E4%B8%80%E8%B7%AF%E6%9F%A5%E4%B8%8B%E5%8E%BB%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Agent 修 Bug 时，为什么不能想到一个原因就一路查下去？</h1><h1>Agent 修 Bug 时，为什么不能想到一个原因就一路查下去？</h1>
+<p>假设一个登录接口的测试突然失败：</p>
+<pre><code class="language-text">预期：200
+实际：401
+</code></pre>
+<p>Agent 看完报错，想到的第一个原因是：访问令牌过期了。</p>
+<p>于是它检查令牌刷新逻辑，修改缓存时间，重新运行测试。结果还是 401。</p>
+<p>它继续沿着这条思路往下查：是不是刷新请求没发出去？是不是新令牌没有写回？是不是重试次数不够？</p>
+<p>每一步都说得通。</p>
+<p>但真正的问题可能根本不在令牌，而是测试环境没有加载认证密钥。</p>
+<p>Agent 从第一步开始就选错了方向。后面做得越认真，离真正原因反而越远。</p>
+<p><strong>它很容易把“目前想到的解释”，过早当成“最值得继续的解释”。</strong></p>
+<h2>测试失败，并不会自动让 Agent 回到分叉口</h2>
+<p>常见 Agent 会不断重复一个循环：</p>
+<blockquote>
+<p>观察结果 → 决定下一步 → 调用工具 → 再观察结果</p>
+</blockquote>
+<p>测试没有通过，它会调整下一步动作。</p>
+<p>但这个调整通常发生在当前路线里。</p>
+<p>Agent 已经认定“令牌过期”，接下来就会继续检查刷新请求、缓存时间和重试逻辑。其他原因没有被排除，只是在后续上下文里消失了。</p>
+<p>重新运行一次 Agent，可能得到另一条路线，但两次尝试彼此独立。第二次不知道第一次在哪个判断上走偏，也无法直接利用第一次已经得到的结果。</p>
+<h2>MCTS 先把几种可能都留下来</h2>
+<p>蒙特卡洛树搜索不会立刻把一个猜测变成唯一方向。</p>
+<p>它先保留几个分叉：</p>
+<pre><code class="language-text">登录测试返回 401
+
+├─ 令牌过期
+├─ 测试环境缺少密钥
+└─ 接口权限发生变化
+</code></pre>
+<p>每个分支还可以继续展开。例如“测试环境缺少密钥”下面，可以检查环境变量、配置加载顺序和最近一次成功提交。</p>
+<p>搜索树中的节点会保存走到这里时的任务状态、执行动作和工具结果。</p>
+<p>接下来，MCTS 反复做四件事：</p>
+<ol>
+<li><strong>选择</strong>：从已有分支中挑一条继续。评分较高的分支更容易被选中，尝试较少的分支也会获得机会。</li>
+<li><strong>扩展</strong>：为当前节点生成新的检查动作。</li>
+<li><strong>执行与评估</strong>：运行命令或测试，判断这条路线有没有带来进展。</li>
+<li><strong>回传</strong>：把结果传回前面的节点，更新整条路线的价值。</li>
+</ol>
+<p>假设 Agent 在第二条分支里发现：</p>
+<pre><code class="language-text">AUTH_SECRET 为空
+补齐后测试通过
+</code></pre>
+<p>这个结果会提高“测试环境缺少密钥”整条路线的价值。下一轮搜索回到最初的 401 报错时，它会优先继续这条路线，而不是反复检查令牌。</p>
+<p>普通重试只知道“刚才失败了”。</p>
+<p>树搜索还能知道：<strong>失败发生在哪条路线，应该回到哪个分叉口。</strong></p>
+<h2>它为什么不把所有路径都试一遍？</h2>
+<p>一棵树越往下展开，可能的路径越多。Agent 没有足够的时间和预算完整尝试。</p>
+<p>MCTS 只采样其中一部分，用已经得到的结果估计哪些方向更值得继续。“蒙特卡洛”指的就是这种通过采样近似结果的方法。</p>
+<p>它需要在两件事之间保持平衡：</p>
+<ul>
+<li>继续利用已经表现不错的路线。</li>
+<li>探索尝试较少、仍可能更好的路线。</li>
+</ul>
+<p>所以它最后选择的是预期价值更高的路线，不是“最可能发生”的路线。</p>
+<h2>多运行几次 Agent，不也是多条路径吗？</h2>
+<p>让 Agent 独立运行十次，确实可能得到十种排查思路。</p>
+<p>区别在于，这十次尝试通常从头开始，彼此不共享中间结果。</p>
+<p>MCTS 会保留共同的搜索树。一条深层路径得到的测试结果，可以更新它经过的所有上层节点；几条路线共享同一个前半段时，也不必反复生成。</p>
+<h2>什么时候值得使用 MCTS？</h2>
+<p>树搜索很贵。</p>
+<p>每次扩展都要生成候选动作，分支可能调用工具、消耗 Token、运行测试。评价不准时，搜索还会把预算浪费在错误方向上。</p>
+<p>不同分支也需要能够隔离和回退。查询网页、运行只读命令容易重复；发送邮件、修改线上数据和执行交易却不能随意撤销。代码 Agent 往往需要 Git 分支、容器或沙箱保存不同状态。</p>
+<p>如果任务很短，正确路线也很明确，单路径执行通常更合适。</p>
+<p>MCTS 更适合：</p>
+<ul>
+<li>开始时存在多个合理方向。</li>
+<li>早期选择会影响后面很多步骤。</li>
+<li>中途能够获得相对可靠的反馈。</li>
+<li>环境允许复制、回退或隔离状态。</li>
+</ul>
+<p>MCTS 只负责搜索。代码任务的分支结果可以直接来自编译器和测试；如果结果由模型预测，那是另一个负责模拟环境的组件。</p>
+<h2>回到最初的报错</h2>
+<p>Agent 修 Bug 时，问题不在于它想到的第一个原因一定是错的。</p>
+<p>问题是，它一旦选中这个原因，就容易丢掉其他仍然合理的解释。</p>
+<p>蒙特卡洛树搜索保留了这些分叉，并把后续测试结果传回前面的节点。一次失败会降低整条路线的价值，让计算转向其他可能。</p>
+<p><strong>MCTS 的价值不是让 Agent 同时尝试所有路径，而是让它在走错以后，知道应该回到哪个分叉点。</strong></p>
+<h2>参考资料</h2>
+<ol>
+<li>Zhou 等，Language Agent Tree Search Unifies Reasoning, Acting, and Planning in Language Models：<a href="https://arxiv.org/abs/2310.04406">https://arxiv.org/abs/2310.04406</a></li>
+<li>Yao 等，ReAct: Synergizing Reasoning and Acting in Language Models：<a href="https://arxiv.org/abs/2210.03629">https://arxiv.org/abs/2210.03629</a></li>
+<li>Browne 等，A Survey of Monte Carlo Tree Search Methods：<a href="https://ieeexplore.ieee.org/document/6145622">https://ieeexplore.ieee.org/document/6145622</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-BhPu14PW.js"></script>
+</body>
+</html>

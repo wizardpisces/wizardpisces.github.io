@@ -9,7 +9,7 @@
   <meta name="author" content="LZ">
   <meta name="DC.title" content="模型为什么这样设计：架构系列节点">
   <meta name="DC.creator" content="LZ">
-  <meta name="DC.date" content="2026-09-01">
+  <meta name="DC.date" content="2026-09-02">
   <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE">
   <meta name="DC.publisher" content="LZ AI NOTE">
   <meta name="DC.language" content="zh-CN">
@@ -21,7 +21,7 @@
   <meta property="og:description" content="模型为什么这样设计：架构系列节点 系列角色：知识主干·模型内部。 负责解释模型结构改变了哪条信息、梯度、计算或参数路径；不承担软件框架实现与 Agent 系统工程。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不按架构名词写百科，也不把论文摘要换成通俗说法。它只追问一个问题： 今天看似理所当然的模型结构，当初是在解决什么失败？ 每篇从一个可感知…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"模型为什么这样设计：架构系列节点","description":"模型为什么这样设计：架构系列节点 系列角色：知识主干·模型内部。 负责解释模型结构改变了哪条信息、梯度、计算或参数路径；不承担软件框架实现与 Agent 系统工程。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不按架构名词写百科，也不把论文摘要换成通俗说法。它只追问一个问题： 今天看似理所当然的模型结构，当初是在解决什么失败？ 每篇从一个可感知…","url":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","dateModified":"2026-09-01","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：模型为什么这样设计：架构系列节点，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","about":["_hidden","公众号策略"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"模型为什么这样设计：架构系列节点","description":"模型为什么这样设计：架构系列节点 系列角色：知识主干·模型内部。 负责解释模型结构改变了哪条信息、梯度、计算或参数路径；不承担软件框架实现与 Agent 系统工程。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不按架构名词写百科，也不把论文摘要换成通俗说法。它只追问一个问题： 今天看似理所当然的模型结构，当初是在解决什么失败？ 每篇从一个可感知…","url":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","dateModified":"2026-09-02","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：模型为什么这样设计：架构系列节点，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","about":["_hidden","公众号策略"]}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>模型为什么这样设计：架构系列节点</h1><h1>模型为什么这样设计：架构系列节点</h1>
@@ -242,7 +242,7 @@ MoE、KV Cache、MQA、GQA、MLA 与量化
 <td>黑箱</td>
 </tr>
 <tr>
-<td>图片已经被切成小块，AI 为什么还能认出完整的雨伞？</td>
+<td>AI 只看局部，怎么知道整张图在讲什么？</td>
 <td>每个 Patch 只拥有局部边缘，模型却能识别跨区域物体</td>
 <td>用四块图片完整运行一次 Attention：Q 表示寻找什么，K 用于判断去哪里找，V 是匹配后拿回的信息</td>
 <td>QKV、Self-Attention、全局关系</td>
@@ -336,7 +336,7 @@ MoE、KV Cache、MQA、GQA、MLA 与量化
 <ol>
 <li><a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E4%B8%8D%E6%98%AF%E5%85%88%E6%83%B3%E5%A5%BD%E5%86%8D%E5%9B%9E%E7%AD%94%EF%BC%9A%E6%AF%8F%E4%B8%AA%20Token%20%E9%83%BD%E5%9C%A8%E6%94%B9%E5%8F%98%E4%B8%8B%E4%B8%80%E6%AD%A5.md"><strong>模型不是先想好再回答：每个 Token 都在改变下一步</strong></a>——自回归生成与路径依赖。</li>
 <li><strong>同一个问题，模型为什么每次回答不一样？</strong>——概率分布与采样。</li>
-<li><strong>图片已经被切成小块，AI 为什么还能认出完整的雨伞？</strong>——用视觉 Patch 讲清 Q、K、V 怎样完成按内容读取。</li>
+<li><strong>AI 只看局部，怎么知道整张图在讲什么？</strong>——用视觉 Patch 讲清 Q、K、V 怎样完成按内容读取。</li>
 <li><strong>词序一换意思就变，模型从哪里知道位置？</strong>——位置编码与 RoPE。</li>
 <li><strong>Attention 负责找信息，FFN 负责加工信息：Transformer 一层究竟在做什么？</strong>——信息交换与特征加工。</li>
 <li><strong>线性层画直线，激活函数负责拐弯：神经网络为什么需要非线性</strong>——回到 FFN 内部理解非线性与深度；已有素材稿，等 FFN 篇后再发布。</li>
@@ -402,10 +402,10 @@ QLoRA 如何把两条路线合在一起
 <pre><code class="language-text">[大模型没有眼睛，一张截图是怎么变成回答的？]
 图片 → Patch → 视觉编码器 → 转接层 → 语言模型
         ↓
-[图片已经被切成小块，AI 为什么还能认出完整的雨伞？]
+[AI 只看局部，怎么知道整张图在讲什么？]
 Patch 提出查询 → 匹配其他区域 → 取回信息 → 获得全局关系
         ↓
-[三张图片、三句话，AI 怎么知道谁和谁是一对？]
+[图片里没有文字，AI是怎么凭一句话把它搜出来的？]
 一批图文配对 → 匹配项拉近、错误项推远 → 共享表示
         ↓
 [AI 明明看见四根手指，为什么还会回答“五根”？]
@@ -429,14 +429,14 @@ Patch 提出查询 → 匹配其他区域 → 取回信息 → 获得全局关�
 </thead>
 <tbody>
 <tr>
-<td>[图片已经被切成小块，AI 为什么还能认出完整的雨伞？](…/文章素材/图片已经被切成小块，AI 为什么还能认出完整的雨伞？.md)</td>
+<td><a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E5%8F%AA%E7%9C%8B%E5%B1%80%E9%83%A8%EF%BC%8C%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E6%95%B4%E5%BC%A0%E5%9B%BE%E5%9C%A8%E8%AE%B2%E4%BB%80%E4%B9%88%EF%BC%9F.md">AI 只看局部，怎么知道整张图在讲什么？</a></td>
 <td>Patch 很小，模型却能识别跨区域物体</td>
 <td>四个 Patch 运行 QKV：查询、匹配、取回信息</td>
 <td>同时承担原 QKV 节点，不再另写术语科普</td>
 </tr>
 <tr>
-<td>[三张图片、三句话，AI 怎么知道谁和谁是一对？](…/文章素材/三张图片、三句话，AI 怎么知道谁和谁是一对？.md)</td>
-<td>模型可以判断一张图片和哪句话最匹配</td>
+<td><a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%9B%BE%E7%89%87%E9%87%8C%E6%B2%A1%E6%9C%89%E6%96%87%E5%AD%97%EF%BC%8CAI%E6%98%AF%E6%80%8E%E4%B9%88%E5%87%AD%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%8A%8A%E5%AE%83%E6%90%9C%E5%87%BA%E6%9D%A5%E7%9A%84%EF%BC%9F.md">图片里没有文字，AI是怎么凭一句话把它搜出来的？</a></td>
+<td>图片没有文字标签，仍然可以用一句自然语言把它搜出来</td>
 <td>同一批图文中，匹配项得分升高，不匹配项得分降低</td>
 <td>不把 CLIP 对齐等同于完整视觉问答</td>
 </tr>
@@ -460,11 +460,11 @@ Patch 提出查询 → 匹配其他区域 → 取回信息 → 获得全局关�
 </tr>
 </tbody>
 </table>
-<p>当前把这六篇作为一轮连续的图像短季。前三篇虽然承担机制层任务，但都从用户能看见的能力进入：截图为何能回答、碎片为何能组成雨伞、图片与句子为何能正确配对；后三篇解释“看懂”为什么仍不等于数清、定位和稳定执行。前三篇发布完成后检查反馈，若读者关系或认知增量不足，可以在进入后三篇前暂停。</p>
+<p>当前把这六篇作为一轮连续的图像短季。前三篇虽然承担机制层任务，但都从用户能看见的能力进入：截图为何能回答、碎片为何能组成雨伞、图片没有文字为何仍能用一句话搜到；后三篇解释“看懂”为什么仍不等于数清、定位和稳定执行。前三篇发布完成后检查反馈，若读者关系或认知增量不足，可以在进入后三篇前暂停。</p>
 <h2>当前发布顺序</h2>
 <pre><code class="language-text">2026-08-27  大模型没有眼睛，一张截图是怎么变成回答的？
-2026-09-01  图片已经被切成小块，AI 为什么还能认出完整的雨伞？
-2026-09-03  三张图片、三句话，AI 怎么知道谁和谁是一对？
+2026-09-01  AI 只看局部，怎么知道整张图在讲什么？
+2026-09-03  图片里没有文字，AI是怎么凭一句话把它搜出来的？
 2026-09-08  AI 明明看见四根手指，为什么还会回答“五根”？
 2026-09-10  模型能叫出按钮的名字，为什么指不准它在哪里？
 2026-09-15  给按钮画上框和编号，模型为什么突然指得更准了？
@@ -502,6 +502,6 @@ Patch 提出查询 → 匹配其他区域 → 取回信息 → 获得全局关�
 <li><code>扩散模型为什么要先把图片毁掉，才能学会生成图片？</code>只向首篇提供最小训练依据；完整加噪训练仍保留为下钻稿，不提前发布成教材章节。</li>
 </ul>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
+  <script type="module" crossorigin src="/assets/index-BhPu14PW.js"></script>
 </body>
 </html>

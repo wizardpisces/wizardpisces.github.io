@@ -9,7 +9,7 @@
   <meta name="author" content="LZ">
   <meta name="DC.title" content="RN 页面还原：六阶段推进">
   <meta name="DC.creator" content="LZ">
-  <meta name="DC.date" content="2026-08-31">
+  <meta name="DC.date" content="2026-09-04">
   <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN%E9%A1%B5%E9%9D%A2%E8%BF%98%E5%8E%9F%EF%BC%9A%E9%98%B6%E6%AE%B5%E6%8E%A8%E8%BF%9B%E4%B8%8E%E9%AA%8C%E6%94%B6">
   <meta name="DC.publisher" content="LZ AI NOTE">
   <meta name="DC.language" content="zh-CN">
@@ -21,14 +21,15 @@
   <meta property="og:description" content="从跑通真实页面开始，通过基线、消融实验和 Case 闭环逐步优化页面生成能力。">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN%E9%A1%B5%E9%9D%A2%E8%BF%98%E5%8E%9F%EF%BC%9A%E9%98%B6%E6%AE%B5%E6%8E%A8%E8%BF%9B%E4%B8%8E%E9%AA%8C%E6%94%B6">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"RN 页面还原：六阶段推进","description":"从跑通真实页面开始，通过基线、消融实验和 Case 闭环逐步优化页面生成能力。","url":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN%E9%A1%B5%E9%9D%A2%E8%BF%98%E5%8E%9F%EF%BC%9A%E9%98%B6%E6%AE%B5%E6%8E%A8%E8%BF%9B%E4%B8%8E%E9%AA%8C%E6%94%B6","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN%E9%A1%B5%E9%9D%A2%E8%BF%98%E5%8E%9F%EF%BC%9A%E9%98%B6%E6%AE%B5%E6%8E%A8%E8%BF%9B%E4%B8%8E%E9%AA%8C%E6%94%B6","dateModified":"2026-08-31","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：RN 页面还原：六阶段推进，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN%E9%A1%B5%E9%9D%A2%E8%BF%98%E5%8E%9F%EF%BC%9A%E9%98%B6%E6%AE%B5%E6%8E%A8%E8%BF%9B%E4%B8%8E%E9%AA%8C%E6%94%B6","about":["_hidden","coding-agent 方案","material-first"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"RN 页面还原：六阶段推进","description":"从跑通真实页面开始，通过基线、消融实验和 Case 闭环逐步优化页面生成能力。","url":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN%E9%A1%B5%E9%9D%A2%E8%BF%98%E5%8E%9F%EF%BC%9A%E9%98%B6%E6%AE%B5%E6%8E%A8%E8%BF%9B%E4%B8%8E%E9%AA%8C%E6%94%B6","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN%E9%A1%B5%E9%9D%A2%E8%BF%98%E5%8E%9F%EF%BC%9A%E9%98%B6%E6%AE%B5%E6%8E%A8%E8%BF%9B%E4%B8%8E%E9%AA%8C%E6%94%B6","dateModified":"2026-09-04","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：RN 页面还原：六阶段推进，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN%E9%A1%B5%E9%9D%A2%E8%BF%98%E5%8E%9F%EF%BC%9A%E9%98%B6%E6%AE%B5%E6%8E%A8%E8%BF%9B%E4%B8%8E%E9%AA%8C%E6%94%B6","about":["_hidden","coding-agent 方案","material-first"]}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>RN 页面还原：六阶段推进</h1><h1>RN 页面还原：六阶段推进</h1>
 <h2>核心思路</h2>
 <pre><code class="language-text">输入
 → 页面生成
-→ 运行与人工验收
+→ Native 运行截图与人工验收
+→ 必要时返回 Agent 调整
 → 成功 / 失败 Case
 → 分析
 → 优化 Skill / Tool / Context
@@ -50,7 +51,8 @@
 <li>流程节点能够创建并运行 RN 页面还原任务；</li>
 <li>Codex 能够访问真实 RN 仓库并完成代码修改；</li>
 <li>页面能够在 Native 环境运行；</li>
-<li>保存输入、执行轨迹、代码结果、人工截图和人工评价。</li>
+<li>保存输入、执行轨迹、代码结果、人工截图和人工评价；</li>
+<li>必要时把 Native 截图返回 Codex，验证最小视觉反馈闭环。</li>
 </ul>
 <p>阶段成果：一个真正跑通的 RN 页面，以及第一份可以分析的真实 Case。</p>
 <h3>阶段 2：固定 Baseline 和评价方式</h3>
@@ -71,7 +73,8 @@
 → + **Page Schema**
 → + Task Brief
 → + Material
-→ + BBox
+→ + Screenshot Preview
+→ + Visual Inspect
 → + Skill 新规则
 </code></pre>
 <p>每个实验都需要回答：</p>
@@ -83,6 +86,7 @@
 <li>是否对其他 Case 造成退化。</li>
 </ul>
 <p>上述顺序不是固定施工顺序。先验证哪个增强能力，由真实页面的问题决定。已有页面修改也作为独立 Case 参与验证，而不是另建一套流程。</p>
+<p><code>screenshot_preview</code> 用于在实现后取得 Native 运行截图；<code>inspect_visual_target</code> 用于 Agent 无法稳定定位元素或提取素材时按需返回 BBox、裁剪图或标注证据。两者都不是页面实现的必经步骤。</p>
 <p>如果真实 Case 暴露的不是组件召回问题，而是页面逻辑和代码组织不稳定，可以额外提供一个同类页面的 Golden Path 做单变量验证。Golden Path 的通用建设不属于 RN 页面还原主流程。</p>
 <p>阶段成果：知道每个增强模块在哪些场景有效、无效或产生副作用。</p>
 <h3>阶段 4：建立 Skill 与 Tool 优化闭环</h3>
@@ -125,7 +129,8 @@
 <pre><code class="language-text">简单新增页面 → Direct
 稳定结构页面 → Page Schema
 组件召回困难 → Material Tool
-视觉定位困难 → BBox
+生成结果需要复核 → Screenshot Preview
+视觉定位或素材提取困难 → Visual Inspect
 需求容易误解 → Task Brief
 </code></pre>
 <p>最终目标不是把所有中间产物都提供给 Codex，而是根据任务和历史 Failure Case，只使用当前真正需要的增强能力。</p>
@@ -134,10 +139,11 @@
 <p>以下能力不按六阶段串行建设，可以跟页面交付同时推进，但不能成为阶段 1 跑通页面的前置条件：</p>
 <ul>
 <li><strong>Trace 与记录 Tool</strong>：接入 Langfuse Raw Trace，完善 Decision Events 和 Execution Report；</li>
-<li><strong>RN 验证自动化</strong>：先保留人工启动和截图，再逐步探索 Deep Link、自动等待、自动截图、功能断言和视觉 Diff；</li>
+<li><strong>Screenshot Preview Tool</strong>：先保留人工启动和截图，再逐步封装自动进入页面、等待渲染和返回 Native 截图；</li>
+<li><strong>Visual Inspect Tool</strong>：只在定位或素材识别困难时，按需返回目标 BBox、裁剪图和标注证据；</li>
 <li><strong>Material 基础</strong>：继续建设 Catalog、Fixture、Candidate Board 和查询 Tool；</li>
 <li><strong>仓库 Material 化</strong>：探索 Material Generator Skill，让已有 FE/RN 组件以引用原实现的方式进入 Catalog、Fixture 和 Candidate Board；</li>
-<li><strong>Schema 与 Context</strong>：继续迁移 Page Schema，并探索 Task Brief、BBox 等候选输入。</li>
+<li><strong>Schema 与 Context</strong>：继续迁移 Page Schema，并探索 Task Brief 等候选输入。</li>
 </ul>
 <p>并行能力可以提前实现，但只有在阶段 3 的真实 Case 对比中证明有效后，才进入默认页面生成路径。</p>
 <p>跨 Web、RN、BE 和 Test 的工程复用属于独立横向方案，见<a href="./AI%20Engineering%20Golden%20Path%EF%BC%9A%E9%9D%A2%E5%90%91%20Agent%20%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%A4%8D%E7%94%A8%E6%9C%BA%E5%88%B6.md">《AI Engineering Golden Path：面向 Agent 的工程复用机制》</a>，不列入当前 RN 页面交付任务。</p>
@@ -176,7 +182,12 @@
 <h2>当前推进边界</h2>
 <p>当前集中完成阶段 1，并为阶段 2 留下可复现的输入与结果。页面必须优先跑通；自动化方式尚未确定时，继续使用人工验证。</p>
 <p>阶段 3 以后都由真实 Case 和评价结果触发，不作为当前页面上线的阻塞项。</p>
+<h1>这套的理论基础佐证</h1>
+<p>（注明：咱这套方案在 8月 21 号评审，正好是这篇文章的发布日期）</p>
+<ul>
+<li><a href="https://claude.com/blog/the-ai-native-sdlc-playbook">https://claude.com/blog/the-ai-native-sdlc-playbook</a></li>
+</ul>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-D2NhAHb7.js"></script>
+  <script type="module" crossorigin src="/assets/index-BhPu14PW.js"></script>
 </body>
 </html>
