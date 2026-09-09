@@ -4,7 +4,7 @@
   "name": "LZ AI NOTE 文章索引",
   "description": "供搜索引擎、问答系统和大模型检索使用的公开文章目录。",
   "url": "https://wizardpisces.github.io/ai-index.json",
-  "numberOfItems": 176,
+  "numberOfItems": 182,
   "itemListElement": [
     {
       "@type": "ListItem",
@@ -1605,492 +1605,6 @@
       "position": 59,
       "item": {
         "@type": "Article",
-        "headline": "为什么俄罗斯方块不用重学，而 Prompt 总要重写？",
-        "description": "为什么俄罗斯方块不用重学，而 Prompt 总要重写？ 很多人都遇到过：模型一换，Prompt 就得重写。原先很稳的指令开始跑偏，有些约束不再生效。 后来我开始留意那些底层技术几经迭代、用户经验却能留下来的系统。俄罗斯方块就是一个有趣的例子：它从早期计算机跑到掌机、手机和网页，平台换了好几轮；今天第一次打开它的人，仍然不需要重新学习这个游戏在玩什么。 底层…",
-        "url": "https://wizardpisces.github.io/blog/tech/ai-%E4%BB%8E%E7%BB%8F%E5%85%B8%E4%B8%AD%E5%AD%A6%E4%B9%A0/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BF%84%E7%BD%97%E6%96%AF%E6%96%B9%E5%9D%97%E4%B8%8D%E7%94%A8%E9%87%8D%E5%AD%A6%EF%BC%8C%E8%80%8C%20Prompt%20%E6%80%BB%E8%A6%81%E9%87%8D%E5%86%99%EF%BC%9F",
-        "mainEntityOfPage": "https://wizardpisces.github.io/blog/tech/ai-%E4%BB%8E%E7%BB%8F%E5%85%B8%E4%B8%AD%E5%AD%A6%E4%B9%A0/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BF%84%E7%BD%97%E6%96%AF%E6%96%B9%E5%9D%97%E4%B8%8D%E7%94%A8%E9%87%8D%E5%AD%A6%EF%BC%8C%E8%80%8C%20Prompt%20%E6%80%BB%E8%A6%81%E9%87%8D%E5%86%99%EF%BC%9F",
-        "dateModified": "2026-08-10T08:03:19.550Z",
-        "inLanguage": "zh-CN",
-        "isAccessibleForFree": true,
-        "author": {
-          "@type": "Person",
-          "name": "LZ",
-          "url": "https://wizardpisces.github.io/blog/Introduction"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "LZ AI NOTE",
-          "url": "https://wizardpisces.github.io/"
-        },
-        "about": [
-          "ai-从经典中学习"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 60,
-      "item": {
-        "@type": "Article",
-        "headline": "Agent 为什么会“记错”？问题可能出在它看到的世界",
-        "description": "Agent 为什么会“记错”？问题可能出在它看到的世界 你先问天气 Agent：“北京明天要不要带伞？”它查到北京有小雨，建议带伞。接着你问：“那上海呢？” 天气工具明明查到上海晴，Agent 却回答： 北京明天有小雨，建议带伞。 如果你在排查这个问题，很容易先怀疑多轮记忆：Agent 是不是把北京记得太牢了？可重试天气接口没有用，城市提取和工具结果都是对…",
-        "url": "https://wizardpisces.github.io/blog/tech/ai-%E5%8F%AF%E9%9D%A0Agent/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E2%80%9C%E8%AE%B0%E9%94%99%E2%80%9D%EF%BC%9F%E9%97%AE%E9%A2%98%E5%8F%AF%E8%83%BD%E5%87%BA%E5%9C%A8%E5%AE%83%E7%9C%8B%E5%88%B0%E7%9A%84%E4%B8%96%E7%95%8C",
-        "mainEntityOfPage": "https://wizardpisces.github.io/blog/tech/ai-%E5%8F%AF%E9%9D%A0Agent/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E2%80%9C%E8%AE%B0%E9%94%99%E2%80%9D%EF%BC%9F%E9%97%AE%E9%A2%98%E5%8F%AF%E8%83%BD%E5%87%BA%E5%9C%A8%E5%AE%83%E7%9C%8B%E5%88%B0%E7%9A%84%E4%B8%96%E7%95%8C",
-        "dateModified": "2026-08-17T08:26:24.026Z",
-        "inLanguage": "zh-CN",
-        "isAccessibleForFree": true,
-        "author": {
-          "@type": "Person",
-          "name": "LZ",
-          "url": "https://wizardpisces.github.io/blog/Introduction"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "LZ AI NOTE",
-          "url": "https://wizardpisces.github.io/"
-        },
-        "about": [
-          "ai-可靠Agent"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 61,
-      "item": {
-        "@type": "Article",
-        "headline": "Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith",
-        "description": "Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith 上一篇《LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂》里，天气 Agent 已经会跨轮补信息、暂停等待，也会在天气接口失败时重试。 它看起来能用了。 有一天，用户问： 北京明天要不要带伞？ 天气工具返回： 小雨，降雨概率 70%。 Agent 最终却说： 晴天，不用…",
-        "url": "https://wizardpisces.github.io/blog/tech/ai-%E5%8F%AF%E9%9D%A0Agent/Agent%20%E8%BF%99%E6%AC%A1%E7%AD%94%E5%AF%B9%E4%BA%86%EF%BC%8C%E4%B8%8B%E6%AC%A1%E5%91%A2%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20LangSmith",
-        "mainEntityOfPage": "https://wizardpisces.github.io/blog/tech/ai-%E5%8F%AF%E9%9D%A0Agent/Agent%20%E8%BF%99%E6%AC%A1%E7%AD%94%E5%AF%B9%E4%BA%86%EF%BC%8C%E4%B8%8B%E6%AC%A1%E5%91%A2%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20LangSmith",
-        "dateModified": "2026-08-17T08:26:25.028Z",
-        "inLanguage": "zh-CN",
-        "isAccessibleForFree": true,
-        "author": {
-          "@type": "Person",
-          "name": "LZ",
-          "url": "https://wizardpisces.github.io/blog/Introduction"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "LZ AI NOTE",
-          "url": "https://wizardpisces.github.io/"
-        },
-        "about": [
-          "ai-可靠Agent"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 62,
-      "item": {
-        "@type": "Article",
-        "headline": "LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂",
-        "description": "LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂 上一篇《什么是 ReAct？一个例子看懂 AI Agent 原理》里，我们做出了一个会查天气的 Agent。 模型发现自己不知道实时天气，就调用工具；工具返回结果，模型再回答。任务没结束，就继续循环。 这已经是 Agent 了。LangGraph 又多解决了什么？ 还是从查天气开始。 一句…",
-        "url": "https://wizardpisces.github.io/blog/tech/ai-%E5%8F%AF%E9%9D%A0Agent/LangGraph%20%E5%88%B0%E5%BA%95%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F%E7%94%A8%E4%B8%80%E4%B8%AA%E6%9F%A5%E5%A4%A9%E6%B0%94%E7%9A%84%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82",
-        "mainEntityOfPage": "https://wizardpisces.github.io/blog/tech/ai-%E5%8F%AF%E9%9D%A0Agent/LangGraph%20%E5%88%B0%E5%BA%95%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F%E7%94%A8%E4%B8%80%E4%B8%AA%E6%9F%A5%E5%A4%A9%E6%B0%94%E7%9A%84%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82",
-        "dateModified": "2026-08-24T03:11:58.792Z",
-        "inLanguage": "zh-CN",
-        "isAccessibleForFree": true,
-        "author": {
-          "@type": "Person",
-          "name": "LZ",
-          "url": "https://wizardpisces.github.io/blog/Introduction"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "LZ AI NOTE",
-          "url": "https://wizardpisces.github.io/"
-        },
-        "about": [
-          "ai-可靠Agent"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 63,
-      "item": {
-        "@type": "Article",
-        "headline": "什么是 ReAct？一个例子看懂 AI Agent 原理",
-        "description": "什么是 ReAct？一个例子看懂 AI Agent 原理 Agent 不是一种神秘技术。 先把 LangGraph、AutoGen、OpenAI Agents SDK、CrewAI 这些框架放到一边，只看最里面的运行逻辑： Agent = LLM + 循环（Loop）+ 工具（Tool）+ 状态（State） 这篇文章不用任何框架。我们从一个只有十几行代码…",
-        "url": "https://wizardpisces.github.io/blog/tech/ai-%E5%8F%AF%E9%9D%A0Agent/%E4%BB%80%E4%B9%88%E6%98%AF%20ReAct%EF%BC%9F%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20Agent%20%E5%8E%9F%E7%90%86",
-        "mainEntityOfPage": "https://wizardpisces.github.io/blog/tech/ai-%E5%8F%AF%E9%9D%A0Agent/%E4%BB%80%E4%B9%88%E6%98%AF%20ReAct%EF%BC%9F%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20Agent%20%E5%8E%9F%E7%90%86",
-        "dateModified": "2026-09-01T06:29:25.548Z",
-        "inLanguage": "zh-CN",
-        "isAccessibleForFree": true,
-        "author": {
-          "@type": "Person",
-          "name": "LZ",
-          "url": "https://wizardpisces.github.io/blog/Introduction"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "LZ AI NOTE",
-          "url": "https://wizardpisces.github.io/"
-        },
-        "about": [
-          "ai-可靠Agent"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 64,
-      "item": {
-        "@type": "Article",
-        "headline": "从 Loop 到 Graph Engineering：当一件事变成多条支线",
-        "description": "从 Loop 到 Graph Engineering：当一件事变成多条支线 这篇接着《从 Prompt 到 Loop Engineering：一个简单例子看懂 AI 工程的四次升级》往外讲。先把 Loop 理解成“做、检查、不合格就重试”的小循环就够了。 还是“夏日读书会”，只是任务多了一点。 只要一条文案：一个 Loop 运营给出活动资料，文案 Agen…",
-        "url": "https://wizardpisces.github.io/blog/tech/ai-%E5%8F%AF%E9%9D%A0Agent/%E4%BB%8E%20Loop%20%E5%88%B0%20Graph%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%E5%A4%9A%20Agent%20%E6%80%8E%E4%B9%88%E5%8D%8F%E4%BD%9C",
-        "mainEntityOfPage": "https://wizardpisces.github.io/blog/tech/ai-%E5%8F%AF%E9%9D%A0Agent/%E4%BB%8E%20Loop%20%E5%88%B0%20Graph%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%E5%A4%9A%20Agent%20%E6%80%8E%E4%B9%88%E5%8D%8F%E4%BD%9C",
-        "dateModified": "2026-08-24T03:11:59.141Z",
-        "inLanguage": "zh-CN",
-        "isAccessibleForFree": true,
-        "author": {
-          "@type": "Person",
-          "name": "LZ",
-          "url": "https://wizardpisces.github.io/blog/Introduction"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "LZ AI NOTE",
-          "url": "https://wizardpisces.github.io/"
-        },
-        "about": [
-          "ai-可靠Agent"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 65,
-      "item": {
-        "@type": "Article",
-        "headline": "从 Prompt 到 Loop Engineering：一个简单例子看懂 AI 工程的四次升级",
-        "description": "从 Prompt 到 Loop Engineering：一个简单例子看懂 AI 工程的四次升级 最近又冒出一个词：Loop Engineering。 Prompt Engineering、Context Engineering、Harness Engineering，再加上 Loop Engineering。这样的术语生产速度，上一次见到还是在鼎盛时期的前…",
-        "url": "https://wizardpisces.github.io/blog/tech/ai-%E5%8F%AF%E9%9D%A0Agent/%E4%BB%8E%20Prompt%20%E5%88%B0%20Loop%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%E7%9A%84%E5%9B%9B%E6%AC%A1%E5%8D%87%E7%BA%A7",
-        "mainEntityOfPage": "https://wizardpisces.github.io/blog/tech/ai-%E5%8F%AF%E9%9D%A0Agent/%E4%BB%8E%20Prompt%20%E5%88%B0%20Loop%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%E7%9A%84%E5%9B%9B%E6%AC%A1%E5%8D%87%E7%BA%A7",
-        "dateModified": "2026-08-24T03:11:58.903Z",
-        "inLanguage": "zh-CN",
-        "isAccessibleForFree": true,
-        "author": {
-          "@type": "Person",
-          "name": "LZ",
-          "url": "https://wizardpisces.github.io/blog/Introduction"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "LZ AI NOTE",
-          "url": "https://wizardpisces.github.io/"
-        },
-        "about": [
-          "ai-可靠Agent"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 66,
-      "item": {
-        "@type": "Article",
-        "headline": "AI 为什么没把你写进答案？从一句产品推荐读懂 GEO",
-        "description": "AI 为什么没把你写进答案？从一句产品推荐读懂 GEO 假设我做了一款代码审查工具，叫 PatchPilot。 官网已经上线，搜产品名也能找到。首页只有两句话： 但当用户问 AI： 我们是一个 20 人的 GitLab 团队，代码不能出内网，想自动审查 Merge Request，有哪些工具适合？ AI 推荐了三款竞品，没提 PatchPilot。 页面明…",
-        "url": "https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/AI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%8A%8A%E4%BD%A0%E5%86%99%E8%BF%9B%E7%AD%94%E6%A1%88%EF%BC%9F%E4%BB%8E%E4%B8%80%E5%8F%A5%E4%BA%A7%E5%93%81%E6%8E%A8%E8%8D%90%E8%AF%BB%E6%87%82%20GEO",
-        "mainEntityOfPage": "https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/AI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%8A%8A%E4%BD%A0%E5%86%99%E8%BF%9B%E7%AD%94%E6%A1%88%EF%BC%9F%E4%BB%8E%E4%B8%80%E5%8F%A5%E4%BA%A7%E5%93%81%E6%8E%A8%E8%8D%90%E8%AF%BB%E6%87%82%20GEO",
-        "dateModified": "2026-08-05T02:02:19.056Z",
-        "inLanguage": "zh-CN",
-        "isAccessibleForFree": true,
-        "author": {
-          "@type": "Person",
-          "name": "LZ",
-          "url": "https://wizardpisces.github.io/blog/Introduction"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "LZ AI NOTE",
-          "url": "https://wizardpisces.github.io/"
-        },
-        "about": [
-          "ai-好问题"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 67,
-      "item": {
-        "@type": "Article",
-        "headline": "Claude Dreaming vs Hermes Skill：帮你入坑 Agent Memory",
-        "description": "Claude Dreaming vs Hermes Skill：帮你入坑 Agent Memory Claude 有 Dreaming，Hermes 有 Skill。 看着都在做同一件事： 让 AI 从经验中学习。 从 Agent Architecture 来看，它们其实属于两个完全不同的层级： Dreaming 关心的是：哪些经验值得长期记住？ Skil…",
-        "url": "https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Claude%20Dreaming%20vs%20Hermes%20Skill%EF%BC%9A%E5%B8%AE%E4%BD%A0%E5%85%A5%E5%9D%91%20Agent%20Memory",
-        "mainEntityOfPage": "https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Claude%20Dreaming%20vs%20Hermes%20Skill%EF%BC%9A%E5%B8%AE%E4%BD%A0%E5%85%A5%E5%9D%91%20Agent%20Memory",
-        "dateModified": "2026-07-16T02:41:18.434Z",
-        "inLanguage": "zh-CN",
-        "isAccessibleForFree": true,
-        "author": {
-          "@type": "Person",
-          "name": "LZ",
-          "url": "https://wizardpisces.github.io/blog/Introduction"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "LZ AI NOTE",
-          "url": "https://wizardpisces.github.io/"
-        },
-        "about": [
-          "ai-好问题"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 68,
-      "item": {
-        "@type": "Article",
-        "headline": "Claude Sonnet 5 的 Token 消耗更多了？一文看懂 Token 的演化",
-        "description": "Claude Sonnet 5 的 Token 消耗更多了？一文看懂 Token 的演化 Anthropic 发布 Claude Sonnet 5 后，在更新说明里专门提到一件事： Claude Sonnet 5 uses a new tokenizer. The same input text produces approximately 30% mor…",
-        "url": "https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Claude%20Sonnet%205%20%E7%9A%84%20Token%20%E6%B6%88%E8%80%97%E6%9B%B4%E5%A4%9A%E4%BA%86%EF%BC%9F%E4%B8%80%E6%96%87%E7%9C%8B%E6%87%82%20Token%20%E7%9A%84%E6%BC%94%E5%8C%96",
-        "mainEntityOfPage": "https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/Claude%20Sonnet%205%20%E7%9A%84%20Token%20%E6%B6%88%E8%80%97%E6%9B%B4%E5%A4%9A%E4%BA%86%EF%BC%9F%E4%B8%80%E6%96%87%E7%9C%8B%E6%87%82%20Token%20%E7%9A%84%E6%BC%94%E5%8C%96",
-        "dateModified": "2026-07-08T06:04:53.210Z",
-        "inLanguage": "zh-CN",
-        "isAccessibleForFree": true,
-        "author": {
-          "@type": "Person",
-          "name": "LZ",
-          "url": "https://wizardpisces.github.io/blog/Introduction"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "LZ AI NOTE",
-          "url": "https://wizardpisces.github.io/"
-        },
-        "about": [
-          "ai-好问题"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 69,
-      "item": {
-        "@type": "Article",
-        "headline": "DeepSeek 为什么也开始造 Harness？因为模型已经解释不了 Agent 为什么好用",
-        "description": "DeepSeek 为什么也开始造 Harness？因为模型已经解释不了 Agent 为什么好用 看到一个 Agent 很好用，我们通常会先问： 它背后是什么模型？ 这个问题正变得不够用了。 同一个模型，放进不同产品里，一个只能告诉你“代码应该怎么改”，另一个却能自己读文件、运行测试、发现失败、继续修改，最后交出可以验证的结果。 模型没有变。后者多出来的，是…",
-        "url": "https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/DeepSeek%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E5%BC%80%E5%A7%8B%E9%80%A0%20Harness%EF%BC%9F%E5%9B%A0%E4%B8%BA%E6%A8%A1%E5%9E%8B%E5%B7%B2%E7%BB%8F%E8%A7%A3%E9%87%8A%E4%B8%8D%E4%BA%86%20Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A5%BD%E7%94%A8",
-        "mainEntityOfPage": "https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/DeepSeek%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E5%BC%80%E5%A7%8B%E9%80%A0%20Harness%EF%BC%9F%E5%9B%A0%E4%B8%BA%E6%A8%A1%E5%9E%8B%E5%B7%B2%E7%BB%8F%E8%A7%A3%E9%87%8A%E4%B8%8D%E4%BA%86%20Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A5%BD%E7%94%A8",
-        "dateModified": "2026-08-24T03:11:59.022Z",
-        "inLanguage": "zh-CN",
-        "isAccessibleForFree": true,
-        "author": {
-          "@type": "Person",
-          "name": "LZ",
-          "url": "https://wizardpisces.github.io/blog/Introduction"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "LZ AI NOTE",
-          "url": "https://wizardpisces.github.io/"
-        },
-        "about": [
-          "ai-好问题"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 70,
-      "item": {
-        "@type": "Article",
-        "headline": "两个程序没有互相调用，数据为什么还是过去了？",
-        "description": "两个程序没有互相调用，数据为什么还是过去了？ 在终端里运行 Claude Code，几秒后打开用于查看 AI 运行过程的 Langfuse，页面上出现了模型请求、工具调用和耗时。 这件事第一眼有点不讲道理。 Claude Code 没装 Langfuse SDK，两个程序也不在同一个进程。代码里找不到谁调用了谁，数据却过去了。 如果把它只当成 OpenTe…",
-        "url": "https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E4%B8%A4%E4%B8%AA%E7%A8%8B%E5%BA%8F%E6%B2%A1%E6%9C%89%E4%BA%92%E7%9B%B8%E8%B0%83%E7%94%A8%EF%BC%8C%E6%95%B0%E6%8D%AE%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E6%98%AF%E8%BF%87%E5%8E%BB%E4%BA%86%EF%BC%9F",
-        "mainEntityOfPage": "https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E4%B8%A4%E4%B8%AA%E7%A8%8B%E5%BA%8F%E6%B2%A1%E6%9C%89%E4%BA%92%E7%9B%B8%E8%B0%83%E7%94%A8%EF%BC%8C%E6%95%B0%E6%8D%AE%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E6%98%AF%E8%BF%87%E5%8E%BB%E4%BA%86%EF%BC%9F",
-        "dateModified": "2026-08-26T03:52:52.573Z",
-        "inLanguage": "zh-CN",
-        "isAccessibleForFree": true,
-        "author": {
-          "@type": "Person",
-          "name": "LZ",
-          "url": "https://wizardpisces.github.io/blog/Introduction"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "LZ AI NOTE",
-          "url": "https://wizardpisces.github.io/"
-        },
-        "about": [
-          "ai-好问题"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 71,
-      "item": {
-        "@type": "Article",
-        "headline": "为什么 AI 应用开发更需要贝叶斯思想？",
-        "description": "AI 应用研发比传统软件研发更需要贝叶斯决策思想。原因不是 AI 更复杂，而是 AI 产品的不确定性远高于传统软件。 传统软件实现的是确定需求： 用户点击按钮 → 后端计算 → 返回结果。 AI 应用在不断验证概率问题： 用户真的需要这个能力吗？（需求不确定） Prompt 是否有效？（方案不确定） Model A 还是 Model B 更好？（模型不确定…",
-        "url": "https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E4%B8%BA%E4%BB%80%E4%B9%88%20AI%20%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E6%9B%B4%E9%9C%80%E8%A6%81%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%80%9D%E6%83%B3%EF%BC%9F",
-        "mainEntityOfPage": "https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E4%B8%BA%E4%BB%80%E4%B9%88%20AI%20%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E6%9B%B4%E9%9C%80%E8%A6%81%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%80%9D%E6%83%B3%EF%BC%9F",
-        "dateModified": "2026-07-21T08:18:44.642Z",
-        "inLanguage": "zh-CN",
-        "isAccessibleForFree": true,
-        "author": {
-          "@type": "Person",
-          "name": "LZ",
-          "url": "https://wizardpisces.github.io/blog/Introduction"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "LZ AI NOTE",
-          "url": "https://wizardpisces.github.io/"
-        },
-        "about": [
-          "ai-好问题"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 72,
-      "item": {
-        "@type": "Article",
-        "headline": "内容没变，AI 推荐却更少了：GEO 为什么这么难量化？",
-        "description": "内容没变，AI 推荐却更少了：GEO 为什么这么难量化？ 假设有一款代码审查工具，叫 PatchPilot。官网可以被搜到，但用户让 AI 推荐支持 GitLab、私有化部署的 Merge Request 审查工具时，它很少出现在答案里。（想了解背景，可以先看《AI 为什么没把你写进答案？从一句产品推荐读懂 GEO》） 我们改写了它的首页，补上 GitLa…",
-        "url": "https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E5%86%85%E5%AE%B9%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%8E%A8%E8%8D%90%E5%8D%B4%E6%9B%B4%E5%B0%91%E4%BA%86%EF%BC%9AGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F",
-        "mainEntityOfPage": "https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E5%86%85%E5%AE%B9%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%8E%A8%E8%8D%90%E5%8D%B4%E6%9B%B4%E5%B0%91%E4%BA%86%EF%BC%9AGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F",
-        "dateModified": "2026-08-06T04:02:50.954Z",
-        "inLanguage": "zh-CN",
-        "isAccessibleForFree": true,
-        "author": {
-          "@type": "Person",
-          "name": "LZ",
-          "url": "https://wizardpisces.github.io/blog/Introduction"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "LZ AI NOTE",
-          "url": "https://wizardpisces.github.io/"
-        },
-        "about": [
-          "ai-好问题"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 73,
-      "item": {
-        "@type": "Article",
-        "headline": "只让 Claude 改了几句话，也会被当成 AI 代写吗？",
-        "description": "只让 Claude 改了几句话，也会被当成 AI 代写吗？ 你自己写完一份报告，只让 Claude 帮忙改了几处语病。 观点是你的，数据是你的，初稿也是你的。你把润色后的版本复制进文档，没有再改。 现在，这份文档可能带着一枚你看不见的 Claude 水印。 Anthropic 最近宣布，符合条件的 Claude 模型会给输出加入机器可识别的标记。文本水印会…",
-        "url": "https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E5%8F%AA%E8%AE%A9%20Claude%20%E6%94%B9%E4%BA%86%E5%87%A0%E5%8F%A5%E8%AF%9D%EF%BC%8C%E4%B9%9F%E4%BC%9A%E8%A2%AB%E5%BD%93%E6%88%90%20AI%20%E4%BB%A3%E5%86%99%E5%90%97%EF%BC%9F",
-        "mainEntityOfPage": "https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E5%8F%AA%E8%AE%A9%20Claude%20%E6%94%B9%E4%BA%86%E5%87%A0%E5%8F%A5%E8%AF%9D%EF%BC%8C%E4%B9%9F%E4%BC%9A%E8%A2%AB%E5%BD%93%E6%88%90%20AI%20%E4%BB%A3%E5%86%99%E5%90%97%EF%BC%9F",
-        "dateModified": "2026-08-13T08:25:41.939Z",
-        "inLanguage": "zh-CN",
-        "isAccessibleForFree": true,
-        "author": {
-          "@type": "Person",
-          "name": "LZ",
-          "url": "https://wizardpisces.github.io/blog/Introduction"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "LZ AI NOTE",
-          "url": "https://wizardpisces.github.io/"
-        },
-        "about": [
-          "ai-好问题"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 74,
-      "item": {
-        "@type": "Article",
-        "headline": "当十个链接被压成一句话：Google 与 ChatGPT 在争夺什么？",
-        "description": "当十个链接被压成一句话：Google 与 ChatGPT 在争夺什么？ 假设有一款虚构的代码审查工具，叫 PatchPilot。它支持 GitLab Merge Request 自动审查和私有化部署。 一个 20 人的 GitLab 团队想判断它是否适合自己，于是向 AI 提问。AI 搜索了官网、价格页、第三方评测和用户讨论，给出了十个引用链接。 最后答案…",
-        "url": "https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E5%BD%93%E5%8D%81%E4%B8%AA%E9%93%BE%E6%8E%A5%E8%A2%AB%E5%8E%8B%E6%88%90%E4%B8%80%E5%8F%A5%E8%AF%9D%EF%BC%9AGoogle%20%E4%B8%8E%20ChatGPT%20%E5%9C%A8%E4%BA%89%E5%A4%BA%E4%BB%80%E4%B9%88%EF%BC%9F",
-        "mainEntityOfPage": "https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E5%BD%93%E5%8D%81%E4%B8%AA%E9%93%BE%E6%8E%A5%E8%A2%AB%E5%8E%8B%E6%88%90%E4%B8%80%E5%8F%A5%E8%AF%9D%EF%BC%9AGoogle%20%E4%B8%8E%20ChatGPT%20%E5%9C%A8%E4%BA%89%E5%A4%BA%E4%BB%80%E4%B9%88%EF%BC%9F",
-        "dateModified": "2026-08-07T03:29:21.615Z",
-        "inLanguage": "zh-CN",
-        "isAccessibleForFree": true,
-        "author": {
-          "@type": "Person",
-          "name": "LZ",
-          "url": "https://wizardpisces.github.io/blog/Introduction"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "LZ AI NOTE",
-          "url": "https://wizardpisces.github.io/"
-        },
-        "about": [
-          "ai-好问题"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 75,
-      "item": {
-        "@type": "Article",
-        "headline": "当排行榜开始训练大模型",
-        "description": "当排行榜开始训练大模型 现在，每当一个新的大模型发布，你还会像以前一样，第一时间去看各种 Benchmark 排行榜吗？ 至少对我来说，不会。 过去，每当一个新模型发布，我最先关注的是各种 Benchmark 的成绩。 谁排第一？ 哪些指标刷新了纪录？ <u 排行榜几乎就是模型能力的代名词。</u 而在持续的观察中，更容易先冒出其他问题： 这个第一，还可信…",
-        "url": "https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E5%BD%93%E6%8E%92%E8%A1%8C%E6%A6%9C%E5%BC%80%E5%A7%8B%E2%80%9C%E8%AE%AD%E7%BB%83%E2%80%9D%E5%A4%A7%E6%A8%A1%E5%9E%8B",
-        "mainEntityOfPage": "https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E5%BD%93%E6%8E%92%E8%A1%8C%E6%A6%9C%E5%BC%80%E5%A7%8B%E2%80%9C%E8%AE%AD%E7%BB%83%E2%80%9D%E5%A4%A7%E6%A8%A1%E5%9E%8B",
-        "dateModified": "2026-07-06T06:07:10.257Z",
-        "inLanguage": "zh-CN",
-        "isAccessibleForFree": true,
-        "author": {
-          "@type": "Person",
-          "name": "LZ",
-          "url": "https://wizardpisces.github.io/blog/Introduction"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "LZ AI NOTE",
-          "url": "https://wizardpisces.github.io/"
-        },
-        "about": [
-          "ai-好问题"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 76,
-      "item": {
-        "@type": "Article",
-        "headline": "Prompt 没变，为什么换个模型，行为就变了？",
-        "description": "Prompt 没变，为什么换个模型，行为就变了？ 假设我们做了一个技术简报助手。 输入五篇资料，它负责写一篇 500～800 字的中文简报。Prompt 很普通： 它稳定运行了一段时间。事实基本准确，遇到互相矛盾的资料，也知道把分歧留下来。 后来模型升级了。 新模型写得明显更顺，标题也更像人写的。可仔细一看，两个来源原本还在争论，它却替双方总结出了一个确定…",
-        "url": "https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%8D%A2%EF%BC%8CPrompt%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%A4%B1%E6%95%88%EF%BC%9F%E4%BB%8E%E9%9A%90%E5%90%AB%E9%BB%98%E5%A5%91%E5%88%B0%E8%A1%8C%E4%B8%BA%E5%8D%8F%E8%AE%AE",
-        "mainEntityOfPage": "https://wizardpisces.github.io/blog/tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%8D%A2%EF%BC%8CPrompt%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%A4%B1%E6%95%88%EF%BC%9F%E4%BB%8E%E9%9A%90%E5%90%AB%E9%BB%98%E5%A5%91%E5%88%B0%E8%A1%8C%E4%B8%BA%E5%8D%8F%E8%AE%AE",
-        "dateModified": "2026-08-10T03:40:16.132Z",
-        "inLanguage": "zh-CN",
-        "isAccessibleForFree": true,
-        "author": {
-          "@type": "Person",
-          "name": "LZ",
-          "url": "https://wizardpisces.github.io/blog/Introduction"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "LZ AI NOTE",
-          "url": "https://wizardpisces.github.io/"
-        },
-        "about": [
-          "ai-好问题"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 77,
-      "item": {
-        "@type": "Article",
         "headline": "Claude Code 没装 Langfuse SDK，运行记录为什么仍会出现？",
         "description": "Claude Code 没装 Langfuse SDK，运行记录为什么仍会出现？ 先在终端里执行： 几秒后打开 Langfuse，页面里出现了一棵完整的调用树：Claude Code 发起了几次模型请求、用了哪些工具、每一步花了多久。 奇怪的是，Claude Code 没有安装 Langfuse SDK，也没有和我们的 Python 应用运行在同一个进程里…",
         "url": "https://wizardpisces.github.io/blog/tech/ai-%E5%B7%A5%E7%A8%8B%E6%8B%86%E8%A7%A3/Claude%20Code%20%E6%B2%A1%E8%A3%85%20Langfuse%20SDK%EF%BC%8C%E8%BF%90%E8%A1%8C%E8%AE%B0%E5%BD%95%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BB%8D%E4%BC%9A%E5%87%BA%E7%8E%B0%EF%BC%9F",
@@ -2115,115 +1629,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 78,
-      "item": {
-        "@type": "Article",
-        "headline": "代码定义结构，权重存储知识：一个例子看懂大模型如何推理",
-        "description": "代码定义结构，权重存储知识：一个例子看懂大模型如何推理 下载一个开源模型时，经常会看到一种奇怪现象：模型代码只有几十 KB，权重文件却有几个 GB，甚至几十 GB。 为什么会差这么多？模型的知识究竟在代码里，还是在那几个 GB 的权重文件里？输入一句话以后，两者又怎样配合得出结果？ 这些问题不必从 Transformer 或注意力机制讲起。先看一个只有 3…",
-        "url": "https://wizardpisces.github.io/blog/tech/ai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84/%E4%BB%A3%E7%A0%81%E5%AE%9A%E4%B9%89%E7%BB%93%E6%9E%84%EF%BC%8C%E6%9D%83%E9%87%8D%E5%AD%98%E5%82%A8%E7%9F%A5%E8%AF%86%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%A6%82%E4%BD%95%E6%8E%A8%E7%90%86",
-        "mainEntityOfPage": "https://wizardpisces.github.io/blog/tech/ai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84/%E4%BB%A3%E7%A0%81%E5%AE%9A%E4%B9%89%E7%BB%93%E6%9E%84%EF%BC%8C%E6%9D%83%E9%87%8D%E5%AD%98%E5%82%A8%E7%9F%A5%E8%AF%86%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%A6%82%E4%BD%95%E6%8E%A8%E7%90%86",
-        "dateModified": "2026-08-28T02:36:03.230Z",
-        "inLanguage": "zh-CN",
-        "isAccessibleForFree": true,
-        "author": {
-          "@type": "Person",
-          "name": "LZ",
-          "url": "https://wizardpisces.github.io/blog/Introduction"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "LZ AI NOTE",
-          "url": "https://wizardpisces.github.io/"
-        },
-        "about": [
-          "ai-模型结构"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 79,
-      "item": {
-        "@type": "Article",
-        "headline": "大模型没有眼睛，一张截图是怎么变成回答的？",
-        "description": "大模型没有眼睛，一张截图是怎么变成回答的？ 你上传一张应用截图，然后问： 这个页面哪里不对？ 模型可能指出按钮没有对齐、文字被截断，甚至能发现弹窗挡住了下面的操作。 这件事有点奇怪。 语言模型原本处理的是文字。它接收前面的 Token，预测下一个 Token。图片既没有词语，也没有句子，只有排列在二维网格里的像素。 一台只会接收文字的模型，是怎样开始看图的…",
-        "url": "https://wizardpisces.github.io/blog/tech/ai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%B2%A1%E6%9C%89%E7%9C%BC%E7%9D%9B%EF%BC%8C%E4%B8%80%E5%BC%A0%E6%88%AA%E5%9B%BE%E6%98%AF%E6%80%8E%E4%B9%88%E5%8F%98%E6%88%90%E5%9B%9E%E7%AD%94%E7%9A%84%EF%BC%9F",
-        "mainEntityOfPage": "https://wizardpisces.github.io/blog/tech/ai-%E6%A8%A1%E5%9E%8B%E7%BB%93%E6%9E%84/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%B2%A1%E6%9C%89%E7%9C%BC%E7%9D%9B%EF%BC%8C%E4%B8%80%E5%BC%A0%E6%88%AA%E5%9B%BE%E6%98%AF%E6%80%8E%E4%B9%88%E5%8F%98%E6%88%90%E5%9B%9E%E7%AD%94%E7%9A%84%EF%BC%9F",
-        "dateModified": "2026-08-26T01:42:09.922Z",
-        "inLanguage": "zh-CN",
-        "isAccessibleForFree": true,
-        "author": {
-          "@type": "Person",
-          "name": "LZ",
-          "url": "https://wizardpisces.github.io/blog/Introduction"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "LZ AI NOTE",
-          "url": "https://wizardpisces.github.io/"
-        },
-        "about": [
-          "ai-模型结构"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 80,
-      "item": {
-        "@type": "Article",
-        "headline": "你刷到的内容越来越像，因为算法也在训练创作者",
-        "description": "你刷到的内容越来越像，因为算法也在训练创作者 最近刷到一个新账号。 两篇内容，讲的是同一个故事：普通学历，专升本、考研，一路逆袭；现在读研，自媒体月入五位数。配图是旅游、美食和看起来松弛自在的生活。 我无法判断收入是真是假，也不是想判断这件事。让我停下来的是：两篇内容几乎用了同一套叙事。而且类似的账号、标题和人物经历并不少见。 它们来自不同的人，却像是从同…",
-        "url": "https://wizardpisces.github.io/blog/tech/ai-%E7%8E%B0%E8%B1%A1-%E5%8F%98%E5%B1%80/%E4%BD%A0%E5%88%B7%E5%88%B0%E7%9A%84%E5%86%85%E5%AE%B9%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%83%8F%EF%BC%8C%E5%9B%A0%E4%B8%BA%E7%AE%97%E6%B3%95%E4%B9%9F%E5%9C%A8%E8%AE%AD%E7%BB%83%E5%88%9B%E4%BD%9C%E8%80%85",
-        "mainEntityOfPage": "https://wizardpisces.github.io/blog/tech/ai-%E7%8E%B0%E8%B1%A1-%E5%8F%98%E5%B1%80/%E4%BD%A0%E5%88%B7%E5%88%B0%E7%9A%84%E5%86%85%E5%AE%B9%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%83%8F%EF%BC%8C%E5%9B%A0%E4%B8%BA%E7%AE%97%E6%B3%95%E4%B9%9F%E5%9C%A8%E8%AE%AD%E7%BB%83%E5%88%9B%E4%BD%9C%E8%80%85",
-        "dateModified": "2026-08-24T03:41:23.165Z",
-        "inLanguage": "zh-CN",
-        "isAccessibleForFree": true,
-        "author": {
-          "@type": "Person",
-          "name": "LZ",
-          "url": "https://wizardpisces.github.io/blog/Introduction"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "LZ AI NOTE",
-          "url": "https://wizardpisces.github.io/"
-        },
-        "about": [
-          "ai-现象-变局"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 81,
-      "item": {
-        "@type": "Article",
-        "headline": "每个人的药都不一样，药厂还怎么生产？",
-        "description": "每个人的药都不一样，药厂还怎么生产？ 药厂最擅长的，是把同一种药稳定地生产很多份。 但有一种癌症疗法反着来：先看每位患者的肿瘤发生了哪些突变，再为他单独设计一段 mRNA。换一个患者，药里的序列也要跟着变。 这听起来更像实验室里的定制品，很难做大。可它已经进入一项 1137 人的 III 期临床试验。2026 年 8 月 19 日，Moderna 和 Me…",
-        "url": "https://wizardpisces.github.io/blog/tech/ai-%E7%8E%B0%E8%B1%A1-%E5%8F%98%E5%B1%80/%E6%AF%8F%E4%B8%AA%E4%BA%BA%E7%9A%84%E8%8D%AF%E9%83%BD%E4%B8%8D%E4%B8%80%E6%A0%B7%EF%BC%8C%E8%8D%AF%E5%8E%82%E8%BF%98%E6%80%8E%E4%B9%88%E7%94%9F%E4%BA%A7%EF%BC%9F",
-        "mainEntityOfPage": "https://wizardpisces.github.io/blog/tech/ai-%E7%8E%B0%E8%B1%A1-%E5%8F%98%E5%B1%80/%E6%AF%8F%E4%B8%AA%E4%BA%BA%E7%9A%84%E8%8D%AF%E9%83%BD%E4%B8%8D%E4%B8%80%E6%A0%B7%EF%BC%8C%E8%8D%AF%E5%8E%82%E8%BF%98%E6%80%8E%E4%B9%88%E7%94%9F%E4%BA%A7%EF%BC%9F",
-        "dateModified": "2026-08-28T03:34:40.977Z",
-        "inLanguage": "zh-CN",
-        "isAccessibleForFree": true,
-        "author": {
-          "@type": "Person",
-          "name": "LZ",
-          "url": "https://wizardpisces.github.io/blog/Introduction"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "LZ AI NOTE",
-          "url": "https://wizardpisces.github.io/"
-        },
-        "about": [
-          "ai-现象-变局"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 82,
+      "position": 60,
       "item": {
         "@type": "Article",
         "headline": "AAR - 自动化对齐研究的启示与陷阱",
@@ -2250,7 +1656,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 83,
+      "position": 61,
       "item": {
         "@type": "Article",
         "headline": "AI 越省力，人越累：从帕金森定律到 Token 浪费",
@@ -2277,7 +1683,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 84,
+      "position": 62,
       "item": {
         "@type": "Article",
         "headline": "AI 的关键是语料",
@@ -2304,7 +1710,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 85,
+      "position": 63,
       "item": {
         "@type": "Article",
         "headline": "AI 阻碍新技术传播",
@@ -2331,7 +1737,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 86,
+      "position": 64,
       "item": {
         "@type": "Article",
         "headline": "AICR",
@@ -2358,7 +1764,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 87,
+      "position": 65,
       "item": {
         "@type": "Article",
         "headline": "Agent 进化论：从规则驱动到强化学习的范式跃迁",
@@ -2385,7 +1791,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 88,
+      "position": 66,
       "item": {
         "@type": "Article",
         "headline": "参考资料",
@@ -2412,7 +1818,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 89,
+      "position": 67,
       "item": {
         "@type": "Article",
         "headline": "详细解析",
@@ -2439,7 +1845,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 90,
+      "position": 68,
       "item": {
         "@type": "Article",
         "headline": "ControlNet 与 LoRA 插件",
@@ -2466,7 +1872,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 91,
+      "position": 69,
       "item": {
         "@type": "Article",
         "headline": "Ego Reasoning（自我推理）：AI 认知能力的边界与突破",
@@ -2493,7 +1899,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 92,
+      "position": 70,
       "item": {
         "@type": "Article",
         "headline": "GPT与开发-TDD",
@@ -2520,7 +1926,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 93,
+      "position": 71,
       "item": {
         "@type": "Article",
         "headline": "LLM的智能来源：核心概念与扩展",
@@ -2547,7 +1953,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 94,
+      "position": 72,
       "item": {
         "@type": "Article",
         "headline": "MCP 升级后，AI 产品如何走出聊天框？",
@@ -2574,7 +1980,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 95,
+      "position": 73,
       "item": {
         "@type": "Article",
         "headline": "[Context Engineering for AI Agents: Lessons from Building Manus](https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus)",
@@ -2601,34 +2007,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 96,
-      "item": {
-        "@type": "Article",
-        "headline": "Prompt 堆叠的尽头，是系统设计问题",
-        "description": "Prompt 堆叠的尽头，是系统设计问题 做 Code Review Agent 时，最容易发生的事不是 Prompt 写错，而是 Prompt 越改越对。 某次模型漏掉了一个空指针风险，于是在 Prompt 里补一句： 不要遗漏潜在风险。 下一次，它把一个理论上可能发生、实际路径根本走不到的并发问题也报了出来。于是再补一句： 不要过度推测，只报告有充分依…",
-        "url": "https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/Prompt%20%E5%A0%86%E5%8F%A0%E7%9A%84%E5%B0%BD%E5%A4%B4%EF%BC%8C%E6%98%AF%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E9%97%AE%E9%A2%98",
-        "mainEntityOfPage": "https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/Prompt%20%E5%A0%86%E5%8F%A0%E7%9A%84%E5%B0%BD%E5%A4%B4%EF%BC%8C%E6%98%AF%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E9%97%AE%E9%A2%98",
-        "dateModified": "2026-08-27T08:43:44.030Z",
-        "inLanguage": "zh-CN",
-        "isAccessibleForFree": true,
-        "author": {
-          "@type": "Person",
-          "name": "LZ",
-          "url": "https://wizardpisces.github.io/blog/Introduction"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "LZ AI NOTE",
-          "url": "https://wizardpisces.github.io/"
-        },
-        "about": [
-          "ai-笔记"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 97,
+      "position": 74,
       "item": {
         "@type": "Article",
         "headline": "Prompt 工程的本质",
@@ -2655,7 +2034,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 98,
+      "position": 75,
       "item": {
         "@type": "Article",
         "headline": "Promptions",
@@ -2682,7 +2061,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 99,
+      "position": 76,
       "item": {
         "@type": "Article",
         "headline": "问题有多难？一个例子",
@@ -2709,7 +2088,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 100,
+      "position": 77,
       "item": {
         "@type": "Article",
         "headline": "《The Bitter Lesson》",
@@ -2736,61 +2115,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 101,
-      "item": {
-        "@type": "Article",
-        "headline": "一次服药，还是连吃五天：从两种流感药看 AI 系统设计",
-        "description": "一次服药，还是连吃五天：从两种流感药看 AI 系统设计 最近比较两种流感药时，我注意到一个很直观的差别。 奥司他韦通常一天两次，连续吃五天；玛巴洛沙韦则按体重单次服用。对患者而言，差别很实际：一种要记住十次，另一种只要吃一次。 人很容易把“一次服药”理解成药效更强、技术更先进。但继续看药物机制，结论没有这么简单。 这件事也让我想到 AI 产品。我们常用模型…",
-        "url": "https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%B8%80%E6%AC%A1%E6%9C%8D%E8%8D%AF%EF%BC%8C%E8%BF%98%E6%98%AF%E8%BF%9E%E5%90%83%E4%BA%94%E5%A4%A9%EF%BC%9A%E4%BB%8E%E4%B8%A4%E7%A7%8D%E6%B5%81%E6%84%9F%E8%8D%AF%E7%9C%8B%20AI%20%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1",
-        "mainEntityOfPage": "https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%B8%80%E6%AC%A1%E6%9C%8D%E8%8D%AF%EF%BC%8C%E8%BF%98%E6%98%AF%E8%BF%9E%E5%90%83%E4%BA%94%E5%A4%A9%EF%BC%9A%E4%BB%8E%E4%B8%A4%E7%A7%8D%E6%B5%81%E6%84%9F%E8%8D%AF%E7%9C%8B%20AI%20%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1",
-        "dateModified": "2026-07-28T07:59:41.115Z",
-        "inLanguage": "zh-CN",
-        "isAccessibleForFree": true,
-        "author": {
-          "@type": "Person",
-          "name": "LZ",
-          "url": "https://wizardpisces.github.io/blog/Introduction"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "LZ AI NOTE",
-          "url": "https://wizardpisces.github.io/"
-        },
-        "about": [
-          "ai-笔记"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 102,
-      "item": {
-        "@type": "Article",
-        "headline": "为什么AI指令应该优先写“不该做什么”",
-        "description": "一、问题的起点：正向清单无法穷举 指令设计的直觉往往导向“应该做什么”。产品经理、提示词工程师、普通用户，第一反应几乎都是描述期望：你应该礼貌、应该详细、应该主动追问。 但正向清单存在一个无法解决的缺陷：它不可能穷举。没有设计者能遍历所有场景，而大模型作为概率系统，在未被明确指引的灰色地带会本能地选择“讨好”——帮用户合理化一个糟糕的决策，为明显错误的命题…",
-        "url": "https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%B8%BA%E4%BB%80%E4%B9%88AI%E6%8C%87%E4%BB%A4%E5%BA%94%E8%AF%A5%E4%BC%98%E5%85%88%E5%86%99%E2%80%9C%E4%B8%8D%E8%AF%A5%E5%81%9A%E4%BB%80%E4%B9%88%E2%80%9D",
-        "mainEntityOfPage": "https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%B8%BA%E4%BB%80%E4%B9%88AI%E6%8C%87%E4%BB%A4%E5%BA%94%E8%AF%A5%E4%BC%98%E5%85%88%E5%86%99%E2%80%9C%E4%B8%8D%E8%AF%A5%E5%81%9A%E4%BB%80%E4%B9%88%E2%80%9D",
-        "dateModified": "2026-05-21T03:17:03.194Z",
-        "inLanguage": "zh-CN",
-        "isAccessibleForFree": true,
-        "author": {
-          "@type": "Person",
-          "name": "LZ",
-          "url": "https://wizardpisces.github.io/blog/Introduction"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "LZ AI NOTE",
-          "url": "https://wizardpisces.github.io/"
-        },
-        "about": [
-          "ai-笔记"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 103,
+      "position": 78,
       "item": {
         "@type": "Article",
         "headline": "为什么RAG正在变得越来越像“多模型调度系统”？",
@@ -2817,88 +2142,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 104,
-      "item": {
-        "@type": "Article",
-        "headline": "为什么几乎所有复杂系统，都会走向\"不断加规则\"？",
-        "description": "为什么几乎所有复杂系统，都会走向\"不断加规则\"？ 前文 《Prompt堆叠的尽头是系统设计》 讲了一个核心观点： 当 Prompt 开始堆叠描述“如何权衡多个冲突目标”时，问题已经不在 Prompt，而在系统设计本身。 现在打算把这个观点往前再推一步； 规则的本质是堵住一个具体的漏洞。 反馈的本质是让系统自己知道发生了什么，然后自己调整。 规则解决“这次”…",
-        "url": "https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%B8%BA%E4%BB%80%E4%B9%88%E5%87%A0%E4%B9%8E%E6%89%80%E6%9C%89%E5%A4%8D%E6%9D%82%E7%B3%BB%E7%BB%9F%EF%BC%8C%E9%83%BD%E4%BC%9A%E8%B5%B0%E5%90%91%22%E4%B8%8D%E6%96%AD%E5%8A%A0%E8%A7%84%E5%88%99%22%EF%BC%9F",
-        "mainEntityOfPage": "https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%B8%BA%E4%BB%80%E4%B9%88%E5%87%A0%E4%B9%8E%E6%89%80%E6%9C%89%E5%A4%8D%E6%9D%82%E7%B3%BB%E7%BB%9F%EF%BC%8C%E9%83%BD%E4%BC%9A%E8%B5%B0%E5%90%91%22%E4%B8%8D%E6%96%AD%E5%8A%A0%E8%A7%84%E5%88%99%22%EF%BC%9F",
-        "dateModified": "2026-06-30T02:57:13.839Z",
-        "inLanguage": "zh-CN",
-        "isAccessibleForFree": true,
-        "author": {
-          "@type": "Person",
-          "name": "LZ",
-          "url": "https://wizardpisces.github.io/blog/Introduction"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "LZ AI NOTE",
-          "url": "https://wizardpisces.github.io/"
-        },
-        "about": [
-          "ai-笔记"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 105,
-      "item": {
-        "@type": "Article",
-        "headline": "从 AI Agent 的 BubbleWrap 沙箱，看“世界与地图”的隔离哲学",
-        "description": "从 AI Agent 的 BubbleWrap 沙箱，看“世界与地图”的隔离哲学 在研究 AI Agent 的运行环境时，经常会看到一个工具： 从定义上来说，它是一个基于 Linux Namespace 的轻量级沙箱工具。很多桌面应用、容器运行时以及 AI Agent 的执行环境都会使用它来限制程序能够访问的资源。 不过，如果只把 Bubblewrap 理…",
-        "url": "https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%BB%8E%20AI%20Agent%20%E7%9A%84%20BubbleWrap%20%E6%B2%99%E7%AE%B1%EF%BC%8C%E7%9C%8B%E2%80%9C%E4%B8%96%E7%95%8C%E4%B8%8E%E5%9C%B0%E5%9B%BE%E2%80%9D%E7%9A%84%E9%9A%94%E7%A6%BB",
-        "mainEntityOfPage": "https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%BB%8E%20AI%20Agent%20%E7%9A%84%20BubbleWrap%20%E6%B2%99%E7%AE%B1%EF%BC%8C%E7%9C%8B%E2%80%9C%E4%B8%96%E7%95%8C%E4%B8%8E%E5%9C%B0%E5%9B%BE%E2%80%9D%E7%9A%84%E9%9A%94%E7%A6%BB",
-        "dateModified": "2026-06-29T03:23:00.433Z",
-        "inLanguage": "zh-CN",
-        "isAccessibleForFree": true,
-        "author": {
-          "@type": "Person",
-          "name": "LZ",
-          "url": "https://wizardpisces.github.io/blog/Introduction"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "LZ AI NOTE",
-          "url": "https://wizardpisces.github.io/"
-        },
-        "about": [
-          "ai-笔记"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 106,
-      "item": {
-        "@type": "Article",
-        "headline": "从支付宝体验技术部“解散”，看 AI 时代的人才选拔逻辑",
-        "description": "从支付宝体验技术部“解散”，看 AI 时代的人才选拔逻辑 一、现象：岗位边界变了，筛选方式还没变 最近网传支付宝体验技术部被拆分。根据目前的公开报道，成员被分流到各个业务线，岗位也在向 Agent 全栈开发转型。 我倒没有因此担心前端会消失。页面仍然要写，交互和性能问题也不会自己解决。真正发生变化的，是工程师负责的范围。 过去，一个前端工程师把页面交付好，…",
-        "url": "https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%BB%8E%E6%94%AF%E4%BB%98%E5%AE%9D%E4%BD%93%E9%AA%8C%E6%8A%80%E6%9C%AF%E9%83%A8%E2%80%9C%E8%A7%A3%E6%95%A3%E2%80%9D%EF%BC%8C%E7%9C%8B%20AI%20%E6%97%B6%E4%BB%A3%E7%9A%84%E4%BA%BA%E6%89%8D%E9%80%89%E6%8B%94%E9%80%BB%E8%BE%91",
-        "mainEntityOfPage": "https://wizardpisces.github.io/blog/tech/ai-%E7%AC%94%E8%AE%B0/%E4%BB%8E%E6%94%AF%E4%BB%98%E5%AE%9D%E4%BD%93%E9%AA%8C%E6%8A%80%E6%9C%AF%E9%83%A8%E2%80%9C%E8%A7%A3%E6%95%A3%E2%80%9D%EF%BC%8C%E7%9C%8B%20AI%20%E6%97%B6%E4%BB%A3%E7%9A%84%E4%BA%BA%E6%89%8D%E9%80%89%E6%8B%94%E9%80%BB%E8%BE%91",
-        "dateModified": "2026-08-03T03:55:54.212Z",
-        "inLanguage": "zh-CN",
-        "isAccessibleForFree": true,
-        "author": {
-          "@type": "Person",
-          "name": "LZ",
-          "url": "https://wizardpisces.github.io/blog/Introduction"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "LZ AI NOTE",
-          "url": "https://wizardpisces.github.io/"
-        },
-        "about": [
-          "ai-笔记"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 107,
+      "position": 79,
       "item": {
         "@type": "Article",
         "headline": "可优化的 AI Agent：用 3 个例子讲清 DSPy、TextGrad、AdalFlow 与 Trace/OPTO",
@@ -2925,7 +2169,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 108,
+      "position": 80,
       "item": {
         "@type": "Article",
         "headline": "核心概念：什么是“上下文工程”？",
@@ -2952,7 +2196,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 109,
+      "position": 81,
       "item": {
         "@type": "Article",
         "headline": "机器与人类的视角",
@@ -2979,7 +2223,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 110,
+      "position": 82,
       "item": {
         "@type": "Article",
         "headline": "机器学习实践记录",
@@ -3006,7 +2250,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 111,
+      "position": 83,
       "item": {
         "@type": "Article",
         "headline": "LSP（Language Server Protocol）",
@@ -3033,7 +2277,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 112,
+      "position": 84,
       "item": {
         "@type": "Article",
         "headline": "理论",
@@ -3060,7 +2304,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 113,
+      "position": 85,
       "item": {
         "@type": "Article",
         "headline": "软件2.0",
@@ -3087,7 +2331,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 114,
+      "position": 86,
       "item": {
         "@type": "Article",
         "headline": "Go 简介",
@@ -3114,7 +2358,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 115,
+      "position": 87,
       "item": {
         "@type": "Article",
         "headline": "JSON序列化",
@@ -3141,7 +2385,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 116,
+      "position": 88,
       "item": {
         "@type": "Article",
         "headline": "napi 宏的理解",
@@ -3168,7 +2412,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 117,
+      "position": 89,
       "item": {
         "@type": "Article",
         "headline": "rust Arena内存分配",
@@ -3195,7 +2439,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 118,
+      "position": 90,
       "item": {
         "@type": "Article",
         "headline": "作用域规则",
@@ -3222,7 +2466,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 119,
+      "position": 91,
       "item": {
         "@type": "Article",
         "headline": "参考",
@@ -3249,7 +2493,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 120,
+      "position": 92,
       "item": {
         "@type": "Article",
         "headline": "rust 的 trait",
@@ -3276,7 +2520,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 121,
+      "position": 93,
       "item": {
         "@type": "Article",
         "headline": "rust 的泛型",
@@ -3303,7 +2547,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 122,
+      "position": 94,
       "item": {
         "@type": "Article",
         "headline": "rust 设计思想",
@@ -3330,7 +2574,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 123,
+      "position": 95,
       "item": {
         "@type": "Article",
         "headline": "rust 跨语言调用",
@@ -3357,7 +2601,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 124,
+      "position": 96,
       "item": {
         "@type": "Article",
         "headline": "Go Runtime：理解 Go “魔法”的核心",
@@ -3384,7 +2628,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 125,
+      "position": 97,
       "item": {
         "@type": "Article",
         "headline": "从 GC 到所有权：一文看懂语言如何管理对象生命周期",
@@ -3411,7 +2655,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 126,
+      "position": 98,
       "item": {
         "@type": "Article",
         "headline": "关于node的addon",
@@ -3438,7 +2682,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 127,
+      "position": 99,
       "item": {
         "@type": "Article",
         "headline": "内存分析",
@@ -3465,7 +2709,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 128,
+      "position": 100,
       "item": {
         "@type": "Article",
         "headline": "列存储",
@@ -3492,7 +2736,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 129,
+      "position": 101,
       "item": {
         "@type": "Article",
         "headline": "Profile",
@@ -3519,7 +2763,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 130,
+      "position": 102,
       "item": {
         "@type": "Article",
         "headline": "Rust 的“无 GC”到底是什么意思",
@@ -3546,7 +2790,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 131,
+      "position": 103,
       "item": {
         "@type": "Article",
         "headline": "理解并发",
@@ -3573,7 +2817,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 132,
+      "position": 104,
       "item": {
         "@type": "Article",
         "headline": "Docker 镜像",
@@ -3600,7 +2844,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 133,
+      "position": 105,
       "item": {
         "@type": "Article",
         "headline": "Vue SSR 经验",
@@ -3627,7 +2871,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 134,
+      "position": 106,
       "item": {
         "@type": "Article",
         "headline": "vite/webpack 之 vue ssr 图解",
@@ -3654,7 +2898,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 135,
+      "position": 107,
       "item": {
         "@type": "Article",
         "headline": "Float32Array 应用场景",
@@ -3681,7 +2925,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 136,
+      "position": 108,
       "item": {
         "@type": "Article",
         "headline": "vite 简介与原理",
@@ -3708,7 +2952,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 137,
+      "position": 109,
       "item": {
         "@type": "Article",
         "headline": "为什么需要隔离",
@@ -3735,7 +2979,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 138,
+      "position": 110,
       "item": {
         "@type": "Article",
         "headline": "为什么 ref 没法直接传递？",
@@ -3762,7 +3006,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 139,
+      "position": 111,
       "item": {
         "@type": "Article",
         "headline": "框架设计的思考",
@@ -3789,7 +3033,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 140,
+      "position": 112,
       "item": {
         "@type": "Article",
         "headline": "Compiler简介-入门到放弃",
@@ -3816,7 +3060,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 141,
+      "position": 113,
       "item": {
         "@type": "Article",
         "headline": "二维码的纠错原理",
@@ -3843,7 +3087,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 142,
+      "position": 114,
       "item": {
         "@type": "Article",
         "headline": "Source-Map原理及其应用",
@@ -3870,7 +3114,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 143,
+      "position": 115,
       "item": {
         "@type": "Article",
         "headline": "JsBridge引发的思考",
@@ -3897,7 +3141,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 144,
+      "position": 116,
       "item": {
         "@type": "Article",
         "headline": "《系统之美》思考",
@@ -3924,7 +3168,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 145,
+      "position": 117,
       "item": {
         "@type": "Article",
         "headline": "Domain Specific Language",
@@ -3951,7 +3195,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 146,
+      "position": 118,
       "item": {
         "@type": "Article",
         "headline": "关于程序跨端",
@@ -3978,7 +3222,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 147,
+      "position": 119,
       "item": {
         "@type": "Article",
         "headline": "列存储",
@@ -4005,7 +3249,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 148,
+      "position": 120,
       "item": {
         "@type": "Article",
         "headline": "可视化编程",
@@ -4032,7 +3276,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 149,
+      "position": 121,
       "item": {
         "@type": "Article",
         "headline": "图像压缩质量评估",
@@ -4059,7 +3303,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 150,
+      "position": 122,
       "item": {
         "@type": "Article",
         "headline": "Introduction",
@@ -4086,7 +3330,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 151,
+      "position": 123,
       "item": {
         "@type": "Article",
         "headline": "惰性求值与宏",
@@ -4113,7 +3357,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 152,
+      "position": 124,
       "item": {
         "@type": "Article",
         "headline": "关于编程语言的发展",
@@ -4140,7 +3384,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 153,
+      "position": 125,
       "item": {
         "@type": "Article",
         "headline": "References",
@@ -4167,7 +3411,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 154,
+      "position": 126,
       "item": {
         "@type": "Article",
         "headline": "大模型生成下一个 token 时，不一定应该永远用最后一层的输出。",
@@ -4194,7 +3438,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 155,
+      "position": 127,
       "item": {
         "@type": "Article",
         "headline": "Hiring",
@@ -4222,7 +3466,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 156,
+      "position": 128,
       "item": {
         "@type": "Article",
         "headline": "个人简介",
@@ -4250,7 +3494,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 157,
+      "position": 129,
       "item": {
         "@type": "Article",
         "headline": "todo",
@@ -4278,7 +3522,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 158,
+      "position": 130,
       "item": {
         "@type": "Article",
         "headline": "世界趋同",
@@ -4306,7 +3550,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 159,
+      "position": 131,
       "item": {
         "@type": "Article",
         "headline": "显示器",
@@ -4334,7 +3578,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 160,
+      "position": 132,
       "item": {
         "@type": "Article",
         "headline": "因果思维型与目标导向型",
@@ -4362,7 +3606,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 161,
+      "position": 133,
       "item": {
         "@type": "Article",
         "headline": "行为决定思想",
@@ -4390,7 +3634,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 162,
+      "position": 134,
       "item": {
         "@type": "Article",
         "headline": "改革的目标",
@@ -4418,7 +3662,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 163,
+      "position": 135,
       "item": {
         "@type": "Article",
         "headline": "精英过剩：理解、起源与历史镜鉴",
@@ -4446,7 +3690,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 164,
+      "position": 136,
       "item": {
         "@type": "Article",
         "headline": "**绝对价值 vs. 相对价值**",
@@ -4474,7 +3718,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 165,
+      "position": 137,
       "item": {
         "@type": "Article",
         "headline": "麦理浩径（MacLehose Trail）",
@@ -4502,7 +3746,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 166,
+      "position": 138,
       "item": {
         "@type": "Article",
         "headline": "Reference",
@@ -4530,7 +3774,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 167,
+      "position": 139,
       "item": {
         "@type": "Article",
         "headline": "书单",
@@ -4558,7 +3802,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 168,
+      "position": 140,
       "item": {
         "@type": "Article",
         "headline": "任务分配管理",
@@ -4586,7 +3830,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 169,
+      "position": 141,
       "item": {
         "@type": "Article",
         "headline": "可能性的艺术",
@@ -4614,7 +3858,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 170,
+      "position": 142,
       "item": {
         "@type": "Article",
         "headline": "复杂",
@@ -4642,7 +3886,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 171,
+      "position": 143,
       "item": {
         "@type": "Article",
         "headline": "The Cerebral Code",
@@ -4670,7 +3914,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 172,
+      "position": 144,
       "item": {
         "@type": "Article",
         "headline": "技术封建主义",
@@ -4698,7 +3942,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 173,
+      "position": 145,
       "item": {
         "@type": "Article",
         "headline": "毫无意义的工作",
@@ -4726,7 +3970,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 174,
+      "position": 146,
       "item": {
         "@type": "Article",
         "headline": "[算法之美](https://www.scribd.com/document/778432015/%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E-%E6%8C%87%E5%AF%BC%E5%B7%A5%E4%BD%9C%E4%B8%8E%E7%94%9F%E6%B4%BB)",
@@ -4754,7 +3998,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 175,
+      "position": 147,
       "item": {
         "@type": "Article",
         "headline": "置身事内",
@@ -4782,7 +4026,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 176,
+      "position": 148,
       "item": {
         "@type": "Article",
         "headline": "读大奉打更人有感",
@@ -4805,6 +4049,924 @@
         "about": [
           "thoughts",
           "reading"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 149,
+      "item": {
+        "@type": "Article",
+        "headline": "AI 为什么没把你写进答案？从一句产品推荐读懂 GEO",
+        "description": "AI 为什么没把你写进答案？从一句产品推荐读懂 GEO 假设我做了一款代码审查工具，叫 PatchPilot。 官网已经上线，搜产品名也能找到。首页只有两句话： 但当用户问 AI： 我们是一个 20 人的 GitLab 团队，代码不能出内网，想自动审查 Merge Request，有哪些工具适合？ AI 推荐了三款竞品，没提 PatchPilot。 页面明…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%8A%8A%E4%BD%A0%E5%86%99%E8%BF%9B%E7%AD%94%E6%A1%88%EF%BC%9F%E4%BB%8E%E4%B8%80%E5%8F%A5%E4%BA%A7%E5%93%81%E6%8E%A8%E8%8D%90%E8%AF%BB%E6%87%82%20GEO",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%8A%8A%E4%BD%A0%E5%86%99%E8%BF%9B%E7%AD%94%E6%A1%88%EF%BC%9F%E4%BB%8E%E4%B8%80%E5%8F%A5%E4%BA%A7%E5%93%81%E6%8E%A8%E8%8D%90%E8%AF%BB%E6%87%82%20GEO",
+        "dateModified": "2026-09-09T07:56:47.451Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 150,
+      "item": {
+        "@type": "Article",
+        "headline": "AI 只看局部，怎么知道整张图在讲什么？",
+        "description": "AI 只看局部，怎么知道整张图在讲什么？ 把一张图片切成四块： 右下角的 D 只包含一段弧线和一根竖线。单独看，它可能是路牌、伞柄，也可能只是背景里的线条。 可模型最后会说： 画面里有人撑着雨伞。 图片已经被切碎了，模型怎么还认得出整把雨伞？ 单看右下角，它没有答案 《大模型没有眼睛，一张截图是怎么变成回答的？》里，每个 Patch 最终会变成一张数字卡片…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E5%8F%AA%E7%9C%8B%E5%B1%80%E9%83%A8%EF%BC%8C%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E6%95%B4%E5%BC%A0%E5%9B%BE%E5%9C%A8%E8%AE%B2%E4%BB%80%E4%B9%88%EF%BC%9F",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E5%8F%AA%E7%9C%8B%E5%B1%80%E9%83%A8%EF%BC%8C%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E6%95%B4%E5%BC%A0%E5%9B%BE%E5%9C%A8%E8%AE%B2%E4%BB%80%E4%B9%88%EF%BC%9F",
+        "dateModified": "2026-09-09T07:56:51.586Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 151,
+      "item": {
+        "@type": "Article",
+        "headline": "AI 明明看见四根手指，为什么还会回答“五根”？",
+        "description": "AI 明明看见四根手指，为什么还会回答“五根”？ 给模型看一张手的照片。大拇指藏在手掌后面，画面里只能看到四根。 它可以说出这是左手，手掌朝向镜头，甚至能描述哪根手指弯了。 可你再问： 图里能看到几根手指？ 答案却可能是五根，甚至六根。 模型明明认出了整只手，为什么反而数不清每根手指？ 认出一只手，不需要数完手指 识别“这是一只手”，只需要抓住一组整体特征…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E6%98%8E%E6%98%8E%E7%9C%8B%E8%A7%81%E5%9B%9B%E6%A0%B9%E6%89%8B%E6%8C%87%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E4%BC%9A%E5%9B%9E%E7%AD%94%E2%80%9C%E4%BA%94%E6%A0%B9%E2%80%9D%EF%BC%9F",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E6%98%8E%E6%98%8E%E7%9C%8B%E8%A7%81%E5%9B%9B%E6%A0%B9%E6%89%8B%E6%8C%87%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E4%BC%9A%E5%9B%9E%E7%AD%94%E2%80%9C%E4%BA%94%E6%A0%B9%E2%80%9D%EF%BC%9F",
+        "dateModified": "2026-09-09T07:56:51.904Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 152,
+      "item": {
+        "@type": "Article",
+        "headline": "AI 给文字加了水印，为什么还能说“不影响内容”？",
+        "description": "AI 给文字加了水印，为什么还能说“不影响内容”？ 2026 年 9 月 1 日，Anthropic 宣布为 Claude 新模型生成的文字加入水印，同时称它不会改变回答的含义、质量和可读性。 图片水印还容易理解。少量像素变亮或变暗，人眼可能看不出来，程序却能检测。 文字没有像素。 如果一句话原来是： 这个方法可以明显提高效率。 水印不能藏在字的颜色里，也…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E7%BB%99%E6%96%87%E5%AD%97%E5%8A%A0%E4%BA%86%E6%B0%B4%E5%8D%B0%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%83%BD%E8%AF%B4%E2%80%9C%E4%B8%8D%E5%BD%B1%E5%93%8D%E5%86%85%E5%AE%B9%E2%80%9D%EF%BC%9F",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E7%BB%99%E6%96%87%E5%AD%97%E5%8A%A0%E4%BA%86%E6%B0%B4%E5%8D%B0%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%83%BD%E8%AF%B4%E2%80%9C%E4%B8%8D%E5%BD%B1%E5%93%8D%E5%86%85%E5%AE%B9%E2%80%9D%EF%BC%9F",
+        "dateModified": "2026-09-09T07:56:47.912Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 153,
+      "item": {
+        "@type": "Article",
+        "headline": "Agent 为什么会“记错”？问题可能出在它看到的世界",
+        "description": "Agent 为什么会“记错”？问题可能出在它看到的世界 你先问天气 Agent：“北京明天要不要带伞？”它查到北京有小雨，建议带伞。接着你问：“那上海呢？” 天气工具明明查到上海晴，Agent 却回答： 北京明天有小雨，建议带伞。 如果你在排查这个问题，很容易先怀疑多轮记忆：Agent 是不是把北京记得太牢了？可重试天气接口没有用，城市提取和工具结果都是对…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E2%80%9C%E8%AE%B0%E9%94%99%E2%80%9D%EF%BC%9F%E9%97%AE%E9%A2%98%E5%8F%AF%E8%83%BD%E5%87%BA%E5%9C%A8%E5%AE%83%E7%9C%8B%E5%88%B0%E7%9A%84%E4%B8%96%E7%95%8C",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E2%80%9C%E8%AE%B0%E9%94%99%E2%80%9D%EF%BC%9F%E9%97%AE%E9%A2%98%E5%8F%AF%E8%83%BD%E5%87%BA%E5%9C%A8%E5%AE%83%E7%9C%8B%E5%88%B0%E7%9A%84%E4%B8%96%E7%95%8C",
+        "dateModified": "2026-09-09T07:56:45.081Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 154,
+      "item": {
+        "@type": "Article",
+        "headline": "Agent 为什么会走对每一步，却到达错误的终点？",
+        "description": "Agent 为什么会走对每一步，却到达错误的终点？ 你让一个旅行 Agent 从杭州、苏州、宁波里选一个周末目的地： 降雨概率不能超过 20%，往返车票不能超过 300 元。如果都不满足，就建议我延期。 Agent 查完以后，拿到这些结果： 天气没有查错，票价也没有算错。 三个城市明明都不符合条件，它却回答： 推荐杭州。票价最便宜，周末下雨的话带伞即可。 …",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%B5%B0%E5%AF%B9%E6%AF%8F%E4%B8%80%E6%AD%A5%EF%BC%8C%E5%8D%B4%E5%88%B0%E8%BE%BE%E9%94%99%E8%AF%AF%E7%9A%84%E7%BB%88%E7%82%B9%EF%BC%9F",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%B5%B0%E5%AF%B9%E6%AF%8F%E4%B8%80%E6%AD%A5%EF%BC%8C%E5%8D%B4%E5%88%B0%E8%BE%BE%E9%94%99%E8%AF%AF%E7%9A%84%E7%BB%88%E7%82%B9%EF%BC%9F",
+        "dateModified": "2026-09-09T07:56:45.435Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 155,
+      "item": {
+        "@type": "Article",
+        "headline": "Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith",
+        "description": "Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith 上一篇《LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂》里，天气 Agent 已经会跨轮补信息、暂停等待，也会在天气接口失败时重试。 它看起来能用了。 有一天，用户问： 北京明天要不要带伞？ 天气工具返回： 小雨，降雨概率 70%。 Agent 最终却说： 晴天，不用…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E8%BF%99%E6%AC%A1%E7%AD%94%E5%AF%B9%E4%BA%86%EF%BC%8C%E4%B8%8B%E6%AC%A1%E5%91%A2%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20LangSmith",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E8%BF%99%E6%AC%A1%E7%AD%94%E5%AF%B9%E4%BA%86%EF%BC%8C%E4%B8%8B%E6%AC%A1%E5%91%A2%EF%BC%9F%E4%B8%80%E4%B8%AA%E5%A4%A9%E6%B0%94%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20LangSmith",
+        "dateModified": "2026-09-09T07:56:45.757Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 156,
+      "item": {
+        "@type": "Article",
+        "headline": "Claude Dreaming vs Hermes Skill：帮你入坑 Agent Memory",
+        "description": "Claude Dreaming vs Hermes Skill：帮你入坑 Agent Memory Claude 有 Dreaming，Hermes 有 Skill。 看着都在做同一件事： 让 AI 从经验中学习。 从 Agent Architecture 来看，它们其实属于两个完全不同的层级： Dreaming 关心的是：哪些经验值得长期记住？ Skil…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Claude%20Dreaming%20vs%20Hermes%20Skill%EF%BC%9A%E5%B8%AE%E4%BD%A0%E5%85%A5%E5%9D%91%20Agent%20Memory",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Claude%20Dreaming%20vs%20Hermes%20Skill%EF%BC%9A%E5%B8%AE%E4%BD%A0%E5%85%A5%E5%9D%91%20Agent%20Memory",
+        "dateModified": "2026-09-09T07:56:48.193Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 157,
+      "item": {
+        "@type": "Article",
+        "headline": "Claude Sonnet 5 的 Token 消耗更多了？一文看懂 Token 的演化",
+        "description": "Claude Sonnet 5 的 Token 消耗更多了？一文看懂 Token 的演化 Anthropic 发布 Claude Sonnet 5 后，在更新说明里专门提到一件事： Claude Sonnet 5 uses a new tokenizer. The same input text produces approximately 30% mor…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Claude%20Sonnet%205%20%E7%9A%84%20Token%20%E6%B6%88%E8%80%97%E6%9B%B4%E5%A4%9A%E4%BA%86%EF%BC%9F%E4%B8%80%E6%96%87%E7%9C%8B%E6%87%82%20Token%20%E7%9A%84%E6%BC%94%E5%8C%96",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Claude%20Sonnet%205%20%E7%9A%84%20Token%20%E6%B6%88%E8%80%97%E6%9B%B4%E5%A4%9A%E4%BA%86%EF%BC%9F%E4%B8%80%E6%96%87%E7%9C%8B%E6%87%82%20Token%20%E7%9A%84%E6%BC%94%E5%8C%96",
+        "dateModified": "2026-09-09T07:56:48.490Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 158,
+      "item": {
+        "@type": "Article",
+        "headline": "DeepSeek 为什么也开始造 Harness？因为模型已经解释不了 Agent 为什么好用",
+        "description": "DeepSeek 为什么也开始造 Harness？因为模型已经解释不了 Agent 为什么好用 看到一个 Agent 很好用，我们通常会先问： 它背后是什么模型？ 这个问题正变得不够用了。 同一个模型，放进不同产品里，一个只能告诉你“代码应该怎么改”，另一个却能自己读文件、运行测试、发现失败、继续修改，最后交出可以验证的结果。 模型没有变。后者多出来的，是…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/DeepSeek%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E5%BC%80%E5%A7%8B%E9%80%A0%20Harness%EF%BC%9F%E5%9B%A0%E4%B8%BA%E6%A8%A1%E5%9E%8B%E5%B7%B2%E7%BB%8F%E8%A7%A3%E9%87%8A%E4%B8%8D%E4%BA%86%20Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A5%BD%E7%94%A8",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/DeepSeek%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E5%BC%80%E5%A7%8B%E9%80%A0%20Harness%EF%BC%9F%E5%9B%A0%E4%B8%BA%E6%A8%A1%E5%9E%8B%E5%B7%B2%E7%BB%8F%E8%A7%A3%E9%87%8A%E4%B8%8D%E4%BA%86%20Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A5%BD%E7%94%A8",
+        "dateModified": "2026-09-09T07:56:48.806Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 159,
+      "item": {
+        "@type": "Article",
+        "headline": "LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂",
+        "description": "LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂 上一篇《什么是 ReAct？一个例子看懂 AI Agent 原理》里，我们做出了一个会查天气的 Agent。 模型发现自己不知道实时天气，就调用工具；工具返回结果，模型再回答。任务没结束，就继续循环。 这已经是 Agent 了。LangGraph 又多解决了什么？ 还是从查天气开始。 一句…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/LangGraph%20%E5%88%B0%E5%BA%95%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F%E7%94%A8%E4%B8%80%E4%B8%AA%E6%9F%A5%E5%A4%A9%E6%B0%94%E7%9A%84%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/LangGraph%20%E5%88%B0%E5%BA%95%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F%E7%94%A8%E4%B8%80%E4%B8%AA%E6%9F%A5%E5%A4%A9%E6%B0%94%E7%9A%84%E7%AE%80%E5%8D%95%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82",
+        "dateModified": "2026-09-09T07:56:46.098Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 160,
+      "item": {
+        "@type": "Article",
+        "headline": "Prompt 堆叠的尽头，是系统设计问题",
+        "description": "Prompt 堆叠的尽头，是系统设计问题 做 Code Review Agent 时，最容易发生的事不是 Prompt 写错，而是 Prompt 越改越对。 某次模型漏掉了一个空指针风险，于是在 Prompt 里补一句： 不要遗漏潜在风险。 下一次，它把一个理论上可能发生、实际路径根本走不到的并发问题也报了出来。于是再补一句： 不要过度推测，只报告有充分依…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Prompt%20%E5%A0%86%E5%8F%A0%E7%9A%84%E5%B0%BD%E5%A4%B4%EF%BC%8C%E6%98%AF%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E9%97%AE%E9%A2%98",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Prompt%20%E5%A0%86%E5%8F%A0%E7%9A%84%E5%B0%BD%E5%A4%B4%EF%BC%8C%E6%98%AF%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E9%97%AE%E9%A2%98",
+        "dateModified": "2026-09-09T07:56:54.182Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 161,
+      "item": {
+        "@type": "Article",
+        "headline": "“我没想法”只是一种错觉",
+        "description": "“我没想法”只是一种错觉 开会时，我偶尔会有一种很熟悉的感觉。 大家讨论同一个问题，某个同事随口说了一句，方向未必完整，却一下打开了新的思路。 我听完会想： 这个我怎么没想到？ 可回头看，自己并不是什么都没有想。 脑子里其实出现过一些模糊的念头，只是很快又被自己否定了： “这个方案是不是太普通了？” “好像有点不对，但我说不清。” “别人应该早就想过了。”…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E2%80%9C%E6%88%91%E6%B2%A1%E6%83%B3%E6%B3%95%E2%80%9D%E5%8F%AA%E6%98%AF%E4%B8%80%E7%A7%8D%E9%94%99%E8%A7%89",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E2%80%9C%E6%88%91%E6%B2%A1%E6%83%B3%E6%B3%95%E2%80%9D%E5%8F%AA%E6%98%AF%E4%B8%80%E7%A7%8D%E9%94%99%E8%A7%89",
+        "dateModified": "2026-09-09T07:56:53.235Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 162,
+      "item": {
+        "@type": "Article",
+        "headline": "一次服药，还是连吃五天：从两种流感药看 AI 系统设计",
+        "description": "一次服药，还是连吃五天：从两种流感药看 AI 系统设计 最近比较两种流感药时，我注意到一个很直观的差别。 奥司他韦通常一天两次，连续吃五天；玛巴洛沙韦则按体重单次服用。对患者而言，差别很实际：一种要记住十次，另一种只要吃一次。 人很容易把“一次服药”理解成药效更强、技术更先进。但继续看药物机制，结论没有这么简单。 这件事也让我想到 AI 产品。我们常用模型…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%B8%80%E6%AC%A1%E6%9C%8D%E8%8D%AF%EF%BC%8C%E8%BF%98%E6%98%AF%E8%BF%9E%E5%90%83%E4%BA%94%E5%A4%A9%EF%BC%9A%E4%BB%8E%E4%B8%A4%E7%A7%8D%E6%B5%81%E6%84%9F%E8%8D%AF%E7%9C%8B%20AI%20%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%B8%80%E6%AC%A1%E6%9C%8D%E8%8D%AF%EF%BC%8C%E8%BF%98%E6%98%AF%E8%BF%9E%E5%90%83%E4%BA%94%E5%A4%A9%EF%BC%9A%E4%BB%8E%E4%B8%A4%E7%A7%8D%E6%B5%81%E6%84%9F%E8%8D%AF%E7%9C%8B%20AI%20%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1",
+        "dateModified": "2026-09-09T07:56:54.506Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 163,
+      "item": {
+        "@type": "Article",
+        "headline": "为什么 AI 应用开发更需要贝叶斯思想？",
+        "description": "AI 应用研发比传统软件研发更需要贝叶斯决策思想。原因不是 AI 更复杂，而是 AI 产品的不确定性远高于传统软件。 传统软件实现的是确定需求： 用户点击按钮 → 后端计算 → 返回结果。 AI 应用在不断验证概率问题： 用户真的需要这个能力吗？（需求不确定） Prompt 是否有效？（方案不确定） Model A 还是 Model B 更好？（模型不确定…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%B8%BA%E4%BB%80%E4%B9%88%20AI%20%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E6%9B%B4%E9%9C%80%E8%A6%81%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%80%9D%E6%83%B3%EF%BC%9F",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%B8%BA%E4%BB%80%E4%B9%88%20AI%20%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E6%9B%B4%E9%9C%80%E8%A6%81%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%80%9D%E6%83%B3%EF%BC%9F",
+        "dateModified": "2026-09-09T07:56:49.298Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 164,
+      "item": {
+        "@type": "Article",
+        "headline": "为什么AI指令应该优先写“不该做什么”",
+        "description": "一、问题的起点：正向清单无法穷举 指令设计的直觉往往导向“应该做什么”。产品经理、提示词工程师、普通用户，第一反应几乎都是描述期望：你应该礼貌、应该详细、应该主动追问。 但正向清单存在一个无法解决的缺陷：它不可能穷举。没有设计者能遍历所有场景，而大模型作为概率系统，在未被明确指引的灰色地带会本能地选择“讨好”——帮用户合理化一个糟糕的决策，为明显错误的命题…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%B8%BA%E4%BB%80%E4%B9%88AI%E6%8C%87%E4%BB%A4%E5%BA%94%E8%AF%A5%E4%BC%98%E5%85%88%E5%86%99%E2%80%9C%E4%B8%8D%E8%AF%A5%E5%81%9A%E4%BB%80%E4%B9%88%E2%80%9D",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%B8%BA%E4%BB%80%E4%B9%88AI%E6%8C%87%E4%BB%A4%E5%BA%94%E8%AF%A5%E4%BC%98%E5%85%88%E5%86%99%E2%80%9C%E4%B8%8D%E8%AF%A5%E5%81%9A%E4%BB%80%E4%B9%88%E2%80%9D",
+        "dateModified": "2026-09-09T07:56:54.808Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 165,
+      "item": {
+        "@type": "Article",
+        "headline": "为什么俄罗斯方块不用重学，而 Prompt 总要重写？",
+        "description": "为什么俄罗斯方块不用重学，而 Prompt 总要重写？ 很多人都遇到过：模型一换，Prompt 就得重写。原先很稳的指令开始跑偏，有些约束不再生效。 后来我开始留意那些底层技术几经迭代、用户经验却能留下来的系统。俄罗斯方块就是一个有趣的例子：它从早期计算机跑到掌机、手机和网页，平台换了好几轮；今天第一次打开它的人，仍然不需要重新学习这个游戏在玩什么。 底层…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BF%84%E7%BD%97%E6%96%AF%E6%96%B9%E5%9D%97%E4%B8%8D%E7%94%A8%E9%87%8D%E5%AD%A6%EF%BC%8C%E8%80%8C%20Prompt%20%E6%80%BB%E8%A6%81%E9%87%8D%E5%86%99%EF%BC%9F",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BF%84%E7%BD%97%E6%96%AF%E6%96%B9%E5%9D%97%E4%B8%8D%E7%94%A8%E9%87%8D%E5%AD%A6%EF%BC%8C%E8%80%8C%20Prompt%20%E6%80%BB%E8%A6%81%E9%87%8D%E5%86%99%EF%BC%9F",
+        "dateModified": "2026-09-09T07:56:44.777Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 166,
+      "item": {
+        "@type": "Article",
+        "headline": "为什么几乎所有复杂系统，都会走向\"不断加规则\"？",
+        "description": "为什么几乎所有复杂系统，都会走向\"不断加规则\"？ 前文 《Prompt堆叠的尽头是系统设计》 讲了一个核心观点： 当 Prompt 开始堆叠描述“如何权衡多个冲突目标”时，问题已经不在 Prompt，而在系统设计本身。 现在打算把这个观点往前再推一步； 规则的本质是堵住一个具体的漏洞。 反馈的本质是让系统自己知道发生了什么，然后自己调整。 规则解决“这次”…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%B8%BA%E4%BB%80%E4%B9%88%E5%87%A0%E4%B9%8E%E6%89%80%E6%9C%89%E5%A4%8D%E6%9D%82%E7%B3%BB%E7%BB%9F%EF%BC%8C%E9%83%BD%E4%BC%9A%E8%B5%B0%E5%90%91%22%E4%B8%8D%E6%96%AD%E5%8A%A0%E8%A7%84%E5%88%99%22%EF%BC%9F",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%B8%BA%E4%BB%80%E4%B9%88%E5%87%A0%E4%B9%8E%E6%89%80%E6%9C%89%E5%A4%8D%E6%9D%82%E7%B3%BB%E7%BB%9F%EF%BC%8C%E9%83%BD%E4%BC%9A%E8%B5%B0%E5%90%91%22%E4%B8%8D%E6%96%AD%E5%8A%A0%E8%A7%84%E5%88%99%22%EF%BC%9F",
+        "dateModified": "2026-09-09T07:56:55.150Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 167,
+      "item": {
+        "@type": "Article",
+        "headline": "什么是 ReAct？一个例子看懂 AI Agent 原理",
+        "description": "什么是 ReAct？一个例子看懂 AI Agent 原理 Agent 不是一种神秘技术。 先把 LangGraph、AutoGen、OpenAI Agents SDK、CrewAI 这些框架放到一边，只看最里面的运行逻辑： Agent = LLM + 循环（Loop）+ 工具（Tool）+ 状态（State） 这篇文章不用任何框架。我们从一个只有十几行代码…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%BB%80%E4%B9%88%E6%98%AF%20ReAct%EF%BC%9F%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20Agent%20%E5%8E%9F%E7%90%86",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%BB%80%E4%B9%88%E6%98%AF%20ReAct%EF%BC%9F%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20Agent%20%E5%8E%9F%E7%90%86",
+        "dateModified": "2026-09-09T07:56:46.436Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 168,
+      "item": {
+        "@type": "Article",
+        "headline": "从 AI Agent 的 BubbleWrap 沙箱，看“世界与地图”的隔离哲学",
+        "description": "从 AI Agent 的 BubbleWrap 沙箱，看“世界与地图”的隔离哲学 在研究 AI Agent 的运行环境时，经常会看到一个工具： 从定义上来说，它是一个基于 Linux Namespace 的轻量级沙箱工具。很多桌面应用、容器运行时以及 AI Agent 的执行环境都会使用它来限制程序能够访问的资源。 不过，如果只把 Bubblewrap 理…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%BB%8E%20AI%20Agent%20%E7%9A%84%20BubbleWrap%20%E6%B2%99%E7%AE%B1%EF%BC%8C%E7%9C%8B%E2%80%9C%E4%B8%96%E7%95%8C%E4%B8%8E%E5%9C%B0%E5%9B%BE%E2%80%9D%E7%9A%84%E9%9A%94%E7%A6%BB",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%BB%8E%20AI%20Agent%20%E7%9A%84%20BubbleWrap%20%E6%B2%99%E7%AE%B1%EF%BC%8C%E7%9C%8B%E2%80%9C%E4%B8%96%E7%95%8C%E4%B8%8E%E5%9C%B0%E5%9B%BE%E2%80%9D%E7%9A%84%E9%9A%94%E7%A6%BB",
+        "dateModified": "2026-09-09T07:56:55.436Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 169,
+      "item": {
+        "@type": "Article",
+        "headline": "从 Loop 到 Graph Engineering：当一件事变成多条支线",
+        "description": "从 Loop 到 Graph Engineering：当一件事变成多条支线 这篇接着《从 Prompt 到 Loop Engineering：一个简单例子看懂 AI 工程的四次升级》往外讲。先把 Loop 理解成“做、检查、不合格就重试”的小循环就够了。 还是“夏日读书会”，只是任务多了一点。 只要一条文案：一个 Loop 运营给出活动资料，文案 Agen…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%BB%8E%20Loop%20%E5%88%B0%20Graph%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%E5%A4%9A%20Agent%20%E6%80%8E%E4%B9%88%E5%8D%8F%E4%BD%9C",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%BB%8E%20Loop%20%E5%88%B0%20Graph%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%E5%A4%9A%20Agent%20%E6%80%8E%E4%B9%88%E5%8D%8F%E4%BD%9C",
+        "dateModified": "2026-09-09T07:56:46.758Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 170,
+      "item": {
+        "@type": "Article",
+        "headline": "从 Prompt 到 Loop Engineering：一个简单例子看懂 AI 工程的四次升级",
+        "description": "从 Prompt 到 Loop Engineering：一个简单例子看懂 AI 工程的四次升级 最近又冒出一个词：Loop Engineering。 Prompt Engineering、Context Engineering、Harness Engineering，再加上 Loop Engineering。这样的术语生产速度，上一次见到还是在鼎盛时期的前…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%BB%8E%20Prompt%20%E5%88%B0%20Loop%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%E7%9A%84%E5%9B%9B%E6%AC%A1%E5%8D%87%E7%BA%A7",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%BB%8E%20Prompt%20%E5%88%B0%20Loop%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%E7%9A%84%E5%9B%9B%E6%AC%A1%E5%8D%87%E7%BA%A7",
+        "dateModified": "2026-09-09T07:56:47.068Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 171,
+      "item": {
+        "@type": "Article",
+        "headline": "从支付宝体验技术部“解散”，看 AI 时代的人才选拔逻辑",
+        "description": "从支付宝体验技术部“解散”，看 AI 时代的人才选拔逻辑 一、现象：岗位边界变了，筛选方式还没变 最近网传支付宝体验技术部被拆分。根据目前的公开报道，成员被分流到各个业务线，岗位也在向 Agent 全栈开发转型。 我倒没有因此担心前端会消失。页面仍然要写，交互和性能问题也不会自己解决。真正发生变化的，是工程师负责的范围。 过去，一个前端工程师把页面交付好，…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%BB%8E%E6%94%AF%E4%BB%98%E5%AE%9D%E4%BD%93%E9%AA%8C%E6%8A%80%E6%9C%AF%E9%83%A8%E2%80%9C%E8%A7%A3%E6%95%A3%E2%80%9D%EF%BC%8C%E7%9C%8B%20AI%20%E6%97%B6%E4%BB%A3%E7%9A%84%E4%BA%BA%E6%89%8D%E9%80%89%E6%8B%94%E9%80%BB%E8%BE%91",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%BB%8E%E6%94%AF%E4%BB%98%E5%AE%9D%E4%BD%93%E9%AA%8C%E6%8A%80%E6%9C%AF%E9%83%A8%E2%80%9C%E8%A7%A3%E6%95%A3%E2%80%9D%EF%BC%8C%E7%9C%8B%20AI%20%E6%97%B6%E4%BB%A3%E7%9A%84%E4%BA%BA%E6%89%8D%E9%80%89%E6%8B%94%E9%80%BB%E8%BE%91",
+        "dateModified": "2026-09-09T07:56:55.807Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 172,
+      "item": {
+        "@type": "Article",
+        "headline": "代码定义结构，权重存储知识：一个例子看懂大模型如何推理",
+        "description": "代码定义结构，权重存储知识：一个例子看懂大模型如何推理 下载一个开源模型时，经常会看到一种奇怪现象：模型代码只有几十 KB，权重文件却有几个 GB，甚至几十 GB。 为什么会差这么多？模型的知识究竟在代码里，还是在那几个 GB 的权重文件里？输入一句话以后，两者又怎样配合得出结果？ 这些问题不必从 Transformer 或注意力机制讲起。先看一个只有 3…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%BB%A3%E7%A0%81%E5%AE%9A%E4%B9%89%E7%BB%93%E6%9E%84%EF%BC%8C%E6%9D%83%E9%87%8D%E5%AD%98%E5%82%A8%E7%9F%A5%E8%AF%86%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%A6%82%E4%BD%95%E6%8E%A8%E7%90%86",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%BB%A3%E7%A0%81%E5%AE%9A%E4%B9%89%E7%BB%93%E6%9E%84%EF%BC%8C%E6%9D%83%E9%87%8D%E5%AD%98%E5%82%A8%E7%9F%A5%E8%AF%86%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%A6%82%E4%BD%95%E6%8E%A8%E7%90%86",
+        "dateModified": "2026-09-09T07:56:52.224Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 173,
+      "item": {
+        "@type": "Article",
+        "headline": "你刷到的内容越来越像，因为算法也在训练创作者",
+        "description": "你刷到的内容越来越像，因为算法也在训练创作者 最近刷到一个新账号。 两篇内容，讲的是同一个故事：普通学历，专升本、考研，一路逆袭；现在读研，自媒体月入五位数。配图是旅游、美食和看起来松弛自在的生活。 我无法判断收入是真是假，也不是想判断这件事。让我停下来的是：两篇内容几乎用了同一套叙事。而且类似的账号、标题和人物经历并不少见。 它们来自不同的人，却像是从同…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%BD%A0%E5%88%B7%E5%88%B0%E7%9A%84%E5%86%85%E5%AE%B9%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%83%8F%EF%BC%8C%E5%9B%A0%E4%B8%BA%E7%AE%97%E6%B3%95%E4%B9%9F%E5%9C%A8%E8%AE%AD%E7%BB%83%E5%88%9B%E4%BD%9C%E8%80%85",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%BD%A0%E5%88%B7%E5%88%B0%E7%9A%84%E5%86%85%E5%AE%B9%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%83%8F%EF%BC%8C%E5%9B%A0%E4%B8%BA%E7%AE%97%E6%B3%95%E4%B9%9F%E5%9C%A8%E8%AE%AD%E7%BB%83%E5%88%9B%E4%BD%9C%E8%80%85",
+        "dateModified": "2026-09-09T07:56:53.561Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 174,
+      "item": {
+        "@type": "Article",
+        "headline": "内容没变，AI 推荐却更少了：GEO 为什么这么难量化？",
+        "description": "内容没变，AI 推荐却更少了：GEO 为什么这么难量化？ 假设有一款代码审查工具，叫 PatchPilot。官网可以被搜到，但用户让 AI 推荐支持 GitLab、私有化部署的 Merge Request 审查工具时，它很少出现在答案里。（想了解背景，可以先看《AI 为什么没把你写进答案？从一句产品推荐读懂 GEO》） 我们改写了它的首页，补上 GitLa…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E5%86%85%E5%AE%B9%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%8E%A8%E8%8D%90%E5%8D%B4%E6%9B%B4%E5%B0%91%E4%BA%86%EF%BC%9AGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E5%86%85%E5%AE%B9%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%8E%A8%E8%8D%90%E5%8D%B4%E6%9B%B4%E5%B0%91%E4%BA%86%EF%BC%9AGEO%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E9%9A%BE%E9%87%8F%E5%8C%96%EF%BC%9F",
+        "dateModified": "2026-09-09T07:56:49.574Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 175,
+      "item": {
+        "@type": "Article",
+        "headline": "又便宜又强，就能“斩杀”其他大模型吗？",
+        "description": "又便宜又强，就能“斩杀”其他大模型吗？ 最近，大模型圈里经常出现一类图表。 一条轴是能力，越高越好；另一条轴是成本，越低越好。 如果一个新模型比另一个模型更强，价格还更低，后者就会落进一片很醒目的区域： 2026 年 7 月 31 日发布的 DeepSeek V4 Flash 0731，就成了这类讨论中的新参照。 截至 2026 年 9 月 4 日，Art…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E5%8F%88%E4%BE%BF%E5%AE%9C%E5%8F%88%E5%BC%BA%EF%BC%8C%E5%B0%B1%E8%83%BD%E2%80%9C%E6%96%A9%E6%9D%80%E2%80%9D%E5%85%B6%E4%BB%96%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%90%97%EF%BC%9F",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E5%8F%88%E4%BE%BF%E5%AE%9C%E5%8F%88%E5%BC%BA%EF%BC%8C%E5%B0%B1%E8%83%BD%E2%80%9C%E6%96%A9%E6%9D%80%E2%80%9D%E5%85%B6%E4%BB%96%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%90%97%EF%BC%9F",
+        "dateModified": "2026-09-09T07:56:49.927Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 176,
+      "item": {
+        "@type": "Article",
+        "headline": "只让 Claude 改了几句话，也会被当成 AI 代写吗？",
+        "description": "只让 Claude 改了几句话，也会被当成 AI 代写吗？ 你自己写完一份报告，只让 Claude 帮忙改了几处语病。 观点是你的，数据是你的，初稿也是你的。你把润色后的版本复制进文档，没有再改。 现在，这份文档可能带着一枚你看不见的 Claude 水印。 Anthropic 最近宣布，符合条件的 Claude 模型会给输出加入机器可识别的标记。文本水印会…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E5%8F%AA%E8%AE%A9%20Claude%20%E6%94%B9%E4%BA%86%E5%87%A0%E5%8F%A5%E8%AF%9D%EF%BC%8C%E4%B9%9F%E4%BC%9A%E8%A2%AB%E5%BD%93%E6%88%90%20AI%20%E4%BB%A3%E5%86%99%E5%90%97%EF%BC%9F",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E5%8F%AA%E8%AE%A9%20Claude%20%E6%94%B9%E4%BA%86%E5%87%A0%E5%8F%A5%E8%AF%9D%EF%BC%8C%E4%B9%9F%E4%BC%9A%E8%A2%AB%E5%BD%93%E6%88%90%20AI%20%E4%BB%A3%E5%86%99%E5%90%97%EF%BC%9F",
+        "dateModified": "2026-09-09T07:56:50.253Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 177,
+      "item": {
+        "@type": "Article",
+        "headline": "图片里没有文字，AI是怎么凭一句话把它搜出来的？",
+        "description": "图片里没有文字，AI是怎么凭一句话把它搜出来的？ 在支持自然语言搜索的相册或图片库里，输入一句： 雨天撑伞的人 系统很快就能找出相关照片。 奇怪的是，照片里并没有写着“雨天撑伞的人”。它的文件名可能只是 IMG 5832.jpg ，也没有人提前给它加上这句标签。 如果只做传统关键词匹配，图片的文件名、标签或说明文字里，需要提前出现相关的词。 可图片由像素组…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E5%9B%BE%E7%89%87%E9%87%8C%E6%B2%A1%E6%9C%89%E6%96%87%E5%AD%97%EF%BC%8CAI%E6%98%AF%E6%80%8E%E4%B9%88%E5%87%AD%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%8A%8A%E5%AE%83%E6%90%9C%E5%87%BA%E6%9D%A5%E7%9A%84%EF%BC%9F",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E5%9B%BE%E7%89%87%E9%87%8C%E6%B2%A1%E6%9C%89%E6%96%87%E5%AD%97%EF%BC%8CAI%E6%98%AF%E6%80%8E%E4%B9%88%E5%87%AD%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%8A%8A%E5%AE%83%E6%90%9C%E5%87%BA%E6%9D%A5%E7%9A%84%EF%BC%9F",
+        "dateModified": "2026-09-09T07:56:52.561Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 178,
+      "item": {
+        "@type": "Article",
+        "headline": "大模型没有眼睛，一张截图是怎么变成回答的？",
+        "description": "大模型没有眼睛，一张截图是怎么变成回答的？ 你上传一张应用截图，然后问： 这个页面哪里不对？ 模型可能指出按钮没有对齐、文字被截断，甚至能发现弹窗挡住了下面的操作。 这件事有点奇怪。 语言模型原本处理的是文字。它接收前面的 Token，预测下一个 Token。图片既没有词语，也没有句子，只有排列在二维网格里的像素。 一台只会接收文字的模型，是怎样开始看图的…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%B2%A1%E6%9C%89%E7%9C%BC%E7%9D%9B%EF%BC%8C%E4%B8%80%E5%BC%A0%E6%88%AA%E5%9B%BE%E6%98%AF%E6%80%8E%E4%B9%88%E5%8F%98%E6%88%90%E5%9B%9E%E7%AD%94%E7%9A%84%EF%BC%9F",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%B2%A1%E6%9C%89%E7%9C%BC%E7%9D%9B%EF%BC%8C%E4%B8%80%E5%BC%A0%E6%88%AA%E5%9B%BE%E6%98%AF%E6%80%8E%E4%B9%88%E5%8F%98%E6%88%90%E5%9B%9E%E7%AD%94%E7%9A%84%EF%BC%9F",
+        "dateModified": "2026-09-09T07:56:52.883Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 179,
+      "item": {
+        "@type": "Article",
+        "headline": "当十个链接被压成一句话：Google 与 ChatGPT 在争夺什么？",
+        "description": "当十个链接被压成一句话：Google 与 ChatGPT 在争夺什么？ 假设有一款虚构的代码审查工具，叫 PatchPilot。它支持 GitLab Merge Request 自动审查和私有化部署。 一个 20 人的 GitLab 团队想判断它是否适合自己，于是向 AI 提问。AI 搜索了官网、价格页、第三方评测和用户讨论，给出了十个引用链接。 最后答案…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E5%BD%93%E5%8D%81%E4%B8%AA%E9%93%BE%E6%8E%A5%E8%A2%AB%E5%8E%8B%E6%88%90%E4%B8%80%E5%8F%A5%E8%AF%9D%EF%BC%9AGoogle%20%E4%B8%8E%20ChatGPT%20%E5%9C%A8%E4%BA%89%E5%A4%BA%E4%BB%80%E4%B9%88%EF%BC%9F",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E5%BD%93%E5%8D%81%E4%B8%AA%E9%93%BE%E6%8E%A5%E8%A2%AB%E5%8E%8B%E6%88%90%E4%B8%80%E5%8F%A5%E8%AF%9D%EF%BC%9AGoogle%20%E4%B8%8E%20ChatGPT%20%E5%9C%A8%E4%BA%89%E5%A4%BA%E4%BB%80%E4%B9%88%EF%BC%9F",
+        "dateModified": "2026-09-09T07:56:50.581Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 180,
+      "item": {
+        "@type": "Article",
+        "headline": "当排行榜开始训练大模型",
+        "description": "当排行榜开始训练大模型 现在，每当一个新的大模型发布，你还会像以前一样，第一时间去看各种 Benchmark 排行榜吗？ 至少对我来说，不会。 过去，每当一个新模型发布，我最先关注的是各种 Benchmark 的成绩。 谁排第一？ 哪些指标刷新了纪录？ <u 排行榜几乎就是模型能力的代名词。</u 而在持续的观察中，更容易先冒出其他问题： 这个第一，还可信…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E5%BD%93%E6%8E%92%E8%A1%8C%E6%A6%9C%E5%BC%80%E5%A7%8B%E2%80%9C%E8%AE%AD%E7%BB%83%E2%80%9D%E5%A4%A7%E6%A8%A1%E5%9E%8B",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E5%BD%93%E6%8E%92%E8%A1%8C%E6%A6%9C%E5%BC%80%E5%A7%8B%E2%80%9C%E8%AE%AD%E7%BB%83%E2%80%9D%E5%A4%A7%E6%A8%A1%E5%9E%8B",
+        "dateModified": "2026-09-09T07:56:50.919Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 181,
+      "item": {
+        "@type": "Article",
+        "headline": "Prompt 没变，为什么换个模型，行为就变了？",
+        "description": "Prompt 没变，为什么换个模型，行为就变了？ 假设我们做了一个技术简报助手。 输入五篇资料，它负责写一篇 500～800 字的中文简报。Prompt 很普通： 它稳定运行了一段时间。事实基本准确，遇到互相矛盾的资料，也知道把分歧留下来。 后来模型升级了。 新模型写得明显更顺，标题也更像人写的。可仔细一看，两个来源原本还在争论，它却替双方总结出了一个确定…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%8D%A2%EF%BC%8CPrompt%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%A4%B1%E6%95%88%EF%BC%9F%E4%BB%8E%E9%9A%90%E5%90%AB%E9%BB%98%E5%A5%91%E5%88%B0%E8%A1%8C%E4%B8%BA%E5%8D%8F%E8%AE%AE",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E6%A8%A1%E5%9E%8B%E4%B8%80%E6%8D%A2%EF%BC%8CPrompt%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%A4%B1%E6%95%88%EF%BC%9F%E4%BB%8E%E9%9A%90%E5%90%AB%E9%BB%98%E5%A5%91%E5%88%B0%E8%A1%8C%E4%B8%BA%E5%8D%8F%E8%AE%AE",
+        "dateModified": "2026-09-09T07:56:51.267Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 182,
+      "item": {
+        "@type": "Article",
+        "headline": "每个人的药都不一样，药厂还怎么生产？",
+        "description": "每个人的药都不一样，药厂还怎么生产？ 药厂最擅长的，是把同一种药稳定地生产很多份。 但有一种癌症疗法反着来：先看每位患者的肿瘤发生了哪些突变，再为他单独设计一段 mRNA。换一个患者，药里的序列也要跟着变。 这听起来更像实验室里的定制品，很难做大。可它已经进入一项 1137 人的 III 期临床试验。2026 年 8 月 19 日，Moderna 和 Me…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E6%AF%8F%E4%B8%AA%E4%BA%BA%E7%9A%84%E8%8D%AF%E9%83%BD%E4%B8%8D%E4%B8%80%E6%A0%B7%EF%BC%8C%E8%8D%AF%E5%8E%82%E8%BF%98%E6%80%8E%E4%B9%88%E7%94%9F%E4%BA%A7%EF%BC%9F",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E6%AF%8F%E4%B8%AA%E4%BA%BA%E7%9A%84%E8%8D%AF%E9%83%BD%E4%B8%8D%E4%B8%80%E6%A0%B7%EF%BC%8C%E8%8D%AF%E5%8E%82%E8%BF%98%E6%80%8E%E4%B9%88%E7%94%9F%E4%BA%A7%EF%BC%9F",
+        "dateModified": "2026-09-09T07:56:53.874Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
         ]
       }
     }

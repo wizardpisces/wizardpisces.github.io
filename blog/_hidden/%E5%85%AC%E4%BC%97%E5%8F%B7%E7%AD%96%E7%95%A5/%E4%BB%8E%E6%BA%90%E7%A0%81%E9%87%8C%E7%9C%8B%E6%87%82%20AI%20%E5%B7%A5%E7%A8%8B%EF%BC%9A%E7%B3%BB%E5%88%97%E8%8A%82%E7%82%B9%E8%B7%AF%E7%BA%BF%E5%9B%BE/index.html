@@ -9,7 +9,7 @@
   <meta name="author" content="LZ">
   <meta name="DC.title" content="从源码里看懂 AI 工程：系列节点路线图">
   <meta name="DC.creator" content="LZ">
-  <meta name="DC.date" content="2026-08-18">
+  <meta name="DC.date" content="2026-09-09">
   <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E6%BA%90%E7%A0%81%E9%87%8C%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE">
   <meta name="DC.publisher" content="LZ AI NOTE">
   <meta name="DC.language" content="zh-CN">
@@ -21,7 +21,7 @@
   <meta property="og:description" content="从源码里看懂 AI 工程：系列节点路线图 系列角色：知识主干·软件实现。 负责从源码证据还原 AI 基础设施与当下项目的工程取舍；只有源码、测试、Issue、RFC 或提交历史不可替代时才主归本系列。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不负责告诉读者“本周又火了什么”，而是借一份真正经受过使用的源码，讲透一个会长期存在的 AI 工程问…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E6%BA%90%E7%A0%81%E9%87%8C%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"从源码里看懂 AI 工程：系列节点路线图","description":"从源码里看懂 AI 工程：系列节点路线图 系列角色：知识主干·软件实现。 负责从源码证据还原 AI 基础设施与当下项目的工程取舍；只有源码、测试、Issue、RFC 或提交历史不可替代时才主归本系列。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不负责告诉读者“本周又火了什么”，而是借一份真正经受过使用的源码，讲透一个会长期存在的 AI 工程问…","url":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E6%BA%90%E7%A0%81%E9%87%8C%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E6%BA%90%E7%A0%81%E9%87%8C%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","dateModified":"2026-08-18","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：从源码里看懂 AI 工程：系列节点路线图，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E6%BA%90%E7%A0%81%E9%87%8C%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","about":["_hidden","公众号策略"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"从源码里看懂 AI 工程：系列节点路线图","description":"从源码里看懂 AI 工程：系列节点路线图 系列角色：知识主干·软件实现。 负责从源码证据还原 AI 基础设施与当下项目的工程取舍；只有源码、测试、Issue、RFC 或提交历史不可替代时才主归本系列。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不负责告诉读者“本周又火了什么”，而是借一份真正经受过使用的源码，讲透一个会长期存在的 AI 工程问…","url":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E6%BA%90%E7%A0%81%E9%87%8C%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E6%BA%90%E7%A0%81%E9%87%8C%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","dateModified":"2026-09-09","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：从源码里看懂 AI 工程：系列节点路线图，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E4%BB%8E%E6%BA%90%E7%A0%81%E9%87%8C%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","about":["_hidden","公众号策略"]}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>从源码里看懂 AI 工程：系列节点路线图</h1><h1>从源码里看懂 AI 工程：系列节点路线图</h1>
@@ -282,7 +282,7 @@ Python 控制流可以随时变化
 <tbody>
 <tr>
 <td>已成稿</td>
-<td><a href="../../tech/ai-%E5%A5%BD%E9%97%AE%E9%A2%98/DeepSeek%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E5%BC%80%E5%A7%8B%E9%80%A0%20Harness%EF%BC%9F%E5%9B%A0%E4%B8%BA%E6%A8%A1%E5%9E%8B%E5%B7%B2%E7%BB%8F%E8%A7%A3%E9%87%8A%E4%B8%8D%E4%BA%86%20Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A5%BD%E7%94%A8.md">DeepSeek 为什么也开始造 Harness？因为模型已经解释不了 Agent 为什么好用</a></td>
+<td><a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/DeepSeek%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E5%BC%80%E5%A7%8B%E9%80%A0%20Harness%EF%BC%9F%E5%9B%A0%E4%B8%BA%E6%A8%A1%E5%9E%8B%E5%B7%B2%E7%BB%8F%E8%A7%A3%E9%87%8A%E4%B8%8D%E4%BA%86%20Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A5%BD%E7%94%A8.md">DeepSeek 为什么也开始造 Harness？因为模型已经解释不了 Agent 为什么好用</a></td>
 <td>模型公司开始建设模型外的运行层；同一模型的 Agent 表现越来越由 Context、工具、状态、权限和 Loop 共同决定</td>
 <td>作为本次热点首发；DeepSeek 是趋势证据，不展开 Cordis API，主讲模型对 Agent 产品的“解释权”正在分散</td>
 </tr>
@@ -508,6 +508,6 @@ Python 控制流可以随时变化
 <p>动笔前必须重新核对当前源码、文档、Issue 和测试，不因为候选池曾经记录过就假设事实仍然有效。</p>
 <p>该系列适合作为现有主线之间的穿插篇：其他主线负责建立体系，源码解剖负责用成熟框架与正在发生的项目检验体系。它们共享概念，但不能重复结论。</p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-DyvYVVjE.js"></script>
+  <script type="module" crossorigin src="/assets/index-iLZuZPiJ.js"></script>
 </body>
 </html>

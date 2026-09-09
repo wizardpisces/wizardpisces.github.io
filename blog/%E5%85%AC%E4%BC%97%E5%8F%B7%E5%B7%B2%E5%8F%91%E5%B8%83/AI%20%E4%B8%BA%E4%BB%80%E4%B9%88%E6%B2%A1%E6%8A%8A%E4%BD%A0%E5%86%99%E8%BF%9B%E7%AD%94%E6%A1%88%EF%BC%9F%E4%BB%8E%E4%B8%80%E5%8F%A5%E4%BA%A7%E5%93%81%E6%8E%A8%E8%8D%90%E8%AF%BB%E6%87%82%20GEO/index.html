@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>AI 为什么没把你写进答案？从一句产品推荐读懂 GEO | LZ AI NOTE</title>
+  <meta name="description" content="AI 为什么没把你写进答案？从一句产品推荐读懂 GEO 假设我做了一款代码审查工具，叫 PatchPilot。 官网已经上线，搜产品名也能找到。首页只有两句话： 但当用户问 AI： 我们是一个 20 人的 GitLab 团队，代码不能出内网，想自动审查 Merge Request，有哪些工具适合？ AI 推荐了三款竞品，没提 PatchPilot。 页面明…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="AI 为什么没把你写进答案？从一句产品推荐读懂 GEO">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-09-09">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%8A%8A%E4%BD%A0%E5%86%99%E8%BF%9B%E7%AD%94%E6%A1%88%EF%BC%9F%E4%BB%8E%E4%B8%80%E5%8F%A5%E4%BA%A7%E5%93%81%E6%8E%A8%E8%8D%90%E8%AF%BB%E6%87%82%20GEO">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%8A%8A%E4%BD%A0%E5%86%99%E8%BF%9B%E7%AD%94%E6%A1%88%EF%BC%9F%E4%BB%8E%E4%B8%80%E5%8F%A5%E4%BA%A7%E5%93%81%E6%8E%A8%E8%8D%90%E8%AF%BB%E6%87%82%20GEO">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="AI 为什么没把你写进答案？从一句产品推荐读懂 GEO | LZ AI NOTE">
+  <meta property="og:description" content="AI 为什么没把你写进答案？从一句产品推荐读懂 GEO 假设我做了一款代码审查工具，叫 PatchPilot。 官网已经上线，搜产品名也能找到。首页只有两句话： 但当用户问 AI： 我们是一个 20 人的 GitLab 团队，代码不能出内网，想自动审查 Merge Request，有哪些工具适合？ AI 推荐了三款竞品，没提 PatchPilot。 页面明…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%8A%8A%E4%BD%A0%E5%86%99%E8%BF%9B%E7%AD%94%E6%A1%88%EF%BC%9F%E4%BB%8E%E4%B8%80%E5%8F%A5%E4%BA%A7%E5%93%81%E6%8E%A8%E8%8D%90%E8%AF%BB%E6%87%82%20GEO">
+  <meta property="og:image" content="https://wizardpisces.github.io/covers/geo-missing-from-ai-answer.png">
+  <meta name="twitter:image" content="https://wizardpisces.github.io/covers/geo-missing-from-ai-answer.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI 为什么没把你写进答案？从一句产品推荐读懂 GEO","description":"AI 为什么没把你写进答案？从一句产品推荐读懂 GEO 假设我做了一款代码审查工具，叫 PatchPilot。 官网已经上线，搜产品名也能找到。首页只有两句话： 但当用户问 AI： 我们是一个 20 人的 GitLab 团队，代码不能出内网，想自动审查 Merge Request，有哪些工具适合？ AI 推荐了三款竞品，没提 PatchPilot。 页面明…","url":"https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%8A%8A%E4%BD%A0%E5%86%99%E8%BF%9B%E7%AD%94%E6%A1%88%EF%BC%9F%E4%BB%8E%E4%B8%80%E5%8F%A5%E4%BA%A7%E5%93%81%E6%8E%A8%E8%8D%90%E8%AF%BB%E6%87%82%20GEO","mainEntityOfPage":"https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%8A%8A%E4%BD%A0%E5%86%99%E8%BF%9B%E7%AD%94%E6%A1%88%EF%BC%9F%E4%BB%8E%E4%B8%80%E5%8F%A5%E4%BA%A7%E5%93%81%E6%8E%A8%E8%8D%90%E8%AF%BB%E6%87%82%20GEO","dateModified":"2026-09-09","image":"https://wizardpisces.github.io/covers/geo-missing-from-ai-answer.png","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：AI 为什么没把你写进答案？从一句产品推荐读懂 GEO，LZ AI NOTE，https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%8A%8A%E4%BD%A0%E5%86%99%E8%BF%9B%E7%AD%94%E6%A1%88%EF%BC%9F%E4%BB%8E%E4%B8%80%E5%8F%A5%E4%BA%A7%E5%93%81%E6%8E%A8%E8%8D%90%E8%AF%BB%E6%87%82%20GEO","about":["公众号已发布"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>AI 为什么没把你写进答案？从一句产品推荐读懂 GEO</h1><h1>AI 为什么没把你写进答案？从一句产品推荐读懂 GEO</h1>
+<p>假设我做了一款代码审查工具，叫 PatchPilot。</p>
+<p>官网已经上线，搜产品名也能找到。首页只有两句话：</p>
+<pre><code class="language-text">下一代智能代码审查平台
+帮助团队更快交付高质量代码
+</code></pre>
+<p>但当用户问 AI：</p>
+<blockquote>
+<p>我们是一个 20 人的 GitLab 团队，代码不能出内网，想自动审查 Merge Request，有哪些工具适合？</p>
+</blockquote>
+<p>AI 推荐了三款竞品，没提 PatchPilot。</p>
+<p>页面明明能搜到，为什么答案里没有它？</p>
+<p>网页能被搜到，产品却进不了 AI 的回答。GEO（Generative Engine Optimization，生成式引擎优化）要处理的，正是这种落差。</p>
+<p>我们就跟着这句消失的推荐，看看它卡在了哪里。</p>
+<h2>一句话，可能触发两轮搜索</h2>
+<p>用户只问了一句话，却带着四个条件：20 人团队、使用 GitLab、代码不能出内网、需要自动审查 Merge Request。</p>
+<p>AI 搜索不一定拿着整句话只搜一次。把过程简化来看，它可以分成两步：先找候选，再围绕候选核验条件。</p>
+<pre><code class="language-text">先找候选
+GitLab Merge Request AI 代码审查工具
+支持私有化部署的 GitLab AI 代码审查工具
+
+再核验每个候选
+[产品名] 是否支持 GitLab 私有化部署
+[产品名] 会上传哪些代码或数据
+[产品名] 20 人团队如何收费
+</code></pre>
+<p>这些不是平台的真实日志，只是 Query 拆分的简化版。查询由此有了先后：第一轮回答“有哪些”，第二轮判断“哪一个真的适合”。</p>
+<p>如果 PatchPilot 在第一轮出现，第二轮就要为它找到足以支撑推荐的材料。材料够了，AI 才可能写下这句话：</p>
+<pre><code class="language-text">PatchPilot 支持 GitLab Merge Request 自动审查，可以私有化部署；
+它按活跃开发者收费，并且只读取当前 Merge Request Diff。
+</code></pre>
+<p>平台、功能、部署方式、成本和数据范围，前面拆出的问题都在这里有了回应。</p>
+<p>回头看 PatchPilot 的首页，它能支撑哪一个？</p>
+<p>一个也不能。</p>
+<p>“下一代”“智能”“更快”适合做宣传，却说不清产品支持什么平台、怎样部署，又会读取哪些数据。</p>
+<p>PatchPilot 缺的是能支撑这句推荐的证据。</p>
+<pre><code class="language-text">主张：支持私有化部署
+        ↓
+证据：部署方式、系统要求、外部依赖
+        ↓
+来源：产品文档或部署说明
+</code></pre>
+<p>这一步很容易被忽略。AI 生成答案时，挑选的不只是网页，还有网页里能够支撑某句话的内容。</p>
+<p>竞品进了答案，很可能只是因为它的文档回答了这些问题。</p>
+<p>问题找到了。我们重写 PatchPilot 的首页：</p>
+<pre><code class="language-text">PatchPilot 是一款面向 GitLab 团队的 Merge Request 代码审查工具。
+
+它读取当前 Merge Request 的 Diff，生成审查意见，
+并以 GitLab Comment 的形式写回。
+
+支持 SaaS 和私有化部署。
+按活跃开发者收费，具体套餐见价格说明。
+所需权限、数据保留时间和部署要求见对应文档。
+</code></pre>
+<p>每句话再配上对应的部署文档、权限清单和价格说明。</p>
+<p>GEO 并不需要一套神秘的“AI 文风”。这里做的事很朴素：把空话换成事实，再给事实一个可以核验的出处。</p>
+<h2>PatchPilot 究竟卡在哪一步？</h2>
+<p>把前面的过程摊开，两条路径会在检索时汇合：</p>
+<pre><code class="language-text">网页发布 → 抓取 → 收录 ──┐
+                         ├→ 检索候选 → 选择证据 → 生成答案与引用
+用户问题 → Query 拆分 ───┘
+</code></pre>
+<p>PatchPilot 沿着上面那条路进入候选；“GitLab、内网部署、MR 审查、成本”沿着下面那条路变成检索条件。</p>
+<p>为了继续追踪这句推荐，我们先假设旧首页已经进入候选。它仍会停在“选择证据”：页面找到了，里面却没有一句内容能支撑那条推荐。</p>
+<p>这时再看 SEO 和 GEO，两者的关系就很清楚了：</p>
+<pre><code class="language-text">SEO 主要把页面送进候选
+GEO 继续争取让其中的主张进入答案
+</code></pre>
+<p>这条线并不绝对。GEO 同样离不开抓取、收录和检索，只是内容竞争又多了一层：网页排在哪里仍然重要，网页里的哪条主张能进入答案也开始变得重要。</p>
+<p>GEO 要提高的，是一条真实主张从检索候选走到最终答案的概率。前提仍然是有事实、有证据；它不能让 AI 凭空信任某个品牌。</p>
+<h2>进入答案，只是一次命中</h2>
+<p>页面重新抓取后，我们再问一次。这回，AI 终于写出了最开始缺失的那句话，也引用了 PatchPilot 的部署文档。</p>
+<p>到这里，第一个问题有了答案：PatchPilot 不是无法被搜索，而是缺少足以支撑推荐的事实和证据。</p>
+<p>可一次出现，还不能证明 GEO 生效了。</p>
+<p>同一个问题多问几遍，PatchPilot 可能时而出现，时而消失；稍微换个问法，它甚至又被说成免费云服务。一张截图只能证明“它出现过”，证明不了这次优化能够稳定复现。</p>
+<p>更麻烦的情况随后出现了：页面一个字没改，平台只是升级了搜索模型，PatchPilot 被准确提到的次数却下降了。</p>
+<p>模型变强了，GEO 数据为什么反而掉了？</p>
+<p>下一篇，我们继续追踪 PatchPilot，看看怎样测量一个会随模型、检索系统和时间不断移动的靶。</p>
+<h2>References</h2>
+<ol>
+<li>
+<p>GEO: Generative Engine Optimization（KDD 2024）：<a href="https://arxiv.org/abs/2311.09735">https://arxiv.org/abs/2311.09735</a></p>
+</li>
+<li>
+<p>ChatGPT Search：<a href="https://help.openai.com/en/articles/9237897-chatgpt-search">https://help.openai.com/en/articles/9237897-chatgpt-search</a></p>
+</li>
+<li>
+<p>Publishers and Developers - FAQ：<a href="https://help.openai.com/en/articles/12627856">https://help.openai.com/en/articles/12627856</a></p>
+</li>
+<li>
+<p>AI features and your website：<a href="https://developers.google.com/search/docs/appearance/ai-features">https://developers.google.com/search/docs/appearance/ai-features</a></p>
+</li>
+<li>
+<p>Optimizing your website for generative AI features on Google Search：<a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide">https://developers.google.com/search/docs/fundamentals/ai-optimization-guide</a></p>
+</li>
+<li>
+<p>Introducing Search Generative AI performance reports in Search Console：<a href="https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports">https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports</a></p>
+</li>
+</ol>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-iLZuZPiJ.js"></script>
+</body>
+</html>
