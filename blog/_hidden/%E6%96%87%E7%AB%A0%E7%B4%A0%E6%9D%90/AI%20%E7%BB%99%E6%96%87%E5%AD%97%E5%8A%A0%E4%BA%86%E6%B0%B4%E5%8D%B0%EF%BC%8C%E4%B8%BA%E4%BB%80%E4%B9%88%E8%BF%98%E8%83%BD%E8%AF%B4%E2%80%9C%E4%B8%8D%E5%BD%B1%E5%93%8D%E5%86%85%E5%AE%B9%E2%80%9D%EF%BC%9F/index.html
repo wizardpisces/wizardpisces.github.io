@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex,nofollow">
   <title>AI 给文字加了水印，为什么还能说“不影响内容”？ | LZ AI NOTE</title>
-  <meta name="description" content="AI 给文字加了水印，为什么还能说“不影响内容”？ 2026 年 9 月 1 日，Anthropic 更新了 Claude 的内容标记说明。 Fable 5.1 和 Mythos 5.1 生成的文字，会带上一种看不见的水印。官方称，它不会改变回答的含义、质量和可读性。 这句话听起来有点矛盾。 图片水印还容易理解。把少量像素调亮一点、调暗一点，人眼可能看不出…">
+  <meta name="description" content="AI 给文字加了水印，为什么还能说“不影响内容”？ 2026 年 9 月 1 日，Anthropic 宣布为 Claude 新模型生成的文字加入水印，同时称它不会改变回答的含义、质量和可读性。 图片水印还容易理解。少量像素变亮或变暗，人眼可能看不出来，程序却能检测。 文字没有像素。 如果一句话原来是： 这个方法可以明显提高效率。 水印不能藏在字的颜色里，也…">
   <meta name="author" content="LZ">
   <meta name="DC.title" content="AI 给文字加了水印，为什么还能说“不影响内容”？">
   <meta name="DC.creator" content="LZ">
-  <meta name="DC.date" content="2026-09-07">
+  <meta name="DC.date" content="2026-09-08">
   <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E7%BB%99%E6%96%87%E5%AD%97%E5%8A%A0%E4%BA%86%E6%B0%B4%E5%8D%B0%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%83%BD%E8%AF%B4%E2%80%9C%E4%B8%8D%E5%BD%B1%E5%93%8D%E5%86%85%E5%AE%B9%E2%80%9D%EF%BC%9F">
   <meta name="DC.publisher" content="LZ AI NOTE">
   <meta name="DC.language" content="zh-CN">
@@ -18,129 +18,110 @@
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
   <meta property="og:title" content="AI 给文字加了水印，为什么还能说“不影响内容”？ | LZ AI NOTE">
-  <meta property="og:description" content="AI 给文字加了水印，为什么还能说“不影响内容”？ 2026 年 9 月 1 日，Anthropic 更新了 Claude 的内容标记说明。 Fable 5.1 和 Mythos 5.1 生成的文字，会带上一种看不见的水印。官方称，它不会改变回答的含义、质量和可读性。 这句话听起来有点矛盾。 图片水印还容易理解。把少量像素调亮一点、调暗一点，人眼可能看不出…">
+  <meta property="og:description" content="AI 给文字加了水印，为什么还能说“不影响内容”？ 2026 年 9 月 1 日，Anthropic 宣布为 Claude 新模型生成的文字加入水印，同时称它不会改变回答的含义、质量和可读性。 图片水印还容易理解。少量像素变亮或变暗，人眼可能看不出来，程序却能检测。 文字没有像素。 如果一句话原来是： 这个方法可以明显提高效率。 水印不能藏在字的颜色里，也…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E7%BB%99%E6%96%87%E5%AD%97%E5%8A%A0%E4%BA%86%E6%B0%B4%E5%8D%B0%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%83%BD%E8%AF%B4%E2%80%9C%E4%B8%8D%E5%BD%B1%E5%93%8D%E5%86%85%E5%AE%B9%E2%80%9D%EF%BC%9F">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI 给文字加了水印，为什么还能说“不影响内容”？","description":"AI 给文字加了水印，为什么还能说“不影响内容”？ 2026 年 9 月 1 日，Anthropic 更新了 Claude 的内容标记说明。 Fable 5.1 和 Mythos 5.1 生成的文字，会带上一种看不见的水印。官方称，它不会改变回答的含义、质量和可读性。 这句话听起来有点矛盾。 图片水印还容易理解。把少量像素调亮一点、调暗一点，人眼可能看不出…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E7%BB%99%E6%96%87%E5%AD%97%E5%8A%A0%E4%BA%86%E6%B0%B4%E5%8D%B0%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%83%BD%E8%AF%B4%E2%80%9C%E4%B8%8D%E5%BD%B1%E5%93%8D%E5%86%85%E5%AE%B9%E2%80%9D%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E7%BB%99%E6%96%87%E5%AD%97%E5%8A%A0%E4%BA%86%E6%B0%B4%E5%8D%B0%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%83%BD%E8%AF%B4%E2%80%9C%E4%B8%8D%E5%BD%B1%E5%93%8D%E5%86%85%E5%AE%B9%E2%80%9D%EF%BC%9F","dateModified":"2026-09-07","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：AI 给文字加了水印，为什么还能说“不影响内容”？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E7%BB%99%E6%96%87%E5%AD%97%E5%8A%A0%E4%BA%86%E6%B0%B4%E5%8D%B0%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%83%BD%E8%AF%B4%E2%80%9C%E4%B8%8D%E5%BD%B1%E5%93%8D%E5%86%85%E5%AE%B9%E2%80%9D%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI 给文字加了水印，为什么还能说“不影响内容”？","description":"AI 给文字加了水印，为什么还能说“不影响内容”？ 2026 年 9 月 1 日，Anthropic 宣布为 Claude 新模型生成的文字加入水印，同时称它不会改变回答的含义、质量和可读性。 图片水印还容易理解。少量像素变亮或变暗，人眼可能看不出来，程序却能检测。 文字没有像素。 如果一句话原来是： 这个方法可以明显提高效率。 水印不能藏在字的颜色里，也…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E7%BB%99%E6%96%87%E5%AD%97%E5%8A%A0%E4%BA%86%E6%B0%B4%E5%8D%B0%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%83%BD%E8%AF%B4%E2%80%9C%E4%B8%8D%E5%BD%B1%E5%93%8D%E5%86%85%E5%AE%B9%E2%80%9D%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E7%BB%99%E6%96%87%E5%AD%97%E5%8A%A0%E4%BA%86%E6%B0%B4%E5%8D%B0%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%83%BD%E8%AF%B4%E2%80%9C%E4%B8%8D%E5%BD%B1%E5%93%8D%E5%86%85%E5%AE%B9%E2%80%9D%EF%BC%9F","dateModified":"2026-09-08","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：AI 给文字加了水印，为什么还能说“不影响内容”？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E7%BB%99%E6%96%87%E5%AD%97%E5%8A%A0%E4%BA%86%E6%B0%B4%E5%8D%B0%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%83%BD%E8%AF%B4%E2%80%9C%E4%B8%8D%E5%BD%B1%E5%93%8D%E5%86%85%E5%AE%B9%E2%80%9D%EF%BC%9F","about":["_hidden","文章素材"]}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>AI 给文字加了水印，为什么还能说“不影响内容”？</h1><h1>AI 给文字加了水印，为什么还能说“不影响内容”？</h1>
-<p>2026 年 9 月 1 日，Anthropic 更新了 Claude 的内容标记说明。</p>
-<p>Fable 5.1 和 Mythos 5.1 生成的文字，会带上一种看不见的水印。官方称，它不会改变回答的含义、质量和可读性。</p>
-<p>这句话听起来有点矛盾。</p>
-<p>图片水印还容易理解。把少量像素调亮一点、调暗一点，人眼可能看不出来，但程序可以检测。</p>
+<p>2026 年 9 月 1 日，Anthropic 宣布为 Claude 新模型生成的文字加入水印，同时称它不会改变回答的含义、质量和可读性。</p>
+<p>图片水印还容易理解。少量像素变亮或变暗，人眼可能看不出来，程序却能检测。</p>
 <p>文字没有像素。</p>
 <p>如果一句话原来是：</p>
 <blockquote>
 <p>这个方法可以明显提高效率。</p>
 </blockquote>
-<p>水印既不能藏在字的颜色里，也不能依赖容易被复制粘贴丢掉的文件信息。它若要留在纯文本中，就只能改变文字本身。</p>
-<p>既然选出来的字变了，怎么还能说“不影响内容”？</p>
-<p>Anthropic 目前没有公开 Fable 5.1 水印的具体采样算法。下面会用已经公开的 SynthID-Text 解释这类技术怎样解决这个矛盾，但不代表两者采用了完全相同的实现。</p>
-<h2>水印不是在文字写完后盖上去的</h2>
-<p>最容易想到的办法，是在句子里塞入隐藏字符，或者把水印放进文档的元数据。</p>
-<p>但文字只要经过复制粘贴、格式转换或重新排版，这些信息就可能消失。</p>
-<p>真正嵌入文本的水印，需要跟着这串文字一起走。哪怕它被复制到聊天框、网页或记事本里，仍然有机会被检测出来。</p>
-<p>这意味着，水印不能等回答生成完以后再加。</p>
-<p>它必须在模型选择下一个词时，就参与进去。</p>
-<h2>模型本来就不是每次都选同一个词</h2>
-<p>大模型生成文字时，不是先在脑子里写完整篇文章，再逐字输出。</p>
-<p>它每走一步，都会计算下一个 Token 可能是什么：</p>
-<pre><code class="language-text">“这个方法可以……”
-
-明显    35%
+<p>水印不能藏在字的颜色里，也不能依赖复制粘贴后容易丢失的文件信息。它若要留在纯文本中，就只能改变模型最后选出的文字。</p>
+<p><strong>既然文字变了，怎么还能说“不影响内容”？</strong></p>
+<p>Anthropic 已确认这套水印基于 SynthID-Text。下面用个简单例子说明其中的“奥秘”</p>
+<h2>水印参与的，是选词过程</h2>
+<p>大模型不是先写好整篇文章，再逐字输出。</p>
+<p>生成到“这个方法可以……”时，它会计算下一个 Token 的可能性：</p>
+<pre><code class="language-text">明显    35%
 显著    30%
 有效    20%
 大幅    15%
 </code></pre>
 <p>这些数字只是示意。重点是，很多时候不止一个选项说得通。</p>
-<p>普通生成会按照这组概率，从候选项里选出一个。于是同一个问题问两次，措辞可能不同，内容仍然成立。</p>
-<p>文字水印利用的，正是这部分本来就存在的选择空间。</p>
-<p>它不需要凭空插入一个奇怪的词，只需要让一把秘密钥匙参与选择：</p>
-<pre><code class="language-text">模型给出下一词的概率
-        ↓
-按原来的概率抽取候选
-        ↓
-密钥给候选分配隐藏分数
-        ↓
-按约定规则选出一个
-        ↓
-继续生成下一个词
-</code></pre>
-<p>单独看其中一次选择，“明显”和“显著”都很自然。</p>
-<p>但一篇长文里会发生几百次选择。掌握密钥的检测器可以回头检查：这些词是不是反复表现出某种普通文本不容易出现的统计偏好。</p>
-<p>一个词看不出水印。</p>
-<p>很多次微小选择叠在一起，水印才逐渐显出来。</p>
-<h2>可它还是改变了这一次回答</h2>
-<p>这正是“不影响内容”最容易被说过头的地方。</p>
-<p>如果没有水印，模型这一步可能选中“明显”；加入水印后，它可能选中“显著”。</p>
-<p>具体生成路径已经变了。</p>
-<p>后面的词又依赖前面的词，所以整段回答也可能随之变化。水印不可能一边参与选词，一边保证每次输出和原来逐字相同。</p>
-<p>技术资料里所说的“不失真”，通常不是这个意思。</p>
-<p>以公开的 SynthID-Text 为例，它会先按照模型原来的概率抽取候选，再用对所有候选都对称的秘密规则决定谁胜出。</p>
-<p>如果系统永远偏爱“显著”，这个词的概率一定会上升，分布也就变了。</p>
-<p>SynthID-Text 不会固定偏爱某一组词。它会结合前文和密钥，为当前候选重新生成一套伪随机分数。这一次可能是“显著”得分高，换一段前文，可能变成“明显”得分高。</p>
-<p>秘密规则会改变某一次选择，却不会长期把结果推向某个固定词。候选又是按照原始概率抽出来的，所以把大量生成放在一起看，每个 Token 最终出现的总体概率仍然可以保持原来的分布。</p>
-<pre><code class="language-text">看单次回答
-→ 具体用词和生成路径可能改变
+<p>普通生成会按照这组概率选出一个词。文字水印利用的，就是这部分原本已经存在的选择空间。</p>
+<p>论文把其中一种方法叫 Tournament sampling。名字不重要，可以先把它理解成两张候选票的比赛：</p>
+<pre><code class="language-text">按模型原来的概率抽取候选
 
-看大量回答
-→ 各种词出现的总体概率可以基本不变
+候选 A：明显
+候选 B：显著
+
+        ↓
+
+密钥结合前文，临时给候选打分
+
+明显：0.18
+显著：0.83
+
+        ↓
+
+选中“显著”
+</code></pre>
+<p>这个分数不是词语质量，也不是一张固定名单。换一段前文，分数就会重新计算，下一次可能轮到“明显”胜出。</p>
+<p>所以水印不会规定模型以后多用某几个词。它只在每一次选择中，让隐藏分数更高的候选更容易被选中。</p>
+<p>检测器拿着同一把密钥，可以沿着文字逐个计算：</p>
+<pre><code class="language-text">检查每个已生成的 Token
+        ↓
+重新计算它的隐藏分数
+        ↓
+高分 Token 是否出现得异常频繁？
+</code></pre>
+<p>一个词可能说明不了什么。但一篇文字里发生几百次选择后，这种偏向会逐渐显出来。</p>
+<h2>“不失真”保住的不是这一次回答</h2>
+<p>水印加入以后，“明显”可能变成“显著”。</p>
+<p>后面的词又依赖前面的词，整段回答也可能沿着另一条路径继续生成。它不可能在参与选词的同时还能保证结果和原来逐字相同。</p>
+<p>SynthID-Text 所说的“不失真”，保住的是另一件事。</p>
+<p>模型原来的概率仍然决定每个词成为候选的机会。原本概率高的词，会更频繁地进入候选。</p>
+<p>密钥评分又不和某个固定词绑定，每次都会根据前文重新计算。它能改变这次谁获胜，却不会长期抬高“显著”或另一组固定词。</p>
+<pre><code class="language-text">只看一次回答
+→ 具体用词可能改变
+
+看大量不同回答
+→ 没有固定词被长期偏爱
 </code></pre>
 <p>因此，“不改变分布”不等于“不改变这一次输出”。</p>
-<p>更准确的说法是：</p>
-<blockquote>
-<p>水印改变了模型这次具体走哪条生成路径，但尽量不改变这些路径整体呈现出来的统计规律。</p>
-</blockquote>
-<h2>质量没明显变差，不代表什么都没变</h2>
-<p>即使总体分布能够保住，也不能直接推出水印对任何输出都毫无影响。</p>
-<p>SynthID-Text 的论文做了自动评测、人工对比和接近 2000 万次 Gemini 回答的线上实验，没有发现明显的质量下降。</p>
-<p>但论文同时提到，非失真配置仍可能减少多次回答之间的多样性。</p>
-<p>也就是说，同一个问题反复生成时，答案可能更容易集中到某些表达路径上。单篇回答读起来没有明显变差，不代表整个生成系统的所有性质都完全没变。</p>
-<p>所以官方所说的“不改变含义、质量和可读性”，更适合这样理解：</p>
-<p><strong>变化被控制在多数读者难以感知、评测也很难区分的范围内。</strong></p>
-<p>它不是说底层选词从未被碰过。</p>
-<h2>文字水印和图片水印，藏的位置不一样</h2>
-<p>如果是像素水印，系统可以轻微改变大量像素。每个像素只动一点，肉眼看起来仍是同一张图，程序却能从整体模式中读出信号。</p>
-<p>文字没有这么连续的空间。一个词被换掉，就是换掉了。</p>
-<p>因此，文字水印不能简单照搬像素水印。它更像是在模型本来就拿不准的几个自然选项里，按照暗号选一个。</p>
-<p>两者的共同点不是“完全没有修改”，而是：</p>
-<pre><code class="language-text">图片
-→ 把变化藏在人眼不敏感的像素差异里
+<p>质量是否受损，还需要另外评估。SynthID-Text 的论文做了自动评测、人工对比，以及接近 2000 万次 Gemini 回答的线上实验，<strong>没有发现明显的质量下降，但多次回答之间的多样性可能减少。</strong></p>
+<p>官方所说的“不改变含义、质量和可读性”，更接近这个意思：</p>
+<p><strong>文字确实变了，但变化通常小到读者和质量评测都难以察觉。</strong></p>
+<h2>图片水印和文字水印，藏的位置不同</h2>
+<p>像素水印可以把变化分散到大量像素里，每个像素只动一点。</p>
+<p>文字没有这么连续的空间。一个词被换掉，就是换掉了。它只能把变化放进模型本来就存在的多种自然表达中。</p>
+<pre><code class="language-text">图片水印
+→ 利用人眼不敏感的像素差异
 
-文字
-→ 把变化藏在模型本来就存在的随机选择里
+文字水印
+→ 利用模型原本就存在的选词空间
 </code></pre>
-<p>还需要区分另一种做法。</p>
-<p>Anthropic 给 Claude 生成的 PNG、JPG、SVG 等文件添加的是签名过的来源元数据。它记录在文件里，不需要修改画面像素；但截图、重新保存或格式转换，也可能把它剥掉。</p>
-<p>文字水印直接进入词语序列，复制粘贴后更容易保留，却会受到另一类破坏：大幅改写、翻译、混入其他文字，都会削弱统计信号。</p>
+<p>Claude 生成的 PNG、JPG、SVG 等文件使用的是签名过的来源元数据。它不需要修改画面像素，但是被截图、重新保存或格式转换后，水印可能被稀释或者移除。</p>
+<p>文字水印则直接进入词语序列，复制粘贴后更容易保留；大幅改写、翻译或混入其他文字，才会削弱检测信号。</p>
 <h2>不是所有文字都适合藏水印</h2>
-<p>水印需要模型有选择。</p>
-<p>如果接下来只有一个答案最合理，秘密规则就没有多少发挥空间。</p>
-<p>例如：</p>
+<p>水印需要模型有多个合理选项。</p>
 <pre><code class="language-text">固定事实
 精确数字
 程序代码
 很短的回答
 高度确定的格式
 </code></pre>
-<p>这些内容要么可选词很少，要么文字太短，来不及积累足够的统计偏好。</p>
-<p>这也解释了为什么检测器不能只看一句话就下结论。文本越长、合理选择越多，水印越容易留下稳定信号；文本越短、越固定，信号通常越弱。</p>
+<p>这些内容要么可选词很少，要么篇幅太短，来不及积累明显的统计偏向。</p>
+<p>检测器也很难只看一句话就下结论。<strong>文本越长、合理选项越多，水印信号通常越稳定。</strong></p>
 <h2>回到最初的问题</h2>
-<p>Fable 5.1 的文字水印会不会影响输出？</p>
-<p>会。</p>
-<p>只要水印真的嵌入了文本，它就必须影响一部分具体选词。否则，文字里根本没有新的信号可供检测。</p>
-<p>但“影响选词”不等于“明显损害内容”。一类可行的做法，是把水印藏进模型原本就存在的随机选择中：这次换一条生成路径，同时尽量守住整体概率分布、语义和可读性。</p>
+<p>Fable 5.1 的文字水印会影响输出。只要信号真的留在纯文本里，它就必须改变一部分具体选词。</p>
+<p>但“影响选词”不等于“明显损害内容”。水印让模型在几个本来都说得通的选项中，按照密钥选择一条不同的生成路径，同时尽量守住整体分布、语义和可读性。</p>
 <p>所以，“水印完全不改变输出”并不准确。</p>
-<p>它真正做到的是：<strong>文字确实变了，但尽量只改变那些本来就可以有不同答案的地方。</strong></p>
+<p><strong>文字确实变了，但水印尽量只改变那些本来就可以有不同答案的地方。</strong></p>
 <h2>参考资料</h2>
 <ol>
 <li>Anthropic，How Claude marks AI-generated content（2026）：<a href="https://support.claude.com/en/articles/16266773-how-claude-marks-ai-generated-content">https://support.claude.com/en/articles/16266773-how-claude-marks-ai-generated-content</a></li>
 <li>Dathathri 等，Scalable watermarking for identifying large language model outputs（Nature，2024）：<a href="https://www.nature.com/articles/s41586-024-08025-4">https://www.nature.com/articles/s41586-024-08025-4</a></li>
-<li>Google DeepMind，Watermarking AI-generated text and video with SynthID（2024）：<a href="https://deepmind.google/discover/blog/watermarking-ai-generated-text-and-video-with-synthid/">https://deepmind.google/discover/blog/watermarking-ai-generated-text-and-video-with-synthid/</a></li>
+<li>Google DeepMind，Watermarking AI-generated text and video with SynthID（2024）：<a href="https://deepmind.google/discover/blog/watermarking-ai-generated-text-and-video-with-synthID/">https://deepmind.google/discover/blog/watermarking-ai-generated-text-and-video-with-synthID/</a></li>
 </ol>
 <p><em>LZ AI Note｜记录现象，追问本质。复杂的事情，简单说。</em></p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-SREZn2ex.js"></script>
+  <script type="module" crossorigin src="/assets/index-DyvYVVjE.js"></script>
 </body>
 </html>

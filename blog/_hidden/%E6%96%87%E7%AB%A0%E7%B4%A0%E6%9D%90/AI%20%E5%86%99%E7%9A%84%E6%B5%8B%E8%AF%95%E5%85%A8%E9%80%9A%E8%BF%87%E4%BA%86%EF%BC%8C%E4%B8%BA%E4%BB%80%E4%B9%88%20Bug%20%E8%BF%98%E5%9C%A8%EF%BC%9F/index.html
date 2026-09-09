@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>AI 写的测试全通过了，为什么 Bug 还在？ | LZ AI NOTE</title>
+  <meta name="description" content="AI 写的测试全通过了，为什么 Bug 还在？ 让 AI 修 Bug，它改完代码，还主动补了一组测试。 终端一片绿色，最后附上一句： 已修复，所有测试通过。 可回到页面，按用户原来的操作再试一次，问题还在。 代码检查过了，测试也真的跑了。到底漏了什么？ 先看“通过”是怎么得出来的。 程序跑通了，它检查的是什么？ 假设用户反馈： 用户名里有空格，保存配置就会…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="AI 写的测试全通过了，为什么 Bug 还在？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-09-09">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E5%86%99%E7%9A%84%E6%B5%8B%E8%AF%95%E5%85%A8%E9%80%9A%E8%BF%87%E4%BA%86%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%20Bug%20%E8%BF%98%E5%9C%A8%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E5%86%99%E7%9A%84%E6%B5%8B%E8%AF%95%E5%85%A8%E9%80%9A%E8%BF%87%E4%BA%86%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%20Bug%20%E8%BF%98%E5%9C%A8%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="AI 写的测试全通过了，为什么 Bug 还在？ | LZ AI NOTE">
+  <meta property="og:description" content="AI 写的测试全通过了，为什么 Bug 还在？ 让 AI 修 Bug，它改完代码，还主动补了一组测试。 终端一片绿色，最后附上一句： 已修复，所有测试通过。 可回到页面，按用户原来的操作再试一次，问题还在。 代码检查过了，测试也真的跑了。到底漏了什么？ 先看“通过”是怎么得出来的。 程序跑通了，它检查的是什么？ 假设用户反馈： 用户名里有空格，保存配置就会…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E5%86%99%E7%9A%84%E6%B5%8B%E8%AF%95%E5%85%A8%E9%80%9A%E8%BF%87%E4%BA%86%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%20Bug%20%E8%BF%98%E5%9C%A8%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI 写的测试全通过了，为什么 Bug 还在？","description":"AI 写的测试全通过了，为什么 Bug 还在？ 让 AI 修 Bug，它改完代码，还主动补了一组测试。 终端一片绿色，最后附上一句： 已修复，所有测试通过。 可回到页面，按用户原来的操作再试一次，问题还在。 代码检查过了，测试也真的跑了。到底漏了什么？ 先看“通过”是怎么得出来的。 程序跑通了，它检查的是什么？ 假设用户反馈： 用户名里有空格，保存配置就会…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E5%86%99%E7%9A%84%E6%B5%8B%E8%AF%95%E5%85%A8%E9%80%9A%E8%BF%87%E4%BA%86%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%20Bug%20%E8%BF%98%E5%9C%A8%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E5%86%99%E7%9A%84%E6%B5%8B%E8%AF%95%E5%85%A8%E9%80%9A%E8%BF%87%E4%BA%86%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%20Bug%20%E8%BF%98%E5%9C%A8%EF%BC%9F","dateModified":"2026-09-09","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：AI 写的测试全通过了，为什么 Bug 还在？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E5%86%99%E7%9A%84%E6%B5%8B%E8%AF%95%E5%85%A8%E9%80%9A%E8%BF%87%E4%BA%86%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%20Bug%20%E8%BF%98%E5%9C%A8%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>AI 写的测试全通过了，为什么 Bug 还在？</h1><h1>AI 写的测试全通过了，为什么 Bug 还在？</h1>
+<p>让 AI 修 Bug，它改完代码，还主动补了一组测试。</p>
+<p>终端一片绿色，最后附上一句：</p>
+<blockquote>
+<p>已修复，所有测试通过。</p>
+</blockquote>
+<p>可回到页面，按用户原来的操作再试一次，问题还在。</p>
+<p>代码检查过了，测试也真的跑了。到底漏了什么？</p>
+<p>先看“通过”是怎么得出来的。</p>
+<h2>程序跑通了，它检查的是什么？</h2>
+<p>假设用户反馈：</p>
+<blockquote>
+<p>用户名里有空格，保存配置就会报错。</p>
+</blockquote>
+<p>这里约定，用户名允许包含空格，保存后应当原样保留。比如输入“林 小舟”，重新打开时还得是“林 小舟”。</p>
+<p>AI 找到保存逻辑，做了一个修改：先删掉用户名里的空格，再保存。</p>
+<p>然后它补上测试：</p>
+<pre><code class="language-text">输入：林 小舟
+执行：保存配置
+检查：没有报错
+结果：通过
+</code></pre>
+<p>保存确实不报错了。但重新打开页面，用户名变成了“林小舟”。</p>
+<p>这个测试没有撒谎。它忠实地检查了“是否报错”，只是没有检查“保存的内容是否正确”。</p>
+<p><strong>测试通过，说明代码满足了写进测试的条件。用户的要求有没有完整写进去，是另一件事。</strong></p>
+<p>这里少的也不只是一个带空格的输入。测试已经用上了这个输入，却仍然放过了错误。</p>
+<p>它少了一句判断：</p>
+<blockquote>
+<p>保存后读出的用户名，必须与输入完全一致。</p>
+</blockquote>
+<h2>测试里的“应该”，从哪里来？</h2>
+<p>一条测试至少要准备输入、运行程序，再把实际结果与预期结果比较。</p>
+<p>测试工具很擅长做比较：</p>
+<pre><code class="language-text">预期：林 小舟
+实际：林小舟
+结果：失败
+</code></pre>
+<p>但它不会自己决定用户名该不该保留空格。“预期：林 小舟”需要有人根据需求写进去。</p>
+<p>软件测试里，把这种判断结果对错的依据称为 Test Oracle。运行程序得到的是“它做了什么”，判定对错还需要知道“它应该做什么”。<a href="https://discovery.ucl.ac.uk/id/eprint/1471263/">测试 Oracle 研究综述</a></p>
+<p>如果预期值直接照着修改后的代码填写，就会出现另一种全绿：</p>
+<pre><code class="language-text">代码：删除空格后保存
+测试：期望读出“林小舟”
+结果：通过
+</code></pre>
+<p>这一次，连保存后的内容都检查了，仍然没有发现问题。</p>
+<p>因为代码和测试同意了同一个错误解释。</p>
+<p>AI 同时写实现和测试时，这条路径尤其需要检查：它先把需求理解成“去掉空格就能保存”，再用同一理解生成测试。多写几个名字、多跑几遍，都可能继续得到绿色。</p>
+<p>人也会犯这个错误。AI 让代码和测试一起生成得更快，理解上的偏差也就可能一起进入两份文件。</p>
+<h2>再找一个 AI 审一遍，够不够？</h2>
+<p>第二个 AI 如果只看到修改后的代码，很容易得出：</p>
+<blockquote>
+<p>这里做了空格清理，测试也验证了清理结果，逻辑一致。</p>
+</blockquote>
+<p>它检查出了内部一致，却没有拿到“空格必须保留”这个依据。</p>
+<p>要让复核有用，应该把原始反馈、产品约定和用户操作交给它，让它据此判断结果。必要时由熟悉业务的人确认预期。</p>
+<p>换一个模型能增加检查角度，但独立打开一个对话框，并不等于获得了独立的判断依据。</p>
+<p>对这个 Bug，验收条件可以在修改代码前就确定：</p>
+<blockquote>
+<p>输入“林 小舟”，保存，再读取；不能报错，读出的名字也不能改变。</p>
+</blockquote>
+<p>AI 仍然可以负责写测试。预期结果有了明确来处，它就不必从自己的实现里反推“正确答案”。</p>
+<h2>让测试先抓住旧错误</h2>
+<p>把这条验收条件放回原来的程序：</p>
+<p>保存时报错，测试失败。</p>
+<p>再放进“删除空格”的修改版：</p>
+<p>保存成功了，读出的名字不一致，测试仍然失败。</p>
+<p>等到修复保存格式的处理逻辑，空格可以原样写入、读出，测试才通过。</p>
+<p>同一条测试现在能够区分三种结果：</p>
+<pre><code class="language-text">原来的代码：保存报错，失败
+删空格的修改：内容被改变，失败
+符合需求的修改：保存成功且内容不变，通过
+</code></pre>
+<p>这比看到一组新测试全绿，多了一层证据：测试能抓住原来的 Bug，也能挡住一个看似合理的错误修复。</p>
+<p>修复前失败、修复后通过，还不是全部。原本不带空格的用户名、其他配置项也要继续正常工作，否则可能修好一处，又破坏另一处。</p>
+<p>这里不需要一口气列出所有可能输入。先确认报告中的故障能被复现，预期来自需求，再检查受影响的原有行为。</p>
+<p>只增加测试数量，未必补得上这几个缺口。</p>
+<h2>榜单里的“修好了”，也是这样判出来的</h2>
+<p><a href="./%E5%90%8C%E4%B8%80%E4%B8%AA%E6%A8%A1%E5%9E%8B%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8D%A2%E4%B8%AA%20Agent%20%E6%A1%86%E6%9E%B6%E5%B0%B1%E8%83%BD%E5%A4%9A%E4%BF%AE%E5%87%A0%E5%8D%81%E4%B8%AA%20Bug%EF%BC%9F.md">上一篇</a>讲的是：同一个模型，换了工具和执行流程，修复成绩会变化。</p>
+<p>但补丁提交以后，还需要一套验收规则决定它算不算成功。</p>
+<p>SWE-bench 的标准评测并不靠 Agent 自己宣称“测试通过”。它使用基准准备的测试检查补丁：与问题相关、原来失败的测试要变为通过，指定的原有通过测试也要继续通过。<a href="https://openai.com/index/introducing-swe-bench-verified/">SWE-bench Verified 的评测说明</a></p>
+<p>这把最终判分与 Agent 自己补的测试区分开了。不过，验收测试本身仍然需要审查。</p>
+<p>规则太松，会放过“删掉空格就算修好”；规则太死，又可能只接受某一种实现，拒绝其他正确解法。SWE-bench Verified 的人工筛选就检查了需求是否清楚、测试是否会错误排除有效修复等问题。<a href="https://openai.com/index/introducing-swe-bench-verified/">筛选方法</a></p>
+<p>所以，看到“解决了多少个 Bug”，应当理解为通过了对应评测的验收条件。它是有用的证据，不能自动扩展成“所有真实使用场景都没有问题”。</p>
+<p>回到那个用户名：终端全绿时，最值得打开看的，是测试里究竟写着“没有报错”，还是“原样保存”。</p>
+<p>两者只差一个判断，用户拿到的却是两个不同的结果。</p>
+<h2>参考资料</h2>
+<ol>
+<li>OpenAI，Introducing SWE-bench Verified（2024）：<a href="https://openai.com/index/introducing-swe-bench-verified/">https://openai.com/index/introducing-swe-bench-verified/</a></li>
+<li>Barr et al.，The Oracle Problem in Software Testing: A Survey，IEEE Transactions on Software Engineering（2015）：<a href="https://discovery.ucl.ac.uk/id/eprint/1471263/">https://discovery.ucl.ac.uk/id/eprint/1471263/</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质。复杂的事情，简单说。</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-DyvYVVjE.js"></script>
+</body>
+</html>

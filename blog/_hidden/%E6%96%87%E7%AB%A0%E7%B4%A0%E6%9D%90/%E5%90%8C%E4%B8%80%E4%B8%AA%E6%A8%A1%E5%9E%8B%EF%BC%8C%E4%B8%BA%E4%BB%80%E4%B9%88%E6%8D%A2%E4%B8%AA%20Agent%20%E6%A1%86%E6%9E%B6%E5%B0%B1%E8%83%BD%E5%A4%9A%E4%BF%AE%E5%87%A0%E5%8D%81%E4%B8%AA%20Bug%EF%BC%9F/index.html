@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>同一个模型，为什么换个 Agent 框架就能多修几十个 Bug？ | LZ AI NOTE</title>
+  <meta name="description" content="同一个模型，为什么换个 Agent 框架就能多修几十个 Bug？ 在软件工程评测 SWE bench Lite 上，GPT 4 曾经出现过一组很夸张的成绩： 模型都是 GPT 4，评测集也没有变，只是换了外面的 Agent 系统。 SWE bench Lite 一共有 300 个真实软件问题。粗略换算，2.7% 只能解决约 8 个，28.3% 则接近 85…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="同一个模型，为什么换个 Agent 框架就能多修几十个 Bug？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-09-08">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E4%B8%80%E4%B8%AA%E6%A8%A1%E5%9E%8B%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8D%A2%E4%B8%AA%20Agent%20%E6%A1%86%E6%9E%B6%E5%B0%B1%E8%83%BD%E5%A4%9A%E4%BF%AE%E5%87%A0%E5%8D%81%E4%B8%AA%20Bug%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E4%B8%80%E4%B8%AA%E6%A8%A1%E5%9E%8B%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8D%A2%E4%B8%AA%20Agent%20%E6%A1%86%E6%9E%B6%E5%B0%B1%E8%83%BD%E5%A4%9A%E4%BF%AE%E5%87%A0%E5%8D%81%E4%B8%AA%20Bug%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="同一个模型，为什么换个 Agent 框架就能多修几十个 Bug？ | LZ AI NOTE">
+  <meta property="og:description" content="同一个模型，为什么换个 Agent 框架就能多修几十个 Bug？ 在软件工程评测 SWE bench Lite 上，GPT 4 曾经出现过一组很夸张的成绩： 模型都是 GPT 4，评测集也没有变，只是换了外面的 Agent 系统。 SWE bench Lite 一共有 300 个真实软件问题。粗略换算，2.7% 只能解决约 8 个，28.3% 则接近 85…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E4%B8%80%E4%B8%AA%E6%A8%A1%E5%9E%8B%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8D%A2%E4%B8%AA%20Agent%20%E6%A1%86%E6%9E%B6%E5%B0%B1%E8%83%BD%E5%A4%9A%E4%BF%AE%E5%87%A0%E5%8D%81%E4%B8%AA%20Bug%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"同一个模型，为什么换个 Agent 框架就能多修几十个 Bug？","description":"同一个模型，为什么换个 Agent 框架就能多修几十个 Bug？ 在软件工程评测 SWE bench Lite 上，GPT 4 曾经出现过一组很夸张的成绩： 模型都是 GPT 4，评测集也没有变，只是换了外面的 Agent 系统。 SWE bench Lite 一共有 300 个真实软件问题。粗略换算，2.7% 只能解决约 8 个，28.3% 则接近 85…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E4%B8%80%E4%B8%AA%E6%A8%A1%E5%9E%8B%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8D%A2%E4%B8%AA%20Agent%20%E6%A1%86%E6%9E%B6%E5%B0%B1%E8%83%BD%E5%A4%9A%E4%BF%AE%E5%87%A0%E5%8D%81%E4%B8%AA%20Bug%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E4%B8%80%E4%B8%AA%E6%A8%A1%E5%9E%8B%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8D%A2%E4%B8%AA%20Agent%20%E6%A1%86%E6%9E%B6%E5%B0%B1%E8%83%BD%E5%A4%9A%E4%BF%AE%E5%87%A0%E5%8D%81%E4%B8%AA%20Bug%EF%BC%9F","dateModified":"2026-09-08","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：同一个模型，为什么换个 Agent 框架就能多修几十个 Bug？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E4%B8%80%E4%B8%AA%E6%A8%A1%E5%9E%8B%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8D%A2%E4%B8%AA%20Agent%20%E6%A1%86%E6%9E%B6%E5%B0%B1%E8%83%BD%E5%A4%9A%E4%BF%AE%E5%87%A0%E5%8D%81%E4%B8%AA%20Bug%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>同一个模型，为什么换个 Agent 框架就能多修几十个 Bug？</h1><h1>同一个模型，为什么换个 Agent 框架就能多修几十个 Bug？</h1>
+<p>在软件工程评测 SWE-bench Lite 上，GPT-4 曾经出现过一组很夸张的成绩：</p>
+<pre><code class="language-text">使用早期 RAG Scaffold：2.7%
+使用 CodeR：28.3%
+</code></pre>
+<p>模型都是 GPT-4，评测集也没有变，只是换了外面的 Agent 系统。</p>
+<p>SWE-bench Lite 一共有 300 个真实软件问题。粗略换算，2.7% 只能解决约 8 个，28.3% 则接近 85 个。</p>
+<p>同一个模型，为什么换个 Agent 框架，就能多修七十多个 Bug？</p>
+<h2>模型并不能直接修改代码</h2>
+<p>SWE-bench 会给 Agent 一段真实的 GitHub Issue，再提供对应版本的代码仓库。</p>
+<p>任务不是回答“应该怎么改”，而是真的完成一连串操作：</p>
+<pre><code class="language-text">理解 Issue
+    ↓
+找到相关文件
+    ↓
+阅读代码
+    ↓
+定位原因
+    ↓
+修改文件
+    ↓
+运行测试
+    ↓
+根据结果继续调整
+    ↓
+提交补丁
+</code></pre>
+<p>模型负责判断下一步做什么，却不能直接看见整个代码库，也不能自己执行命令。</p>
+<p>中间必须有一套系统，把仓库内容送进模型，再把模型的决定变成真实操作。这套系统通常被称为 Scaffold、Harness 或 Agent 框架。</p>
+<p>它决定模型怎样接触代码世界。</p>
+<h2>第一个差距：模型到底看见了什么</h2>
+<p>假设 Issue 说：</p>
+<blockquote>
+<p>用户名包含空格时，保存配置会失败。</p>
+</blockquote>
+<p>代码库里有几千个文件。模型不可能一开始把它们全部读完，Agent 必须决定先给它看什么。</p>
+<p>一种做法是提前检索：</p>
+<pre><code class="language-text">Issue
+  ↓
+搜索 username、config、save
+  ↓
+取回几个可能相关的文件
+  ↓
+交给模型
+</code></pre>
+<p>如果检索找错了，模型拿到的可能只有界面代码，真正的问题却藏在配置序列化里。</p>
+<p>模型接下来推理得再认真，也只是在错误的范围里寻找答案。</p>
+<p>另一种 Agent 会让模型自己探索：</p>
+<pre><code class="language-text">先搜索调用位置
+  ↓
+打开相关文件
+  ↓
+顺着函数继续追
+  ↓
+根据新发现调整搜索方向
+</code></pre>
+<p>模型没有变，但它看到的证据变了。</p>
+<p>不少失败发生在模型开始推理之前：正确的代码根本没有进入上下文。</p>
+<h2>第二个差距：模型的想法能不能准确落到仓库里</h2>
+<p>模型判断“应该修改这个函数”，距离真正改对还有一段路。</p>
+<p>它可能需要：</p>
+<ul>
+<li>精确定位函数所在文件。</li>
+<li>查看同类实现和测试。</li>
+<li>修改几行代码，而不是重写整个文件。</li>
+<li>避免破坏原有格式。</li>
+<li>在修改后运行正确的测试命令。</li>
+</ul>
+<p>Agent 提供什么工具、工具怎样返回结果，会直接影响这些步骤。</p>
+<p>如果读取文件时一次返回几千行，真正相关的报错很容易被挤出上下文；如果编辑工具要求模型重新输出整份文件，一个局部修改就可能带来额外错误；如果命令输出被截断，模型可能根本看不到测试失败的原因。</p>
+<p>这些问题都不会出现在“模型会不会写代码”的单轮问答里，却会直接决定它能不能完成一次真实修复。</p>
+<h2>第三个差距：第一次改错以后会发生什么</h2>
+<p>修 Bug 很少一次成功。</p>
+<p>模型可能改对了方向，却漏掉一个边界条件；也可能修好了原来的测试，又破坏了其他行为。</p>
+<p>这时，Agent 怎样组织下一轮很重要。</p>
+<pre><code class="language-text">测试失败
+   ↓
+保留原始目标和已经检查过的线索
+   ↓
+把失败信息送回模型
+   ↓
+重新判断原因
+   ↓
+继续修改
+</code></pre>
+<p>如果系统只把最后一段报错交给模型，它可能忘记 Issue 原本要求什么。如果完整历史不断增长，真正有用的信息又可能被大量命令输出淹没。</p>
+<p>Agent 需要决定保留什么、压缩什么、何时重试，以及什么时候应该停止。</p>
+<p>同一个模型放进不同循环里，可能一个在第一次失败后换方向，另一个却沿着错误原因连续修改五次。</p>
+<p>最后的差距会被整条执行链放大。</p>
+<h2>所以榜单测到的不是裸模型</h2>
+<p>现在重新看最开始的数字：</p>
+<pre><code class="language-text">GPT-4 + 早期 RAG Scaffold：2.7%
+GPT-4 + CodeR：28.3%
+</code></pre>
+<p>它不能说明 Agent 框架凭空让 GPT-4 的代码能力提高了十倍。</p>
+<p>模型原本具备的一部分能力，在第一套系统里没有顺利变成补丁。</p>
+<p>一次软件工程评测实际测到的是：</p>
+<pre><code class="language-text">模型
+× 看见了哪些代码
+× 可以使用哪些工具
+× 失败信息怎样返回
+× 有多少步和多少预算
+× 最后怎样判断成功
+</code></pre>
+<p>其中任何一项变化，都可能改变最终成绩。</p>
+<p>为了减少这种混淆，SWE-bench 后来增加了使用统一 mini-SWE-agent 的比较方式。固定同一套 Bash-only Harness，再更换模型，才能更接近回答“哪个模型更强”。</p>
+<p>如果 Harness 也跟着变，榜单比较的就是两套完整系统。</p>
+<h2>Agent 框架也不是越复杂越好</h2>
+<p>看到框架能带来巨大差距，很容易得出另一个结论：给 Agent 加更多工具、更复杂的规划和更多重试，成绩应该会继续提高。</p>
+<p>事实没有这么简单。</p>
+<p>更多工具也意味着更多选择。工具描述不清楚，模型会调用错误；上下文管理过度压缩，关键线索会丢失；循环放得太长，Agent 可能在错误方向上消耗更多 Token。</p>
+<p>SWE-agent 团队后来推出的 mini-SWE-agent，核心 Agent 只有约一百行代码，只给模型提供 Bash，成绩仍然可以接近复杂系统。</p>
+<p>模型能力变化后，过去必要的脚手架也可能变成干扰。</p>
+<p>评测 Agent 框架时，更该问：</p>
+<blockquote>
+<p>它是否让模型更容易获得正确证据、执行正确动作，并从失败中继续推进？</p>
+</blockquote>
+<h2>看 Agent 榜单时，先看清比较的是什么</h2>
+<p>以后再看到“某模型在 SWE-bench 上提高了二十个百分点”，可以先检查三件事：</p>
+<pre><code class="language-text">模型是否相同？
+Harness 是否相同？
+推理预算和尝试次数是否相同？
+</code></pre>
+<p>只有这些条件接近，分数差距才更能归因于模型。</p>
+<p>如果模型、工具、上下文策略和执行循环全部换了，排行榜告诉你的不是“哪个模型更会写代码”，而是“哪套系统在这套规则下修好了更多问题”。</p>
+<p>同一个模型换个 Agent 框架，确实可能多修几十个 Bug。</p>
+<p>框架没有替模型学会编程。它改变的是模型看见什么、怎样行动，以及失败以后还能不能回到正确方向。</p>
+<h2>参考资料</h2>
+<ol>
+<li>OpenAI，Introducing SWE-bench Verified（2024）：<a href="https://openai.com/index/introducing-swe-bench-verified/">https://openai.com/index/introducing-swe-bench-verified/</a></li>
+<li>SWE-bench，Official Leaderboards：<a href="https://www.swebench.com/">https://www.swebench.com/</a></li>
+<li>SWE-agent，mini-SWE-agent：<a href="https://github.com/SWE-agent/mini-swe-agent">https://github.com/SWE-agent/mini-swe-agent</a></li>
+<li>SWE-bench，Experiments：<a href="https://github.com/swe-bench/experiments">https://github.com/swe-bench/experiments</a></li>
+<li>Anthropic，Building effective agents：<a href="https://www.anthropic.com/engineering/building-effective-agents">https://www.anthropic.com/engineering/building-effective-agents</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质。复杂的事情，简单说。</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-DyvYVVjE.js"></script>
+</body>
+</html>

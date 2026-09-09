@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>AI 进了公司，为什么常常只剩一个 API？ | LZ AI NOTE</title>
+  <meta name="description" content="AI 进了公司，为什么常常只剩一个 API？ 很多 AI 项目，开始时想得很大。 要做 Agent，要重新设计工作流，要让系统自己规划、执行、检查，还要根据反馈继续改进。 可一进公司，方案就会一点点变形： 最后，项目按时上线了。 AI 也确实用上了。 只是最初想改变的工作方式，几乎原封不动。 最后只在旧流程里多了一次模型调用。 这种结果很常见，也很奇怪： …">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="AI 进了公司，为什么常常只剩一个 API？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-09-09">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E8%BF%9B%E4%BA%86%E5%85%AC%E5%8F%B8%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E5%B8%B8%E5%B8%B8%E5%8F%AA%E5%89%A9%E4%B8%80%E4%B8%AA%20API%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E8%BF%9B%E4%BA%86%E5%85%AC%E5%8F%B8%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E5%B8%B8%E5%B8%B8%E5%8F%AA%E5%89%A9%E4%B8%80%E4%B8%AA%20API%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="AI 进了公司，为什么常常只剩一个 API？ | LZ AI NOTE">
+  <meta property="og:description" content="AI 进了公司，为什么常常只剩一个 API？ 很多 AI 项目，开始时想得很大。 要做 Agent，要重新设计工作流，要让系统自己规划、执行、检查，还要根据反馈继续改进。 可一进公司，方案就会一点点变形： 最后，项目按时上线了。 AI 也确实用上了。 只是最初想改变的工作方式，几乎原封不动。 最后只在旧流程里多了一次模型调用。 这种结果很常见，也很奇怪： …">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E8%BF%9B%E4%BA%86%E5%85%AC%E5%8F%B8%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E5%B8%B8%E5%B8%B8%E5%8F%AA%E5%89%A9%E4%B8%80%E4%B8%AA%20API%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI 进了公司，为什么常常只剩一个 API？","description":"AI 进了公司，为什么常常只剩一个 API？ 很多 AI 项目，开始时想得很大。 要做 Agent，要重新设计工作流，要让系统自己规划、执行、检查，还要根据反馈继续改进。 可一进公司，方案就会一点点变形： 最后，项目按时上线了。 AI 也确实用上了。 只是最初想改变的工作方式，几乎原封不动。 最后只在旧流程里多了一次模型调用。 这种结果很常见，也很奇怪： …","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E8%BF%9B%E4%BA%86%E5%85%AC%E5%8F%B8%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E5%B8%B8%E5%B8%B8%E5%8F%AA%E5%89%A9%E4%B8%80%E4%B8%AA%20API%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E8%BF%9B%E4%BA%86%E5%85%AC%E5%8F%B8%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E5%B8%B8%E5%B8%B8%E5%8F%AA%E5%89%A9%E4%B8%80%E4%B8%AA%20API%EF%BC%9F","dateModified":"2026-09-09","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：AI 进了公司，为什么常常只剩一个 API？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E8%BF%9B%E4%BA%86%E5%85%AC%E5%8F%B8%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E5%B8%B8%E5%B8%B8%E5%8F%AA%E5%89%A9%E4%B8%80%E4%B8%AA%20API%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>AI 进了公司，为什么常常只剩一个 API？</h1><h1>AI 进了公司，为什么常常只剩一个 API？</h1>
+<p>很多 AI 项目，开始时想得很大。</p>
+<p>要做 Agent，要重新设计工作流，要让系统自己规划、执行、检查，还要根据反馈继续改进。</p>
+<p>可一进公司，方案就会一点点变形：</p>
+<pre><code class="language-text">Agent
+  ↓
+一条固定流程
+  ↓
+一个聊天窗口
+  ↓
+调用一次大模型 API
+</code></pre>
+<p>最后，项目按时上线了。</p>
+<p>AI 也确实用上了。</p>
+<p>只是最初想改变的工作方式，几乎原封不动。</p>
+<p>最后只在旧流程里多了一次模型调用。</p>
+<p>这种结果很常见，也很奇怪：</p>
+<p><strong>为什么一种新的技术进入组织以后，常常会被改造成旧系统熟悉的样子？</strong></p>
+<h2>新问题进入组织，会先被翻译成旧问题</h2>
+<p>假设团队想做一个处理客户工单的 Agent。</p>
+<p>原本需要讨论的是：</p>
+<pre><code class="language-text">模型怎样判断下一步？
+缺少信息时该不该继续？
+工具调用失败后怎样恢复？
+最终结果由谁检查？
+哪些操作必须交给人？
+</code></pre>
+<p>这些问题没有现成答案。</p>
+<p>模型的输出不稳定，执行过程会分叉，错误还可能一路传到最后。团队需要重新划分模型、程序和人的责任。</p>
+<p>但到了评审会上，讨论往往会迅速变成：</p>
+<blockquote>
+<p>能不能先做一个接口？</p>
+</blockquote>
+<blockquote>
+<p>规则明确的地方为什么不用 if/else？</p>
+</blockquote>
+<blockquote>
+<p>这个功能什么时候能上线？</p>
+</blockquote>
+<blockquote>
+<p>别人家的产品是不是已经有了？</p>
+</blockquote>
+<p>这些问题当然也要回答。</p>
+<p>麻烦在于，当所有讨论都退回这些问题，AI 项目就被翻译成了传统软件项目：</p>
+<pre><code class="language-text">输入是什么？
+接口返回什么？
+页面放在哪里？
+什么时候交付？
+</code></pre>
+<p>组织不是故意排斥新东西。</p>
+<p>它只是在使用自己最熟悉的语言，理解一个还没有形成共同经验的新问题。</p>
+<p>数据库、缓存、权限和事务，已经有几十年的工程经验。即使没有亲手实现过，大部分人也知道它们为什么存在。</p>
+<p>Agent、Context、Tool Calling 和 Evaluation 不一样。</p>
+<p>很多团队知道这些词，却没有一起经历过它们背后的失败。</p>
+<p>于是，新的问题一进入讨论，就会被旧的经验自动翻译。</p>
+<h2>两个人看到的，可能不是同一个方案</h2>
+<p>还是那个工单 Agent。</p>
+<p>没有实际运行过的人，看到的方案很简单：</p>
+<pre><code class="language-text">工单
+  ↓
+大模型
+  ↓
+处理建议
+</code></pre>
+<p>看起来一个 Prompt 就够了。</p>
+<p>实践过的人看到的却是另一张图：</p>
+<pre><code class="language-text">历史订单没有进入上下文
+用户信息不完整，模型仍然下了结论
+查询工具已经失败，模型还在继续回答
+每一步都像是对的，最终却操作了错误订单
+同一类问题今天成功，明天又换了一种做法
+</code></pre>
+<p>所以他提出状态管理、权限边界、失败重试和结果检查。</p>
+<p>旁边的人看到的是：一个原本能跑的功能，为什么突然多出这么多模块？</p>
+<p>他自己看到的是：如果没有这些模块，过去发生过的错误还会再来一遍。</p>
+<p>两边争论的表面是架构，背后其实是经验不对称。</p>
+<p>一边拿着一张整洁的架构图。</p>
+<p>另一边脑子里装着半年踩过的坑。</p>
+<p>这也是 AI 项目很难只靠讲解推动的原因。</p>
+<p>很多判断并不是看懂概念以后得到的，而是在模型一本正经地做错几次之后，才慢慢长出来。</p>
+<h2>组织选择的，通常不是技术上的最优解</h2>
+<p>技术人员容易默认：只要证明一个方案更先进、更完整，组织就应该接受它。</p>
+<p>公司实际比较的东西要多得多：</p>
+<pre><code class="language-text">大家能不能理解？
+出了问题能不能定位？
+结果是否可以验收？
+成本能不能预测？
+风险由谁承担？
+</code></pre>
+<p>一个能力更强、但行为难以解释的系统，未必比一套笨一些、却能稳定验收的流程更容易通过。</p>
+<p>一个 Agent 可以自己规划十步，听起来很强。</p>
+<p>可如果没有人能说清它为什么选择第三步、失败后会走向哪里、什么时候必须停下来，这种“强”在组织里首先意味着风险。</p>
+<p>于是，公司会自然地把它改造成更容易管理的形状：</p>
+<pre><code class="language-text">让 Agent 自己决定
+        ↓
+改成固定 Workflow
+        ↓
+只保留一个模型节点
+        ↓
+其余继续使用原来的规则
+</code></pre>
+<p>模型能自行决定的范围缩小了，团队也更容易预测和验收结果。固定流程可能正好适合这个任务。</p>
+<p>值得警惕的是：如果所有 AI 项目都在进入真实任务前就被改成旧系统的样子，组织永远看不到新方案究竟能做到什么，也不会积累驾驭它的能力。</p>
+<p>然后它会得出一个很合理的结论：</p>
+<blockquote>
+<p>AI 好像也没有改变多少东西。</p>
+</blockquote>
+<p>当然没有。</p>
+<p>因为它被允许进入公司的方式，就是不要改变原来的东西。</p>
+<h2>为什么继续讲架构通常没有用</h2>
+<p>遇到这种情况，技术团队最常见的反应是继续解释。</p>
+<p>再补一页 Agent 架构。</p>
+<p>再讲一次 Context Engineering。</p>
+<p>再说明为什么需要 Evaluation、Memory 和数据闭环。</p>
+<p>结果往往是：讲的人越来越急，听的人越来越确认这个方案太复杂。</p>
+<p>架构图只能说明系统怎样设计，无法替别人补上设计之前的失败经验。</p>
+<p>你说需要独立的检查模块，对方听到的是“又多一次模型调用”。</p>
+<p>假设测试后拿出这样的记录：</p>
+<blockquote>
+<p>100 个工单里，有 12 个查询和修改操作都执行成功了，处理的却是错误订单。当前流程只检查操作有没有成功，没有核对订单是否属于这次投诉。</p>
+</blockquote>
+<p>检查模块就不再是“高级架构”。</p>
+<p>它有了明确的工作：核对订单是否匹配。再跑同一批工单，看看能拦住多少错误、会不会误拦正确结果，才知道它值不值得加。</p>
+<p>很多 AI 方案说服不了组织，原因可能就在这里：团队试图直接共享答案，却没有共享答案形成之前的证据。</p>
+<h2>让经验离开一个人的脑子</h2>
+<p>把工单输入、两版处理结果和检查成本放在一起，负责验收的人就能核对：它解决的是不是业务在意的错误，代价能不能接受。</p>
+<p>提出方案的人也要接受检查。挑几个成功演示，能说明系统做得到；把失败和误拦一起留下，才有依据讨论它是否值得用。</p>
+<p>如果简单方案已经足够，就留下简单方案；如果新方案改善了结果，也能具体说明为什么值得试。实验同样可能推翻设计者对“先进”的判断。</p>
+<p>这些记录留下来以后，下一位参与者不必亲自再踩一遍坑，也能看到方案怎样形成。</p>
+<p>经验只存在于少数人脑子里时，架构像个人偏好。别人能够检查它的来路，团队才有机会形成共同判断。</p>
+<h2>写在最后</h2>
+<p>AI 进了公司，最后常常只剩一个 API，很多时候不是因为团队不够重视 AI。</p>
+<p>组织只能用已经拥有的经验，管理眼前的风险。</p>
+<p>当新的架构没有共同的失败证据支撑，它看起来就是一组昂贵、陌生又难以验收的设计。</p>
+<p>让同一批工单在新旧方案里各跑一次，比继续堆架构图更能推进讨论。团队终于能看到：保留旧做法会错过什么，新做法又需要付出什么。</p>
+<p>否则，再新的 AI，进入组织以后也会被翻译成旧软件。</p>
+<p>接口留下了。</p>
+<p>新的工作方式没有。</p>
+<p><em>LZ AI Note｜记录现象，追问本质。复杂的事情，简单说。</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-DyvYVVjE.js"></script>
+</body>
+</html>

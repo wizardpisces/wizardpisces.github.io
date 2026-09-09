@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex,nofollow">
-  <title>模型不是先想好再回答：每个 Token 都在改变下一步 | LZ AI NOTE</title>
-  <meta name="description" content="模型不是先想好再回答：每个 Token 都在改变下一步 大模型回答问题时，总是一个 Token 接一个 Token 地往外生成。 你按下停止，句子可能断在一半。重新问同一个问题，开头只换了几个字，后面的论证却走向完全不同的方向。 这不只是聊天界面的打字动画。 主流大模型通常不会先在内部写好整段答案，再逐字显示。它每一步只解决一个问题： 根据目前已经出现的内…">
+  <title>AI 开头只换了几个字，为什么后面的答案全变了？ | LZ AI NOTE</title>
+  <meta name="description" content="AI 开头只换了几个字，为什么后面的答案全变了？ 大模型回答问题时，总是一个 Token 接一个 Token 地往外生成。 你按下停止，句子可能断在一半。重新问同一个问题，开头只换了几个字，后面的论证却走向完全不同的方向。 这不只是聊天界面的打字动画。 主流大模型通常不会先在内部写好整段答案，再逐字显示。它每一步只解决一个问题： 根据目前已经出现的内容，下…">
   <meta name="author" content="LZ">
-  <meta name="DC.title" content="模型不是先想好再回答：每个 Token 都在改变下一步">
+  <meta name="DC.title" content="AI 开头只换了几个字，为什么后面的答案全变了？">
   <meta name="DC.creator" content="LZ">
-  <meta name="DC.date" content="2026-08-24">
+  <meta name="DC.date" content="2026-09-08">
   <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E4%B8%8D%E6%98%AF%E5%85%88%E6%83%B3%E5%A5%BD%E5%86%8D%E5%9B%9E%E7%AD%94%EF%BC%9A%E6%AF%8F%E4%B8%AA%20Token%20%E9%83%BD%E5%9C%A8%E6%94%B9%E5%8F%98%E4%B8%8B%E4%B8%80%E6%AD%A5">
   <meta name="DC.publisher" content="LZ AI NOTE">
   <meta name="DC.language" content="zh-CN">
@@ -17,14 +17,14 @@
   <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
-  <meta property="og:title" content="模型不是先想好再回答：每个 Token 都在改变下一步 | LZ AI NOTE">
-  <meta property="og:description" content="模型不是先想好再回答：每个 Token 都在改变下一步 大模型回答问题时，总是一个 Token 接一个 Token 地往外生成。 你按下停止，句子可能断在一半。重新问同一个问题，开头只换了几个字，后面的论证却走向完全不同的方向。 这不只是聊天界面的打字动画。 主流大模型通常不会先在内部写好整段答案，再逐字显示。它每一步只解决一个问题： 根据目前已经出现的内…">
+  <meta property="og:title" content="AI 开头只换了几个字，为什么后面的答案全变了？ | LZ AI NOTE">
+  <meta property="og:description" content="AI 开头只换了几个字，为什么后面的答案全变了？ 大模型回答问题时，总是一个 Token 接一个 Token 地往外生成。 你按下停止，句子可能断在一半。重新问同一个问题，开头只换了几个字，后面的论证却走向完全不同的方向。 这不只是聊天界面的打字动画。 主流大模型通常不会先在内部写好整段答案，再逐字显示。它每一步只解决一个问题： 根据目前已经出现的内容，下…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E4%B8%8D%E6%98%AF%E5%85%88%E6%83%B3%E5%A5%BD%E5%86%8D%E5%9B%9E%E7%AD%94%EF%BC%9A%E6%AF%8F%E4%B8%AA%20Token%20%E9%83%BD%E5%9C%A8%E6%94%B9%E5%8F%98%E4%B8%8B%E4%B8%80%E6%AD%A5">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"模型不是先想好再回答：每个 Token 都在改变下一步","description":"模型不是先想好再回答：每个 Token 都在改变下一步 大模型回答问题时，总是一个 Token 接一个 Token 地往外生成。 你按下停止，句子可能断在一半。重新问同一个问题，开头只换了几个字，后面的论证却走向完全不同的方向。 这不只是聊天界面的打字动画。 主流大模型通常不会先在内部写好整段答案，再逐字显示。它每一步只解决一个问题： 根据目前已经出现的内…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E4%B8%8D%E6%98%AF%E5%85%88%E6%83%B3%E5%A5%BD%E5%86%8D%E5%9B%9E%E7%AD%94%EF%BC%9A%E6%AF%8F%E4%B8%AA%20Token%20%E9%83%BD%E5%9C%A8%E6%94%B9%E5%8F%98%E4%B8%8B%E4%B8%80%E6%AD%A5","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E4%B8%8D%E6%98%AF%E5%85%88%E6%83%B3%E5%A5%BD%E5%86%8D%E5%9B%9E%E7%AD%94%EF%BC%9A%E6%AF%8F%E4%B8%AA%20Token%20%E9%83%BD%E5%9C%A8%E6%94%B9%E5%8F%98%E4%B8%8B%E4%B8%80%E6%AD%A5","dateModified":"2026-08-24","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：模型不是先想好再回答：每个 Token 都在改变下一步，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E4%B8%8D%E6%98%AF%E5%85%88%E6%83%B3%E5%A5%BD%E5%86%8D%E5%9B%9E%E7%AD%94%EF%BC%9A%E6%AF%8F%E4%B8%AA%20Token%20%E9%83%BD%E5%9C%A8%E6%94%B9%E5%8F%98%E4%B8%8B%E4%B8%80%E6%AD%A5","about":["_hidden","文章素材"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI 开头只换了几个字，为什么后面的答案全变了？","description":"AI 开头只换了几个字，为什么后面的答案全变了？ 大模型回答问题时，总是一个 Token 接一个 Token 地往外生成。 你按下停止，句子可能断在一半。重新问同一个问题，开头只换了几个字，后面的论证却走向完全不同的方向。 这不只是聊天界面的打字动画。 主流大模型通常不会先在内部写好整段答案，再逐字显示。它每一步只解决一个问题： 根据目前已经出现的内容，下…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E4%B8%8D%E6%98%AF%E5%85%88%E6%83%B3%E5%A5%BD%E5%86%8D%E5%9B%9E%E7%AD%94%EF%BC%9A%E6%AF%8F%E4%B8%AA%20Token%20%E9%83%BD%E5%9C%A8%E6%94%B9%E5%8F%98%E4%B8%8B%E4%B8%80%E6%AD%A5","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E4%B8%8D%E6%98%AF%E5%85%88%E6%83%B3%E5%A5%BD%E5%86%8D%E5%9B%9E%E7%AD%94%EF%BC%9A%E6%AF%8F%E4%B8%AA%20Token%20%E9%83%BD%E5%9C%A8%E6%94%B9%E5%8F%98%E4%B8%8B%E4%B8%80%E6%AD%A5","dateModified":"2026-09-08","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：AI 开头只换了几个字，为什么后面的答案全变了？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E4%B8%8D%E6%98%AF%E5%85%88%E6%83%B3%E5%A5%BD%E5%86%8D%E5%9B%9E%E7%AD%94%EF%BC%9A%E6%AF%8F%E4%B8%AA%20Token%20%E9%83%BD%E5%9C%A8%E6%94%B9%E5%8F%98%E4%B8%8B%E4%B8%80%E6%AD%A5","about":["_hidden","文章素材"]}</script>
 </head>
 <body>
-  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>模型不是先想好再回答：每个 Token 都在改变下一步</h1><h1>模型不是先想好再回答：每个 Token 都在改变下一步</h1>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>AI 开头只换了几个字，为什么后面的答案全变了？</h1><h1>AI 开头只换了几个字，为什么后面的答案全变了？</h1>
 <p>大模型回答问题时，总是一个 Token 接一个 Token 地往外生成。</p>
 <p>你按下停止，句子可能断在一半。重新问同一个问题，开头只换了几个字，后面的论证却走向完全不同的方向。</p>
 <p>这不只是聊天界面的打字动画。</p>
@@ -149,6 +149,6 @@
 <li>Hugging Face，Text generation strategies：<a href="https://huggingface.co/docs/transformers/generation_strategies">https://huggingface.co/docs/transformers/generation_strategies</a></li>
 </ol>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-SREZn2ex.js"></script>
+  <script type="module" crossorigin src="/assets/index-DyvYVVjE.js"></script>
 </body>
 </html>
