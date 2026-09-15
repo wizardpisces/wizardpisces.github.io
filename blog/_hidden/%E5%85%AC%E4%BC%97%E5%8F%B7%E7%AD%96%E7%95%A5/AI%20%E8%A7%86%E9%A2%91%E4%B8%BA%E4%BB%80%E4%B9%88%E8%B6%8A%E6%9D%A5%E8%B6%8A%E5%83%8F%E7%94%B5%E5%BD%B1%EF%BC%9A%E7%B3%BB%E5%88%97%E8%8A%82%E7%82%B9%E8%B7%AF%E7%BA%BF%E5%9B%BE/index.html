@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>AI 视频为什么越来越像电影：系列节点路线图 | LZ AI NOTE</title>
+  <meta name="description" content="AI 视频为什么越来越像电影：系列节点路线图 系列角色：模型主干下的阶段性重点系列。 从视频生成的可见进步进入，连续解释画面怎样在时间里保持人物、空间、动作、镜头和声音的一致。它属于「模型为什么这样设计」，不新增顶级知识主干。 系列判断 这个方向足以形成系列，而且比单独追 Seedance、Veo、Sora 或可灵更稳定。 视频生成正在从“让一张图动起来”…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="AI 视频为什么越来越像电影：系列节点路线图">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-09-14">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/AI%20%E8%A7%86%E9%A2%91%E4%B8%BA%E4%BB%80%E4%B9%88%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%83%8F%E7%94%B5%E5%BD%B1%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/AI%20%E8%A7%86%E9%A2%91%E4%B8%BA%E4%BB%80%E4%B9%88%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%83%8F%E7%94%B5%E5%BD%B1%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="AI 视频为什么越来越像电影：系列节点路线图 | LZ AI NOTE">
+  <meta property="og:description" content="AI 视频为什么越来越像电影：系列节点路线图 系列角色：模型主干下的阶段性重点系列。 从视频生成的可见进步进入，连续解释画面怎样在时间里保持人物、空间、动作、镜头和声音的一致。它属于「模型为什么这样设计」，不新增顶级知识主干。 系列判断 这个方向足以形成系列，而且比单独追 Seedance、Veo、Sora 或可灵更稳定。 视频生成正在从“让一张图动起来”…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/AI%20%E8%A7%86%E9%A2%91%E4%B8%BA%E4%BB%80%E4%B9%88%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%83%8F%E7%94%B5%E5%BD%B1%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI 视频为什么越来越像电影：系列节点路线图","description":"AI 视频为什么越来越像电影：系列节点路线图 系列角色：模型主干下的阶段性重点系列。 从视频生成的可见进步进入，连续解释画面怎样在时间里保持人物、空间、动作、镜头和声音的一致。它属于「模型为什么这样设计」，不新增顶级知识主干。 系列判断 这个方向足以形成系列，而且比单独追 Seedance、Veo、Sora 或可灵更稳定。 视频生成正在从“让一张图动起来”…","url":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/AI%20%E8%A7%86%E9%A2%91%E4%B8%BA%E4%BB%80%E4%B9%88%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%83%8F%E7%94%B5%E5%BD%B1%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/AI%20%E8%A7%86%E9%A2%91%E4%B8%BA%E4%BB%80%E4%B9%88%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%83%8F%E7%94%B5%E5%BD%B1%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","dateModified":"2026-09-14","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：AI 视频为什么越来越像电影：系列节点路线图，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/AI%20%E8%A7%86%E9%A2%91%E4%B8%BA%E4%BB%80%E4%B9%88%E8%B6%8A%E6%9D%A5%E8%B6%8A%E5%83%8F%E7%94%B5%E5%BD%B1%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","about":["_hidden","公众号策略"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>AI 视频为什么越来越像电影：系列节点路线图</h1><h1>AI 视频为什么越来越像电影：系列节点路线图</h1>
+<blockquote>
+<p><strong>系列角色：模型主干下的阶段性重点系列。</strong> 从视频生成的可见进步进入，连续解释画面怎样在时间里保持人物、空间、动作、镜头和声音的一致。它属于「模型为什么这样设计」，不新增顶级知识主干。</p>
+</blockquote>
+<h2>系列判断</h2>
+<p>这个方向足以形成系列，而且比单独追 Seedance、Veo、Sora 或可灵更稳定。</p>
+<p>视频生成正在从“让一张图动起来”走向“完成一段作品”。Seedance 2.0 已经把文字、图片、音频和视频放进同一个参考与生成流程，Seedance 2.5 又把单次生成推进到 30 秒、多轮续写、多镜头与编辑。真正值得连续追问的不是某次模型升级，而是：</p>
+<blockquote>
+<p>一张好看的图片，只需要一个瞬间成立；一段可信的视频，为什么要让整个世界在时间里持续成立？</p>
+</blockquote>
+<p>固定承诺：</p>
+<blockquote>
+<p>每篇从一段普通读者看得见的惊艳、穿帮或产品反差进入，拆开视频模型为了让人物、动作、空间、镜头和声音持续成立，究竟多解决了哪一种问题，又为什么不能顺手解决所有图片任务。</p>
+</blockquote>
+<p>读者收益：</p>
+<ul>
+<li>普通读者能看懂 AI 视频为什么突然变得像电影，也能识别“画面漂亮”和“作品成立”的差别。</li>
+<li>技术读者能沿时间表示、运动、物体恒常、空间记忆、音画联合与长程规划，建立一张视频生成机制地图。</li>
+</ul>
+<h2>系列边界</h2>
+<ul>
+<li>不做视频模型排行榜，不按厂商逐个介绍功能。</li>
+<li>不做提示词教程、运镜词典和 AI 短剧赚钱指南。</li>
+<li>单帧生成、局部改图和姿势控制仍归文生图节点；只有时间关系不可替代时才进入本系列。</li>
+<li>视频能否被用于训练机器人、预测动作后果，主归属是世界模型；本系列只讲生成作品时的时间与世界一致性。</li>
+<li>版权、演员替代和影视行业变化可以作为新闻或变局文章，不占据机制主线。</li>
+</ul>
+<h2>问题节点图</h2>
+<pre><code class="language-text">一张图已经能画得很好
+        ↓
+怎样让它连续动起来，而不是每一帧重新抽一次？
+        ↓
+人物在运动中为什么不会不断变脸、变衣服？
+        ↓
+转身、遮挡和出画以后，模型怎样知道它还是同一个人？
+        ↓
+人物和物体发生碰撞时，动作为什么要遵守前后因果？
+        ↓
+一个镜头成立后，切到下一个镜头怎样保持角色、空间和事件连续？
+        ↓
+画面、台词、口型、环境声和音乐怎样同时对上？
+        ↓
+几十秒已经像短片，为什么离一部电影仍然很远？
+</code></pre>
+<p>这条线不是“先讲完所有基础，再看作品”。每篇仍从可独立成立的真实画面进入，正文只补当前问题需要的最小机制。</p>
+<h2>首批核心节点</h2>
+<h3>1. <a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E8%A7%86%E9%A2%91%E6%98%8E%E6%98%8E%E7%94%B1%E5%9B%BE%E7%89%87%E7%BB%84%E6%88%90%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E6%8B%8D%E8%A7%86%E9%A2%91%E7%9A%84%20AI%20%E7%94%BB%E4%B8%8D%E5%A5%BD%E4%B8%80%E5%BC%A0%E5%9B%BE%EF%BC%9F.md">视频明明由图片组成，为什么会拍视频的 AI 画不好一张图？</a></h3>
+<p>进入方式：Seedance 2.5 已经能生成《CANDY》这类完整度很高的短片，同一家公司的豆包在日常生图和图片编辑中，结果却可能与用户预期相差很远。</p>
+<p>真正追问：任务难度为什么不由输出帧数决定，而由模型需要补出的未知和结果必须遵守的约束共同决定；视频生成能力为什么不是图片生成与编辑的上位集合。</p>
+<p>认知落点：</p>
+<pre><code class="language-text">Seedance：视频生成与视频编辑模型
+Seedream / SeedEdit：图片生成与图片编辑模型
+豆包：决定调用什么模型、开放什么控制方式的产品
+
+同一家公司
+≠ 同一个模型
+≠ 同一种任务
+≠ 同一套产品能力
+</code></pre>
+<p>这一篇还要解释体验反差为何会被放大：视频首先奖励运动、氛围和连续观感；图片编辑要求指定区域改变、其他像素尽量不动。前者的一处小瑕疵可能一闪而过，后者可以被用户放大检查。Seedream 5.0 Pro 官方展示的精确编辑也依赖点选、套索、框选和涂鸦等空间控制，聊天产品是否接入同一版本、怎样路由、开放了哪些控制，必须单独核验，不能从实验室展示倒推豆包体验。</p>
+<p>它是系列最强入口，先拆掉“视频帧数更多，所以一定包含图片能力”的单线能力观。后文再进入视频到底难在哪里。</p>
+<h3>2. <a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E8%A7%86%E9%A2%91%E4%BB%A5%E5%89%8D%E5%8F%AA%E8%83%BD%E6%8B%8D%E5%87%A0%E7%A7%92%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E7%8E%B0%E5%9C%A8%E5%B7%B2%E7%BB%8F%E8%83%BD%E8%AE%B2%E6%95%85%E4%BA%8B%E4%BA%86%EF%BC%9F.md">AI 视频以前只能拍几秒，为什么现在已经能讲故事了？</a></h3>
+<p>进入方式：以 DiDi_OK 使用 Dreamina Seedance 2.5 制作的《CANDY》为入口。公开信息能确认使用工具和作品设定，不能证明整部短片来自一次生成；正文明确区分模型能力与创作者的设计、筛选和剪辑。</p>
+<p>真正追问：行业的跃迁为什么不只是单帧画质提高，而是多镜头、音画、参考素材和连续编辑开始被放进同一条创作链。</p>
+<p>认知落点：</p>
+<pre><code class="language-text">让画面动起来
+→ 让动作连续
+→ 让角色和空间持续存在
+→ 让多个镜头组成事件
+→ 让事件形成作品
+</code></pre>
+<p>它是系列入口，不在第一篇讲完所有模型结构。</p>
+<h3>3. AI 每一帧都画得很好，连起来为什么还会闪？</h3>
+<p>进入方式：人物皮肤、衣服纹理、背景细节在连续画面中不断跳动，暂停看每一帧却都没有明显问题。</p>
+<p>真正追问：独立生成好看的帧，为什么不等于生成连续的视频。</p>
+<p>认知落点：空间一致性与时间一致性是两种要求；模型需要让当前帧受到前后帧和运动轨迹的约束，而不是只追求这一帧像真图。</p>
+<h3>4. 人已经转过身了，AI 为什么还知道他长什么样？</h3>
+<p>进入方式：人物转身、被车挡住、走出镜头再回来后，脸、衣服或随身物品突然改变。</p>
+<p>真正追问：像素暂时消失后，视频如何维持“还是同一个对象”的判断。</p>
+<p>认知落点：物体恒常、身份表示与空间记忆。它与图片中的身份保持不同，因为视频必须跨遮挡和时间空档恢复对象。</p>
+<h3>5. 杯子已经被碰倒了，AI 为什么下一秒又让它站了起来？</h3>
+<p>进入方式：碰撞、倾倒、破碎、液体流动等动作看起来流畅，结果却不遵守刚刚发生的事。</p>
+<p>真正追问：运动自然与因果正确为什么不是同一种能力。</p>
+<p>认知落点：</p>
+<pre><code class="language-text">画面变化像真的
+≠
+状态变化有原因
+≠
+变化后的结果会被持续记住
+</code></pre>
+<p>这一篇可以与世界模型交叉，但主问题仍是视频里的世界一致性。</p>
+<h3>6. 同一个人换了三个镜头，为什么还能像在演同一场戏？</h3>
+<p>进入方式：远景里人物推门，近景却换了衣服；上一镜头杯子在右手，切镜后跑到左手。</p>
+<p>真正追问：多镜头生成为什么不是把几个独立视频拼在一起。</p>
+<p>认知落点：镜头计划、跨镜头状态、角色与场景连续性。Seedance 1.0 的原生多镜头能力和后续版本的长叙事改进可作为案例，但不写成功能发布稿。</p>
+<h3>7. 人物开口只有两秒，AI 怎么让声音、口型和表情一起对上？</h3>
+<p>进入方式：画面很真，嘴型却慢半拍；脚已经落地，声音才出现。</p>
+<p>真正追问：先生成视频再贴音频，为什么难以稳定获得细粒度同步。</p>
+<p>认知落点：音频和视频既要分别生成，又要共享时间轴与语义事件。Seedance 1.5 Pro、2.0 的音画联合生成可作为主案例。</p>
+<h2>第二阶段候选</h2>
+<table>
+<thead>
+<tr>
+<th>标题方向</th>
+<th>核心问题</th>
+<th>暂不进入首批的原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>给 AI 一张脸、一段动作和一首歌，它怎么知道分别参考什么？</td>
+<td>多模态参考怎样分工并避免互相污染</td>
+<td>更适合等读者先建立视频连续性的基础地图</td>
+</tr>
+<tr>
+<td>一段视频已经拍完了，为什么只改一句台词还会牵动整个画面？</td>
+<td>视频局部编辑与时间范围控制</td>
+<td>与图片编辑有交叉，需要找到更强的视频独有现象</td>
+</tr>
+<tr>
+<td>AI 一次能生成 30 秒，为什么不能直接生成 90 分钟？</td>
+<td>长程状态、叙事规划、误差累积和计算成本</td>
+<td>容易写成“大模型还不够强”的空泛结论，需要具体制作证据</td>
+</tr>
+<tr>
+<td>AI 视频越来越像电影，导演还剩下什么？</td>
+<td>生成成本下降后，选择、调度、表演和叙事价值怎样移动</td>
+<td>属于变局文章，不与机制主线连续发布</td>
+</tr>
+<tr>
+<td>AI 视频怎样判断谁更好？</td>
+<td>动作、提示词、审美、物理和世界一致性如何分别评测</td>
+<td>可与「榜单背后」评测专题交叉，等热点触发</td>
+</tr>
+</tbody>
+</table>
+<h2>与现有内容的关系</h2>
+<ul>
+<li><a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E4%B8%80%E5%8F%A5%E6%8F%90%E7%A4%BA%E8%AF%8D%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E6%AC%A1%E7%94%9F%E6%88%90%E7%9A%84%E5%9B%BE%E7%89%87%E9%83%BD%E4%B8%8D%E4%B8%80%E6%A0%B7%EF%BC%9F.md">《同一句提示词，为什么每次生成的图片都不一样？》</a>解释单张图片为何沿不同随机起点形成不同结果。本系列复用“生成不是唯一答案”，继续追问视频为什么不能让每一帧各自自由生成。</li>
+<li>[《为什么加一张姿势图，AI 生图就突然更听话了？》](…/文章素材/为什么加一张姿势图，AI 生图就突然更听话了？.md)解释单张图片的空间控制。视频系列新增时间、运动和跨镜头状态，不重复 ControlNet。</li>
+<li><a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%8F%AA%E8%AE%A9%20AI%20%E6%8D%A2%E4%BB%B6%E8%A1%A3%E6%9C%8D%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%9E%E8%84%B8%E4%B9%9F%E4%B8%80%E8%B5%B7%E6%8D%A2%E4%BA%86%EF%BC%9F.md">《只让 AI 换件衣服，为什么连脸也一起换了？》</a>解释图片编辑中的改变与保留。视频局部编辑只有在“如何让修改沿指定时间传播”成为主问题时才独立成篇。</li>
+<li>世界模型方向研究动作之后可能发生什么；视频生成主线研究一段作品怎样在时间里看起来持续成立。二者可以共享案例，不能混成“视频模型就是世界模型”。</li>
+</ul>
+<h2>发布建议</h2>
+<p>先写“视频很强、改图却很差”的产品反差，再发布《CANDY》总入口。前者拆掉单线能力观，后者回答视频究竟跨过了什么门槛。连续两篇后，与其他成熟选题重新比较，不因为路线图很长就强行连载。</p>
+<p>Seedance 适合成为入口和贯穿案例，但不应成为系列名。模型更新很快，时间一致性、物体恒常、因果、多镜头与音画同步这些问题不会随品牌版本一起过期。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-CmvjrxFo.js"></script>
+</body>
+</html>

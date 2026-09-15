@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>同一家公司的 AI，为什么视频很强，生图却不行？ | LZ AI NOTE</title>
+  <meta name="description" content="同一家公司的 AI，为什么视频很强，生图却不行？ 最近看完 Seedance 2.5 制作的科幻短片《CANDY》，我有点想不通。 人物会表演，镜头会切换，画面和声音还能连成一个完整故事。 可同一家公司的豆包，生图却经常不太行。构图容易跑，质感不对味；让它改一处，脸和背景还可能跟着变。 视频不就是很多张图片连在一起吗？ 能生成几百帧，为什么反而画不好一帧？…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="同一家公司的 AI，为什么视频很强，生图却不行？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-09-15">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E4%B8%80%E5%AE%B6%E5%85%AC%E5%8F%B8%E7%9A%84%20AI%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A7%86%E9%A2%91%E5%BE%88%E5%BC%BA%EF%BC%8C%E7%94%9F%E5%9B%BE%E5%8D%B4%E4%B8%8D%E8%A1%8C%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E4%B8%80%E5%AE%B6%E5%85%AC%E5%8F%B8%E7%9A%84%20AI%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A7%86%E9%A2%91%E5%BE%88%E5%BC%BA%EF%BC%8C%E7%94%9F%E5%9B%BE%E5%8D%B4%E4%B8%8D%E8%A1%8C%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="同一家公司的 AI，为什么视频很强，生图却不行？ | LZ AI NOTE">
+  <meta property="og:description" content="同一家公司的 AI，为什么视频很强，生图却不行？ 最近看完 Seedance 2.5 制作的科幻短片《CANDY》，我有点想不通。 人物会表演，镜头会切换，画面和声音还能连成一个完整故事。 可同一家公司的豆包，生图却经常不太行。构图容易跑，质感不对味；让它改一处，脸和背景还可能跟着变。 视频不就是很多张图片连在一起吗？ 能生成几百帧，为什么反而画不好一帧？…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E4%B8%80%E5%AE%B6%E5%85%AC%E5%8F%B8%E7%9A%84%20AI%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A7%86%E9%A2%91%E5%BE%88%E5%BC%BA%EF%BC%8C%E7%94%9F%E5%9B%BE%E5%8D%B4%E4%B8%8D%E8%A1%8C%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"同一家公司的 AI，为什么视频很强，生图却不行？","description":"同一家公司的 AI，为什么视频很强，生图却不行？ 最近看完 Seedance 2.5 制作的科幻短片《CANDY》，我有点想不通。 人物会表演，镜头会切换，画面和声音还能连成一个完整故事。 可同一家公司的豆包，生图却经常不太行。构图容易跑，质感不对味；让它改一处，脸和背景还可能跟着变。 视频不就是很多张图片连在一起吗？ 能生成几百帧，为什么反而画不好一帧？…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E4%B8%80%E5%AE%B6%E5%85%AC%E5%8F%B8%E7%9A%84%20AI%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A7%86%E9%A2%91%E5%BE%88%E5%BC%BA%EF%BC%8C%E7%94%9F%E5%9B%BE%E5%8D%B4%E4%B8%8D%E8%A1%8C%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E4%B8%80%E5%AE%B6%E5%85%AC%E5%8F%B8%E7%9A%84%20AI%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A7%86%E9%A2%91%E5%BE%88%E5%BC%BA%EF%BC%8C%E7%94%9F%E5%9B%BE%E5%8D%B4%E4%B8%8D%E8%A1%8C%EF%BC%9F","dateModified":"2026-09-15","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：同一家公司的 AI，为什么视频很强，生图却不行？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E4%B8%80%E5%AE%B6%E5%85%AC%E5%8F%B8%E7%9A%84%20AI%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A7%86%E9%A2%91%E5%BE%88%E5%BC%BA%EF%BC%8C%E7%94%9F%E5%9B%BE%E5%8D%B4%E4%B8%8D%E8%A1%8C%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>同一家公司的 AI，为什么视频很强，生图却不行？</h1><h1>同一家公司的 AI，为什么视频很强，生图却不行？</h1>
+<p>最近看完 Seedance 2.5 制作的科幻短片《CANDY》，我有点想不通。</p>
+<p>人物会表演，镜头会切换，画面和声音还能连成一个完整故事。</p>
+<p>可同一家公司的豆包，生图却经常不太行。构图容易跑，质感不对味；让它改一处，脸和背景还可能跟着变。</p>
+<p>视频不就是很多张图片连在一起吗？</p>
+<p>能生成几百帧，为什么反而画不好一帧？</p>
+<p>问题藏在一个很自然的误解里：</p>
+<pre><code class="language-text">输出越多
+→ 任务越难
+→ 做好视频以后，图片自然也会做好
+</code></pre>
+<p>生成任务真正的难度，不只取决于输出多少。</p>
+<p>还取决于：<strong>模型需要自己猜多少。</strong></p>
+<h2>先让 AI 画一个人</h2>
+<p>我们给它一句话：</p>
+<blockquote>
+<p>一个穿红色大衣的女人，走在雨夜的上海街头。</p>
+</blockquote>
+<p>句子看起来很具体，其实留下了大量空白：</p>
+<pre><code class="language-text">她长什么样？
+站在画面哪里？
+镜头离她多远？
+街道是什么样？
+灯光从哪里来？
+是纪实摄影，还是广告大片？
+</code></pre>
+<p>这些问题没有标准答案。</p>
+<p>生图模型必须从大量可能性中选一套，再让人物、构图、光线和风格同时成立。</p>
+<pre><code class="language-text">一句文字
+   ↓
+补全所有未说明的细节
+   ↓
+得到一张图片
+</code></pre>
+<p>它只输出一帧，却几乎要决定整个世界。</p>
+<p>豆包生成的结果可能满足了“红色大衣、女人、雨夜、上海”，我们还是觉得不好看。真正决定画面质感的，恰恰是那些没有写进提示词、却被模型替我们决定的部分。</p>
+<h2>再让这个人走起来</h2>
+<p>现在把刚生成的图片交给视频模型：</p>
+<blockquote>
+<p>让她向前走，镜头从侧面跟拍。</p>
+</blockquote>
+<p>视频多出了几百帧，还要处理步伐、衣服摆动和镜头移动，看起来明显更难。</p>
+<p>但第一张图已经回答了一批问题：</p>
+<pre><code class="language-text">她长什么样
+大衣什么颜色
+街道怎样延伸
+灯光从哪里来
+镜头大概多远
+</code></pre>
+<p>视频模型不需要再次决定世界的起点。它主要处理的是：这个已经确定的画面，接下来怎样变化。</p>
+<pre><code class="language-text">已经确定的画面
+        +
+向前走、侧面跟拍
+        ↓
+生成连续变化
+</code></pre>
+<p>输出变多了，选择空间却被第一张图压小了。</p>
+<pre><code class="language-text">生图
+→ 从少量文字中补出一个世界
+
+图生视频
+→ 让已经给出的世界继续变化
+</code></pre>
+<p>看起来更复杂的任务，如果拿到了更多条件，未必在每个维度上都更难。</p>
+<h2>视频拿到的，可能还不只一张图</h2>
+<p>Seedance 2.5 可以同时接收图片、视频和音频参考。</p>
+<p>还是刚才的雨夜：</p>
+<pre><code class="language-text">人物参考图
+→ 决定她长什么样
+
+街道参考图
+→ 决定环境长什么样
+
+动作参考视频
+→ 决定她怎样走路
+
+音频参考
+→ 决定雨声和脚步节奏
+</code></pre>
+<p>最终结果是一段复杂视频，许多关键选择却已经由参考素材提前确定。</p>
+<p>模型回答的不再是“请凭空想象一切”，而是：</p>
+<blockquote>
+<p>怎样让这些已经给出的东西，在同一段时间里配合起来？</p>
+</blockquote>
+<p>这仍然很难，却和“一句话画出所有东西”不是同一道题。</p>
+<p>Seedance 也支持纯文生视频。没有参考图时，它同样要生成最初的人物和场景。这说明 Seedance 本身确实拥有很强的单帧画面能力。</p>
+<p>但这份能力长在 Seedance 的参数里。</p>
+<p>训练视频模型时，数据更新的是 Seedance；豆包生图使用的图片模型，不会隔空获得同一份能力。</p>
+<pre><code class="language-text">Seedance 学会生成漂亮的视频帧
+            ↓
+说明 Seedance 的画面能力很强
+            ↓
+不等于另一个图片模型也同步学会
+</code></pre>
+<p>同一家公司的模型，不共享一颗会自动同步的脑子。</p>
+<h2>改图为什么可能更难受？</h2>
+<p>生图留下大量空白，让模型自由发挥。</p>
+<p>改图正好相反：自由越少越好。</p>
+<p>把红色大衣换成黑色夹克，实际包含两条命令：</p>
+<pre><code class="language-text">必须改变
+→ 衣服颜色、领口、材质和阴影
+
+必须保留
+→ 脸、头发、姿势、街道、灯光和构图
+</code></pre>
+<p>改得太轻，红色大衣还在。</p>
+<p>改得太重，夹克出现了，脸也换了。</p>
+<pre><code class="language-text">改图的目标
+→ 在很小的区域制造明显变化
+→ 再把变化锁在边界以内
+</code></pre>
+<p>视频模型主要学习怎样让变化连续发生。</p>
+<p>改图模型还要学习另一件事：变化必须在哪里停下。</p>
+<p>两者都处理像素，要求却不一样。</p>
+<h2>任务难不难，要看它留下了多少未知</h2>
+<p>现在把三项任务放在一起：</p>
+<pre><code class="language-text">生图只有一帧
+→ 整个世界都要从一句话里补出来
+
+视频有几百帧
+→ 前面的画面和参考素材不断缩小后面的选择
+
+改图还是一帧
+→ 同时满足“这里必须变”和“那里绝对别动”
+</code></pre>
+<p>视频由图片组成，只能说明视频里有很多帧。</p>
+<p>它不能证明视频生成是图片生成和编辑的上位能力。</p>
+<p>真正决定任务难度的，是两件事：</p>
+<pre><code class="language-text">模型需要自己补出多少未知
+            +
+结果必须遵守多少约束
+</code></pre>
+<p>Seedance 可以很会让一个世界连续变化，豆包使用的图片模型仍可能不擅长从一句话创造这个世界，也不擅长只改一处、不惊动其他地方。</p>
+<p>看起来矛盾，是因为我们一直在数输出有多少帧。</p>
+<p>模型面对的，却是三道完全不同的题。</p>
+<h2>参考资料</h2>
+<ol>
+<li>ByteDance Seed Team，Seedance 2.0 Official Launch，2026：<a href="https://seed.bytedance.com/en/blog/seedance-2-0-official-launch">https://seed.bytedance.com/en/blog/seedance-2-0-official-launch</a></li>
+<li>ByteDance Seed Team，One-take Creation, Flexible Referencing: Introducing Seedance 2.5，2026：<a href="https://seed.bytedance.com/en/blog/one-take-creation-flexible-referencing-introducing-seedance-2-5">https://seed.bytedance.com/en/blog/one-take-creation-flexible-referencing-introducing-seedance-2-5</a></li>
+<li>Wang 等，SeedEdit 3.0: Fast and High-Quality Generative Image Editing，2025：<a href="https://arxiv.org/abs/2506.05083">https://arxiv.org/abs/2506.05083</a></li>
+<li>DiDi_OK，《CANDY》，2026：<a href="https://x.com/DiDi_OKK">https://x.com/DiDi_OKK</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质。复杂的事情，简单说。</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-CmvjrxFo.js"></script>
+</body>
+</html>

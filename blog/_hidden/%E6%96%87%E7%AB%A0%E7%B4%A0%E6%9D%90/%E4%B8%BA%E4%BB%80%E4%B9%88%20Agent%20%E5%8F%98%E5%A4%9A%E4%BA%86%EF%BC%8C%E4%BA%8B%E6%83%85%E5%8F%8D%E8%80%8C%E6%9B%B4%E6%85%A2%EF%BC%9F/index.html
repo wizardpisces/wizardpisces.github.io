@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>为什么 Agent 变多了，事情反而更慢？ | LZ AI NOTE</title>
+  <meta name="description" content="为什么 Agent 变多了，事情反而更慢？ 你让一个 Agent 根据产品资料，写一份新品上市方案。 它要分析用户、研究竞品、设计价格、提炼卖点，还要检查风险。事情不少，一个 Agent 做得很慢。 于是你把它拆成五个： 五个一起开工，总该快五倍了吧？ 结果，用户 Agent 把产品定位成职场新人的入门工具，定价 Agent 却按专业用户能接受的价格来算；…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="为什么 Agent 变多了，事情反而更慢？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-09-11">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%B8%BA%E4%BB%80%E4%B9%88%20Agent%20%E5%8F%98%E5%A4%9A%E4%BA%86%EF%BC%8C%E4%BA%8B%E6%83%85%E5%8F%8D%E8%80%8C%E6%9B%B4%E6%85%A2%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%B8%BA%E4%BB%80%E4%B9%88%20Agent%20%E5%8F%98%E5%A4%9A%E4%BA%86%EF%BC%8C%E4%BA%8B%E6%83%85%E5%8F%8D%E8%80%8C%E6%9B%B4%E6%85%A2%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="为什么 Agent 变多了，事情反而更慢？ | LZ AI NOTE">
+  <meta property="og:description" content="为什么 Agent 变多了，事情反而更慢？ 你让一个 Agent 根据产品资料，写一份新品上市方案。 它要分析用户、研究竞品、设计价格、提炼卖点，还要检查风险。事情不少，一个 Agent 做得很慢。 于是你把它拆成五个： 五个一起开工，总该快五倍了吧？ 结果，用户 Agent 把产品定位成职场新人的入门工具，定价 Agent 却按专业用户能接受的价格来算；…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%B8%BA%E4%BB%80%E4%B9%88%20Agent%20%E5%8F%98%E5%A4%9A%E4%BA%86%EF%BC%8C%E4%BA%8B%E6%83%85%E5%8F%8D%E8%80%8C%E6%9B%B4%E6%85%A2%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"为什么 Agent 变多了，事情反而更慢？","description":"为什么 Agent 变多了，事情反而更慢？ 你让一个 Agent 根据产品资料，写一份新品上市方案。 它要分析用户、研究竞品、设计价格、提炼卖点，还要检查风险。事情不少，一个 Agent 做得很慢。 于是你把它拆成五个： 五个一起开工，总该快五倍了吧？ 结果，用户 Agent 把产品定位成职场新人的入门工具，定价 Agent 却按专业用户能接受的价格来算；…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%B8%BA%E4%BB%80%E4%B9%88%20Agent%20%E5%8F%98%E5%A4%9A%E4%BA%86%EF%BC%8C%E4%BA%8B%E6%83%85%E5%8F%8D%E8%80%8C%E6%9B%B4%E6%85%A2%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%B8%BA%E4%BB%80%E4%B9%88%20Agent%20%E5%8F%98%E5%A4%9A%E4%BA%86%EF%BC%8C%E4%BA%8B%E6%83%85%E5%8F%8D%E8%80%8C%E6%9B%B4%E6%85%A2%EF%BC%9F","dateModified":"2026-09-11","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：为什么 Agent 变多了，事情反而更慢？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%B8%BA%E4%BB%80%E4%B9%88%20Agent%20%E5%8F%98%E5%A4%9A%E4%BA%86%EF%BC%8C%E4%BA%8B%E6%83%85%E5%8F%8D%E8%80%8C%E6%9B%B4%E6%85%A2%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>为什么 Agent 变多了，事情反而更慢？</h1><h1>为什么 Agent 变多了，事情反而更慢？</h1>
+<p>你让一个 Agent 根据产品资料，写一份新品上市方案。</p>
+<p>它要分析用户、研究竞品、设计价格、提炼卖点，还要检查风险。事情不少，一个 Agent 做得很慢。</p>
+<p>于是你把它拆成五个：</p>
+<pre><code class="language-text">用户 Agent
+竞品 Agent
+定价 Agent
+文案 Agent
+风险 Agent
+</code></pre>
+<p>五个一起开工，总该快五倍了吧？</p>
+<p>结果，用户 Agent 把产品定位成职场新人的入门工具，定价 Agent 却按专业用户能接受的价格来算；文案 Agent 主打“便宜易用”，竞品 Agent 拿来比较的却都是高端产品。</p>
+<p>每份报告单独看都有道理，放在一起却不是同一个产品。</p>
+<p>主 Agent 只好重新读五份结果，找出它们用了哪些不同前提，再让其中几个重做。一个 Agent 原本只是慢，现在五个 Agent 一边并行，一边互相制造返工。</p>
+<p>为什么 Agent 变多了，事情反而更慢？</p>
+<h2>五个 Agent，先把同一份资料读了五遍</h2>
+<p>每个子 Agent 都不能只收到一句“你负责定价”。</p>
+<p>它至少要知道产品是什么、面向谁、这次方案想解决什么问题、有哪些不能碰的边界。否则，它只能自己补齐缺失的信息。</p>
+<p>于是那份产品资料被分别塞进五个上下文。五个 Agent 各读一遍，各自理解一遍，再把结果交回主 Agent。主 Agent 还要把五份输出重新读一遍。</p>
+<p>单 Agent 的过程原本是：</p>
+<pre><code class="language-text">读一次资料
+    ↓
+一边判断，一边往下写
+</code></pre>
+<p>拆开以后变成：</p>
+<pre><code class="language-text">复制背景给五个 Agent
+        ↓
+五个 Agent 分别判断
+        ↓
+收回五份结果
+        ↓
+重新对齐、合并和返工
+</code></pre>
+<p>并行节省了执行时间，却增加了传递和合并工作。多出来的这部分，可以叫作协调成本。</p>
+<p>这很像《人月神话》里的那条著名判断：给一个已经延期的软件项目增加人手，往往会让它更晚。新成员要了解项目，原来的成员要花时间解释，大家写出的代码还要重新整合。人手增加了，工期并不会按比例缩短。</p>
+<p>Agent 不用入职，也不会因为开会太多而疲惫，不能把这条规律原样搬过来。但任务里的依赖关系还在。新增一个 Agent，同样要给它背景、目标和边界；它的结果也要被读取、判断并合回原任务。五份独立上下文，不能自动拼成一份完整判断。</p>
+<p>只要几个任务共享同一个尚未确定的前提，它们就可能同时跑得很快，又同时跑向不同方向。</p>
+<h2>真正不能并行的，是还没做出的共同决定</h2>
+<p>回到这份上市方案。</p>
+<p>“查找竞品资料”和“收集用户反馈”可以各自进行，谁先完成都不影响另一方。</p>
+<p>但“怎么定价”和“卖点怎么写”，都依赖同一个决定：这个产品到底卖给谁，准备占据什么位置。</p>
+<p>如果这个决定还没形成，就把后面的工作全部并行出去，每个 Agent 都得自己猜一个答案。最后合并的不是五块拼图，而是五张画法不同的图。</p>
+<p>所以，多 Agent 能不能提速，不取决于任务看起来有多少部分，而取决于这些部分之间有没有等待关系：</p>
+<pre><code class="language-text">可以各自完成，最后直接拼接
+→ 适合并行
+
+后一个判断依赖前一个结果
+→ 先别拆开
+</code></pre>
+<p>Anthropic 在多 Agent 研究系统中也观察到类似边界。它的系统尤其适合同时探索多个彼此独立的搜索方向；在内部研究评测中，相比单 Agent，多 Agent 方案的表现高出 90.2%。成本统计使用的是另一个基准：一般 Agent 使用的 Token 约为普通聊天的 4 倍，多 Agent 则约为 15 倍。对于依赖关系密集、需要共享大量上下文的任务，Anthropic 也明确表示并不适合直接使用多 Agent。</p>
+<p>只有并行得到的结果足够值钱，这笔协调成本才值得付。</p>
+<h2>这份方案应该怎么拆？</h2>
+<p>问题不在“五个”这个数字，而在拆分发生得太早。</p>
+<p>先让主 Agent 划清调查范围和交付格式，再把彼此独立的取证任务分出去：</p>
+<pre><code class="language-text">主 Agent：划清问题和交付格式
+        ↓
+        ├─ 用户 Agent：谁确实需要它？
+        ├─ 竞品 Agent：市场上已有谁？
+        └─ 风险 Agent：哪些话不能承诺？
+        ↓
+主 Agent：根据证据确定定位，再完成定价和文案
+</code></pre>
+<p>这一次，三个子任务可以各自推进，拿回来的也是同一种交付物：回答明确问题的证据。主 Agent 不必调和三套产品定义，而是等证据回来以后再做共同决定。</p>
+<p>当然，如果任务本来只是同时抓取五个网页、调用五个确定的接口，普通并发就够了。节点会同时运行，不等于每个节点都需要一套独立上下文和自主决策。</p>
+<p>回到开头。一个 Agent 忙不过来，并不说明该把它拆成五个。先看任务之间共享多少信息、依赖多少共同决定，以及结果能不能直接合并。</p>
+<p>能独立推进的工作，多个 Agent 才是在并行；离不开彼此结果的工作，拆得越开，花在重新对齐上的时间可能越多。</p>
+<h2>参考资料</h2>
+<ol>
+<li>Anthropic，《How we built our multi-agent research system》，2025：<a href="https://www.anthropic.com/engineering/multi-agent-research-system">https://www.anthropic.com/engineering/multi-agent-research-system</a></li>
+<li>Anthropic，《Building effective agents》，2024：<a href="https://www.anthropic.com/engineering/building-effective-agents">https://www.anthropic.com/engineering/building-effective-agents</a></li>
+<li>Frederick P. Brooks Jr.，《The Mythical Man-Month: Essays on Software Engineering》：<a href="https://books.google.com/books/about/The_Mythical_Man_Month.html?id=Yq35BY5Fk3gC">https://books.google.com/books/about/The_Mythical_Man_Month.html?id=Yq35BY5Fk3gC</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质。复杂的事情，简单说。</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-CmvjrxFo.js"></script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>模型没变，AI 怎么从只能修好 8 个 Bug，变成了 85 个？ | LZ AI NOTE</title>
+  <meta name="description" content="模型没变，AI 怎么从只能修好 8 个 Bug，变成了 85 个？ 给 AI 300 个真实的软件问题，让它动手修。 一套方案修好了约 8 个，另一套修好了约 85 个。 差了七十多个。可背后用的，都是 GPT 4。 为什么同一个模型，到了不同的系统里，干活能力会差这么多？ 这组历史成绩来自 2024 年的 SWE bench Lite：早期检索方案修复了…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="模型没变，AI 怎么从只能修好 8 个 Bug，变成了 85 个？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-09-10">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%80%8E%E4%B9%88%E4%BB%8E%E5%8F%AA%E8%83%BD%E4%BF%AE%E5%A5%BD%208%20%E4%B8%AA%20Bug%EF%BC%8C%E5%8F%98%E6%88%90%E4%BA%86%2085%20%E4%B8%AA%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%80%8E%E4%B9%88%E4%BB%8E%E5%8F%AA%E8%83%BD%E4%BF%AE%E5%A5%BD%208%20%E4%B8%AA%20Bug%EF%BC%8C%E5%8F%98%E6%88%90%E4%BA%86%2085%20%E4%B8%AA%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="模型没变，AI 怎么从只能修好 8 个 Bug，变成了 85 个？ | LZ AI NOTE">
+  <meta property="og:description" content="模型没变，AI 怎么从只能修好 8 个 Bug，变成了 85 个？ 给 AI 300 个真实的软件问题，让它动手修。 一套方案修好了约 8 个，另一套修好了约 85 个。 差了七十多个。可背后用的，都是 GPT 4。 为什么同一个模型，到了不同的系统里，干活能力会差这么多？ 这组历史成绩来自 2024 年的 SWE bench Lite：早期检索方案修复了…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%80%8E%E4%B9%88%E4%BB%8E%E5%8F%AA%E8%83%BD%E4%BF%AE%E5%A5%BD%208%20%E4%B8%AA%20Bug%EF%BC%8C%E5%8F%98%E6%88%90%E4%BA%86%2085%20%E4%B8%AA%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"模型没变，AI 怎么从只能修好 8 个 Bug，变成了 85 个？","description":"模型没变，AI 怎么从只能修好 8 个 Bug，变成了 85 个？ 给 AI 300 个真实的软件问题，让它动手修。 一套方案修好了约 8 个，另一套修好了约 85 个。 差了七十多个。可背后用的，都是 GPT 4。 为什么同一个模型，到了不同的系统里，干活能力会差这么多？ 这组历史成绩来自 2024 年的 SWE bench Lite：早期检索方案修复了…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%80%8E%E4%B9%88%E4%BB%8E%E5%8F%AA%E8%83%BD%E4%BF%AE%E5%A5%BD%208%20%E4%B8%AA%20Bug%EF%BC%8C%E5%8F%98%E6%88%90%E4%BA%86%2085%20%E4%B8%AA%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%80%8E%E4%B9%88%E4%BB%8E%E5%8F%AA%E8%83%BD%E4%BF%AE%E5%A5%BD%208%20%E4%B8%AA%20Bug%EF%BC%8C%E5%8F%98%E6%88%90%E4%BA%86%2085%20%E4%B8%AA%EF%BC%9F","dateModified":"2026-09-10","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：模型没变，AI 怎么从只能修好 8 个 Bug，变成了 85 个？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%80%8E%E4%B9%88%E4%BB%8E%E5%8F%AA%E8%83%BD%E4%BF%AE%E5%A5%BD%208%20%E4%B8%AA%20Bug%EF%BC%8C%E5%8F%98%E6%88%90%E4%BA%86%2085%20%E4%B8%AA%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>模型没变，AI 怎么从只能修好 8 个 Bug，变成了 85 个？</h1><h1>模型没变，AI 怎么从只能修好 8 个 Bug，变成了 85 个？</h1>
+<p>给 AI 300 个真实的软件问题，让它动手修。</p>
+<p>一套方案修好了约 8 个，另一套修好了约 85 个。</p>
+<p>差了七十多个。可背后用的，都是 GPT-4。</p>
+<p>为什么同一个模型，到了不同的系统里，干活能力会差这么多？</p>
+<p>这组历史成绩来自 2024 年的 SWE-bench Lite：早期检索方案修复了 2.7%，CodeR 修复了 28.3%。两套方案的运行步骤和预算也有差异，并非只换了框架。</p>
+<h2>模型并不能直接修改代码</h2>
+<p>SWE-bench 会给 AI 一份用户提交的问题报告和当时的项目代码。</p>
+<p>任务不是回答“应该怎么改”，而是真的完成一连串操作：</p>
+<pre><code class="language-text">理解问题报告
+    ↓
+找到相关文件
+    ↓
+阅读代码
+    ↓
+定位原因
+    ↓
+修改文件
+    ↓
+运行测试
+    ↓
+根据结果继续调整
+    ↓
+提交代码修改
+</code></pre>
+<p>交卷后，评测会把提交的修改应用到项目中，运行指定测试：原来失败的测试要通过，原来正常的相关测试也不能被改坏，才算解决一道题。最终统计解决题目的比例，而不是代码与人类答案有多像。</p>
+<p>模型负责判断下一步做什么，Agent 框架负责取回代码、执行操作，再把结果交回模型。</p>
+<h2>第一个差距：模型到底看见了什么</h2>
+<p>假设用户报告说：</p>
+<blockquote>
+<p>用户名包含空格时，保存配置会失败。</p>
+</blockquote>
+<p>代码库里有几千个文件。模型不可能一开始把它们全部读完，Agent 必须决定先给它看什么。</p>
+<p>一种做法是提前检索：</p>
+<pre><code class="language-text">问题报告
+  ↓
+搜索 username、config、save
+  ↓
+取回几个可能相关的文件
+  ↓
+交给模型
+</code></pre>
+<p>如果真正出错的是写入配置文件的程序，模型却只拿到了输入框和按钮的代码，它就会在错误的位置认真寻找原因。</p>
+<p>另一种 Agent 会让模型自己探索：</p>
+<pre><code class="language-text">先搜索调用位置
+  ↓
+打开相关文件
+  ↓
+顺着函数继续追
+  ↓
+根据新发现调整搜索方向
+</code></pre>
+<p>模型没有变，但它看到的证据变了。</p>
+<h2>第二个差距：想好了怎么改，能不能准确改进去</h2>
+<p>找对了位置，还要看工具能不能把修改准确执行下去。</p>
+<ul>
+<li><strong>读取</strong>：一次返回几千行，相关线索可能被淹没。</li>
+<li><strong>编辑</strong>：只改几行却要重写整个文件，可能改坏其他地方。</li>
+<li><strong>运行</strong>：报错被截断，模型知道失败了，却看不到原因。</li>
+</ul>
+<p>这些问题都不会出现在“模型会不会写代码”的单轮问答里，却会直接决定它能不能完成一次真实修复。</p>
+<h2>第三个差距：第一次改错以后会发生什么</h2>
+<p>修 Bug 很少一次成功。</p>
+<p>模型可能改对了方向，却漏掉一个边界条件；也可能修好了原来的测试，又破坏了其他行为。</p>
+<pre><code class="language-text">测试失败
+   ↓
+保留原始目标和已经检查过的线索
+   ↓
+把失败信息送回模型
+   ↓
+重新判断原因
+   ↓
+继续修改
+</code></pre>
+<p>只留最后一段报错，可能丢掉用户原来的要求；保留全部操作记录，关键线索又可能被大量输出淹没。</p>
+<p>同一个模型，可能一个根据新线索换了方向，另一个却沿着错误原因连续改了五次。</p>
+<h2>所以榜单测到的不是裸模型</h2>
+<p>从约 8 个到约 85 个，不等于模型的编程能力提高了十倍。评测数的是最终修好了多少问题，证据、工具、反馈和运行预算都会影响结果。</p>
+<p>2026 年 2 月，Anthropic 还报告了一项 SWE-bench 实验：227 道题，每题运行 10 次，把可用内存提高到基准的五倍，修复成绩提高了 1.54 个百分点。连运行代码的资源条件，也会影响最后的成绩。</p>
+<p>SWE-bench 提供了统一使用 mini-SWE-agent 的比较方式：让不同模型使用同一套命令行工具和运行流程，减少框架差异对成绩的影响。</p>
+<h2>Agent 框架也不是越复杂越好</h2>
+<p>看到框架能带来巨大差距，很容易得出另一个结论：给 Agent 加更多工具、更复杂的规划和更多重试，成绩应该会继续提高。</p>
+<p>工具更多，说明不清就更容易选错；记录更短，压缩过度就会丢线索；重试更多，方向没变也可能只是继续犯错。</p>
+<p>SWE-agent 团队后来推出的 mini-SWE-agent，早期核心实现只有约一百行代码，主要让模型通过命令行完成操作，也能取得有竞争力的成绩。</p>
+<h2>看 Agent 榜单时，先看清比较的是什么</h2>
+<ul>
+<li>比较模型：尽量固定框架、预算和尝试次数。</li>
+<li>比较框架：尽量固定模型、预算和尝试次数。</li>
+<li>模型和框架一起换：比较的是两套完整系统。</li>
+</ul>
+<p>框架没有替模型学会编程。它改变的是模型看见什么、怎样行动，以及失败以后还能不能回到正确方向。</p>
+<h2>参考资料</h2>
+<ol>
+<li>
+<p>OpenAI，Introducing SWE-bench Verified（2024）：<a href="https://openai.com/index/introducing-swe-bench-verified/">https://openai.com/index/introducing-swe-bench-verified/</a></p>
+</li>
+<li>
+<p>SWE-bench，Official Leaderboards：<a href="https://www.swebench.com/">https://www.swebench.com/</a></p>
+</li>
+<li>
+<p>SWE-agent，mini-SWE-agent：<a href="https://github.com/SWE-agent/mini-swe-agent">https://github.com/SWE-agent/mini-swe-agent</a></p>
+</li>
+<li>
+<p>SWE-bench，Experiments：<a href="https://github.com/swe-bench/experiments">https://github.com/swe-bench/experiments</a></p>
+</li>
+<li>
+<p>Anthropic，Building effective agents：<a href="https://www.anthropic.com/engineering/building-effective-agents">https://www.anthropic.com/engineering/building-effective-agents</a></p>
+</li>
+<li>
+<p>SWE-agent 研究团队，SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering（2024）：<a href="https://arxiv.org/abs/2405.15793">https://arxiv.org/abs/2405.15793</a></p>
+</li>
+<li>
+<p>CodeR 研究团队，CodeR: Issue Resolving with Multi-Agent and Task Graphs（2024）：<a href="https://arxiv.org/abs/2406.01304">https://arxiv.org/abs/2406.01304</a></p>
+</li>
+<li>
+<p>Anthropic，Quantifying infrastructure noise in agentic coding evals（2026）：<a href="https://www.anthropic.com/engineering/infrastructure-noise">https://www.anthropic.com/engineering/infrastructure-noise</a></p>
+</li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质。复杂的事情，简单说。</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-CmvjrxFo.js"></script>
+</body>
+</html>

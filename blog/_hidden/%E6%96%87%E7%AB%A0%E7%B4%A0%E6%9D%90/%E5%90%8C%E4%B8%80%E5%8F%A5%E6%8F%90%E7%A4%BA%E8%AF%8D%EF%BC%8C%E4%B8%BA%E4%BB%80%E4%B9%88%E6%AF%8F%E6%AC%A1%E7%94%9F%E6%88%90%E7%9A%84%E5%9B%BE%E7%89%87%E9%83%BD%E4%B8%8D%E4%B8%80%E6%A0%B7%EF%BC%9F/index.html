@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex,nofollow">
-  <title>同一句提示词，为什么每次生成的图片都不一样？ | LZ AI NOTE</title>
-  <meta name="description" content="同一句提示词，为什么每次生成的图片都不一样？ 在生图工具里输入： 雨夜里，一个人撑着红色雨伞走在街上。 第一次生成，人物站在画面中央，身后是模糊的路灯。 不改一个字，再生成一次，人物可能走到了左边，镜头变远，街道、衣服和灯光也换了样子。 同一句提示词交给同一个模型，为什么没有得到同一张图？ 很多人知道这和“随机”有关。 但随机起点是怎么来的？一团没有内容的…">
+  <title>同一句提示词，为什么每次生成的图片都不一样？ - 基础原理篇 | LZ AI NOTE</title>
+  <meta name="description" content="同一句提示词，为什么每次生成的图片都不一样？ 基础原理篇 在生图工具里输入： 雨夜里，一个人撑着红色雨伞走在街上。 第一次生成，人物站在画面中央，身后是模糊的路灯。 不改一个字，再生成一次，人物可能走到了左边，镜头变远，街道、衣服和灯光也换了样子。 同一句提示词交给同一个模型，为什么没有得到同一张图？ 很多人知道这和“随机”有关。 但随机起点是怎么来的？一…">
   <meta name="author" content="LZ">
-  <meta name="DC.title" content="同一句提示词，为什么每次生成的图片都不一样？">
+  <meta name="DC.title" content="同一句提示词，为什么每次生成的图片都不一样？ - 基础原理篇">
   <meta name="DC.creator" content="LZ">
-  <meta name="DC.date" content="2026-09-01">
+  <meta name="DC.date" content="2026-09-14">
   <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E4%B8%80%E5%8F%A5%E6%8F%90%E7%A4%BA%E8%AF%8D%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E6%AC%A1%E7%94%9F%E6%88%90%E7%9A%84%E5%9B%BE%E7%89%87%E9%83%BD%E4%B8%8D%E4%B8%80%E6%A0%B7%EF%BC%9F">
   <meta name="DC.publisher" content="LZ AI NOTE">
   <meta name="DC.language" content="zh-CN">
@@ -17,14 +17,14 @@
   <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
-  <meta property="og:title" content="同一句提示词，为什么每次生成的图片都不一样？ | LZ AI NOTE">
-  <meta property="og:description" content="同一句提示词，为什么每次生成的图片都不一样？ 在生图工具里输入： 雨夜里，一个人撑着红色雨伞走在街上。 第一次生成，人物站在画面中央，身后是模糊的路灯。 不改一个字，再生成一次，人物可能走到了左边，镜头变远，街道、衣服和灯光也换了样子。 同一句提示词交给同一个模型，为什么没有得到同一张图？ 很多人知道这和“随机”有关。 但随机起点是怎么来的？一团没有内容的…">
+  <meta property="og:title" content="同一句提示词，为什么每次生成的图片都不一样？ - 基础原理篇 | LZ AI NOTE">
+  <meta property="og:description" content="同一句提示词，为什么每次生成的图片都不一样？ 基础原理篇 在生图工具里输入： 雨夜里，一个人撑着红色雨伞走在街上。 第一次生成，人物站在画面中央，身后是模糊的路灯。 不改一个字，再生成一次，人物可能走到了左边，镜头变远，街道、衣服和灯光也换了样子。 同一句提示词交给同一个模型，为什么没有得到同一张图？ 很多人知道这和“随机”有关。 但随机起点是怎么来的？一…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E4%B8%80%E5%8F%A5%E6%8F%90%E7%A4%BA%E8%AF%8D%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E6%AC%A1%E7%94%9F%E6%88%90%E7%9A%84%E5%9B%BE%E7%89%87%E9%83%BD%E4%B8%8D%E4%B8%80%E6%A0%B7%EF%BC%9F">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"同一句提示词，为什么每次生成的图片都不一样？","description":"同一句提示词，为什么每次生成的图片都不一样？ 在生图工具里输入： 雨夜里，一个人撑着红色雨伞走在街上。 第一次生成，人物站在画面中央，身后是模糊的路灯。 不改一个字，再生成一次，人物可能走到了左边，镜头变远，街道、衣服和灯光也换了样子。 同一句提示词交给同一个模型，为什么没有得到同一张图？ 很多人知道这和“随机”有关。 但随机起点是怎么来的？一团没有内容的…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E4%B8%80%E5%8F%A5%E6%8F%90%E7%A4%BA%E8%AF%8D%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E6%AC%A1%E7%94%9F%E6%88%90%E7%9A%84%E5%9B%BE%E7%89%87%E9%83%BD%E4%B8%8D%E4%B8%80%E6%A0%B7%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E4%B8%80%E5%8F%A5%E6%8F%90%E7%A4%BA%E8%AF%8D%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E6%AC%A1%E7%94%9F%E6%88%90%E7%9A%84%E5%9B%BE%E7%89%87%E9%83%BD%E4%B8%8D%E4%B8%80%E6%A0%B7%EF%BC%9F","dateModified":"2026-09-01","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：同一句提示词，为什么每次生成的图片都不一样？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E4%B8%80%E5%8F%A5%E6%8F%90%E7%A4%BA%E8%AF%8D%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E6%AC%A1%E7%94%9F%E6%88%90%E7%9A%84%E5%9B%BE%E7%89%87%E9%83%BD%E4%B8%8D%E4%B8%80%E6%A0%B7%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"同一句提示词，为什么每次生成的图片都不一样？ - 基础原理篇","description":"同一句提示词，为什么每次生成的图片都不一样？ 基础原理篇 在生图工具里输入： 雨夜里，一个人撑着红色雨伞走在街上。 第一次生成，人物站在画面中央，身后是模糊的路灯。 不改一个字，再生成一次，人物可能走到了左边，镜头变远，街道、衣服和灯光也换了样子。 同一句提示词交给同一个模型，为什么没有得到同一张图？ 很多人知道这和“随机”有关。 但随机起点是怎么来的？一…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E4%B8%80%E5%8F%A5%E6%8F%90%E7%A4%BA%E8%AF%8D%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E6%AC%A1%E7%94%9F%E6%88%90%E7%9A%84%E5%9B%BE%E7%89%87%E9%83%BD%E4%B8%8D%E4%B8%80%E6%A0%B7%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E4%B8%80%E5%8F%A5%E6%8F%90%E7%A4%BA%E8%AF%8D%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E6%AC%A1%E7%94%9F%E6%88%90%E7%9A%84%E5%9B%BE%E7%89%87%E9%83%BD%E4%B8%8D%E4%B8%80%E6%A0%B7%EF%BC%9F","dateModified":"2026-09-14","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：同一句提示词，为什么每次生成的图片都不一样？ - 基础原理篇，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E4%B8%80%E5%8F%A5%E6%8F%90%E7%A4%BA%E8%AF%8D%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E6%AC%A1%E7%94%9F%E6%88%90%E7%9A%84%E5%9B%BE%E7%89%87%E9%83%BD%E4%B8%8D%E4%B8%80%E6%A0%B7%EF%BC%9F","about":["_hidden","文章素材"]}</script>
 </head>
 <body>
-  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>同一句提示词，为什么每次生成的图片都不一样？</h1><h1>同一句提示词，为什么每次生成的图片都不一样？</h1>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>同一句提示词，为什么每次生成的图片都不一样？ - 基础原理篇</h1><h1>同一句提示词，为什么每次生成的图片都不一样？ - 基础原理篇</h1>
 <p>在生图工具里输入：</p>
 <blockquote>
 <p>雨夜里，一个人撑着红色雨伞走在街上。</p>
@@ -48,6 +48,7 @@
 <p>近景、远景、侧面、背影，都可能满足同一句话。</p>
 <p>提示词描述的是一组要求，并不对应一张等待模型还原的标准图片。</p>
 <p>系统还需要决定那些没有写出来的细节。</p>
+<p>进入生成过程前，文字编码器会把这句话变成一组可以参与计算的数字表示，通常叫文字条件。它仍然不包含任何像素，只负责告诉模型：接下来的调整应该更接近“雨夜”“人物”和“红色雨伞”。</p>
 <h2>随机起点不是一张随机草图</h2>
 <p>下面用常见的扩散式生图过程来看。</p>
 <p>图片在模型内部是一大片数字。生成开始时，这些位置还没有颜色、人物或街道，需要先填入一组初始数字。</p>
@@ -57,10 +58,8 @@
 ░▓▒░▓▓▒░▒▓░▓
 ▒░▓▒░▒▓▓░▒▓░
 </code></pre>
-<p>这些数也不是从任意范围里乱取。</p>
-<p>常见扩散模型会使用和训练时相同类型的噪声：大部分数值靠近 0，特别大或特别小的数较少。这通常叫正态分布。</p>
-<p>模型训练时一直在学习怎样处理这种噪声，生成时自然也要从它熟悉的噪声开始。</p>
-<p>Seed 决定程序这次会生成哪一串随机数：</p>
+<p>许多现代生图系统不会直接在完整像素上处理这些数，而是把它们放在一个更紧凑的潜空间里。可以先把潜空间理解成一张压缩过的数字画布。模型生成时使用的噪声类型与训练时相同，因为它一直在学习怎样处理这样的随机状态。</p>
+<p>Seed（随机种子）决定程序这次会生成哪一串随机数：</p>
 <pre><code class="language-text">Seed 123
    ↓
 得到第一串随机数
@@ -88,6 +87,7 @@ Seed 456
 </code></pre>
 <p>它每次预测的不是“这张图有多清晰”，也不会拿一张隐藏的正确图片进行比较。</p>
 <p>模型预测的是：<strong>当前状态下一步应该怎样调整。</strong></p>
+<p>例如，某片区域开始形成弧形轮廓时，“撑开的雨伞”会影响它接下来怎样变化；另一片区域正在形成暗色背景，“雨夜”会把它推向更符合夜景的方向。提示词没有直接画出这些像素，但会参与每一步选择。</p>
 <p>这个依据来自训练。</p>
 <p>训练时，程序会给清晰图片加入不同程度的噪声，再让模型判断其中混入了什么噪声，或者下一步应该往哪个方向修正。</p>
 <p>模型看过大量这样的任务以后，参数里逐渐留下了一些规律：</p>
@@ -116,8 +116,7 @@ Seed 456
    ↓
 得到完整图片
 </code></pre>
-<p>我们看到的是轮廓越来越清楚。</p>
-<p>对系统来说，它只是在重复“根据当前状态预测下一步”，并没有一个单独的清晰度按钮。</p>
+<p>对系统来说，它只是在重复“根据当前状态预测下一步”，并没有一个单独的清晰度按钮。如果这些调整发生在潜空间，最后还需要解码器把结果展开成屏幕能够显示的 RGB 像素。</p>
 <h2>不同起点，会让整条路径逐渐分开</h2>
 <p>提示词一直没有变化，但两次生成使用了不同随机起点。</p>
 <p>第一次：</p>
@@ -147,34 +146,23 @@ Seed 456
 <p>每次重新生成，并不是拿上一张图换几处颜色，而是从另一个起点重新走完一遍生成过程。</p>
 <h2>Seed 固定的是起点</h2>
 <p>只要模型、提示词、图片尺寸、采样方法和其他设置都保持一致，使用相同 Seed，通常可以得到相同或非常接近的结果。</p>
-<p>但 Seed 不是图片编号。</p>
-<p>模型不会看到 <code>123</code>，就从图库里取出第 123 张图片。它只是帮助程序重新生成相同的随机起点。</p>
-<p>复现一张图片也不能只记录 Seed。下面任何一项发生变化，结果都可能不同：</p>
-<pre><code class="language-text">模型或版本
-图片尺寸
-采样方法
-生成步数
-提示词处理方式
-计算设备和精度
-</code></pre>
-<p>如果想探索更多构图，可以保留提示词，切换 Seed。</p>
-<p>如果喜欢当前画面，准备继续调整，先保留 Seed 和主要设置。这样更容易判断后续变化究竟来自哪里。</p>
+<p>但 Seed 不是图片编号。模型不会看到 <code>123</code>，就从图库里取出第 123 张图片；它只是让程序再次得到相同的随机起点。模型版本、图片尺寸或采样方法变了，后面的生成路径仍可能变化。</p>
+<p>所以，想比较两版提示词的影响，可以先固定 Seed；想在同一句提示词下探索其他构图，就换一个 Seed。</p>
 <h2>回到最初的问题</h2>
 <p>两次生成可以压缩成：</p>
 <pre><code class="language-text">同一句提示词
         ↓
-不同随机起点
+相同的文字条件
+        ↓
+不同 Seed 产生不同随机起点
         ↓
 模型根据训练规律反复调整
         ↓
 生成路径逐渐分开
         ↓
-两张不同但都符合要求的图片
+解码成两张不同但都符合要求的图片
 </code></pre>
-<p>同一句提示词没有得到同一张图，不是因为模型忘了上一张，也不只是工具“故意制造惊喜”。</p>
-<p>提示词没有规定唯一画面，系统需要从随机起点开始，把未写出的构图和细节逐步确定下来。</p>
-<p>随机起点决定这次从哪里开始。</p>
-<p>模型学到的规律，决定它怎样从那里走向一张合理图片。</p>
+<p>模型没有忘掉上一张，因为它本来就不是在复现上一张。提示词只规定了一组要求，两次生成又从不同的随机起点出发。模型按照训练中学到的规律逐步补齐构图和细节，最后便走向两张不同但都符合提示词的图片。</p>
 <h2>参考资料</h2>
 <ol>
 <li>Ho、Jain、Abbeel，Denoising Diffusion Probabilistic Models（NeurIPS，2020）：<a href="https://arxiv.org/abs/2006.11239">https://arxiv.org/abs/2006.11239</a></li>
@@ -184,6 +172,6 @@ Seed 456
 </ol>
 <p><em>LZ AI Note｜记录现象，追问本质</em></p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-C6-_bK0s.js"></script>
+  <script type="module" crossorigin src="/assets/index-CmvjrxFo.js"></script>
 </body>
 </html>

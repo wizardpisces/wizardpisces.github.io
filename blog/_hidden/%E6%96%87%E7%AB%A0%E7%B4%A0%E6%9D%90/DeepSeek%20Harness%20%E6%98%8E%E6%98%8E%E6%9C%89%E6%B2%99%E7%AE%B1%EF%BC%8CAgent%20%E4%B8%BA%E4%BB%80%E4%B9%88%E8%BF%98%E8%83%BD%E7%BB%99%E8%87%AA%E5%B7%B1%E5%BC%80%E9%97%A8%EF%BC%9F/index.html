@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>DeepSeek Harness 明明有沙箱，Agent 为什么还能给自己开门？ | LZ AI NOTE</title>
+  <meta name="description" content="DeepSeek Harness 明明有沙箱，Agent 为什么还能给自己开门？ 把 Coding Agent 交给一个陌生项目之前，很多人会先确认一件事： 它是不是运行在沙箱里？ 有沙箱，Agent 就算被仓库里的恶意文字骗去执行命令，也只能在允许的目录里活动。它看得到项目，可以改代码、跑测试，却碰不到项目外的文件。 至少我们希望如此。 最近披露的 De…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="DeepSeek Harness 明明有沙箱，Agent 为什么还能给自己开门？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-09-10">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/DeepSeek%20Harness%20%E6%98%8E%E6%98%8E%E6%9C%89%E6%B2%99%E7%AE%B1%EF%BC%8CAgent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%83%BD%E7%BB%99%E8%87%AA%E5%B7%B1%E5%BC%80%E9%97%A8%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/DeepSeek%20Harness%20%E6%98%8E%E6%98%8E%E6%9C%89%E6%B2%99%E7%AE%B1%EF%BC%8CAgent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%83%BD%E7%BB%99%E8%87%AA%E5%B7%B1%E5%BC%80%E9%97%A8%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="DeepSeek Harness 明明有沙箱，Agent 为什么还能给自己开门？ | LZ AI NOTE">
+  <meta property="og:description" content="DeepSeek Harness 明明有沙箱，Agent 为什么还能给自己开门？ 把 Coding Agent 交给一个陌生项目之前，很多人会先确认一件事： 它是不是运行在沙箱里？ 有沙箱，Agent 就算被仓库里的恶意文字骗去执行命令，也只能在允许的目录里活动。它看得到项目，可以改代码、跑测试，却碰不到项目外的文件。 至少我们希望如此。 最近披露的 De…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/DeepSeek%20Harness%20%E6%98%8E%E6%98%8E%E6%9C%89%E6%B2%99%E7%AE%B1%EF%BC%8CAgent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%83%BD%E7%BB%99%E8%87%AA%E5%B7%B1%E5%BC%80%E9%97%A8%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"DeepSeek Harness 明明有沙箱，Agent 为什么还能给自己开门？","description":"DeepSeek Harness 明明有沙箱，Agent 为什么还能给自己开门？ 把 Coding Agent 交给一个陌生项目之前，很多人会先确认一件事： 它是不是运行在沙箱里？ 有沙箱，Agent 就算被仓库里的恶意文字骗去执行命令，也只能在允许的目录里活动。它看得到项目，可以改代码、跑测试，却碰不到项目外的文件。 至少我们希望如此。 最近披露的 De…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/DeepSeek%20Harness%20%E6%98%8E%E6%98%8E%E6%9C%89%E6%B2%99%E7%AE%B1%EF%BC%8CAgent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%83%BD%E7%BB%99%E8%87%AA%E5%B7%B1%E5%BC%80%E9%97%A8%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/DeepSeek%20Harness%20%E6%98%8E%E6%98%8E%E6%9C%89%E6%B2%99%E7%AE%B1%EF%BC%8CAgent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%83%BD%E7%BB%99%E8%87%AA%E5%B7%B1%E5%BC%80%E9%97%A8%EF%BC%9F","dateModified":"2026-09-10","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：DeepSeek Harness 明明有沙箱，Agent 为什么还能给自己开门？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/DeepSeek%20Harness%20%E6%98%8E%E6%98%8E%E6%9C%89%E6%B2%99%E7%AE%B1%EF%BC%8CAgent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%83%BD%E7%BB%99%E8%87%AA%E5%B7%B1%E5%BC%80%E9%97%A8%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>DeepSeek Harness 明明有沙箱，Agent 为什么还能给自己开门？</h1><h1>DeepSeek Harness 明明有沙箱，Agent 为什么还能给自己开门？</h1>
+<p>把 Coding Agent 交给一个陌生项目之前，很多人会先确认一件事：</p>
+<blockquote>
+<p>它是不是运行在沙箱里？</p>
+</blockquote>
+<p>有沙箱，Agent 就算被仓库里的恶意文字骗去执行命令，也只能在允许的目录里活动。它看得到项目，可以改代码、跑测试，却碰不到项目外的文件。</p>
+<p>至少我们希望如此。</p>
+<p>最近披露的 DeepSeek Harness 漏洞却出现了一个很奇怪的结果：Agent 明明还在沙箱里，却能通过一次本地请求，把自己的权限改成 <code>danger-full-access</code>，同时关掉审批提示。</p>
+<p>之后的命令，便不再受原来的沙箱约束。</p>
+<p>这里的 Agent 不会凭空发现漏洞并主动越狱。攻击成立的前提，是它把仓库或网页里的恶意内容当成任务指令，执行了攻击者诱导的命令。可这恰好是沙箱要兜住的错误。</p>
+<p>这次出问题的不是沙箱被打穿了。</p>
+<p>沙箱工作得好好的，只是被关在里面的 Agent，找到了控制门锁的按钮。</p>
+<h2>沙箱其实拦住了它</h2>
+<p>DeepSeek Harness 是一套运行 Coding Agent 的开源系统。Agent 可以读取代码、调用模型，也可以使用 Bash 执行测试和修改文件。</p>
+<p>有了这些能力，Agent 才能真的干活。风险也跟着进来了。</p>
+<p>代码仓库里的 README、Issue、网页内容，甚至某个不起眼的注释，都可能混入针对 Agent 的恶意指令。模型一旦把它当成任务的一部分，就可能执行原本不该执行的命令。</p>
+<p>因此，Harness 会把命令放进操作系统沙箱，限制它能访问和修改哪些文件。</p>
+<p>发现漏洞的 OX Research 做了一个对照实验：让两个会话执行同一条写文件命令，目标位于工作区之外。</p>
+<p>没有利用漏洞的会话失败了。</p>
+<p>利用漏洞后的会话成功了。</p>
+<p>原来的沙箱不是摆设。它确实拦住了越界写入。</p>
+<p>问题发生在文件隔离之外。</p>
+<h2>文件出不去，网络还通着</h2>
+<p>一个程序被限制写文件，不等于它与宿主机完全断开。</p>
+<p>DeepSeek Harness 当时的沙箱配置主要收紧了文件访问，却没有隔离网络。沙箱里的命令仍然可以访问宿主机的回环地址，也就是通常所说的 <code>localhost</code>。</p>
+<p>而 Harness 恰好在本机运行着一个 HTTP API。</p>
+<p>这个 API 能修改 Agent 的权限，也能关闭危险操作前的人工确认。</p>
+<p>原本看起来没有关系的两件事，就这样接上了：</p>
+<pre><code class="language-text">沙箱里的 Agent
+   ↓
+可以访问 localhost
+   ↓
+调用 Harness 控制 API
+   ↓
+修改自己所在会话的权限
+   ↓
+后续命令不再受限
+</code></pre>
+<h2>Agent 怎么走进了用户入口</h2>
+<p>Harness 里有两种角色：Agent 在沙箱里干活，用户通过浏览器管理它。修改权限的 API，原本是留给用户界面的。</p>
+<p>问题是，沙箱里的 Agent 也能访问这个 API。当时的接口没有用身份凭证确认调用者，只检查请求里的 <code>Host</code> 是否像本机地址。Agent 运行的命令行程序同样可以满足这个条件。</p>
+<p>于是，Agent 发出的请求走进了用户入口，权限变更也被记录成了用户操作。</p>
+<p>Harness 知道自己正在修改 Agent 的权限，却不知道按下按钮的就是 Agent。</p>
+<h2>为什么“加了沙箱”还是不够</h2>
+<p>我们通常把权限控制想成一堵墙：</p>
+<pre><code class="language-text">Agent 能访问什么？
+Agent 能修改什么？
+</code></pre>
+<p>这个漏洞多问了一层：</p>
+<pre><code class="language-text">Agent 能不能接触修改这些规则的入口？
+</code></pre>
+<p>如果答案是能，那么第一层限制再严，也可能被第二层重新配置。</p>
+<p>这和服务器把普通用户关进受限账户，却又允许他调用一个无需认证的管理员接口没有本质区别。普通用户不必攻破操作系统，只要请管理员接口替自己完成提权。</p>
+<p>沙箱负责限制 Agent 的行动范围，控制面负责定义这个范围。两者放在同一套系统里很正常，但信任方向必须是单向的：</p>
+<pre><code class="language-text">控制面可以收紧或放宽沙箱
+
+沙箱中的进程不能反过来控制控制面
+</code></pre>
+<p>问题就出在这条反向通路上。</p>
+<p>我们之前常说，Agent 不只是模型加工具，还需要 Runtime 管理 Session、权限、审批和沙箱。Runtime 的确能让 Agent 更可靠，但当这些能力集中到一起，它也会成为一个权限很高的控制中心。</p>
+<p>Agent 能碰到哪些文件固然重要。Agent 能不能修改“自己可以碰哪些文件”，更重要。</p>
+<h2>修复为什么不在沙箱里</h2>
+<p>DeepSeek 已在 <code>0.1.2-alpha.1</code> 中修复这个问题。新的设计为浏览器访问增加了身份凭证，不再把 <code>Host</code> 和 <code>Origin</code> 当成用户身份；官方也收紧了非本机监听方式。</p>
+<p>这次修复没有继续收紧文件隔离，因为失败的位置不在那里。</p>
+<p>真正需要补上的是控制面的认证，以及受限进程与控制面之间的边界。</p>
+<p>对正在使用旧版本 DeepSeek Harness 的人，最直接的处理是升级到 <code>0.1.2-alpha.1</code> 或更新版本。若要让 Agent 处理不可信仓库和网页，仅依赖应用自带的沙箱仍不稳妥。DeepSeek 的安全说明也明确建议使用低权限账户，并优先放进一次性虚拟机、容器或专用环境。</p>
+<p>比那条利用命令更值得留下来的，是一个容易被忽略的边界：</p>
+<blockquote>
+<p><strong>真正需要隔离的，不只是 Agent 的行动，还包括它修改行动边界的能力。</strong></p>
+</blockquote>
+<p>沙箱可以把 Agent 关在房间里。</p>
+<p>但控制门锁的按钮，不能也留在房间里。</p>
+<h2>参考资料</h2>
+<ol>
+<li>OX Research，CVE-2026-82533: DeepSeek Harness Vulnerability Lets AI Agents Escape Their Own Sandbox（2026-09-08）：<a href="https://www.ox.security/blog/cve-2026-82533-deepseek-harness-ai-agent-sandbox-escape/">https://www.ox.security/blog/cve-2026-82533-deepseek-harness-ai-agent-sandbox-escape/</a></li>
+<li>VulnCheck，DeepSeek Harness &lt; 0.1.2-alpha.1 Authentication Bypass via Host Header Spoofing（2026-09-08）：<a href="https://www.vulncheck.com/advisories/deepseek-harness-alpha-1-authentication-bypass-via-host-header-spoofing">https://www.vulncheck.com/advisories/deepseek-harness-alpha-1-authentication-bypass-via-host-header-spoofing</a></li>
+<li>DeepSeek，DeepSeek Harness v0.1.2-alpha.1 Release：<a href="https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.1.2-alpha.1">https://github.com/deepseek-ai/deepseek-harness/releases/tag/dsh-v0.1.2-alpha.1</a></li>
+<li>DeepSeek，修复提交：fix(web): authenticate the browser Host API：<a href="https://github.com/deepseek-ai/deepseek-harness/commit/3e24087bfaeabe40b58ba2f7b936895b8f93fe27">https://github.com/deepseek-ai/deepseek-harness/commit/3e24087bfaeabe40b58ba2f7b936895b8f93fe27</a></li>
+<li>DeepSeek，DeepSeek Harness Safety：<a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/SAFETY.md">https://github.com/deepseek-ai/deepseek-harness/blob/master/SAFETY.md</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质。复杂的事情，简单说。</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-CmvjrxFo.js"></script>
+</body>
+</html>

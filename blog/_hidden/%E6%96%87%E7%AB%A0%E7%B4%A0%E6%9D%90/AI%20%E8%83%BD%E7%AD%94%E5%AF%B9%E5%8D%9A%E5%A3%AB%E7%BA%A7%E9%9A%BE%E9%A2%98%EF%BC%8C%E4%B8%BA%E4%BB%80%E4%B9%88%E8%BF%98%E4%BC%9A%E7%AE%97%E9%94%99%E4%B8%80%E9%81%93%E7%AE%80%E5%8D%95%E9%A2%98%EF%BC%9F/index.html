@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>AI 能答对博士级难题，为什么还会算错一道简单题？ | LZ AI NOTE</title>
+  <meta name="description" content="AI 能答对博士级难题，为什么还会算错一道简单题？ 一边是 AI 在博士级科学题上超过人类专家，一边是有模型连 9.11 和 9.9 都比较错过。 它到底是真厉害，还是假厉害？ 超过博士专家的是 o1 在 GPQA Diamond 上的成绩，小数错误来自其他模型，并非同一个模型的两次表现。 博士级考题拿了高分，简单题就可以放心交给它了吗？ 我们熟悉的能力顺…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="AI 能答对博士级难题，为什么还会算错一道简单题？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-09-10">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E8%83%BD%E7%AD%94%E5%AF%B9%E5%8D%9A%E5%A3%AB%E7%BA%A7%E9%9A%BE%E9%A2%98%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E4%BC%9A%E7%AE%97%E9%94%99%E4%B8%80%E9%81%93%E7%AE%80%E5%8D%95%E9%A2%98%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E8%83%BD%E7%AD%94%E5%AF%B9%E5%8D%9A%E5%A3%AB%E7%BA%A7%E9%9A%BE%E9%A2%98%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E4%BC%9A%E7%AE%97%E9%94%99%E4%B8%80%E9%81%93%E7%AE%80%E5%8D%95%E9%A2%98%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="AI 能答对博士级难题，为什么还会算错一道简单题？ | LZ AI NOTE">
+  <meta property="og:description" content="AI 能答对博士级难题，为什么还会算错一道简单题？ 一边是 AI 在博士级科学题上超过人类专家，一边是有模型连 9.11 和 9.9 都比较错过。 它到底是真厉害，还是假厉害？ 超过博士专家的是 o1 在 GPQA Diamond 上的成绩，小数错误来自其他模型，并非同一个模型的两次表现。 博士级考题拿了高分，简单题就可以放心交给它了吗？ 我们熟悉的能力顺…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E8%83%BD%E7%AD%94%E5%AF%B9%E5%8D%9A%E5%A3%AB%E7%BA%A7%E9%9A%BE%E9%A2%98%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E4%BC%9A%E7%AE%97%E9%94%99%E4%B8%80%E9%81%93%E7%AE%80%E5%8D%95%E9%A2%98%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI 能答对博士级难题，为什么还会算错一道简单题？","description":"AI 能答对博士级难题，为什么还会算错一道简单题？ 一边是 AI 在博士级科学题上超过人类专家，一边是有模型连 9.11 和 9.9 都比较错过。 它到底是真厉害，还是假厉害？ 超过博士专家的是 o1 在 GPQA Diamond 上的成绩，小数错误来自其他模型，并非同一个模型的两次表现。 博士级考题拿了高分，简单题就可以放心交给它了吗？ 我们熟悉的能力顺…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E8%83%BD%E7%AD%94%E5%AF%B9%E5%8D%9A%E5%A3%AB%E7%BA%A7%E9%9A%BE%E9%A2%98%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E4%BC%9A%E7%AE%97%E9%94%99%E4%B8%80%E9%81%93%E7%AE%80%E5%8D%95%E9%A2%98%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E8%83%BD%E7%AD%94%E5%AF%B9%E5%8D%9A%E5%A3%AB%E7%BA%A7%E9%9A%BE%E9%A2%98%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E4%BC%9A%E7%AE%97%E9%94%99%E4%B8%80%E9%81%93%E7%AE%80%E5%8D%95%E9%A2%98%EF%BC%9F","dateModified":"2026-09-10","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：AI 能答对博士级难题，为什么还会算错一道简单题？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E8%83%BD%E7%AD%94%E5%AF%B9%E5%8D%9A%E5%A3%AB%E7%BA%A7%E9%9A%BE%E9%A2%98%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E4%BC%9A%E7%AE%97%E9%94%99%E4%B8%80%E9%81%93%E7%AE%80%E5%8D%95%E9%A2%98%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>AI 能答对博士级难题，为什么还会算错一道简单题？</h1><h1>AI 能答对博士级难题，为什么还会算错一道简单题？</h1>
+<p>一边是 AI 在博士级科学题上超过人类专家，一边是有模型连 9.11 和 9.9 都比较错过。</p>
+<p>它到底是真厉害，还是假厉害？</p>
+<p>超过博士专家的是 o1 在 GPQA Diamond 上的成绩，小数错误来自其他模型，并非同一个模型的两次表现。</p>
+<p><strong>博士级考题拿了高分，简单题就可以放心交给它了吗？</strong></p>
+<p>我们熟悉的能力顺序是这样的：</p>
+<pre><code class="language-text">小学题会做
+↓
+中学题会做
+↓
+大学题会做
+↓
+能挑战博士级难题
+</code></pre>
+<p>看到最下面的成绩，我们会顺手把上面几层都打上勾。</p>
+<p>GPQA 却没有替模型考过前面几层。</p>
+<h2>博士级考题，难在哪？</h2>
+<p>GPQA 考物理、化学、生物，每道题给四个选项。它的难度不是靠把题干写长，也不是给普通题挂上“博士级”的牌子。</p>
+<p>原论文展示过一道生物题，大意是：研究人员想培育耐热小麦，找到了与耐热蛋白有关的基因线索，却发现小麦没有合成这种蛋白。为什么？</p>
+<p>对普通读者来说，“有基因却没有蛋白”已经够陌生了。对懂这个领域的人，问题会沿着具体环节展开：</p>
+<pre><code class="language-text">基因里的信息
+↓ 转录
+形成 RNA
+↓ 翻译
+合成蛋白质
+</code></pre>
+<p>这些箭头不能跳过。有基因，不代表它一定被转录；没有合成蛋白，也不能随便拿一个发生在合成之后的过程来解释。</p>
+<p>题目的选项把专业术语放进不同的因果关系里。要选对，得知道哪种机制能让这条链停下来，哪种解释虽然词都认识，放在这里却不成立。</p>
+<p><strong>难在理解关系，不能只靠搜到几个名词。</strong></p>
+<h2>题目先考人，再考 AI</h2>
+<p>怎样确定一道题真的需要专业能力，而不是出题人觉得它难？</p>
+<p>GPQA 找了两类人试做：本领域专家，以及其他领域的高学历答题者。后者可以上网查资料。</p>
+<pre><code class="language-text">领域专家出题
+↓
+同行试做，提出反馈
+↓
+修订题目，再请专家验证
+↓
+让非本领域答题者查资料作答
+</code></pre>
+<p>这两类人承担不同的检查：同行帮助确认题目与答案站得住，跨领域答题者帮助判断它是不是搜一搜就能解。</p>
+<p>常见榜单上的 GPQA Diamond，是其中筛得更严的 198 道题：两位专家认可答案，多数非本领域答题者答错。专家的“认可”也包括看到答案后能确认自己错在哪里。</p>
+<p>所以，“博士级”的含义逐渐清楚了：<strong>它挑的是需要领域知识、外行查资料仍难判断的科学问题。</strong></p>
+<p>这套筛法不会顺便确认模型能否稳定比较小数、核对账单，或按要求只写三句话。那些是别的测试任务。</p>
+<h2>一大段推理，最后只交一个字母</h2>
+<p>模型拿到题目后，可以写分析、排除选项，最后交出答案。</p>
+<p>OpenAI 公开的 GPQA 评测代码把它变成分数的方式：</p>
+<pre><code class="language-text">打乱四个选项的顺序
+↓
+模型回答
+↓
+提取最后的 A / B / C / D
+↓
+与标准答案相同：1 分
+不同或提取失败：0 分
+↓
+汇总答对比例
+</code></pre>
+<p>打乱顺序，可以减少模型固定选某个位置带来的影响。但判分仍然只检查最后的选项，不逐句审核推理过程。</p>
+<p>这意味着，一段分析是否每一步都可靠，与这道题有没有得分，并不是同一个检查。</p>
+<p>假设一次测试做了 100 道题，答对 80 道，成绩就是 80%。单看这个数字，你不知道剩下 20 道是否集中在某个领域，也不知道把答对的题换一种问法，它还会不会答对。</p>
+<p><strong>分数把很多次回答压成一个数，同时也省略了错误发生在哪里。</strong></p>
+<h2>小数题为什么可能成为另一个难点？</h2>
+<p>我们比较 9.9 和 9.11，会把它们当成小数：9.90 大于 9.11。</p>
+<p>但模型从文字里学过的关系，不只有这一种。同样的数字，还可能组成章节或版本编号：</p>
+<pre><code class="language-text">小数大小
+9.9 &gt; 9.11
+
+章节顺序
+第 9 章第 9 节
+排在第 9 章第 11 节前面
+</code></pre>
+<p>人觉得题目简单，是因为已经确定该用第一种规则。模型却可能受到其他关系的影响。</p>
+<p>Transluce 团队研究过 Llama 3.1 8B 的这类错误。他们找到一组常在《圣经》章节文本中活跃的神经元，也就是模型内部的计算单元，把它们的输出设为零，再让模型比较小数：</p>
+<pre><code class="language-text">不做改动：正确率 55%
+关闭这组神经元：正确率 76%
+随机关掉一些：基本没有改善
+</code></pre>
+<p>没有补数学课，只是让一部分计算不再参与，模型就答对了更多题。这说明，错误不一定是因为不会，也可能是受到了干扰。</p>
+<p>至于它是不是把小数当成了章节编号，这个实验还不能确定，也不能据此解释所有模型的小数错误。</p>
+<p>耐热小麦题考的是基因如何影响蛋白质，小数题考的是数值大小。<strong>模型可以在前一种任务上表现很好，却在后一种任务上反复出错。</strong> “博士级”并不意味着这套卷子已经把基础能力也考过了。</p>
+<h2>这张成绩单应该怎么用？</h2>
+<p>GPQA 高分值得重视：它说明模型在这套专业科学选择题上，能做出更多正确判断。不能因为一道简单题答错，就把这些能力全部抹掉。</p>
+<p>反过来，如果准备让它核对金额，也不能拿 GPQA 的成绩来代替金额测试。</p>
+<pre><code class="language-text">想了解专业科学答题表现
+→ 看 GPQA 的任务、配置和成绩
+
+想让它核对金额
+→ 测金额比较、精度和边界情况
+</code></pre>
+<p>博士级题目的高分，回答的是“这些难题，它能答对多少”。我们却容易把它读成“比这些简单的事情，它应该都不会错”。</p>
+<p><strong>从第一句话到第二句话，多出来的保证，是我们自己加的。</strong></p>
+<h2>参考资料</h2>
+<ol>
+<li>David Rein 等，GPQA: A Graduate-Level Google-Proof Q&amp;A Benchmark（2023）：<a href="https://arxiv.org/abs/2311.12022">https://arxiv.org/abs/2311.12022</a></li>
+<li>OpenAI，GPQA 评测实现：<a href="https://github.com/openai/simple-evals/blob/main/gpqa_eval.py">https://github.com/openai/simple-evals/blob/main/gpqa_eval.py</a></li>
+<li>OpenAI，Learning to reason with LLMs（2024）：<a href="https://openai.com/index/learning-to-reason-with-llms/">https://openai.com/index/learning-to-reason-with-llms/</a></li>
+<li>Transluce，Monitor: An AI-Driven Observability Interface（2024，小数比较干预实验）：<a href="https://transluce.org/observability-interface">https://transluce.org/observability-interface</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质。复杂的事情，简单说。</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-CmvjrxFo.js"></script>
+</body>
+</html>

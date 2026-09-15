@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <title>Agent 为什么会走对每一步，却到达错误的终点？ | LZ AI NOTE</title>
-  <meta name="description" content="Agent 为什么会走对每一步，却到达错误的终点？ 你让一个旅行 Agent 从杭州、苏州、宁波里选一个周末目的地： 降雨概率不能超过 20%，往返车票不能超过 300 元。如果都不满足，就建议我延期。 Agent 查完以后，拿到这些结果： 天气没有查错，票价也没有算错。 三个城市明明都不符合条件，它却回答： 推荐杭州。票价最便宜，周末下雨的话带伞即可。 …">
+  <meta name="description" content="Agent 为什么会走对每一步，却到达错误的终点？ 你让一个旅行 Agent 从杭州、苏州、宁波里选个周末目的地，条件很清楚： 降雨概率不能超过 20%，往返车票不能超过 300 元。如果都不满足，就建议我延期。 Agent 最后查到： 三个城市都不合格，答案应该是延期。 Agent 却推荐了杭州：票价最便宜，下雨带伞就行。 奇怪的是，检查它的执行过程，天…">
   <meta name="author" content="LZ">
   <meta name="DC.title" content="Agent 为什么会走对每一步，却到达错误的终点？">
   <meta name="DC.creator" content="LZ">
-  <meta name="DC.date" content="2026-09-09">
+  <meta name="DC.date" content="2026-09-11">
   <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%B5%B0%E5%AF%B9%E6%AF%8F%E4%B8%80%E6%AD%A5%EF%BC%8C%E5%8D%B4%E5%88%B0%E8%BE%BE%E9%94%99%E8%AF%AF%E7%9A%84%E7%BB%88%E7%82%B9%EF%BC%9F">
   <meta name="DC.publisher" content="LZ AI NOTE">
   <meta name="DC.language" content="zh-CN">
@@ -18,117 +18,76 @@
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
   <meta property="og:title" content="Agent 为什么会走对每一步，却到达错误的终点？ | LZ AI NOTE">
-  <meta property="og:description" content="Agent 为什么会走对每一步，却到达错误的终点？ 你让一个旅行 Agent 从杭州、苏州、宁波里选一个周末目的地： 降雨概率不能超过 20%，往返车票不能超过 300 元。如果都不满足，就建议我延期。 Agent 查完以后，拿到这些结果： 天气没有查错，票价也没有算错。 三个城市明明都不符合条件，它却回答： 推荐杭州。票价最便宜，周末下雨的话带伞即可。 …">
+  <meta property="og:description" content="Agent 为什么会走对每一步，却到达错误的终点？ 你让一个旅行 Agent 从杭州、苏州、宁波里选个周末目的地，条件很清楚： 降雨概率不能超过 20%，往返车票不能超过 300 元。如果都不满足，就建议我延期。 Agent 最后查到： 三个城市都不合格，答案应该是延期。 Agent 却推荐了杭州：票价最便宜，下雨带伞就行。 奇怪的是，检查它的执行过程，天…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%B5%B0%E5%AF%B9%E6%AF%8F%E4%B8%80%E6%AD%A5%EF%BC%8C%E5%8D%B4%E5%88%B0%E8%BE%BE%E9%94%99%E8%AF%AF%E7%9A%84%E7%BB%88%E7%82%B9%EF%BC%9F">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Agent 为什么会走对每一步，却到达错误的终点？","description":"Agent 为什么会走对每一步，却到达错误的终点？ 你让一个旅行 Agent 从杭州、苏州、宁波里选一个周末目的地： 降雨概率不能超过 20%，往返车票不能超过 300 元。如果都不满足，就建议我延期。 Agent 查完以后，拿到这些结果： 天气没有查错，票价也没有算错。 三个城市明明都不符合条件，它却回答： 推荐杭州。票价最便宜，周末下雨的话带伞即可。 …","url":"https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%B5%B0%E5%AF%B9%E6%AF%8F%E4%B8%80%E6%AD%A5%EF%BC%8C%E5%8D%B4%E5%88%B0%E8%BE%BE%E9%94%99%E8%AF%AF%E7%9A%84%E7%BB%88%E7%82%B9%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%B5%B0%E5%AF%B9%E6%AF%8F%E4%B8%80%E6%AD%A5%EF%BC%8C%E5%8D%B4%E5%88%B0%E8%BE%BE%E9%94%99%E8%AF%AF%E7%9A%84%E7%BB%88%E7%82%B9%EF%BC%9F","dateModified":"2026-09-09","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：Agent 为什么会走对每一步，却到达错误的终点？，LZ AI NOTE，https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%B5%B0%E5%AF%B9%E6%AF%8F%E4%B8%80%E6%AD%A5%EF%BC%8C%E5%8D%B4%E5%88%B0%E8%BE%BE%E9%94%99%E8%AF%AF%E7%9A%84%E7%BB%88%E7%82%B9%EF%BC%9F","about":["公众号已发布"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Agent 为什么会走对每一步，却到达错误的终点？","description":"Agent 为什么会走对每一步，却到达错误的终点？ 你让一个旅行 Agent 从杭州、苏州、宁波里选个周末目的地，条件很清楚： 降雨概率不能超过 20%，往返车票不能超过 300 元。如果都不满足，就建议我延期。 Agent 最后查到： 三个城市都不合格，答案应该是延期。 Agent 却推荐了杭州：票价最便宜，下雨带伞就行。 奇怪的是，检查它的执行过程，天…","url":"https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%B5%B0%E5%AF%B9%E6%AF%8F%E4%B8%80%E6%AD%A5%EF%BC%8C%E5%8D%B4%E5%88%B0%E8%BE%BE%E9%94%99%E8%AF%AF%E7%9A%84%E7%BB%88%E7%82%B9%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%B5%B0%E5%AF%B9%E6%AF%8F%E4%B8%80%E6%AD%A5%EF%BC%8C%E5%8D%B4%E5%88%B0%E8%BE%BE%E9%94%99%E8%AF%AF%E7%9A%84%E7%BB%88%E7%82%B9%EF%BC%9F","dateModified":"2026-09-11","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：Agent 为什么会走对每一步，却到达错误的终点？，LZ AI NOTE，https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%B5%B0%E5%AF%B9%E6%AF%8F%E4%B8%80%E6%AD%A5%EF%BC%8C%E5%8D%B4%E5%88%B0%E8%BE%BE%E9%94%99%E8%AF%AF%E7%9A%84%E7%BB%88%E7%82%B9%EF%BC%9F","about":["公众号已发布"]}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Agent 为什么会走对每一步，却到达错误的终点？</h1><h1>Agent 为什么会走对每一步，却到达错误的终点？</h1>
-<p>你让一个旅行 Agent 从杭州、苏州、宁波里选一个周末目的地：</p>
+<p>你让一个旅行 Agent 从杭州、苏州、宁波里选个周末目的地，条件很清楚：</p>
 <blockquote>
 <p>降雨概率不能超过 20%，往返车票不能超过 300 元。如果都不满足，就建议我延期。</p>
 </blockquote>
-<p>Agent 查完以后，拿到这些结果：</p>
+<p>Agent 最后查到：</p>
 <pre><code class="language-text">杭州：降雨概率 60%，往返 180 元
 苏州：降雨概率 10%，往返 360 元
 宁波：降雨概率 40%，往返 260 元
 </code></pre>
-<p>天气没有查错，票价也没有算错。</p>
-<p>三个城市明明都不符合条件，它却回答：</p>
-<blockquote>
-<p>推荐杭州。票价最便宜，周末下雨的话带伞即可。</p>
-</blockquote>
-<p>检查执行记录，查询接口都成功，票价排序也没有算错。Agent 走完了自己计划里的每一步，为什么还是给出了错误答案？</p>
-<p>如果日志只标记步骤成功或失败，这类错误很容易漏过去。工具没有报错，待办也全部完成，系统只是悄悄换掉了“什么结果才算完成”。</p>
-<h2>错误发生在一次看似合理的重规划里</h2>
-<p>任务开始时，Agent 生成了一份待办计划（Plan）：</p>
-<pre><code class="language-text">[待执行] 查询三个城市的天气
-[待执行] 查询三个城市的车票
-[待执行] 过滤掉不符合条件的城市
-[待执行] 有合格城市就推荐，否则建议延期
+<p>三个城市都不合格，答案应该是延期。</p>
+<p>Agent 却推荐了杭州：票价最便宜，下雨带伞就行。</p>
+<p>奇怪的是，检查它的执行过程，天气没查错，票价没算错，排序也没错。每一步单独拿出来都说得通，最后的答案却违背了用户要求。</p>
+<p>它到底在哪一步走偏了？</p>
+<h2>接口超时后，终点被悄悄换了</h2>
+<p>一开始，Agent 的计划没有问题：</p>
+<pre><code class="language-text">查询三个城市的天气和票价
+        ↓
+找出同时满足两个条件的城市
+        ↓
+有就推荐，没有就建议延期
 </code></pre>
-<p>天气查询很顺利，杭州和宁波的车票也拿到了，只有苏州票价接口超时：</p>
+<p>执行到一半，苏州的票价接口超时了。</p>
+<p>这时杭州和宁波已经因为天气被排除，苏州天气合格，票价却还不知道。Agent 不能直接给答案，只能重试。</p>
+<p>于是它重新整理了剩下的步骤：</p>
+<pre><code class="language-text">重试苏州票价
+        ↓
+汇总三个城市
+        ↓
+推荐综合最优的城市
+</code></pre>
+<p>乍看很顺。重试、汇总、推荐，每一步都合理。</p>
+<p>真正的问题藏在最后六个字里：<strong>推荐综合最优。</strong></p>
+<p>用户原本说的是：没有城市同时满足条件，就延期。</p>
+<p>新的计划却变成：不管是否满足条件，都挑一个相对最好的。</p>
+<p>Agent 没有走错路。它是在改路时，顺手换了终点。</p>
+<h2>每一步正确，不代表整件事正确</h2>
+<p>很多 Agent 系统会检查工具有没有调用成功、参数有没有填对、计划里的步骤有没有完成。</p>
+<p>这些检查只能证明：Agent 完成了自己当前的计划。</p>
+<p>但计划是可以改的。接口超时、搜索无结果、工具返回新信息，都可能触发重规划。如果“接下来怎么做”和“做到什么才算完成”写在同一份计划里，Agent 改步骤时，也可能把用户的要求一起改掉。</p>
+<p>在这个例子里，始终不能变化的其实只有三件事：</p>
+<pre><code class="language-text">雨量必须合格
+票价必须合格
+没有合格城市就延期
+</code></pre>
+<p>至于先查天气还是先查车票、失败后重试几次，都可以调整。</p>
+<p>工程上通常会把这两类信息分开：把可调整的路线叫 Plan，把不能擅自改变的完成条件叫 Goal。名字并不重要，重要的是别让它们跟着同一次重规划一起被覆盖。</p>
+<h2>改计划时，先拿原要求对一遍</h2>
+<p>只把 Goal 保存下来还不够。它必须真的参与检查。</p>
+<p>这个旅行 Agent 每次生成新计划后，都应该问一句：新计划还保留了天气、预算和“无解就延期”吗？准备回答用户之前，再问一次：现在的结果真的满足这些条件吗？</p>
+<p>这样一来，“推荐综合最优的城市”就过不了第一道检查。即便它漏了过去，杭州也过不了最后一道检查。</p>
+<p>当苏州票价重试成功，得到 360 元以后，系统会回到原来的完成条件：</p>
 <pre><code class="language-text">杭州：天气不合格
+苏州：票价不合格
 宁波：天气不合格
-苏州：天气合格，票价未知
-</code></pre>
-<p>苏州仍然可能满足条件，任务还不能结束。</p>
-<p>Agent 决定重试接口，并为剩余任务生成了一个更短的新 Plan：</p>
-<pre><code class="language-text">[待执行] 重试苏州票价查询
-[待执行] 汇总三个城市的数据
-[待执行] 推荐当前综合最优的城市
-</code></pre>
-<p>前两步都合理，最后一步却悄悄变了。</p>
-<p>原来的要求是：</p>
-<pre><code class="language-text">有城市同时满足天气和预算
-→ 推荐
-
-没有城市满足
-→ 建议延期
-</code></pre>
-<p>新的 Plan 变成了：</p>
-<pre><code class="language-text">无论是否满足条件
-→ 都要选出一个综合最优的城市
-</code></pre>
-<p>Agent 没有在查天气或查票时出错。它在重新安排路线时，顺手换掉了终点。</p>
-<h2>Plan 管下一步，Goal 管什么算完成</h2>
-<p>Plan 回答的是：</p>
-<blockquote>
-<p>接下来做什么？</p>
-</blockquote>
-<p>Goal 回答的是：</p>
-<blockquote>
-<p>什么结果算成功？什么情况应该停止？</p>
-</blockquote>
-<p>这里的 Goal 应该写成一组不能被重规划改掉的验收条件，而不只是“推荐一个城市”：</p>
-<pre><code class="language-text">成功条件：
-降雨概率 ≤ 20%
-并且往返票价 ≤ 300 元
-
-继续条件：
-仍有城市的信息不完整
-
-结束条件：
-找到合格城市，或者确认三个城市都不合格
-
-输出规则：
-有合格城市就推荐，否则建议延期
-</code></pre>
-<p>查询顺序可以调整，接口失败后也可以增加重试。只有用户主动修改要求，例如把预算提高到 400 元，Goal 才应该改变。</p>
-<p>如果系统只保留一份不断重写的 Todo 列表，重规划就可能同时覆盖执行步骤和完成标准。新 Plan 全部打勾，只能证明它完成了自己刚刚写下的计划，不能证明它完成了用户交付的任务。</p>
-<h2>Goal 自己不会阻止 Agent 跑偏</h2>
-<p>把 Goal 单独保存，只解决了“不被新 Plan 覆盖”的问题。Goal 是数据，不是检查器。系统还要在两个地方读取它。</p>
-<p>第一次是重规划之后：</p>
-<pre><code class="language-text">生成新 Plan
         ↓
-检查新 Plan 是否保留硬条件和无解分支
+没有合格城市
         ↓
-不符合 → 拒绝替换
+建议延期
 </code></pre>
-<p>“推荐当前综合最优的城市”没有保留天气、预算和延期条件，因此不能成为新的结束步骤。</p>
-<p>第二次是准备回答之前：</p>
-<pre><code class="language-text">当前证据
-        ↓
-信息是否完整？
-        ↓
-不完整 → 继续查询
-        ↓
-完整后，再检查是否有合格项
-        ↓
-有 → 推荐
-没有 → 建议延期
-</code></pre>
-<p>苏州票价超时时，它仍然可能合格，结果属于“信息不足”，所以继续查询。</p>
-<p>重试得到 360 元以后，三个城市全部不合格，结果进入“无解”分支。Agent 应该回答：</p>
-<blockquote>
-<p>三个城市都无法同时满足天气和预算条件，建议延期。</p>
-</blockquote>
-<p>同一份天气和票价数据，现在得到了正确答案。模型和推理方式都没变，系统只多做了两次核对：改计划时一次，交答案前再一次。</p>
-<p>Plan 可以随着工具结果不断变化。除非用户修改条件，否则 Goal 不动。</p>
-<p>开头那个 Agent 完成了后来生成的 Plan，所以每一步都显示成功。问题是，这份 Plan 已经不再通向用户最初的 Goal。</p>
+<p>天气数据没变，票价数据没变，模型也不一定需要变。系统只是守住了一件事：可以重新规划怎么走，但不能重新定义什么叫到达。</p>
+<p>所以，看到 Agent 的每一步都显示成功，先别急着相信最终答案。它可能确实走对了每一步，只是那些步骤，早已不再通向你要的终点。</p>
 <p><em>LZ AI Note｜记录现象，追问本质。复杂的事情，简单说。</em></p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-C6-_bK0s.js"></script>
+  <script type="module" crossorigin src="/assets/index-CmvjrxFo.js"></script>
 </body>
 </html>
