@@ -9,7 +9,7 @@
   <meta name="author" content="LZ">
   <meta name="DC.title" content="模型为什么这样设计：架构系列节点">
   <meta name="DC.creator" content="LZ">
-  <meta name="DC.date" content="2026-09-14">
+  <meta name="DC.date" content="2026-09-16">
   <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE">
   <meta name="DC.publisher" content="LZ AI NOTE">
   <meta name="DC.language" content="zh-CN">
@@ -21,7 +21,7 @@
   <meta property="og:description" content="模型为什么这样设计：架构系列节点 系列角色：知识主干·模型内部。 负责解释模型结构改变了哪条信息、梯度、计算或参数路径；不承担软件框架实现与 Agent 系统工程。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不按架构名词写百科，也不把论文摘要换成通俗说法。它只追问一个问题： 今天看似理所当然的模型结构，当初是在解决什么失败？ 每篇从一个可感知…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"模型为什么这样设计：架构系列节点","description":"模型为什么这样设计：架构系列节点 系列角色：知识主干·模型内部。 负责解释模型结构改变了哪条信息、梯度、计算或参数路径；不承担软件框架实现与 Agent 系统工程。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不按架构名词写百科，也不把论文摘要换成通俗说法。它只追问一个问题： 今天看似理所当然的模型结构，当初是在解决什么失败？ 每篇从一个可感知…","url":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","dateModified":"2026-09-14","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：模型为什么这样设计：架构系列节点，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","about":["_hidden","公众号策略"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"模型为什么这样设计：架构系列节点","description":"模型为什么这样设计：架构系列节点 系列角色：知识主干·模型内部。 负责解释模型结构改变了哪条信息、梯度、计算或参数路径；不承担软件框架实现与 Agent 系统工程。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不按架构名词写百科，也不把论文摘要换成通俗说法。它只追问一个问题： 今天看似理所当然的模型结构，当初是在解决什么失败？ 每篇从一个可感知…","url":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","dateModified":"2026-09-16","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：模型为什么这样设计：架构系列节点，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","about":["_hidden","公众号策略"]}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>模型为什么这样设计：架构系列节点</h1><h1>模型为什么这样设计：架构系列节点</h1>
@@ -180,6 +180,21 @@ MoE、KV Cache、MQA、GQA、MLA 与量化
 视觉编码器、多模态投影与统一 Token
 </code></pre>
 <p>这是认知上的依赖关系，不是必须照顺序发布的课程目录。</p>
+<h2>机器学习通用机制短季</h2>
+<p>这条支线回答机器学习系统反复面对的共同问题：现实如何被表示、错误如何被修正、规律如何越过训练样本，以及模型为什么会在新环境和细节任务上失效。</p>
+<pre><code class="language-text">现实输入太复杂，模型无法直接操作
+        ↓
+潜空间与表示学习：从可见结果中压出隐藏因素
+        ↓
+泛化与过拟合：记住样本为何不等于学会规律
+        ↓
+训练目标与损失：模型优化的为何不是人真正想要的
+        ↓
+数据组成：新增数据如何改变规律的相对权重
+        ↓
+分布漂移：训练时的世界为何不是使用时的世界
+</code></pre>
+<p>每个节点都必须有独立的现象入口和可迁移判断；只有定义、没有新问题的术语不单独成篇。</p>
 <h2>核心候选节点</h2>
 <table>
 <thead>
@@ -309,6 +324,13 @@ MoE、KV Cache、MQA、GQA、MLA 与量化
 <td>提示词没有变化，构图、人物和灯光却会改变</td>
 <td>文字条件如何约束生成，不同随机起点又如何让迭代路径逐渐分开</td>
 <td>文字条件、Seed、潜空间、迭代生成、解码器</td>
+<td>黑箱</td>
+</tr>
+<tr>
+<td><a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E6%8A%8A%E2%80%9C%E5%BE%AE%E7%AC%91%E2%80%9D%E5%8F%98%E6%88%90%E4%B8%80%E4%B8%AA%E5%8F%AF%E4%BB%A5%E7%A7%BB%E5%8A%A8%E7%9A%84%E6%96%B9%E5%90%91%EF%BC%9F.md">AI 为什么能把“微笑”变成一个可以移动的方向？</a></td>
+<td>拖动一个滑块，脸仍是同一张脸，表情却连续变化</td>
+<td>模型怎样从可见样本中压出隐藏因素；训练目标又如何决定内部表示保留什么</td>
+<td>表示学习、潜变量、潜空间、编码与解码</td>
 <td>黑箱</td>
 </tr>
 <tr>
@@ -509,6 +531,6 @@ Patch 提出查询 → 匹配其他区域 → 取回信息 → 获得全局关�
 <li><code>扩散模型为什么要先把图片毁掉，才能学会生成图片？</code>只向首篇和改图篇提供最小训练依据；完整加噪训练仍保留为下钻稿，不作为前置教材提前发布。</li>
 </ul>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-CmvjrxFo.js"></script>
+  <script type="module" crossorigin src="/assets/index-Bn-GGpyn.js"></script>
 </body>
 </html>

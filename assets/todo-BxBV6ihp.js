@@ -17,7 +17,36 @@ const x={},F=`<h1 id="RN Screenshot-to-Page TODO"><a href="#RN Screenshot-to-Pag
 </ul>
 <ol start="2">
 <li>&#x7EC4;&#x4EF6;&#x590D;&#x7528;&#x7387;&#xFF0C;&#x6CA1;&#x627E;&#x5230;&#x7684;&#x7EC4;&#x4EF6;&#x662F;&#x5565;&#x60C5;&#x51B5;&#xFF0C;&#x5F15;&#x5BFC;&#x6700;&#x5927;&#x7A0B;&#x5EA6;&#x7684;&#x590D;&#x7528;&#xFF1B;</li>
+<li>&#x9875;&#x9762;&#x8FD8;&#x539F;</li>
 </ol>
+<ul>
+<li>icon &#x65E0;&#x6CD5;&#x5BF9;&#x9F50;&#xFF1A;&#x573A;&#x666F;&#x8DEF;&#x7531;</li>
+<li>&#x81EA;&#x5DF1;&#x521B;&#x9020;&#x7EC4;&#x4EF6;&#xFF0C;&#x4F46;&#x662F;&#x4E0D;&#x5982;&#x610F;&#xFF1A;&#x6C89;&#x6DC0;&#x6700;&#x4F73;&#x5B9E;&#x8DF5; material&#xFF0C;&#x5E76;&#x8DEF;&#x7531;&#x6700;&#x4F73;&#x5B9E;&#x8DF5;&#x8DEF;&#x7EBF;&#x521B;&#x5EFA;&#x7EC4;&#x4EF6;</li>
+<li></li>
+</ul>
+<ol start="4">
+<li>&#x5B50; Agent</li>
+</ol>
+<ul>
+<li>Plan Agent &#x4EA7;&#x7269;&#x8FC7;&#x5927;&#xFF08;&#x4E3B;&#x8981;&#x662F; figma &#x7684;&#x7ED3;&#x6784;&#x5316;&#x4EA7;&#x7269;&#xFF09;&#xFF1A;&#x65B0;&#x589E; Plan Tool&#xFF08;&#x505A; FE Plan &#x7EA6;&#x5B9A;&#xFF09;&#xFF1B;&#x62C6;&#x5206;&#x5B50; Agent&#xFF0C;&#x4F18;&#x5316;&#x4EA7;&#x7269;</li>
+<li>Coding Agent&#xFF1A;&#x65B0;&#x589E; Coding Agent Toll&#xFF1B;&#x7ED9;&#x4EA7;&#x7269;&#x7684;&#x5168;&#x5C40;&#x89C6;&#x91CE;&#x8BF4;&#x660E;&#xFF0C;&#x8BA9; Agent &#x51B3;&#x7B56;&#x4E0B;&#x4E00;&#x6B65;&#x5F80;&#x54EA;&#x8D70;</li>
+</ul>
+<ol start="5">
+<li>Screenshot Preview tool&#xFF08;&#x5F88;&#x91CD;&#x8981;&#xFF09;&#xFF0C;&#x53EB; capture_mobile_app_state &#x66F4;&#x5408;&#x9002;</li>
+</ol>
+<ul>
+<li>&#x57FA;&#x672C;&#x6D41;&#x7A0B;&#xFF1A;&#xFF08;&#x524D;&#x7F6E;&#xFF1A;&#x914D;&#x7F6E; dev &#x6A21;&#x5F0F;&#x8BBF;&#x95EE;&#x7684;&#x8D44;&#x6E90;&#x57DF;&#x540D;&#xFF0C;&#x542F;&#x52A8;&#x865A;&#x62DF;&#x673A;&#xFF09;open &#x5F00;&#x542F; shopee App -&gt; abd &#x8DEF;&#x7531;&#x5230;&#x5F00;&#x53D1;&#x7684;&#x754C;&#x9762; -&gt; &#x8C03;&#x7528;&#x65E0;&#x969C;&#x788D;&#x6A21;&#x5F0F;&#xFF08;&#x9875;&#x9762;&#x53EF;&#x64CD;&#x4F5C;&#x7684;&#x5143;&#x7D20;&#xFF09; + abd &#x622A;&#x56FE;&#xFF08;&#x9875;&#x9762;&#x5B9E;&#x9645;&#x957F;&#x5565;&#x6837;&#xFF09; + abd &#x83B7;&#x53D6;&#x7EC4;&#x4EF6;&#x7ED3;&#x6784;&#xFF08;&#x9875;&#x9762;&#x5B9E;&#x9645;&#x7684;&#x7EC4;&#x4EF6;&#x6784;&#x6210;&#xFF09;-&gt; agent &#x57FA;&#x4E8E;&#x7ED3;&#x679C;&#x8FDB;&#x884C;&#x6BD4;&#x5BF9;&#x8DDF;&#x81EA;&#x52A8;&#x5316;&#x4FEE;&#x590D;</li>
+</ul>
+<pre><code class="language-mermaid">flowchart LR
+  A[Agent &#x5B8C;&#x6210;&#x9875;&#x9762;&#x4EE3;&#x7801;] --&gt; B[&#x542F;&#x52A8; iOS Simulator]
+  B --&gt; C[&#x6253;&#x5F00;&#x9875;&#x9762; Deep Link]
+  C --&gt; D[&#x8BFB;&#x53D6; Accessibility &#x72B6;&#x6001;]
+  D --&gt; E[&#x622A;&#x53D6;&#x9875;&#x9762;]
+  E --&gt; F[&#x4FDD;&#x5B58;&#x4E3A; Run Artifact]
+  F --&gt; G[&#x4EBA;&#x5DE5;&#x89C6;&#x89C9;&#x9A8C;&#x6536;]
+  G --&gt; H[Execution Report]
+* &#x5176;&#x4ED6;&#x7CFB;&#x7EDF;&#x67B6;&#x6784;&#xFF1A;&#x622A;&#x56FE;&#x4E0A;&#x4F20; &#x2192; S3 &#x2192; Run Artifact &#x2192; AICR &#x5C55;&#x793A;&#xFF0C;&#x7136;&#x540E;&#x7EE7;&#x7EED;&#x5FAA;&#x73AF;&#x91C7;&#x96C6;&#x6210;&#x529F;&#x8DDF;&#x5931;&#x8D25;&#x6848;&#x4F8B;
+</code></pre>
 <h2 id="&#x5F53;&#x524D;&#x76EE;&#x6807;"><a href="#&#x5F53;&#x524D;&#x76EE;&#x6807;"></a>&#x5F53;&#x524D;&#x76EE;&#x6807;</h2>
 <p>&#x5F53;&#x524D;&#x53EA;&#x805A;&#x7126;&#x9636;&#x6BB5; 1&#xFF1A;&#x628A; RN Screenshot-to-Page &#x63A5;&#x5165;&#x73B0;&#x6709;&#x6D41;&#x7A0B;&#x8282;&#x70B9;&#xFF0C;&#x5B8C;&#x6210;&#x4E00;&#x4E2A;&#x771F;&#x5B9E;&#x3001;&#x53EF;&#x8FD0;&#x884C;&#x3001;&#x53EF;&#x4EBA;&#x5DE5;&#x9A8C;&#x6536;&#x7684;&#x9875;&#x9762;&#x3002;</p>
 <pre><code class="language-text">&#x622A;&#x56FE; + &#x9700;&#x6C42; + RN &#x4ED3;&#x5E93; + &#x9A8C;&#x6536;&#x6761;&#x4EF6;

@@ -36,48 +36,54 @@ const x={},E=`<h1 id="&#x699C;&#x5355;&#x80CC;&#x540E;&#xFF1A;&#x5927;&#x6A21;&#
 </tr>
 <tr>
 <td>3</td>
+<td><a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E8%A7%A3%E5%AE%8C%E6%95%B4%E7%89%A9%E7%90%86%E7%A0%94%E7%A9%B6%E9%A2%98%E5%8F%AA%E6%9C%89%205.7%25%EF%BC%8C%E6%8B%86%E5%BC%80%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E5%88%B0%2020%25%EF%BC%9F.md">AI &#x89E3;&#x5B8C;&#x6574;&#x7269;&#x7406;&#x7814;&#x7A76;&#x9898;&#x53EA;&#x6709; 5.7%&#xFF0C;&#x62C6;&#x5F00;&#x540E;&#x4E3A;&#x4EC0;&#x4E48;&#x80FD;&#x5230; 20%&#xFF1F;</a></td>
+<td>CritPt</td>
+<td>&#x7528;&#x516C;&#x5F00;&#x91CF;&#x5B50;&#x7EA0;&#x9519;&#x6311;&#x6218;&#x89E3;&#x91CA;&#x5B8C;&#x6574;&#x7814;&#x7A76;&#x4EFB;&#x52A1;&#x3001;&#x68C0;&#x67E5;&#x70B9;&#x3001;&#x81EA;&#x63A5;&#x529B;&#x4E0E;&#x4E13;&#x5BB6;&#x7B54;&#x6848;&#x63A5;&#x529B;&#x600E;&#x6837;&#x533A;&#x5206;&#x5C40;&#x90E8;&#x80FD;&#x529B;&#x3001;&#x9519;&#x8BEF;&#x4F20;&#x64AD;&#x548C;&#x7AEF;&#x5230;&#x7AEF;&#x53EF;&#x9760;&#x6027;&#xFF1B;&#x4E0E; GPQA &#x7684;&#x5355;&#x9053;&#x9009;&#x62E9;&#x9898;&#x533A;&#x5206;&#x3002;</td>
+</tr>
+<tr>
+<td>4</td>
 <td><a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E8%AF%B4%E2%80%9C%E6%88%91%E4%B8%8D%E7%9F%A5%E9%81%93%E2%80%9D%EF%BC%8C%E6%80%8E%E4%B9%88%E5%8F%8D%E8%80%8C%E6%AF%94%E7%BB%99%E5%87%BA%E7%AD%94%E6%A1%88%E6%9B%B4%E9%9D%A0%E8%B0%B1%EF%BC%9F.md">AI &#x8BF4;&#x201C;&#x6211;&#x4E0D;&#x77E5;&#x9053;&#x201D;&#xFF0C;&#x600E;&#x4E48;&#x53CD;&#x800C;&#x6BD4;&#x7ED9;&#x51FA;&#x7B54;&#x6848;&#x66F4;&#x9760;&#x8C31;&#xFF1F;</a></td>
 <td>SimpleQA &#x539F;&#x7248;</td>
 <td>&#x5DF2;&#x6709;&#x521D;&#x7A3F;&#xFF1A;&#x4ECE;&#x516C;&#x5F00;&#x4EBA;&#x540D;&#x5224;&#x5206;&#x793A;&#x4F8B;&#xFF0C;&#x62C6;&#x5F00;&#x6B63;&#x786E;&#x3001;&#x9519;&#x8BEF;&#x4E0E;&#x672A;&#x4F5C;&#x7B54;&#xFF0C;&#x518D;&#x7528;&#x5047;&#x8BBE;&#x6210;&#x7EE9;&#x89E3;&#x91CA;&#x4E24;&#x4E2A;&#x5206;&#x6BCD;&#x53CA; F-score &#x7684;&#x7528;&#x9014;&#x3002;&#x4E0D;&#x590D;&#x7528; GPQA &#x7684;&#x96BE;&#x9898;&#x53CD;&#x5DEE;&#xFF0C;&#x4E0D;&#x6CDB;&#x8BB2;&#x5E7B;&#x89C9;&#x6210;&#x56E0;&#x3002;&#x539F;&#x62DF;&#x9898;&#x201C;AI &#x8FDE;&#x96BE;&#x9898;&#x90FD;&#x4F1A;&#x505A;&#xFF0C;&#x4E3A;&#x4EC0;&#x4E48;&#x8FD8;&#x4F1A;&#x7F16;&#x9519;&#x4E00;&#x4E2A;&#x4EBA;&#x540D;&#xFF1F;&#x201D;&#x5DF2;&#x8C03;&#x6574;&#x3002;</td>
 </tr>
 <tr>
-<td>4</td>
+<td>5</td>
 <td>&#x8BA9; AI &#x53EA;&#x5199;&#x4E09;&#x53E5;&#x8BDD;&#xFF0C;&#x4E3A;&#x4EC0;&#x4E48;&#x4E5F;&#x503C;&#x5F97;&#x4E13;&#x95E8;&#x51FA;&#x4E00;&#x5957;&#x8003;&#x9898;&#xFF1F;</td>
 <td>IFEval</td>
 <td>&#x53EF;&#x9A8C;&#x8BC1;&#x7684;&#x6307;&#x4EE4;&#x9075;&#x5FAA;&#xFF1A;&#x53EF;&#x7A0B;&#x5E8F;&#x68C0;&#x67E5;&#x7684;&#x7EA6;&#x675F;&#x3001;&#x5355;&#x6761;&#x6307;&#x4EE4;&#x4E0E;&#x6574;&#x6761;&#x63D0;&#x793A;&#x7684;&#x901A;&#x8FC7;&#x6807;&#x51C6;&#xFF1B;&#x4E0D;&#x628A;&#x683C;&#x5F0F;&#x5408;&#x89C4;&#x5F53;&#x5185;&#x5BB9;&#x6B63;&#x786E;&#x3002;</td>
 </tr>
 <tr>
-<td>5</td>
+<td>6</td>
 <td>AI &#x80FD;&#x88C5;&#x4E0B;&#x4E00;&#x6574;&#x672C;&#x4E66;&#xFF0C;&#x5C31;&#x4EE3;&#x8868;&#x5B83;&#x771F;&#x7684;&#x80FD;&#x7528;&#x597D;&#x6574;&#x672C;&#x4E66;&#x5417;&#xFF1F;</td>
 <td>RULER</td>
 <td>&#x957F;&#x4E0A;&#x4E0B;&#x6587;&#x5229;&#x7528;&#xFF1A;&#x4ECE;&#x5355;&#x6761;&#x68C0;&#x7D22;&#x5230;&#x591A;&#x6761;&#x4FE1;&#x606F;&#x5173;&#x8054;&#x548C;&#x805A;&#x5408;&#xFF0C;&#x533A;&#x5206;&#x88C5;&#x5F97;&#x4E0B;&#x4E0E;&#x7528;&#x5F97;&#x4E0A;&#xFF1B;&#x4E0D;&#x5199;&#x6210;&#x4E0A;&#x4E0B;&#x6587;&#x7A97;&#x53E3;&#x539F;&#x7406;&#x7BC7;&#x3002;</td>
 </tr>
 <tr>
-<td>6</td>
+<td>7</td>
 <td>AI &#x5DF2;&#x7ECF;&#x4F1A;&#x5199;&#x4EE3;&#x7801;&#x4E86;&#xFF0C;&#x4E3A;&#x4EC0;&#x4E48;&#x8FD8;&#x8981;&#x8003;&#x5B83;&#x4F1A;&#x4E0D;&#x4F1A;&#x7528;&#x7535;&#x8111;&#x7EC8;&#x7AEF;&#xFF1F;</td>
 <td>Terminal-Bench 2.0</td>
 <td>&#x7EC8;&#x7AEF;&#x4E2D;&#x7684;&#x5B8C;&#x6574;&#x4EFB;&#x52A1;&#xFF1A;&#x73AF;&#x5883;&#x3001;&#x547D;&#x4EE4;&#x6267;&#x884C;&#x4E0E;&#x7ED3;&#x679C;&#x9A8C;&#x8BC1;&#xFF1B;&#x4E0E; SWE-bench &#x533A;&#x5206;&#xFF0C;&#x4E0D;&#x9650;&#x5B9A;&#x4E3A;&#x4FEE;&#x6539;&#x4EE3;&#x7801;&#x8865;&#x4E01;&#x3002;&#x56FA;&#x5B9A;&#x4EE5; 2.0 &#x8BB2;&#x673A;&#x5236;&#xFF0C;&#x5F15;&#x7528;&#x65B0;&#x7248;&#x5206;&#x6570;&#x524D;&#x53E6;&#x6838;&#x7248;&#x672C;&#x3002;</td>
 </tr>
 <tr>
-<td>7</td>
+<td>8</td>
 <td>AI &#x8BF4;&#x6587;&#x4EF6;&#x6539;&#x597D;&#x4E86;&#xFF0C;&#x4E3A;&#x4EC0;&#x4E48;&#x8FD8;&#x8981;&#x6253;&#x5F00;&#x7535;&#x8111;&#x68C0;&#x67E5;&#x4E00;&#x904D;&#xFF1F;</td>
 <td>OSWorld&#xFF08;&#x539F;&#x7248;&#xFF09;</td>
 <td>&#x771F;&#x5B9E;&#x684C;&#x9762;&#x64CD;&#x4F5C;&#xFF1A;&#x8DE8;&#x5E94;&#x7528;&#x64CD;&#x4F5C;&#x53CA;&#x6587;&#x4EF6;&#x3001;&#x5E94;&#x7528;&#x72B6;&#x6001;&#x7684;&#x7ED3;&#x679C;&#x68C0;&#x67E5;&#xFF1B;&#x4E0D;&#x91CD;&#x590D;&#x89E3;&#x91CA;&#x89C6;&#x89C9;&#x5750;&#x6807;&#x6216;&#x70B9;&#x51FB;&#x63A7;&#x5236;&#x3002;</td>
 </tr>
 <tr>
-<td>8</td>
+<td>9</td>
 <td>AI &#x5BA2;&#x670D;&#x8BF4;&#x9000;&#x6B3E;&#x6210;&#x529F;&#x4E86;&#xFF0C;&#x4E3A;&#x4EC0;&#x4E48;&#x94B1;&#x53EF;&#x80FD;&#x6839;&#x672C;&#x6CA1;&#x9000;&#xFF1F;</td>
 <td>&#x3C4;-bench</td>
 <td>&#x5BF9;&#x8BDD;&#x3001;&#x5DE5;&#x5177;&#x4E0E;&#x4E1A;&#x52A1;&#x89C4;&#x5219;&#xFF1A;&#x6A21;&#x62DF;&#x7528;&#x6237;&#x3001;&#x4E1A;&#x52A1; API&#x3001;&#x653F;&#x7B56;&#x7EA6;&#x675F;&#x4E0E;&#x6700;&#x7EC8;&#x6570;&#x636E;&#x5E93;&#x72B6;&#x6001;&#xFF1B;&#x540C;&#x65F6;&#x89E3;&#x91CA;&#x91CD;&#x590D;&#x8FD0;&#x884C;&#x7684;&#x53EF;&#x9760;&#x6027;&#xFF0C;&#x4E0D;&#x4E0E; pass@k &#x6DF7;&#x6DC6;&#x3002;</td>
 </tr>
 <tr>
-<td>9</td>
+<td>10</td>
 <td>AI &#x80FD;&#x8BA4;&#x51FA;&#x7167;&#x7247;&#x91CC;&#x7684;&#x732B;&#xFF0C;&#x5C31;&#x7B97;&#x770B;&#x61C2;&#x56FE;&#x7247;&#x4E86;&#x5417;&#xFF1F;</td>
 <td>MMMU</td>
 <td>&#x4E13;&#x4E1A;&#x56FE;&#x6587;&#x7406;&#x89E3;&#x4E0E;&#x63A8;&#x7406;&#xFF1A;&#x4ECE;&#x56FE;&#x8868;&#x6216;&#x793A;&#x610F;&#x56FE;&#x7684;&#x4E00;&#x9053;&#x771F;&#x5B9E;&#x9898;&#xFF0C;&#x89E3;&#x91CA;&#x89C6;&#x89C9;&#x4FE1;&#x606F;&#x3001;&#x5B66;&#x79D1;&#x77E5;&#x8BC6;&#x548C;&#x63A8;&#x7406;&#x7684;&#x8054;&#x5408;&#x8003;&#x67E5;&#xFF1B;&#x4E0D;&#x91CD;&#x8BB2;&#x56FE;&#x7247;&#x7F16;&#x7801;&#x4E0E;&#x5C40;&#x90E8;&#x8BC6;&#x522B;&#x539F;&#x7406;&#x3002;</td>
 </tr>
 <tr>
-<td>10</td>
+<td>11</td>
 <td>&#x6CA1;&#x6709;&#x6807;&#x51C6;&#x7B54;&#x6848;&#xFF0C;AI &#x804A;&#x5929;&#x699C;&#x5355;&#x51ED;&#x4EC0;&#x4E48;&#x6392;&#x51FA;&#x7B2C;&#x4E00;&#xFF1F;</td>
 <td>Chatbot Arena</td>
 <td>&#x4EBA;&#x7684;&#x56DE;&#x7B54;&#x504F;&#x597D;&#xFF1A;&#x533F;&#x540D;&#x6210;&#x5BF9;&#x6BD4;&#x8F83;&#x4E0E;&#x6392;&#x540D;&#x4F30;&#x8BA1;&#xFF1B;&#x504F;&#x597D;&#x5206;&#x4E0D;&#x7B49;&#x4E8E;&#x4E8B;&#x5B9E;&#x51C6;&#x786E;&#x7387;&#xFF0C;&#x4E0D;&#x5199;&#x6210;&#x699C;&#x5355;&#x64CD;&#x7EB5;&#x8BC4;&#x8BBA;&#x3002;</td>
@@ -88,6 +94,7 @@ const x={},E=`<h1 id="&#x699C;&#x5355;&#x80CC;&#x540E;&#xFF1A;&#x5927;&#x6A21;&#
 <h2 id="&#x4E3A;&#x4EC0;&#x4E48;&#x4E0D;&#x4F1A;&#x53EA;&#x662F;&#x5341;&#x6B21;&#x91CD;&#x590D;&#x201C;&#x699C;&#x5355;&#x4E0D;&#x53EF;&#x9760;&#x201D;"><a href="#&#x4E3A;&#x4EC0;&#x4E48;&#x4E0D;&#x4F1A;&#x53EA;&#x662F;&#x5341;&#x6B21;&#x91CD;&#x590D;&#x201C;&#x699C;&#x5355;&#x4E0D;&#x53EF;&#x9760;&#x201D;"></a>&#x4E3A;&#x4EC0;&#x4E48;&#x4E0D;&#x4F1A;&#x53EA;&#x662F;&#x5341;&#x6B21;&#x91CD;&#x590D;&#x201C;&#x699C;&#x5355;&#x4E0D;&#x53EF;&#x9760;&#x201D;</h2>
 <ul>
 <li>GPQA &#x4E0E; SimpleQA&#xFF1A;&#x524D;&#x8005;&#x8BB2;&#x4E13;&#x5BB6;&#x79D1;&#x5B66;&#x95EE;&#x9898;&#x7684;&#x96BE;&#x5EA6;&#x4E0E;&#x9009;&#x62E9;&#x9898;&#x8BC4;&#x4EF7;&#xFF0C;&#x540E;&#x8005;&#x8BB2;&#x4E8B;&#x5B9E;&#x6B63;&#x786E;&#x6027;&#x548C;&#x4E0D;&#x4F5C;&#x7B54;&#x3002;</li>
+<li>GPQA &#x4E0E; CritPt&#xFF1A;&#x524D;&#x8005;&#x68C0;&#x67E5;&#x4E00;&#x9879;&#x72EC;&#x7ACB;&#x7684;&#x4E13;&#x5BB6;&#x7EA7;&#x95EE;&#x9898;&#xFF0C;&#x540E;&#x8005;&#x628A;&#x591A;&#x4E2A;&#x7814;&#x7A76;&#x6B65;&#x9AA4;&#x8FDE;&#x8D77;&#x6765;&#xFF0C;&#x6BD4;&#x8F83;&#x5C40;&#x90E8;&#x6B63;&#x786E;&#x4E0E;&#x7AEF;&#x5230;&#x7AEF;&#x5B8C;&#x6210;&#x4E4B;&#x95F4;&#x7684;&#x843D;&#x5DEE;&#x3002;</li>
 <li>SWE-bench&#x3001;Terminal-Bench&#x3001;OSWorld&#x3001;&#x3C4;-bench&#xFF1A;&#x5206;&#x522B;&#x68C0;&#x67E5;&#x8865;&#x4E01;&#x3001;&#x7EC8;&#x7AEF;&#x4EFB;&#x52A1;&#x3001;&#x684C;&#x9762;&#x7ED3;&#x679C;&#x3001;&#x5E26;&#x4E1A;&#x52A1;&#x7EA6;&#x675F;&#x7684;&#x4EA4;&#x4E92;&#xFF1B;&#x91CD;&#x70B9;&#x662F;&#x4E0D;&#x540C;&#x5DE5;&#x4F5C;&#x5982;&#x4F55;&#x88AB;&#x8F6C;&#x6210;&#x53EF;&#x9A8C;&#x6536;&#x4EFB;&#x52A1;&#xFF0C;&#x4E0D;&#x662F;&#x56DB;&#x6B21;&#x4ECB;&#x7ECD; Agent&#x3002;</li>
 <li>IFEval&#x3001;RULER&#x3001;MMMU&#xFF1A;&#x5206;&#x522B;&#x6539;&#x53D8;&#x7EA6;&#x675F;&#x3001;&#x8F93;&#x5165;&#x957F;&#x5EA6;&#x3001;&#x4FE1;&#x606F;&#x6A21;&#x6001;&#xFF0C;&#x5C55;&#x793A;&#x4E0D;&#x540C;&#x80FD;&#x529B;&#x600E;&#x6837;&#x88AB;&#x5355;&#x72EC;&#x68C0;&#x67E5;&#x3002;</li>
 <li>Arena&#xFF1A;&#x4ECE;&#x201C;&#x7B26;&#x5408;&#x9884;&#x8BBE;&#x7B54;&#x6848;&#x6216;&#x72B6;&#x6001;&#x201D;&#x8F6C;&#x5230;&#x201C;&#x4EBA;&#x66F4;&#x559C;&#x6B22;&#x54EA;&#x4E2A;&#x56DE;&#x7B54;&#x201D;&#x3002;&#x5B83;&#x662F;&#x504F;&#x597D;&#x8BC4;&#x4EF7;&#xFF0C;&#x4E0D;&#x80FD;&#x5305;&#x88C5;&#x4E3A;&#x901A;&#x7528;&#x80FD;&#x529B;&#x603B;&#x5206;&#x3002;</li>
@@ -108,6 +115,7 @@ const x={},E=`<h1 id="&#x699C;&#x5355;&#x80CC;&#x540E;&#xFF1A;&#x5927;&#x6A21;&#
 <ul>
 <li>SWE-bench&#xFF1A;https://www.swebench.com/</li>
 <li>GPQA&#xFF1A;https://arxiv.org/abs/2311.12022</li>
+<li>CritPt&#xFF1A;https://arxiv.org/abs/2509.26574</li>
 <li>SimpleQA&#xFF1A;https://arxiv.org/abs/2411.04368</li>
 <li>IFEval&#xFF1A;https://arxiv.org/abs/2311.07911</li>
 <li>RULER&#xFF1A;https://arxiv.org/abs/2404.06654</li>

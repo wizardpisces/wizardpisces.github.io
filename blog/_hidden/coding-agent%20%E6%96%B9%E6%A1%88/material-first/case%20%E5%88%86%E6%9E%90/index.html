@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>case 分析 | LZ AI NOTE</title>
+  <meta name="description" content="RN 还原 Case 分析 问题分析 问题一：列表页顶部图标间距与设计稿不一致 问题描述：标题栏右侧搜索、筛选两个图标的间距与设计稿不一致（设计稿规范为间距 20px、距右侧 12px，实际渲染约 6px），观感有偏差。 根本原因：RN agent 使用了较旧的 TitleBar 组件，而非线上通用的 ActionBar 组件，图标间距只能靠自定义样式硬凑…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="case 分析">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-09-16">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/case%20%E5%88%86%E6%9E%90">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/case%20%E5%88%86%E6%9E%90">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="case 分析 | LZ AI NOTE">
+  <meta property="og:description" content="RN 还原 Case 分析 问题分析 问题一：列表页顶部图标间距与设计稿不一致 问题描述：标题栏右侧搜索、筛选两个图标的间距与设计稿不一致（设计稿规范为间距 20px、距右侧 12px，实际渲染约 6px），观感有偏差。 根本原因：RN agent 使用了较旧的 TitleBar 组件，而非线上通用的 ActionBar 组件，图标间距只能靠自定义样式硬凑…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/case%20%E5%88%86%E6%9E%90">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"case 分析","description":"RN 还原 Case 分析 问题分析 问题一：列表页顶部图标间距与设计稿不一致 问题描述：标题栏右侧搜索、筛选两个图标的间距与设计稿不一致（设计稿规范为间距 20px、距右侧 12px，实际渲染约 6px），观感有偏差。 根本原因：RN agent 使用了较旧的 TitleBar 组件，而非线上通用的 ActionBar 组件，图标间距只能靠自定义样式硬凑…","url":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/case%20%E5%88%86%E6%9E%90","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/case%20%E5%88%86%E6%9E%90","dateModified":"2026-09-16","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：case 分析，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/case%20%E5%88%86%E6%9E%90","about":["_hidden","coding-agent 方案","material-first"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>case 分析</h1><p>RN 还原 Case 分析</p>
+<p>问题分析
+问题一：列表页顶部图标间距与设计稿不一致
+问题描述：标题栏右侧搜索、筛选两个图标的间距与设计稿不一致（设计稿规范为间距 20px、距右侧 12px，实际渲染约 6px），观感有偏差。
+根本原因：RN agent 使用了较旧的 TitleBar 组件，而非线上通用的 ActionBar 组件，图标间距只能靠自定义样式硬凑；设计复核仅停留在代码数值比对，未发现该视觉偏差。
+背后的错误模式：组件选型未优先采用平台通用方案；flex 布局下间距由父容器与子元素样式共同决定，仅凭代码声明难以准确预测实际渲染结果。</p>
+<p>问题二：筛选日期选择器交互与既有实现不一致
+问题描述：筛选功能的日期选择器，设计稿和 PRD 未定义点击后的具体交互形式。RN agent 采用了「点击后展开 120 个月长列表」的方案，与线上同功能已有的「滚轮式选择器」不一致，用户操作路径相对较长。
+根本原因：plan 阶段已识别到该交互在设计稿中未定义，但编码时未明确采用与线上实现一致的方案。
+背后的错误模式：需求未明确的交互点，方案选择时未优先对齐既有实现。</p>
+<p>问题三：文案未接入 i18n
+问题描述：RN agent 将列表、搜索、筛选、入口的用户可见文案全部硬编码为英文，未接入 i18n，语言切换时无法按环境展示对应文案。
+根本原因：RN agent workspace 中未提供词条文件，编码时 RN Agent 判断无法执行新增词条；交付校验中没有「禁止硬编码文案」的检查项。
+背后的错误模式：未遵循项目既有的 i18n 实践。
+问题四：列表未复用 UniversalList 通用列表组件
+问题描述：列表功能未复用仓库已有的 UniversalList 组件，而是手写了分页逻辑，未继承其列表项缓存与失败监控能力。
+根本原因：Plan 阶段已识别出该通用组件，编码时未采用。
+背后的错误模式：未优先复用仓库内成熟组件和模式。
+下阶段推进 Todo
+阶段 2：固定 Baseline 与评价方式
+冻结首个真实 Case 的输入（需求、验收条件、代码基线、模型与技能版本）与产物（执行轨迹、人工验收记录）
+复跑该 Case，验证结果可复现，作为后续所有增强的对比基准
+阶段 3：逐个增加增强能力（单变量消融）
+E1 通用组件与方案选型策略 — 面向占比最高的失败类型「组件/方案选型未对齐既有实现」，建立优先复用平台通用组件与线上既有实现的选型规范，预期同时改善多个已知问题
+E2 交互组件选型与实现策略 — 面向交互型组件（如日期选择器）在需求未明确定义时的方案选择，建立优先对齐线上既有交互模式的实现规范，消除同类交互差异
+E3 长列表选型策略 — 面向长列表页面手写实现、未复用通用列表能力的场景，建立虚拟列表选型规范，提升列表性能与稳定性
+E4 页面组织策略 — 面向页面结构与运行稳定性，建立统一的页面骨架与错误兜底规范（加载/空/失败态、组件挂载），降低运行期问题
+E5 i18n 规范策略 — 面向用户可见文案硬编码问题，建立词条生成与校验规范，杜绝硬编码，保证多语言场景文案正确
+E6 GraphQL 代码生成策略 — 面向数据层实现不一致问题，建立统一的数据请求与类型生成规范，保证数据层正确性
+E7 Code Design Restoration 持续优化 — 面向 Agent 执行过程的分析与追溯，持续完善关键执行事件与结果的记录，补充关键决策、工具调用、代码变更及执行结果等信息，为 Case 复盘、失败归因与后续策略优化提供完整依据
+以已有页面修改作为回归 Case，验证各增强能力不互相影响
+每项增强均记录：首轮通过是否提升、人工修正是否减少、目标问题是否解决、是否对其他 Case 造成退化。
+阶段 4：建立 Skill/Tool 优化闭环
+建立针对特定问题模式的 Golden Path 生成基本流程，将验证有效的解决方案沉淀为可复用能力。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-Bn-GGpyn.js"></script>
+</body>
+</html>

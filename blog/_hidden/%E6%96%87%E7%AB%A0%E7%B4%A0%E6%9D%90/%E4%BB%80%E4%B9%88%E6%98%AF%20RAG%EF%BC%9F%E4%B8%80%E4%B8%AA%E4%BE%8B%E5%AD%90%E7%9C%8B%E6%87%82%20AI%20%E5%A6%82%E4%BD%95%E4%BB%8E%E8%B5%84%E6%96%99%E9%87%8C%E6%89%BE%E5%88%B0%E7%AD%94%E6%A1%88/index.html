@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>什么是 RAG？一个例子看懂 AI 如何从资料里找到答案 | LZ AI NOTE</title>
+  <meta name="description" content="什么是 RAG？一个例子看懂 AI 如何从资料里找到答案 公司刚更新了休假制度。 你把新版员工手册交给 AI，然后问： 去年没休完的年假，今年还能用吗？ 通用大模型未必知道答案。员工手册是公司内部资料，更新日期可能就在昨天，它没有参加过这次培训，也不该凭常识猜。 可接入 RAG 后，它却能回答： 可以。未使用的年假可以结转，但需要在今年 3 月 31 日前…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="什么是 RAG？一个例子看懂 AI 如何从资料里找到答案">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-09-16">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%BB%80%E4%B9%88%E6%98%AF%20RAG%EF%BC%9F%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20%E5%A6%82%E4%BD%95%E4%BB%8E%E8%B5%84%E6%96%99%E9%87%8C%E6%89%BE%E5%88%B0%E7%AD%94%E6%A1%88">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%BB%80%E4%B9%88%E6%98%AF%20RAG%EF%BC%9F%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20%E5%A6%82%E4%BD%95%E4%BB%8E%E8%B5%84%E6%96%99%E9%87%8C%E6%89%BE%E5%88%B0%E7%AD%94%E6%A1%88">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="什么是 RAG？一个例子看懂 AI 如何从资料里找到答案 | LZ AI NOTE">
+  <meta property="og:description" content="什么是 RAG？一个例子看懂 AI 如何从资料里找到答案 公司刚更新了休假制度。 你把新版员工手册交给 AI，然后问： 去年没休完的年假，今年还能用吗？ 通用大模型未必知道答案。员工手册是公司内部资料，更新日期可能就在昨天，它没有参加过这次培训，也不该凭常识猜。 可接入 RAG 后，它却能回答： 可以。未使用的年假可以结转，但需要在今年 3 月 31 日前…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%BB%80%E4%B9%88%E6%98%AF%20RAG%EF%BC%9F%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20%E5%A6%82%E4%BD%95%E4%BB%8E%E8%B5%84%E6%96%99%E9%87%8C%E6%89%BE%E5%88%B0%E7%AD%94%E6%A1%88">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"什么是 RAG？一个例子看懂 AI 如何从资料里找到答案","description":"什么是 RAG？一个例子看懂 AI 如何从资料里找到答案 公司刚更新了休假制度。 你把新版员工手册交给 AI，然后问： 去年没休完的年假，今年还能用吗？ 通用大模型未必知道答案。员工手册是公司内部资料，更新日期可能就在昨天，它没有参加过这次培训，也不该凭常识猜。 可接入 RAG 后，它却能回答： 可以。未使用的年假可以结转，但需要在今年 3 月 31 日前…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%BB%80%E4%B9%88%E6%98%AF%20RAG%EF%BC%9F%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20%E5%A6%82%E4%BD%95%E4%BB%8E%E8%B5%84%E6%96%99%E9%87%8C%E6%89%BE%E5%88%B0%E7%AD%94%E6%A1%88","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%BB%80%E4%B9%88%E6%98%AF%20RAG%EF%BC%9F%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20%E5%A6%82%E4%BD%95%E4%BB%8E%E8%B5%84%E6%96%99%E9%87%8C%E6%89%BE%E5%88%B0%E7%AD%94%E6%A1%88","dateModified":"2026-09-16","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：什么是 RAG？一个例子看懂 AI 如何从资料里找到答案，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%BB%80%E4%B9%88%E6%98%AF%20RAG%EF%BC%9F%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20%E5%A6%82%E4%BD%95%E4%BB%8E%E8%B5%84%E6%96%99%E9%87%8C%E6%89%BE%E5%88%B0%E7%AD%94%E6%A1%88","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>什么是 RAG？一个例子看懂 AI 如何从资料里找到答案</h1><h1>什么是 RAG？一个例子看懂 AI 如何从资料里找到答案</h1>
+<p>公司刚更新了休假制度。</p>
+<p>你把新版员工手册交给 AI，然后问：</p>
+<blockquote>
+<p>去年没休完的年假，今年还能用吗？</p>
+</blockquote>
+<p>通用大模型未必知道答案。员工手册是公司内部资料，更新日期可能就在昨天，它没有参加过这次培训，也不该凭常识猜。</p>
+<p>可接入 RAG 后，它却能回答：</p>
+<blockquote>
+<p>可以。未使用的年假可以结转，但需要在今年 3 月 31 日前使用。</p>
+</blockquote>
+<p>RAG 到底做了什么？</p>
+<p>它没有重新训练模型，也没有把整本手册永久塞进模型权重。它只是在回答之前，先从资料中找到这次需要的几段，再把它们连同问题一起交给模型。</p>
+<p>RAG 的全称是 Retrieval-Augmented Generation，中文通常叫“检索增强生成”。名字有点长，运行过程其实只有两步：</p>
+<pre><code class="language-text">先找资料
+再根据资料回答
+</code></pre>
+<p>下面用这本员工手册，把整条链跑一遍。</p>
+<h2>第一步：先把资料切成可以寻找的小块</h2>
+<p>假设员工手册只有三段：</p>
+<pre><code class="language-text">片段 A：
+员工每年享有 10 天带薪年假。
+
+片段 B：
+未使用的年假可以结转至下一年度，
+但必须在 3 月 31 日前使用。
+
+片段 C：
+请病假超过两天，需要提交医院证明。
+</code></pre>
+<p>如果把几百页文档整个丢给模型，会带来两个问题：内容可能超过上下文限制，即使塞得进去，大量无关文字也会淹没真正有用的信息。</p>
+<p>所以 RAG 通常会先把资料切成一段一段的小块。每块既要足够短，方便精确寻找；也要保留完整意思，不能把条件和结论从中间切断。</p>
+<p>切块不是最后一步。系统还要为每段文字生成一个向量，也就是一组数字。</p>
+<p>可以先把它理解成文字在“意义地图”上的坐标：意思接近的文字，坐标通常也更接近。</p>
+<p>于是这三个片段会得到各自的位置：</p>
+<pre><code class="language-text">片段 A → [年假、天数、员工福利]
+片段 B → [年假、结转、截止日期]
+片段 C → [病假、医院证明]
+</code></pre>
+<p>真实向量不是这些文字标签，而是一长串数字。这里写成标签，只是为了让关系更容易看见。</p>
+<p>这一步通常提前完成。资料入库以后，不需要每次提问都重新处理整本手册。</p>
+<h2>第二步：问题也要进入同一张地图</h2>
+<p>用户问的是：</p>
+<blockquote>
+<p>去年没休完的年假，今年还能用吗？</p>
+</blockquote>
+<p>员工手册里并没有这句原话。它写的是：</p>
+<blockquote>
+<p>未使用的年假可以结转至下一年度。</p>
+</blockquote>
+<p>如果只按关键词逐字匹配，“没休完”和“未使用”、“今年还能用”和“结转至下一年度”并不相同。</p>
+<p>RAG 会把问题也转换成向量，再与资料片段比较距离：</p>
+<pre><code class="language-text">问题：去年没休完的年假，今年还能用吗？
+
+与片段 A 的相似度：0.63
+与片段 B 的相似度：0.91
+与片段 C 的相似度：0.08
+</code></pre>
+<p>这些分数只是示意，但选择过程就是这样：片段 B 与问题最接近，因此被检索出来。</p>
+<p>到这里，模型还没有回答问题。</p>
+<p>检索程序只是完成了“找哪一页”。</p>
+<h2>第三步：把找到的资料放进这一次上下文</h2>
+<p>系统接下来会组装一条新的输入：</p>
+<pre><code class="language-text">请根据以下资料回答问题。
+
+资料：
+未使用的年假可以结转至下一年度，
+但必须在 3 月 31 日前使用。
+
+问题：
+去年没休完的年假，今年还能用吗？
+</code></pre>
+<p>模型这时才开始生成答案：</p>
+<blockquote>
+<p>可以，但需要在今年 3 月 31 日前使用。</p>
+</blockquote>
+<p>整条 RAG 链路可以压成：</p>
+<pre><code class="language-text">员工手册
+   ↓ 切块并建立索引
+一组可检索的资料片段
+
+用户问题
+   ↓ 找到最相关片段
+片段 B
+   ↓ 与问题一起交给模型
+最终答案
+</code></pre>
+<p>这就是 RAG。</p>
+<p>模型负责理解问题和组织语言，检索系统负责把正确资料送到它眼前。</p>
+<h2>RAG 没有让模型“学会”员工手册</h2>
+<p>这点很容易混淆。</p>
+<p>上传资料以后，模型能回答其中的问题，看起来像是它学会了新知识。实际上，这份知识并没有进入模型权重。</p>
+<p>关闭这次上下文，或者把检索系统断开，模型通常又不知道公司的休假规定了。</p>
+<p>可以把两种方式分开看：</p>
+<pre><code class="language-text">训练模型
+→ 改变权重
+→ 改变模型长期形成的能力和行为
+
+RAG
+→ 不改权重
+→ 改变模型这一次回答前能看到的资料
+</code></pre>
+<p>所以，RAG 更像一场开卷考试。</p>
+<p>模型没有背下整本员工手册。每次有人提问，系统先替它翻到相关页，再让它根据这一页作答。</p>
+<p>这个区别会直接影响系统设计。</p>
+<p>公司制度更新时，不必重新训练模型，只要替换资料库里的旧片段。需要追查答案来源时，也可以把被检索到的原文一起显示出来。</p>
+<h2>既然资料找到了，答案为什么还会错？</h2>
+<p>因为 RAG 不是一个动作，而是一条链。</p>
+<p>刚才的回答成立，依赖三件事：</p>
+<pre><code class="language-text">资料库里有正确内容
+        ↓
+检索找到了正确片段
+        ↓
+模型按照片段回答
+</code></pre>
+<p>任何一步出错，最后都可能答错。</p>
+<p>例如，员工手册已经更新，资料库里却还留着旧版本；切块时把“可以结转”和“3 月 31 日前使用”拆到了两处；检索只找回了前半句；或者模型看见正确片段后，仍然混入自己的常识。</p>
+<p>因此，排查 RAG 不能只盯着最终回答。先看系统究竟找回了什么，通常比反复修改 Prompt 更有效。</p>
+<pre><code class="language-text">没找到正确资料
+→ 先查资料、切块和检索
+
+资料正确，回答仍然错误
+→ 再查提示方式和生成模型
+</code></pre>
+<p>这也是 RAG 最实用的一条判断：</p>
+<blockquote>
+<p>模型答错，不一定是模型不会；也可能是系统根本没有把正确资料送到它眼前。</p>
+</blockquote>
+<h2>回到那本员工手册</h2>
+<p>现在再看最初的问题：</p>
+<blockquote>
+<p>去年没休完的年假，今年还能用吗？</p>
+</blockquote>
+<p>RAG 没有让模型永久记住公司的制度。它完成的是另一件事：</p>
+<pre><code class="language-text">从大量资料中找到当前问题需要的片段
+        ↓
+把片段放进这一次上下文
+        ↓
+让模型依据片段生成答案
+</code></pre>
+<p>所以，RAG 解决的不是“怎样让模型知道所有知识”，而是：</p>
+<blockquote>
+<p>在模型准备回答的这一刻，怎样把它真正需要的知识送到眼前。</p>
+</blockquote>
+<h2>参考资料</h2>
+<ol>
+<li>Lewis 等，《Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks》，NeurIPS 2020：<a href="https://arxiv.org/abs/2005.11401">https://arxiv.org/abs/2005.11401</a></li>
+<li>Karpukhin 等，《Dense Passage Retrieval for Open-Domain Question Answering》，EMNLP 2020：<a href="https://arxiv.org/abs/2004.04906">https://arxiv.org/abs/2004.04906</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质。复杂的事情，简单说。</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-Bn-GGpyn.js"></script>
+</body>
+</html>

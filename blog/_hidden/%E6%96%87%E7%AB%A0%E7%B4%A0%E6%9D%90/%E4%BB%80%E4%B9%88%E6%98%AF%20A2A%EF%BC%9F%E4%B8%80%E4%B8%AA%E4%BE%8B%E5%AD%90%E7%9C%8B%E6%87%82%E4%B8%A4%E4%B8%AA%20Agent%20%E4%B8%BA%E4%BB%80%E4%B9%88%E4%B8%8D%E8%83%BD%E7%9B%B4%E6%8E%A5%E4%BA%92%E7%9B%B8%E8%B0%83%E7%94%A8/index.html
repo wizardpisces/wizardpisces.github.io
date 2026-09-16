@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>什么是 A2A？一个例子看懂两个 Agent 为什么不能直接互相调用 | LZ AI NOTE</title>
+  <meta name="description" content="什么是 A2A？一个例子看懂两个 Agent 为什么不能直接互相调用 假设你有一个“出差助理 Agent”。 它接到任务： 下周去上海见客户，找一家离客户近、每晚 800 元以内的酒店。 它知道有个酒店 Agent，于是很自然地写出： 如果 hotel agent 是同一个程序里的函数，这样写没有任何问题：传入参数，等它返回酒店列表。 但这次，酒店 Age…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="什么是 A2A？一个例子看懂两个 Agent 为什么不能直接互相调用">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-09-16">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%BB%80%E4%B9%88%E6%98%AF%20A2A%EF%BC%9F%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%E4%B8%A4%E4%B8%AA%20Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%9B%B4%E6%8E%A5%E4%BA%92%E7%9B%B8%E8%B0%83%E7%94%A8">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%BB%80%E4%B9%88%E6%98%AF%20A2A%EF%BC%9F%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%E4%B8%A4%E4%B8%AA%20Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%9B%B4%E6%8E%A5%E4%BA%92%E7%9B%B8%E8%B0%83%E7%94%A8">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="什么是 A2A？一个例子看懂两个 Agent 为什么不能直接互相调用 | LZ AI NOTE">
+  <meta property="og:description" content="什么是 A2A？一个例子看懂两个 Agent 为什么不能直接互相调用 假设你有一个“出差助理 Agent”。 它接到任务： 下周去上海见客户，找一家离客户近、每晚 800 元以内的酒店。 它知道有个酒店 Agent，于是很自然地写出： 如果 hotel agent 是同一个程序里的函数，这样写没有任何问题：传入参数，等它返回酒店列表。 但这次，酒店 Age…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%BB%80%E4%B9%88%E6%98%AF%20A2A%EF%BC%9F%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%E4%B8%A4%E4%B8%AA%20Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%9B%B4%E6%8E%A5%E4%BA%92%E7%9B%B8%E8%B0%83%E7%94%A8">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"什么是 A2A？一个例子看懂两个 Agent 为什么不能直接互相调用","description":"什么是 A2A？一个例子看懂两个 Agent 为什么不能直接互相调用 假设你有一个“出差助理 Agent”。 它接到任务： 下周去上海见客户，找一家离客户近、每晚 800 元以内的酒店。 它知道有个酒店 Agent，于是很自然地写出： 如果 hotel agent 是同一个程序里的函数，这样写没有任何问题：传入参数，等它返回酒店列表。 但这次，酒店 Age…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%BB%80%E4%B9%88%E6%98%AF%20A2A%EF%BC%9F%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%E4%B8%A4%E4%B8%AA%20Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%9B%B4%E6%8E%A5%E4%BA%92%E7%9B%B8%E8%B0%83%E7%94%A8","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%BB%80%E4%B9%88%E6%98%AF%20A2A%EF%BC%9F%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%E4%B8%A4%E4%B8%AA%20Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%9B%B4%E6%8E%A5%E4%BA%92%E7%9B%B8%E8%B0%83%E7%94%A8","dateModified":"2026-09-16","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：什么是 A2A？一个例子看懂两个 Agent 为什么不能直接互相调用，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%BB%80%E4%B9%88%E6%98%AF%20A2A%EF%BC%9F%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%E4%B8%A4%E4%B8%AA%20Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%9B%B4%E6%8E%A5%E4%BA%92%E7%9B%B8%E8%B0%83%E7%94%A8","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>什么是 A2A？一个例子看懂两个 Agent 为什么不能直接互相调用</h1><h1>什么是 A2A？一个例子看懂两个 Agent 为什么不能直接互相调用</h1>
+<p>假设你有一个“出差助理 Agent”。</p>
+<p>它接到任务：</p>
+<blockquote>
+<p>下周去上海见客户，找一家离客户近、每晚 800 元以内的酒店。</p>
+</blockquote>
+<p>它知道有个酒店 Agent，于是很自然地写出：</p>
+<pre><code class="language-python">hotel = hotel_agent.find(
+    city=&quot;上海&quot;,
+    near=&quot;客户地址&quot;,
+    budget=800,
+)
+</code></pre>
+<p>如果 <code>hotel_agent</code> 是同一个程序里的函数，这样写没有任何问题：传入参数，等它返回酒店列表。</p>
+<p>但这次，酒店 Agent 在另一家公司运行。它收到请求后，没有立刻给酒店，而是回了一句：</p>
+<blockquote>
+<p>客户地址不完整。是在浦东，还是徐汇？</p>
+</blockquote>
+<p>函数调用到这里就尴尬了。</p>
+<p>它本来只准备了两种结果：返回值，或者报错。可现在既不是成功，也不是失败。任务进行到一半，正在等人补一句话。</p>
+<p>这正是 A2A 要解决的缺口。</p>
+<h2>第一层：函数只能处理“一次问答”</h2>
+<p>把酒店 Agent 当函数时，出差助理默认知道四件事：</p>
+<pre><code class="language-text">函数叫什么
+需要哪些参数
+什么时候返回
+返回值长什么样
+</code></pre>
+<p>这些假设在同一个代码仓库里通常成立。调用方读过函数定义，出错能改代码，调用还没结束，栈和变量也都在。</p>
+<p>远程 Agent 不受这些条件约束。</p>
+<p>出差助理甚至未必知道“酒店 Agent”能做什么：它只会搜索，还是也能比较价格？能不能预订？预订前会不会要求用户确认？</p>
+<p>所以，直接调用之前，先得让对方自己说明能力。</p>
+<pre><code class="language-text">酒店 Agent：
+- 可以搜索和比较酒店
+- 可以提交预订
+- 搜索不需要确认
+- 真正付款前必须由用户授权
+</code></pre>
+<p>这类可读取的能力说明，解决的是第一个问题：</p>
+<blockquote>
+<p>我还没合作过，怎么知道该不该把这件事交给你？</p>
+</blockquote>
+<h2>第二层：一旦会等待，调用就必须变成任务</h2>
+<p>现在出差助理知道该找谁了，重新提交：</p>
+<pre><code class="language-text">找下周一到周三、靠近客户地址的酒店。
+预算每晚 800 元以内。
+</code></pre>
+<p>酒店 Agent 还在等“浦东还是徐汇”。</p>
+<p>如果这是一通普通函数调用，出差助理只能一直卡在那里等。可现实里，用户可能半小时后才回复；酒店 Agent 也可能要同时查询几个网站；出差助理还要去订高铁。</p>
+<p>因此，交出去的不能只是一次调用，得是一个有编号的任务：</p>
+<pre><code class="language-text">任务 #42
+状态：input-required
+缺少信息：客户位于浦东还是徐汇？
+</code></pre>
+<p>用户回复“浦东”后，出差助理不必重新发起一遍搜索。它把补充信息交给任务 #42，酒店 Agent 从中断处继续。</p>
+<pre><code class="language-text">任务 #42
+状态：working
+</code></pre>
+<p>找到酒店后：</p>
+<pre><code class="language-text">任务 #42
+状态：completed
+结果：3 家候选酒店
+</code></pre>
+<p>到这一步，A2A 与函数调用的差别已经出现了：</p>
+<blockquote>
+<p>调用一个函数，拿到的是一个返回值；委托一个 Agent，拿到的是一项会变化的任务。</p>
+</blockquote>
+<h2>第三层：任务能继续，不代表谁都能继续</h2>
+<p>出差助理选中其中一家酒店，准备让酒店 Agent 下单。</p>
+<p>这时又不能简单地续上一句：</p>
+<pre><code class="language-text">那就订第一家。
+</code></pre>
+<p>因为“搜索酒店”和“花用户的钱”不是同一种权限。</p>
+<p>酒店 Agent 需要知道：这条指令来自谁？它代表的是哪位用户？这位用户是否真的授权了付款？授权只限这一次，还是以后都有效？</p>
+<p>于是任务还需要带着身份和授权往下走：</p>
+<pre><code class="language-text">任务 #42
+调用者：出差助理 Agent
+代表用户：李小姐
+已有权限：搜索、比价
+尚缺权限：确认付款
+</code></pre>
+<p>酒店 Agent 因此把状态改成：</p>
+<pre><code class="language-text">任务 #42
+状态：input-required
+需要：用户确认付款
+</code></pre>
+<p>用户确认后，它才真正下单。</p>
+<p>这不是给协议多塞几个字段，而是在回答一个很现实的问题：</p>
+<blockquote>
+<p>任务已经跨出当前 Agent 的边界后，谁还能替用户继续做决定？</p>
+</blockquote>
+<h2>A2A 到底补上了什么</h2>
+<p>把刚才的酒店任务倒回去看，会发现每一层都是被前一层逼出来的：</p>
+<pre><code class="language-text">不知道对方能做什么
+→ 需要能力说明
+
+任务不会立刻完成，还会等待补充信息
+→ 需要任务 ID 和状态
+
+任务要跨系统继续执行，还涉及付款
+→ 需要身份与授权
+</code></pre>
+<p>这些约定合在一起，才接近 A2A：Agent-to-Agent Protocol。</p>
+<p>它不负责让酒店 Agent 更会找酒店，也不替出差助理决定选哪一家。它解决的是两个独立 Agent 怎样把一件事安全地交接下去。</p>
+<p>所以，A2A 并不等于“两个 AI 互相聊天”。它更像是把远程 Agent 当作一个有能力、有边界、会等待、也会交付结果的合作方。</p>
+<h2>那什么时候根本不需要 A2A？</h2>
+<p>回到最开始那段代码：</p>
+<pre><code class="language-python">hotel = search_hotel(&quot;上海&quot;, &quot;浦东&quot;, 800)
+</code></pre>
+<p>如果酒店搜索就是本地的一段确定代码，调用方知道它的参数，几秒钟内能返回，也不涉及跨用户授权，那么函数或 Tool 就够了。</p>
+<p>只有当对方是一个独立运行的 Agent，任务会暂停、追问、异步完成，甚至要代表用户产生真实副作用时，函数的“参数 + 返回值”才开始装不下整件事。</p>
+<p>这也是区分 Tool 和 Remote Agent 的一个简单办法：</p>
+<pre><code class="language-text">动作可以立刻完成
+→ Tool
+
+任务需要独立推进、等待和交付
+→ Remote Agent / A2A
+</code></pre>
+<p>回到出差任务。出差助理不是把酒店 Agent “调用”了一次，而是把任务 #42 委托给了它；它们之后能否继续合作，取决于任务状态、身份和授权能不能一直说得清。</p>
+<h2>参考资料</h2>
+<ol>
+<li>Google，《Agent2Agent Protocol》：<a href="https://a2a-protocol.org/latest/">https://a2a-protocol.org/latest/</a></li>
+<li>Linux Foundation，《A2A Protocol》：<a href="https://github.com/a2aproject/A2A">https://github.com/a2aproject/A2A</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质。复杂的事情，简单说。</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-Bn-GGpyn.js"></script>
+</body>
+</html>

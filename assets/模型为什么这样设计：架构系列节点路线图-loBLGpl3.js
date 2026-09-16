@@ -154,6 +154,21 @@ MoE&#x3001;KV Cache&#x3001;MQA&#x3001;GQA&#x3001;MLA &#x4E0E;&#x91CF;&#x5316;
 &#x89C6;&#x89C9;&#x7F16;&#x7801;&#x5668;&#x3001;&#x591A;&#x6A21;&#x6001;&#x6295;&#x5F71;&#x4E0E;&#x7EDF;&#x4E00; Token
 </code></pre>
 <p>&#x8FD9;&#x662F;&#x8BA4;&#x77E5;&#x4E0A;&#x7684;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#xFF0C;&#x4E0D;&#x662F;&#x5FC5;&#x987B;&#x7167;&#x987A;&#x5E8F;&#x53D1;&#x5E03;&#x7684;&#x8BFE;&#x7A0B;&#x76EE;&#x5F55;&#x3002;</p>
+<h2 id="&#x673A;&#x5668;&#x5B66;&#x4E60;&#x901A;&#x7528;&#x673A;&#x5236;&#x77ED;&#x5B63;"><a href="#&#x673A;&#x5668;&#x5B66;&#x4E60;&#x901A;&#x7528;&#x673A;&#x5236;&#x77ED;&#x5B63;"></a>&#x673A;&#x5668;&#x5B66;&#x4E60;&#x901A;&#x7528;&#x673A;&#x5236;&#x77ED;&#x5B63;</h2>
+<p>&#x8FD9;&#x6761;&#x652F;&#x7EBF;&#x56DE;&#x7B54;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x7CFB;&#x7EDF;&#x53CD;&#x590D;&#x9762;&#x5BF9;&#x7684;&#x5171;&#x540C;&#x95EE;&#x9898;&#xFF1A;&#x73B0;&#x5B9E;&#x5982;&#x4F55;&#x88AB;&#x8868;&#x793A;&#x3001;&#x9519;&#x8BEF;&#x5982;&#x4F55;&#x88AB;&#x4FEE;&#x6B63;&#x3001;&#x89C4;&#x5F8B;&#x5982;&#x4F55;&#x8D8A;&#x8FC7;&#x8BAD;&#x7EC3;&#x6837;&#x672C;&#xFF0C;&#x4EE5;&#x53CA;&#x6A21;&#x578B;&#x4E3A;&#x4EC0;&#x4E48;&#x4F1A;&#x5728;&#x65B0;&#x73AF;&#x5883;&#x548C;&#x7EC6;&#x8282;&#x4EFB;&#x52A1;&#x4E0A;&#x5931;&#x6548;&#x3002;</p>
+<pre><code class="language-text">&#x73B0;&#x5B9E;&#x8F93;&#x5165;&#x592A;&#x590D;&#x6742;&#xFF0C;&#x6A21;&#x578B;&#x65E0;&#x6CD5;&#x76F4;&#x63A5;&#x64CD;&#x4F5C;
+        &#x2193;
+&#x6F5C;&#x7A7A;&#x95F4;&#xFF1A;&#x628A;&#x4E16;&#x754C;&#x6539;&#x5199;&#x6210;&#x5185;&#x90E8;&#x5173;&#x7CFB;
+        &#x2193;
+&#x8BAD;&#x7EC3;&#x76EE;&#x6807;&#x4E0E;&#x635F;&#x5931;&#xFF1A;&#x6A21;&#x578B;&#x600E;&#x6837;&#x77E5;&#x9053;&#x81EA;&#x5DF1;&#x9519;&#x4E86;
+        &#x2193;
+&#x6CDB;&#x5316;&#x4E0E;&#x8FC7;&#x62DF;&#x5408;&#xFF1A;&#x8BB0;&#x4F4F;&#x6837;&#x672C;&#x4E3A;&#x4F55;&#x4E0D;&#x7B49;&#x4E8E;&#x5B66;&#x4F1A;&#x89C4;&#x5F8B;
+        &#x2193;
+&#x5206;&#x5E03;&#x6F02;&#x79FB;&#xFF1A;&#x8BAD;&#x7EC3;&#x65F6;&#x7684;&#x4E16;&#x754C;&#x4E3A;&#x4F55;&#x4E0D;&#x662F;&#x4F7F;&#x7528;&#x65F6;&#x7684;&#x4E16;&#x754C;
+        &#x2193;
+&#x4E0D;&#x786E;&#x5B9A;&#x6027;&#x4E0E;&#x6821;&#x51C6;&#xFF1A;&#x6A21;&#x578B;&#x7684;&#x81EA;&#x4FE1;&#x4E3A;&#x4EC0;&#x4E48;&#x9700;&#x8981;&#x5355;&#x72EC;&#x68C0;&#x9A8C;
+</code></pre>
+<p>&#x6BCF;&#x4E2A;&#x8282;&#x70B9;&#x90FD;&#x5FC5;&#x987B;&#x6709;&#x72EC;&#x7ACB;&#x7684;&#x73B0;&#x8C61;&#x5165;&#x53E3;&#x548C;&#x53EF;&#x8FC1;&#x79FB;&#x5224;&#x65AD;&#xFF1B;&#x53EA;&#x6709;&#x5B9A;&#x4E49;&#x3001;&#x6CA1;&#x6709;&#x65B0;&#x95EE;&#x9898;&#x7684;&#x672F;&#x8BED;&#x4E0D;&#x5355;&#x72EC;&#x6210;&#x7BC7;&#x3002;</p>
 <h2 id="&#x6838;&#x5FC3;&#x5019;&#x9009;&#x8282;&#x70B9;"><a href="#&#x6838;&#x5FC3;&#x5019;&#x9009;&#x8282;&#x70B9;"></a>&#x6838;&#x5FC3;&#x5019;&#x9009;&#x8282;&#x70B9;</h2>
 <table>
 <thead>
@@ -283,6 +298,13 @@ MoE&#x3001;KV Cache&#x3001;MQA&#x3001;GQA&#x3001;MLA &#x4E0E;&#x91CF;&#x5316;
 <td>&#x63D0;&#x793A;&#x8BCD;&#x6CA1;&#x6709;&#x53D8;&#x5316;&#xFF0C;&#x6784;&#x56FE;&#x3001;&#x4EBA;&#x7269;&#x548C;&#x706F;&#x5149;&#x5374;&#x4F1A;&#x6539;&#x53D8;</td>
 <td>&#x6587;&#x5B57;&#x6761;&#x4EF6;&#x5982;&#x4F55;&#x7EA6;&#x675F;&#x751F;&#x6210;&#xFF0C;&#x4E0D;&#x540C;&#x968F;&#x673A;&#x8D77;&#x70B9;&#x53C8;&#x5982;&#x4F55;&#x8BA9;&#x8FED;&#x4EE3;&#x8DEF;&#x5F84;&#x9010;&#x6E10;&#x5206;&#x5F00;</td>
 <td>&#x6587;&#x5B57;&#x6761;&#x4EF6;&#x3001;Seed&#x3001;&#x6F5C;&#x7A7A;&#x95F4;&#x3001;&#x8FED;&#x4EE3;&#x751F;&#x6210;&#x3001;&#x89E3;&#x7801;&#x5668;</td>
+<td>&#x9ED1;&#x7BB1;</td>
+</tr>
+<tr>
+<td><a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%BD%9C%E7%A9%BA%E9%97%B4%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%85%88%E6%8A%8A%E4%B8%96%E7%95%8C%E6%94%B9%E5%86%99%E4%B8%80%E9%81%8D%EF%BC%9F.md">&#x6F5C;&#x7A7A;&#x95F4;&#x662F;&#x4EC0;&#x4E48;&#xFF1F;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x5148;&#x628A;&#x4E16;&#x754C;&#x6539;&#x5199;&#x4E00;&#x904D;&#xFF1F;</a></td>
+<td>&#x56FE;&#x7247;&#x3001;&#x6587;&#x5B57;&#x548C;&#x63A8;&#x8350;&#x4E3A;&#x4F55;&#x90FD;&#x8981;&#x5148;&#x53D8;&#x6210;&#x5185;&#x90E8;&#x8868;&#x793A;</td>
+<td>&#x6A21;&#x578B;&#x5982;&#x4F55;&#x5728;&#x5173;&#x7CFB;&#x7A7A;&#x95F4;&#x91CC;&#x5B8C;&#x6210;&#x5224;&#x65AD;&#xFF0C;&#x4EE5;&#x53CA;&#x538B;&#x7F29;&#x8868;&#x793A;&#x4E3A;&#x4F55;&#x540C;&#x65F6;&#x5E26;&#x6765;&#x6CDB;&#x5316;&#x4E0E;&#x7EC6;&#x8282;&#x635F;&#x5931;</td>
+<td>&#x8868;&#x793A;&#x5B66;&#x4E60;&#x3001;&#x6F5C;&#x7A7A;&#x95F4;&#x3001;&#x7F16;&#x7801;&#x4E0E;&#x89E3;&#x7801;</td>
 <td>&#x9ED1;&#x7BB1;</td>
 </tr>
 <tr>
@@ -482,4 +504,4 @@ Patch &#x63D0;&#x51FA;&#x67E5;&#x8BE2; &#x2192; &#x5339;&#x914D;&#x5176;&#x4ED6;
 <li><code>&#x4E00;&#x53E5;&#x63D0;&#x793A;&#x8BCD;&#x91CC;&#x6CA1;&#x6709;&#x50CF;&#x7D20;&#xFF0C;AI &#x600E;&#x4E48;&#x628A;&#x5B83;&#x53D8;&#x6210;&#x4E00;&#x5F20;&#x56FE;&#xFF1F;</code>&#x7684;&#x6587;&#x5B57;&#x6761;&#x4EF6;&#x3001;&#x6F5C;&#x7A7A;&#x95F4;&#x548C;&#x89E3;&#x7801;&#x5668;&#x7B49;&#x5FC5;&#x8981;&#x6750;&#x6599;&#x5DF2;&#x5E76;&#x5165;&#x9996;&#x7BC7;&#xFF0C;&#x65E7;&#x7A3F;&#x5DF2;&#x7ECF;&#x5220;&#x9664;&#x3002;</li>
 <li><code>&#x6269;&#x6563;&#x6A21;&#x578B;&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x5148;&#x628A;&#x56FE;&#x7247;&#x6BC1;&#x6389;&#xFF0C;&#x624D;&#x80FD;&#x5B66;&#x4F1A;&#x751F;&#x6210;&#x56FE;&#x7247;&#xFF1F;</code>&#x53EA;&#x5411;&#x9996;&#x7BC7;&#x548C;&#x6539;&#x56FE;&#x7BC7;&#x63D0;&#x4F9B;&#x6700;&#x5C0F;&#x8BAD;&#x7EC3;&#x4F9D;&#x636E;&#xFF1B;&#x5B8C;&#x6574;&#x52A0;&#x566A;&#x8BAD;&#x7EC3;&#x4ECD;&#x4FDD;&#x7559;&#x4E3A;&#x4E0B;&#x94BB;&#x7A3F;&#xFF0C;&#x4E0D;&#x4F5C;&#x4E3A;&#x524D;&#x7F6E;&#x6559;&#x6750;&#x63D0;&#x524D;&#x53D1;&#x5E03;&#x3002;</li>
 </ul>
-`,F=[{level:1,title:"模型为什么这样设计：架构系列节点",children:[{level:2,title:"系列定位",children:[]},{level:2,title:"信息增量门槛",children:[]},{level:2,title:"问题入口与机制模型",children:[]},{level:2,title:"什么样的题值得独立写",children:[]},{level:2,title:"单篇的固定闭环",children:[]},{level:2,title:"总问题节点图",children:[]},{level:2,title:"核心候选节点",children:[]},{level:2,title:"经典架构支线",children:[]},{level:2,title:"第一季：从用户看到的行为进入",children:[]},{level:2,title:"后续分支",children:[{level:3,title:"架构演化",children:[]},{level:3,title:"模型扩展",children:[]},{level:3,title:"低成本改造",children:[]},{level:3,title:"语言之外",children:[]}]},{level:2,title:"当前发布顺序",children:[{level:3,title:"下一候选短季：AI 生图",children:[]}]}]}];export{x as attributes,E as html,F as nestedHeaders};
+`,F=[{level:1,title:"模型为什么这样设计：架构系列节点",children:[{level:2,title:"系列定位",children:[]},{level:2,title:"信息增量门槛",children:[]},{level:2,title:"问题入口与机制模型",children:[]},{level:2,title:"什么样的题值得独立写",children:[]},{level:2,title:"单篇的固定闭环",children:[]},{level:2,title:"总问题节点图",children:[]},{level:2,title:"机器学习通用机制短季",children:[]},{level:2,title:"核心候选节点",children:[]},{level:2,title:"经典架构支线",children:[]},{level:2,title:"第一季：从用户看到的行为进入",children:[]},{level:2,title:"后续分支",children:[{level:3,title:"架构演化",children:[]},{level:3,title:"模型扩展",children:[]},{level:3,title:"低成本改造",children:[]},{level:3,title:"语言之外",children:[]}]},{level:2,title:"当前发布顺序",children:[{level:3,title:"下一候选短季：AI 生图",children:[]}]}]}];export{x as attributes,E as html,F as nestedHeaders};
