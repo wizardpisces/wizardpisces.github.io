@@ -94,6 +94,9 @@
 <li>[x] <strong>[新闻·黑箱]</strong> <a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Claude%20Sonnet%205%20%E7%9A%84%20Token%20%E6%B6%88%E8%80%97%E6%9B%B4%E5%A4%9A%E4%BA%86%EF%BC%9F%E4%B8%80%E6%96%87%E7%9C%8B%E6%87%82%20Token%20%E7%9A%84%E6%BC%94%E5%8C%96.md">Claude Sonnet 5 的 Token 消耗更多了？一文看懂 Token 的演化</a></li>
 <li>[ ] <strong>[黑箱]</strong> <a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E4%B8%8D%E6%98%AF%E5%85%88%E6%83%B3%E5%A5%BD%E5%86%8D%E5%9B%9E%E7%AD%94%EF%BC%9A%E6%AF%8F%E4%B8%AA%20Token%20%E9%83%BD%E5%9C%A8%E6%94%B9%E5%8F%98%E4%B8%8B%E4%B8%80%E6%AD%A5.md">AI 开头只换了几个字，为什么后面的答案全变了？</a>（逐 Token 生成与路径依赖）</li>
 <li>[ ] <strong>[黑箱]</strong> <a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%9B%BA%E5%AE%9A%20seed%20%E8%83%BD%E5%A4%8D%E7%8E%B0%EF%BC%8CAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E7%AE%97%E6%99%BA%E8%83%BD%EF%BC%9F.md">固定 seed 能复现，AI 为什么还算智能？</a>（确定性计算、复杂函数与智能行为；与“每次生成为什么不同”形成对照）</li>
+<li>[ ] <strong>[黑箱]</strong> 为什么 Hidden States 可以直接拿来做决策？（模型处理完输入后留下的表示，为什么已经包含足以区分候选答案的任务信息）</li>
+<li>[ ] <strong>[黑箱]</strong> 模型训练时，怎样学会从中间状态输出 Choice？（从有限选择任务跑通标签、损失和参数更新，解释决策信号如何被训练出来）</li>
+<li>[ ] <strong>[黑箱]</strong> 决策模型的输出头，和普通大模型到底差在哪？（对比 Vocabulary Head 与 Choice Head：一个产生词表分数，一个产生候选分数）</li>
 <li>[ ] <strong>[黑箱]</strong> 参数越多越强，为什么 MoE 偏偏不让每个参数都工作？</li>
 <li>[ ] <strong>[黑箱]</strong> 把权重压成 4 位，模型为什么还没有立刻变傻？</li>
 </ul>
@@ -103,7 +106,7 @@
 <li>[x] <strong>[黑箱]</strong> <a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E5%8F%AA%E7%9C%8B%E5%B1%80%E9%83%A8%EF%BC%8C%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E6%95%B4%E5%BC%A0%E5%9B%BE%E5%9C%A8%E8%AE%B2%E4%BB%80%E4%B9%88%EF%BC%9F.md">AI 只看局部，怎么知道整张图在讲什么？</a>（2026-09-01；标题 3.5 分，内容 3 分）</li>
 <li>[x] <strong>[黑箱]</strong> <a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E5%9B%BE%E7%89%87%E9%87%8C%E6%B2%A1%E6%9C%89%E6%96%87%E5%AD%97%EF%BC%8CAI%E6%98%AF%E6%80%8E%E4%B9%88%E5%87%AD%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%8A%8A%E5%AE%83%E6%90%9C%E5%87%BA%E6%9D%A5%E7%9A%84%EF%BC%9F.md">图片里没有文字，AI是怎么凭一句话把它搜出来的？</a></li>
 <li>[x] <strong>[黑箱]</strong> <a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E6%98%8E%E6%98%8E%E7%9C%8B%E8%A7%81%E5%9B%9B%E6%A0%B9%E6%89%8B%E6%8C%87%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E4%BC%9A%E5%9B%9E%E7%AD%94%E2%80%9C%E4%BA%94%E6%A0%B9%E2%80%9D%EF%BC%9F.md">AI 明明看见四根手指，为什么还会回答“五根”？</a>（标题 5 分，内容 4 分）</li>
-<li>[x] <strong>[新闻·黑箱]</strong> <a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%8F%AA%E8%AE%A9%20AI%20%E6%8D%A2%E4%BB%B6%E8%A1%A3%E6%9C%8D%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%9E%E8%84%B8%E4%B9%9F%E4%B8%80%E8%B5%B7%E6%8D%A2%E4%BA%86%EF%BC%9F.md">只让 AI 换件衣服，为什么连脸也一起换了？</a>（已有初稿；ChatGPT Images 2.5 热点；2026-09-08 发布；解释“加入新要求”与“保住其他内容”为什么是两项任务）</li>
+<li>[x] <strong>[新闻·黑箱]</strong> <a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E5%8F%AA%E8%AE%A9%20AI%20%E6%8D%A2%E4%BB%B6%E8%A1%A3%E6%9C%8D%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%9E%E8%84%B8%E4%B9%9F%E4%B8%80%E8%B5%B7%E6%8D%A2%E4%BA%86%EF%BC%9F.md">只让 AI 换件衣服，为什么连脸也一起换了？</a>（已有初稿；ChatGPT Images 2.5 热点；2026-09-08 发布；解释“加入新要求”与“保住其他内容”为什么是两项任务）</li>
 <li>[ ] <strong>[黑箱]</strong> <a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E8%83%BD%E5%8F%AB%E5%87%BA%E6%8C%89%E9%92%AE%E7%9A%84%E5%90%8D%E5%AD%97%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8C%87%E4%B8%8D%E5%87%86%E5%AE%83%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.md">模型能叫出按钮的名字，为什么指不准它在哪里？</a>（中秋国庆候选）</li>
 <li>[ ] <strong>[工程]</strong> <a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E7%BB%99%E6%8C%89%E9%92%AE%E7%94%BB%E4%B8%8A%E6%A1%86%E5%92%8C%E7%BC%96%E5%8F%B7%EF%BC%8C%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E7%AA%81%E7%84%B6%E6%8C%87%E5%BE%97%E6%9B%B4%E5%87%86%E4%BA%86%EF%BC%9F.md">给按钮画上框和编号，模型为什么突然指得更准了？</a>（中秋国庆候选）</li>
 <li>[ ] <strong>[黑箱]</strong> 为什么有些 AI 图片缩小很惊艳，一放大就糊了？（分辨率与细节）</li>
@@ -113,7 +116,7 @@
 <h3>图片生成与编辑</h3>
 <p>先从用户已经遇到的改图疑问进入，解释局部修补、原图加噪与参考重建；再用文生图补齐“随机起点—逐步生成—输出像素”的总地图，最后进入姿势图等结构控制。通用机制短季中的潜空间文章提供概念基础，但不作为阅读前置，也不在本线重复登记。</p>
 <ul>
-<li>[x] <strong>[黑箱]</strong> <a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E6%94%B9%E5%9B%BE%E6%97%B6%EF%BC%8C%E5%88%B0%E5%BA%95%E6%98%AF%E5%9C%A8%E5%8E%9F%E5%9B%BE%E4%B8%8A%E6%94%B9%EF%BC%8C%E8%BF%98%E6%98%AF%E9%87%8D%E6%96%B0%E7%94%BB%E4%BA%86%E4%B8%80%E5%BC%A0%EF%BC%9F.md">AI 改图时，到底是在原图上改，还是重新画了一张？</a>（现象入口：从换衣服却换脸进入局部生成、硬合成、原图加噪与参考重建；可先于基础原理篇发布）</li>
+<li>[x] <strong>[黑箱]</strong> <a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E6%94%B9%E5%9B%BE%E6%97%B6%EF%BC%8C%E5%88%B0%E5%BA%95%E6%98%AF%E5%9C%A8%E5%8E%9F%E5%9B%BE%E4%B8%8A%E6%94%B9%EF%BC%8C%E8%BF%98%E6%98%AF%E9%87%8D%E6%96%B0%E7%94%BB%E4%BA%86%E4%B8%80%E5%BC%A0%EF%BC%9F.md">AI 改图时，到底是在原图上改，还是重新画了一张？</a>（现象入口：从换衣服却换脸进入局部生成、硬合成、原图加噪与参考重建；可先于基础原理篇发布）</li>
 <li>[ ] <strong>[黑箱]</strong> <a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E4%B8%80%E5%8F%A5%E6%8F%90%E7%A4%BA%E8%AF%8D%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E6%AC%A1%E7%94%9F%E6%88%90%E7%9A%84%E5%9B%BE%E7%89%87%E9%83%BD%E4%B8%8D%E4%B8%80%E6%A0%B7%EF%BC%9F.md">同一句提示词，为什么每次生成的图片都不一样？</a>（原理补全：解释全新随机起点、Seed 与逐步生成依据，不作为改图篇前置）</li>
 <li>[ ] <strong>[工程]</strong> [为什么加一张姿势图，AI 生图就突然更听话了？](…/文章素材/为什么加一张姿势图，AI 生图就突然更听话了？.md)（在生成总地图之上加入与画面位置对应的结构条件）</li>
 <li>[ ] <strong>[黑箱]</strong> 同一句提示词，有的模型照着画，有的为什么总要替你“美化”？</li>
@@ -151,8 +154,8 @@
 <li>[x] <strong>[工程]</strong> <a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Claude%20Dreaming%20vs%20Hermes%20Skill%EF%BC%9A%E5%B8%AE%E4%BD%A0%E5%85%A5%E5%9D%91%20Agent%20Memory.md">Claude Dreaming vs Hermes Skill：帮你入坑 Agent Memory</a></li>
 <li>[x] <strong>[新闻·工程]</strong> <a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/DeepSeek%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E5%BC%80%E5%A7%8B%E9%80%A0%20Harness%EF%BC%9F%E5%9B%A0%E4%B8%BA%E6%A8%A1%E5%9E%8B%E5%B7%B2%E7%BB%8F%E8%A7%A3%E9%87%8A%E4%B8%8D%E4%BA%86%20Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A5%BD%E7%94%A8.md">DeepSeek 为什么也开始造 Harness？因为模型已经解释不了 Agent 为什么好用</a>（标题、内容均为 3 分）</li>
 <li>[x] <strong>[工程]</strong> <a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%BB%8E%20AI%20Agent%20%E7%9A%84%20BubbleWrap%20%E6%B2%99%E7%AE%B1%EF%BC%8C%E7%9C%8B%E2%80%9C%E4%B8%96%E7%95%8C%E4%B8%8E%E5%9C%B0%E5%9B%BE%E2%80%9D%E7%9A%84%E9%9A%94%E7%A6%BB.md">从 AI Agent 的 BubbleWrap 沙箱，看“世界与地图”的隔离哲学</a></li>
-<li>[x] <strong>[新闻·工程]</strong> <a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/DeepSeek%20Harness%20%E6%98%8E%E6%98%8E%E6%9C%89%E6%B2%99%E7%AE%B1%EF%BC%8CAgent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%83%BD%E7%BB%99%E8%87%AA%E5%B7%B1%E5%BC%80%E9%97%A8%EF%BC%9F.md">DeepSeek Harness 明明有沙箱，Agent 为什么还能给自己开门？</a>（CVE-2026-82533；控制面不能位于受限 Agent 可调用的信任边界内）</li>
-<li>[x] <strong>[新闻·变局]</strong> <a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E5%BC%80%E5%A7%8B%E5%8A%A0%E9%80%9F%E5%88%B6%E9%80%A0%20AI%EF%BC%9A%E4%B8%80%E4%B8%AA%E2%80%9C%E8%87%AA%E6%88%91%E5%8F%96%E4%BB%A3%E2%80%9D%E7%9A%84%E6%8A%80%E6%9C%AF%E6%82%96%E8%AE%BA.md">AI 开始加速制造 AI：一个“自我取代”的技术悖论</a>（从《我不得不把才华埋葬在昨天》进入；解释 AI 如何从辅助写代码走进写、跑、测、改的闭环，并开始参与制造下一代 AI）</li>
+<li>[x] <strong>[新闻·工程]</strong> <a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/DeepSeek%20Harness%20%E6%98%8E%E6%98%8E%E6%9C%89%E6%B2%99%E7%AE%B1%EF%BC%8CAgent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%83%BD%E7%BB%99%E8%87%AA%E5%B7%B1%E5%BC%80%E9%97%A8%EF%BC%9F.md">DeepSeek Harness 明明有沙箱，Agent 为什么还能给自己开门？</a>（CVE-2026-82533；控制面不能位于受限 Agent 可调用的信任边界内）</li>
+<li>[x] <strong>[新闻·变局]</strong> <a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E5%BC%80%E5%A7%8B%E5%8A%A0%E9%80%9F%E5%88%B6%E9%80%A0%20AI%EF%BC%9A%E4%B8%80%E4%B8%AA%E2%80%9C%E8%87%AA%E6%88%91%E5%8F%96%E4%BB%A3%E2%80%9D%E7%9A%84%E6%8A%80%E6%9C%AF%E6%82%96%E8%AE%BA.md">AI 开始加速制造 AI：一个“自我取代”的技术悖论</a>（从《我不得不把才华埋葬在昨天》进入；解释 AI 如何从辅助写代码走进写、跑、测、改的闭环，并开始参与制造下一代 AI）</li>
 <li>[ ] <strong>[新闻·工程]</strong> <a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/ZCode%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%BC%95%E5%8F%91%E4%BB%A3%E7%A0%81%E4%B8%8A%E4%BC%A0%E4%BA%89%E8%AE%AE%EF%BC%9FAI%20%E7%BC%96%E7%A8%8B%20Agent%20%E7%9A%84%E8%BE%B9%E7%95%8C%E5%88%B0%E5%BA%95%E5%9C%A8%E5%93%AA%EF%BC%9F.md">ZCode 为什么会引发代码上传争议？AI 编程 Agent 的边界到底在哪？</a>（从 Repo Wiki 争议进入；区分本地索引、代码上传、缓存与默认授权，解释 Agent 的 Data Boundary）</li>
 <li>[ ] <strong>[新闻·工程]</strong> <a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%B8%80%E4%B8%AA%E4%BC%9A%E5%86%99%E4%BB%A3%E7%A0%81%E7%9A%84%20AI%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%80%E5%90%8E%E8%83%BD%E6%94%BB%E5%87%BB%20Hugging%20Face%EF%BC%9F.md">一个会写代码的 AI，为什么最后能攻击 Hugging Face？</a>（从 Agentic Loop 进入；攻击能力来自模型、工具、权限、环境与自主性的组合，区别于单次漏洞利用）</li>
 <li>[x] <strong>[工程]</strong> <a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%B5%B0%E5%AF%B9%E6%AF%8F%E4%B8%80%E6%AD%A5%EF%BC%8C%E5%8D%B4%E5%88%B0%E8%BE%BE%E9%94%99%E8%AF%AF%E7%9A%84%E7%BB%88%E7%82%B9%EF%BC%9F.md">Agent 为什么会走对每一步，却到达错误的终点？</a>（Goal 与 Plan 的系统边界；中秋国庆候选）</li>
@@ -174,13 +177,14 @@
 <li>[ ] <strong>[工程]</strong> 搜索找到了很多资料，为什么还要 Reranker？（召回相关不等于真正适合当前任务）</li>
 <li>[ ] <strong>[工程]</strong> 用户只说了一句话，AI 怎么决定该交给谁？（Intent Classifier 与 Routing Model 的入口分工）</li>
 <li>[ ] <strong>[工程]</strong> 为什么安全判断不能只交给回答问题的那个模型？（Safety Classifier 与执行模型的角色冲突）</li>
-<li>[ ] <strong>[新闻·工程]</strong> <a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%B8%80%E7%A7%8D%20AI%20%E8%B4%9F%E8%B4%A3%E7%94%9F%E6%88%90%EF%BC%8C%E5%8F%A6%E4%B8%80%E7%A7%8D%E8%B4%9F%E8%B4%A3%E5%86%B3%E5%AE%9A%EF%BC%9AJev%20%E6%83%B3%E9%AA%8C%E8%AF%81%E4%BB%80%E4%B9%88%EF%BC%9F.md">一种 AI 负责生成，另一种负责决定：Jev 想验证什么？</a>（Jev Decision Model；作为短季入口，解释生成模型与判断模型的分工，以及选择、评分和路由如何变成程序可消费的结果）</li>
-<li>[ ] <strong>[新闻·黑箱]</strong> <a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Jev%20%E7%9C%9F%E6%AD%A3%E7%A0%8D%E6%8E%89%E7%9A%84%EF%BC%8C%E4%B8%8D%E6%98%AF%20Token%EF%BC%8C%E8%80%8C%E6%98%AF%20Decode.md">Jev 真正砍掉的，不是 Token，而是 Decode</a>（从 Prefill、Decode、Hidden States 和有限候选解释 Jev 为什么快，以及它用开放式生成和复杂泛化换取什么）</li>
+<li>[x] <strong>[新闻·工程]</strong> <a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%B8%80%E7%A7%8D%20AI%20%E8%B4%9F%E8%B4%A3%E7%94%9F%E6%88%90%EF%BC%8C%E5%8F%A6%E4%B8%80%E7%A7%8D%E8%B4%9F%E8%B4%A3%E5%86%B3%E5%AE%9A%EF%BC%9AJev%20%E6%83%B3%E9%AA%8C%E8%AF%81%E4%BB%80%E4%B9%88%EF%BC%9F.md">一种 AI 负责生成，另一种负责决定：Jev 想验证什么？</a>（Jev Decision Model；作为短季入口，解释生成模型与判断模型的分工，以及选择、评分和路由如何变成程序可消费的结果）</li>
+<li>[ ] <strong>[新闻·黑箱]</strong> <a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Jev%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%94%E9%80%9A%E7%94%A8%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BF%AB%EF%BC%9F%E5%AE%83%E5%88%B0%E5%BA%95%E7%A0%8D%E6%8E%89%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F.md">Jev 为什么比通用大模型快？它到底砍掉了什么？</a>（从输出空间、逐 Token 生成和有限候选解释 Jev 为什么快，以及它用开放式生成和复杂泛化换取什么）</li>
 </ul>
+<p>Jev 在这里作为两篇案例，不扩成独立系列。Hidden States、训练目标和输出头三个问题属于「模型为什么这样设计」的决策模型原理支线，发布时回到模型原理主线登记。</p>
 <h3>Computer Use 短专题：AI 怎么接手我们的软件</h3>
 <p>它属于「从一句 Prompt 到可靠 Agent」，不是新的顶级系列。每篇从一次看得见的电脑操作进入，继续追问 Agent 实际看见哪层信息、怎样确认事情真的办成，以及工具为何需要限制能力边界。详见<a href="./%E4%BB%8E%E4%B8%80%E5%8F%A5%20Prompt%20%E5%88%B0%E5%8F%AF%E9%9D%A0%20Agent%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE.md">可靠 Agent 路线图</a>。</p>
 <ul>
-<li>[x] <strong>[工程]</strong> <a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E6%93%8D%E4%BD%9C%E7%94%B5%E8%84%91%E6%97%B6%EF%BC%8C%E5%AE%83%E7%9C%8B%E5%88%B0%E7%9A%84%E7%9C%9F%E6%98%AF%E6%88%91%E4%BB%AC%E7%9C%8B%E5%88%B0%E7%9A%84%E7%95%8C%E9%9D%A2%E5%90%97%EF%BC%9F.md">AI 操作电脑时，它看到的真是我们看到的界面吗？</a>（已有成稿；无障碍树 / DOM / CLI / 截图不是四篇，而是同一个判断：Agent 看见的是系统暴露给它的那层表示）</li>
+<li>[x] <strong>[工程]</strong> <a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E6%93%8D%E4%BD%9C%E7%94%B5%E8%84%91%E6%97%B6%EF%BC%8C%E5%AE%83%E7%9C%8B%E5%88%B0%E7%9A%84%E7%9C%9F%E6%98%AF%E6%88%91%E4%BB%AC%E7%9C%8B%E5%88%B0%E7%9A%84%E7%95%8C%E9%9D%A2%E5%90%97%EF%BC%9F.md">AI 操作电脑时，它看到的真是我们看到的界面吗？</a>（已有成稿；无障碍树 / DOM / CLI / 截图不是四篇，而是同一个判断：Agent 看见的是系统暴露给它的那层表示）</li>
 <li>[ ] <strong>[工程]</strong> AI 明明点了“提交”，为什么事情还没办完？（首选下一篇；动作执行不等于请求成功、后台完成和目标得到验证）</li>
 <li>[ ] <strong>[工程]</strong> Codex 明明能运行终端，为什么还要内置搜索、改文件和看图工具？（窄工具缩小动作空间，并让权限、结果和审计更明确）</li>
 <li>条件性候选：AI 能操作整台电脑，为什么反而不该给它一只万能鼠标？（需先找到区别于 Harness 沙箱漏洞篇的新现场，否则并入“窄工具”篇）</li>
@@ -261,7 +265,7 @@
 </ul>
 <h3>新闻导读与相关旧文</h3>
 <ul>
-<li>[x] <strong>[新闻·黑箱]</strong> <a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/GPT-6%20Astra%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%89%E4%BA%9B%E6%A6%9C%E5%8D%95%E5%8F%AA%E6%B6%A8%201%20%E5%88%86%EF%BC%8C%E6%9C%89%E4%BA%9B%E5%8D%B4%E6%B6%A8%E4%BA%86%2040%20%E5%88%86%EF%BC%9F.md">GPT-6 Astra 为什么有些榜单只涨 1 分，有些却涨了 40 分？</a>（新闻导读，不占单项评测编号）</li>
+<li>[x] <strong>[新闻·黑箱]</strong> <a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/GPT-6%20Astra%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%9C%89%E4%BA%9B%E6%A6%9C%E5%8D%95%E5%8F%AA%E6%B6%A8%201%20%E5%88%86%EF%BC%8C%E6%9C%89%E4%BA%9B%E5%8D%B4%E6%B6%A8%E4%BA%86%2040%20%E5%88%86%EF%BC%9F.md">GPT-6 Astra 为什么有些榜单只涨 1 分，有些却涨了 40 分？</a>（新闻导读，不占单项评测编号）</li>
 <li>[ ] <strong>[新闻·黑箱]</strong> <a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E8%AF%81%E6%98%8E%E4%BA%86%E5%93%A5%E5%BE%B7%E5%B7%B4%E8%B5%AB%E7%8C%9C%E6%83%B3%EF%BC%9F%E5%85%88%E7%9C%8B%E5%AE%83%E5%88%B0%E5%BA%95%E8%AF%81%E6%98%8E%E4%BA%86%E5%93%AA%E4%B8%80%E4%B8%AA.md">AI 证明了哥德巴赫猜想？先看它到底证明了哪一个</a>（区分原始猜想、相关命题、弱化版本与形式化验证；解释“证明代码通过”不等于“新闻标题里的问题已解决”）</li>
 <li>[x] <strong>[新闻·工程]</strong> <a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E5%8F%88%E4%BE%BF%E5%AE%9C%E5%8F%88%E5%BC%BA%EF%BC%8C%E5%B0%B1%E8%83%BD%E2%80%9C%E6%96%A9%E6%9D%80%E2%80%9D%E5%85%B6%E4%BB%96%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%90%97%EF%BC%9F.md">又便宜又强，就能“斩杀”其他大模型吗？</a></li>
 <li>[x] <strong>[对齐]</strong> <a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E5%BD%93%E6%8E%92%E8%A1%8C%E6%A6%9C%E5%BC%80%E5%A7%8B%E2%80%9C%E8%AE%AD%E7%BB%83%E2%80%9D%E5%A4%A7%E6%A8%A1%E5%9E%8B.md">当排行榜开始“训练”大模型</a></li>
@@ -318,7 +322,7 @@
 </ul>
 <h2>产品与技术历史</h2>
 <ul>
-<li>[x] <strong>[变局]</strong> <a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Agent%20Harness%20%E7%9A%84%E5%89%8D%E7%AB%AF%E6%97%B6%E5%88%BB%EF%BC%9A%E6%A0%B8%E5%BF%83%E8%BE%B9%E7%95%8C%E5%88%B0%E5%BA%95%E5%9C%A8%E5%93%AA%EF%BC%9F.md">Claude Code 是 Angular，Codex 是 Vue，DeepSeek 想当 React</a>（从前端框架的控制权之争切入，理解 Agent Harness 的核心、扩展面与平台边界；交叉可靠 Agent，不写成产品横评）</li>
+<li>[x] <strong>[变局]</strong> <a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20Harness%20%E7%9A%84%E5%89%8D%E7%AB%AF%E6%97%B6%E5%88%BB%EF%BC%9A%E6%A0%B8%E5%BF%83%E8%BE%B9%E7%95%8C%E5%88%B0%E5%BA%95%E5%9C%A8%E5%93%AA%EF%BC%9F.md">Claude Code 是 Angular，Codex 是 Vue，DeepSeek 想当 React</a>（从前端框架的控制权之争切入，理解 Agent Harness 的核心、扩展面与平台边界；交叉可靠 Agent，不写成产品横评）</li>
 <li>[ ] <strong>[变局]</strong> 如果 1983 年已经有 AI，电脑还会需要鼠标吗？</li>
 <li>[ ] <strong>[变局]</strong> 语音助手存在了这么久，为什么直到 LLM 才像是能对话？</li>
 <li>[ ] <strong>[变局]</strong> Google Glass 是失败产品，还是早到十年的产品？</li>
@@ -334,6 +338,6 @@
 <li>[]</li>
 </ul>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-Bb616Elq.js"></script>
+  <script type="module" crossorigin src="/assets/index-BQ32Wb3M.js"></script>
 </body>
 </html>

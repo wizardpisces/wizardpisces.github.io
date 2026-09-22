@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>Claude Code 是 Angular，Codex 是 Vue，DeepSeek 想当 React | LZ AI NOTE</title>
+  <meta name="description" content="Claude Code 是 Angular，Codex 是 Vue，DeepSeek 想当 React 如果把过去十几年的前端发展史压缩成一句话，大概是： 从“大包大揽的框架”，走向“稳定核心 + 可组合生态”。 而今天的 AI Coding Agent，正在经历一件非常相似的事情。 Angular、Vue、React 曾经争论过一个问题： 一个应用，究竟…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="Claude Code 是 Angular，Codex 是 Vue，DeepSeek 想当 React">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-09-18">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20Harness%20%E7%9A%84%E5%89%8D%E7%AB%AF%E6%97%B6%E5%88%BB%EF%BC%9A%E6%A0%B8%E5%BF%83%E8%BE%B9%E7%95%8C%E5%88%B0%E5%BA%95%E5%9C%A8%E5%93%AA%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20Harness%20%E7%9A%84%E5%89%8D%E7%AB%AF%E6%97%B6%E5%88%BB%EF%BC%9A%E6%A0%B8%E5%BF%83%E8%BE%B9%E7%95%8C%E5%88%B0%E5%BA%95%E5%9C%A8%E5%93%AA%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="Claude Code 是 Angular，Codex 是 Vue，DeepSeek 想当 React | LZ AI NOTE">
+  <meta property="og:description" content="Claude Code 是 Angular，Codex 是 Vue，DeepSeek 想当 React 如果把过去十几年的前端发展史压缩成一句话，大概是： 从“大包大揽的框架”，走向“稳定核心 + 可组合生态”。 而今天的 AI Coding Agent，正在经历一件非常相似的事情。 Angular、Vue、React 曾经争论过一个问题： 一个应用，究竟…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20Harness%20%E7%9A%84%E5%89%8D%E7%AB%AF%E6%97%B6%E5%88%BB%EF%BC%9A%E6%A0%B8%E5%BF%83%E8%BE%B9%E7%95%8C%E5%88%B0%E5%BA%95%E5%9C%A8%E5%93%AA%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Claude Code 是 Angular，Codex 是 Vue，DeepSeek 想当 React","description":"Claude Code 是 Angular，Codex 是 Vue，DeepSeek 想当 React 如果把过去十几年的前端发展史压缩成一句话，大概是： 从“大包大揽的框架”，走向“稳定核心 + 可组合生态”。 而今天的 AI Coding Agent，正在经历一件非常相似的事情。 Angular、Vue、React 曾经争论过一个问题： 一个应用，究竟…","url":"https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20Harness%20%E7%9A%84%E5%89%8D%E7%AB%AF%E6%97%B6%E5%88%BB%EF%BC%9A%E6%A0%B8%E5%BF%83%E8%BE%B9%E7%95%8C%E5%88%B0%E5%BA%95%E5%9C%A8%E5%93%AA%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20Harness%20%E7%9A%84%E5%89%8D%E7%AB%AF%E6%97%B6%E5%88%BB%EF%BC%9A%E6%A0%B8%E5%BF%83%E8%BE%B9%E7%95%8C%E5%88%B0%E5%BA%95%E5%9C%A8%E5%93%AA%EF%BC%9F","dateModified":"2026-09-18","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：Claude Code 是 Angular，Codex 是 Vue，DeepSeek 想当 React，LZ AI NOTE，https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20Harness%20%E7%9A%84%E5%89%8D%E7%AB%AF%E6%97%B6%E5%88%BB%EF%BC%9A%E6%A0%B8%E5%BF%83%E8%BE%B9%E7%95%8C%E5%88%B0%E5%BA%95%E5%9C%A8%E5%93%AA%EF%BC%9F","about":["公众号已发布"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Claude Code 是 Angular，Codex 是 Vue，DeepSeek 想当 React</h1><h1>Claude Code 是 Angular，Codex 是 Vue，DeepSeek 想当 React</h1>
+<p>如果把过去十几年的前端发展史压缩成一句话，大概是：</p>
+<p><strong>从“大包大揽的框架”，走向“稳定核心 + 可组合生态”。</strong></p>
+<p>而今天的 AI Coding Agent，正在经历一件非常相似的事情。</p>
+<p>Angular、Vue、React 曾经争论过一个问题：</p>
+<blockquote>
+<p>一个应用，究竟应该由框架替你决定多少？</p>
+</blockquote>
+<p>今天 Claude Code、Codex、DeepSeek Harness，以及越来越多的 Agent Harness，争论的其实是同一个问题：</p>
+<blockquote>
+<p>一个软件工程 Agent，究竟应该替你决定多少？</p>
+</blockquote>
+<p>前端留下来的真正遗产，不是 JSX、Vue Template 或 Angular Component。</p>
+<p>而是我们终于知道了：</p>
+<p><strong>一个生态的护城河，不一定是功能，而可能是控制权应该放在哪里。</strong></p>
+<h2>前端框架，争的从来不是语法</h2>
+<p>很多人聊 Angular、Vue、React，聊的是模板语法、响应式原理、性能和打包体积。</p>
+<p>这些当然重要，但它们之所以会长成三种不同的生态，根源不在这里。</p>
+<p>它们对“谁来做决定”，给出了三种答案。</p>
+<p>Angular 的答案最干脆：</p>
+<blockquote>
+<p>框架多替你做一点。</p>
+</blockquote>
+<p>项目怎么组织、依赖怎么管理、路由怎么做、表单怎么做、组件怎么通信，最好都有一套统一方式。</p>
+<p>这很像刚入职时遇到的那种成熟团队：规矩很多，但你不容易走错路。代价也很明确——当你想换一种做法，先得问一句：Angular 允许吗？</p>
+<p>Vue 往后退了一步：</p>
+<blockquote>
+<p>我守住核心，但别替你把外围也定死。</p>
+</blockquote>
+<p>于是你有稳定的组件和响应式模型，路由、状态管理、UI 组件却可以自己挑。</p>
+<p>React 又退了一步。它几乎只咬住一件事：<strong>状态变了，UI 怎么跟着变。</strong></p>
+<p>剩下的事，交给社区。</p>
+<pre><code class="language-text">Angular：框架替你安排一条完整的路
+Vue：    框架给你主干，岔路自己选
+React：  框架只留下地基，房子怎么盖交给生态
+</code></pre>
+<p>React 当年最容易被误解的一点，是“它怎么什么都没有”。</p>
+<p>路由呢？状态管理呢？数据请求呢？</p>
+<p>后来才发现，这不是漏做了，而是主动让出来了。</p>
+<p><strong>核心不抢着把所有位置占满，外围才长得出自己的生态。</strong></p>
+<h2>Agent 也走到了这个岔路口</h2>
+<p>现在的 Coding Agent，表面上都在做同一件事：读代码、改文件、跑测试、修 Bug。</p>
+<p>可你真的开始用，就会发现差别不在“它会不会调用工具”，而在另一件更隐蔽的事：</p>
+<blockquote>
+<p>谁在决定 Agent 应该怎样工作？</p>
+</blockquote>
+<p>一个完整的 Agent 产品，已经替你做了许多决定：什么时候读哪些文件，怎样压缩上下文，什么操作需要确认，任务怎样拆，子 Agent 怎么协作，工具怎样接入。</p>
+<p>Claude Code 的气质很接近这种完整框架。</p>
+<p>它给你的不是一个裸的模型，而是一套已经能工作的软件工程环境。你可以自己写规则、接 MCP、加 Skills；但整体的 Agent Loop、权限和工作流，已经有了很强的默认形状。</p>
+<p>这很像 Angular。</p>
+<p>好处是：打开就能干活。</p>
+<p>代价是：当你的公司已经有一套权限、工具链、审批流和研发流程时，你做的往往不是“拼一个 Agent”，而是在想办法把它们塞进既有的 Agent 世界。</p>
+<p>Codex 则像中间那一步。</p>
+<p>它仍然给出完整体验，却把“哪里可以变”说得更清楚：</p>
+<pre><code class="language-text">AGENTS.md  → 这个项目的做事规矩
+Skills     → 可以反复调用的方法和资料
+MCP        → 接入公司的工具与系统
+Subagents  → 把任务交给不同角色
+</code></pre>
+<p>这几样东西不是功能清单。</p>
+<p>它们在说：<strong>核心 Agent 不必跟着每个项目一起变；项目规则、能力和外部系统，应该从不同入口接进来。</strong></p>
+<p>这就是前端后来摸索出来的那种平衡：核心稳定，变化有地方安放。</p>
+<h2>DeepSeek 想把这条路再推远一点</h2>
+<p>真正让我觉得“前端的幽灵回来了”的，是 DeepSeek Harness。</p>
+<p>它在官方仓库里把自己定义成：</p>
+<blockquote>
+<p>all-plugin Cordis agent harness</p>
+</blockquote>
+<p>这句话翻成大白话就是：别急着把一个 Agent 做成巨型产品，先把它做成一个能装配能力的底座。</p>
+<p>在它的架构里，<code>tools</code>、<code>llm</code>、<code>agents</code>、<code>session</code>、<code>sandbox</code>、<code>skill</code>、<code>workflow</code> 这些原本很像“Agent 内置功能”的东西，都可以是独立的包或插件；其中一些能力还能由插件提供，再被别的插件使用。</p>
+<p>于是画面变了：</p>
+<pre><code class="language-text">以前
+一个 Agent 产品
+ ├── 模型
+ ├── 工具
+ ├── 上下文
+ ├── 记忆
+ └── 工作流
+
+现在
+一个运行时
+ ├── 想接什么模型，就接什么模型
+ ├── 想用什么工具，就装什么工具
+ ├── 想怎么记忆，就换什么记忆
+ └── 想怎么协作，就拼什么工作流
+</code></pre>
+<h2>“开放”未必意味着“小”</h2>
+<p>DeepSeek 的模型能被别的 Harness 调用，这说的是<strong>模型层的开放</strong>：你能不能换掉大脑。</p>
+<p>DeepSeek Harness 把 <code>tools</code>、<code>llm</code>、<code>agents</code> 这些能力拆成插件和 Service，说的则是<strong>系统核心的边界</strong>：大脑之外的身体、工具和工作流，谁来决定怎么拼。</p>
+<p>一个模型完全开放，外面照样可以套着一个大包大揽的框架；一个产品就算允许接插件，核心也未必真的小。</p>
+<p>所以 DeepSeek Harness 像 React，不是因为 DeepSeek 模型“开放”，而是因为 Harness 本身试图把能力从核心里拿出来，交还给组合和生态。</p>
+<pre><code class="language-text">Angular          → Claude Code       → 框架替你定义工作流
+Vue              → Codex             → 稳定核心 + 清晰扩展面
+React            → DeepSeek Harness  → 小内核 + 能力自由组合
+</code></pre>
+<h2>React 真正带来的，不是更多功能</h2>
+<p>React 的革命恰恰是核心更少。</p>
+<pre><code class="language-text">不是让框架替你完成更多事情
+而是让框架只守住最稳定的事情
+</code></pre>
+<p>于是路由、数据层、状态管理和服务端方案，都可以交给生态。</p>
+<p>DeepSeek Harness 的野心也在这里。</p>
+<p>它不是单纯想把 Agent 做得越来越大，而是想把 Harness 做成一个能承载生态的 runtime：能力由插件装配，Agent 不必只有一种形状。</p>
+<h2>“小核心”不是免费午餐</h2>
+<p>这里很容易把故事讲成：核心越小，架构越先进。</p>
+<p>并不是。</p>
+<p>一个完整框架的好处，是它替你做了大量默认决定。你拿来就能用，团队也更容易保持一致。</p>
+<p>一个小核心的代价，是这些决定被移到外围以后，总得有人重新做：</p>
+<pre><code class="language-text">插件怎样发现彼此？
+服务怎样提供和消费？
+权限落在哪一层？
+会话怎样恢复？
+替换一个插件后，哪些行为必须保持不变？
+</code></pre>
+<p>如果这些问题没有稳定答案，“everything is plugin”最后可能变成“一切都能装，但装起来很痛苦”。</p>
+<p>所以真正难的不是把核心删小。</p>
+<p>而是删小以后，仍然让外围能力可靠地组合起来。</p>
+<p>这也是为什么 Angular、Vue、React 并不是一条“越往后越先进”的直线。</p>
+<p>它们分别解决了不同的问题：</p>
+<pre><code class="language-text">Angular
+→ 统一和完整
+
+Vue
+→ 稳定核心与选择空间的平衡
+
+React
+→ 用最小核心换取最大的生态组合空间
+</code></pre>
+<p>Agent Harness 也一样。</p>
+<p>如果你只是想让 AI 修改一个项目，完整 Agent 产品可能已经足够好。</p>
+<p>如果你要把 Agent 接进公司已有的权限、工具和流程，清晰的扩展面会更重要。</p>
+<p>如果你要让别人基于你的系统继续开发 Agent，核心边界、插件生命周期和协议就会变成第一等问题。</p>
+<h2>前端真正留下来的遗产</h2>
+<p>所以，“前端已死，但思想永存”最后并不是要说 Agent 在抄前端。</p>
+<p>它要说的是：软件平台发展到一定阶段，都会遇到同一场争论。</p>
+<pre><code class="language-text">谁拥有核心？
+谁定义边界？
+谁拥有扩展点？
+最终，用户拥有多少控制权？
+</code></pre>
+<p>前端没有因为 React 出现就消失。</p>
+<p>它只是从“一个框架替你安排一切”，慢慢变成浏览器、运行时、框架、组件和应用共同组成的系统。</p>
+<p>Agent 可能也会走向类似的分层：</p>
+<pre><code class="language-text">Model
+  ↓
+Agent Runtime
+  ↓
+Tools / Skills / Context / Memory
+  ↓
+Applications
+</code></pre>
+<p>到那时，我们问的可能不再只是：</p>
+<blockquote>
+<p>这个 Agent 用的是 Claude、GPT 还是 DeepSeek？</p>
+</blockquote>
+<p>还会问：</p>
+<blockquote>
+<p>它的 Harness 能不能换？</p>
+<p>Tool 和 Skill 能不能迁移？</p>
+<p>权限由谁控制？</p>
+<p>运行状态能不能带走？</p>
+</blockquote>
+<p>前端没有留下一个“正确的框架”。</p>
+<p>它留下的是一个每一代平台都会重新回答的问题：</p>
+<blockquote>
+<p>核心到底该替用户决定多少？</p>
+</blockquote>
+<p>Agent Harness，才刚刚走到这个问题面前。</p>
+<h2>参考资料</h2>
+<ol>
+<li>DeepSeek，DeepSeek Harness <code>AGENTS.md</code>：<a href="https://github.com/deepseek-ai/deepseek-harness/blob/master/AGENTS.md">https://github.com/deepseek-ai/deepseek-harness/blob/master/AGENTS.md</a></li>
+<li>React，React documentation：<a href="https://react.dev/">https://react.dev/</a></li>
+<li>Angular，Angular documentation：<a href="https://angular.dev/overview">https://angular.dev/overview</a></li>
+<li>Vue，Vue documentation：<a href="https://vuejs.org/guide/introduction.html">https://vuejs.org/guide/introduction.html</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质。复杂的事情，简单说。</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-BQ32Wb3M.js"></script>
+</body>
+</html>
