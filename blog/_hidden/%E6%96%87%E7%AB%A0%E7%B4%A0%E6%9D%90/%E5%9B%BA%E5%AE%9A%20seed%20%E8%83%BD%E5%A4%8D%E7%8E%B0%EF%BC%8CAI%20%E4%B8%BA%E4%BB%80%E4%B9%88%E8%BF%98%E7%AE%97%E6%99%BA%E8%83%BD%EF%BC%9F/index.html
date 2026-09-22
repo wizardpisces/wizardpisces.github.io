@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>固定 seed 能复现，AI 为什么还算智能？ | LZ AI NOTE</title>
+  <meta name="description" content="固定 seed 能复现，AI 为什么还算智能？ 有人提出了一个质疑： 既然固定 seed 以后，同样的输入总能得到同样的输出，那 AI 不就是一个巨大的逻辑函数吗？ 这个判断，前半句是对的。 大模型确实是函数。问题在于： 是函数，不等于只是简单的 if else。 一个最普通的函数 输入 2 和 3 ，输出一定是 5 。 它是确定的，也没有人会把它叫作智能…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="固定 seed 能复现，AI 为什么还算智能？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-09-20">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%9B%BA%E5%AE%9A%20seed%20%E8%83%BD%E5%A4%8D%E7%8E%B0%EF%BC%8CAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E7%AE%97%E6%99%BA%E8%83%BD%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%9B%BA%E5%AE%9A%20seed%20%E8%83%BD%E5%A4%8D%E7%8E%B0%EF%BC%8CAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E7%AE%97%E6%99%BA%E8%83%BD%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="固定 seed 能复现，AI 为什么还算智能？ | LZ AI NOTE">
+  <meta property="og:description" content="固定 seed 能复现，AI 为什么还算智能？ 有人提出了一个质疑： 既然固定 seed 以后，同样的输入总能得到同样的输出，那 AI 不就是一个巨大的逻辑函数吗？ 这个判断，前半句是对的。 大模型确实是函数。问题在于： 是函数，不等于只是简单的 if else。 一个最普通的函数 输入 2 和 3 ，输出一定是 5 。 它是确定的，也没有人会把它叫作智能…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%9B%BA%E5%AE%9A%20seed%20%E8%83%BD%E5%A4%8D%E7%8E%B0%EF%BC%8CAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E7%AE%97%E6%99%BA%E8%83%BD%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"固定 seed 能复现，AI 为什么还算智能？","description":"固定 seed 能复现，AI 为什么还算智能？ 有人提出了一个质疑： 既然固定 seed 以后，同样的输入总能得到同样的输出，那 AI 不就是一个巨大的逻辑函数吗？ 这个判断，前半句是对的。 大模型确实是函数。问题在于： 是函数，不等于只是简单的 if else。 一个最普通的函数 输入 2 和 3 ，输出一定是 5 。 它是确定的，也没有人会把它叫作智能…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%9B%BA%E5%AE%9A%20seed%20%E8%83%BD%E5%A4%8D%E7%8E%B0%EF%BC%8CAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E7%AE%97%E6%99%BA%E8%83%BD%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%9B%BA%E5%AE%9A%20seed%20%E8%83%BD%E5%A4%8D%E7%8E%B0%EF%BC%8CAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E7%AE%97%E6%99%BA%E8%83%BD%EF%BC%9F","dateModified":"2026-09-20","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：固定 seed 能复现，AI 为什么还算智能？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%9B%BA%E5%AE%9A%20seed%20%E8%83%BD%E5%A4%8D%E7%8E%B0%EF%BC%8CAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E7%AE%97%E6%99%BA%E8%83%BD%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>固定 seed 能复现，AI 为什么还算智能？</h1><h1>固定 seed 能复现，AI 为什么还算智能？</h1>
+<p>有人提出了一个质疑：</p>
+<blockquote>
+<p>既然固定 seed 以后，同样的输入总能得到同样的输出，那 AI 不就是一个巨大的逻辑函数吗？</p>
+</blockquote>
+<p>这个判断，前半句是对的。</p>
+<p>大模型确实是函数。问题在于：</p>
+<p><strong>是函数，不等于只是简单的 if-else。</strong></p>
+<h2>一个最普通的函数</h2>
+<pre><code class="language-python">def add(a, b):
+    return a + b
+</code></pre>
+<p>输入 <code>2</code> 和 <code>3</code>，输出一定是 <code>5</code>。</p>
+<p>它是确定的，也没有人会把它叫作智能。</p>
+<p>再换一个程序：</p>
+<pre><code class="language-text">输入棋盘局面
+      ↓
+搜索可能的走法
+      ↓
+评估后续局面
+      ↓
+输出下一步棋
+</code></pre>
+<p>如果固定搜索深度和所有参数，它同样可以复现。</p>
+<p>但我们通常会说，一个优秀的下棋程序具备某种智能。</p>
+<p>所以，问题不在于：</p>
+<blockquote>
+<p>它是不是一个函数？</p>
+</blockquote>
+<p>而在于：</p>
+<blockquote>
+<p><strong>这个函数到底学会了什么，能处理多复杂的输入？</strong></p>
+</blockquote>
+<h2>大模型确实是一个函数</h2>
+<p>把大模型简化一下，可以写成：</p>
+<pre><code class="language-text">输出 = 模型(输入, 参数, 随机源)
+</code></pre>
+<p>输入是你的 Prompt，参数是训练得到的权重，随机源可以是 seed 和采样设置。</p>
+<p>在模型版本、实现和运行环境也保持一致时，这些东西都固定，输出才通常能复现。</p>
+<p>Transformer 里面的矩阵乘法、加法、Softmax 和 LayerNorm，本质上都是计算。</p>
+<p>生图模型也是一样。给定同一段提示词、同一组参数和同一个 seed，在相同实现和运行环境下，扩散过程通常会沿着同一条路径运行，最后得到同一张图。</p>
+<p>所以固定 seed 能复现，说明的是：</p>
+<blockquote>
+<p><strong>这套系统可计算、可控制、可调试。</strong></p>
+</blockquote>
+<h2>函数可以非常复杂</h2>
+<p>计算器也是函数。</p>
+<p>但计算器的规则，人可以直接写出来：</p>
+<pre><code class="language-text">2 + 2 → 4
+</code></pre>
+<p>大模型的情况完全不同。</p>
+<p>它的参数里压缩了大量语言、代码、图像和人类行为中的规律。输入不再只是几个数字，而可能是一段需求、一份代码、一张截图，或者几种信息的组合。</p>
+<pre><code class="language-text">输入一个新问题
+      ↓
+找到相关模式
+      ↓
+组合不同知识
+      ↓
+生成符合上下文的结果
+</code></pre>
+<p>我们可以把它看成一个函数，却很难把这个函数的规则逐条写出来。</p>
+<p>这不是因为它脱离了数学，而是因为它的映射太复杂。</p>
+<p>天气预报也是函数：</p>
+<pre><code class="language-text">温度、湿度、风速、气压
+          ↓
+      预测天气
+</code></pre>
+<p>这就不是一个只写了几条规则的计算器那么简单了。</p>
+<h2>随机 &lt; 泛化</h2>
+<p>如果 AI 只是随机输出，那它确实谈不上智能。</p>
+<p>但大模型的关键能力，不是“每次都不一样”，而是：</p>
+<blockquote>
+<p><strong>训练时没见过完全相同的问题，面对新输入时仍然能给出有关系的结果。</strong></p>
+</blockquote>
+<p>例如，模型没有见过你刚写的这句需求。</p>
+<p>它仍然可能理解你的意图，生成一段结构合理的代码。</p>
+<p>它没提前存了这句答案，更不可能每次都随机碰巧猜中。</p>
+<p>只是在训练过程把大量例子压缩成了某些更一般的关系：</p>
+<pre><code class="language-text">代码片段 → 可能的功能
+错误信息 → 可能的原因
+需求描述 → 可能的实现方式
+问题结构 → 可能的回答路径
+</code></pre>
+<p>固定 seed 只固定了它这次沿哪条路径输出。</p>
+<p>它并没有抹掉模型从训练中获得的这些关系。</p>
+<h2>“确定”与“简单”不是一回事</h2>
+<p>可以把这件事分成三层：</p>
+<pre><code class="language-text">底层：
+矩阵乘法、加法、概率计算
+
+中间：
+参数里保存了训练得到的复杂关系
+
+上层：
+面对新输入时表现出识别、组合、推理和迁移
+</code></pre>
+<p>底层是确定计算，中间是复杂参数，上层是我们观察到的能力。</p>
+<p>把第一层直接等同于第三层，就像说：</p>
+<blockquote>
+<p>人脑只是神经元放电，所以人的推理只是电流变化。</p>
+</blockquote>
+<p>这句话在底层描述上没有错，但它跳过了真正有用的层次。</p>
+<p>我们关心的不是电流是不是遵守物理规律，而是这些规律组织起来以后，系统能不能完成某种任务。</p>
+<h2>那大模型到底算不算“智能”？</h2>
+<p>这要看你给“智能”下什么定义。</p>
+<p>如果智能意味着：</p>
+<pre><code class="language-text">有自我意识
+有稳定目标
+能持续学习
+能理解世界
+</code></pre>
+<p>那今天的大模型显然不能直接全部满足。</p>
+<p>但如果智能指的是：</p>
+<pre><code class="language-text">识别新模式
+把知识迁移到新问题
+组合已有结构
+根据上下文调整输出
+完成一部分推理和规划
+</code></pre>
+<p>大模型已经表现出了其中一部分能力。</p>
+<p>所以更准确的说法不是：</p>
+<blockquote>
+<p>大模型不是智能，因为它是函数。</p>
+</blockquote>
+<p>也不是：</p>
+<blockquote>
+<p>大模型和人一样，因为它表现得像人。</p>
+</blockquote>
+<p>而是：</p>
+<blockquote>
+<p><strong>大模型是一个确定的复杂函数，它在训练后表现出了部分智能行为。</strong></p>
+</blockquote>
+<h2>回到 seed</h2>
+<p>固定 seed 后，模型可以复现同一个结果。</p>
+<p>这说明它的输出受到输入、参数和随机源共同决定。</p>
+<p>但这并不意味着它只是一个简单的规则表。</p>
+<p>真正值得追问的是：</p>
+<blockquote>
+<p>这个函数有没有从训练数据中学到可迁移的结构？</p>
+</blockquote>
+<p>如果它只能记住见过的答案，那只是更大的查表系统。</p>
+<p>如果它能把学到的关系用于没见过的新问题，我们才会开始讨论它是否具备某种智能。</p>
+<p>所以，固定 seed 证明的不是“AI 没有智能”。</p>
+<p>它只揭开了 AI 的一层底：</p>
+<blockquote>
+<p><strong>所谓智能，并不需要脱离计算才能出现。</strong></p>
+</blockquote>
+<p>一个系统完全可以由确定的计算组成，却因为参数、结构和训练过程足够复杂，在更高层表现出我们愿意称为“智能”的行为。</p>
+<h2>参考资料</h2>
+<p><em>LZ AI Note｜记录现象，追问本质。复杂的事情，简单说。</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-DGyc3k3c.js"></script>
+</body>
+</html>

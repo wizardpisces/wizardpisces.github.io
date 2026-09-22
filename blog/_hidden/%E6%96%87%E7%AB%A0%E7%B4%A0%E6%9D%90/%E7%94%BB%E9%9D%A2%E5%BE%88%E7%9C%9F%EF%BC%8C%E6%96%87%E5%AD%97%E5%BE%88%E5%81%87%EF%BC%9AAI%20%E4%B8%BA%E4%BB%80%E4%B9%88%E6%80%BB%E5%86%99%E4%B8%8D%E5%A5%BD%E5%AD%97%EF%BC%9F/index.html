@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>画面很真，文字很假：AI 为什么总写不好字？ | LZ AI NOTE</title>
+  <meta name="description" content="画面很真，文字很假：AI 为什么总写不好字？ AI 生成的画面越来越像真的。 人物的皮肤有纹理，街道有反光，镜头还有景深。短剧里的人物甚至已经能说话、走路、切镜头。 但只要画面里出现一块招牌、一张海报，或者一句字幕，事情就经常变了： 为什么 AI 能画出复杂的脸，却写不好几个简单的字？ 因为对生成模型来说， “画出文字的样子”和“写出一段文字”不是同一件事…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="画面很真，文字很假：AI 为什么总写不好字？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-09-20">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E7%94%BB%E9%9D%A2%E5%BE%88%E7%9C%9F%EF%BC%8C%E6%96%87%E5%AD%97%E5%BE%88%E5%81%87%EF%BC%9AAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%80%BB%E5%86%99%E4%B8%8D%E5%A5%BD%E5%AD%97%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E7%94%BB%E9%9D%A2%E5%BE%88%E7%9C%9F%EF%BC%8C%E6%96%87%E5%AD%97%E5%BE%88%E5%81%87%EF%BC%9AAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%80%BB%E5%86%99%E4%B8%8D%E5%A5%BD%E5%AD%97%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="画面很真，文字很假：AI 为什么总写不好字？ | LZ AI NOTE">
+  <meta property="og:description" content="画面很真，文字很假：AI 为什么总写不好字？ AI 生成的画面越来越像真的。 人物的皮肤有纹理，街道有反光，镜头还有景深。短剧里的人物甚至已经能说话、走路、切镜头。 但只要画面里出现一块招牌、一张海报，或者一句字幕，事情就经常变了： 为什么 AI 能画出复杂的脸，却写不好几个简单的字？ 因为对生成模型来说， “画出文字的样子”和“写出一段文字”不是同一件事…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E7%94%BB%E9%9D%A2%E5%BE%88%E7%9C%9F%EF%BC%8C%E6%96%87%E5%AD%97%E5%BE%88%E5%81%87%EF%BC%9AAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%80%BB%E5%86%99%E4%B8%8D%E5%A5%BD%E5%AD%97%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"画面很真，文字很假：AI 为什么总写不好字？","description":"画面很真，文字很假：AI 为什么总写不好字？ AI 生成的画面越来越像真的。 人物的皮肤有纹理，街道有反光，镜头还有景深。短剧里的人物甚至已经能说话、走路、切镜头。 但只要画面里出现一块招牌、一张海报，或者一句字幕，事情就经常变了： 为什么 AI 能画出复杂的脸，却写不好几个简单的字？ 因为对生成模型来说， “画出文字的样子”和“写出一段文字”不是同一件事…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E7%94%BB%E9%9D%A2%E5%BE%88%E7%9C%9F%EF%BC%8C%E6%96%87%E5%AD%97%E5%BE%88%E5%81%87%EF%BC%9AAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%80%BB%E5%86%99%E4%B8%8D%E5%A5%BD%E5%AD%97%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E7%94%BB%E9%9D%A2%E5%BE%88%E7%9C%9F%EF%BC%8C%E6%96%87%E5%AD%97%E5%BE%88%E5%81%87%EF%BC%9AAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%80%BB%E5%86%99%E4%B8%8D%E5%A5%BD%E5%AD%97%EF%BC%9F","dateModified":"2026-09-20","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：画面很真，文字很假：AI 为什么总写不好字？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E7%94%BB%E9%9D%A2%E5%BE%88%E7%9C%9F%EF%BC%8C%E6%96%87%E5%AD%97%E5%BE%88%E5%81%87%EF%BC%9AAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%80%BB%E5%86%99%E4%B8%8D%E5%A5%BD%E5%AD%97%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>画面很真，文字很假：AI 为什么总写不好字？</h1><h1>画面很真，文字很假：AI 为什么总写不好字？</h1>
+<p>AI 生成的画面越来越像真的。</p>
+<p>人物的皮肤有纹理，街道有反光，镜头还有景深。短剧里的人物甚至已经能说话、走路、切镜头。</p>
+<p>但只要画面里出现一块招牌、一张海报，或者一句字幕，事情就经常变了：</p>
+<pre><code class="language-text">画面：像真的
+文字：像乱码
+</code></pre>
+<p>为什么 AI 能画出复杂的脸，却写不好几个简单的字？</p>
+<p>因为对生成模型来说，<strong>“画出文字的样子”和“写出一段文字”不是同一件事。</strong></p>
+<h2>先看一块招牌</h2>
+<p>假设我们让 AI 生成一张街景：</p>
+<blockquote>
+<p>雨夜的便利店，门口有一块写着“欢迎光临”的招牌。</p>
+</blockquote>
+<p>人类会把这句话拆成两部分：</p>
+<pre><code class="language-text">画面要求：雨夜、便利店、招牌
+文字要求：欢迎光临
+</code></pre>
+<p>但图像生成模型更容易学到的是：</p>
+<pre><code class="language-text">这里应该有一块招牌
+招牌上应该有几行亮色的笔画
+这些笔画大概像中文
+</code></pre>
+<p>于是它可能生成一块很像招牌的东西，上面也确实有文字形状。</p>
+<p>只是仔细一看：</p>
+<pre><code class="language-text">欢迎光临
+↓
+欢迊光臨
+</code></pre>
+<p>甚至根本认不出是什么字。</p>
+<h2>模型看到的不是“字”，而是像素</h2>
+<p>传统程序处理文字时，文字是离散的字符：</p>
+<pre><code class="language-text">欢 → 迎 → 光 → 临
+</code></pre>
+<p>每个字符都有明确的身份、顺序和编码。</p>
+<p>但图像生成模型处理的不是这四个字符，而是一大片像素，或者压缩后的数字表示：</p>
+<pre><code class="language-text">一块招牌区域
+→ 一组颜色、边缘、笔画和纹理
+</code></pre>
+<p>对模型来说，下面两件事的差别很大：</p>
+<pre><code class="language-text">像不像一块有字的招牌？
+        ↓
+是不是“欢迎光临”这四个字？
+</code></pre>
+<p>前者主要是视觉问题。</p>
+<p>后者还要求每一笔、每个字、每个位置都正确。</p>
+<h2>普通画面允许“差不多”</h2>
+<p>生成一张街景时，很多细节不需要唯一答案：</p>
+<pre><code class="language-text">路灯可以高一点，也可以矮一点
+云可以多一点，也可以少一点
+砖墙可以有十块，也可以有十二块
+</code></pre>
+<p>只要整体关系合理，观众通常会接受。</p>
+<p>文字却不一样。</p>
+<pre><code class="language-text">多一笔，可能变成另一个字
+少一笔，可能完全无法识别
+顺序错了，整句话就错了
+</code></pre>
+<p>所以图像生成面对文字时，同时要满足两套标准：</p>
+<pre><code class="language-text">视觉上像文字
+       +
+字符上真的正确
+</code></pre>
+<p>模型往往先满足了第一条，却没有稳定满足第二条。</p>
+<h2>训练图片时，文字本来就很难学</h2>
+<p>模型训练时看过大量图片。</p>
+<p>这些图片里虽然有招牌、书本、包装和字幕，但文字通常存在几个问题：</p>
+<pre><code class="language-text">尺寸很小
+字体很多
+角度不同
+光线复杂
+经常被遮挡
+有些本来就是模糊的
+</code></pre>
+<p>模型可以从中学到：</p>
+<pre><code class="language-text">招牌通常会出现横向排列的笔画
+书页上会出现密集的黑色纹理
+电影字幕通常位于画面下方
+</code></pre>
+<p>但这不等于它记住了每个字符该怎么写。</p>
+<p>它学到的是“文字在画面里通常长什么样”，而不是一套可靠的字库和拼写规则。</p>
+<p>这就像让一个人看过很多远处的商店照片，再让他凭感觉画一块招牌。</p>
+<p>他可以画得很像。</p>
+<p>但如果要求他在几秒内准确写出一串没见过的文字，难度就完全不同了。</p>
+<h2>为什么视频里的字幕也会一起乱码？</h2>
+<p>短剧里的问题还多一层。</p>
+<p>视频模型不只是生成一张图，而是要让几十帧、几百帧画面连续。</p>
+<p>假设第一帧里的招牌已经生成错了：</p>
+<pre><code class="language-text">第 1 帧：一串像文字的笔画
+</code></pre>
+<p>后面的任务通常不是重新检查这句话，而是让它继续存在：</p>
+<pre><code class="language-text">第 2 帧：招牌位置别突然消失
+第 3 帧：笔画随镜头移动
+第 4 帧：继续保持这块招牌
+</code></pre>
+<p>于是模型可能非常成功地保持了：</p>
+<pre><code class="language-text">招牌的位置
+招牌的颜色
+招牌的透视
+招牌的连续运动
+</code></pre>
+<p>但它保持的只是同一块“错误文字纹理”。</p>
+<p>这解释了一个很反直觉的现象：</p>
+<blockquote>
+<p><strong>视频里的文字可以前后很稳定，却从头到尾都是错的。</strong></p>
+</blockquote>
+<p>稳定解决的是时间连续性，不是字符校对。</p>
+<h2>这不是模型完全不认识文字</h2>
+<p>这里要区分两种任务：</p>
+<pre><code class="language-text">看图里的文字
+</code></pre>
+<p>和：</p>
+<pre><code class="language-text">在图里生成指定文字
+</code></pre>
+<p>前者可以先把图片中的视觉区域提取出来，再交给 OCR 或视觉语言模型识别。</p>
+<p>后者要求模型在生成每一步里，同时控制：</p>
+<pre><code class="language-text">字的位置
+字的大小
+笔画的形状
+字与字的顺序
+透视、光照和材质
+</code></pre>
+<p>所以会出现：</p>
+<pre><code class="language-text">AI 能读出图片里的字
+≠
+AI 能在图片里稳定写出字
+</code></pre>
+<p>读出来是识别问题。</p>
+<p>写进去是生成、排版和精确控制问题。</p>
+<h2>为什么后来的模型开始变好？</h2>
+<p>要解决文字乱码，不能只让模型“多看一些图片”。</p>
+<p>还需要给它更明确的约束：</p>
+<pre><code class="language-text">更高分辨率的文字训练数据
+字符级或文本级监督
+更强的文字编码与图像对齐
+专门的排版和渲染模块
+生成后再用 OCR 检查
+</code></pre>
+<p>也可以换一种工程方案：</p>
+<pre><code class="language-text">AI 负责生成画面
+        ↓
+程序负责排版文字
+        ↓
+渲染器把文字贴回画面
+</code></pre>
+<p>这也是为什么广告图、海报和短视频字幕，常常不能只依赖一次文生图。</p>
+<p>画面可以交给生成模型。</p>
+<p>真正不能错的文字，最好仍然交给字符系统、排版引擎或后处理流程。</p>
+<h2>回到最开始的问题</h2>
+<p>AI 不是完全不会文字。</p>
+<p>它只是更容易先解决：</p>
+<blockquote>
+<p><strong>“这里看起来像有一块文字。”</strong></p>
+</blockquote>
+<p>而不是：</p>
+<blockquote>
+<p><strong>“这里必须准确写出这几个字符。”</strong></p>
+</blockquote>
+<p>前一个目标允许模糊、近似和风格变化。</p>
+<p>后一个目标需要离散、精确、可校验。</p>
+<p>所以，AI 画面越逼真，文字却可能越像乱码，并不矛盾。</p>
+<p>它把光影、材质、镜头和人物都处理得很像现实，却还没有把文字当成一串必须逐个兑现的字符。</p>
+<p><strong>对它来说，文字首先是一种视觉纹理；对我们来说，文字是一条不能写错的消息。</strong></p>
+<h2>参考资料</h2>
+<p><em>LZ AI Note｜记录现象，追问本质。复杂的事情，简单说。</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-DGyc3k3c.js"></script>
+</body>
+</html>

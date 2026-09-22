@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>什么是 AI 时代的《编写可读代码的艺术》？ | LZ AI NOTE</title>
+  <meta name="description" content="什么是 AI 时代的《编写可读代码的艺术》？ 让 AI 生成一个模块，已经不算什么难事。 真正麻烦的是三个月以后。 需求变了，测试还是绿的，可没人敢动那段代码。写代码的人忘了当初为什么这么写，AI 也只记得现在的文件，不知道哪些绕路是业务要求，哪些只是历史遗留。 这时重新看《编写可读代码的艺术》，会发现它真正关心的从来不是“代码好不好看”。 它真正追问的是…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="什么是 AI 时代的《编写可读代码的艺术》？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-09-21">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%BB%80%E4%B9%88%E6%98%AF%20AI%20%E6%97%B6%E4%BB%A3%E7%9A%84%E3%80%8A%E7%BC%96%E5%86%99%E5%8F%AF%E8%AF%BB%E4%BB%A3%E7%A0%81%E7%9A%84%E8%89%BA%E6%9C%AF%E3%80%8B%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%BB%80%E4%B9%88%E6%98%AF%20AI%20%E6%97%B6%E4%BB%A3%E7%9A%84%E3%80%8A%E7%BC%96%E5%86%99%E5%8F%AF%E8%AF%BB%E4%BB%A3%E7%A0%81%E7%9A%84%E8%89%BA%E6%9C%AF%E3%80%8B%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="什么是 AI 时代的《编写可读代码的艺术》？ | LZ AI NOTE">
+  <meta property="og:description" content="什么是 AI 时代的《编写可读代码的艺术》？ 让 AI 生成一个模块，已经不算什么难事。 真正麻烦的是三个月以后。 需求变了，测试还是绿的，可没人敢动那段代码。写代码的人忘了当初为什么这么写，AI 也只记得现在的文件，不知道哪些绕路是业务要求，哪些只是历史遗留。 这时重新看《编写可读代码的艺术》，会发现它真正关心的从来不是“代码好不好看”。 它真正追问的是…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%BB%80%E4%B9%88%E6%98%AF%20AI%20%E6%97%B6%E4%BB%A3%E7%9A%84%E3%80%8A%E7%BC%96%E5%86%99%E5%8F%AF%E8%AF%BB%E4%BB%A3%E7%A0%81%E7%9A%84%E8%89%BA%E6%9C%AF%E3%80%8B%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"什么是 AI 时代的《编写可读代码的艺术》？","description":"什么是 AI 时代的《编写可读代码的艺术》？ 让 AI 生成一个模块，已经不算什么难事。 真正麻烦的是三个月以后。 需求变了，测试还是绿的，可没人敢动那段代码。写代码的人忘了当初为什么这么写，AI 也只记得现在的文件，不知道哪些绕路是业务要求，哪些只是历史遗留。 这时重新看《编写可读代码的艺术》，会发现它真正关心的从来不是“代码好不好看”。 它真正追问的是…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%BB%80%E4%B9%88%E6%98%AF%20AI%20%E6%97%B6%E4%BB%A3%E7%9A%84%E3%80%8A%E7%BC%96%E5%86%99%E5%8F%AF%E8%AF%BB%E4%BB%A3%E7%A0%81%E7%9A%84%E8%89%BA%E6%9C%AF%E3%80%8B%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%BB%80%E4%B9%88%E6%98%AF%20AI%20%E6%97%B6%E4%BB%A3%E7%9A%84%E3%80%8A%E7%BC%96%E5%86%99%E5%8F%AF%E8%AF%BB%E4%BB%A3%E7%A0%81%E7%9A%84%E8%89%BA%E6%9C%AF%E3%80%8B%EF%BC%9F","dateModified":"2026-09-21","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：什么是 AI 时代的《编写可读代码的艺术》？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%BB%80%E4%B9%88%E6%98%AF%20AI%20%E6%97%B6%E4%BB%A3%E7%9A%84%E3%80%8A%E7%BC%96%E5%86%99%E5%8F%AF%E8%AF%BB%E4%BB%A3%E7%A0%81%E7%9A%84%E8%89%BA%E6%9C%AF%E3%80%8B%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>什么是 AI 时代的《编写可读代码的艺术》？</h1><h1>什么是 AI 时代的《编写可读代码的艺术》？</h1>
+<p>让 AI 生成一个模块，已经不算什么难事。</p>
+<p>真正麻烦的是三个月以后。</p>
+<p>需求变了，测试还是绿的，可没人敢动那段代码。写代码的人忘了当初为什么这么写，AI 也只记得现在的文件，不知道哪些绕路是业务要求，哪些只是历史遗留。</p>
+<p>这时重新看《编写可读代码的艺术》，会发现它真正关心的从来不是“代码好不好看”。</p>
+<p>它真正追问的是：</p>
+<blockquote>
+<p><strong>一个人需要花多久，才能建立这段代码的正确理解？</strong></p>
+</blockquote>
+<p>AI 改变的，正好是这件事的另一半：</p>
+<pre><code class="language-text">代码生产越来越便宜
+代码理解却没有同步变便宜
+</code></pre>
+<p>所以 AI 时代最容易积累的，不只是技术债，还有一种更隐蔽的东西：理解债。</p>
+<p>代码今天能跑，不代表三个月后还有人知道它为什么这样跑。</p>
+<h2>短代码，不一定更容易理解</h2>
+<p>看这段很短很漂亮的 Python 代码代码：</p>
+<pre><code class="language-python">return [order for order in orders if order.status == &quot;paid&quot; and order.total &gt; 100]
+</code></pre>
+<p>业务规则其实是：</p>
+<blockquote>
+<p>只给已付款、金额超过 100 元的订单显示“可发货”。</p>
+</blockquote>
+<p>换一种写法：</p>
+<pre><code class="language-python">for order in orders:
+    if order.status != &quot;paid&quot;:
+        continue
+
+    is_large_enough = order.total &gt; 100
+
+    if is_large_enough:
+        yield order
+</code></pre>
+<p>代码变长了，但“已付款”和“超过 100 元”这两个条件被明确写了出来。以后需求改成“超过 200 元”，也更容易找到该改哪里。</p>
+<p>可读性不是让代码更短，而是让读者更快回答：</p>
+<pre><code class="language-text">数据从哪里来？
+经过了什么？
+谁改变了它？
+为什么这样改变？
+</code></pre>
+<h2>第一个反差：AI 越会写漂亮代码，系统越可能难懂</h2>
+<p>AI 很擅长把一小段代码整理得漂亮：</p>
+<pre><code class="language-text">这里抽一个函数
+那里复用一个工具
+这几个判断合并一下
+</code></pre>
+<p>每个函数可能只有十几行，命名也很规范。</p>
+<p>但原来一眼能看懂的流程，可能变成：</p>
+<pre><code class="language-text">process
+  ↓
+validateRequest
+  ↓
+getUser
+  ↓
+checkPermission
+  ↓
+loadConfig
+  ↓
+prepareData
+  ↓
+calculateResult
+  ↓
+buildResponse
+</code></pre>
+<p>单个函数都很清楚，整个数据流却要在十个文件之间来回跳。</p>
+<p>这就是 AI 时代一个容易被忽略的风险：</p>
+<blockquote>
+<p><strong>局部可读，不等于系统可理解。</strong></p>
+</blockquote>
+<p>函数该不该拆，不能只看行数。真正要问的是：它们是不是两个不同的业务概念，未来是不是应该一起变化。</p>
+<h2>第二个反差：重复代码有时比“优雅抽象”更便宜</h2>
+<p>AI 看到两段代码长得像，往往会建议把它们合成一个 <code>PriceCalculator</code>；但订单价格、运费和退款金额，也许只是今天碰巧用了相似公式，明天却会分别变化。</p>
+<p>这正是 DRY（Don’t Repeat Yourself）最容易被读错的地方。</p>
+<p>DRY 要消灭的不是所有长得相似的代码，而是同一条业务知识被写在多个地方。比如“订单满 100 元免运费”这条规则，如果同时散落在下单、结算和退款逻辑里，改一次就得找三遍，这才是真正危险的重复。</p>
+<p>但订单价格、运费和退款金额只是恰好用了相似公式，就不一定应该强行共用一个抽象。它们未来可能分别变化，过早合并反而会让本来独立的规则绑在一起。</p>
+<p><strong>真正该消灭的不是重复代码，而是重复的知识。</strong> 错误的抽象，会让三个本来可以独立修改的地方绑在一起。</p>
+<h2>第三个转折：可读代码不是写给 AI 的，却决定 AI 能不能安全修改</h2>
+<p>过去是：</p>
+<pre><code class="language-text">程序员 → 代码 → 编译器 → 机器
+</code></pre>
+<p>现在多了一层：</p>
+<pre><code class="language-text">人 → AI → 代码 → 编译器 → 机器
+</code></pre>
+<p>Agent 会搜索代码、定位文件、修改实现、运行测试，再回来继续修改。它能不能安全行动，取决于代码库是否把边界表达清楚。</p>
+<p>如果支付、订单和库存各自有明确边界，你可以告诉 AI：</p>
+<blockquote>
+<p>只改支付模块，不要改变订单状态机。</p>
+</blockquote>
+<p>如果所有逻辑都塞进一个 <code>processEverything()</code>，你连“只改哪里”都很难说清楚。</p>
+<p>所以，人不是为了 AI 才写得更规整。清晰的结构首先是给人看的，同时让 AI 更容易判断：</p>
+<pre><code class="language-text">哪些地方相关
+哪些状态不能碰
+这次修改可能影响什么
+</code></pre>
+<h2>代码便宜以后，什么必须变贵？</h2>
+<p>以前代码很贵，程序员会自然控制数量：</p>
+<blockquote>
+<p>这个函数真的需要吗？这个抽象值得吗？</p>
+</blockquote>
+<p>现在 AI 可以很快增加工具函数、兼容分支和抽象层。工程师真正要控制的，就不再只是写了多少行代码，而是系统增加了多少无法被人快速理解的复杂性。</p>
+<p>Code Review 也会随之改变重点。格式、命名和简单静态检查可以交给工具，人更该追问：</p>
+<pre><code class="language-text">这个抽象边界对吗？
+这个状态变化够明显吗？
+AI 下次修改时，哪里不能碰？
+如果它改坏了，我能在十分钟内发现吗？
+</code></pre>
+<p>这才是重新理解《编写可读代码的艺术》后，最值得带进 AI 时代的地方。</p>
+<p>可读性不是装饰，也不只是让同事少皱几次眉。它是在给未来的修改者留下足够清楚的因果：</p>
+<pre><code class="language-text">这段代码为什么存在
+它依赖什么
+哪些地方可以改
+改了以后会影响什么
+</code></pre>
+<p>过去，这个“未来的修改者”主要是另一个程序员。</p>
+<p>现在，它也可能是下一次接手任务的 Agent。</p>
+<p>所以今天写代码，实际上是在同时维护两种可读性：</p>
+<pre><code class="language-text">人能不能快速建立正确理解
+Agent 能不能根据边界做出可验证的修改
+</code></pre>
+<p>这也是为什么《编写可读代码的艺术》在 AI 时代没有过时。它真正留下的不是一张命名和格式清单，而是一种工程要求：</p>
+<blockquote>
+<p><strong>让代码把自己的因果关系说清楚。</strong></p>
+</blockquote>
+<p>这可能是最值得带进 AI 时代的一句话：</p>
+<blockquote>
+<p><strong>AI 让代码越来越便宜，工程师要做的是控制系统复杂性的增长速度。</strong></p>
+</blockquote>
+<p>AI 可以帮我们解决“代码怎么写”。</p>
+<p>但仍然需要有人负责：</p>
+<blockquote>
+<p><strong>这段代码为什么存在，哪里可以改，改了以后会发生什么。</strong></p>
+</blockquote>
+<h2>参考资料</h2>
+<ol>
+<li>Steve McConnell，《Code Complete》</li>
+<li>Dustin Boswell、Trevor Foucher，《The Art of Readable Code》</li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质。复杂的事情，简单说。</em></p>
+<h2>往期推荐</h2>
+<ul>
+<li><a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%BB%8E%20Prompt%20%E5%88%B0%20Loop%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%E7%9A%84%E5%9B%9B%E6%AC%A1%E5%8D%87%E7%BA%A7.md">从 Prompt 到 Loop：一个例子看懂 AI 工程的四次升级</a>：继续看 AI 如何从生成代码进入执行、测试和反馈循环。</li>
+<li><a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Prompt%20%E5%A0%86%E5%8F%A0%E7%9A%84%E5%B0%BD%E5%A4%B4%EF%BC%8C%E6%98%AF%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E9%97%AE%E9%A2%98.md">Prompt 堆叠的尽头，是系统设计问题</a>：继续看哪些复杂性应该交给代码，而不是继续塞进 Prompt。</li>
+</ul>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-DGyc3k3c.js"></script>
+</body>
+</html>

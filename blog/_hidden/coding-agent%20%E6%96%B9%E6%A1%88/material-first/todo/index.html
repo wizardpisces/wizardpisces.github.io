@@ -9,7 +9,7 @@
   <meta name="author" content="LZ">
   <meta name="DC.title" content="RN Screenshot-to-Page TODO">
   <meta name="DC.creator" content="LZ">
-  <meta name="DC.date" content="2026-09-15">
+  <meta name="DC.date" content="2026-09-20">
   <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/todo">
   <meta name="DC.publisher" content="LZ AI NOTE">
   <meta name="DC.language" content="zh-CN">
@@ -21,7 +21,7 @@
   <meta property="og:description" content="RN Screenshot to Page TODO 本文维护六阶段路线下的执行项。阶段目标、成果和评价标准见[《RN 页面还原：六阶段推进》]。 根据反馈的迭代计划 [] record run decision event 性能优化，写本地，然后批量提交到远端 [] 研究 webMCP 使得 site 更好的支持 Agent 查看，或者它的结构化是不是也…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/todo">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"RN Screenshot-to-Page TODO","description":"RN Screenshot to Page TODO 本文维护六阶段路线下的执行项。阶段目标、成果和评价标准见[《RN 页面还原：六阶段推进》]。 根据反馈的迭代计划 [] record run decision event 性能优化，写本地，然后批量提交到远端 [] 研究 webMCP 使得 site 更好的支持 Agent 查看，或者它的结构化是不是也…","url":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/todo","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/todo","dateModified":"2026-09-15","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：RN Screenshot-to-Page TODO，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/todo","about":["_hidden","coding-agent 方案","material-first"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"RN Screenshot-to-Page TODO","description":"RN Screenshot to Page TODO 本文维护六阶段路线下的执行项。阶段目标、成果和评价标准见[《RN 页面还原：六阶段推进》]。 根据反馈的迭代计划 [] record run decision event 性能优化，写本地，然后批量提交到远端 [] 研究 webMCP 使得 site 更好的支持 Agent 查看，或者它的结构化是不是也…","url":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/todo","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/todo","dateModified":"2026-09-20","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：RN Screenshot-to-Page TODO，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/todo","about":["_hidden","coding-agent 方案","material-first"]}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>RN Screenshot-to-Page TODO</h1><h1>RN Screenshot-to-Page TODO</h1>
@@ -33,36 +33,25 @@
 [] 研究 webMCP 使得 site 更好的支持 Agent 查看，或者它的结构化是不是也能被参照？
 [] query_project_memory(query)
 [] propose_project_memory_update(content, evidence)</p>
-<p>case 分析</p>
+<p>case 分析
+0. 提升反馈收集性能
+[] 降时间（提升收集反馈速度）：对任务进行原子化处理，或者说对 plan 进行任务 flow 构建，使得能够出现并行跟依赖，整理出小任务，去做消融验证；
+[] 降成本：以及换小模型试验，降低跑一次的费用</p>
 <ol>
-<li>（yangyang）补齐 bff-export 月报市登记号并生成 Insight 客户端；</li>
+<li>关键事件跟 report 优化（yangyang）补齐 bff-export 月报市登记号并生成 Insight 客户端；
+[] 关键事件 1 实际已经在后续被修复：本地词典缺失且月报执行器存在验收缺口
+[] 执行报告中，实际最后是验收环节，这个是需要开启浏览器做验证的，说的有些混乱
+[x] 组件复用率，没找到的组件是啥情况，引导最大程度的复用；</li>
+<li>页面还原
+[x] icon 无法对齐：场景路由
+[] 自己创造组件，但是不如意：沉淀最佳实践 material，并路由最佳实践路线创建组件</li>
+<li>子 Agent
+[] Plan Agent 产物过大（主要是 figma 的结构化产物）：新增 Plan Tool（做 FE Plan 约定）；拆分子 Agent，优化产物
+[] 继承父 agent 模式，使得 token 消耗巨大：可以考虑启发式压缩父 agent 上下文，再传递</li>
 </ol>
-<ul>
-<li>关键事件 1 实际已经在后续被修复：本地词典缺失且月报执行器存在验收缺口</li>
-<li>执行报告中，实际最后是验收环节，这个是需要开启浏览器做验证的，说的有些混乱</li>
-</ul>
-<ol start="2">
-<li>组件复用率，没找到的组件是啥情况，引导最大程度的复用；</li>
-<li>页面还原</li>
-</ol>
-<ul>
-<li>icon 无法对齐：场景路由</li>
-<li>自己创造组件，但是不如意：沉淀最佳实践 material，并路由最佳实践路线创建组件</li>
-<li></li>
-</ul>
-<ol start="4">
-<li>子 Agent</li>
-</ol>
-<ul>
-<li>Plan Agent 产物过大（主要是 figma 的结构化产物）：新增 Plan Tool（做 FE Plan 约定）；拆分子 Agent，优化产物</li>
-<li>Coding Agent：新增 Coding Agent Toll；给产物的全局视野说明，让 Agent 决策下一步往哪走</li>
-</ul>
-<ol start="5">
-<li>Screenshot Preview tool（很重要），叫 capture_mobile_app_state 更合适</li>
-</ol>
-<ul>
-<li>基本流程：（前置：配置 dev 模式访问的资源域名，启动虚拟机）open 开启 shopee App -&gt; abd 路由到开发的界面 -&gt; 调用无障碍模式（页面可操作的元素） + abd 截图（页面实际长啥样） + abd 获取组件结构（页面实际的组件构成）-&gt; agent 基于结果进行比对跟自动化修复</li>
-</ul>
+<p>[x] Coding Agent：新增 Coding Agent Toll；给产物的全局视野说明，让 Agent 决策下一步往哪走
+5. capture_mobile_app_state 更合适
+[] 基本流程：（前置：配置 dev 模式访问的资源域名，启动虚拟机）open 开启 shopee App -&gt; abd 路由到开发的界面 -&gt; 调用无障碍模式（页面可操作的元素） + abd 截图（页面实际长啥样） + abd 获取组件结构（页面实际的组件构成）-&gt; agent 基于结果进行比对跟自动化修复</p>
 <pre><code class="language-mermaid">flowchart LR
   A[Agent 完成页面代码] --&gt; B[启动 iOS Simulator]
   B --&gt; C[打开页面 Deep Link]
@@ -73,6 +62,16 @@
   G --&gt; H[Execution Report]
 * 其他系统架构：截图上传 → S3 → Run Artifact → AICR 展示，然后继续循环采集成功跟失败案例
 </code></pre>
+<ol start="6">
+<li>Component Index 优化
+[] 仓库变更监听；
+[] 中心构建任务；
+[] CI Worker；
+[] 自动增量更新；
+[] 自动创建 PR；
+[] 远端 Index 存储；
+[] Materialize 自动化联动。</li>
+</ol>
 <h2>当前目标</h2>
 <p>当前只聚焦阶段 1：把 RN Screenshot-to-Page 接入现有流程节点，完成一个真实、可运行、可人工验收的页面。</p>
 <pre><code class="language-text">截图 + 需求 + RN 仓库 + 验收条件
@@ -254,6 +253,6 @@ v0 输出：pixel/normalized bbox + croppedImage + annotatedImage
 </ol>
 <p>完整方案见<a href="./AI%20Engineering%20Golden%20Path%EF%BC%9A%E9%9D%A2%E5%90%91%20Agent%20%E7%9A%84%E5%B7%A5%E7%A8%8B%E5%A4%8D%E7%94%A8%E6%9C%BA%E5%88%B6.md">《AI Engineering Golden Path：面向 Agent 的工程复用机制》</a>。</p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-Bn-GGpyn.js"></script>
+  <script type="module" crossorigin src="/assets/index-DGyc3k3c.js"></script>
 </body>
 </html>

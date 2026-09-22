@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>一种 AI 负责生成，另一种负责决定：Jev 想验证什么？ | LZ AI NOTE</title>
+  <meta name="description" content="一种 AI 负责生成，另一种负责决定：Jev 想验证什么？ 最近有个叫 Jev 的模型引起了讨论。 它不是用来聊天的，也不是用来写代码的。 它更像一个专门给软件调用的“决策模型”： 很多人第一反应是： 这不就是让 GPT 做分类吗？ Jev 真正想验证的，不是模型能不能选出一个答案，而是： 软件是不是需要一种专门负责“做判断”的模型？ 先看一个普通的客服系…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="一种 AI 负责生成，另一种负责决定：Jev 想验证什么？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-09-20">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%B8%80%E7%A7%8D%20AI%20%E8%B4%9F%E8%B4%A3%E7%94%9F%E6%88%90%EF%BC%8C%E5%8F%A6%E4%B8%80%E7%A7%8D%E8%B4%9F%E8%B4%A3%E5%86%B3%E5%AE%9A%EF%BC%9AJev%20%E6%83%B3%E9%AA%8C%E8%AF%81%E4%BB%80%E4%B9%88%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%B8%80%E7%A7%8D%20AI%20%E8%B4%9F%E8%B4%A3%E7%94%9F%E6%88%90%EF%BC%8C%E5%8F%A6%E4%B8%80%E7%A7%8D%E8%B4%9F%E8%B4%A3%E5%86%B3%E5%AE%9A%EF%BC%9AJev%20%E6%83%B3%E9%AA%8C%E8%AF%81%E4%BB%80%E4%B9%88%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="一种 AI 负责生成，另一种负责决定：Jev 想验证什么？ | LZ AI NOTE">
+  <meta property="og:description" content="一种 AI 负责生成，另一种负责决定：Jev 想验证什么？ 最近有个叫 Jev 的模型引起了讨论。 它不是用来聊天的，也不是用来写代码的。 它更像一个专门给软件调用的“决策模型”： 很多人第一反应是： 这不就是让 GPT 做分类吗？ Jev 真正想验证的，不是模型能不能选出一个答案，而是： 软件是不是需要一种专门负责“做判断”的模型？ 先看一个普通的客服系…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%B8%80%E7%A7%8D%20AI%20%E8%B4%9F%E8%B4%A3%E7%94%9F%E6%88%90%EF%BC%8C%E5%8F%A6%E4%B8%80%E7%A7%8D%E8%B4%9F%E8%B4%A3%E5%86%B3%E5%AE%9A%EF%BC%9AJev%20%E6%83%B3%E9%AA%8C%E8%AF%81%E4%BB%80%E4%B9%88%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"一种 AI 负责生成，另一种负责决定：Jev 想验证什么？","description":"一种 AI 负责生成，另一种负责决定：Jev 想验证什么？ 最近有个叫 Jev 的模型引起了讨论。 它不是用来聊天的，也不是用来写代码的。 它更像一个专门给软件调用的“决策模型”： 很多人第一反应是： 这不就是让 GPT 做分类吗？ Jev 真正想验证的，不是模型能不能选出一个答案，而是： 软件是不是需要一种专门负责“做判断”的模型？ 先看一个普通的客服系…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%B8%80%E7%A7%8D%20AI%20%E8%B4%9F%E8%B4%A3%E7%94%9F%E6%88%90%EF%BC%8C%E5%8F%A6%E4%B8%80%E7%A7%8D%E8%B4%9F%E8%B4%A3%E5%86%B3%E5%AE%9A%EF%BC%9AJev%20%E6%83%B3%E9%AA%8C%E8%AF%81%E4%BB%80%E4%B9%88%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%B8%80%E7%A7%8D%20AI%20%E8%B4%9F%E8%B4%A3%E7%94%9F%E6%88%90%EF%BC%8C%E5%8F%A6%E4%B8%80%E7%A7%8D%E8%B4%9F%E8%B4%A3%E5%86%B3%E5%AE%9A%EF%BC%9AJev%20%E6%83%B3%E9%AA%8C%E8%AF%81%E4%BB%80%E4%B9%88%EF%BC%9F","dateModified":"2026-09-20","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：一种 AI 负责生成，另一种负责决定：Jev 想验证什么？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%B8%80%E7%A7%8D%20AI%20%E8%B4%9F%E8%B4%A3%E7%94%9F%E6%88%90%EF%BC%8C%E5%8F%A6%E4%B8%80%E7%A7%8D%E8%B4%9F%E8%B4%A3%E5%86%B3%E5%AE%9A%EF%BC%9AJev%20%E6%83%B3%E9%AA%8C%E8%AF%81%E4%BB%80%E4%B9%88%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>一种 AI 负责生成，另一种负责决定：Jev 想验证什么？</h1><h1>一种 AI 负责生成，另一种负责决定：Jev 想验证什么？</h1>
+<p>最近有个叫 Jev 的模型引起了讨论。</p>
+<p>它不是用来聊天的，也不是用来写代码的。</p>
+<p>它更像一个专门给软件调用的“决策模型”：</p>
+<pre><code class="language-text">这个请求属于哪个团队？
+用户是不是想退款？
+这条内容要不要转人工？
+这个文档和问题到底相关不相关？
+</code></pre>
+<p>很多人第一反应是：</p>
+<blockquote>
+<p>这不就是让 GPT 做分类吗？</p>
+</blockquote>
+<p>Jev 真正想验证的，不是模型能不能选出一个答案，而是：</p>
+<blockquote>
+<p><strong>软件是不是需要一种专门负责“做判断”的模型？</strong></p>
+</blockquote>
+<h2>先看一个普通的客服系统</h2>
+<p>用户发来一句话：</p>
+<blockquote>
+<p>支付接口一直超时，订单提交不了，麻烦赶紧处理。</p>
+</blockquote>
+<p>人一看就知道，这大概应该交给技术团队，而且优先级不低。</p>
+<p>但程序真正需要的不是一段解释，而是几个可以直接执行的字段：</p>
+<pre><code class="language-json">{
+  &quot;department&quot;: &quot;technical&quot;,
+  &quot;urgent&quot;: true
+}
+</code></pre>
+<p>接下来业务代码才能继续：</p>
+<pre><code class="language-text">用户输入
+   ↓
+判断意图
+   ↓
+结构化结果
+   ↓
+业务代码
+   ↓
+分配团队 / 提高优先级 / 转人工
+</code></pre>
+<p>以前可以写规则：</p>
+<pre><code class="language-python">if &quot;退款&quot; in text:
+    department = &quot;billing&quot;
+elif &quot;接口&quot; in text:
+    department = &quot;technical&quot;
+</code></pre>
+<p>但用户不会永远按照你的关键词说话。</p>
+<p>“钱没回来”“扣款失败”“订单卡住了”，都可能是在说支付问题。</p>
+<p>规则一多，判断逻辑就开始膨胀。</p>
+<p>于是我们把这一步交给大模型：</p>
+<pre><code class="language-text">请判断这个工单属于哪个团队。
+只返回 billing、technical 或 other。
+</code></pre>
+<p>这已经能工作。</p>
+<p>问题是，大模型通常在生成答案，而软件经常只需要一个决定：</p>
+<pre><code class="language-text">要不要转人工？
+该走哪条路？
+这个结果有多可靠？
+</code></pre>
+<p>假设两个模型都把工单分给 <code>technical</code>：</p>
+<pre><code class="language-text">technical
+</code></pre>
+<p>但它们的把握完全不同：</p>
+<pre><code class="language-text">模型 A：
+technical  0.99
+其他       0.01
+
+模型 B：
+technical  0.36
+billing    0.34
+other      0.30
+</code></pre>
+<p>答案一样，程序的动作却不该一样。A 可以自动分流，B 更适合转人工。</p>
+<p>这里就出现了 Jev 想重点处理的东西：Calibration，校准。</p>
+<p>假设模型对 1000 个请求都给出 80% 的信心。校准得好，这批请求里应该大约有 800 个判断正确：</p>
+<pre><code class="language-text">模型说 80% 的样本
+          ↓
+长期来看约 80% 正确
+</code></pre>
+<p>只有这样，下面的代码才有意义：</p>
+<pre><code class="language-python">if confidence &lt; 0.8:
+    human_review()
+else:
+    route_automatically()
+</code></pre>
+<p>如果模型总是自信满满，但 80% 的判断只对了一半，这个数字就只是包装。</p>
+<h2>Jev 想把这一步单独做成模型</h2>
+<p>Jev 的输出可以压缩成三类：</p>
+<pre><code class="language-text">Choice
+→ 从有限选项中选一个
+
+Yes / No
+→ 判断一件事是否成立
+
+Score
+→ 按明确标准给出分数
+</code></pre>
+<p>例如：</p>
+<pre><code class="language-text">Choice：这个工单交给 billing 还是 technical？
+
+Yes / No：用户是否明确要求退款？
+
+Score：这个问题对用户影响有多大？
+</code></pre>
+<p>这些任务本身并不新。分类模型、意图识别和排序模型早就存在。</p>
+<p>Jev 想做的，是把这类“软件需要的判断”单独优化成一种模型能力：</p>
+<pre><code class="language-text">请求
+  ↓
+Decision Model
+  ↓
+选择路由、判断风险、决定是否继续
+  ↓
+LLM / Tool / 人工
+</code></pre>
+<h2>为什么不让一个大模型全包？</h2>
+<p>一个通用模型完全能同时完成：</p>
+<pre><code class="language-text">理解请求
+判断意图
+写回复
+调用工具
+总结结果
+</code></pre>
+<p>但“全包”会带来几个工程问题。</p>
+<p>第一，输出太自由。</p>
+<p>你想要三个类别，它可能顺手加一段解释；你想要 <code>true</code>，它可能返回“看起来大概率是”。</p>
+<p>第二，成本和延迟更高。</p>
+<p>一个只需要判断“要不要转人工”的任务，不一定值得调用最强的生成模型。</p>
+<p>第三，判断和执行混在一起。</p>
+<p>模型一边判断，一边生成回复，一边决定是否调用工具。出了问题，你很难知道错在理解、路由，还是后面的业务逻辑。</p>
+<p>拆开以后，系统更像普通软件：</p>
+<pre><code class="language-text">Decision Model
+→ 负责判断
+
+业务代码
+→ 负责执行确定规则
+
+LLM
+→ 负责生成复杂内容
+</code></pre>
+<p>这不是让系统更“聪明”，而是让每个环节的责任更清楚。</p>
+<p>结构化输出也不等于判断正确：</p>
+<pre><code class="language-text">Schema 正确 ≠ 语义正确 ≠ 业务动作正确
+</code></pre>
+<p>所以 Decision Model 最终还是要用真实业务数据看准确率、校准度、延迟和成本。尤其是校准度，如果概率不能指导“自动处理还是转人工”，它和普通分类器的区别就会小很多。</p>
+<h2>Jev 真正要证明什么？</h2>
+<p>不是：</p>
+<blockquote>
+<p>我也能分类。</p>
+</blockquote>
+<p>因为 GPT、Claude、Qwen 甚至一个微调后的开源模型都能分类。</p>
+<p>它真正要证明的是：</p>
+<pre><code class="language-text">在相同判断质量下
+→ 更便宜
+→ 更快
+→ 概率更可靠
+→ 更容易被程序直接调用
+</code></pre>
+<p>这也是“Decision Model”值得单独讨论的原因。</p>
+<p>如果未来通用模型已经足够便宜、足够快，而且能稳定输出校准良好的判断，那么独立决策模型的空间会变小。</p>
+<p>但如果软件系统里确实有大量：</p>
+<pre><code class="language-text">不需要长篇生成
+却需要稳定判断
+需要概率
+需要低延迟
+</code></pre>
+<p>那么把这类能力单独优化，仍然可能有价值。</p>
+<h2>回到最开始的问题</h2>
+<p>一种 AI 负责生成，另一种负责决定：Jev 想验证什么？</p>
+<p>因为“写答案”和“决定系统下一步怎么走”，是两种不同的工作。</p>
+<p>前者追求表达、组合和完整生成。</p>
+<p>后者追求有限选项、稳定概率和可执行结果。</p>
+<p>Jev 现在还不能证明 Decision Model 会成为下一代基础模型。</p>
+<p>但它提出了一个值得关注的问题：</p>
+<blockquote>
+<p><strong>软件需要的 AI，是否不应该只有一种形态？</strong></p>
+</blockquote>
+<p>有的模型负责生成。</p>
+<p>有的模型负责检索。</p>
+<p>有的模型负责排序。</p>
+<p>也有的模型，只负责告诉程序：</p>
+<pre><code class="language-text">现在该走哪条路。
+</code></pre>
+<p><em>LZ AI Note｜记录现象，追问本质。复杂的事情，简单说。</em></p>
+<h2>往期推荐</h2>
+<ul>
+<li><a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%BB%8E%20Prompt%20%E5%88%B0%20Loop%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%20AI%20%E5%B7%A5%E7%A8%8B%E7%9A%84%E5%9B%9B%E6%AC%A1%E5%8D%87%E7%BA%A7.md">从 Prompt 到 Loop：一个例子看懂 AI 工程的四次升级</a>：先看模型如何从“生成答案”进入“执行循环”。</li>
+<li><a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%B5%B0%E5%AF%B9%E6%AF%8F%E4%B8%80%E6%AD%A5%EF%BC%8C%E5%8D%B4%E5%88%B0%E8%BE%BE%E9%94%99%E8%AF%AF%E7%9A%84%E7%BB%88%E7%82%B9%EF%BC%9F.md">Agent 为什么会走对每一步，却到达错误的终点？</a>：继续看 Agent 为什么需要单独的目标、计划和判断边界。</li>
+</ul>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-DGyc3k3c.js"></script>
+</body>
+</html>
