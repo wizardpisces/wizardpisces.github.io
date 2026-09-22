@@ -537,16 +537,10 @@ Decision Model：不再把“决定”伪装成一段聊天
 <td>不重复“模型为什么需要工具”</td>
 </tr>
 <tr>
-<td>Jev 为什么比通用大模型快？它到底砍掉了什么？</td>
-<td>专用决策模型声称极低延迟和成本</td>
-<td>从输出空间、串行生成、并行采样与校准拆解 Jev 与通用大模型的速度、能力和稳定性取舍</td>
-<td>不把更快直接写成更强；校准优势仍需在相同任务上验证</td>
-</tr>
-<tr>
-<td>AI 不该每次都调用最强模型：谁来决定这道题交给谁？</td>
-<td>所有请求固定调用同一个模型，简单任务浪费预算，复杂任务又可能选错模型</td>
-<td>Model Router、Cascade、升级策略与不确定性驱动的预算分配</td>
-<td>不再写 Jev 产品；解释“决定生成路径”如何成为独立控制层</td>
+<td>Jev 真正砍掉的，不是 Token，而是 Decode</td>
+<td>Jev 不再把每个判断翻译成长文本</td>
+<td>从 Prefill、Decode、Hidden States 和有限候选解释 Jev 的速度来源与能力取舍</td>
+<td>不把“零幻觉”写成“永远正确”；区分格式约束、语义判断和 Calibration</td>
 </tr>
 <tr>
 <td>同样是“打分”，Reward Model 和 Judge Model 到底差在哪？</td>
@@ -730,6 +724,6 @@ Decision Model：不再把“决定”伪装成一段聊天
 </ol>
 <p>发布顺序不追求把概念补齐。一篇只有在已有系统里发生了新的失败，并且这个失败值得带出可复用的认知结构，才继续推进主链。</p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-DGyc3k3c.js"></script>
+  <script type="module" crossorigin src="/assets/index-Bb616Elq.js"></script>
 </body>
 </html>

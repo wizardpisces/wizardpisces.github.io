@@ -511,16 +511,10 @@ Decision Model&#xFF1A;&#x4E0D;&#x518D;&#x628A;&#x201C;&#x51B3;&#x5B9A;&#x201D;&#
 <td>&#x4E0D;&#x91CD;&#x590D;&#x201C;&#x6A21;&#x578B;&#x4E3A;&#x4EC0;&#x4E48;&#x9700;&#x8981;&#x5DE5;&#x5177;&#x201D;</td>
 </tr>
 <tr>
-<td>Jev &#x4E3A;&#x4EC0;&#x4E48;&#x6BD4;&#x901A;&#x7528;&#x5927;&#x6A21;&#x578B;&#x5FEB;&#xFF1F;&#x5B83;&#x5230;&#x5E95;&#x780D;&#x6389;&#x4E86;&#x4EC0;&#x4E48;&#xFF1F;</td>
-<td>&#x4E13;&#x7528;&#x51B3;&#x7B56;&#x6A21;&#x578B;&#x58F0;&#x79F0;&#x6781;&#x4F4E;&#x5EF6;&#x8FDF;&#x548C;&#x6210;&#x672C;</td>
-<td>&#x4ECE;&#x8F93;&#x51FA;&#x7A7A;&#x95F4;&#x3001;&#x4E32;&#x884C;&#x751F;&#x6210;&#x3001;&#x5E76;&#x884C;&#x91C7;&#x6837;&#x4E0E;&#x6821;&#x51C6;&#x62C6;&#x89E3; Jev &#x4E0E;&#x901A;&#x7528;&#x5927;&#x6A21;&#x578B;&#x7684;&#x901F;&#x5EA6;&#x3001;&#x80FD;&#x529B;&#x548C;&#x7A33;&#x5B9A;&#x6027;&#x53D6;&#x820D;</td>
-<td>&#x4E0D;&#x628A;&#x66F4;&#x5FEB;&#x76F4;&#x63A5;&#x5199;&#x6210;&#x66F4;&#x5F3A;&#xFF1B;&#x6821;&#x51C6;&#x4F18;&#x52BF;&#x4ECD;&#x9700;&#x5728;&#x76F8;&#x540C;&#x4EFB;&#x52A1;&#x4E0A;&#x9A8C;&#x8BC1;</td>
-</tr>
-<tr>
-<td>AI &#x4E0D;&#x8BE5;&#x6BCF;&#x6B21;&#x90FD;&#x8C03;&#x7528;&#x6700;&#x5F3A;&#x6A21;&#x578B;&#xFF1A;&#x8C01;&#x6765;&#x51B3;&#x5B9A;&#x8FD9;&#x9053;&#x9898;&#x4EA4;&#x7ED9;&#x8C01;&#xFF1F;</td>
-<td>&#x6240;&#x6709;&#x8BF7;&#x6C42;&#x56FA;&#x5B9A;&#x8C03;&#x7528;&#x540C;&#x4E00;&#x4E2A;&#x6A21;&#x578B;&#xFF0C;&#x7B80;&#x5355;&#x4EFB;&#x52A1;&#x6D6A;&#x8D39;&#x9884;&#x7B97;&#xFF0C;&#x590D;&#x6742;&#x4EFB;&#x52A1;&#x53C8;&#x53EF;&#x80FD;&#x9009;&#x9519;&#x6A21;&#x578B;</td>
-<td>Model Router&#x3001;Cascade&#x3001;&#x5347;&#x7EA7;&#x7B56;&#x7565;&#x4E0E;&#x4E0D;&#x786E;&#x5B9A;&#x6027;&#x9A71;&#x52A8;&#x7684;&#x9884;&#x7B97;&#x5206;&#x914D;</td>
-<td>&#x4E0D;&#x518D;&#x5199; Jev &#x4EA7;&#x54C1;&#xFF1B;&#x89E3;&#x91CA;&#x201C;&#x51B3;&#x5B9A;&#x751F;&#x6210;&#x8DEF;&#x5F84;&#x201D;&#x5982;&#x4F55;&#x6210;&#x4E3A;&#x72EC;&#x7ACB;&#x63A7;&#x5236;&#x5C42;</td>
+<td>Jev &#x771F;&#x6B63;&#x780D;&#x6389;&#x7684;&#xFF0C;&#x4E0D;&#x662F; Token&#xFF0C;&#x800C;&#x662F; Decode</td>
+<td>Jev &#x4E0D;&#x518D;&#x628A;&#x6BCF;&#x4E2A;&#x5224;&#x65AD;&#x7FFB;&#x8BD1;&#x6210;&#x957F;&#x6587;&#x672C;</td>
+<td>&#x4ECE; Prefill&#x3001;Decode&#x3001;Hidden States &#x548C;&#x6709;&#x9650;&#x5019;&#x9009;&#x89E3;&#x91CA; Jev &#x7684;&#x901F;&#x5EA6;&#x6765;&#x6E90;&#x4E0E;&#x80FD;&#x529B;&#x53D6;&#x820D;</td>
+<td>&#x4E0D;&#x628A;&#x201C;&#x96F6;&#x5E7B;&#x89C9;&#x201D;&#x5199;&#x6210;&#x201C;&#x6C38;&#x8FDC;&#x6B63;&#x786E;&#x201D;&#xFF1B;&#x533A;&#x5206;&#x683C;&#x5F0F;&#x7EA6;&#x675F;&#x3001;&#x8BED;&#x4E49;&#x5224;&#x65AD;&#x548C; Calibration</td>
 </tr>
 <tr>
 <td>&#x540C;&#x6837;&#x662F;&#x201C;&#x6253;&#x5206;&#x201D;&#xFF0C;Reward Model &#x548C; Judge Model &#x5230;&#x5E95;&#x5DEE;&#x5728;&#x54EA;&#xFF1F;</td>
