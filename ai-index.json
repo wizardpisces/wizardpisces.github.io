@@ -4,7 +4,7 @@
   "name": "LZ AI NOTE 文章索引",
   "description": "供搜索引擎、问答系统和大模型检索使用的公开文章目录。",
   "url": "https://wizardpisces.github.io/ai-index.json",
-  "numberOfItems": 190,
+  "numberOfItems": 191,
   "itemListElement": [
     {
       "@type": "ListItem",
@@ -4300,6 +4300,33 @@
       "position": 158,
       "item": {
         "@type": "Article",
+        "headline": "Agent 为什么会一条路走到黑？",
+        "description": "Agent 为什么会一条路走到黑？ 一个登录接口的测试突然失败： Agent 看完报错，想到的第一个原因是：访问令牌过期了。 于是它检查令牌刷新逻辑，修改缓存时间，重新运行测试。结果还是 401。 它继续沿着这条思路往下查：刷新请求有没有发出去？新令牌有没有写回？重试次数够不够？ 每一步都说得通。 但真正的问题可能根本不在令牌，而是测试环境没有加载认证密钥…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E4%B8%80%E6%9D%A1%E8%B7%AF%E8%B5%B0%E5%88%B0%E9%BB%91%EF%BC%9F",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E4%B8%80%E6%9D%A1%E8%B7%AF%E8%B5%B0%E5%88%B0%E9%BB%91%EF%BC%9F",
+        "dateModified": "2026-09-23T02:35:05.638Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 159,
+      "item": {
+        "@type": "Article",
         "headline": "Agent 为什么会走对每一步，却到达错误的终点？",
         "description": "Agent 为什么会走对每一步，却到达错误的终点？ 你让一个旅行 Agent 从杭州、苏州、宁波里选个周末目的地，条件很清楚： 降雨概率不能超过 20%，往返车票不能超过 300 元。如果都不满足，就建议我延期。 Agent 最后查到： 三个城市都不合格，答案应该是延期。 Agent 却推荐了杭州：票价最便宜，下雨带伞就行。 奇怪的是，检查它的执行过程，天…",
         "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%B5%B0%E5%AF%B9%E6%AF%8F%E4%B8%80%E6%AD%A5%EF%BC%8C%E5%8D%B4%E5%88%B0%E8%BE%BE%E9%94%99%E8%AF%AF%E7%9A%84%E7%BB%88%E7%82%B9%EF%BC%9F",
@@ -4324,7 +4351,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 159,
+      "position": 160,
       "item": {
         "@type": "Article",
         "headline": "Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith",
@@ -4351,7 +4378,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 160,
+      "position": 161,
       "item": {
         "@type": "Article",
         "headline": "Claude Dreaming vs Hermes Skill：帮你入坑 Agent Memory",
@@ -4378,7 +4405,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 161,
+      "position": 162,
       "item": {
         "@type": "Article",
         "headline": "Claude Sonnet 5 的 Token 消耗更多了？一文看懂 Token 的演化",
@@ -4405,7 +4432,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 162,
+      "position": 163,
       "item": {
         "@type": "Article",
         "headline": "DeepSeek Harness 明明有沙箱，Agent 为什么还能给自己开门？",
@@ -4432,7 +4459,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 163,
+      "position": 164,
       "item": {
         "@type": "Article",
         "headline": "DeepSeek 为什么也开始造 Harness？因为模型已经解释不了 Agent 为什么好用",
@@ -4459,7 +4486,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 164,
+      "position": 165,
       "item": {
         "@type": "Article",
         "headline": "GPT-6 Astra 为什么有些榜单只涨 1 分，有些却涨了 40 分？",
@@ -4486,7 +4513,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 165,
+      "position": 166,
       "item": {
         "@type": "Article",
         "headline": "LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂",
@@ -4513,7 +4540,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 166,
+      "position": 167,
       "item": {
         "@type": "Article",
         "headline": "Prompt 堆叠的尽头，是系统设计问题",
@@ -4540,7 +4567,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 167,
+      "position": 168,
       "item": {
         "@type": "Article",
         "headline": "“我没想法”只是一种错觉",
@@ -4567,7 +4594,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 168,
+      "position": 169,
       "item": {
         "@type": "Article",
         "headline": "一次服药，还是连吃五天：从两种流感药看 AI 系统设计",
@@ -4594,7 +4621,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 169,
+      "position": 170,
       "item": {
         "@type": "Article",
         "headline": "一种 AI 负责生成，另一种负责决定：Jev 想验证什么？",
@@ -4621,7 +4648,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 170,
+      "position": 171,
       "item": {
         "@type": "Article",
         "headline": "为什么 AI 应用开发更需要贝叶斯思想？",
@@ -4648,7 +4675,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 171,
+      "position": 172,
       "item": {
         "@type": "Article",
         "headline": "为什么AI指令应该优先写“不该做什么”",
@@ -4675,7 +4702,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 172,
+      "position": 173,
       "item": {
         "@type": "Article",
         "headline": "为什么俄罗斯方块不用重学，而 Prompt 总要重写？",
@@ -4702,7 +4729,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 173,
+      "position": 174,
       "item": {
         "@type": "Article",
         "headline": "为什么几乎所有复杂系统，都会走向\"不断加规则\"？",
@@ -4729,7 +4756,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 174,
+      "position": 175,
       "item": {
         "@type": "Article",
         "headline": "什么是 ReAct？一个例子看懂 AI Agent 原理",
@@ -4756,7 +4783,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 175,
+      "position": 176,
       "item": {
         "@type": "Article",
         "headline": "从 AI Agent 的 BubbleWrap 沙箱，看“世界与地图”的隔离哲学",
@@ -4783,7 +4810,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 176,
+      "position": 177,
       "item": {
         "@type": "Article",
         "headline": "从 Loop 到 Graph Engineering：当一件事变成多条支线",
@@ -4810,7 +4837,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 177,
+      "position": 178,
       "item": {
         "@type": "Article",
         "headline": "从 Prompt 到 Loop Engineering：一个简单例子看懂 AI 工程的四次升级",
@@ -4837,7 +4864,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 178,
+      "position": 179,
       "item": {
         "@type": "Article",
         "headline": "从支付宝体验技术部“解散”，看 AI 时代的人才选拔逻辑",
@@ -4864,7 +4891,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 179,
+      "position": 180,
       "item": {
         "@type": "Article",
         "headline": "代码定义结构，权重存储知识：一个例子看懂大模型如何推理",
@@ -4891,7 +4918,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 180,
+      "position": 181,
       "item": {
         "@type": "Article",
         "headline": "你刷到的内容越来越像，因为算法也在训练创作者",
@@ -4918,7 +4945,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 181,
+      "position": 182,
       "item": {
         "@type": "Article",
         "headline": "内容没变，AI 推荐却更少了：GEO 为什么这么难量化？",
@@ -4945,7 +4972,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 182,
+      "position": 183,
       "item": {
         "@type": "Article",
         "headline": "又便宜又强，就能“斩杀”其他大模型吗？",
@@ -4972,7 +4999,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 183,
+      "position": 184,
       "item": {
         "@type": "Article",
         "headline": "只让 AI 换件衣服，为什么连脸也一起换了？",
@@ -4999,7 +5026,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 184,
+      "position": 185,
       "item": {
         "@type": "Article",
         "headline": "只让 Claude 改了几句话，也会被当成 AI 代写吗？",
@@ -5026,7 +5053,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 185,
+      "position": 186,
       "item": {
         "@type": "Article",
         "headline": "图片里没有文字，AI是怎么凭一句话把它搜出来的？",
@@ -5053,7 +5080,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 186,
+      "position": 187,
       "item": {
         "@type": "Article",
         "headline": "大模型没有眼睛，一张截图是怎么变成回答的？",
@@ -5080,7 +5107,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 187,
+      "position": 188,
       "item": {
         "@type": "Article",
         "headline": "当十个链接被压成一句话：Google 与 ChatGPT 在争夺什么？",
@@ -5107,7 +5134,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 188,
+      "position": 189,
       "item": {
         "@type": "Article",
         "headline": "当排行榜开始训练大模型",
@@ -5134,7 +5161,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 189,
+      "position": 190,
       "item": {
         "@type": "Article",
         "headline": "Prompt 没变，为什么换个模型，行为就变了？",
@@ -5161,7 +5188,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 190,
+      "position": 191,
       "item": {
         "@type": "Article",
         "headline": "每个人的药都不一样，药厂还怎么生产？",

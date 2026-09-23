@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>同样一句吩咐，为什么一个 Agent 很快做完，另一个一直在绕？ | LZ AI NOTE</title>
+  <meta name="description" content="同样一句吩咐，为什么一个 Agent 很快做完，另一个一直在绕？ 给两个 Coding Agent 同一个任务： 它们的输出速度看起来差不多。 一个 Agent 很快找到导出入口，补了一个边界测试，改完两个文件，跑完测试就结束了。 另一个 Agent 先读项目目录，再读数据模型、接口、前端调用和配置文件。它改了序列化逻辑，又改了接口返回，测试失败后重新读了…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="同样一句吩咐，为什么一个 Agent 很快做完，另一个一直在绕？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-09-23">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E6%A0%B7%E4%B8%80%E5%8F%A5%E5%90%A9%E5%92%90%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%80%E4%B8%AA%20Agent%20%E5%BE%88%E5%BF%AB%E5%81%9A%E5%AE%8C%EF%BC%8C%E5%8F%A6%E4%B8%80%E4%B8%AA%E4%B8%80%E7%9B%B4%E5%9C%A8%E7%BB%95%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E6%A0%B7%E4%B8%80%E5%8F%A5%E5%90%A9%E5%92%90%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%80%E4%B8%AA%20Agent%20%E5%BE%88%E5%BF%AB%E5%81%9A%E5%AE%8C%EF%BC%8C%E5%8F%A6%E4%B8%80%E4%B8%AA%E4%B8%80%E7%9B%B4%E5%9C%A8%E7%BB%95%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="同样一句吩咐，为什么一个 Agent 很快做完，另一个一直在绕？ | LZ AI NOTE">
+  <meta property="og:description" content="同样一句吩咐，为什么一个 Agent 很快做完，另一个一直在绕？ 给两个 Coding Agent 同一个任务： 它们的输出速度看起来差不多。 一个 Agent 很快找到导出入口，补了一个边界测试，改完两个文件，跑完测试就结束了。 另一个 Agent 先读项目目录，再读数据模型、接口、前端调用和配置文件。它改了序列化逻辑，又改了接口返回，测试失败后重新读了…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E6%A0%B7%E4%B8%80%E5%8F%A5%E5%90%A9%E5%92%90%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%80%E4%B8%AA%20Agent%20%E5%BE%88%E5%BF%AB%E5%81%9A%E5%AE%8C%EF%BC%8C%E5%8F%A6%E4%B8%80%E4%B8%AA%E4%B8%80%E7%9B%B4%E5%9C%A8%E7%BB%95%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"同样一句吩咐，为什么一个 Agent 很快做完，另一个一直在绕？","description":"同样一句吩咐，为什么一个 Agent 很快做完，另一个一直在绕？ 给两个 Coding Agent 同一个任务： 它们的输出速度看起来差不多。 一个 Agent 很快找到导出入口，补了一个边界测试，改完两个文件，跑完测试就结束了。 另一个 Agent 先读项目目录，再读数据模型、接口、前端调用和配置文件。它改了序列化逻辑，又改了接口返回，测试失败后重新读了…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E6%A0%B7%E4%B8%80%E5%8F%A5%E5%90%A9%E5%92%90%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%80%E4%B8%AA%20Agent%20%E5%BE%88%E5%BF%AB%E5%81%9A%E5%AE%8C%EF%BC%8C%E5%8F%A6%E4%B8%80%E4%B8%AA%E4%B8%80%E7%9B%B4%E5%9C%A8%E7%BB%95%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E6%A0%B7%E4%B8%80%E5%8F%A5%E5%90%A9%E5%92%90%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%80%E4%B8%AA%20Agent%20%E5%BE%88%E5%BF%AB%E5%81%9A%E5%AE%8C%EF%BC%8C%E5%8F%A6%E4%B8%80%E4%B8%AA%E4%B8%80%E7%9B%B4%E5%9C%A8%E7%BB%95%EF%BC%9F","dateModified":"2026-09-23","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：同样一句吩咐，为什么一个 Agent 很快做完，另一个一直在绕？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E6%A0%B7%E4%B8%80%E5%8F%A5%E5%90%A9%E5%92%90%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%80%E4%B8%AA%20Agent%20%E5%BE%88%E5%BF%AB%E5%81%9A%E5%AE%8C%EF%BC%8C%E5%8F%A6%E4%B8%80%E4%B8%AA%E4%B8%80%E7%9B%B4%E5%9C%A8%E7%BB%95%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>同样一句吩咐，为什么一个 Agent 很快做完，另一个一直在绕？</h1><h1>同样一句吩咐，为什么一个 Agent 很快做完，另一个一直在绕？</h1>
+<p>给两个 Coding Agent 同一个任务：</p>
+<pre><code class="language-text">给这个旧项目加一个 CSV 导出功能，但不能破坏现有接口。
+</code></pre>
+<p>它们的输出速度看起来差不多。</p>
+<p>一个 Agent 很快找到导出入口，补了一个边界测试，改完两个文件，跑完测试就结束了。</p>
+<p>另一个 Agent 先读项目目录，再读数据模型、接口、前端调用和配置文件。它改了序列化逻辑，又改了接口返回，测试失败后重新读了一遍上下文，最后才发现真正需要改的只有一个导出函数。</p>
+<p>同样一句吩咐，为什么差这么多？</p>
+<h2>慢的，不一定是模型</h2>
+<p>很多人比较 Agent，第一眼会看模型每秒能吐多少 Token。</p>
+<p>但一项任务的时间还包括：</p>
+<pre><code class="language-text">模型调用
++ 工具执行
++ 读取和处理上下文
++ 重复操作
++ 失败重试
+</code></pre>
+<p>第一个 Agent 可能只调用了几次工具：</p>
+<pre><code class="language-text">定位导出入口
+    ↓
+查看相关测试
+    ↓
+修改最小范围
+    ↓
+运行测试
+</code></pre>
+<p>第二个 Agent 的问题不一定是代码写错，而是每一步都把范围弄得更大：</p>
+<pre><code class="language-text">读取整个项目
+    ↓
+猜测数据模型也要改
+    ↓
+顺手改接口和前端
+    ↓
+测试失败
+    ↓
+重新理解一遍上下文
+</code></pre>
+<p>它并没有一直停着不动。它只是花了很多时间，却没有让问题明显变小。</p>
+<p>这才是两者真正的差距：</p>
+<pre><code class="language-text">一次动作之后，
+任务的不确定性减少了多少？
+</code></pre>
+<h2>“改完代码”不等于“事情做完”</h2>
+<p>假设 Agent 找到了一个看起来合理的导出实现。</p>
+<p>它还需要确认：</p>
+<pre><code class="language-text">旧接口的返回格式有没有变化？
+空数据会不会报错？
+中文字段会不会乱码？
+大文件会不会一次性读进内存？
+</code></pre>
+<p>如果它只看到“代码能运行”，就会很快宣布完成。</p>
+<p>如果它先把这些风险变成测试，再修改代码，前几步可能慢一点，但后面少了返工。</p>
+<p>所以，真正快的 Agent 往往不是最快写出第一版代码的那个，而是更早知道“什么证据才算完成”的那个。</p>
+<h2>Agent 的第一步，决定了后面要付多少钱</h2>
+<p>面对一个陌生项目，Agent 可以先打开整个仓库，也可以先找入口文件和现有测试。</p>
+<p>两步都能开始工作，但价值完全不同：</p>
+<pre><code class="language-text">读取整个仓库
+成本高，得到的信息杂，下一步仍然不确定
+
+查看导出入口和相关测试
+成本低，能马上确定修改范围
+</code></pre>
+<p>这可以压缩成一个很实用的判断：</p>
+<pre><code class="language-text">检查价值
+≈ 能改变多少判断
+  ÷ 需要付出的成本
+</code></pre>
+<p>Agent 不需要一开始就猜中最终答案。它只需要优先选择那些能快速排除大块可能性的动作。</p>
+<p>很多“越做越慢”，其实在第一步就已经埋下了：它选了一个看起来很努力、却不能改变判断的动作。</p>
+<h2>Harness 会把差距放大</h2>
+<p>同一个模型，放进不同的 Harness，也可能跑出完全不同的轨迹。</p>
+<p>如果每一轮都把整个项目重新塞给模型，它会反复读取已经看过的文件。</p>
+<p>如果系统没有记录哪些假设已经被证伪，Agent 可能再次执行同一条失败路线。</p>
+<p>如果工具没有调用预算和停止条件，它就会继续“再确认一下”，直到把时间耗在重复检查上。</p>
+<p>一个有基本状态管理的 Harness，至少应该让 Agent 看见：</p>
+<pre><code class="language-text">已经检查过什么
+哪些路线已经失败
+最近一次测试留下了什么证据
+当前还缺哪一个判断
+</code></pre>
+<p>模型负责选择动作，Harness 负责让动作有记录、有边界，失败后还能回来。</p>
+<p>所以，Agent 的速度不是一个模型参数就能解释的结果。模型的行动倾向、工具的设计方式和运行时状态，都会改变最后那条路径。</p>
+<h2>真正应该比较什么？</h2>
+<p>下次比较两个 Agent，不要只看它们谁先吐完答案，可以看：</p>
+<pre><code class="language-text">谁更早找到相关文件？
+谁更早跑出能区分问题的测试？
+谁重复读取和重复调用更少？
+谁第一次有效修改出现得更早？
+谁能在证据足够后停下来？
+</code></pre>
+<p>如果一个 Agent 的文字输出速度并不慢，却总在扩大搜索范围、重复读取上下文、沿失败路线继续尝试，那么它慢的不是“说话速度”，而是“缩小问题空间的速度”。</p>
+<blockquote>
+<p><strong>Agent 真正的速度，不是每秒生成多少字，而是每一步有没有让问题变小。</strong></p>
+</blockquote>
+<p>这条判断不只适用于 Coding Agent。查资料、做实验、处理工单，凡是需要连续行动的任务，都可以用同一个标准检查：</p>
+<pre><code class="language-text">这一步完成后，
+我比刚才更接近答案了吗？
+</code></pre>
+<p><em>LZ AI Note｜记录现象，追问本质。复杂的事情，简单说。</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-p-6qhOkR.js"></script>
+</body>
+</html>

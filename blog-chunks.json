@@ -18150,6 +18150,83 @@
     "originalTitle": "Agent 为什么会“记错”？问题可能出在它看到的世界"
   },
   {
+    "chunkId": "/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E4%B8%80%E6%9D%A1%E8%B7%AF%E8%B5%B0%E5%88%B0%E9%BB%91%EF%BC%9F#chunk-0",
+    "title": "Agent 为什么会一条路走到黑？",
+    "content": "Agent 为什么会一条路走到黑？\n一个登录接口的测试突然失败：\nAgent 看完报错，想到的第一个原因是：访问令牌过期了。\n于是它检查令牌刷新逻辑，修改缓存时间，重新运行测试。结果还是 401。\n它继续沿着这条思路往下查：刷新请求有没有发出去？新令牌有没有写回？重试次数够不够？\n每一步都说得通。\n但真正的问题可能根本不在令牌，而是测试环境没有加载认证密钥。\nAgent 从第一步开始就选错了方向。后面做得越认真，离真正原因反而越远。\nAgent 很容易把“目前想到的解释”，过早当成唯一值得继续的解释。\n测试失败，并不会自动让 Agent 回到分叉口\n常见 Agent 会沿着这个循环继续工作：\n观察结果 → 决定下一步 → 调用工具 → 再观察结果\n测试没有通过，它会调整下一步动作。",
+    "url": "/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E4%B8%80%E6%9D%A1%E8%B7%AF%E8%B5%B0%E5%88%B0%E9%BB%91%EF%BC%9F",
+    "chunkIndex": 0,
+    "totalChunks": 7,
+    "startPos": 0,
+    "endPos": 346,
+    "originalTitle": "Agent 为什么会一条路走到黑？"
+  },
+  {
+    "chunkId": "/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E4%B8%80%E6%9D%A1%E8%B7%AF%E8%B5%B0%E5%88%B0%E9%BB%91%EF%BC%9F#chunk-1",
+    "title": "Agent 为什么会一条路走到黑？ (第2段)",
+    "content": "...用工具 → 再观察结果\n测试没有通过，它会调整下一步动作。 但这个调整通常只发生在当前路线里。\nAgent 已经认定“令牌过期”，接下来就会继续检查刷新请求、缓存时间和重试逻辑。其他原因没有被排除，只是在后续上下文里消失了。\n重新运行一次 Agent，可能得到另一条路线，但两次尝试彼此独立。第二次不知道第一次在哪个判断上走偏，也无法直接利用第一次已经得到的结果。\nMCTS 先把几种可能都留下来\n蒙特卡洛树搜索不会立刻把一个猜测变成唯一方向。\n它先保留几个分叉：\n每个分支还可以继续展开。例如“测试环境缺少密钥”下面，可以检查环境变量、配置加载顺序和最近一次成功提交。\n搜索树中的节点会保存走到这里时的任务状态、执行动作和工具结果。\n接下来，MCTS 反复做四件事：",
+    "url": "/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E4%B8%80%E6%9D%A1%E8%B7%AF%E8%B5%B0%E5%88%B0%E9%BB%91%EF%BC%9F",
+    "chunkIndex": 1,
+    "totalChunks": 7,
+    "startPos": 346,
+    "endPos": 651,
+    "originalTitle": "Agent 为什么会一条路走到黑？"
+  },
+  {
+    "chunkId": "/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E4%B8%80%E6%9D%A1%E8%B7%AF%E8%B5%B0%E5%88%B0%E9%BB%91%EF%BC%9F#chunk-2",
+    "title": "Agent 为什么会一条路走到黑？ (第3段)",
+    "content": "...态、执行动作和工具结果。\n接下来，MCTS 反复做四件事： 1. **选择**：从已有分支中挑一条继续。表现好的分支更容易被选中，尝试较少的分支也会获得机会。\n2. **扩展**：为当前节点生成新的检查动作。\n3. **执行与评估**：运行命令或测试，判断这条路线有没有带来进展。\n4. **回传**：把结果传回前面的节点，更新整条路线的价值。\n假设 Agent 在第二条分支里发现：\n这个结果会提高“测试环境缺少密钥”整条路线的价值。下一轮搜索回到最初的 401 报错时，它会优先继续这条路线，而不是反复检查令牌。\n普通重试只知道“刚才失败了”。树搜索还会留下失败发生的路线，知道下一次该回到哪个分叉口。\n它为什么不把所有路径都试一遍？\n一棵树越往下展开，可能的路径越多。Agent 没有足够的时间和预算完整尝试。",
+    "url": "/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E4%B8%80%E6%9D%A1%E8%B7%AF%E8%B5%B0%E5%88%B0%E9%BB%91%EF%BC%9F",
+    "chunkIndex": 2,
+    "totalChunks": 7,
+    "startPos": 651,
+    "endPos": 980,
+    "originalTitle": "Agent 为什么会一条路走到黑？"
+  },
+  {
+    "chunkId": "/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E4%B8%80%E6%9D%A1%E8%B7%AF%E8%B5%B0%E5%88%B0%E9%BB%91%EF%BC%9F#chunk-3",
+    "title": "Agent 为什么会一条路走到黑？ (第4段)",
+    "content": "...可能的路径越多。Agent 没有足够的时间和预算完整尝试。 MCTS 只采样其中一部分，用已经得到的结果估计哪些方向更值得继续。“蒙特卡洛”指的就是通过采样近似结果。\n它会继续投入已经表现不错的路线，也会偶尔检查尝试较少、但仍可能有价值的路线。目标不是找“最像答案”的猜想，而是把有限预算花在更值得继续的方向上。\n多运行几次 Agent，不也是多条路径吗？\n让 Agent 独立运行十次，确实可能得到十种排查思路。\n区别在于，这十次尝试通常从头开始，彼此不共享中间结果。\nMCTS 会保留共同的搜索树。一条深层路径得到的测试结果，可以更新它经过的所有上层节点；几条路线共享同一个前半段时，也不必反复生成。\n什么时候值得使用 MCTS？\n树搜索很贵。",
+    "url": "/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E4%B8%80%E6%9D%A1%E8%B7%AF%E8%B5%B0%E5%88%B0%E9%BB%91%EF%BC%9F",
+    "chunkIndex": 3,
+    "totalChunks": 7,
+    "startPos": 980,
+    "endPos": 1275,
+    "originalTitle": "Agent 为什么会一条路走到黑？"
+  },
+  {
+    "chunkId": "/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E4%B8%80%E6%9D%A1%E8%B7%AF%E8%B5%B0%E5%88%B0%E9%BB%91%EF%BC%9F#chunk-4",
+    "title": "Agent 为什么会一条路走到黑？ (第5段)",
+    "content": "...不必反复生成。\n什么时候值得使用 MCTS？\n树搜索很贵。 每次扩展都要生成候选动作，分支可能调用工具、消耗 Token、运行测试。评价不准时，搜索还会把预算浪费在错误方向上。\n不同分支也需要能够隔离和回退。查询网页、运行只读命令容易重复；发送邮件、修改线上数据和执行交易却不能随意撤销。代码 Agent 往往需要 Git 分支、容器或沙箱保存不同状态。\n如果任务很短，正确路线也很明确，单路径执行通常更合适。\nMCTS 更适合：\n开始时存在多个合理方向。\n早期选择会影响后面很多步骤。\n中途能够获得相对可靠的反馈。\n环境允许复制、回退或隔离状态。\nMCTS 只负责搜索。代码任务的反馈可以直接来自编译器和测试；如果结果只能靠模型预测，那已经是另一个问题。\n回到最初的报错\nAgent 修 Bug 时，问题不在于它想到的第一个原因一定是错的。",
+    "url": "/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E4%B8%80%E6%9D%A1%E8%B7%AF%E8%B5%B0%E5%88%B0%E9%BB%91%EF%BC%9F",
+    "chunkIndex": 4,
+    "totalChunks": 7,
+    "startPos": 1275,
+    "endPos": 1617,
+    "originalTitle": "Agent 为什么会一条路走到黑？"
+  },
+  {
+    "chunkId": "/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E4%B8%80%E6%9D%A1%E8%B7%AF%E8%B5%B0%E5%88%B0%E9%BB%91%EF%BC%9F#chunk-5",
+    "title": "Agent 为什么会一条路走到黑？ (第6段)",
+    "content": "...修 Bug 时，问题不在于它想到的第一个原因一定是错的。 问题在于，一旦选中这个原因，其他仍然合理的解释很容易被丢到上下文之外。\n蒙特卡洛树搜索保留了这些分叉，并把后续测试结果传回前面的节点。一次失败会降低整条路线的价值，让计算转向其他可能。\nMCTS 不会让 Agent 同时尝试所有路径。它留下分叉、记录证据，再在走偏时回到更早的分叉点。\n参考资料\n1. Zhou 等，Language Agent Tree Search Unifies Reasoning, Acting, and Planning in Language Models：https://arxiv.org/abs/2310.04406",
+    "url": "/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E4%B8%80%E6%9D%A1%E8%B7%AF%E8%B5%B0%E5%88%B0%E9%BB%91%EF%BC%9F",
+    "chunkIndex": 5,
+    "totalChunks": 7,
+    "startPos": 1617,
+    "endPos": 1894,
+    "originalTitle": "Agent 为什么会一条路走到黑？"
+  },
+  {
+    "chunkId": "/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E4%B8%80%E6%9D%A1%E8%B7%AF%E8%B5%B0%E5%88%B0%E9%BB%91%EF%BC%9F#chunk-6",
+    "title": "Agent 为什么会一条路走到黑？ (第7段)",
+    "content": "...ps://arxiv.org/abs/2310.04406 2. Yao 等，ReAct: Synergizing Reasoning and Acting in Language Models：https://arxiv.org/abs/2210.03629\n3. Browne 等，A Survey of Monte Carlo Tree Search Methods：https://ieeexplore.ieee.org/document/6145622\n*LZ AI Note｜记录现象，追问本质*",
+    "url": "/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E4%B8%80%E6%9D%A1%E8%B7%AF%E8%B5%B0%E5%88%B0%E9%BB%91%EF%BC%9F",
+    "chunkIndex": 6,
+    "totalChunks": 7,
+    "startPos": 1894,
+    "endPos": 2118,
+    "originalTitle": "Agent 为什么会一条路走到黑？"
+  },
+  {
     "chunkId": "/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%B5%B0%E5%AF%B9%E6%AF%8F%E4%B8%80%E6%AD%A5%EF%BC%8C%E5%8D%B4%E5%88%B0%E8%BE%BE%E9%94%99%E8%AF%AF%E7%9A%84%E7%BB%88%E7%82%B9%EF%BC%9F#chunk-0",
     "title": "Agent 为什么会走对每一步，却到达错误的终点？",
     "content": "Agent 为什么会走对每一步，却到达错误的终点？\n你让一个旅行 Agent 从杭州、苏州、宁波里选个周末目的地，条件很清楚：\n降雨概率不能超过 20%，往返车票不能超过 300 元。如果都不满足，就建议我延期。\nAgent 最后查到：\n三个城市都不合格，答案应该是延期。\nAgent 却推荐了杭州：票价最便宜，下雨带伞就行。\n奇怪的是，检查它的执行过程，天气没查错，票价没算错，排序也没错。每一步单独拿出来都说得通，最后的答案却违背了用户要求。\n它到底在哪一步走偏了？\n接口超时后，终点被悄悄换了\n一开始，Agent 的计划没有问题：\n执行到一半，苏州的票价接口超时了。\n这时杭州和宁波已经因为天气被排除，苏州天气合格，票价却还不知道。Agent 不能直接给答案，只能重试。",
