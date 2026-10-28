@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Agent 反复读长上下文，DeepSeek Flash 如何加速？ | LZ AI NOTE</title>
+  <meta name="description" content="&lt;! 写作锚点 读者收获：能沿一次工具返回追踪新输入的计算与缓存，判断长上下文加速省在哪里，而不只看每秒生成多少 token。 核心判断：DeepSeek V4.1 Flash 改变深层全局 KV 的来源以减少首次计算，再结合跨层复用和低精度存储减轻缓存负担；生成和训练仍使用完整的新架构。 如何推进：从修 Bug 时新增的 2000 个 token 出发，…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="Agent 反复读长上下文，DeepSeek Flash 如何加速？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-10-20">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Agent%20%E5%8F%8D%E5%A4%8D%E8%AF%BB%E9%95%BF%E4%B8%8A%E4%B8%8B%E6%96%87%EF%BC%8CDeepSeek%20Flash%20%E6%80%8E%E4%B9%88%E5%8A%A0%E9%80%9F%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Agent%20%E5%8F%8D%E5%A4%8D%E8%AF%BB%E9%95%BF%E4%B8%8A%E4%B8%8B%E6%96%87%EF%BC%8CDeepSeek%20Flash%20%E6%80%8E%E4%B9%88%E5%8A%A0%E9%80%9F%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="Agent 反复读长上下文，DeepSeek Flash 如何加速？ | LZ AI NOTE">
+  <meta property="og:description" content="&lt;! 写作锚点 读者收获：能沿一次工具返回追踪新输入的计算与缓存，判断长上下文加速省在哪里，而不只看每秒生成多少 token。 核心判断：DeepSeek V4.1 Flash 改变深层全局 KV 的来源以减少首次计算，再结合跨层复用和低精度存储减轻缓存负担；生成和训练仍使用完整的新架构。 如何推进：从修 Bug 时新增的 2000 个 token 出发，…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Agent%20%E5%8F%8D%E5%A4%8D%E8%AF%BB%E9%95%BF%E4%B8%8A%E4%B8%8B%E6%96%87%EF%BC%8CDeepSeek%20Flash%20%E6%80%8E%E4%B9%88%E5%8A%A0%E9%80%9F%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Agent 反复读长上下文，DeepSeek Flash 如何加速？","description":"\u003c! 写作锚点 读者收获：能沿一次工具返回追踪新输入的计算与缓存，判断长上下文加速省在哪里，而不只看每秒生成多少 token。 核心判断：DeepSeek V4.1 Flash 改变深层全局 KV 的来源以减少首次计算，再结合跨层复用和低精度存储减轻缓存负担；生成和训练仍使用完整的新架构。 如何推进：从修 Bug 时新增的 2000 个 token 出发，…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Agent%20%E5%8F%8D%E5%A4%8D%E8%AF%BB%E9%95%BF%E4%B8%8A%E4%B8%8B%E6%96%87%EF%BC%8CDeepSeek%20Flash%20%E6%80%8E%E4%B9%88%E5%8A%A0%E9%80%9F%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Agent%20%E5%8F%8D%E5%A4%8D%E8%AF%BB%E9%95%BF%E4%B8%8A%E4%B8%8B%E6%96%87%EF%BC%8CDeepSeek%20Flash%20%E6%80%8E%E4%B9%88%E5%8A%A0%E9%80%9F%EF%BC%9F","dateModified":"2026-10-20","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：Agent 反复读长上下文，DeepSeek Flash 如何加速？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Agent%20%E5%8F%8D%E5%A4%8D%E8%AF%BB%E9%95%BF%E4%B8%8A%E4%B8%8B%E6%96%87%EF%BC%8CDeepSeek%20Flash%20%E6%80%8E%E4%B9%88%E5%8A%A0%E9%80%9F%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Agent 反复读长上下文，DeepSeek Flash 如何加速？</h1><!-- 写作锚点
+读者收获：能沿一次工具返回追踪新输入的计算与缓存，判断长上下文加速省在哪里，而不只看每秒生成多少 token。
+核心判断：DeepSeek-V4.1-Flash 改变深层全局 KV 的来源以减少首次计算，再结合跨层复用和低精度存储减轻缓存负担；生成和训练仍使用完整的新架构。
+如何推进：从修 Bug 时新增的 2000 个 token 出发，走过逐层准备 KV、CED 改变依赖、完整生成与训练，再看这些记录如何被存读以及为效率付出的代价。
+-->
+<h1>Agent 反复读长上下文，DeepSeek Flash 如何加速？</h1>
+<p>Coding Agent 修一个 Bug，要读文件、运行测试、查看报错，再继续修改。它生成的指令可能很短，工具返回的代码和日志却很长：</p>
+<pre><code class="language-text">模型生成工具调用
+↓
+工具返回一大段内容
+↓
+模型处理新内容，再决定下一步
+↓
+更多内容进入上下文
+</code></pre>
+<p>你看它半天没动静，可能是在生成答案，也可能还在处理刚收到的材料，或保存、读取前面的计算结果。</p>
+<p>DeepSeek-V4.1-Flash 就在这些地方省开销：减少处理新输入的计算，缩小历史缓存。其中一项改动，是把 40 个 Transformer Block 分成前后各 20 个。</p>
+<h2>缓存里没有的，还是得先算</h2>
+<p>假设 Coding Agent 已经读过一段 10000 个 token 的上下文，接着调用工具，收到 2000 个新 token：</p>
+<pre><code class="language-text">旧的 10000 个 → 已有 KV，直接复用
+新的 2000 个 → 没有 KV，首次计算
+</code></pre>
+<p>工具结果刚刚返回，缓存里还没有。模型得先处理这 2000 个 token，把算出的结果存下来，后面回答时才能直接读取。</p>
+<p>这就是 KV Cache：把具体输入算出的 K、V 存下来，后面直接读取，免去重复计算。</p>
+<p>模型先处理这批输入、准备好 KV 的过程，叫 Prefill。随后逐个生成新 token，叫 Decode。</p>
+<p>有了 KV Cache，旧内容不用再算一遍。但新来的内容，或者没命中缓存的内容，仍要先算。新架构想省下的，就是这部分计算。</p>
+<h2>为什么首次计算要经过那么多层？</h2>
+<p>每个 token 进入模型后，先表示成一串数字，可以把它看成一张数字卡片。在普通 Decoder-only 模型里，卡片会这样往下传：</p>
+<pre><code class="language-text">输入 token → 数字卡片
+↓
+Block 1
+  多头 Attention：读取其他位置的信息
+  FFN：继续加工当前卡片
+↓
+Block 2：接着加工上一层的结果
+↓
+……
+↓
+Block 40
+↓
+输出头：得到下一 token 的概率
+</code></pre>
+<p>一个 Block 包含 Attention、前馈网络 FFN 等计算，多个 Block 一层层接起来。Attention 的多个头可以在同一层里并行读取信息，但后一个 Block 得等前一个加工完卡片，才能接着算。</p>
+<p>Attention 读取前文时，会从卡片算出 Q、K、V：</p>
+<pre><code class="language-text">Q：这次要找什么
+K：是否匹配这个查询
+V：被读取时，提供什么内容
+</code></pre>
+<p>生成 Q、K、V 所用的权重，是训练得到的参数；KV 则是用这些权重处理具体输入后算出的结果。换一份输入，KV 会变，权重不会跟着变。</p>
+<p>每层都从传到这一层的卡片生成 KV。想拿到很深一层的 KV，就得先让卡片经过前面各层，一层层算到这里。</p>
+<h2>让深层 KV 换一个来源</h2>
+<p>因果编码器-解码器（Causal Encoder-Decoder，CED）让后半段的全局 KV 不用再这样一层层等。</p>
+<p>前 20 个 Block 先处理新输入，得到中间状态，记为 <code>H₂₀</code>。后半段用于读取全文的全局 KV，直接用 <code>H₂₀</code> 乘相应的投影权重得到。以第 30 层为例：</p>
+<pre><code class="language-text">传统路径：
+H₂₀
+↓
+完整计算第 21～29 个 Block
+↓ 得到第 29 层结果
+投影出第 30 层的全局 KV
+
+CED 路径：
+H₂₀
+↓ 第 30 层的投影权重
+第 30 层的全局 KV
+</code></pre>
+<p>投影这一步仍然要算。不过，从 <code>H₂₀</code> 算出后半段需要的全局 KV，比跑完后 20 个 Block 少了许多工作。</p>
+<p>后半段各层可以使用不同的投影权重，但都能从 <code>H₂₀</code> 出发。为了准备这些全局 KV，原本还要在历史位置上执行的第 21、22 层等后续层的 Attention、FFN，就能省下。</p>
+<p>这样，为这 2000 个新 token 准备全局 KV 时，就不用让每个位置都完整跑过后半段。</p>
+<pre><code class="language-text">KV Cache → 算过的，不重复算
+MLA → 每份历史记录，存小一点
+CED → 准备新记录时，少跑完整层
+</code></pre>
+<h2>少跑的是输入 KV 计算，不是答案生成</h2>
+<p>那后 20 个 Block 还在干什么？</p>
+<p>读入工具结果时，大部分位置只需要准备好供后面读取的 KV。等到生成答案，当前 token 仍会经过完整网络：</p>
+<pre><code class="language-text">当前 token
+↓
+前 20 个 Block
+↓
+后 20 个 Block
+↓
+预测下一个 token
+</code></pre>
+<p>后半段各层仍会生成自己的查询，读取历史 KV，再继续加工当前 token。</p>
+<p>省下的是读入长输入时的那部分计算。生成答案时，40 个 Block 仍然都要跑。</p>
+<h2>快了，代价是什么？</h2>
+<p>原来，深层的全局 KV 来自一路加工到该层的历史状态。现在，后半段的全局 KV 都从第 20 层结果出发，再用各层的权重变换，或者跨层复用。</p>
+<p>后半段仍能继续处理当前 token，但它读取的全局 KV，少了原来那些逐层加工历史内容的计算。跨层复用又让一些层共用 KV，低精度存储则会引入数值误差。这些改动都需要模型在训练中适应。</p>
+<p>DeepSeek 报告称，CED 能让 Prefill 计算接近减半，性能与基线相当。</p>
+<p>回到修 Bug 的 Agent：工具返回的 2000 个新 token，第一次进入模型时，少跑一部分完整层计算；算出的 KV 再通过复用和低精度存储，减少保存和读取的开销。</p>
+<p>所以，看 Agent 的快慢，除了每秒生成多少 token，也要看工具返回之后，它要花多久才能接着干活。</p>
+<p>关联文章阅读《还在比 Token 速度？Agent 的快慢可能不在那》</p>
+<h2>参考资料</h2>
+<ol>
+<li>DeepSeek-AI，DeepSeek-V4.1-Flash: Pushing the Limits of KV Cache Compression（2026），第 2.1—2.3 节：<a href="https://arxiv.org/html/2609.19969v1">https://arxiv.org/html/2609.19969v1</a></li>
+<li>Hugging Face，How caching works：<a href="https://huggingface.co/docs/transformers/cache_explanation">https://huggingface.co/docs/transformers/cache_explanation</a></li>
+<li>Vaswani 等，Attention Is All You Need（NeurIPS，2017）：<a href="https://arxiv.org/html/1706.03762v7">https://arxiv.org/html/1706.03762v7</a></li>
+<li>Sun 等，You Only Cache Once: Decoder-Decoder Architectures for Language Models（2024）：<a href="https://arxiv.org/html/2405.05254v2">https://arxiv.org/html/2405.05254v2</a></li>
+<li>DeepSeek-AI，DeepSeek-V3 Technical Report（2024）：<a href="https://arxiv.org/html/2412.19437v1">https://arxiv.org/html/2412.19437v1</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质。复杂的事情，简单说。</em></p>
+<h2>往期推荐</h2>
+<ul>
+<li><a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E5%8F%AA%E7%9C%8B%E5%B1%80%E9%83%A8%EF%BC%8C%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E6%95%B4%E5%BC%A0%E5%9B%BE%E5%9C%A8%E8%AE%B2%E4%BB%80%E4%B9%88%EF%BC%9F.md">AI 只看局部，怎么知道整张图在讲什么？</a></li>
+<li><a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%BB%A3%E7%A0%81%E5%AE%9A%E4%B9%89%E7%BB%93%E6%9E%84%EF%BC%8C%E6%9D%83%E9%87%8D%E5%AD%98%E5%82%A8%E7%9F%A5%E8%AF%86%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%A6%82%E4%BD%95%E6%8E%A8%E7%90%86.md">代码定义结构，权重存储知识：一个例子看懂大模型如何推理</a></li>
+</ul>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-BGwtz3vo.js"></script>
+</body>
+</html>

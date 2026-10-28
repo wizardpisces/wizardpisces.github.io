@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Agent 改进工作空间：任务修订与知识演进机制 | LZ AI NOTE</title>
+  <meta name="description" content="从真实任务与人工修订出发，在中心化工作区中保留改进依据，让工程知识、Creator、采集策略与评估场景按反馈逐步形成。">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="Agent 改进工作空间：任务修订与知识演进机制">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-10-26">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/Agent%20%E6%94%B9%E8%BF%9B%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%EF%BC%9A%E4%BB%BB%E5%8A%A1%E4%BF%AE%E8%AE%A2%E4%B8%8E%E7%9F%A5%E8%AF%86%E6%BC%94%E8%BF%9B%E6%9C%BA%E5%88%B6">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/Agent%20%E6%94%B9%E8%BF%9B%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%EF%BC%9A%E4%BB%BB%E5%8A%A1%E4%BF%AE%E8%AE%A2%E4%B8%8E%E7%9F%A5%E8%AF%86%E6%BC%94%E8%BF%9B%E6%9C%BA%E5%88%B6">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="Agent 改进工作空间：任务修订与知识演进机制 | LZ AI NOTE">
+  <meta property="og:description" content="从真实任务与人工修订出发，在中心化工作区中保留改进依据，让工程知识、Creator、采集策略与评估场景按反馈逐步形成。">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/Agent%20%E6%94%B9%E8%BF%9B%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%EF%BC%9A%E4%BB%BB%E5%8A%A1%E4%BF%AE%E8%AE%A2%E4%B8%8E%E7%9F%A5%E8%AF%86%E6%BC%94%E8%BF%9B%E6%9C%BA%E5%88%B6">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Agent 改进工作空间：任务修订与知识演进机制","description":"从真实任务与人工修订出发，在中心化工作区中保留改进依据，让工程知识、Creator、采集策略与评估场景按反馈逐步形成。","url":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/Agent%20%E6%94%B9%E8%BF%9B%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%EF%BC%9A%E4%BB%BB%E5%8A%A1%E4%BF%AE%E8%AE%A2%E4%B8%8E%E7%9F%A5%E8%AF%86%E6%BC%94%E8%BF%9B%E6%9C%BA%E5%88%B6","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/Agent%20%E6%94%B9%E8%BF%9B%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%EF%BC%9A%E4%BB%BB%E5%8A%A1%E4%BF%AE%E8%AE%A2%E4%B8%8E%E7%9F%A5%E8%AF%86%E6%BC%94%E8%BF%9B%E6%9C%BA%E5%88%B6","dateModified":"2026-10-26","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：Agent 改进工作空间：任务修订与知识演进机制，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/Agent%20%E6%94%B9%E8%BF%9B%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%EF%BC%9A%E4%BB%BB%E5%8A%A1%E4%BF%AE%E8%AE%A2%E4%B8%8E%E7%9F%A5%E8%AF%86%E6%BC%94%E8%BF%9B%E6%9C%BA%E5%88%B6","about":["_hidden","coding-agent 方案","material-first"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Agent 改进工作空间：任务修订与知识演进机制</h1><h1>Agent 改进工作空间：任务修订与知识演进机制</h1>
+<h2>背景与目标</h2>
+<p>小时级工程任务包含多阶段执行、外部依赖和人工介入。验证一条经验时，反复重跑整个需求成本较高；只在任务结束后总结，又容易丢失每次修正的条件与依据。</p>
+<p>工作区从真实任务与人工修订开始，先保留每轮输入、输出、反馈与变化。人工指导 Agent 提炼经验，候选经过 Review 后供后续任务使用；使用中暴露的新问题，再驱动下一轮改进。</p>
+<p>Skill、Memory、Skill Creator、Meta-skill-creator、Trace 策略与评估世界，都沿同一个机制逐步形成：</p>
+<pre><code class="language-text">实际执行与反馈 → 暴露缺口 → 最小改动 → 实际使用与观察
+      ↑                                  ↓
+      └────────── 保留 / 修订 / 撤回 ──────┘
+</code></pre>
+<p>先由人工完成改进，方法稳定后再固化为指导或工具。各项能力按实际缺口扩展，共享同一条反馈链。</p>
+<h2>中心化工作区</h2>
+<p>中心化运行环境关联任务工程、召回知识与修订记录。初始工作区可以采用以下概念结构：</p>
+<pre><code class="language-text">workspace/
+├── AGENTS.md                         工作区入口与操作约束
+└── tasks/&lt;task&gt;/
+    ├── AGENTS.md                     任务目标、上下文入口与约束
+    ├── repos/                        可操作的工程代码及工程说明
+    ├── inputs/                       需求、设计、数据与相关材料
+    ├── knowledge/                    本次召回或试用的 Skills / Memory
+    ├── rollouts/                     执行轨迹、环境输出与产物
+    └── reviews/&lt;round&gt;/              本轮反馈、起止状态、diff 与验收引用
+</code></pre>
+<p><code>knowledge</code> 是本次任务实际获得的知识；来源可以是此前任务采纳的经验，初次运行允许为空。候选经过 Review 后进入中心化知识来源，后续任务按工程与场景召回。</p>
+<p>提炼操作稳定后，再将 Skill Creator 放入工作区的可用能力中；Meta Creator、评估场景也在有实际用途时加入。工作区的入口说明随之更新，描述各项能力的职责、材料入口和操作范围。</p>
+<p>工程上下文包括真实仓库、依赖和相关材料。每轮另行固定可回查的起止状态：代码使用 Commit 与必要的未提交改动，文档与知识保留对应内容及 diff。外部输入、工具响应和环境条件随轨迹保存。</p>
+<p>各目录可以挂载或引用已有产物。关键是让 Creator 能访问完整上下文，并准确找到某轮执行时的工程、知识和结果。</p>
+<h2>一轮反馈如何驱动修订</h2>
+<p>首先保留任务本身的修订链：</p>
+<pre><code class="language-text">起点：工程 C1 ＋ 当时使用的知识 K1 ＋ 结果 R1
+                         ↓
+                    人工反馈 F1
+                         ↓
+                修改 C1 → C2 → 再验收 R2
+                         ↓
+                  Review 与取舍理由
+</code></pre>
+<p>这一轮保留 <code>C1 → C2</code> 的代码 diff，以及反馈和验收对应的轨迹入口。人工随后结合这些材料指导经验提炼，Review 候选，再观察后续使用。首个闭环可以在现有执行流程之外完成。</p>
+<p>当需要在节点内直接检验策略修订时，再将知识更新嵌入任务修复：</p>
+<pre><code class="language-text">节点反馈 → 修订候选知识 K1 → K2 → Agent 采用 K2 修改工程
+                                         ↓
+                              环境重验 → 联合 Review
+</code></pre>
+<p>此时同时保留知识 diff 与代码 diff，观察策略修订如何落实到实际操作。</p>
+<h3>示例：标题栏组件选型</h3>
+<p>以标题栏间距问题为例，初期可以在一次修复后提炼候选指导：</p>
+<pre><code class="language-text">R1：使用 TitleBar，实际图标间距不符合设计
+ ↓
+F1：检查工程已有 ActionBar；要求核对实际渲染
+ ↓
+C2：替换组件并调整调用
+ ↓
+R2：保留渲染结果、交互检查及其判定
+ ↓
+人工指导提炼：核对组件能力与既有用法，符合需求时优先复用；
+              根据实际渲染与交互检查结果
+ ↓
+候选 Review → 后续任务采用 → 回查实际选型、渲染与返工情况
+</code></pre>
+<p>进一步嵌入节点时，人工反馈可以先驱动选型 Skill 的修订，再让 Agent 按新指导修复页面。联合 Review 同时检查：策略是否合理、Agent 是否落实、环境是否能正确判定结果。</p>
+<p>人工反馈也可能暴露环境缺口，例如只检查代码数值而未观察实际渲染。此时补充观察与验收方式，并关联环境变化。任务通过、知识采纳和环境修订分别记录，各自保留判断依据。</p>
+<p>若反馈同时改变 Mock、输入或验收要求，应保留变化原因与前后条件。新结果按新条件判定；比较策略收益时，再选择条件一致的执行。</p>
+<h2>提炼能力如何形成</h2>
+<h3>从修订中沉淀工程知识</h3>
+<p>最开始由人工在对话中指定问题、引导取证、修改候选，并解释采纳或拒绝的原因。这些提炼操作逐渐稳定后，整理为 Skill Creator 的指导，结合反馈、工程证据和已有知识提出增删改：</p>
+<table>
+<thead>
+<tr>
+<th>观察到的问题</th>
+<th>处理方向</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>已有正确知识未被召回</td>
+<td>调整召回或入口指导</td>
+</tr>
+<tr>
+<td>同一职责的指导缺失或不完整</td>
+<td>修改已有 Skill</td>
+</tr>
+<tr>
+<td>存在独立的适用情境与执行方法</td>
+<td>新增候选 Skill</td>
+</tr>
+<tr>
+<td>确认的工程事实与约束</td>
+<td>写入有来源和适用范围的 Memory</td>
+</tr>
+<tr>
+<td>规则过时、有害或被替代</td>
+<td>提出修订或移除，并说明影响</td>
+</tr>
+<tr>
+<td>仅属任务临时要求，或证据不足</td>
+<td>保留在任务记录中</td>
+</tr>
+</tbody>
+</table>
+<p>候选注明来源修订轮次，人工保留采纳、拒绝及其理由。当前任务可以显式试用候选；正式采纳后，再供后续任务召回。</p>
+<h3>从提炼反馈改进 Creator</h3>
+<p>人工继续 Review Creator 的产出，保留纠正归因、收窄范围、补充证据的过程。当“怎样改进 Creator”形成可复用方法时，再沉淀为 Meta-skill-creator，分析提炼轨迹与后续使用结果。</p>
+<pre><code class="language-text">多次把任务特例写成通用规则
+  → 回查候选与人工删改理由
+  → 提议修改 Creator：区分任务条件与可迁移策略，核查适用范围
+  → 在已有复盘材料和新任务上检查候选质量
+</code></pre>
+<p>缺工程信息时补上下文；提炼方法存在缺陷时再修改 Creator。Creator 的改动同样保留起点、diff、Review 和使用结果，观察候选适用性、人工修订成本，以及产出知识在后续任务中的表现。</p>
+<h2>知识使用与效果追踪</h2>
+<p>效果追踪以具体知识的使用为主线，回答哪条指导被采用、改变了什么行为、对应结果如何，为保留、修订或移除提供依据。整体交付通过率、返工和成本作为辅助，观察整套机制的收益与退化。</p>
+<p>Trace 策略随复盘需求迭代：先利用执行轨迹、产物和人工交互；发现无法确认某条指导是否采用、某次重验为何发生，再补充相应采集与关联。不可回查的历史条件保留为证据缺口，后续任务增加采集。</p>
+<p>知识以稳定标识关联具体内容，内容状态可用 Git revision 或摘要表示。每轮执行记录实际采用的版本，避免知识更新后混淆历史效果。</p>
+<pre><code class="language-text">召回了什么 → 实际采用哪条指导 → 行为怎样变化 → 验收与人工反馈
+</code></pre>
+<p>运行时采集加载内容、采用声明、实际修改和验证输出；复盘时结合轨迹与 diff 核对声明，并分析其他同时变化的条件。</p>
+<p>效果先落在一次使用上，再跨任务汇总：</p>
+<table>
+<thead>
+<tr>
+<th>记录维度</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>采用证据</td>
+<td>对应指导、实际操作与轨迹位置</td>
+</tr>
+<tr>
+<td>观测结果</td>
+<td>改善、退化、未变化或无法判断，以及判定依据</td>
+</tr>
+<tr>
+<td>比较条件</td>
+<td>工程与环境变化、其他策略、人工新增要求</td>
+</tr>
+<tr>
+<td>人工取舍</td>
+<td>采纳、修订或拒绝，以及理由</td>
+</tr>
+</tbody>
+</table>
+<p>单次结果保留其适用条件和证据强度。多项因素共同变化时允许无法归因；跨多次使用，逐步形成某条知识在哪些场景有收益、有哪些反例的判断。</p>
+<h3>FE 示例：点位发现、可视化与标记</h3>
+<p>FE 以具体 UI 点位连接知识与结果。点位对应某个页面状态中的组件、区域或验收对象，例如标题栏图标组及其间距。</p>
+<pre><code class="language-text">设计参考与实际截图 → AI 对比定位问题 ─────────┐
+                                           ├→ 合并点位 → 截图编号、框选
+组件索引与 Skill 的采用记录 → 定位作用区域 ──┘                  ↓
+                                                    逐点属性与证据
+                                                           ↓
+                                                  人工 Review → 修订
+</code></pre>
+<p>点位从两个入口发现：截图对比发现的失败位置，以及实际采用组件索引或 UI Skill 的作用位置。相同状态、同一对象的点位合并，保留多项检查与知识关联。代码、轨迹和运行元素帮助定位采用位置；关联不明确时标为待确认。</p>
+<p>输出包括标注截图和点位明细，使用同一编号连接。以下为示意：</p>
+<pre><code class="language-text">实际页面截图
+┌──────────────────────────┐
+│ 月报          [P1 图标组]│
+│                          │
+│ [P2 列表卡片]            │
+│                          │
+│ [P3 底部留白]            │
+└──────────────────────────┘
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>点位</th>
+<th>组件索引与实际组件</th>
+<th>采用的 Skill</th>
+<th>验收结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P1 图标组</td>
+<td>经索引选用 ActionBar</td>
+<td>标题栏选型 Skill，关联具体版本</td>
+<td>失败：图标间距不符</td>
+</tr>
+<tr>
+<td>P2 列表卡片</td>
+<td>未使用索引</td>
+<td>卡片布局 Skill，关联具体版本</td>
+<td>通过：布局符合要求</td>
+</tr>
+<tr>
+<td>P3 底部留白</td>
+<td>未使用索引</td>
+<td>未采用相关 Skill</td>
+<td>失败：留白不符</td>
+</tr>
+</tbody>
+</table>
+<p>每个点位保留以下属性：</p>
+<ul>
+<li><strong>位置</strong>：页面与状态、截图区域、对应组件或代码位置。</li>
+<li><strong>知识采用</strong>：索引检索与实际组件、Skill 标识及内容版本、采用证据；未采用与无法确认分别标记。</li>
+<li><strong>结果准确性</strong>：预期与实际、通过／失败／无法判断、判定来源与截图或运行证据。交互结论需要实际操作与反馈支撑。</li>
+<li><strong>修订关系</strong>：所属 Review 轮次、前后 diff，以及重验后的同一点位结果。坐标随截图更新，保留对象关联。</li>
+</ul>
+<p>人工可以沿截图点位检查采用情况与结果，修正 AI 的定位和判定。由此区分“未采用知识且失败”“采用知识仍失败”“采用知识且通过”，再回查指导、执行或环境的问题。</p>
+<h3>从点位标记汇总效果</h3>
+<p>先形成可回查的点位记录，再按知识版本、场景和修订轮次汇总采用与验收结果。重复验收关联同一点位，多条 Skill 的共同采用保留关联。修订前后比较时，对齐点位与验收条件，观察失败是否解决、是否引入退步，以及重试与成本变化。</p>
+<p>这组点位覆盖已发现的问题和知识采用区域，汇总同时注明覆盖范围。它服务于知识效果分析；采用后通过记录为通过，改善与归因另需比较证据，证据不足时保留无法判断。</p>
+<h2>从任务流选择评估场景</h2>
+<p>任务持续流入时，人工或启发式策略按知识的验证需要筛选场景，逐步积累评估世界：</p>
+<pre><code class="language-text">流入的任务与修订片段
+          ↓
+关联 Skill，判断相关性、恢复难度、耗时、判别力与覆盖价值
+          ↓
+选择适合的任务或局部片段
+          ↓
+萃取并校验 Env → 形成关联该 Skill 的评估集合
+</code></pre>
+<p>一个 Skill 可以关联多个任务，一个任务也可以验证不同知识。优先选择能够恢复起点、低成本重跑，并能区分策略差异的片段。</p>
+<p>先获得覆盖有限但可用的评估集合，降低每次验证的成本；复杂依赖和长链路能力继续通过真实任务观察，随证据与恢复能力积累扩大覆盖。环境萃取方法本身，也从实际恢复失败、错误判定和人工修订中逐步形成。</p>
+<p>例如，验证“新增 TypeScript 诊断识别”时，“旧错误减少一条、新错误增加一条、总数不变”的场景，比始终没有错误的场景更有判别力。标题栏选型则需要保留设计要求、组件能力、交互与渲染检查条件。</p>
+<p>评估集合记录覆盖范围，补充失败、反例和不同条件，避免只保留便宜或已成功的任务。来源任务用于回放与调试，后续新任务补充迁移证据。环境恢复与评价校验沿用《评估世界萃取》的机制。</p>
+<h2>启动与扩展条件</h2>
+<p>初版从一个真实任务的阶段结果开始，人工指导 Agent 提炼一份候选，Review 后供后续任务使用。先保留工程与产物的起止状态、实际输出、采用的知识内容，以及评论和修订关系。</p>
+<p>随后按暴露的缺口扩展：</p>
+<table>
+<thead>
+<tr>
+<th>出现的需要</th>
+<th>对应扩展</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>人工反复进行相近的提炼操作</td>
+<td>固化 Skill Creator</td>
+</tr>
+<tr>
+<td>人工反复纠正 Creator 的提炼方法</td>
+<td>提炼 Meta-skill-creator</td>
+</tr>
+<tr>
+<td>无法回查某项行为或判断</td>
+<td>补充 Trace 策略</td>
+</tr>
+<tr>
+<td>希望立即检验某条策略修订</td>
+<td>在选定节点嵌入知识修订与联合 Review</td>
+</tr>
+<tr>
+<td>流入任务中出现有判别力、可恢复的场景</td>
+<td>萃取并校验局部 Env</td>
+</tr>
+</tbody>
+</table>
+<p>每次扩展接受同样的检查：是否帮助回答实际问题，是否减少遗漏、误判或返工，收益是否覆盖新增成本。各项能力可以交错形成，暂时无收益的改动保留待验证或撤回。</p>
+<h2>关联方案</h2>
+<ul>
+<li><a href="./Agent%20%E6%94%B9%E8%BF%9B%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%EF%BC%9A%E4%B8%8A%E4%B8%8B%E6%96%87%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%8F%8D%E9%A6%88%E9%87%87%E9%9B%86.md">Agent 改进工作空间：上下文设计与反馈采集</a>：上下文范围与反馈采集原则。</li>
+<li><a href="./%E8%AF%84%E4%BC%B0%E4%B8%96%E7%95%8C%E8%90%83%E5%8F%96%EF%BC%9A%E4%B8%8E%20Skill%20%E5%8D%8F%E5%90%8C%E6%BC%94%E8%BF%9B%E7%9A%84%E9%AA%8C%E8%AF%81%E6%9C%BA%E5%88%B6.md">评估世界萃取：与 Skill 协同演进的验证机制</a>：环境恢复、评价校验与 Skill 验证。</li>
+<li><a href="./%E9%9D%A2%E5%90%91%20RSI%20%E7%9A%84%20Coding%20Agent%EF%BC%9A%E4%BB%8E%E4%BB%BB%E5%8A%A1%E5%8F%8D%E9%A6%88%E5%88%B0%E6%96%B9%E6%B3%95%E8%BF%AD%E4%BB%A3.md">面向 RSI 的 Coding Agent：从任务反馈到方法迭代</a>：工程经验与提炼方法的递归改进。</li>
+</ul>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-BGwtz3vo.js"></script>
+</body>
+</html>

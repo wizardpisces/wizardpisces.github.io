@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>工程预提炼：从已有实现生成可验证 Skills | LZ AI NOTE</title>
+  <meta name="description" content="在任务开始前，从工程已有实现、文档和测试中提取有证据的候选 Skills，再通过能力验证与实际应用持续修订。">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="工程预提炼：从已有实现生成可验证 Skills">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-10-16">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/%E5%B7%A5%E7%A8%8B%E9%A2%84%E6%8F%90%E7%82%BC%EF%BC%9A%E4%BB%8E%E5%B7%B2%E6%9C%89%E5%AE%9E%E7%8E%B0%E7%94%9F%E6%88%90%E5%8F%AF%E9%AA%8C%E8%AF%81%20Skills">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/%E5%B7%A5%E7%A8%8B%E9%A2%84%E6%8F%90%E7%82%BC%EF%BC%9A%E4%BB%8E%E5%B7%B2%E6%9C%89%E5%AE%9E%E7%8E%B0%E7%94%9F%E6%88%90%E5%8F%AF%E9%AA%8C%E8%AF%81%20Skills">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="工程预提炼：从已有实现生成可验证 Skills | LZ AI NOTE">
+  <meta property="og:description" content="在任务开始前，从工程已有实现、文档和测试中提取有证据的候选 Skills，再通过能力验证与实际应用持续修订。">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/%E5%B7%A5%E7%A8%8B%E9%A2%84%E6%8F%90%E7%82%BC%EF%BC%9A%E4%BB%8E%E5%B7%B2%E6%9C%89%E5%AE%9E%E7%8E%B0%E7%94%9F%E6%88%90%E5%8F%AF%E9%AA%8C%E8%AF%81%20Skills">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"工程预提炼：从已有实现生成可验证 Skills","description":"在任务开始前，从工程已有实现、文档和测试中提取有证据的候选 Skills，再通过能力验证与实际应用持续修订。","url":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/%E5%B7%A5%E7%A8%8B%E9%A2%84%E6%8F%90%E7%82%BC%EF%BC%9A%E4%BB%8E%E5%B7%B2%E6%9C%89%E5%AE%9E%E7%8E%B0%E7%94%9F%E6%88%90%E5%8F%AF%E9%AA%8C%E8%AF%81%20Skills","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/%E5%B7%A5%E7%A8%8B%E9%A2%84%E6%8F%90%E7%82%BC%EF%BC%9A%E4%BB%8E%E5%B7%B2%E6%9C%89%E5%AE%9E%E7%8E%B0%E7%94%9F%E6%88%90%E5%8F%AF%E9%AA%8C%E8%AF%81%20Skills","dateModified":"2026-10-16","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：工程预提炼：从已有实现生成可验证 Skills，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/%E5%B7%A5%E7%A8%8B%E9%A2%84%E6%8F%90%E7%82%BC%EF%BC%9A%E4%BB%8E%E5%B7%B2%E6%9C%89%E5%AE%9E%E7%8E%B0%E7%94%9F%E6%88%90%E5%8F%AF%E9%AA%8C%E8%AF%81%20Skills","about":["_hidden","coding-agent 方案","material-first"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>工程预提炼：从已有实现生成可验证 Skills</h1><h1>工程预提炼：从已有实现生成可验证 Skills</h1>
+<h2>背景与目标</h2>
+<p>工程中的公共能力、成熟实现、文档和测试，已经包含大量可复用的知识。Agent 进入一个新工程时，需要重新发现这些能力、判断适用条件，并理解工程约束。</p>
+<p>工程预提炼在需求任务开始前完成这部分知识准备：从已有工程提取有来源依据的候选 Skills，经过验证后供后续任务按需使用。即使工程尚未积累 Agent 执行案例，也可以建立初始指导。</p>
+<h2>预提炼机制</h2>
+<p>负责提炼的 Agent 根据目标工程的实际能力和参考实现，生成指导，再检查指导是否准确、可用：</p>
+<pre><code class="language-text">源码 / 文档 / 测试 / 已有 Skills
+  → 识别可复用能力与工程模式
+  → 取证、比较适用条件
+  → 生成候选 Skill
+  → 来源核查、能力验证与人工 Review
+  → 后续任务采用 → 环境反馈 → 修订
+</code></pre>
+<h3>围绕使用问题取证</h3>
+<p>从组件选型、接口调用、错误处理、测试构造等具体问题入手，检查能力入口、核心实现、真实使用方式和已有验证。提炼范围由使用问题决定，避免将整个仓库机械地转成文档。</p>
+<p>例如，标题栏选型需要比较平台组件与存量组件的能力、消费者和限制；接口接入需要识别已有请求封装、错误处理和测试约定。它们共用取证方法，具体指导来自各自工程。</p>
+<h3>将证据整理为候选指导</h3>
+<p>候选围绕四个问题组织：</p>
+<pre><code class="language-text">什么时候用 → 适用场景与前提
+怎么使用   → 能力入口、参考实现与操作方式
+怎么验证   → 已有测试、检查方法与验收条件
+依据是什么 → 来源证据、限制与待确认问题
+</code></pre>
+<p>索引用于帮助发现能力，Skill 用于表达应用与验证方法。经过实际任务验证、适合优先采用的工程路径，可以进一步沉淀为 Golden Path。</p>
+<h3>验证后进入任务使用</h3>
+<p>预提炼阶段核查引用、接口和适用条件，并通过已有测试、最小示例或局部运行检查指导是否可执行，保留未验证的部分。人工 Review 补充隐含约束和工程取舍。</p>
+<p>后续任务检验指导是否被采用、是否减少错误与返工、是否引入回归。能力检查提供初步可用性证据，任务反馈检验实际收益，两者共同修订候选。</p>
+<h2>与任务后提炼的关系</h2>
+<table>
+<thead>
+<tr>
+<th>机制</th>
+<th>起点</th>
+<th>生成与验证方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>工程预提炼</td>
+<td>已有实现、文档、测试与工程约束</td>
+<td>生成候选 → 核查与验证 → 任务应用</td>
+</tr>
+<tr>
+<td>任务后提炼</td>
+<td>执行结果、环境反馈与人工修正</td>
+<td>分析执行经验 → 生成或修订候选 → 新任务验证</td>
+</tr>
+</tbody>
+</table>
+<p>预提炼提供任务开始时可用的知识，任务后提炼用真实经验校正这些知识。两者共享取证、抽象、Review 和验证能力，前端、后端与测试工程都可以采用。</p>
+<h2>提炼方法的迁移与改进</h2>
+<p>任务复盘中积累的提炼方法，可以迁移到新工程。例如，如何定位平台公共能力、比较成熟实现、识别适用边界，以及选择验证证据，都可以指导后续预提炼。</p>
+<p>迁移时重新收集目标工程的实现与约束，并检验生成的指导。源工程的经验帮助决定如何取证，目标工程的证据决定具体结论。</p>
+<p>随着应用反馈积累，可以继续检查提炼方法：是否遗漏能力、是否过度泛化、哪些候选反复需要人工纠正。由这些结果修订取证与验证方法，逐步改善下一轮预提炼。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-BGwtz3vo.js"></script>
+</body>
+</html>

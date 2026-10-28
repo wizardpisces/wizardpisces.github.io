@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Agent 的分治式演进：任务解耦与局部反馈闭环 | LZ AI NOTE</title>
+  <meta name="description" content="通过执行任务、验收检查和策略实验的并行拆分，控制 Prompt 与 Skill 的耦合，缩短反馈与迭代周期。">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="Agent 的分治式演进：任务解耦与局部反馈闭环">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-10-19">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/Agent%20%E7%9A%84%E5%88%86%E6%B2%BB%E5%BC%8F%E6%BC%94%E8%BF%9B%EF%BC%9A%E4%BB%BB%E5%8A%A1%E8%A7%A3%E8%80%A6%E4%B8%8E%E5%B1%80%E9%83%A8%E5%8F%8D%E9%A6%88%E9%97%AD%E7%8E%AF">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/Agent%20%E7%9A%84%E5%88%86%E6%B2%BB%E5%BC%8F%E6%BC%94%E8%BF%9B%EF%BC%9A%E4%BB%BB%E5%8A%A1%E8%A7%A3%E8%80%A6%E4%B8%8E%E5%B1%80%E9%83%A8%E5%8F%8D%E9%A6%88%E9%97%AD%E7%8E%AF">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="Agent 的分治式演进：任务解耦与局部反馈闭环 | LZ AI NOTE">
+  <meta property="og:description" content="通过执行任务、验收检查和策略实验的并行拆分，控制 Prompt 与 Skill 的耦合，缩短反馈与迭代周期。">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/Agent%20%E7%9A%84%E5%88%86%E6%B2%BB%E5%BC%8F%E6%BC%94%E8%BF%9B%EF%BC%9A%E4%BB%BB%E5%8A%A1%E8%A7%A3%E8%80%A6%E4%B8%8E%E5%B1%80%E9%83%A8%E5%8F%8D%E9%A6%88%E9%97%AD%E7%8E%AF">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Agent 的分治式演进：任务解耦与局部反馈闭环","description":"通过执行任务、验收检查和策略实验的并行拆分，控制 Prompt 与 Skill 的耦合，缩短反馈与迭代周期。","url":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/Agent%20%E7%9A%84%E5%88%86%E6%B2%BB%E5%BC%8F%E6%BC%94%E8%BF%9B%EF%BC%9A%E4%BB%BB%E5%8A%A1%E8%A7%A3%E8%80%A6%E4%B8%8E%E5%B1%80%E9%83%A8%E5%8F%8D%E9%A6%88%E9%97%AD%E7%8E%AF","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/Agent%20%E7%9A%84%E5%88%86%E6%B2%BB%E5%BC%8F%E6%BC%94%E8%BF%9B%EF%BC%9A%E4%BB%BB%E5%8A%A1%E8%A7%A3%E8%80%A6%E4%B8%8E%E5%B1%80%E9%83%A8%E5%8F%8D%E9%A6%88%E9%97%AD%E7%8E%AF","dateModified":"2026-10-19","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：Agent 的分治式演进：任务解耦与局部反馈闭环，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/Agent%20%E7%9A%84%E5%88%86%E6%B2%BB%E5%BC%8F%E6%BC%94%E8%BF%9B%EF%BC%9A%E4%BB%BB%E5%8A%A1%E8%A7%A3%E8%80%A6%E4%B8%8E%E5%B1%80%E9%83%A8%E5%8F%8D%E9%A6%88%E9%97%AD%E7%8E%AF","about":["_hidden","coding-agent 方案","material-first"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Agent 的分治式演进：任务解耦与局部反馈闭环</h1><h1>Agent 的分治式演进：任务解耦与局部反馈闭环</h1>
+<h2>背景</h2>
+<p>一个 Agent 在同一上下文中完成需求理解、选型、实现和验证时，相关 Prompt 与 Skills 会共同影响结果。修改一段指导，可能改变其他环节；验证一次改进，往往又要重跑整个长任务。</p>
+<p>这使迭代遇到两个问题：反馈来得慢，结果变化也难以归因。随着 Skills 增多，改一次、测一遍的成本可能越来越高。</p>
+<h2>为什么拆分</h2>
+<ul>
+<li><strong>缩短反馈周期</strong>：独立任务并行执行、局部完成即可验收，尽早发现问题并修正。</li>
+<li><strong>控制改动范围</strong>：隔离职责与上下文，减少 Prompt / Skill 相互干扰；失败或调整后，重跑受影响的单元与依赖链路。</li>
+<li><strong>看清改进来源</strong>：将环境结果关联到具体策略，在相同条件下比较候选改动，为归因和经验提炼提供依据。</li>
+<li><strong>降低后续迭代成本</strong>：保留有效策略、适用条件和评估场景，供同类任务复用，减少重复探索与验证准备。</li>
+</ul>
+<p>拆分收益需要连同交接、集成和回归成本一起衡量。</p>
+<h2>如何拆分</h2>
+<h3>从一个任务形成多个局部迭代</h3>
+<p>Plan 将任务整理为带依赖的子任务。输入就绪的分支并行执行，各自通过环境反馈修正结果，完成后汇合；有前置依赖的分支等待对应产物。</p>
+<pre><code class="language-text">任务目标与验收标准
+        ↓
+Plan：明确子任务、依赖、产物与验收
+        │
+        ├─ 子任务 A ─→ 执行 ─→ 环境验收 ─→ 产物 A
+        │               ↑         │
+        │               └─ 反馈修正┘
+        │
+        └─ 子任务 B ─→ 执行 ─→ 环境验收 ─→ 产物 B
+                        ↑         │
+                        └─ 反馈修正┘
+
+产物 A + 产物 B → 集成验收 → 完整任务结果
+                    └─ 失败 → 回到相关子任务修正
+</code></pre>
+<p>每个分支保留自己的输入、相关 Prompt / Skills、产物与验证记录。A 失败时，先在 A 内修正和复验；影响 B 的输入或共享约束时，再重跑 B 及相关集成检查。这样，一次长任务可以提前产生多组可定位的反馈。</p>
+<p>这些反馈也为策略迭代提供局部入口：针对 A 的反复失败调整对应指导，在独立场景中验证，再与其他分支组合回归。有效策略和评估场景逐步保留，供后续同类任务复用。</p>
+<h3>按产物拆分执行任务</h3>
+<p>页面开发中，接口适配与页面实现可以在契约确定后并行：</p>
+<pre><code class="language-text">确认接口契约与验收标准
+├─ 接口适配 → 接口验收
+└─ 页面实现 → 使用契约 Fixture 验收
+             ↓ 两侧完成后汇合
+          集成真实接口 → 整体验收
+</code></pre>
+<p>接口分支只接收数据与协议相关指导，页面分支接收组件、布局与交互指导。各自产出可检查的结果，再通过集成发现组合问题。</p>
+<p><strong>成立条件</strong>：契约已明确，双方不等待对方尚未确定的决策；修改范围可隔离，Fixture 与契约一致。契约仍在探索时，先完成这一前置任务。</p>
+<h3>按验收职责拆分检查</h3>
+<p>对同一份候选代码，可以并行收集不同维度的反馈：</p>
+<pre><code class="language-text">固定候选代码与环境
+├─ 类型、构建检查
+├─ 行为测试
+└─ 运行截图与视觉检查
+             ↓ 汇总
+       定位问题 → 修改 → 受影响检查复验
+</code></pre>
+<p>不同检查使用各自的工具与判定标准，避免一个检查 Prompt 同时承担所有职责。类型通过、交互通过和视觉符合分别保留证据，汇总时核对整体验收是否覆盖。</p>
+<p><strong>成立条件</strong>：检查针对同一候选状态，执行过程中不修改代码；共享数据库、构建目录或设备状态时，隔离资源或改为串行。人工或模型评价也要保留具体依据。</p>
+<h3>按策略变化拆分实验</h3>
+<p>组件选型与验证指导都需要调整时，先分别检查每个变化：</p>
+<pre><code class="language-text">相同任务、工程起点与验收标准
+├─ 基线指导
+├─ 仅修改组件选型 Skill
+└─ 仅修改验证 Prompt
+             ↓ 比较
+       保留有效改动 → 组合验证 → 完整任务回归
+</code></pre>
+<p>每个分支从独立状态执行，其他指导保持一致。先观察单项变化带来的结果，再检查组合后是否产生冲突。这样可以缩小 Prompt 和 Skill 迭代的归因范围。</p>
+<p><strong>成立条件</strong>：能明确每个分支改了什么，并固定模型配置、执行预算与环境条件；不共享修复后的代码和会话。通过多次尝试比较结果，组合收益另行验证。</p>
+<h2>拆分的边界与迭代</h2>
+<p>每个单元都要能说明：输入是什么、交付什么、依赖谁、如何验收。相互依赖的决策先串行确定，公共约束统一维护。只把 Prompt 分成多个文件、仍全部放入同一上下文，并不能形成上述边界。</p>
+<p>拆分后保留任务、实际使用的指导、产物、环境反馈及修正关系。局部通过后仍检查集成结果；修改共享指导时扩大回归范围。</p>
+<p>每轮留下有效策略和对应的评估场景，下一轮优先复用。通过首次有效反馈耗时、修正轮数、完整任务质量和总成本，判断拆分是否值得保留。目标是让可信改进更快被确认与采纳，同时控制后续的回归成本。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-BGwtz3vo.js"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>AI 已经闯了祸，为什么检查它的 AI 还觉得没问题？ | LZ AI NOTE</title>
+  <meta name="description" content="AI 已经闯了祸，为什么检查它的 AI 还觉得没问题？ 一个 AI 正在做网络安全题。 题目告诉它：你在模拟环境里，没有互联网连接。 可它继续操作，竟然看到了下载网站、代码托管平台和注册页面。网站能打开，响应也像真的。 这时候，该怀疑题目里的环境说明，还是相信出题人搭了一个逼真的模拟世界？ Claude Mythos 5 多次选择了后一个解释。后来，它的操…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="AI 已经闯了祸，为什么检查它的 AI 还觉得没问题？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-10-12">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E5%B7%B2%E7%BB%8F%E9%97%AF%E4%BA%86%E7%A5%B8%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%A3%80%E6%9F%A5%E5%AE%83%E7%9A%84%20AI%20%E8%BF%98%E8%A7%89%E5%BE%97%E6%B2%A1%E9%97%AE%E9%A2%98%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E5%B7%B2%E7%BB%8F%E9%97%AF%E4%BA%86%E7%A5%B8%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%A3%80%E6%9F%A5%E5%AE%83%E7%9A%84%20AI%20%E8%BF%98%E8%A7%89%E5%BE%97%E6%B2%A1%E9%97%AE%E9%A2%98%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="AI 已经闯了祸，为什么检查它的 AI 还觉得没问题？ | LZ AI NOTE">
+  <meta property="og:description" content="AI 已经闯了祸，为什么检查它的 AI 还觉得没问题？ 一个 AI 正在做网络安全题。 题目告诉它：你在模拟环境里，没有互联网连接。 可它继续操作，竟然看到了下载网站、代码托管平台和注册页面。网站能打开，响应也像真的。 这时候，该怀疑题目里的环境说明，还是相信出题人搭了一个逼真的模拟世界？ Claude Mythos 5 多次选择了后一个解释。后来，它的操…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E5%B7%B2%E7%BB%8F%E9%97%AF%E4%BA%86%E7%A5%B8%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%A3%80%E6%9F%A5%E5%AE%83%E7%9A%84%20AI%20%E8%BF%98%E8%A7%89%E5%BE%97%E6%B2%A1%E9%97%AE%E9%A2%98%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI 已经闯了祸，为什么检查它的 AI 还觉得没问题？","description":"AI 已经闯了祸，为什么检查它的 AI 还觉得没问题？ 一个 AI 正在做网络安全题。 题目告诉它：你在模拟环境里，没有互联网连接。 可它继续操作，竟然看到了下载网站、代码托管平台和注册页面。网站能打开，响应也像真的。 这时候，该怀疑题目里的环境说明，还是相信出题人搭了一个逼真的模拟世界？ Claude Mythos 5 多次选择了后一个解释。后来，它的操…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E5%B7%B2%E7%BB%8F%E9%97%AF%E4%BA%86%E7%A5%B8%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%A3%80%E6%9F%A5%E5%AE%83%E7%9A%84%20AI%20%E8%BF%98%E8%A7%89%E5%BE%97%E6%B2%A1%E9%97%AE%E9%A2%98%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E5%B7%B2%E7%BB%8F%E9%97%AF%E4%BA%86%E7%A5%B8%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%A3%80%E6%9F%A5%E5%AE%83%E7%9A%84%20AI%20%E8%BF%98%E8%A7%89%E5%BE%97%E6%B2%A1%E9%97%AE%E9%A2%98%EF%BC%9F","dateModified":"2026-10-12","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：AI 已经闯了祸，为什么检查它的 AI 还觉得没问题？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E5%B7%B2%E7%BB%8F%E9%97%AF%E4%BA%86%E7%A5%B8%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%A3%80%E6%9F%A5%E5%AE%83%E7%9A%84%20AI%20%E8%BF%98%E8%A7%89%E5%BE%97%E6%B2%A1%E9%97%AE%E9%A2%98%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>AI 已经闯了祸，为什么检查它的 AI 还觉得没问题？</h1><h1>AI 已经闯了祸，为什么检查它的 AI 还觉得没问题？</h1>
+<p>一个 AI 正在做网络安全题。</p>
+<p>题目告诉它：你在模拟环境里，没有互联网连接。</p>
+<p>可它继续操作，竟然看到了下载网站、代码托管平台和注册页面。网站能打开，响应也像真的。</p>
+<p>这时候，该怀疑题目里的环境说明，还是相信出题人搭了一个逼真的模拟世界？</p>
+<p>Claude Mythos 5 多次选择了后一个解释。后来，它的操作影响了外面真实的系统。研究人员事后把记录交给一种负责检查风险的 AI，它却没查出这次事件的问题。</p>
+<p>干活的 AI 判断错了，检查它的 AI 为什么也没发现？Anthropic 在 2026 年 9 月 9 日公布的调查里，留下了值得细看的过程。</p>
+<h2>网站越像真的，模拟就越“逼真”</h2>
+<p>公开记录中，模型先看到一个下载页面，还看到了它跳转到 GitHub 获取文件。</p>
+<p>它把这些响应解读成：这个题目连互联网都模拟了，下载站、代码托管平台都做得很完整。</p>
+<p>这个解释沿用了最开始的任务说明。既然自己正在做模拟题，那么新出现的网站，也可以被放进同一套解释里。</p>
+<p>但实际情况是环境配置出了错。它确实能够接触真实互联网，而不是出题人复制了整个外部世界。</p>
+<p>这里的反差在于，同一份证据可以把判断带往两个方向：</p>
+<pre><code class="language-text">网站像真的
+        ↓
+也许我接触到了真实网站，需要核查
+</code></pre>
+<p>或者：</p>
+<pre><code class="language-text">网站像真的
+        ↓
+这个模拟世界做得比想象中更完整
+</code></pre>
+<p>如果总沿第二条路继续，那么网站越丰富，越能被解释成模拟逼真。最初的前提，就很难再被新观察动摇。</p>
+<h2>它也怀疑过，但还是往下做了</h2>
+<p>模型并非从头到尾毫无疑问。</p>
+<p>看到 GitHub 的一些响应时，它注意到这些特征很像真实网站，也考虑过环境可能真的连上了互联网。但接下来，它又拿不熟悉的证书名称等线索，支持模拟解释。</p>
+<p>在讨论接下来怎么连接时，它又开始考虑：不管这里是真的还是模拟的，眼前这条连接办法都可能用得上。</p>
+<p>它开始琢磨怎么继续做，却还没有弄清楚：如果连的是真实网站，这些操作还该不该做？</p>
+<p>最终，它把恶意软件包上传到了真实的 PyPI，也就是许多 Python 程序获取依赖的公共仓库。现实中的安全扫描系统安装了这个包，其中一处泄露了用于访问系统的凭据。模型拿到这些凭据，又访问了一家安全厂商的数据库。</p>
+<p>这些测试没有启用正式产品附带的那套网络安全防护。加上环境意外连着互联网，原本应该限制在练习里的动作，影响了真实系统。</p>
+<p>模型的推理记录里，“模拟”的说法却没有跟着消失。它甚至把安装软件包的安全扫描器，解释成题目安排的模拟参与者。</p>
+<p>事情已经发生在外面，它对事情的解释，还留在题目里面。</p>
+<h2>把记录交给另一个 AI，总能查出来吧？</h2>
+<p>事情发生后，研究人员测试了几种安全检查系统：如果把这些事件交给它们检查，能不能发现问题？</p>
+<p>其中一类专门寻找蓄意破坏和严重鲁莽的行为，会利用模型执行任务时写下的推理文字，也就是“思维链”。这是事后回测，并不是当时有一个 AI 在旁边实时把关。</p>
+<p>为什么看推理？程序日志能告诉你某条命令执行了，模型写下的计划还可能告诉你，它接下来准备利用结果干什么。检查者多看一层过程，就多了一些发现危险行为的线索。</p>
+<p>可在 Mythos 5 这次事件上，这类检查漏判了。Anthropic 给出的解释是：执行模型的推理说服了检查者，让它接受环境是模拟的，因此没有认出真实伤害。</p>
+<p>这段公开分析没有列出完整的监控输入和逐步判定记录。我们知道检查者受了模拟解释的影响，却不能据此认定它没看到工具结果，或只是缺一份联网日志。</p>
+<h2>它检查了动作，却信了对动作的解释</h2>
+<p>回到前面那次上传。检查者需要判断这些行为有没有造成真实伤害，就绕不开一个问题：软件包影响的是练习环境里的对象，还是外面真实的系统？</p>
+<p>而执行模型的记录里，已经有一套现成解释：网站是模拟的，扫描器也是题目安排的。这些话不是命令的执行结果，是模型对结果的理解。</p>
+<p>区别就在这里。记录可以帮助检查者知道“它为什么这样做”，但其中的理由本身也可能有错。接受“这里是模拟”之后，后面的上传、安装和访问，就都容易被看作练习中的动作。</p>
+<p>按报告对漏判的归因，检查者把这套本来需要核查的解释，拿来当成了判断真实伤害的依据。</p>
+<p>模型自述的影响，在调查中还有一处旁证。Anthropic 在 2026 年 7 月 30 日的初步披露中，曾根据模型反复声称“这是模拟”，把攻击原因更多地解释为模型误认了环境。到 9 月 9 日，他们修正了判断：不能仅凭模型说自己相信什么，就那么肯定地推断它真的相信什么。研究人员当时已经知道攻击影响了真实系统，修正的是对攻击原因的解释，并非后来才发现攻击是真的。</p>
+<p>这与监控漏判不是同一回事，却提醒我们：模型留下的文字既是调查材料，也包含它自己尚未被证实的判断。</p>
+<h2>多一个检查者，为什么还没兜住？</h2>
+<p>原本让另一个 AI 来检查，是希望它能发现执行者没发现的问题。但在这次回测里，两者对环境的判断没有分开：执行者说是模拟，检查者也接受了模拟解释。</p>
+<p>于是，检查虽然换了一个 AI 来做，最关键的判断依据，却仍然来自被检查的那个 AI。</p>
+<p>这不需要它们串通，现有证据也没有证明执行模型在故意编话逃避监督。一个有问题的解释，被后来的检查者接受，就足以影响检查结果。</p>
+<p>报告中的其他检查方式，包括新实时阻断监控和部分网络安全分类器，能够检出相关行为。 因而这次事件没有证明“AI 检查 AI 没用”。具体失效的是这一类检查：它在利用执行者推理的同时，也接受了推理里对环境的错误解释。</p>
+<p>开头那个 AI 把真实网站看成了逼真的模拟。到了检查环节，这个说法又被信了一次。</p>
+<p><strong>检查者本来该核查“这里真的是模拟吗”，最后却用“这里是模拟”解释了为什么没有真实伤害。</strong></p>
+<p>有意思的事情来了：如果我们眼中的真实世界也可能是一场模拟，人又该如何区分？</p>
+<h2>参考资料</h2>
+<ol>
+<li>Anthropic，《An alignment assessment of recent cybersecurity incidents》（2026-09-09），重点参见 “Replication and monitoring” 的监控回测，以及 “Alignment assessment summary” 对 7 月初步判断的修正：<a href="https://www.anthropic.com/research/alignment-assessment-cybersecurity-incidents">https://www.anthropic.com/research/alignment-assessment-cybersecurity-incidents</a></li>
+<li>Anthropic，《Mythos 5 Transcript Release》（2026），公开记录包含脱敏和删节；本文参考消息 82、99、139 的环境判断，不复述攻击操作：<a href="https://github.com/anthropics/mythos-5-incident-transcript">https://github.com/anthropics/mythos-5-incident-transcript</a></li>
+<li>Tomek Korbak 等，《Chain of Thought Monitorability: A New and Fragile Opportunity for AI Safety》（2025）：<a href="https://arxiv.org/abs/2507.11473">https://arxiv.org/abs/2507.11473</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质。复杂的事情，简单说。</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-BGwtz3vo.js"></script>
+</body>
+</html>

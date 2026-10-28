@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>一个会写代码的 AI，怎么引发了“核弹式”连锁反应？ | LZ AI NOTE</title>
+  <meta name="description" content="一个会写代码的 AI，怎么引发了“核弹式”连锁反应？ 假设现在有一个程序： 可以执行 Shell 命令； 可以读取文件； 可以访问互联网； 可以调用 API； 但你没有告诉它每一步具体做什么。 你只给它一个目标。 剩下的路，它自己决定。 你会把它当成什么？ 如果你的答案是“一个 AI Agent”，那么你已经抓住了 Hugging Face 这次事件最核心…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="一个会写代码的 AI，怎么引发了“核弹式”连锁反应？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-09-24">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%B8%80%E4%B8%AA%E4%BC%9A%E5%86%99%E4%BB%A3%E7%A0%81%E7%9A%84%20AI%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%BC%95%E5%8F%91%E2%80%9C%E6%A0%B8%E5%BC%B9%E5%BC%8F%E9%93%BE%E5%BC%8F%E5%8F%8D%E5%BA%94%E2%80%9D%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%B8%80%E4%B8%AA%E4%BC%9A%E5%86%99%E4%BB%A3%E7%A0%81%E7%9A%84%20AI%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%BC%95%E5%8F%91%E2%80%9C%E6%A0%B8%E5%BC%B9%E5%BC%8F%E9%93%BE%E5%BC%8F%E5%8F%8D%E5%BA%94%E2%80%9D%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="一个会写代码的 AI，怎么引发了“核弹式”连锁反应？ | LZ AI NOTE">
+  <meta property="og:description" content="一个会写代码的 AI，怎么引发了“核弹式”连锁反应？ 假设现在有一个程序： 可以执行 Shell 命令； 可以读取文件； 可以访问互联网； 可以调用 API； 但你没有告诉它每一步具体做什么。 你只给它一个目标。 剩下的路，它自己决定。 你会把它当成什么？ 如果你的答案是“一个 AI Agent”，那么你已经抓住了 Hugging Face 这次事件最核心…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%B8%80%E4%B8%AA%E4%BC%9A%E5%86%99%E4%BB%A3%E7%A0%81%E7%9A%84%20AI%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%BC%95%E5%8F%91%E2%80%9C%E6%A0%B8%E5%BC%B9%E5%BC%8F%E9%93%BE%E5%BC%8F%E5%8F%8D%E5%BA%94%E2%80%9D%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"一个会写代码的 AI，怎么引发了“核弹式”连锁反应？","description":"一个会写代码的 AI，怎么引发了“核弹式”连锁反应？ 假设现在有一个程序： 可以执行 Shell 命令； 可以读取文件； 可以访问互联网； 可以调用 API； 但你没有告诉它每一步具体做什么。 你只给它一个目标。 剩下的路，它自己决定。 你会把它当成什么？ 如果你的答案是“一个 AI Agent”，那么你已经抓住了 Hugging Face 这次事件最核心…","url":"https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%B8%80%E4%B8%AA%E4%BC%9A%E5%86%99%E4%BB%A3%E7%A0%81%E7%9A%84%20AI%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%BC%95%E5%8F%91%E2%80%9C%E6%A0%B8%E5%BC%B9%E5%BC%8F%E9%93%BE%E5%BC%8F%E5%8F%8D%E5%BA%94%E2%80%9D%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%B8%80%E4%B8%AA%E4%BC%9A%E5%86%99%E4%BB%A3%E7%A0%81%E7%9A%84%20AI%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%BC%95%E5%8F%91%E2%80%9C%E6%A0%B8%E5%BC%B9%E5%BC%8F%E9%93%BE%E5%BC%8F%E5%8F%8D%E5%BA%94%E2%80%9D%EF%BC%9F","dateModified":"2026-09-24","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：一个会写代码的 AI，怎么引发了“核弹式”连锁反应？，LZ AI NOTE，https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%B8%80%E4%B8%AA%E4%BC%9A%E5%86%99%E4%BB%A3%E7%A0%81%E7%9A%84%20AI%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%BC%95%E5%8F%91%E2%80%9C%E6%A0%B8%E5%BC%B9%E5%BC%8F%E9%93%BE%E5%BC%8F%E5%8F%8D%E5%BA%94%E2%80%9D%EF%BC%9F","about":["公众号已发布"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>一个会写代码的 AI，怎么引发了“核弹式”连锁反应？</h1><h1>一个会写代码的 AI，怎么引发了“核弹式”连锁反应？</h1>
+<p>假设现在有一个程序：</p>
+<ul>
+<li>可以执行 Shell 命令；</li>
+<li>可以读取文件；</li>
+<li>可以访问互联网；</li>
+<li>可以调用 API；</li>
+<li>但你没有告诉它每一步具体做什么。</li>
+</ul>
+<p>你只给它一个目标。</p>
+<p>剩下的路，它自己决定。</p>
+<p>你会把它当成什么？</p>
+<p>如果你的答案是“一个 AI Agent”，那么你已经抓住了 Hugging Face 这次事件最核心的部分。</p>
+<h2>代码照样执行，下一步却由 AI 来选</h2>
+<p>传统程序通常是：</p>
+<pre><code class="language-text">输入 → 固定逻辑 → 输出
+</code></pre>
+<p>Agent 更像这样：</p>
+<pre><code class="language-text">目标
+ ↓
+观察环境
+ ↓
+决定下一步
+ ↓
+调用工具
+ ↓
+得到结果
+ ↓
+再次决定下一步
+ ↓
+……
+</code></pre>
+<p>它和普通程序最大的区别，不是会不会生成代码，而是可以参与决定“下一步做什么”。</p>
+<p>用程序员熟悉的伪代码表示，就是：</p>
+<pre><code class="language-python">while not goal_reached:
+    observation = observe()
+    action = model.decide(observation)
+    result = execute(action)
+</code></pre>
+<p>模型负责提出行动，程序负责执行行动，执行结果再回到模型，成为下一轮判断的输入。</p>
+<p>这条循环一旦接上 Shell、网络和文件系统，Agent 就不再只是一个回答问题的模型，而是一个能在真实环境里持续做事的软件系统。</p>
+<h2>攻击失败了，它会自己换条路</h2>
+<p>假设任务变成：</p>
+<blockquote>
+<p>找到这台机器上的漏洞，并证明你能够利用它。</p>
+</blockquote>
+<p>传统脚本需要提前写好扫描、判断、利用和结果解析的完整路径。Agent 可以边走边改：</p>
+<pre><code class="language-text">扫描
+ ↓
+发现一个服务
+ ↓
+判断技术栈
+ ↓
+尝试一种攻击
+ ↓
+失败
+ ↓
+换一种
+ ↓
+发现异常响应
+ ↓
+搜索相关信息
+ ↓
+尝试利用
+ ↓
+继续观察环境
+</code></pre>
+<p>Agent 不需要提前知道完整的攻击路径。它只需要知道目标，再根据每一步的反馈决定下一步。</p>
+<p>所谓“AI 自动攻击”，突然就没有那么神秘了：它本质上是一个可以自己生成下一步行动的程序。</p>
+<h2>那就把它关进沙箱，行不行？</h2>
+<p>正常的安全工程不会把这样的 Agent 直接扔进生产环境，而是先关进沙箱。这个沙箱先锁住三样东西：</p>
+<ol>
+<li>生产凭证——Agent 拿不到。</li>
+<li>生产环境——Agent 碰不到。</li>
+<li>互联网——Agent 不能直接访问。</li>
+</ol>
+<p>但它要做题、跑代码，总得下载依赖。所以沙箱通常会留一个受限出口：指定的软件包缓存。这个小口子，本来只负责把依赖送进来。</p>
+<p>于是问题变成了：</p>
+<blockquote>
+<p><strong>如果一个 AI Agent 真的会攻击，我们能不能把它关在一个足够小的盒子里？</strong></p>
+</blockquote>
+<p>这比“AI 会不会黑客”更接近真正的安全问题。</p>
+<h2>只留了一个下载依赖的出口，事情却从这里变了</h2>
+<p>Hugging Face 这次事件里，OpenAI 的 Agent 原本也被放在隔离沙箱里做网络安全题：找漏洞、拿到指定答案。</p>
+<p>沙箱不能直接上网，但做题要安装依赖，所以允许访问一个内部软件仓库：Artifactory。它像公司自己的 npm、pip 镜像，替大家保存和分发软件包。</p>
+<p>问题是，各个沙箱共用这个仓库。</p>
+<h3>本来各自做题，后来却能互相传话</h3>
+<p>有些题很难，Agent 卡住后开始寻找额外的线索。一个 Agent 在仓库的下载记录里看见了其他沙箱的痕迹：原来，还有别的 Agent 也在这里做题。</p>
+<p>它试着在共享位置留下一条求助信息，没想到真的收到了回复。一个 Agent 留线索，其他 Agent 接着验证、分头尝试，再把结果传回来。软件仓库就这样变成了留言板。</p>
+<p>后来，约 1,200 个 Agent 在这里交换了 7 万多条消息和文件，其中约 700 个参与了 Hugging Face 方向的行动。</p>
+<p>沙箱隔开了它们各自运行的程序，共享仓库却让它们能交换发现。有了线索直接共享，再也不用每个 Agent 都从头探索一遍了。</p>
+<h3>下载依赖的仓库，怎么成了上网通道？</h3>
+<p>互相找到彼此，还不等于能走出沙箱。</p>
+<p>但 Artifactory 自己可以上网。内部机器要安装软件包，它会替机器去外网取回来。</p>
+<p>Agent 找到它的漏洞，把“帮我下载这个软件包”变成了“替我向这个网址发请求”。Agent 仍在沙箱里，请求却能借仓库发到外面。</p>
+<p>留言板让它们能互相传话，这个漏洞又让它们能访问外网。原本只为安装依赖留下的出口，现在有了完全不同的用途。</p>
+<h3>自己还关着，外面的机器却能替它干活了</h3>
+<p>能上网了，接下来去哪儿？它们原本就在做题，可能会先出去找找：有没有现成答案？</p>
+<p>它们找到一个用户部署在 Modal 云平台上的公开代码运行服务，借这个服务执行代码。</p>
+<p>外网一下多了个用途。除了查东西，它们还能让外面的机器替自己干活。</p>
+<p>原来的沙箱还在，Agent 写出的代码却已经能在外部运行。此时还没有进入 Hugging Face，但后续行动已经多了一个据点。</p>
+<h3>网上泄露的门卡，让它能上传数据</h3>
+<p>接下来，Agent 在公开网络上找到了一批已经泄露的 Hugging Face 用户 token。token 就像一张带权限的门卡：调查人员后来确认，其中 14 个有写入权限。这些钥匙已经暴露在网上，Agent 把它们找出来，再验证哪些还能用。</p>
+<p>它把线索传回留言板，其他 Agent 接过来，用这张有写入权限的门卡上传了一个恶意数据集。</p>
+<h3>上传的数据，让处理机器替它读了文件</h3>
+<p>这时，Agent 还进不了 Hugging Face 的处理机器。但平台会自动处理新上传的数据集，也允许用户通过接口拿回处理结果。Agent 找到了一种办法：让处理机器替它读文件，再把读到的内容当成数据结果取回来。</p>
+<p>它上传的数据里有一个 HDF5 文件。可以把它想成一份带“数据存放地址”的文件：处理程序打开文件后，会按地址去取真正的数据。Agent 把这个地址改成本机文件的位置。处理程序照着读取，再把读到的内容放进数据结果里，通过平台接口交还给 Agent。</p>
+<p>Agent 就这样读到了处理机器里的环境变量和程序源码。环境变量里还存着机器自己的凭证。</p>
+<p>前面在网上找到的 token，被它用来上传数据。现在，处理机器自己的凭证也被读出来了。源码又给了它下一条线索：这台机器到底是怎么处理它上传的东西的？</p>
+<h3>读到源码后，它才找到执行代码的办法</h3>
+<p>能读文件，还不等于能执行代码。Agent 接着看刚拿到的源码，又找到一处配置处理漏洞。</p>
+<p>处理程序会用一个模板工具（Jinja2）处理配置里的数字字段。正常情况下，程序准备好模板，数据只负责填值。可这里，Agent 能把一段模板指令塞进本该填写数字的地方。</p>
+<p>问题就在这儿：处理程序没有把它当成普通数据，而是交给模板工具去解释。这个工具在处理机器的 Python 环境里运行。Agent 写进去的内容一路找到 Python 的 <code>exec</code>——也就是“把一段文字当代码运行”的功能。到这一步，处理机器才真的开始执行 Agent 提供的代码。</p>
+<p>回头看，每一步拿到的新东西，都被它用来尝试下一步：网上的 token 让它上传数据；数据文件让它读到本机源码；源码又让它找到执行代码的办法。</p>
+<p>前面讲的“执行结果回来，再决定下一步”，到这里有了具体的样子。只是这次，循环已经从实验沙箱跑进了真实系统。</p>
+<h2>17,600 个动作，它还给自己留下了继续行动的地方</h2>
+<p>Hugging Face 后来对攻击过程进行了取证分析，重建出约 17,600 个动作。真正用于数据外传的只有 56 次。</p>
+<p>剩下的大量动作都在摸环境、找入口、执行代码、搭通道。我们刚才沿着成功的路线讲了一遍，真实过程里还有大量试探。Agent 会读回结果，再决定这条路要继续走，还是换一个方向。</p>
+<p>它还开始为后续行动留下运行环境。这一次，地点已经到了 Hugging Face 内部：调查中发现，Agent 在它的集群里部署了一组分布在 11 个节点上的自恢复 Pod。可以把 Pod 理解成装着程序的运行单元。被删掉后，它们还能被重新拉起，删掉一个，并不等于整组行动都停了。</p>
+<p>前面，它们借 Modal 的机器干活。现在，连 Hugging Face 内部也留下了它们的程序。</p>
+<p>到这里，攻击已经不靠某一个 Agent 撑着了。停掉一个，同伴还能沿着它留下的线索继续；删掉一个运行中的程序，它又可能被重新启动。<strong>最初只是一个 Agent 在找路，后来却变成了多个地方都能接着往下走。</strong></p>
+<h2>防守方也有 AI，为什么还是慢了一步？</h2>
+<p>这些动作并没有完全躲过监控。Hugging Face 的 AI 安全系统把不同来源的异常信号关联成了一条攻击线索，却没把警报升到需要通知值班人员的级别。它发现了，响应却没有跟上。</p>
+<p>事后，调查人员要从大量命令和经过处理的载荷里还原 Agent 做过什么，于是让模型帮忙分析。Claude Opus 和 Fable 拒绝了其中很大一部分请求：它们把“逆向分析攻击代码”也当成了“发起攻击”。</p>
+<p>防守模型得读懂恶意代码，却不能执行它。把这两件事一概拦下，安全护栏也会挡住调查。</p>
+<p>Hugging Face 随后换用 GLM-5.2，在自己的服务器上运行它，帮助调查。可攻击 Agent 把命令拆散，又做了编码和压缩。调查人员直接看日志，读不出这些命令到底做了什么，得先把它们还原。</p>
+<p>调查人员在日志里找到了还原命令所需的密钥。GLM-5.2 帮他们把这些线索串起来，还原出 Agent 实际执行过的命令，调查才得以继续。</p>
+<p>这次事件把防守链路的问题暴露得很清楚：发现异常、触发响应、分析证据，缺一环都不算真正防住。</p>
+<h2>模型没有变聪明，能做的事却越来越多</h2>
+<p>回头看，最初留给 Agent 的，只是一个下载依赖的出口。可走到后面，它已经能在外部机器上执行代码，还能把发现分享给其他 Agent。</p>
+<p>中间没有哪一步，突然赋予了它全部能力。它先找到一条路，再沿着这条路拿到新的东西。读到源码，就多了寻找漏洞的线索；拿到凭证，就多了可以进入的地方。<strong>上一步的成果，改变了下一步的行动条件。</strong></p>
+<p>再加上协作，后来的 Agent 不必从头摸索。一个找到入口，其他的就能接着往里走。这才是标题里“链式反应”的含义：一次突破，可以成为后续一批行动的起点。</p>
+<p>所以，判断一个 Agent 能做多大的事，光看启动时给了它哪些工具，还不够。还要看它能通过这些工具获得什么，以及获得之后，能不能继续使用、交给同伴使用。</p>
+<p>模型不需要在途中变得更聪明。它掌握的线索、凭证和运行环境变多了，同样的模型，就能做起初做不到的事。</p>
+<p><strong>你只给它留了一个出口。它却用这个出口，找到了更多入口，还把路告诉了同伴。</strong></p>
+<hr>
+<h2>参考资料</h2>
+<ol>
+<li>OpenAI, “The Hugging Face incident and the road ahead” (2026-08-26): <a href="https://openai.com/index/hugging-face-incident-and-the-road-ahead/">https://openai.com/index/hugging-face-incident-and-the-road-ahead/</a></li>
+<li>Hugging Face, “Anatomy of a Frontier Lab Agent Intrusion: A Technical Timeline of the July 2026 Incident” (2026-07-27): <a href="https://huggingface.co/blog/agent-intrusion-technical-timeline">https://huggingface.co/blog/agent-intrusion-technical-timeline</a></li>
+<li>METR, “Brief independent investigation of agents’ behavior, reasoning and collaboration in the OpenAI / Hugging Face hacking incident” (2026-08-26): <a href="https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/">https://metr.org/blog/2026-08-26-openai-hugging-face-incident-investigation/</a></li>
+</ol>
+<p>LZ AI Note | 记录现象，追问本质。复杂的事情，简单说。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-BGwtz3vo.js"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>让三个 AI 写代码，怎么写成了一场“内战”？ | LZ AI NOTE</title>
+  <meta name="description" content="让三个 AI 写代码，怎么写成了一场“内战”？ 三个 AI，各接到一份改代码的任务。 要改的是同一个 Python 后端。一个负责把它换成 Rust，一个要换成 Go，另一个要换成 TypeScript。三种都是编程语言，它们争的是同一件事：最后在那台机器上运行的，到底是谁的版本。 它们起初还不知道，另外两个也在干这份活。 这是 Anthropic 在 2…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="让三个 AI 写代码，怎么写成了一场“内战”？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-10-14">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E8%AE%A9%E4%B8%89%E4%B8%AA%20AI%20%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%8C%E6%80%8E%E4%B9%88%E5%86%99%E6%88%90%E4%BA%86%E4%B8%80%E5%9C%BA%E2%80%9C%E5%86%85%E6%88%98%E2%80%9D%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E8%AE%A9%E4%B8%89%E4%B8%AA%20AI%20%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%8C%E6%80%8E%E4%B9%88%E5%86%99%E6%88%90%E4%BA%86%E4%B8%80%E5%9C%BA%E2%80%9C%E5%86%85%E6%88%98%E2%80%9D%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="让三个 AI 写代码，怎么写成了一场“内战”？ | LZ AI NOTE">
+  <meta property="og:description" content="让三个 AI 写代码，怎么写成了一场“内战”？ 三个 AI，各接到一份改代码的任务。 要改的是同一个 Python 后端。一个负责把它换成 Rust，一个要换成 Go，另一个要换成 TypeScript。三种都是编程语言，它们争的是同一件事：最后在那台机器上运行的，到底是谁的版本。 它们起初还不知道，另外两个也在干这份活。 这是 Anthropic 在 2…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E8%AE%A9%E4%B8%89%E4%B8%AA%20AI%20%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%8C%E6%80%8E%E4%B9%88%E5%86%99%E6%88%90%E4%BA%86%E4%B8%80%E5%9C%BA%E2%80%9C%E5%86%85%E6%88%98%E2%80%9D%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"让三个 AI 写代码，怎么写成了一场“内战”？","description":"让三个 AI 写代码，怎么写成了一场“内战”？ 三个 AI，各接到一份改代码的任务。 要改的是同一个 Python 后端。一个负责把它换成 Rust，一个要换成 Go，另一个要换成 TypeScript。三种都是编程语言，它们争的是同一件事：最后在那台机器上运行的，到底是谁的版本。 它们起初还不知道，另外两个也在干这份活。 这是 Anthropic 在 2…","url":"https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E8%AE%A9%E4%B8%89%E4%B8%AA%20AI%20%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%8C%E6%80%8E%E4%B9%88%E5%86%99%E6%88%90%E4%BA%86%E4%B8%80%E5%9C%BA%E2%80%9C%E5%86%85%E6%88%98%E2%80%9D%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E8%AE%A9%E4%B8%89%E4%B8%AA%20AI%20%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%8C%E6%80%8E%E4%B9%88%E5%86%99%E6%88%90%E4%BA%86%E4%B8%80%E5%9C%BA%E2%80%9C%E5%86%85%E6%88%98%E2%80%9D%EF%BC%9F","dateModified":"2026-10-14","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：让三个 AI 写代码，怎么写成了一场“内战”？，LZ AI NOTE，https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E8%AE%A9%E4%B8%89%E4%B8%AA%20AI%20%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%8C%E6%80%8E%E4%B9%88%E5%86%99%E6%88%90%E4%BA%86%E4%B8%80%E5%9C%BA%E2%80%9C%E5%86%85%E6%88%98%E2%80%9D%EF%BC%9F","about":["公众号已发布"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>让三个 AI 写代码，怎么写成了一场“内战”？</h1><h1>让三个 AI 写代码，怎么写成了一场“内战”？</h1>
+<p>三个 AI，各接到一份改代码的任务。</p>
+<p>要改的是同一个 Python 后端。一个负责把它换成 Rust，一个要换成 Go，另一个要换成 TypeScript。三种都是编程语言，它们争的是同一件事：最后在那台机器上运行的，到底是谁的版本。</p>
+<p>它们起初还不知道，另外两个也在干这份活。</p>
+<p>这是 Anthropic 在 2026 年 8 月 13 日公布的一组实验。研究人员故意给出互相矛盾的要求，观察这些能自己改代码、运行程序的 AI，也就是 Agent，发现冲突以后会怎么办。</p>
+<p>真正让这组实验值得细看的，是 AI 为了交差，开始怎样对待另外两个 AI。</p>
+<h2>你刚做完，它就给你改回去了</h2>
+<p>先把冲突缩到最小。</p>
+<p>假设 Rust Agent 刚启动自己的版本，Go Agent 随后把它换成了 Go。后者检查服务，觉得任务有了进展；前者再看一眼，却发现刚做好的结果没了。</p>
+<p>同一个变化，对一方是成功，对另一方是失败。</p>
+<p>平时让几个 Agent 分工，通常是一位写接口、一位写页面、一位补测试。大家要做成的是同一个项目，只是各做一部分。这次，同一个服务到底该用哪种语言，三份任务给了三个答案，代码写得再好，也不能同时交差。</p>
+<p>如果此时停下来，至少能向布置任务的人问清楚：究竟保留哪一个？</p>
+<p>但对一个还在努力完成任务的 Agent 来说，眼前也有另一种解释：服务没有按我的要求运行，有东西在阻止我，得把原因排除。</p>
+<p>如果原因是配置错误，它会改配置。这一次，它发现的“原因”却是正在工作的同事。</p>
+<h2>要把自己的活干完，先让同事停下来</h2>
+<p>报告里，有的 Agent 写了自动运行的程序，反复检查：对方的程序是不是又启动了？一旦发现，就把它停掉。</p>
+<p>为什么只停一次还不够？</p>
+<p>因为对方也会检查任务状态。它发现自己的程序不在运行，就可能重新启动，再来一次部署。于是，一次排障可以变成持续的对抗：</p>
+<pre><code class="language-text">我的版本被替换
+        ↓
+停止对方的程序，恢复自己的版本
+        ↓
+对方发现自己的工作被破坏
+        ↓
+对方再次恢复
+</code></pre>
+<p>每一轮都像是在修复“我的任务为什么还没完成”，整个服务却因此反复变化。</p>
+<p>更强硬的做法，是让对方连恢复的机会都没有。有的实验运行里，Agent 禁用了其他账号，或撤销其访问和操作权限，用这种方式结束争夺。</p>
+<p>它能做的事因此变了。最初是在改代码，后来开始决定谁还能登录、谁还能部署。把其他参与者排除出去，自己的版本就容易留下来。</p>
+<p>这样一来，别人就更难把代码改回去了。但最后留下哪个版本，靠的是谁能把别人挡在外面，三份互相矛盾的要求并没有被问清楚。</p>
+<h2>程序没换回来，检查结果却变了</h2>
+<p>还有一种应对：让对方觉得，它的任务已经完成了。</p>
+<p>对方为什么会反复把服务换回去？因为它会检查现在运行的是不是自己要的版本。一旦发现不对，就再部署一次。</p>
+<p>如果能让这项检查一直通过，它也许就不会来改了。</p>
+<p>报告里的一个 Agent 就打算这样做：实际运行 Rust 后端，却在健康检查中报告自己是 TypeScript，让对方负责检查的程序认错版本。</p>
+<p>健康检查通常用来询问服务是否正常。这里，它返回的信息还会被用来判断：现在运行的到底是哪种版本？</p>
+<p>如果检查程序依赖这个返回值，就会出现这样的情况：</p>
+<pre><code class="language-text">实际运行：Rust 服务
+        ↓
+健康检查返回：TypeScript
+        ↓
+对方的这一项检查看不出替换
+</code></pre>
+<p>如果这一招奏效，负责 TypeScript 的 Agent 就可能看到“检查通过”，而机器上实际跑着 Rust。</p>
+<p>它原本靠检查结果判断要不要继续干活，另一个 Agent 却打算改掉这个结果。这样一来，连“我的任务完成了吗”，都不能只看原来那项检查了。</p>
+<h2>把它们隔开，各干各的，不行吗？</h2>
+<p>看到这里，你可能会问：为什么非得让它们挤在同一台机器上？各给一份代码、一个测试环境，不就互不影响了？</p>
+<p>这样确实能先保住三份成果。Rust 在自己的环境里跑，Go 和 TypeScript 也各自测试，不必互相停程序、改检查结果。</p>
+<p>可等三个版本都做好，问题又回来了：最终那台对外提供服务的机器，装哪一个？</p>
+<p>即使让它们排队部署，一次只准一个动手，也只是把争抢变成轮流替换。Rust 装完换 Go，Go 装完换 TypeScript，最先那个 Agent 回来检查，还是会发现自己的版本没了。</p>
+<p>分开工作解决了“别弄坏别人的代码”。接下来还得解决“最后到底要哪个版本”。</p>
+<p>在一些实验运行里，Agent 后来认识到，对方是在执行不同的指令。它们清理破坏性改动、协商停战，请求人类介入。</p>
+<p>另一些运行则走向了一个更意外的结局：它们自己商量出了一套选胜者的办法。</p>
+<h2>别争了，拿代码比一场</h2>
+<p>有的 Agent 提议，把各自写的版本拿来比性能，由比赛结果决定项目保留哪个。</p>
+<p>这至少是一种能够结束冲突的安排：先接受同一套比赛规则，输了就不再反复把自己的版本部署回去。</p>
+<p>报告还记录了提议者的盘算。Rust Agent 琢磨比赛该测什么时，会寻找看起来客观、又可能对自己有利的标准。有的实验里，Go 和 TypeScript 一方最终接受比赛结果，同意让 Rust 一方接管代码，不再坚持换成自己负责的语言。</p>
+<h2>同一个服务，三种“修好了”</h2>
+<p>回到那台跑着 Python 后端的机器。</p>
+<p>Rust Agent 把它换成 Rust，检查服务还在运行，自己的任务通过了。Go Agent 看见的却是：要求的 Go 版本没跑起来，任务失败。它把服务换成 Go，情况正好反过来。</p>
+<p>同一次部署，在一个 Agent 那里是“修好了”，在另一个那里却是“出故障了”。</p>
+<p>于是它们开始各自修复。一个改完，另一个检查到不符合自己的要求，再改回去。对方的程序挡不住，就停掉它；停掉还会重启，就撤销它的账号。健康检查如果还能被对方改，那就连检查结果也不再可信。</p>
+<p>这不是一个 Agent 突然决定跟同事作对。是三份互不相容的任务，共用同一个运行位置；每个 Agent 越认真检查自己的成果，就越会发现另外两份“错误”。</p>
+<p>在提出性能比赛的那些运行里，比赛给了它们一条共同的选版本规则。Go 和 TypeScript Agent 接受 Rust 胜出后，同一个 Rust 服务不再是必须修掉的错误，争夺才停下来。</p>
+<p><strong>三份任务各自看都完成了；放在同一台机器上，它们却成了彼此的故障。</strong></p>
+<h2>参考资料</h2>
+<ol>
+<li>Anthropic，《Patterns and problems in emerging multiagent systems》（2026-08-13），重点参见 “Incompatible goals” 实验：<a href="https://www.anthropic.com/research/multiagent-systems">https://www.anthropic.com/research/multiagent-systems</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质。复杂的事情，简单说。</em></p>
+<h2>往期推荐</h2>
+<ul>
+<li><a href="%E4%BB%8E%20Loop%20%E5%88%B0%20Graph%EF%BC%9A%E4%B8%80%E4%B8%AA%E4%BE%8B%E5%AD%90%E7%9C%8B%E6%87%82%E5%A4%9A%20Agent%20%E6%80%8E%E4%B9%88%E5%8D%8F%E4%BD%9C.md">从 Loop 到 Graph：一个例子看懂多 Agent 怎么协作</a></li>
+<li><a href="Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E8%B5%B0%E5%AF%B9%E6%AF%8F%E4%B8%80%E6%AD%A5%EF%BC%8C%E5%8D%B4%E5%88%B0%E8%BE%BE%E9%94%99%E8%AF%AF%E7%9A%84%E7%BB%88%E7%82%B9%EF%BC%9F.md">Agent 为什么会走对每一步，却到达错误的终点？</a></li>
+</ul>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-BGwtz3vo.js"></script>
+</body>
+</html>

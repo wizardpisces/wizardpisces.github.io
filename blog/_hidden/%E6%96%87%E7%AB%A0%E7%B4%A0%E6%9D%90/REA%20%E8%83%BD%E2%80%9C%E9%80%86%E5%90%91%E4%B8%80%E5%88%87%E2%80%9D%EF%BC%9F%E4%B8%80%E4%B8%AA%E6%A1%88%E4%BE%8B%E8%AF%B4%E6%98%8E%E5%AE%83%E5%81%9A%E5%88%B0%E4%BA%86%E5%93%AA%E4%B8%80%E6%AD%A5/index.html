@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>REA 能“逆向一切”？它真正加速的是什么？ | LZ AI NOTE</title>
+  <meta name="description" content="&lt;! 写作锚点 读者收获：用满减例子理解“根据结果继续调查”的循环，再想到自己的工作加速点和需要重新审视的软件保护。 核心判断：REA 接通已有逆向工具，让 Agent 接手分析者的推理与调查安排；所需证据仍须通过工具、实验和真实环境获取。 如何推进：八折猜错 → 换金额、对照混淆代码与按含义改写的代码 → 解释 Agent 如何接续调查 → 留下工作流程…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="REA 能“逆向一切”？它真正加速的是什么？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-10-15">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/REA%20%E8%83%BD%E2%80%9C%E9%80%86%E5%90%91%E4%B8%80%E5%88%87%E2%80%9D%EF%BC%9F%E4%B8%80%E4%B8%AA%E6%A1%88%E4%BE%8B%E8%AF%B4%E6%98%8E%E5%AE%83%E5%81%9A%E5%88%B0%E4%BA%86%E5%93%AA%E4%B8%80%E6%AD%A5">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/REA%20%E8%83%BD%E2%80%9C%E9%80%86%E5%90%91%E4%B8%80%E5%88%87%E2%80%9D%EF%BC%9F%E4%B8%80%E4%B8%AA%E6%A1%88%E4%BE%8B%E8%AF%B4%E6%98%8E%E5%AE%83%E5%81%9A%E5%88%B0%E4%BA%86%E5%93%AA%E4%B8%80%E6%AD%A5">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="REA 能“逆向一切”？它真正加速的是什么？ | LZ AI NOTE">
+  <meta property="og:description" content="&lt;! 写作锚点 读者收获：用满减例子理解“根据结果继续调查”的循环，再想到自己的工作加速点和需要重新审视的软件保护。 核心判断：REA 接通已有逆向工具，让 Agent 接手分析者的推理与调查安排；所需证据仍须通过工具、实验和真实环境获取。 如何推进：八折猜错 → 换金额、对照混淆代码与按含义改写的代码 → 解释 Agent 如何接续调查 → 留下工作流程…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/REA%20%E8%83%BD%E2%80%9C%E9%80%86%E5%90%91%E4%B8%80%E5%88%87%E2%80%9D%EF%BC%9F%E4%B8%80%E4%B8%AA%E6%A1%88%E4%BE%8B%E8%AF%B4%E6%98%8E%E5%AE%83%E5%81%9A%E5%88%B0%E4%BA%86%E5%93%AA%E4%B8%80%E6%AD%A5">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"REA 能“逆向一切”？它真正加速的是什么？","description":"\u003c! 写作锚点 读者收获：用满减例子理解“根据结果继续调查”的循环，再想到自己的工作加速点和需要重新审视的软件保护。 核心判断：REA 接通已有逆向工具，让 Agent 接手分析者的推理与调查安排；所需证据仍须通过工具、实验和真实环境获取。 如何推进：八折猜错 → 换金额、对照混淆代码与按含义改写的代码 → 解释 Agent 如何接续调查 → 留下工作流程…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/REA%20%E8%83%BD%E2%80%9C%E9%80%86%E5%90%91%E4%B8%80%E5%88%87%E2%80%9D%EF%BC%9F%E4%B8%80%E4%B8%AA%E6%A1%88%E4%BE%8B%E8%AF%B4%E6%98%8E%E5%AE%83%E5%81%9A%E5%88%B0%E4%BA%86%E5%93%AA%E4%B8%80%E6%AD%A5","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/REA%20%E8%83%BD%E2%80%9C%E9%80%86%E5%90%91%E4%B8%80%E5%88%87%E2%80%9D%EF%BC%9F%E4%B8%80%E4%B8%AA%E6%A1%88%E4%BE%8B%E8%AF%B4%E6%98%8E%E5%AE%83%E5%81%9A%E5%88%B0%E4%BA%86%E5%93%AA%E4%B8%80%E6%AD%A5","dateModified":"2026-10-15","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：REA 能“逆向一切”？它真正加速的是什么？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/REA%20%E8%83%BD%E2%80%9C%E9%80%86%E5%90%91%E4%B8%80%E5%88%87%E2%80%9D%EF%BC%9F%E4%B8%80%E4%B8%AA%E6%A1%88%E4%BE%8B%E8%AF%B4%E6%98%8E%E5%AE%83%E5%81%9A%E5%88%B0%E4%BA%86%E5%93%AA%E4%B8%80%E6%AD%A5","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>REA 能“逆向一切”？它真正加速的是什么？</h1><!-- 写作锚点
+读者收获：用满减例子理解“根据结果继续调查”的循环，再想到自己的工作加速点和需要重新审视的软件保护。
+核心判断：REA 接通已有逆向工具，让 Agent 接手分析者的推理与调查安排；所需证据仍须通过工具、实验和真实环境获取。
+如何推进：八折猜错 → 换金额、对照混淆代码与按含义改写的代码 → 解释 Agent 如何接续调查 → 留下工作流程和软件保护两条启发。
+-->
+<h1>REA 能“逆向一切”？它真正加速的是什么？</h1>
+<p>假设一个结算程序，输入 100 元，输出 80 元。</p>
+<p>你猜它在打八折。</p>
+<p>再输入 150 元，它却输出 130 元。八折应该是 120 元，怎么多收了 10 块？</p>
+<p>换个猜测：每单减 20？再试，99 元一分不减，200 元也只减 20。看起来是“满 100 减 20，一单只减一次”。</p>
+<p>然后你去混淆代码查类似结算代码，找到的是这样一行：</p>
+<pre><code class="language-javascript">function e(t){return t&gt;=100?t-20:t}
+</code></pre>
+<p>解码成人读懂的代码：</p>
+<pre><code class="language-javascript">function checkout(amount) {
+  if (amount &gt;= 100) return amount - 20;
+  return amount;
+}
+</code></pre>
+<p>这就是逆向的简单展示</p>
+<p>这个过程一直在重复：<strong>观察结果，提出猜测，调用工具验证，再决定下一步。</strong></p>
+<p>而 REA 只是把已有逆向工具接给 Agent，方便它把整个查函数、追调用、继续验证的循环串起来。<strong>AI 自动化的是逆向工程中分析者的脑力劳动：根据线索提出猜测，决定下一步查什么、怎么验证。</strong></p>
+<p>程序里的实际数据、运行时的行为，仍要通过工具、实验和真实环境取得。模型猜得再像，也不能代替这些证据。“任意软件都能轻易复制”，还谈不上。</p>
+<p>对我们，有两条启发。</p>
+<p>**工作里，找类似的循环来加速。**如果工具已经能干活，人反复忙在看结果、转交信息、安排下一步，就值得试着让 Agent 接手，驱动任务链路自动转起来。</p>
+<p>**软件保护上，重算分析成本。**混淆仍能增加难度，但依赖“代码难读、人工分析太费劲”的防线还能拖住多久，需要重新估计（特别是核心源码都放在客户端的产品）。</p>
+<h2>参考资料</h2>
+<ol>
+<li>morluto，REA 项目 README，工具接入方式、支持目标与原生分析依赖，查阅于 2026 年 10 月 15 日：<a href="https://github.com/morluto/rea">https://github.com/morluto/rea</a></li>
+</ol>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-BGwtz3vo.js"></script>
+</body>
+</html>

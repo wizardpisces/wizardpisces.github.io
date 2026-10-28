@@ -9,7 +9,7 @@
   <meta name="author" content="LZ">
   <meta name="DC.title" content="模型为什么这样设计：架构系列节点">
   <meta name="DC.creator" content="LZ">
-  <meta name="DC.date" content="2026-09-22">
+  <meta name="DC.date" content="2026-10-15">
   <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE">
   <meta name="DC.publisher" content="LZ AI NOTE">
   <meta name="DC.language" content="zh-CN">
@@ -21,7 +21,7 @@
   <meta property="og:description" content="模型为什么这样设计：架构系列节点 系列角色：知识主干·模型内部。 负责解释模型结构改变了哪条信息、梯度、计算或参数路径；不承担软件框架实现与 Agent 系统工程。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不按架构名词写百科，也不把论文摘要换成通俗说法。它只追问一个问题： 今天看似理所当然的模型结构，当初是在解决什么失败？ 每篇从一个可感知…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"模型为什么这样设计：架构系列节点","description":"模型为什么这样设计：架构系列节点 系列角色：知识主干·模型内部。 负责解释模型结构改变了哪条信息、梯度、计算或参数路径；不承担软件框架实现与 Agent 系统工程。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不按架构名词写百科，也不把论文摘要换成通俗说法。它只追问一个问题： 今天看似理所当然的模型结构，当初是在解决什么失败？ 每篇从一个可感知…","url":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","dateModified":"2026-09-22","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：模型为什么这样设计：架构系列节点，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","about":["_hidden","公众号策略"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"模型为什么这样设计：架构系列节点","description":"模型为什么这样设计：架构系列节点 系列角色：知识主干·模型内部。 负责解释模型结构改变了哪条信息、梯度、计算或参数路径；不承担软件框架实现与 Agent 系统工程。整体归属与交叉规则见[内容系列总图]。 系列定位 这个系列不按架构名词写百科，也不把论文摘要换成通俗说法。它只追问一个问题： 今天看似理所当然的模型结构，当初是在解决什么失败？ 每篇从一个可感知…","url":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","dateModified":"2026-10-15","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：模型为什么这样设计：架构系列节点，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E6%A0%B7%E8%AE%BE%E8%AE%A1%EF%BC%9A%E6%9E%B6%E6%9E%84%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","about":["_hidden","公众号策略"]}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>模型为什么这样设计：架构系列节点</h1><h1>模型为什么这样设计：架构系列节点</h1>
@@ -279,11 +279,32 @@ Choice Head 怎样把区分结果变成候选分数？
 <td>黑箱</td>
 </tr>
 <tr>
-<td>Transformer 为什么每层都有 Attention 和 FFN？</td>
-<td>既然 Attention 是核心，为什么 FFN 往往占了更多参数</td>
-<td>Attention 负责 Token 之间的信息交换，FFN 负责每个 Token 内部的特征转换</td>
-<td>Token Mixing、Channel Mixing、SwiGLU</td>
+<td>AI 为什么更关注这几个词，而不是其他词？</td>
+<td>换一个查询，同一段前文被读取的比例发生变化</td>
+<td>从 QK 匹配、Softmax 到 V 的加权结果跑一次计算，区分当次读取比例与训练后的投影权重</td>
+<td>注意力分数、Softmax、加权读取</td>
 <td>黑箱</td>
+</tr>
+<tr>
+<td>模型已经有多个注意力头，为什么还要堆很多层？</td>
+<td>多个头可并行，模型却仍要逐个经过 Block</td>
+<td>比较同一轮多路读取与根据新状态继续加工，不把头或层固定成某个语义角色</td>
+<td>Multi-Head Attention、Transformer Block、深度</td>
+<td>黑箱</td>
+</tr>
+<tr>
+<td>Attention 已经读到了信息，FFN 还在算什么？</td>
+<td>读取来的信息还要转成下一轮可使用的状态</td>
+<td>Attention 负责跨位置交换信息，FFN 做逐位置非线性转换；二者共同产生能力，不按“关系 / 推理”硬切分</td>
+<td>Token Mixing、Channel Mixing、SwiGLU、残差</td>
+<td>黑箱</td>
+</tr>
+<tr>
+<td>模型的大量参数，为什么放在 FFN 而不是 Attention？</td>
+<td>组件名字的显眼程度不等于参数预算</td>
+<td>条件性下钻：以具体配置数矩阵，区分参数量、激活量和耗时；若没有独立增量就并入 FFN 篇</td>
+<td>矩阵维度、参数预算、计算成本</td>
+<td>黑箱 / 工程</td>
 </tr>
 <tr>
 <td>词已经变成向量，模型为什么还会分不清顺序？</td>
@@ -314,6 +335,13 @@ Choice Head 怎样把区分结果变成候选分数？
 <td>工程</td>
 </tr>
 <tr>
+<td><a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Agent%20%E5%8F%8D%E5%A4%8D%E8%AF%BB%E9%95%BF%E4%B8%8A%E4%B8%8B%E6%96%87%EF%BC%8CDeepSeek%20Flash%20%E6%80%8E%E4%B9%88%E5%8A%A0%E9%80%9F%EF%BC%9F.md">Agent 反复读长上下文，DeepSeek Flash 怎么加速？</a></td>
+<td>Agent 不断接收新的工具结果，并反复读取长历史</td>
+<td>用 CED 解释首次计算与历史复用的区别，再连接跨层 KV 复用、低精度存储与训练取舍；是机制应用稿，不要求读者先读完基础节点</td>
+<td>Prefill、Decode、CED、KV 复用与量化</td>
+<td>工程</td>
+</tr>
+<tr>
 <td>为什么只训练不到 1% 的参数，也能改变一个大模型？</td>
 <td>新任务并不总需要重写全部预训练知识</td>
 <td>任务所需的权重增量为什么可能存在于低维子空间，以及这个假设的边界</td>
@@ -335,7 +363,7 @@ Choice Head 怎样把区分结果变成候选分数？
 <td>黑箱</td>
 </tr>
 <tr>
-<td><a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E4%B8%80%E5%8F%A5%E6%8F%90%E7%A4%BA%E8%AF%8D%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E6%AC%A1%E7%94%9F%E6%88%90%E7%9A%84%E5%9B%BE%E7%89%87%E9%83%BD%E4%B8%8D%E4%B8%80%E6%A0%B7%EF%BC%9F.md">同一句提示词，为什么每次生成的图片都不一样？</a></td>
+<td><a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E5%90%8C%E4%B8%80%E5%8F%A5%E6%8F%90%E7%A4%BA%E8%AF%8D%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E6%AC%A1%E7%94%9F%E6%88%90%E7%9A%84%E5%9B%BE%E7%89%87%E9%83%BD%E4%B8%8D%E4%B8%80%E6%A0%B7%EF%BC%9F.md">同一句提示词，为什么每次生成的图片都不一样？</a></td>
 <td>提示词没有变化，构图、人物和灯光却会改变</td>
 <td>文字条件如何约束生成，不同随机起点又如何让迭代路径逐渐分开</td>
 <td>文字条件、Seed、潜空间、迭代生成、解码器</td>
@@ -375,7 +403,7 @@ Choice Head 怎样把区分结果变成候选分数？
 <li><strong>同一个问题，模型为什么每次回答不一样？</strong>——概率分布与采样。</li>
 <li><strong>AI 只看局部，怎么知道整张图在讲什么？</strong>——用视觉 Patch 讲清 Q、K、V 怎样完成按内容读取。</li>
 <li><strong>词序一换意思就变，模型从哪里知道位置？</strong>——位置编码与 RoPE。</li>
-<li><strong>Attention 负责找信息，FFN 负责加工信息：Transformer 一层究竟在做什么？</strong>——信息交换与特征加工。</li>
+<li><strong>Attention 已经读到了信息，FFN 还在算什么？</strong>——信息交换与特征加工。</li>
 <li><strong>线性层画直线，激活函数负责拐弯：神经网络为什么需要非线性</strong>——回到 FFN 内部理解非线性与深度；已有素材稿，等 FFN 篇后再发布。</li>
 </ol>
 <p>从 2026 年 9 月 10 日起，本系列成为周四活跃主线。首批先连续验证三个低门槛节点：</p>
@@ -537,7 +565,7 @@ Patch 提出查询 → 匹配其他区域 → 取回信息 → 获得全局关�
 </code></pre>
 <p>素材处理：</p>
 <ul>
-<li><a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8C%E4%B8%80%E5%8F%A5%E6%8F%90%E7%A4%BA%E8%AF%8D%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E6%AC%A1%E7%94%9F%E6%88%90%E7%9A%84%E5%9B%BE%E7%89%87%E9%83%BD%E4%B8%8D%E4%B8%80%E6%A0%B7%EF%BC%9F.md">《同一句提示词，为什么每次生成的图片都不一样？》</a>已经完成重写；长文增量是回答“随机起点怎样产生”和“模型依据什么逐步形成结构”，不只解释 Seed。</li>
+<li><a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E5%90%8C%E4%B8%80%E5%8F%A5%E6%8F%90%E7%A4%BA%E8%AF%8D%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E6%AC%A1%E7%94%9F%E6%88%90%E7%9A%84%E5%9B%BE%E7%89%87%E9%83%BD%E4%B8%8D%E4%B8%80%E6%A0%B7%EF%BC%9F.md">《同一句提示词，为什么每次生成的图片都不一样？》</a>已经完成重写；长文增量是回答“随机起点怎样产生”和“模型依据什么逐步形成结构”，不只解释 Seed。</li>
 <li><a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E6%94%B9%E5%9B%BE%E6%97%B6%EF%BC%8C%E5%88%B0%E5%BA%95%E6%98%AF%E5%9C%A8%E5%8E%9F%E5%9B%BE%E4%B8%8A%E6%94%B9%EF%BC%8C%E8%BF%98%E6%98%AF%E9%87%8D%E6%96%B0%E7%94%BB%E4%BA%86%E4%B8%80%E5%BC%A0%EF%BC%9F.md">《AI 改图时，到底是在原图上改，还是重新画了一张？》</a>作为更贴近用户的现象入口先发；它在正文内解释原图加噪所需的最小机制，不依赖生成总地图。后续《同一句提示词》再补全随机起点与开放生成，不重复改图的三种保留方式。</li>
 <li>[《为什么加一张姿势图，AI 生图就突然更听话了？》](…/文章素材/为什么加一张姿势图，AI 生图就突然更听话了？.md)已经成稿；它复用首篇的开放生成机制，引出与画面位置对应的结构条件。</li>
 <li><a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E5%8F%AA%E8%AE%A9%20AI%20%E6%8D%A2%E4%BB%B6%E8%A1%A3%E6%9C%8D%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%9E%E8%84%B8%E4%B9%9F%E4%B8%80%E8%B5%B7%E6%8D%A2%E4%BA%86%EF%BC%9F.md">《只让 AI 换件衣服，为什么连脸也一起换了？》</a>已完成初稿；核心不是罗列 Sketch、模板和速度，而是解释生图从“一次生成”走向“可连续修改”时，为什么“其他地方别动”本身是一项能力。</li>
@@ -546,6 +574,6 @@ Patch 提出查询 → 匹配其他区域 → 取回信息 → 获得全局关�
 <li><code>扩散模型为什么要先把图片毁掉，才能学会生成图片？</code>只向首篇和改图篇提供最小训练依据；完整加噪训练仍保留为下钻稿，不作为前置教材提前发布。</li>
 </ul>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-p-6qhOkR.js"></script>
+  <script type="module" crossorigin src="/assets/index-BGwtz3vo.js"></script>
 </body>
 </html>

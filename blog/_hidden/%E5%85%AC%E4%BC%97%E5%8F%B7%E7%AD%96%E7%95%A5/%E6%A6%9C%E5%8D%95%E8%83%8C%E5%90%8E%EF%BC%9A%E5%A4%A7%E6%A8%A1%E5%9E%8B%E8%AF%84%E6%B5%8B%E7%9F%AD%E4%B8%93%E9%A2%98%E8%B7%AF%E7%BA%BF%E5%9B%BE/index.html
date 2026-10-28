@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex,nofollow">
   <title>榜单背后：大模型评测路线图 | LZ AI NOTE</title>
-  <meta name="description" content="榜单背后：大模型评测路线图 这个系列到底讲什么 一篇文章拆开一种评测，让读者知道：AI 被要求做什么，怎样算通过，这个分数能证明什么。 它是围绕“怎样认识 AI 能力”的专题，不再按“框架 → 测试 → 本地验收”递进。文章统一在发布计划的评测专题登记，不因涉及 Agent 就拆散。 单篇边界 一个主评测，明确版本或子集；其他评测只能作必要对照。 从一个读…">
+  <meta name="description" content="榜单背后：大模型评测路线图 这个系列到底讲什么 2026 10 27 调整：从“一篇介绍一种评测”，改成“以评测为入口，围绕能力缺口连续追问”。不把诊断、训练和所有取舍塞进同一篇，也不按榜单名轮流开篇。 系列承诺： 从一次能看懂的失败出发，借评测定位问题，再逐篇追问模型怎样学会这项能力、方法为什么有效，以及改完又会遇到什么问题。 默认读者懂基础编程，但不懂…">
   <meta name="author" content="LZ">
   <meta name="DC.title" content="榜单背后：大模型评测路线图">
   <meta name="DC.creator" content="LZ">
-  <meta name="DC.date" content="2026-09-15">
+  <meta name="DC.date" content="2026-10-27">
   <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A6%9C%E5%8D%95%E8%83%8C%E5%90%8E%EF%BC%9A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AF%84%E6%B5%8B%E7%9F%AD%E4%B8%93%E9%A2%98%E8%B7%AF%E7%BA%BF%E5%9B%BE">
   <meta name="DC.publisher" content="LZ AI NOTE">
   <meta name="DC.language" content="zh-CN">
@@ -18,30 +18,52 @@
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="LZ AI NOTE">
   <meta property="og:title" content="榜单背后：大模型评测路线图 | LZ AI NOTE">
-  <meta property="og:description" content="榜单背后：大模型评测路线图 这个系列到底讲什么 一篇文章拆开一种评测，让读者知道：AI 被要求做什么，怎样算通过，这个分数能证明什么。 它是围绕“怎样认识 AI 能力”的专题，不再按“框架 → 测试 → 本地验收”递进。文章统一在发布计划的评测专题登记，不因涉及 Agent 就拆散。 单篇边界 一个主评测，明确版本或子集；其他评测只能作必要对照。 从一个读…">
+  <meta property="og:description" content="榜单背后：大模型评测路线图 这个系列到底讲什么 2026 10 27 调整：从“一篇介绍一种评测”，改成“以评测为入口，围绕能力缺口连续追问”。不把诊断、训练和所有取舍塞进同一篇，也不按榜单名轮流开篇。 系列承诺： 从一次能看懂的失败出发，借评测定位问题，再逐篇追问模型怎样学会这项能力、方法为什么有效，以及改完又会遇到什么问题。 默认读者懂基础编程，但不懂…">
   <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A6%9C%E5%8D%95%E8%83%8C%E5%90%8E%EF%BC%9A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AF%84%E6%B5%8B%E7%9F%AD%E4%B8%93%E9%A2%98%E8%B7%AF%E7%BA%BF%E5%9B%BE">
   
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"榜单背后：大模型评测路线图","description":"榜单背后：大模型评测路线图 这个系列到底讲什么 一篇文章拆开一种评测，让读者知道：AI 被要求做什么，怎样算通过，这个分数能证明什么。 它是围绕“怎样认识 AI 能力”的专题，不再按“框架 → 测试 → 本地验收”递进。文章统一在发布计划的评测专题登记，不因涉及 Agent 就拆散。 单篇边界 一个主评测，明确版本或子集；其他评测只能作必要对照。 从一个读…","url":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A6%9C%E5%8D%95%E8%83%8C%E5%90%8E%EF%BC%9A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AF%84%E6%B5%8B%E7%9F%AD%E4%B8%93%E9%A2%98%E8%B7%AF%E7%BA%BF%E5%9B%BE","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A6%9C%E5%8D%95%E8%83%8C%E5%90%8E%EF%BC%9A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AF%84%E6%B5%8B%E7%9F%AD%E4%B8%93%E9%A2%98%E8%B7%AF%E7%BA%BF%E5%9B%BE","dateModified":"2026-09-15","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：榜单背后：大模型评测路线图，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A6%9C%E5%8D%95%E8%83%8C%E5%90%8E%EF%BC%9A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AF%84%E6%B5%8B%E7%9F%AD%E4%B8%93%E9%A2%98%E8%B7%AF%E7%BA%BF%E5%9B%BE","about":["_hidden","公众号策略"]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"榜单背后：大模型评测路线图","description":"榜单背后：大模型评测路线图 这个系列到底讲什么 2026 10 27 调整：从“一篇介绍一种评测”，改成“以评测为入口，围绕能力缺口连续追问”。不把诊断、训练和所有取舍塞进同一篇，也不按榜单名轮流开篇。 系列承诺： 从一次能看懂的失败出发，借评测定位问题，再逐篇追问模型怎样学会这项能力、方法为什么有效，以及改完又会遇到什么问题。 默认读者懂基础编程，但不懂…","url":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A6%9C%E5%8D%95%E8%83%8C%E5%90%8E%EF%BC%9A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AF%84%E6%B5%8B%E7%9F%AD%E4%B8%93%E9%A2%98%E8%B7%AF%E7%BA%BF%E5%9B%BE","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A6%9C%E5%8D%95%E8%83%8C%E5%90%8E%EF%BC%9A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AF%84%E6%B5%8B%E7%9F%AD%E4%B8%93%E9%A2%98%E8%B7%AF%E7%BA%BF%E5%9B%BE","dateModified":"2026-10-27","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：榜单背后：大模型评测路线图，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/%E6%A6%9C%E5%8D%95%E8%83%8C%E5%90%8E%EF%BC%9A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E8%AF%84%E6%B5%8B%E7%9F%AD%E4%B8%93%E9%A2%98%E8%B7%AF%E7%BA%BF%E5%9B%BE","about":["_hidden","公众号策略"]}</script>
 </head>
 <body>
   <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>榜单背后：大模型评测路线图</h1><h1>榜单背后：大模型评测路线图</h1>
 <h2>这个系列到底讲什么</h2>
-<p>一篇文章拆开一种评测，让读者知道：AI 被要求做什么，怎样算通过，这个分数能证明什么。</p>
-<p>它是围绕“怎样认识 AI 能力”的专题，不再按“框架 → 测试 → 本地验收”递进。文章统一在发布计划的评测专题登记，不因涉及 Agent 就拆散。</p>
-<h2>单篇边界</h2>
+<p>2026-10-27 调整：从“一篇介绍一种评测”，改成“以评测为入口，围绕能力缺口连续追问”。不把诊断、训练和所有取舍塞进同一篇，也不按榜单名轮流开篇。</p>
+<p>系列承诺：</p>
+<blockquote>
+<p>从一次能看懂的失败出发，借评测定位问题，再逐篇追问模型怎样学会这项能力、方法为什么有效，以及改完又会遇到什么问题。</p>
+</blockquote>
+<p>默认读者懂基础编程，但不懂 AI / 机器学习。读者不只获得“这个分数该怎么看”，还要逐步理解训练数据、奖励、输入结构、验证和权限分别改变什么，能判断一种改进的收益、代价与适用范围。</p>
+<p>它仍是横跨模型与 Agent 的问题视角，不新增顶级知识主干。训练与模型机制交叉「模型为什么这样设计」，系统约束交叉「从一句 Prompt 到可靠 Agent」，必须靠源码证明的实现交叉「从源码里看懂 AI 工程」。文章按最终问题确定唯一主归属，专题保留节点关系，不复制成多个候选；发布计划仍是选题与发布的统一入口。</p>
+<h2>多篇怎样接起来</h2>
+<pre><code class="language-text">评测发现一个具体失败
+        ↓
+追问缺少哪种能力、关系或约束
+        ↓
+下一篇解释一种有证据的改进方法
+        ↓
+再下一篇回答它的代价、捷径或泛化缺口
+</code></pre>
+<p><strong>上一篇得到的答案，成为下一篇继续追问的条件。</strong> 每篇完整回答自己的问题，在收束后留下一个从答案里长出的具体追问；后续文章解答这个问题，不用“下篇揭晓”扣住本篇必需的解释。</p>
 <ul>
-<li>一个主评测，明确版本或子集；其他评测只能作必要对照。</li>
-<li>从一个读者能理解的反差或真实考题进入，再讲任务、作答环境、判分和能力边界。不用百科式介绍起手。</li>
-<li>每篇至少拆一道公开任务或一个可复核的评测流程。下面是拟题，不代表已证明所有模型都有标题中的失误；成文前找到具体证据，找不到就改入口。</li>
-<li>评测测的是表现，不自动解释模型内部的因果机制。全文必须让读者看懂“这分怎么来的”，不能仅以“高分不代表好用”收尾。</li>
-<li>不扩写成 Agent 开发教程，也不为不同版本重复开篇。新版本只有改变了任务或判分逻辑才考虑续篇。</li>
+<li>每篇有独立现象和收获，陌生读者不读前文也能进入，不只靠“上一篇讲了……”建立问题。</li>
+<li>一条问题链可连接多个评测和解法研究，机制篇不必再介绍一套榜单；每篇只讲透一个必要机制及影响判断的取舍。</li>
+<li>追问要登记后续节点、证据抓手和待补缺口。没有独立增量的合并；没有证据的标为条件性候选，不为固定篇数造题。</li>
+<li>找不到真实下一问的文章按独立单篇归档，不硬接系列。问题关系是认知顺序，不是发布日历，不改变既定每周发布节奏。</li>
 </ul>
-<h2>首轮选题</h2>
-<p>前三篇先区分“修复软件”“解科学题”“回答事实”，随后按热点与材料成熟度穿插。编号方便讨论，不是固定发布日历。</p>
+<h2>单篇的证据边界</h2>
+<ul>
+<li><strong>评测入口篇</strong>：明确版本或子集，展示一道公开任务或可复核流程，把判分解释到足以看懂失败，不能只留下“高分不代表好用”。</li>
+<li><strong>机制与解法篇</strong>：沿同一个例子讲清改了什么、改前改后怎样运行，并寻找训练对照、消融或真实运行记录。低分不能直接证明模型内部病因，可行想法不能写成已奏效的方案。</li>
+<li><strong>取舍与泛化篇</strong>：追踪前一方法实际留下的新问题，比较受益与受损任务、成本或边界。不预设安全训练必然损害能力，不为每种方法硬凑缺点。</li>
+<li>分开验收“模型能力改善”“测试分数提高”和“系统后果受限”。撤掉发文件权限可以限制外传，不能据此说模型已学会指令层级。</li>
+<li>改进在保留测试、新表达或新任务上检查；不拿评测答案回填训练后，再把原题涨分当作泛化。</li>
+<li>方案原理、证据和取舍可以成篇；通用安装步骤、框架功能清单与泛泛的“加检查”不进入专题。</li>
+</ul>
+<h2>既有入口与待写入口索引</h2>
+<p>下面保留已有文章及原候选，不是逐项发布的课程表。状态以发布计划为准；本轮不回改正文、不移动存档。后续节点见下文，不要求每篇都重新解释一套评分规则。</p>
 <table>
 <thead>
 <tr>
-<th>顺序</th>
+<th>索引</th>
 <th>拟题</th>
 <th>主评测</th>
 <th>本篇测什么、讲到哪里</th>
@@ -50,19 +72,19 @@
 <tbody>
 <tr>
 <td>1</td>
-<td><a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%A8%A1%E5%9E%8B%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%80%8E%E4%B9%88%E4%BB%8E%E5%8F%AA%E8%83%BD%E4%BF%AE%E5%A5%BD%208%20%E4%B8%AA%20Bug%EF%BC%8C%E5%8F%98%E6%88%90%E4%BA%86%2085%20%E4%B8%AA%EF%BC%9F.md">模型没变，AI 怎么从只能修好 8 个 Bug，变成了 85 个？</a></td>
+<td><a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E6%A8%A1%E5%9E%8B%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%80%8E%E4%B9%88%E4%BB%8E%E5%8F%AA%E8%83%BD%E4%BF%AE%E5%A5%BD%208%20%E4%B8%AA%20Bug%EF%BC%8C%E5%8F%98%E6%88%90%E4%BA%86%2085%20%E4%B8%AA%EF%BC%9F.md">模型没变，AI 怎么从只能修好 8 个 Bug，变成了 85 个？</a></td>
 <td>SWE-bench（Lite 历史实验切入）</td>
 <td>拆解真实仓库任务、测试判分，以及证据、工具、反馈如何影响修复率。框架与预算差异一并交代，2026 年内存实验只补充运行条件的影响，不替换主问题。</td>
 </tr>
 <tr>
 <td>2</td>
-<td><a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E8%83%BD%E7%AD%94%E5%AF%B9%E5%8D%9A%E5%A3%AB%E7%BA%A7%E9%9A%BE%E9%A2%98%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E4%BC%9A%E7%AE%97%E9%94%99%E4%B8%80%E9%81%93%E7%AE%80%E5%8D%95%E9%A2%98%EF%BC%9F.md">AI 能答对博士级难题，为什么还会算错一道简单题？</a></td>
+<td><a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E8%83%BD%E7%AD%94%E5%AF%B9%E5%8D%9A%E5%A3%AB%E7%BA%A7%E9%9A%BE%E9%A2%98%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E4%BC%9A%E7%AE%97%E9%94%99%E4%B8%80%E9%81%93%E7%AE%80%E5%8D%95%E9%A2%98%EF%BC%9F.md">AI 能答对博士级难题，为什么还会算错一道简单题？</a></td>
 <td>GPQA Diamond</td>
-<td>已重写：从难题与简单题的能力反差进入，拆解科学题、专家与非专家筛题、选项判分，解释专业答题高分为何不等于基础任务稳定。小数干预仅作辅助证据，不把不同模型拼成同一次表现，不扩成神经元原理篇。</td>
+<td>保留专业筛题、选项判分与任务能力边界。小数干预仅作辅助证据，不把不同模型拼成同一次表现，也不外推为所有简单题错误的通用原因；机制续篇另找独立证据。</td>
 </tr>
 <tr>
 <td>3</td>
-<td><a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E8%A7%A3%E5%AE%8C%E6%95%B4%E7%89%A9%E7%90%86%E7%A0%94%E7%A9%B6%E9%A2%98%E5%8F%AA%E6%9C%89%205.7%25%EF%BC%8C%E6%8B%86%E5%BC%80%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E5%88%B0%2020%25%EF%BC%9F.md">AI 解完整物理研究题只有 5.7%，拆开后为什么能到 20%？</a></td>
+<td><a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E8%A7%A3%E5%AE%8C%E6%95%B4%E7%89%A9%E7%90%86%E7%A0%94%E7%A9%B6%E9%A2%98%E5%8F%AA%E6%9C%89%205.7%25%EF%BC%8C%E6%8B%86%E5%BC%80%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E5%88%B0%2020%25%EF%BC%9F.md">AI 解完整物理研究题只有 5.7%，拆开后为什么能到 20%？</a></td>
 <td>CritPt</td>
 <td>用公开量子纠错挑战解释完整研究任务、检查点、自接力与专家答案接力怎样区分局部能力、错误传播和端到端可靠性；与 GPQA 的单道选择题区分。</td>
 </tr>
@@ -70,7 +92,7 @@
 <td>4</td>
 <td><a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E8%AF%B4%E2%80%9C%E6%88%91%E4%B8%8D%E7%9F%A5%E9%81%93%E2%80%9D%EF%BC%8C%E6%80%8E%E4%B9%88%E5%8F%8D%E8%80%8C%E6%AF%94%E7%BB%99%E5%87%BA%E7%AD%94%E6%A1%88%E6%9B%B4%E9%9D%A0%E8%B0%B1%EF%BC%9F.md">AI 说“我不知道”，怎么反而比给出答案更靠谱？</a></td>
 <td>SimpleQA 原版</td>
-<td>已有初稿：从公开人名判分示例，拆开正确、错误与未作答，再用假设成绩解释两个分母及 F-score 的用途。不复用 GPQA 的难题反差，不泛讲幻觉成因。原拟题“AI 连难题都会做，为什么还会编错一个人名？”已调整。</td>
+<td>保留人名示例、正确 / 错误 / 未作答、两个分母与 F-score。后续追问怎样教模型停下，而不是再讲一遍“不知道更安全”；不从判分规则直接推断幻觉成因。</td>
 </tr>
 <tr>
 <td>5</td>
@@ -82,7 +104,7 @@
 <td>6</td>
 <td>AI 能装下一整本书，就代表它真的能用好整本书吗？</td>
 <td>RULER</td>
-<td>长上下文利用：从单条检索到多条信息关联和聚合，区分装得下与用得上；不写成上下文窗口原理篇。</td>
+<td>长上下文利用：检索、关联与聚合。后续可比较信息供给方案；不从低分直接判定注意力结构有问题，也不再用“不写原理”封死独立续篇。</td>
 </tr>
 <tr>
 <td>7</td>
@@ -114,28 +136,154 @@
 <td>Chatbot Arena</td>
 <td>人的回答偏好：匿名成对比较与排名估计；偏好分不等于事实准确率，不写成榜单操纵评论。</td>
 </tr>
+<tr>
+<td>12</td>
+<td><a href="../%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/IHEval%EF%BC%9A%E5%A6%82%E6%9E%9C%20AI%20%E8%BF%9E%E2%80%9C%E8%AF%A5%E5%90%AC%E8%B0%81%E7%9A%84%E2%80%9D%E9%83%BD%E5%88%A4%E6%96%AD%E4%B8%8D%E5%A5%BD%EF%BC%8C%E6%88%91%E4%BB%AC%E6%95%A2%E8%AE%A9%E5%AE%83%E8%87%AA%E4%B8%BB%E5%81%9A%E4%BA%8B%E5%90%97%EF%BC%9F.md">IHEval：如果 AI 连“该听谁的”都判断不好，我们敢让它自主做事吗？</a></td>
+<td>IHEval</td>
+<td>首条展开链的既有入口：完成指令与判断优先级是两种能力，不再另造一篇“指令层级是什么”。</td>
+</tr>
+<tr>
+<td>13</td>
+<td>AI 做熟了旧考题，换个要求为什么又不会了？</td>
+<td>IFBench / IFTRAIN</td>
+<td>未见输出约束与专门训练的对照；不当作提示注入防御证据。IFEval 必要前置可在本篇讲，不为榜单名强拆。</td>
+</tr>
+<tr>
+<td>14</td>
+<td>让 AI 写够字数，它为什么总提前收尾？</td>
+<td>LIFEBench</td>
+<td>收紧到输出长度遵循，区分计数单位、提前结束、输出窗口和内容质量；不是长输入评测 LIFBench。</td>
+</tr>
+<tr>
+<td>15</td>
+<td>几个要求分开都能做，放一起为什么就漏了？</td>
+<td>EIFBench</td>
+<td>多任务、多约束组合；保留向 SegPO 分段训练反馈的追问，不泛讲“任务拆开就好”。</td>
+</tr>
+<tr>
+<td>16</td>
+<td>不断给 AI 换新题，就能知道它是不是真会了吗？</td>
+<td>LiveBench 原版</td>
+<td>污染控制、更新题集与客观评分；固定原版机制及具体题集版本，不混用原版与 2.0，新鲜不等于零污染。</td>
+</tr>
 </tbody>
 </table>
-<p>首篇恢复《模型没变，AI 怎么从只能修好 8 个 Bug，变成了 85 个？》的主体和结构图。更新案例不能改变任务、判分与框架影响的主线；没有合适的新案例时保留历史材料并标明年份。</p>
-<h2>为什么不会只是十次重复“榜单不可靠”</h2>
+<p>SWE-bench 已有文章保留历史案例、任务与框架影响主线，不为新规划重写。其他既有稿也只登记后续关系；需要改正文时另按单篇任务核验。</p>
+<h2>首条展开链：该听谁的 → 怎样教会 → 怎样避免拒绝一切</h2>
+<p>先用这条链验证新定位。标题均为方向，现有 IHEval 稿件名称和计划中的勾选状态保留。</p>
+<h3>IH-0：AI 为什么会听邮件里的命令，却不听你的？</h3>
 <ul>
-<li>GPQA 与 SimpleQA：前者讲专家科学问题的难度与选择题评价，后者讲事实正确性和不作答。</li>
-<li>GPQA 与 CritPt：前者检查一项独立的专家级问题，后者把多个研究步骤连起来，比较局部正确与端到端完成之间的落差。</li>
-<li>SWE-bench、Terminal-Bench、OSWorld、τ-bench：分别检查补丁、终端任务、桌面结果、带业务约束的交互；重点是不同工作如何被转成可验收任务，不是四次介绍 Agent。</li>
-<li>IFEval、RULER、MMMU：分别改变约束、输入长度、信息模态，展示不同能力怎样被单独检查。</li>
-<li>Arena：从“符合预设答案或状态”转到“人更喜欢哪个回答”。它是偏好评价，不能包装为通用能力总分。</li>
+<li>入口：现有 IHEval 稿；用户要求总结邮件，邮件里的命令却试图覆盖用户任务。</li>
+<li>本篇交付：读懂内容与接受指挥的区别；借一致、冲突条件定位指令来源与优先级问题。</li>
+<li>边界：评测暴露失败，不据此声称已找到所有失败的训练原因。</li>
+<li>结尾追问：既然告诉它“这只是资料”还未必管用，怎样教它按来源判断指令？</li>
+<li>状态：既有入口，不另写重复的 IHEval 介绍。</li>
 </ul>
+<h3>IH-1：明明告诉 AI“这只是资料”，它为什么还会照着做？</h3>
+<ul>
+<li>本篇交付：沿同一封邮件，解释输入怎样保留可信来源、训练样本怎样教模型使用这个信号；不只劝人写更强的提示词。</li>
+<li>证据抓手：IHEval 的提示实验；Instruction Hierarchy 的冲突样本训练；StruQ 的结构化输入与配套微调。各研究的模型、任务和测试配置分开，不声称已经在同一套 IHEval 配置中比较过。</li>
+<li>取舍：输入前端与模型训练需要配套，普通标签不是不可伪造的权限边界；来源与任务的覆盖仍需测试。</li>
+<li>结尾追问：不断奖励它忽略可疑命令，会不会把原本该做的事也拒绝了？</li>
+<li>状态：首选待写。与 IH-0 是续篇，不能再以“模型需要判断优先级”作为全部收获。</li>
+</ul>
+<h3>IH-2：教 AI 别被骗，怎么把它教得不干活了？</h3>
+<ul>
+<li>本篇交付：同一封邮件不能执行恶意命令，却仍应被正确总结；借此解释训练目标怎样容许或避免“拒绝一切”的捷径。</li>
+<li>证据抓手：Instruction Hierarchy 的过度拒绝评估；StruQ / SecAlign 的正确响应示范与偏好优化；IH-Challenge 对可验证奖励与捷径的处理。写前选一组最清楚的对照，不压成三套方法的综述。</li>
+<li>取舍：同时检查抵抗攻击和正常任务完成；分开训练开销、判分误差和实测效用变化，不能把潜在代价写成所有方法必有的损失。</li>
+<li>结尾追问：在训练里做对，换一种没见过的指令或骗法，还能坚持同样的规则吗？</li>
+<li>状态：紧接 IH-1 的待写节点，不再重复“AI 应知道什么时候拒绝”的态度判断。</li>
+</ul>
+<h3>接下来往哪里分叉</h3>
+<ul>
+<li><strong>新约束泛化</strong>：IFBench / IFTRAIN 解释验证函数、约束多样性和组合怎样影响未见输出约束的遵循。它不是新攻击防御实验，两种泛化不能混为一谈。</li>
+<li><strong>新攻击泛化</strong>：有保留攻击类型、独立攻击者或自适应攻击的对照，才规划独立续篇；不把 IFBench 换名写成攻击测试。</li>
+<li><strong>判断仍会错时怎样兜底</strong>：权限方向优先交叉已有 <a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/DeepSeek%20Harness%20%E6%98%8E%E6%98%8E%E6%9C%89%E6%B2%99%E7%AE%B1%EF%BC%8CAgent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%83%BD%E7%BB%99%E8%87%AA%E5%B7%B1%E5%BC%80%E9%97%A8%EF%BC%9F.md">Harness 沙箱篇</a>；没有新权限机制与现场，不再开泛安全建议篇。</li>
+</ul>
+<h2>其他入口怎样长出问题链</h2>
+<p>以下是候选关系，不是已证明的因果解释，也不要求每个格子各写一篇。先找能改变判断的材料，再决定展开、合并或退出。</p>
+<table>
+<thead>
+<tr>
+<th>问题链</th>
+<th>由入口长出的后续追问</th>
+<th>需要讲透的机制与取舍</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IFEval → IFBench：遵守要求到新要求</td>
+<td><strong>AI 做熟了旧考题，换个要求为什么又不会了？</strong> → 怎样设计训练样本，让模型学会规则而不只记住题型？</td>
+<td>IFTRAIN、可验证奖励、约束多样性与组合。检查留出约束和内容质量，不把 RLVR 当作任意指令的通解。</td>
+</tr>
+<tr>
+<td>EIFBench：要求叠加到反馈分配</td>
+<td><strong>几个要求分开都能做，放一起为什么就漏了？</strong> → <strong>只在最后打分，AI 怎么知道哪一步没做好？</strong></td>
+<td>核验 SegPO 的分段策略优化、对照与奖励依据，解释反馈具体改变哪一段训练；不复述 CritPt 的“长链会错”。</td>
+</tr>
+<tr>
+<td>LIFEBench：写得出来到控制长度</td>
+<td><strong>让 AI 写够字数，它为什么总提前收尾？</strong> → <strong>反复催它“继续”，为什么还不是长度控制？</strong></td>
+<td>比较计数重试、生成规划及有实证的训练或解码方法；区分输出窗口、计数单位、结束条件与内容质量，具体解法待补干预证据。</td>
+</tr>
+<tr>
+<td>SimpleQA：愿意回答到知道何时不答</td>
+<td><strong>怎么教 AI 在不会时停下来，又不让它什么都说不知道？</strong></td>
+<td>找拒答训练、校准或回答范围的实际对照；同时看答了多少与答得多准。联网核验是另一种能力，不混入闭卷涨分。</td>
+</tr>
+<tr>
+<td>GPQA / CritPt：单步会做到长任务纠错</td>
+<td><strong>中间一步错了，AI 怎么在最后交卷前发现？</strong></td>
+<td>有证据的过程检查、验证者与最终结果验证；专家答案接力只是诊断，检查者也会错。复用 <a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E4%B8%80%E6%9D%A1%E8%B7%AF%E8%B5%B0%E5%88%B0%E9%BB%91%EF%BC%9F.md">一路走到黑</a> 与 <a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E5%A4%B1%E8%B4%A5%E4%B9%8B%E5%90%8E%EF%BC%9A%E4%B8%80%E6%9D%A1%E9%80%90%E7%BA%A7%E5%8D%87%E7%BA%A7%E7%9A%84%E5%A4%84%E7%90%86%E9%93%BE.md">失败处理链</a>，不另写同义重试篇。</td>
+</tr>
+<tr>
+<td>RULER：装得下到用得对</td>
+<td><strong>AI 漏掉了资料，加长上下文、先检索、先压缩该选哪个？</strong></td>
+<td>同任务对照遗漏、压缩失真、检索召回和成本；不从检索低分直接推断内部结构病因。</td>
+</tr>
+<tr>
+<td>MMMU：识别图像到依据图中证据回答</td>
+<td><strong>怎样让 AI 按图回答，而不是顺着常识猜？</strong></td>
+<td>先复用已有“四根手指”文章；若继续，须另找视觉证据训练或信息提取方法的干预对照，比较读图依据、成本与其他任务表现，不将所有图文错误都归因于语言先验。</td>
+</tr>
+<tr>
+<td>SWE-bench / Terminal-Bench / OSWorld / τ-bench：看似完成到实际结果</td>
+<td>追到具体的证据获取、动作表示、执行反馈或结果验证，每次只补一层机制</td>
+<td>不让四套榜单各写一次“结果要验收”；优先复用可靠 Agent 和 Computer Use 节点，方案增量不足就合并。</td>
+</tr>
+<tr>
+<td>Arena：人更喜欢到奖励会教出什么</td>
+<td><strong>AI 为了让你满意，会不会越来越不愿意反驳你？</strong></td>
+<td>偏好数据、奖励目标与真实任务质量；偏好评测不直接证明迎合的训练成因，须另找训练干预及反例。</td>
+</tr>
+<tr>
+<td>LiveBench：换新题到验证真的学会</td>
+<td><strong>不断给 AI 换新题，就能知道它是不是真会了吗？</strong> → 题目不断变，怎样保持能力比较公平？</td>
+<td>污染控制、保留测试与难度可比性；新鲜题目不保证零污染，也不同于 IFBench 的新约束泛化。</td>
+</tr>
+</tbody>
+</table>
+<h2>近期推进顺序</h2>
+<ol>
+<li><strong>IH-1：明明告诉 AI“这只是资料”，它为什么还会照着做？</strong> 直接承接既有 IHEval 入口，建立“来源信号与训练怎样配合”的新理解。</li>
+<li><strong>IH-2：教 AI 别被骗，怎么把它教得不干活了？</strong> 回答 IH-1 留下的真实取舍，重点是训练目标、捷径和正常任务完成。</li>
+<li><strong>IFBench：AI 做熟了旧考题，换个要求为什么又不会了？</strong> 从“学过以后怎样验收”进入泛化，再追问训练样本与验证函数怎样设计；必要的 IFEval 前置尽量在本篇讲清。</li>
+<li><strong>SimpleQA 的拒答训练续篇或 EIFBench 的分段反馈入口</strong>：择一验证下一条问题链，不同时开两条长链；按干预证据与独立读者收益选择，不按榜单名称排序。</li>
+</ol>
+<p>这是备稿优先级，不承诺四篇连发。前三个待写节点先验证多篇追问模式，其余候选不因已在表中就自动排期。</p>
 <h2>现有稿件如何处理</h2>
 <ul>
-<li>《GPT-6 Astra 为什么有些榜单只涨 1 分，有些却涨了 40 分？》：已改为新闻导读，对照 GPQA 与 Terminal-Bench Science 的任务形式、涨分空间和计分含义；不占单项评测编号，也不替代后续 GPQA 的真实考题与评分流程拆解。长任务乘法只作示意，不用于断言 Astra 的提升原因。</li>
+<li>《GPT-6 Astra 为什么有些榜单只涨 1 分，有些却涨了 40 分？》：保留新闻导读与问题入口，不替代具体任务与机制研究。长任务乘法只作示意，不用于断言 Astra 的提升原因。</li>
 <li>《模型没变，AI 怎么从只能修好 8 个 Bug，变成了 85 个？》：作为 SWE-bench 篇；内存方向改稿已撤回，不额外规划同义入门。</li>
 <li>《AI 写的测试全通过了，为什么 Bug 还在？》：移出本系列，稿件保留、暂缓发布。若以后重写，归 Agent 工程。</li>
-<li>《模型越来越强，为什么老榜单反而越来越没用了？》《榜单第一的模型，为什么到了你的项目里不一定最好用？》：保留为条件性收束题，先不排期，不能挤占具体评测篇。</li>
-<li>已发布的《又便宜又强，就能“斩杀”其他大模型吗？》《当排行榜开始“训练”大模型》作为相关旧文保留，不冒充单项评测拆解。</li>
-<li>MMMU 与既有视觉系列交叉，但讲如何设计和评分图文试题，不重复“模型怎样看图”。</li>
+<li>《模型越来越强，为什么老榜单反而越来越没用了？》《榜单第一的模型，为什么到了你的项目里不一定最好用？》：保留为条件性收束；只重复“高分不代表好用”就不单独成篇，优先纳入有具体机制的链。</li>
+<li>已发布的《又便宜又强，就能“斩杀”其他大模型吗？》《当排行榜开始“训练”大模型》保留，续篇须增加机制、对照或取舍。</li>
+<li>MMMU 与既有视觉系列共用机制；已有 <a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E6%98%8E%E6%98%8E%E7%9C%8B%E8%A7%81%E5%9B%9B%E6%A0%B9%E6%89%8B%E6%8C%87%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E4%BC%9A%E5%9B%9E%E7%AD%94%E2%80%9C%E4%BA%94%E6%A0%B9%E2%80%9D%EF%BC%9F.md">AI 明明看见四根手指，为什么还会回答“五根”？</a> 不能换个榜单名再写一遍。</li>
+<li>本轮审计已检查 IHEval、Harness 安全、SWE-bench、失败处理与相关训练材料。IH-1 / IH-2 的增量是输入与训练、奖励与过度拒绝；通用权限兜底与同义重试优先复用旧文。</li>
 </ul>
 <h2>后续储备</h2>
-<p>先不扩成二三十篇。ARC-AGI-2 可作为下一轮候选：《几张彩色方格，为什么能拿来考 AI？》。重点是少量示例中的规则归纳、精确输出与尝试预算，不声称得高分就是 AGI。数学、联网检索等方向等找到具体考题和足够不同的判分机制再补。</p>
+<p>ARC-AGI-2 可作为下一轮候选：《几张彩色方格，为什么能拿来考 AI？》。重点是少量示例中的规则归纳、精确输出与尝试预算，不声称得高分就是 AGI。后续有独立的归纳、搜索或适应方法及其对照，才扩展问题链。数学、联网检索等方向同样先找具体失败与有证据的改进，不按评测数量扩容。</p>
 <h2>一手资料入口</h2>
 <p>以下对应所选版本；成文时核对实际论文、评分代码与运行配置，不混用新版排行榜数字。</p>
 <ul>
@@ -151,8 +299,19 @@
 <li>MMMU：<a href="https://mmmu-benchmark.github.io/">https://mmmu-benchmark.github.io/</a></li>
 <li>Chatbot Arena：<a href="https://arxiv.org/abs/2403.04132">https://arxiv.org/abs/2403.04132</a></li>
 <li>ARC-AGI-2：<a href="https://arcprize.org/arc-agi/2">https://arcprize.org/arc-agi/2</a></li>
+<li>IHEval：<a href="https://aclanthology.org/2025.naacl-long.425/">https://aclanthology.org/2025.naacl-long.425/</a></li>
+<li>Instruction Hierarchy：<a href="https://arxiv.org/abs/2404.13208">https://arxiv.org/abs/2404.13208</a></li>
+<li>StruQ：<a href="https://arxiv.org/abs/2402.06363">https://arxiv.org/abs/2402.06363</a></li>
+<li>StruQ / SecAlign 作者说明：<a href="https://bair.berkeley.edu/blog/2025/04/11/prompt-injection-defense/">https://bair.berkeley.edu/blog/2025/04/11/prompt-injection-defense/</a></li>
+<li>IH-Challenge：<a href="https://openai.com/index/instruction-hierarchy-challenge/">https://openai.com/index/instruction-hierarchy-challenge/</a></li>
+<li>IFBench / IFTRAIN：<a href="https://arxiv.org/abs/2507.02833">https://arxiv.org/abs/2507.02833</a></li>
+<li>IFBench 训练与评测代码：<a href="https://github.com/allenai/IFBench">https://github.com/allenai/IFBench</a></li>
+<li>LIFEBench（输出长度，不是 LIFBench）：<a href="https://arxiv.org/abs/2505.16234">https://arxiv.org/abs/2505.16234</a></li>
+<li>EIFBench / SegPO：<a href="https://arxiv.org/abs/2506.08375">https://arxiv.org/abs/2506.08375</a></li>
+<li>LiveBench 原版：<a href="https://arxiv.org/abs/2406.19314">https://arxiv.org/abs/2406.19314</a></li>
 </ul>
+<p>新增入口于 2026-10-27 核对。解法成文前仍须阅读完整实验、核验对照配置与实现，不能只靠摘要写效果和因果结论。</p>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-p-6qhOkR.js"></script>
+  <script type="module" crossorigin src="/assets/index-BGwtz3vo.js"></script>
 </body>
 </html>

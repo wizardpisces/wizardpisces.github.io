@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>后训练能只删攻击、不碰编程吗？关键不在训练，在验证 | LZ AI NOTE</title>
+  <meta name="description" content="&lt;! 写作锚点 读者收获：理解 SFT 与 RL 怎样改变模型行为，并能区分测试中更安全与相关能力已经消失。 核心判断：后训练通过示范和奖励更新参数，调整模型运用能力的方式；是否有效、是否误伤相关能力，需要独立评估。 如何推进：从保留漏洞修复、减少攻击行为的需求出发，依次解释预训练与后训练、行为调整、奖励方向和效果验证。 后训练能只删攻击、不碰编程吗？关键…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="后训练能只删攻击、不碰编程吗？关键不在训练，在验证">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-10-28">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8E%E8%AE%AD%E7%BB%83%E5%88%B0%E5%BA%95%E5%9C%A8%E8%AE%AD%E7%BB%83%E4%BB%80%E4%B9%88%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AE%83%E8%83%BD%E6%94%B9%E5%8F%98%20AI%20%E7%9A%84%E8%83%BD%E5%8A%9B%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8E%E8%AE%AD%E7%BB%83%E5%88%B0%E5%BA%95%E5%9C%A8%E8%AE%AD%E7%BB%83%E4%BB%80%E4%B9%88%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AE%83%E8%83%BD%E6%94%B9%E5%8F%98%20AI%20%E7%9A%84%E8%83%BD%E5%8A%9B%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="后训练能只删攻击、不碰编程吗？关键不在训练，在验证 | LZ AI NOTE">
+  <meta property="og:description" content="&lt;! 写作锚点 读者收获：理解 SFT 与 RL 怎样改变模型行为，并能区分测试中更安全与相关能力已经消失。 核心判断：后训练通过示范和奖励更新参数，调整模型运用能力的方式；是否有效、是否误伤相关能力，需要独立评估。 如何推进：从保留漏洞修复、减少攻击行为的需求出发，依次解释预训练与后训练、行为调整、奖励方向和效果验证。 后训练能只删攻击、不碰编程吗？关键…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8E%E8%AE%AD%E7%BB%83%E5%88%B0%E5%BA%95%E5%9C%A8%E8%AE%AD%E7%BB%83%E4%BB%80%E4%B9%88%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AE%83%E8%83%BD%E6%94%B9%E5%8F%98%20AI%20%E7%9A%84%E8%83%BD%E5%8A%9B%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"后训练能只删攻击、不碰编程吗？关键不在训练，在验证","description":"\u003c! 写作锚点 读者收获：理解 SFT 与 RL 怎样改变模型行为，并能区分测试中更安全与相关能力已经消失。 核心判断：后训练通过示范和奖励更新参数，调整模型运用能力的方式；是否有效、是否误伤相关能力，需要独立评估。 如何推进：从保留漏洞修复、减少攻击行为的需求出发，依次解释预训练与后训练、行为调整、奖励方向和效果验证。 后训练能只删攻击、不碰编程吗？关键…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8E%E8%AE%AD%E7%BB%83%E5%88%B0%E5%BA%95%E5%9C%A8%E8%AE%AD%E7%BB%83%E4%BB%80%E4%B9%88%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AE%83%E8%83%BD%E6%94%B9%E5%8F%98%20AI%20%E7%9A%84%E8%83%BD%E5%8A%9B%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8E%E8%AE%AD%E7%BB%83%E5%88%B0%E5%BA%95%E5%9C%A8%E8%AE%AD%E7%BB%83%E4%BB%80%E4%B9%88%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AE%83%E8%83%BD%E6%94%B9%E5%8F%98%20AI%20%E7%9A%84%E8%83%BD%E5%8A%9B%EF%BC%9F","dateModified":"2026-10-28","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：后训练能只删攻击、不碰编程吗？关键不在训练，在验证，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%90%8E%E8%AE%AD%E7%BB%83%E5%88%B0%E5%BA%95%E5%9C%A8%E8%AE%AD%E7%BB%83%E4%BB%80%E4%B9%88%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AE%83%E8%83%BD%E6%94%B9%E5%8F%98%20AI%20%E7%9A%84%E8%83%BD%E5%8A%9B%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>后训练能只删攻击、不碰编程吗？关键不在训练，在验证</h1><!-- 写作锚点
+读者收获：理解 SFT 与 RL 怎样改变模型行为，并能区分测试中更安全与相关能力已经消失。
+核心判断：后训练通过示范和奖励更新参数，调整模型运用能力的方式；是否有效、是否误伤相关能力，需要独立评估。
+如何推进：从保留漏洞修复、减少攻击行为的需求出发，依次解释预训练与后训练、行为调整、奖励方向和效果验证。
+-->
+<h1>后训练能只删攻击、不碰编程吗？关键不在训练，在验证</h1>
+<p>一个模型学会了写代码，就可能既会修复漏洞，也会编写攻击代码。</p>
+<p>如果我们想让它保留前者、减少后者，能不能在训练阶段直接调整？</p>
+<p>这不是纯假设。月之暗面发布 Kimi K3.1 Pro 时，就在中期训练和强化学习阶段移除了网络攻防相关数据，同时保留通用编程任务。内部测试中，未清理的检查点能解决 90.5% 的漏洞利用任务，清理后降到 81%——降低了，<strong>但没有消失</strong>。</p>
+<p>后训练就可以用来做这种调整。在已有能力的基础上，它会进一步改变模型如何使用这些能力。</p>
+<p>那么后训练究竟是如何做的，局限性在哪？看完本篇相信你就理解了 Kimi K3.1 即便是后训练也无法消除模型漏洞利用的能力</p>
+<h2>一、预训练让模型学会，后训练让模型更倾向于怎么做</h2>
+<p>先看大模型的基本训练过程。</p>
+<p><strong>预训练：学习如何预测下一个 token。</strong></p>
+<p>给模型一段文本：</p>
+<p><code>发现程序存在漏洞后，开发者应该……</code></p>
+<p>模型需要预测后面可能出现的内容。经过海量文本、代码和其他数据的训练，它逐渐学会语言规律、编程知识和复杂模式。</p>
+<p>但这不意味着它天然知道什么回答更有帮助、什么行为存在风险。它学到的知识和模式，也可能被用于不同目的。</p>
+<p><strong>后训练：进一步调整模型的行为。</strong></p>
+<p>常见的后训练方法包括监督微调（SFT）和强化学习（RL）。</p>
+<ul>
+<li>SFT：给模型示范什么样的输入应该对应什么样的回答。</li>
+<li>RL：让模型尝试完成任务，根据结果或奖励信号调整后续生成行为。</li>
+</ul>
+<p>例如，训练一个代码模型：</p>
+<pre><code class="language-text">生成代码 → 运行测试 → 发现错误 → 修改代码 → 再次测试
+</code></pre>
+<p>如果训练机制持续奖励通过测试、解决问题的行为，模型就会更倾向于采用有效的编程策略。</p>
+<p>这些变化来自参数更新。训练让某些回答和行为模式更容易出现，通常不会直接向模型写入一条条规则。</p>
+<h2>二、为什么后训练可以调整特定能力？</h2>
+<p>假设模型同时具备两种能力：</p>
+<p>A：分析软件漏洞并提出修复方案。</p>
+<p>B：利用漏洞构造攻击。</p>
+<p>两者会共享大量知识，例如程序执行逻辑、内存管理和漏洞成因。简单删除某类知识，可能连带损害修复能力。</p>
+<p>后训练可以从行为入手：<strong>让希望保留的行为在训练中得到更多强化。</strong></p>
+<p>可以把过程简化为：</p>
+<pre><code class="language-text">目标行为 → 设计训练样本或任务 → 产生回答 → 评估结果 → 更新模型参数
+</code></pre>
+<p>如果训练任务更强调安全分析与修复，同时减少对特定攻击行为的强化，模型的行为倾向就可能发生变化。</p>
+<p>但这并不是一个精确的开关。</p>
+<p>模型参数共同承载大量关联能力。一次更新可能同时影响多个任务；训练中表现出的变化，也不一定能迁移到所有真实场景。</p>
+<p>所以，调整某一种能力时，其他相关能力也可能跟着变化，很难像拆掉独立模块那样干净。</p>
+<h2>三、强化学习为什么尤其重要？</h2>
+<p>监督微调依赖示范：模型需要学习什么样的回答是理想答案。</p>
+<p>强化学习则可以进一步利用任务结果或奖励信号。对于有明确验证标准的任务，这尤其有用。</p>
+<p>例如代码任务可以检查：</p>
+<ul>
+<li>程序是否通过测试；</li>
+<li>结果是否符合预期；</li>
+<li>修改是否引入新错误。</li>
+</ul>
+<p>模型尝试不同方案，训练机制根据结果提供反馈，推动模型逐渐学会更有效的解题策略。</p>
+<p>但奖励信号也决定了优化方向。</p>
+<p>如果只奖励“成功完成任务”，却不约束完成任务的方式，模型可能学会投机取巧，甚至找到奖励机制没有预料到的路径。</p>
+<p>因此，训练目标除了定义成功，还需要考虑安全性、正确性和其他约束。<strong>训练实际奖励了什么，可能与设计者心里想要的结果有差距。</strong></p>
+<h2>四、为什么调整后还必须重新评估？</h2>
+<p>假设我们希望降低模型的某种攻击能力。训练后，模型在指定测试中表现得更安全了。</p>
+<p>这能证明什么？</p>
+<p>它说明模型在这些测试条件下发生了变化，还不能证明相关能力已经消失。</p>
+<p>至少还需要检查三件事：</p>
+<ol>
+<li><strong>目标能力是否变化？</strong> 换一种提示、任务形式或测试场景，结果是否依然成立？</li>
+<li><strong>有用能力是否受损？</strong> 通用编程、漏洞修复等相关任务是否退步？</li>
+<li><strong>模型是否只是学会了拒答？</strong> 它是真的不再容易完成某类任务，还是只在表面上改变了回答方式？</li>
+</ol>
+<p>训练可以推动模型朝某个方向变化，但是否达到了目标，要靠独立评估来验证。</p>
+<p>训练也无法保证模型在所有未见过的情境中都表现一致。对于高风险操作，仍然需要权限限制、沙箱和运行时防护。</p>
+<h2>五、后训练改变了什么？</h2>
+<p>后训练通过数据、任务、反馈和奖励更新模型参数，让某些行为更容易出现，另一些行为受到抑制。</p>
+<p>回到开头那个代码模型：我们希望它更倾向于分析和修复漏洞，减少生成攻击代码。能否做到，既取决于怎样设计训练，也取决于怎样验证结果。</p>
+<p>能力之间存在关联，训练目标也可能被模型以意料之外的方式满足。难点落在三件事上：</p>
+<p><strong>调整得动 → 不误伤其他能力 → 能证明调整有效。</strong></p>
+<p>因此，后训练不是银弹，用的不好，就可能引发意料之外的损失</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-BGwtz3vo.js"></script>
+</body>
+</html>

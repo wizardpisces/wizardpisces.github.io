@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+  <title>Agent 失败之后：一条逐级升级的处理链 | LZ AI NOTE</title>
+  <meta name="description" content="Agent 失败之后：一条逐级升级的处理链 上一篇讲了一个场景：Agent 遇到 401，认定是令牌过期，于是一路排查刷新逻辑。改了几轮，错误依旧。真正的原因，却可能是环境里缺了一把密钥。 问题来了：为什么 Agent 明明一直在失败，却没有及时换个方向？ 这就是 Agent 的 Loop of Death。它一直在思考、一直在行动，却始终困在同一个错误假…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="Agent 失败之后：一条逐级升级的处理链">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-10-26">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E5%A4%B1%E8%B4%A5%E4%B9%8B%E5%90%8E%EF%BC%9A%E4%B8%80%E6%9D%A1%E9%80%90%E7%BA%A7%E5%8D%87%E7%BA%A7%E7%9A%84%E5%A4%84%E7%90%86%E9%93%BE">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E5%A4%B1%E8%B4%A5%E4%B9%8B%E5%90%8E%EF%BC%9A%E4%B8%80%E6%9D%A1%E9%80%90%E7%BA%A7%E5%8D%87%E7%BA%A7%E7%9A%84%E5%A4%84%E7%90%86%E9%93%BE">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="Agent 失败之后：一条逐级升级的处理链 | LZ AI NOTE">
+  <meta property="og:description" content="Agent 失败之后：一条逐级升级的处理链 上一篇讲了一个场景：Agent 遇到 401，认定是令牌过期，于是一路排查刷新逻辑。改了几轮，错误依旧。真正的原因，却可能是环境里缺了一把密钥。 问题来了：为什么 Agent 明明一直在失败，却没有及时换个方向？ 这就是 Agent 的 Loop of Death。它一直在思考、一直在行动，却始终困在同一个错误假…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E5%A4%B1%E8%B4%A5%E4%B9%8B%E5%90%8E%EF%BC%9A%E4%B8%80%E6%9D%A1%E9%80%90%E7%BA%A7%E5%8D%87%E7%BA%A7%E7%9A%84%E5%A4%84%E7%90%86%E9%93%BE">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Agent 失败之后：一条逐级升级的处理链","description":"Agent 失败之后：一条逐级升级的处理链 上一篇讲了一个场景：Agent 遇到 401，认定是令牌过期，于是一路排查刷新逻辑。改了几轮，错误依旧。真正的原因，却可能是环境里缺了一把密钥。 问题来了：为什么 Agent 明明一直在失败，却没有及时换个方向？ 这就是 Agent 的 Loop of Death。它一直在思考、一直在行动，却始终困在同一个错误假…","url":"https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E5%A4%B1%E8%B4%A5%E4%B9%8B%E5%90%8E%EF%BC%9A%E4%B8%80%E6%9D%A1%E9%80%90%E7%BA%A7%E5%8D%87%E7%BA%A7%E7%9A%84%E5%A4%84%E7%90%86%E9%93%BE","mainEntityOfPage":"https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E5%A4%B1%E8%B4%A5%E4%B9%8B%E5%90%8E%EF%BC%9A%E4%B8%80%E6%9D%A1%E9%80%90%E7%BA%A7%E5%8D%87%E7%BA%A7%E7%9A%84%E5%A4%84%E7%90%86%E9%93%BE","dateModified":"2026-10-26","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：Agent 失败之后：一条逐级升级的处理链，LZ AI NOTE，https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E5%A4%B1%E8%B4%A5%E4%B9%8B%E5%90%8E%EF%BC%9A%E4%B8%80%E6%9D%A1%E9%80%90%E7%BA%A7%E5%8D%87%E7%BA%A7%E7%9A%84%E5%A4%84%E7%90%86%E9%93%BE","about":["公众号已发布"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Agent 失败之后：一条逐级升级的处理链</h1><h1>Agent 失败之后：一条逐级升级的处理链</h1>
+<p>上一篇讲了一个场景：Agent 遇到 401，认定是令牌过期，于是一路排查刷新逻辑。改了几轮，错误依旧。真正的原因，却可能是环境里缺了一把密钥。</p>
+<p>问题来了：为什么 Agent 明明一直在失败，却没有及时换个方向？</p>
+<p>这就是 Agent 的 Loop of Death。它一直在思考、一直在行动，却始终困在同一个错误假设里。它会根据报错修改代码，会根据测试结果继续排查，但如果这些动作始终围绕最初的判断展开，执行再积极，也只是把错误方向走得更远。</p>
+<p>生产 Agent 靠什么避免这种情况？单靠一种“更聪明的机制”还不够，需要一条逐级升级的失败处理链。下面用同一个 401，走一遍这条链。</p>
+<h2>第一级：预算兜底——先保证它不会无限烧钱</h2>
+<p><strong>动作</strong>：设一个硬上限，比如“同一类错误连续出现 3 次，或 token 消耗超过 50k，强制停手”。</p>
+<p><strong>401 里发生什么</strong>：Agent 第 1 轮查令牌刷新，第 2 轮改缓存时间，第 3 轮查重试次数，还是 401。预算计数器触发，任务暂停，交回给人。</p>
+<p><strong>敲重点</strong>：预算上限不解决方向问题，但它保证错误方向有成本上限。没有这一级，后面所有机制都可能来不及上场。</p>
+<h2>第二级：人工回退——有人发现不对劲，就换条路</h2>
+<p><strong>动作</strong>：人看到“连续三轮相同 401”，判断方向可能错了，按 <code>Esc Esc</code> 回退到第一次修改前，输入“先检查 <code>AUTH_SECRET</code> 是否为空”。</p>
+<p><strong>401 里发生什么</strong>：Claude Code 的 checkpoint 把人带回起点，人给出新方向。Agent 查环境变量，发现密钥为空，补齐，测试通过。</p>
+<p><strong>敲重点</strong>：回退机制负责让你退得回来。什么时候该退、退回去以后查什么，仍要靠人的经验。这一级的质量，取决于人有没有在盯着。</p>
+<h2>第三级：目标与评估器——防止没做完就宣布完成</h2>
+<p><strong>动作</strong>：设一个可验证条件，比如“<code>test/auth</code> 全过且 lint 干净”，由一个独立评估器每轮检查。不满足就把 Agent 踢回去继续。</p>
+<p><strong>401 里发生什么</strong>：评估器每轮都说“测试没过，继续”。Agent 就继续在令牌逻辑里加倍努力。它防住了“Agent 改了两行就说做完了”，但防不住“Agent 认真地做错”。</p>
+<p><strong>敲重点</strong>：评估器能判断“做完没有”，不一定能判断“为什么一直做不完”。它管终点，不管方向。</p>
+<h2>第四级：预设工作流——提前把已知的岔路写好</h2>
+<p><strong>动作</strong>：如果团队经常遇到认证失败，在流程里预写一条规则：“测试返回 401 时，先查环境变量，再查认证配置，最后才进令牌刷新逻辑。”</p>
+<p><strong>401 里发生什么</strong>：Agent 遇到 401，流程直接把它拽去查环境变量，发现密钥缺失。问题在写规则的那一刻就被预见了。</p>
+<p><strong>敲重点</strong>：工作流把经验固化成规则，对已知故障非常有效。但它只能处理已经覆盖的情况。如果这次是服务端权限或网络代理，规则没写，Agent 照样困住。</p>
+<h2>第五级：MCTS——让 Agent 自己比较不同路径</h2>
+<p><strong>动作</strong>：Agent 同时保留“令牌过期”“缺密钥”“服务端权限”三个假设，分别浅试一轮，把测试结果反馈到搜索树，优先深挖得分高的那条。</p>
+<p><strong>401 里发生什么</strong>：Agent 试“令牌过期”两轮，得分 0；试“缺密钥”一轮，发现 <code>AUTH_SECRET</code> 为空，得分 1。下一轮从根节点选择时，“缺密钥”整条路线的价值被抬高，Agent 优先继续它，而不是回头折腾令牌。</p>
+<p><strong>敲重点</strong>：MCTS 把换路决策从人手里收回给 Agent 自己。但前提是：候选假设里得有“缺密钥”这一条。如果 Agent 根本没提出这个假设，搜索树再漂亮也覆盖不到真因。而且它贵：需要生成候选、隔离执行、可靠评估。SWE-Search 在 SWE-bench 上报告了约 23% 的相对提升，但论文自己也把“性能更高”和“搜索更深、计算更多”绑在一起。</p>
+<h2>把这五级串成一条链</h2>
+<p>这五种机制可以组合成一条逐级升级的处理链：</p>
+<pre><code class="language-text">连续相同错误
+   ↓
+预算还剩多少？——不够 → 停手，交回给人
+   ↓ 够
+有没有人盯着？——有 → 人工回退，换方向
+   ↓ 没有
+目标评估器说“没完成”？——是 → 踢回去继续（但它只管终点）
+   ↓ 但方向可能还是错的
+这是已知故障模式吗？——是 → 预设工作流接管
+   ↓ 不是
+有多个合理假设、且能可靠验证吗？——是 → MCTS 自己搜索
+   ↓ 不是
+接受“可能走偏”，用预算兜底，等人介入
+</code></pre>
+<p>越往后，换路决策越从人手里收回到 Agent 自己手里，代价也越高。</p>
+<table>
+<thead>
+<tr>
+<th>策略</th>
+<th>谁做换路决策</th>
+<th>核心局限</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>预算上限</td>
+<td>计数器</td>
+<td>停止不等于找对答案</td>
+</tr>
+<tr>
+<td>人工回退</td>
+<td>人</td>
+<td>依赖有人盯着</td>
+</tr>
+<tr>
+<td>目标与评估器</td>
+<td>独立评估器</td>
+<td>管终点，不管方向</td>
+</tr>
+<tr>
+<td>预设工作流</td>
+<td>脚本作者</td>
+<td>只覆盖已预见的情况</td>
+</tr>
+<tr>
+<td>MCTS</td>
+<td>Agent 自己</td>
+<td>依赖候选假设质量、评估可靠性，且贵</td>
+</tr>
+</tbody>
+</table>
+<h2>回到那个思考题</h2>
+<p>上一篇结尾问：为什么生产 Agent 仍以线性循环为主——是树搜索太贵，还是反馈信号不够硬？</p>
+<p>生产 Agent 往往把这些事分开处理：预算决定什么时候停，评估器检查结果，脚本处理已知故障，人来判断要不要换个方向。MCTS 则尝试让 Agent 自己比较路线，前提是它能可靠地判断哪条路更好。</p>
+<p>是否采用 MCTS，要看几个具体条件：任务能不能回退，反馈够不够可靠，以及能不能有人及时介入。</p>
+<p>代码任务中的编译器和测试，可以提供一部分可验证的反馈。换到缺少这类反馈的领域，搜索树可能主要依赖模型自己打分。如果评分本身错了，搜索越多，也可能只是让错误方向的分数越来越高。</p>
+<p>这时，保留人工回退更稳妥。至少有人能跳出当前假设，重新判断这条路还值不值得走。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-BGwtz3vo.js"></script>
+</body>
+</html>

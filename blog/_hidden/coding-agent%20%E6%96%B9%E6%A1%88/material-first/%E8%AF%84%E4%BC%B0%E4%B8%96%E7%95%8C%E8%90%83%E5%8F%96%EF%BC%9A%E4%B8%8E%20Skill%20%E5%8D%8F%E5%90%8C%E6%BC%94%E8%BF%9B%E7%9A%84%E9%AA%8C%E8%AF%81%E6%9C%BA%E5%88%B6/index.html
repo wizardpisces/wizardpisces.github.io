@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>评估世界萃取：与 Skill 协同演进的验证机制 | LZ AI NOTE</title>
+  <meta name="description" content="从真实任务中同时提炼执行方法与评估环境，通过环境校验、方法验证和反馈回流，让 Skill 与评估能力共同积累。">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="评估世界萃取：与 Skill 协同演进的验证机制">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-10-16">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/%E8%AF%84%E4%BC%B0%E4%B8%96%E7%95%8C%E8%90%83%E5%8F%96%EF%BC%9A%E4%B8%8E%20Skill%20%E5%8D%8F%E5%90%8C%E6%BC%94%E8%BF%9B%E7%9A%84%E9%AA%8C%E8%AF%81%E6%9C%BA%E5%88%B6">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/%E8%AF%84%E4%BC%B0%E4%B8%96%E7%95%8C%E8%90%83%E5%8F%96%EF%BC%9A%E4%B8%8E%20Skill%20%E5%8D%8F%E5%90%8C%E6%BC%94%E8%BF%9B%E7%9A%84%E9%AA%8C%E8%AF%81%E6%9C%BA%E5%88%B6">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="评估世界萃取：与 Skill 协同演进的验证机制 | LZ AI NOTE">
+  <meta property="og:description" content="从真实任务中同时提炼执行方法与评估环境，通过环境校验、方法验证和反馈回流，让 Skill 与评估能力共同积累。">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/%E8%AF%84%E4%BC%B0%E4%B8%96%E7%95%8C%E8%90%83%E5%8F%96%EF%BC%9A%E4%B8%8E%20Skill%20%E5%8D%8F%E5%90%8C%E6%BC%94%E8%BF%9B%E7%9A%84%E9%AA%8C%E8%AF%81%E6%9C%BA%E5%88%B6">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"评估世界萃取：与 Skill 协同演进的验证机制","description":"从真实任务中同时提炼执行方法与评估环境，通过环境校验、方法验证和反馈回流，让 Skill 与评估能力共同积累。","url":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/%E8%AF%84%E4%BC%B0%E4%B8%96%E7%95%8C%E8%90%83%E5%8F%96%EF%BC%9A%E4%B8%8E%20Skill%20%E5%8D%8F%E5%90%8C%E6%BC%94%E8%BF%9B%E7%9A%84%E9%AA%8C%E8%AF%81%E6%9C%BA%E5%88%B6","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/%E8%AF%84%E4%BC%B0%E4%B8%96%E7%95%8C%E8%90%83%E5%8F%96%EF%BC%9A%E4%B8%8E%20Skill%20%E5%8D%8F%E5%90%8C%E6%BC%94%E8%BF%9B%E7%9A%84%E9%AA%8C%E8%AF%81%E6%9C%BA%E5%88%B6","dateModified":"2026-10-16","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：评估世界萃取：与 Skill 协同演进的验证机制，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/%E8%AF%84%E4%BC%B0%E4%B8%96%E7%95%8C%E8%90%83%E5%8F%96%EF%BC%9A%E4%B8%8E%20Skill%20%E5%8D%8F%E5%90%8C%E6%BC%94%E8%BF%9B%E7%9A%84%E9%AA%8C%E8%AF%81%E6%9C%BA%E5%88%B6","about":["_hidden","coding-agent 方案","material-first"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>评估世界萃取：与 Skill 协同演进的验证机制</h1><h1>评估世界萃取：与 Skill 协同演进的验证机制</h1>
+<h2>背景与目标</h2>
+<p>任务执行留下行动、产物、环境反馈和人工修正。这些材料可以用于提炼 Skill，也可以用于恢复任务条件、构造验收场景，检验后续方法是否有效。</p>
+<p>如果只保留 Skill，原来的问题和验收条件会逐渐丢失；如果同时保留能够重新执行与评价的环境，每次方法修订就有了可比较的依据。</p>
+<p>本方案从同一次任务中萃取两类产物：Skill 沉淀怎样完成任务，评估世界（Env）沉淀任务在什么条件下发生、Agent 可以怎样交互，以及结果如何被评价。两类产物通过实际使用共同演进。</p>
+<h2>整体机制</h2>
+<pre><code class="language-text">任务目标、执行轨迹、产物与人工反馈
+                  ↓
+          同一个分析工作空间
+           ↙             ↘
+Skill Creator         Env Creator
+提炼执行方法           萃取评估世界
+           ↘             ↙
+         Agent 采用 Skill，在 Env 中执行
+                  ↓
+         行为、结果、评价与修正
+           ↙             ↘
+       修订 Skill       完善 Env
+</code></pre>
+<p>人工先确认候选 Skill 的内容与适用范围，Env Creator 据此选择相关任务片段、恢复执行条件并构造评价。Skill 的实际效果通过环境中的执行结果检验。</p>
+<h2>评估世界包含什么</h2>
+<table>
+<thead>
+<tr>
+<th>部分</th>
+<th>内容与作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>初始状态</td>
+<td>恢复任务开始时的代码或文档、相关数据与配置</td>
+</tr>
+<tr>
+<td>交互条件</td>
+<td>提供可操作对象、工具、依赖服务，以及必要的 Fixture 或 Mock</td>
+</tr>
+<tr>
+<td>任务目标</td>
+<td>保留原始要求、约束和允许变化的范围</td>
+</tr>
+<tr>
+<td>评价机制</td>
+<td>定义检查方式、所需证据、人工验收条件及已知评价边界</td>
+</tr>
+</tbody>
+</table>
+<p>Env 应允许 Agent 根据行动获得新的环境响应，并选择不同的解决路径。任务目标和验收条件来自需求、工程约束与人工确认；候选 Skill 是接受检验的方法。</p>
+<h2>Env Creator 如何萃取环境</h2>
+<h3>从问题范围恢复执行条件</h3>
+<p>围绕候选 Skill 所解决的问题，选择相关任务、失败与修正片段，提取执行所需的最小条件。</p>
+<p>代码任务恢复起点 Commit、相关未提交改动、依赖和测试数据；文档任务恢复原文、修改要求、人工评论及前后 diff。最终实现和修改 diff 作为评价参考，保留产生这些变化的要求与理由。</p>
+<p>起点与关键过程证据需要在原任务执行时保存。复盘阶段检查材料是否充分，标出无法恢复的依赖和条件，供人工决定补证或缩小评估范围。</p>
+<h3>构造任务入口与评价方式</h3>
+<p>Env Creator 将原始要求整理为可再次交给 Agent 的任务，配置相关工具和数据，并从原有验收中提取检查项。</p>
+<p>执行侧获得任务、起点与必要上下文；评价侧保留参考结果、失败证据和检查依据。已知修复过程用于分析与评价，避免将来源任务的完整答案直接提供给待测 Agent。</p>
+<h3>校验环境本身</h3>
+<p>生成的 Env 需要接受人工 Review 和样本校验：</p>
+<pre><code class="language-text">已知满足要求的结果 → 能够识别其有效性
+已知违反要求的结果 → 能够发现对应失败
+不同实现的合法结果 → 能够按相同要求评价
+</code></pre>
+<p>例如，标题栏 Env 应能发现回调缺失或间距不符，也应接受满足要求的另一种实现。校验结果暴露任务条件、观察能力或评价标准的缺口，再反馈给 Env Creator 修订。</p>
+<h2>Skill 与 Env 如何协同演进</h2>
+<p>两者都可以变化，但每次比较固定相应的对象：</p>
+<pre><code class="language-text">验证 Skill：
+固定 Env → 比较旧 Skill 与候选 Skill 的行为和结果
+
+验证 Env：
+固定参考样本 → 检查新 Env 的恢复能力与评价表现
+            → 必要时重新评估已有 Skills
+</code></pre>
+<p>环境变化保留原因与影响范围。验收标准改变后，新旧结果分别对应各自条件；比较同一 Skill 的改进时，使用一致的环境和标准。</p>
+<h2>从 Env Creator 到 Meta-env-creator</h2>
+<p>Env Creator 负责具体环境的萃取与修订。Meta-env-creator 负责从反复出现的环境问题中，改进取证、恢复、场景构造和评价校验的方法。</p>
+<pre><code class="language-text">某个 Env 遗漏必要数据 → 补齐该环境
+
+多个 Env 反复遗漏执行条件
+  → 分析萃取方法的缺口
+  → 修订 Env Creator 的指导或工具
+  → 在独立任务中验证新方法
+</code></pre>
+<p>输入包括环境构建过程、恢复失败、错误判定、人工纠正，以及后续 Skill 的应用结果。人工审核生成方法的变化，检查是否减少遗漏和误判、是否增加恢复成本。</p>
+<p>补充新场景扩展的是评估覆盖；改进生成场景与评价的方法，才进入 meta 层。该机制作为后续探索，先保留相应过程与反馈。</p>
+<h2>初步验证范围</h2>
+<p>初版围绕一个真实任务问题，验证环境萃取与方法评估能否连接起来：</p>
+<ul>
+<li>能否恢复任务起点，并让 Agent 重新开展交互。</li>
+<li>能否依据原始要求评价已知成功、失败及合法替代结果。</li>
+<li>能否在同一 Env 中比较候选 Skill，回查行为、结果与证据。</li>
+<li>新发现的问题能否反馈为 Skill 修订、环境补充或明确的证据缺口。</li>
+</ul>
+<p>先验证这条闭环，再根据恢复成本、评价可靠性和场景复用情况，判断环境生成与 meta 层自动化的投入。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-BGwtz3vo.js"></script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>面向 RSI 的 Coding Agent：从任务反馈到方法迭代 | LZ AI NOTE</title>
+  <meta name="description" content="以 RSI（递归自改进）为方向，将真实任务反馈转化为 Skill、Tool 与 Context 的改进，并进一步迭代 Skill Creator 的取证、筛选与验证方法。">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="面向 RSI 的 Coding Agent：从任务反馈到方法迭代">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-10-16">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/%E9%9D%A2%E5%90%91%20RSI%20%E7%9A%84%20Coding%20Agent%EF%BC%9A%E4%BB%8E%E4%BB%BB%E5%8A%A1%E5%8F%8D%E9%A6%88%E5%88%B0%E6%96%B9%E6%B3%95%E8%BF%AD%E4%BB%A3">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/%E9%9D%A2%E5%90%91%20RSI%20%E7%9A%84%20Coding%20Agent%EF%BC%9A%E4%BB%8E%E4%BB%BB%E5%8A%A1%E5%8F%8D%E9%A6%88%E5%88%B0%E6%96%B9%E6%B3%95%E8%BF%AD%E4%BB%A3">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="面向 RSI 的 Coding Agent：从任务反馈到方法迭代 | LZ AI NOTE">
+  <meta property="og:description" content="以 RSI（递归自改进）为方向，将真实任务反馈转化为 Skill、Tool 与 Context 的改进，并进一步迭代 Skill Creator 的取证、筛选与验证方法。">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/%E9%9D%A2%E5%90%91%20RSI%20%E7%9A%84%20Coding%20Agent%EF%BC%9A%E4%BB%8E%E4%BB%BB%E5%8A%A1%E5%8F%8D%E9%A6%88%E5%88%B0%E6%96%B9%E6%B3%95%E8%BF%AD%E4%BB%A3">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"面向 RSI 的 Coding Agent：从任务反馈到方法迭代","description":"以 RSI（递归自改进）为方向，将真实任务反馈转化为 Skill、Tool 与 Context 的改进，并进一步迭代 Skill Creator 的取证、筛选与验证方法。","url":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/%E9%9D%A2%E5%90%91%20RSI%20%E7%9A%84%20Coding%20Agent%EF%BC%9A%E4%BB%8E%E4%BB%BB%E5%8A%A1%E5%8F%8D%E9%A6%88%E5%88%B0%E6%96%B9%E6%B3%95%E8%BF%AD%E4%BB%A3","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/%E9%9D%A2%E5%90%91%20RSI%20%E7%9A%84%20Coding%20Agent%EF%BC%9A%E4%BB%8E%E4%BB%BB%E5%8A%A1%E5%8F%8D%E9%A6%88%E5%88%B0%E6%96%B9%E6%B3%95%E8%BF%AD%E4%BB%A3","dateModified":"2026-10-16","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：面向 RSI 的 Coding Agent：从任务反馈到方法迭代，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/%E9%9D%A2%E5%90%91%20RSI%20%E7%9A%84%20Coding%20Agent%EF%BC%9A%E4%BB%8E%E4%BB%BB%E5%8A%A1%E5%8F%8D%E9%A6%88%E5%88%B0%E6%96%B9%E6%B3%95%E8%BF%AD%E4%BB%A3","about":["_hidden","coding-agent 方案","material-first"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>面向 RSI 的 Coding Agent：从任务反馈到方法迭代</h1><h1>面向 RSI 的 Coding Agent：从任务反馈到方法迭代</h1>
+<h2>背景</h2>
+<p>Coding Agent 可以在一次任务中根据测试、运行结果和人工反馈反复修正代码，但任务完成后，这些修正未必改变下一次执行。同类组件选型、验证缺失或环境误判，仍可能需要人工重新纠正。</p>
+<p>RSI（Recursive Self-Improvement，递归自改进）关注的是：系统能否根据反馈改进自身，并进一步改进产生这些改进的方法。</p>
+<p>在 Coding Agent 中，工程切入点是将任务中经过验证的有效变化沉淀到 Skill / Tool / Context，再用提炼与使用结果改进 Skill Creator 本身。</p>
+<h2>范式变化：从交付结果到改进执行系统</h2>
+<p>因此，优化单元从交付代码扩展到 Agent 的执行系统，再扩展到产生改进的方法：</p>
+<pre><code class="language-text">任务修正：改业务代码
+└─ 改善当前任务的结果
+
+执行系统改进：改 Skill / Tool / Context（含工程信息）
+└─ 改善后续任务的执行方式
+
+递归改进：改 Skill Creator 的取证 / 筛选 / 验证方法
+└─ 改善下一轮如何产生改进
+</code></pre>
+<p>进步通过可复用的策略与能力留下来，继续接受后续任务的反馈。</p>
+<h2>工程经验如何被复用</h2>
+<pre><code class="language-text">代码复用 → 使用已有组件、SDK、Service 等实现
+决策复用 → 沿用经过验证的选型、组织方式与验证策略
+</code></pre>
+<p>Golden Path 是针对同类工程问题、经过验证的优先路径，说明适用条件、参考实现和允许调整的边界，可以通过 Skill 或 Context 提供给 Agent。</p>
+<p>Asset 提供可复用实现，Contract 定义结果要求，Case 保留实际执行与验收反馈。Agent 根据需求采用或调整路径，再通过结果修订指导和适用范围。</p>
+<h2>总体闭环</h2>
+<p>Coding 负责完成任务并留下实际交互；Post-coding 对照这些记录与工程约束，提出可复用的改进。候选经过人工 Review 和新任务验证，再进入后续执行。</p>
+<pre><code class="language-text">真实任务
+  ↓
+执行轨迹 + 环境结果 + 人工反馈
+  ↓
+对照工程约束与已有经验
+  ↓
+候选改进 → 人工 Review / 修订
+  ↓
+新 Case 验证 + 既有能力回归
+  ├─ 有收益 → 保留 → 下一轮任务
+  ├─ 有退步 → 修订 / 删除 → 重新验证
+  └─ 证据不足 → 补证 → 重新判断
+</code></pre>
+<p>这一闭环还要作用于 Creator 自身，才能进入 RSI 的递归层：</p>
+<pre><code class="language-text">任务执行反馈 → 改执行方法 → 后续任务检验
+提炼与使用反馈 → 改提炼方法 → 后续提炼检验
+</code></pre>
+<h2>反馈驱动的工程机制</h2>
+<h3>真实事件为主线，验收记录作为标注</h3>
+<p>失败前后的输入、工具返回和实际改动，是定位优化点的依据。真实事件流保留过程事实，验收标注将具体片段与任务目标、判断依据和修正关系连接起来。</p>
+<pre><code class="language-text">真实事件流：操作 / 输入输出 / 产物变化 / 人工交互
+  ↑ 关联原始事件与证据
+验收标注：
+  目标 / 标准 / 判定 / 失败点
+  重试关系 / Skill 应用
+
+事件中已有的事实 → 直接复用
+需要验收语义的部分 → 补充标注
+</code></pre>
+<p>复盘入口：反复失败、无效重试、人工纠正；对照材料：首次成功、修正后的结果。</p>
+<h3>环境反馈决定优化方向</h3>
+<p>测试 / 构建 / API / Mock / Browser / Native 提供环境输出，判定时保留验收标准、执行条件和判定来源。</p>
+<pre><code class="language-text">确认缺口 → 选择优化对象
+├─ 已有能力未被发现 → 工程信息 / 检索
+├─ 指导不适用 → Skill / 适用范围
+├─ 证据缺失或不可见 → Tool / 验证入口
+└─ 运行环境故障 → 环境修复 / 重新观察
+</code></pre>
+<p>判断一次调整是否可复用，还要对照需求、工程状态和已有经验。</p>
+<h3>人工驱动提炼，使用结果持续回流</h3>
+<p>人工补充业务背景、隐含约束和优先级，并修订候选的归因与适用范围。这些反馈与对应候选版本关联，保留取舍依据，供下一轮分析使用。</p>
+<pre><code class="language-text">人工：提出问题 / 补充约束
+  ↓
+Agent：取证 / 对照工程与经验 / 提出候选
+  ↓
+人工 Review：评论与理由 ↔ 对应候选版本
+  ↓
+新 Case：具体 Skill 指导 → 实际行为 → 验收与返工
+  ↓
+反馈回流 → 保留 / 修订 / 删除指导
+</code></pre>
+<h2>改进机制如何进入递归层</h2>
+<p>如果 Creator 只是把每次失败转成新规则，经验可能越来越多，误用范围也随之扩大。此时需要调整的是证据筛选、同类 Case 比较和验证方法，再检查调整后的提炼质量。</p>
+<p>递归发生在改进机制也成为被改进的对象：</p>
+<pre><code class="language-text">Coding 轨迹
+→ 改 Skill / Tool / Context → 下一轮 Coding
+
+Skill Creator 的工作轨迹
+→ 改取证 / 筛选 / 验证方法 → 下一轮提炼
+</code></pre>
+<p>例如：</p>
+<pre><code class="language-text">人工反复删除过度泛化的规则
+  ↓
+候选方法：增加反例核查
+  ↓
+比较候选适用性 / 遗漏 / 人工修订成本
+  ├─ 改善 → 更新 Creator 指导或工具 → 下一轮提炼
+  └─ 未改善 → 修订 / 放弃该方法
+</code></pre>
+<p>Creator 的输入、取证操作、候选版本、Review 和使用结果，构成这一层的复盘材料。</p>
+<h2>改进成立的依据</h2>
+<p>通过某项检查提供的是局部证据；策略是否值得保留，还要观察它在未参与提炼的任务中的表现、代价和回归。对 Creator 的修改，则需要同时检验其产出的候选质量。</p>
+<pre><code class="language-text">比较条件：保留任务输入 / 验收标准 / 执行条件
+验证范围：未参与提炼的新 Case + 既有能力回归
+
+执行层：结果改善 / 返工减少 / 成本变化 / 引入的退步
+提炼层：候选适用性 / 遗漏 / 人工修订成本
+</code></pre>
+<h2>关联方案与参考</h2>
+<ul>
+<li><a href="./Agent%20%E6%94%B9%E8%BF%9B%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%EF%BC%9A%E4%B8%8A%E4%B8%8B%E6%96%87%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%8F%8D%E9%A6%88%E9%87%87%E9%9B%86.md">Agent 改进工作空间：上下文设计与反馈采集</a>：上下文组织与反馈采集专项方案。</li>
+<li><a href="./RN%20Screenshot%20Perception%20Layer%EF%BC%9A%E4%B8%8B%E4%B8%80%E9%98%B6%E6%AE%B5%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88.md">RN Screenshot Perception Layer</a>：Native 环境观察。</li>
+<li><a href="./%E5%B7%A5%E7%A8%8B%E9%A2%84%E6%8F%90%E7%82%BC%EF%BC%9A%E4%BB%8E%E5%B7%B2%E6%9C%89%E5%AE%9E%E7%8E%B0%E7%94%9F%E6%88%90%E5%8F%AF%E9%AA%8C%E8%AF%81%20Skills.md">工程预提炼：从已有实现生成可验证 Skills</a>：从工程证据生成候选指导，并通过实际应用持续修订。</li>
+<li><a href="https://arxiv.org/abs/2505.22954">Darwin Gödel Machine</a>：Agent 自身实现的修改与编码评测。</li>
+<li><a href="https://arxiv.org/abs/2510.04618">ACE</a>：依据执行反馈反思与增量整理上下文。</li>
+<li><a href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents">Anthropic Agent Evals</a>：执行轨迹、环境结果与评估。</li>
+</ul>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-BGwtz3vo.js"></script>
+</body>
+</html>

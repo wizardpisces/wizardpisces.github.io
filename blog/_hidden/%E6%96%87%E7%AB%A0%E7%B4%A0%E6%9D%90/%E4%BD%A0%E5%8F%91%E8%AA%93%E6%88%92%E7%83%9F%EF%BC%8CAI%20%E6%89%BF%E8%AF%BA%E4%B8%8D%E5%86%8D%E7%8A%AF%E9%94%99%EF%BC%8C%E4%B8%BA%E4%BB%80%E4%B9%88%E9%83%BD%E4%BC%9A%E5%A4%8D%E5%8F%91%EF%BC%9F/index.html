@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>你发誓戒烟，AI 承诺不再犯错，为什么都会复发？ | LZ AI NOTE</title>
+  <meta name="description" content="&lt;! 写作锚点 读者收获：借戒烟反复的循环，理解 AI 在训练与部署之间的表现落差，再用情境预案、过程反馈、环境约束和及时纠偏反过来思考戒烟策略。 核心判断：戒烟反复与模型部署失误有可类比的结构：承诺时的表现，没有覆盖真正触发行为的情境；改变还需要具体的练习、反馈与环境安排。 如何推进：沿用作者戒烟草稿，从承诺与复发讲到分布外泛化、预训练先验和行为成本，再…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="你发誓戒烟，AI 承诺不再犯错，为什么都会复发？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-10-19">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%BD%A0%E5%8F%91%E8%AA%93%E6%88%92%E7%83%9F%EF%BC%8CAI%20%E6%89%BF%E8%AF%BA%E4%B8%8D%E5%86%8D%E7%8A%AF%E9%94%99%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E9%83%BD%E4%BC%9A%E5%A4%8D%E5%8F%91%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%BD%A0%E5%8F%91%E8%AA%93%E6%88%92%E7%83%9F%EF%BC%8CAI%20%E6%89%BF%E8%AF%BA%E4%B8%8D%E5%86%8D%E7%8A%AF%E9%94%99%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E9%83%BD%E4%BC%9A%E5%A4%8D%E5%8F%91%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="你发誓戒烟，AI 承诺不再犯错，为什么都会复发？ | LZ AI NOTE">
+  <meta property="og:description" content="&lt;! 写作锚点 读者收获：借戒烟反复的循环，理解 AI 在训练与部署之间的表现落差，再用情境预案、过程反馈、环境约束和及时纠偏反过来思考戒烟策略。 核心判断：戒烟反复与模型部署失误有可类比的结构：承诺时的表现，没有覆盖真正触发行为的情境；改变还需要具体的练习、反馈与环境安排。 如何推进：沿用作者戒烟草稿，从承诺与复发讲到分布外泛化、预训练先验和行为成本，再…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%BD%A0%E5%8F%91%E8%AA%93%E6%88%92%E7%83%9F%EF%BC%8CAI%20%E6%89%BF%E8%AF%BA%E4%B8%8D%E5%86%8D%E7%8A%AF%E9%94%99%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E9%83%BD%E4%BC%9A%E5%A4%8D%E5%8F%91%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"你发誓戒烟，AI 承诺不再犯错，为什么都会复发？","description":"\u003c! 写作锚点 读者收获：借戒烟反复的循环，理解 AI 在训练与部署之间的表现落差，再用情境预案、过程反馈、环境约束和及时纠偏反过来思考戒烟策略。 核心判断：戒烟反复与模型部署失误有可类比的结构：承诺时的表现，没有覆盖真正触发行为的情境；改变还需要具体的练习、反馈与环境安排。 如何推进：沿用作者戒烟草稿，从承诺与复发讲到分布外泛化、预训练先验和行为成本，再…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%BD%A0%E5%8F%91%E8%AA%93%E6%88%92%E7%83%9F%EF%BC%8CAI%20%E6%89%BF%E8%AF%BA%E4%B8%8D%E5%86%8D%E7%8A%AF%E9%94%99%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E9%83%BD%E4%BC%9A%E5%A4%8D%E5%8F%91%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%BD%A0%E5%8F%91%E8%AA%93%E6%88%92%E7%83%9F%EF%BC%8CAI%20%E6%89%BF%E8%AF%BA%E4%B8%8D%E5%86%8D%E7%8A%AF%E9%94%99%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E9%83%BD%E4%BC%9A%E5%A4%8D%E5%8F%91%EF%BC%9F","dateModified":"2026-10-19","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：你发誓戒烟，AI 承诺不再犯错，为什么都会复发？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E4%BD%A0%E5%8F%91%E8%AA%93%E6%88%92%E7%83%9F%EF%BC%8CAI%20%E6%89%BF%E8%AF%BA%E4%B8%8D%E5%86%8D%E7%8A%AF%E9%94%99%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E9%83%BD%E4%BC%9A%E5%A4%8D%E5%8F%91%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>你发誓戒烟，AI 承诺不再犯错，为什么都会复发？</h1><!-- 写作锚点
+读者收获：借戒烟反复的循环，理解 AI 在训练与部署之间的表现落差，再用情境预案、过程反馈、环境约束和及时纠偏反过来思考戒烟策略。
+核心判断：戒烟反复与模型部署失误有可类比的结构：承诺时的表现，没有覆盖真正触发行为的情境；改变还需要具体的练习、反馈与环境安排。
+如何推进：沿用作者戒烟草稿，从承诺与复发讲到分布外泛化、预训练先验和行为成本，再保留六条策略，让 AI 训练与戒烟经验互相解释。
+-->
+<h1>你发誓戒烟，AI 承诺不再犯错，为什么都会复发？</h1>
+<h2>一个熟悉的循环</h2>
+<p>你发誓戒烟。压力很大，愧疚很重，话说得很狠：“这次一定。”</p>
+<p>三天后，饭后站起来的那三秒钟，手已经伸进口袋了。你甚至没有“决定”要抽，等你意识到的时候，烟已经点上了。</p>
+<p>然后是被发现、被指责、新一轮愧疚、新一轮承诺。循环。</p>
+<p>这个循环让人自我怀疑：是不是我意志力太差？或者不够真诚？</p>
+<p><strong>这个循环，和大型语言模型“训练时表现很好、部署时原形毕露”有相似的结构。</strong> 把戒烟当成一个 AI 对齐问题来看，两边的困惑就都解开了。</p>
+<h2>发誓那一刻，你其实在刷评估分（承诺 = SFT/Reward Hacking）</h2>
+<p>先看承诺。</p>
+<p>人在压力和愧疚下说出“我一定戒”，有时也是在安抚自己和身边的人：先缓解眼前的不适，具体怎么戒，还没想好。等那股情绪过去，承诺的劲头也跟着淡了。</p>
+<p>对应到大模型，这就像 <strong>SFT（监督微调）或 RLHF（基于人类反馈的强化学习）学到的表面策略</strong>。模型在训练阶段学会了输出人类满意的回答，在“被评估时”拿到高分。但当下表现的好是被监督了，而真实环境的对话中很可能现出原形。</p>
+<p>这样的承诺有点像<strong>奖励黑客（reward hacking）</strong>：你事前表现的“态度好”实际是被周围人或者自己狠狠地奖励了。你说得越狠，越像模型在评估集上刷了个高分。并不能代表实际问题不再复发</p>
+<p>再看复发。</p>
+<p>承诺发生在“被看见、有压力”的情境下；复发发生在“无人监督、线索触发”的另一种情境里。饭后、酒局、熬夜、焦虑，这些场景在承诺的那一刻根本不在场。</p>
+<p>这可以类比<strong>分布外泛化失败（OOD failure）</strong>。模型在训练集上表现好，部署到真实环境，遇到训练没有充分覆盖的状态，原来学到的某些倾向又可能占上风。对应到人，压力一撤，就退回到最省力的自动化路径。</p>
+<p><strong>承诺时想好的策略，没有覆盖真正容易复发的场景。</strong></p>
+<h2>手伸进口袋的那三秒，旧路径已经赢了（隐蔽路径 = 先验）</h2>
+<p>两个词很关键：隐蔽、门槛低。</p>
+<p><strong>隐蔽</strong>：复发未必从一句“我要抽烟”开始。手伸进口袋、路过便利店、饭后站起来的那三秒钟，熟悉的动作已经接上了，你还没来得及认真想。这让人联想到模型里的<strong>预训练先验</strong>：尼古丁依赖形成的线索与反应之间的联系，可以类比大量训练形成的强烈倾向。后来的对齐想改变它，却可能没有在各种情境里学扎实，旧倾向又冒了出来。也可以借此理解<strong>捷径学习</strong>：抽烟有一条走惯了的近路，戒烟却需要持续抑制，才能绕开它。</p>
+<p><strong>门槛低</strong>：复发不需要“下决心”，只需要“不阻止”。借模型生成打个比方，贪心解码每一步都选概率最高的 token；约束解码（constrained decoding）则限制哪些输出可以被选中。继续沿着旧习惯走，和每一步都要主动克制，可以用来理解这种差别。</p>
+<p><strong>戒断是逆水行舟，复发是顺流而下。</strong> 两者的行为成本不对称，门槛就差在这里。由俭入奢易，由奢入俭难，也是一个道理</p>
+<p>错配也出在这里：<strong>承诺试图用一次高强度的情绪事件，去对抗一个低强度却高频、自动化的行为路径。</strong> 情绪是一阵一阵的，旧习惯却每天都在运行。发誓时的那股劲会过去，饭后想抽烟的时刻却天天都有。誓言越来越狠，原来的触发路径却照旧没变。</p>
+<h2>别只练&quot;说得好&quot;，要练&quot;做得到&quot;</h2>
+<p>既然复发和习惯、触发场景有关，对策也得落到这些地方。有趣的是，AI 训练的改进思路，恰好能反过来启发戒烟策略。</p>
+<p><strong>1. 别只做 SFT，要做 RL：在真实触发分布里练。</strong></p>
+<p>借用前面的类比，承诺只是说出了理想答案，接下来还得练行动。把“我发誓不抽”换成一个 <strong>if-then 预案</strong>：“如果饭后想抽，我就立刻刷牙，或者出门走五分钟。”把决策提前到线索出现之前，用预设反应接住自动反应。这相当于把部署时的现实情境纳入到模型训练，再根据实际执行的结果调整优化。</p>
+<p>Deepseek R1 强化学习就是这么干的</p>
+<p><strong>2. 加过程奖励，不只看结果。</strong></p>
+<p>除了奖励“结果”，也给“识别触发点并记下来”一点肯定。记录每次复发的“前三秒”：当时在哪、在做什么、什么情绪。原来没留意的动作被看见了，下一次才有机会在这里停下来。</p>
+<p>这就是 agent 路径优化的 奖励分配；对完整的好的过程也给奖励</p>
+<p><strong>3. 对抗性采样：提前预演高诱惑场景。</strong></p>
+<p>别等真实复发来暴露漏洞。提前预演酒局、熬夜、高压场景下的反应，想好怎么拒绝、怎么离开、想抽时做什么，类似在训练时补上容易出错的样本。这里是预演应对，需要在可控环境进行，找个人监督监督；千万不要故意把自己放进诱惑里考验意志力，因为人性是经不起考验的</p>
+<p><strong>4. 环境改造 ≈ 推理时约束。</strong></p>
+<p>给抽烟增加一点麻烦：烟不留家里、不经过常买烟的便利店、喝酒场合提前离场。让“顺流而下”也没那么顺。这可以类比推理时给 prompt 不断加约束加规则，减少走回旧路的机会。</p>
+<p><strong>5. 复吸即停 ≈ 在线纠偏。</strong></p>
+<p>一次错误生成，不代表模型就没救了，需要给机会自我改进，及时纠偏；同样的，不能因为已经抽了一根，就否定过去的努力。别因为“反正已经失败了”接着抽，自责增加的压力也可能把人推向下一根烟。及时纠偏，是为了不让一次失误触发破窗效应，降低后面再来一根的门槛</p>
+<h2>复吸即停 ≈ 在线纠偏：别让一次失误触发破窗</h2>
+<p>这个类比最有意思的地方在于：<strong>承诺像是对齐时的好表现，复发则像分布外泛化失败。</strong></p>
+<p>反复戒烟失败，未必是人不够坚定，也可能是承诺时和真正想抽时的情境没对上，又缺少及时纠偏的办法。AI 的局限也在这里：<strong>对齐训练中学会了怎样回答，部署时却要面对训练没有充分覆盖的、无人监督的真实场景。</strong> 评估时的表面策略再漂亮，真实中也可能会继续说：不好意思，我错了，然后下次接着犯错。</p>
+<p>反过来，戒烟的策略也帮助我们理解 AI 的局限：<strong>光有对齐时的好表现还不够，还需要过程奖励、对抗性采样、推理时约束、在线纠偏。</strong> 一个系统“说得好”和“做得好”之间，可能隔着训练与部署之间的一整段落差。</p>
+<p>生活里那些“犯错、承诺、复发”的循环，减肥破戒后暴食、拖延后发誓再犯、关系里吵架后道歉再吵，也可以从这个角度重新看：<strong>是不是在用评估时的表现，替代实际执行时的策略？</strong></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-BGwtz3vo.js"></script>
+</body>
+</html>

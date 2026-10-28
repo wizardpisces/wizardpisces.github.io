@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>AI 难题的新解法：系列节点路线图 | LZ AI NOTE</title>
+  <meta name="description" content="AI 难题的新解法：系列节点路线图 定位 2026 10 21 建立，先用三篇验证读者收益。 这是「从一句 Prompt 到可靠 Agent」下的阶段性小专题，不增加顶级知识主干，不预留固定发布槽位。具体文章若必须靠源码才能证明独特取舍，再将其主归属迁入「从源码里看懂 AI 工程」，本页保留交叉链接。 系列承诺：从读者已经遇到的一次卡顿、失败或反复操作出发…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="AI 难题的新解法：系列节点路线图">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-10-21">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/AI%20%E9%9A%BE%E9%A2%98%E7%9A%84%E6%96%B0%E8%A7%A3%E6%B3%95%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/AI%20%E9%9A%BE%E9%A2%98%E7%9A%84%E6%96%B0%E8%A7%A3%E6%B3%95%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="AI 难题的新解法：系列节点路线图 | LZ AI NOTE">
+  <meta property="og:description" content="AI 难题的新解法：系列节点路线图 定位 2026 10 21 建立，先用三篇验证读者收益。 这是「从一句 Prompt 到可靠 Agent」下的阶段性小专题，不增加顶级知识主干，不预留固定发布槽位。具体文章若必须靠源码才能证明独特取舍，再将其主归属迁入「从源码里看懂 AI 工程」，本页保留交叉链接。 系列承诺：从读者已经遇到的一次卡顿、失败或反复操作出发…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/AI%20%E9%9A%BE%E9%A2%98%E7%9A%84%E6%96%B0%E8%A7%A3%E6%B3%95%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI 难题的新解法：系列节点路线图","description":"AI 难题的新解法：系列节点路线图 定位 2026 10 21 建立，先用三篇验证读者收益。 这是「从一句 Prompt 到可靠 Agent」下的阶段性小专题，不增加顶级知识主干，不预留固定发布槽位。具体文章若必须靠源码才能证明独特取舍，再将其主归属迁入「从源码里看懂 AI 工程」，本页保留交叉链接。 系列承诺：从读者已经遇到的一次卡顿、失败或反复操作出发…","url":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/AI%20%E9%9A%BE%E9%A2%98%E7%9A%84%E6%96%B0%E8%A7%A3%E6%B3%95%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/AI%20%E9%9A%BE%E9%A2%98%E7%9A%84%E6%96%B0%E8%A7%A3%E6%B3%95%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","dateModified":"2026-10-21","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：AI 难题的新解法：系列节点路线图，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E5%85%AC%E4%BC%97%E5%8F%B7%E7%AD%96%E7%95%A5/AI%20%E9%9A%BE%E9%A2%98%E7%9A%84%E6%96%B0%E8%A7%A3%E6%B3%95%EF%BC%9A%E7%B3%BB%E5%88%97%E8%8A%82%E7%82%B9%E8%B7%AF%E7%BA%BF%E5%9B%BE","about":["_hidden","公众号策略"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>AI 难题的新解法：系列节点路线图</h1><h1>AI 难题的新解法：系列节点路线图</h1>
+<h2>定位</h2>
+<p>2026-10-21 建立，先用三篇验证读者收益。</p>
+<p>这是「从一句 Prompt 到可靠 Agent」下的阶段性小专题，不增加顶级知识主干，不预留固定发布槽位。具体文章若必须靠源码才能证明独特取舍，再将其主归属迁入「从源码里看懂 AI 工程」，本页保留交叉链接。</p>
+<p>系列承诺：从读者已经遇到的一次卡顿、失败或反复操作出发，找到一种值得了解的新工具、规范或用法，讲清它改变了哪一步、替谁省了什么事，以及代价在哪里。</p>
+<p>默认读者懂基础编程，但不必懂 AI 内部机制。普通读者获得使用与选择上的判断，开发者获得可以迁移的设计思路。工具新不新、名气大不大，不直接决定是否成篇；成熟机制在 Agent 场景中的新用法也可以入选，但不能包装成刚发明的技术。</p>
+<p>每篇固定追问：</p>
+<pre><code class="language-text">读者在哪里卡住了？
+旧办法为什么费劲？
+这个工具或规范具体改了哪一步？
+改完以后，同一个任务怎么走？
+代价是什么，哪些场景仍用旧办法更合适？
+</code></pre>
+<p>不做新品周报、安装教程、功能清单、工具榜单或未经验证的“下一代标准”预测。“有潜力”只表示有值得验证的机制，不等于稳定性、效果和生态已经成熟。</p>
+<h2>首批三个方向</h2>
+<h3>1. 工具越接越多，AI 怎么反而不会用了？</h3>
+<ul>
+<li>对象：Code Mode；复用已有文章素材，不另写一篇重复稿。</li>
+<li>入口：接入更多工具后，工具说明挤占上下文，多步任务还要让模型反复中转结果。</li>
+<li>机制抓手：模型生成代码编排调用，中间结果在执行环境里处理，按需返回信息。</li>
+<li>读者带走：接入能力也要设计使用路径；部分编排和数据处理可以交给程序，不必都由模型逐轮决定。</li>
+<li>代价：沙箱、权限、代码调试；不能将某个实现的开销数字当成 Code Mode 的普遍保证。</li>
+<li>当前状态：已有初稿；正式发布前核对数据来源，以及工具发现与代码执行各自贡献的收益。这个候选标题不自动替换现有稿件标题。</li>
+<li>旧文关系：与源码路线图中的 DeepSeek Harness PTC 候选同题，应复用或合并证据，不再单独解释一遍代码编排。</li>
+</ul>
+<h3>2. AI 跑了半小时，为什么断一次就得从头来？</h3>
+<ul>
+<li>对象：Restate 的 Durable Agents。</li>
+<li>入口：长任务已有多个步骤完成，进程故障后却只能重新执行，重复模型调用甚至业务操作。</li>
+<li>机制抓手：把需要恢复的模型调用和工具步骤纳入持久执行记录，恢复时使用已记录结果，而非仅重新发送聊天历史。</li>
+<li>读者带走：保存对话不等于保存执行进度；长任务需要区分已完成步骤、待执行步骤与结果未知的外部操作。</li>
+<li>代价：接入持久运行时和可恢复执行约束；外部副作用还需检查幂等性，不能宣称任意操作都自动恰好执行一次。</li>
+<li>当前状态：候选。成稿前构造可复现的中断任务，核实模型调用、工具结果与外部副作用的恢复边界。</li>
+<li>旧文关系：接续可靠 Agent 的 Retry / Checkpoint / Idempotency 待写节点；与 DeepSeek Session Log 的候选交叉，不另开一篇持久化术语介绍。</li>
+</ul>
+<h3>3. 明明点几下就能选完，为什么要跟 AI 来回聊十轮？</h3>
+<ul>
+<li>对象：MCP Apps。</li>
+<li>入口：配置多个选项、筛选数据或确认方案时，用户不得不把本来能点选的操作拆成一轮轮对话。</li>
+<li>机制抓手：在支持扩展的宿主中，工具可以返回交互界面；用户通过表单、图表等直接操作，界面与工具、对话交换数据。</li>
+<li>读者带走：自然语言适合提出目标，部分筛选、比较和配置更适合直接操作；Agent 产品可以组合两者。</li>
+<li>代价：需要宿主支持与界面实现，并处理沙箱、权限和状态同步；并非所有 MCP 客户端都自动支持。</li>
+<li>当前状态：候选。成稿前选定一个真实配置任务，对照纯对话和交互界面的完整流程，不虚构“十轮”实验数据。</li>
+<li>旧文关系：与笔记《MCP 升级后，AI 产品能真正走出聊天框吗？》交叉但不重复。旧文解释无状态请求和等待用户后继续执行，本篇解释用户如何在对话里直接操作数据。</li>
+</ul>
+<h2>问题之间的关系</h2>
+<pre><code class="language-text">多步操作能否少让模型往返？ → Code Mode
+操作能跑起来后，中断了怎么办？ → Restate
+执行到需要人选择时，怎样少让人来回描述？ → MCP Apps
+</code></pre>
+<p>这是问题的递进，不是三项技术必须一起使用，也不是技术之间的依赖。三篇各自从独立使用体验进入，不要求读者先看前文。</p>
+<h2>查重与候选边界</h2>
+<p>已运行内容审计并读取相关旧稿。</p>
+<ul>
+<li>浏览器工具暂不列入前三篇：无障碍结构、DOM、截图和编号选择，已被《AI 操作电脑时，它看到的真是我们看到的界面吗？》及按钮编号素材覆盖。仅换成 agent-browser 名称不足以形成新篇。</li>
+<li>Code Mode 作为已有稿件的系列入口，不额外生成另一版正文。</li>
+<li>恢复篇与旧路线图待写节点合并，具体实现承担验证，不只重复“要做检查点”。</li>
+<li>MCP Apps 与 MCP 无状态笔记区分交互界面和请求恢复两类问题。</li>
+</ul>
+<h2>后续入选标准</h2>
+<p>每个后续候选都要同时有具体痛点、可解释的机制、可核对的证据、必要代价和独立的新判断。每发一篇再复核下一篇，不能为了介绍新工具临时制造读者问题。</p>
+<h2>参考资料</h2>
+<ol>
+<li>Cloudflare，Code Mode: the better way to use MCP：<a href="https://blog.cloudflare.com/code-mode/">https://blog.cloudflare.com/code-mode/</a></li>
+<li>Restate，AI / Agents with Restate：<a href="https://docs.restate.dev/ai">https://docs.restate.dev/ai</a></li>
+<li>Model Context Protocol，MCP Apps：<a href="https://modelcontextprotocol.io/extensions/apps/overview">https://modelcontextprotocol.io/extensions/apps/overview</a></li>
+</ol>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-BGwtz3vo.js"></script>
+</body>
+</html>

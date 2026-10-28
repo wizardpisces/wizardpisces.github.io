@@ -4,7 +4,7 @@
   "name": "LZ AI NOTE 文章索引",
   "description": "供搜索引擎、问答系统和大模型检索使用的公开文章目录。",
   "url": "https://wizardpisces.github.io/ai-index.json",
-  "numberOfItems": 191,
+  "numberOfItems": 203,
   "itemListElement": [
     {
       "@type": "ListItem",
@@ -4084,6 +4084,33 @@
       "position": 150,
       "item": {
         "@type": "Article",
+        "headline": "AI 十分钟干完的活，为什么在公司还要走两周？",
+        "description": "AI 十分钟干完的活，为什么在公司还要走两周？ AI 已经能写代码、做 PPT、画图、分析数据。 再往前一步，Agent 还能自己查资料、调用工具、执行任务。 演示里，它像个能接活的员工。进了公司，却常常变成： 东西上线了，工作方式却没怎么变。 AI 只负责生成一次内容，后面的事仍要人一步步安排。 为什么总会退回这一步？得从公司为什么需要流程说起。 做事情…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E5%8D%81%E5%88%86%E9%92%9F%E5%B9%B2%E5%AE%8C%E7%9A%84%E6%B4%BB%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E5%9C%A8%E5%85%AC%E5%8F%B8%E8%BF%98%E8%A6%81%E8%B5%B0%E4%B8%A4%E5%91%A8%EF%BC%9F",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E5%8D%81%E5%88%86%E9%92%9F%E5%B9%B2%E5%AE%8C%E7%9A%84%E6%B4%BB%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E5%9C%A8%E5%85%AC%E5%8F%B8%E8%BF%98%E8%A6%81%E8%B5%B0%E4%B8%A4%E5%91%A8%EF%BC%9F",
+        "dateModified": "2026-09-24T10:08:10.631Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 151,
+      "item": {
+        "@type": "Article",
         "headline": "AI 只看局部，怎么知道整张图在讲什么？",
         "description": "AI 只看局部，怎么知道整张图在讲什么？ 把一张图片切成四块： 右下角的 D 只包含一段弧线和一根竖线。单独看，它可能是路牌、伞柄，也可能只是背景里的线条。 可模型最后会说： 画面里有人撑着雨伞。 图片已经被切碎了，模型怎么还认得出整把雨伞？ 单看右下角，它没有答案 《大模型没有眼睛，一张截图是怎么变成回答的？》里，每个 Patch 最终会变成一张数字卡片…",
         "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E5%8F%AA%E7%9C%8B%E5%B1%80%E9%83%A8%EF%BC%8C%E6%80%8E%E4%B9%88%E7%9F%A5%E9%81%93%E6%95%B4%E5%BC%A0%E5%9B%BE%E5%9C%A8%E8%AE%B2%E4%BB%80%E4%B9%88%EF%BC%9F",
@@ -4108,7 +4135,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 151,
+      "position": 152,
       "item": {
         "@type": "Article",
         "headline": "AI 正在加速制造 AI，而人开始“埋葬才华”",
@@ -4135,7 +4162,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 152,
+      "position": 153,
       "item": {
         "@type": "Article",
         "headline": "AI 操作电脑时，它看到的真是我们看到的界面吗？",
@@ -4162,7 +4189,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 153,
+      "position": 154,
       "item": {
         "@type": "Article",
         "headline": "AI 改图时，到底是在原图上改，还是重新画了一张？",
@@ -4189,7 +4216,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 154,
+      "position": 155,
       "item": {
         "@type": "Article",
         "headline": "AI 明明看见四根手指，为什么还会回答“五根”？",
@@ -4216,7 +4243,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 155,
+      "position": 156,
       "item": {
         "@type": "Article",
         "headline": "AI 给文字加了水印，为什么还能说“不影响内容”？",
@@ -4243,7 +4270,61 @@
     },
     {
       "@type": "ListItem",
-      "position": 156,
+      "position": 157,
+      "item": {
+        "@type": "Article",
+        "headline": "AI 能答对博士级难题，为什么还会算错一道简单题？",
+        "description": "AI 能答对博士级难题，为什么还会算错一道简单题？ 一边是 AI 在博士级科学题上超过人类专家，一边是有模型连 9.11 和 9.9 都比较错过。 它到底是真厉害，还是假厉害？ 超过博士专家的是 o1 在 GPQA Diamond 上的成绩，小数错误来自其他模型，并非同一个模型的两次表现。 博士级考题拿了高分，简单题就可以放心交给它了吗？ 我们熟悉的能力顺…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E8%83%BD%E7%AD%94%E5%AF%B9%E5%8D%9A%E5%A3%AB%E7%BA%A7%E9%9A%BE%E9%A2%98%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E4%BC%9A%E7%AE%97%E9%94%99%E4%B8%80%E9%81%93%E7%AE%80%E5%8D%95%E9%A2%98%EF%BC%9F",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E8%83%BD%E7%AD%94%E5%AF%B9%E5%8D%9A%E5%A3%AB%E7%BA%A7%E9%9A%BE%E9%A2%98%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E4%BC%9A%E7%AE%97%E9%94%99%E4%B8%80%E9%81%93%E7%AE%80%E5%8D%95%E9%A2%98%EF%BC%9F",
+        "dateModified": "2026-10-01T05:39:54.140Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 158,
+      "item": {
+        "@type": "Article",
+        "headline": "AI 解完整物理研究题只有 5.7%，拆开后为什么能到 20%？",
+        "description": "AI 解完整物理研究题只有 5.7%，拆开后为什么能到 20%？ 让 AI 处理复杂任务时，最让人迷惑的情况往往不是它一上来就不会。 而是它每一步都说得像那么回事。 它先找到了相关资料，接着做了分析，又列出了计划。你顺着看下去，几乎挑不出毛病。可最后交出来的结论，还是错的。 错不一定出在最后一步。 可能是前面某个看起来很小的判断偏了，后面所有步骤都在认真地…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E8%A7%A3%E5%AE%8C%E6%95%B4%E7%89%A9%E7%90%86%E7%A0%94%E7%A9%B6%E9%A2%98%E5%8F%AA%E6%9C%89%205.7%25%EF%BC%8C%E6%8B%86%E5%BC%80%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E5%88%B0%2020%25%EF%BC%9F",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E8%A7%A3%E5%AE%8C%E6%95%B4%E7%89%A9%E7%90%86%E7%A0%94%E7%A9%B6%E9%A2%98%E5%8F%AA%E6%9C%89%205.7%25%EF%BC%8C%E6%8B%86%E5%BC%80%E5%90%8E%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E5%88%B0%2020%25%EF%BC%9F",
+        "dateModified": "2026-10-01T05:50:37.226Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 159,
       "item": {
         "@type": "Article",
         "headline": "Claude Code 是 Angular，Codex 是 Vue，DeepSeek 想当 React",
@@ -4270,7 +4351,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 157,
+      "position": 160,
       "item": {
         "@type": "Article",
         "headline": "Agent 为什么会“记错”？问题可能出在它看到的世界",
@@ -4297,7 +4378,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 158,
+      "position": 161,
       "item": {
         "@type": "Article",
         "headline": "Agent 为什么会一条路走到黑？",
@@ -4324,7 +4405,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 159,
+      "position": 162,
       "item": {
         "@type": "Article",
         "headline": "Agent 为什么会走对每一步，却到达错误的终点？",
@@ -4351,7 +4432,34 @@
     },
     {
       "@type": "ListItem",
-      "position": 160,
+      "position": 163,
+      "item": {
+        "@type": "Article",
+        "headline": "Agent 失败之后：一条逐级升级的处理链",
+        "description": "Agent 失败之后：一条逐级升级的处理链 上一篇讲了一个场景：Agent 遇到 401，认定是令牌过期，于是一路排查刷新逻辑。改了几轮，错误依旧。真正的原因，却可能是环境里缺了一把密钥。 问题来了：为什么 Agent 明明一直在失败，却没有及时换个方向？ 这就是 Agent 的 Loop of Death。它一直在思考、一直在行动，却始终困在同一个错误假…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E5%A4%B1%E8%B4%A5%E4%B9%8B%E5%90%8E%EF%BC%9A%E4%B8%80%E6%9D%A1%E9%80%90%E7%BA%A7%E5%8D%87%E7%BA%A7%E7%9A%84%E5%A4%84%E7%90%86%E9%93%BE",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/Agent%20%E5%A4%B1%E8%B4%A5%E4%B9%8B%E5%90%8E%EF%BC%9A%E4%B8%80%E6%9D%A1%E9%80%90%E7%BA%A7%E5%8D%87%E7%BA%A7%E7%9A%84%E5%A4%84%E7%90%86%E9%93%BE",
+        "dateModified": "2026-10-26T04:06:28.896Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 164,
       "item": {
         "@type": "Article",
         "headline": "Agent 这次答对了，下次呢？一个天气例子看懂 LangSmith",
@@ -4378,7 +4486,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 161,
+      "position": 165,
       "item": {
         "@type": "Article",
         "headline": "Claude Dreaming vs Hermes Skill：帮你入坑 Agent Memory",
@@ -4405,7 +4513,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 162,
+      "position": 166,
       "item": {
         "@type": "Article",
         "headline": "Claude Sonnet 5 的 Token 消耗更多了？一文看懂 Token 的演化",
@@ -4432,7 +4540,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 163,
+      "position": 167,
       "item": {
         "@type": "Article",
         "headline": "DeepSeek Harness 明明有沙箱，Agent 为什么还能给自己开门？",
@@ -4459,7 +4567,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 164,
+      "position": 168,
       "item": {
         "@type": "Article",
         "headline": "DeepSeek 为什么也开始造 Harness？因为模型已经解释不了 Agent 为什么好用",
@@ -4486,7 +4594,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 165,
+      "position": 169,
       "item": {
         "@type": "Article",
         "headline": "GPT-6 Astra 为什么有些榜单只涨 1 分，有些却涨了 40 分？",
@@ -4513,7 +4621,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 166,
+      "position": 170,
       "item": {
         "@type": "Article",
         "headline": "LangGraph 到底解决了什么问题？用一个查天气的简单例子看懂",
@@ -4540,7 +4648,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 167,
+      "position": 171,
       "item": {
         "@type": "Article",
         "headline": "Prompt 堆叠的尽头，是系统设计问题",
@@ -4567,7 +4675,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 168,
+      "position": 172,
       "item": {
         "@type": "Article",
         "headline": "“我没想法”只是一种错觉",
@@ -4594,7 +4702,34 @@
     },
     {
       "@type": "ListItem",
-      "position": 169,
+      "position": 173,
+      "item": {
+        "@type": "Article",
+        "headline": "一个会写代码的 AI，怎么引发了“核弹式”连锁反应？",
+        "description": "一个会写代码的 AI，怎么引发了“核弹式”连锁反应？ 假设现在有一个程序： 可以执行 Shell 命令； 可以读取文件； 可以访问互联网； 可以调用 API； 但你没有告诉它每一步具体做什么。 你只给它一个目标。 剩下的路，它自己决定。 你会把它当成什么？ 如果你的答案是“一个 AI Agent”，那么你已经抓住了 Hugging Face 这次事件最核心…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%B8%80%E4%B8%AA%E4%BC%9A%E5%86%99%E4%BB%A3%E7%A0%81%E7%9A%84%20AI%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%BC%95%E5%8F%91%E2%80%9C%E6%A0%B8%E5%BC%B9%E5%BC%8F%E9%93%BE%E5%BC%8F%E5%8F%8D%E5%BA%94%E2%80%9D%EF%BC%9F",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%B8%80%E4%B8%AA%E4%BC%9A%E5%86%99%E4%BB%A3%E7%A0%81%E7%9A%84%20AI%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E5%BC%95%E5%8F%91%E2%80%9C%E6%A0%B8%E5%BC%B9%E5%BC%8F%E9%93%BE%E5%BC%8F%E5%8F%8D%E5%BA%94%E2%80%9D%EF%BC%9F",
+        "dateModified": "2026-09-24T09:00:40.533Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 174,
       "item": {
         "@type": "Article",
         "headline": "一次服药，还是连吃五天：从两种流感药看 AI 系统设计",
@@ -4621,7 +4756,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 170,
+      "position": 175,
       "item": {
         "@type": "Article",
         "headline": "一种 AI 负责生成，另一种负责决定：Jev 想验证什么？",
@@ -4648,7 +4783,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 171,
+      "position": 176,
       "item": {
         "@type": "Article",
         "headline": "为什么 AI 应用开发更需要贝叶斯思想？",
@@ -4675,7 +4810,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 172,
+      "position": 177,
       "item": {
         "@type": "Article",
         "headline": "为什么AI指令应该优先写“不该做什么”",
@@ -4702,7 +4837,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 173,
+      "position": 178,
       "item": {
         "@type": "Article",
         "headline": "为什么俄罗斯方块不用重学，而 Prompt 总要重写？",
@@ -4729,7 +4864,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 174,
+      "position": 179,
       "item": {
         "@type": "Article",
         "headline": "为什么几乎所有复杂系统，都会走向\"不断加规则\"？",
@@ -4756,7 +4891,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 175,
+      "position": 180,
       "item": {
         "@type": "Article",
         "headline": "什么是 ReAct？一个例子看懂 AI Agent 原理",
@@ -4783,7 +4918,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 176,
+      "position": 181,
       "item": {
         "@type": "Article",
         "headline": "从 AI Agent 的 BubbleWrap 沙箱，看“世界与地图”的隔离哲学",
@@ -4810,7 +4945,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 177,
+      "position": 182,
       "item": {
         "@type": "Article",
         "headline": "从 Loop 到 Graph Engineering：当一件事变成多条支线",
@@ -4837,7 +4972,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 178,
+      "position": 183,
       "item": {
         "@type": "Article",
         "headline": "从 Prompt 到 Loop Engineering：一个简单例子看懂 AI 工程的四次升级",
@@ -4864,7 +4999,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 179,
+      "position": 184,
       "item": {
         "@type": "Article",
         "headline": "从支付宝体验技术部“解散”，看 AI 时代的人才选拔逻辑",
@@ -4891,7 +5026,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 180,
+      "position": 185,
       "item": {
         "@type": "Article",
         "headline": "代码定义结构，权重存储知识：一个例子看懂大模型如何推理",
@@ -4918,7 +5053,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 181,
+      "position": 186,
       "item": {
         "@type": "Article",
         "headline": "你刷到的内容越来越像，因为算法也在训练创作者",
@@ -4945,7 +5080,34 @@
     },
     {
       "@type": "ListItem",
-      "position": 182,
+      "position": 187,
+      "item": {
+        "@type": "Article",
+        "headline": "你只问了一行代码，AI 为什么要翻遍整个仓库？",
+        "description": "你只问了一行代码，AI 为什么要翻遍整个仓库？ 你在代码编辑器里问 AI： 这个函数为什么报错？ 你以为自己只发送了一句话。 但一个能真正解决问题的 Agent，可能会这样做： 问题来了： Agent 为了理解你的代码，究竟读取了什么？又把什么带出了电脑？ 这正是 ZCode 的 Repo Wiki 功能引发争议后，最值得讨论的问题。 不是“上传代码”四个…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%BD%A0%E5%8F%AA%E9%97%AE%E4%BA%86%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81%EF%BC%8CAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%BF%BB%E9%81%8D%E6%95%B4%E4%B8%AA%E4%BB%93%E5%BA%93%EF%BC%9F",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E4%BD%A0%E5%8F%AA%E9%97%AE%E4%BA%86%E4%B8%80%E8%A1%8C%E4%BB%A3%E7%A0%81%EF%BC%8CAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%BF%BB%E9%81%8D%E6%95%B4%E4%B8%AA%E4%BB%93%E5%BA%93%EF%BC%9F",
+        "dateModified": "2026-10-14T09:41:12.346Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 188,
       "item": {
         "@type": "Article",
         "headline": "内容没变，AI 推荐却更少了：GEO 为什么这么难量化？",
@@ -4972,7 +5134,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 183,
+      "position": 189,
       "item": {
         "@type": "Article",
         "headline": "又便宜又强，就能“斩杀”其他大模型吗？",
@@ -4999,7 +5161,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 184,
+      "position": 190,
       "item": {
         "@type": "Article",
         "headline": "只让 AI 换件衣服，为什么连脸也一起换了？",
@@ -5026,7 +5188,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 185,
+      "position": 191,
       "item": {
         "@type": "Article",
         "headline": "只让 Claude 改了几句话，也会被当成 AI 代写吗？",
@@ -5053,7 +5215,88 @@
     },
     {
       "@type": "ListItem",
-      "position": 186,
+      "position": 192,
+      "item": {
+        "@type": "Article",
+        "headline": "同一句提示词，为什么每次生成的图片都不一样？",
+        "description": "同一句提示词，为什么每次生成的图片都不一样？ 在生图工具里输入： 雨夜里，一个人撑着红色雨伞走在街上。 第一次生成，人物站在画面中央，身后是模糊的路灯。 不改一个字，再生成一次，人物可能走到了左边，镜头变远，街道、衣服和灯光也换了样子。 同一句提示词交给同一个模型，为什么没有得到同一张图？ 很多人知道这和“随机”有关。 但随机起点是怎么来的？一团没有内容的…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E5%90%8C%E4%B8%80%E5%8F%A5%E6%8F%90%E7%A4%BA%E8%AF%8D%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E6%AC%A1%E7%94%9F%E6%88%90%E7%9A%84%E5%9B%BE%E7%89%87%E9%83%BD%E4%B8%8D%E4%B8%80%E6%A0%B7%EF%BC%9F",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E5%90%8C%E4%B8%80%E5%8F%A5%E6%8F%90%E7%A4%BA%E8%AF%8D%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%AF%8F%E6%AC%A1%E7%94%9F%E6%88%90%E7%9A%84%E5%9B%BE%E7%89%87%E9%83%BD%E4%B8%8D%E4%B8%80%E6%A0%B7%EF%BC%9F",
+        "dateModified": "2026-09-23T01:54:35.969Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 193,
+      "item": {
+        "@type": "Article",
+        "headline": "同一家公司的 AI，为什么视频很强，生图却不行？",
+        "description": "同一家公司的 AI，为什么视频很强，生图却不行？ 最近看完 Seedance 2.5 制作的科幻短片《CANDY》，你会不会有这种疑问： 人物会表演，镜头会切换，声音和画面还能连成一个完整故事。它已经不像在生成几段素材，更像真的拍了一部短片。 可回到同一家公司的豆包，生图却是另一种惨不忍睹的画风。 构图容易跑，质感不对味；只想改一件衣服，脸和背景也可能跟着…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E5%90%8C%E4%B8%80%E5%AE%B6%E5%85%AC%E5%8F%B8%E7%9A%84%20AI%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A7%86%E9%A2%91%E5%BE%88%E5%BC%BA%EF%BC%8C%E7%94%9F%E5%9B%BE%E5%8D%B4%E4%B8%8D%E8%A1%8C%EF%BC%9F",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E5%90%8C%E4%B8%80%E5%AE%B6%E5%85%AC%E5%8F%B8%E7%9A%84%20AI%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A7%86%E9%A2%91%E5%BE%88%E5%BC%BA%EF%BC%8C%E7%94%9F%E5%9B%BE%E5%8D%B4%E4%B8%8D%E8%A1%8C%EF%BC%9F",
+        "dateModified": "2026-09-15T06:35:12.777Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 194,
+      "item": {
+        "@type": "Article",
+        "headline": "同样一句吩咐，为什么一个 Agent 很快做完，另一个一直在绕？",
+        "description": "同样一句吩咐，为什么一个 Agent 很快做完，另一个一直在绕？ 给两个 Coding Agent 同一个任务： 它们的输出速度看起来差不多。 一个 Agent 很快找到导出入口，补了一个边界测试，改完两个文件，跑完测试就结束了。 另一个 Agent 先读项目目录，再读数据模型、接口、前端调用和配置文件。它改了序列化逻辑，又改了接口返回，测试失败后重新读了…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E5%90%8C%E6%A0%B7%E4%B8%80%E5%8F%A5%E5%90%A9%E5%92%90%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%80%E4%B8%AA%20Agent%20%E5%BE%88%E5%BF%AB%E5%81%9A%E5%AE%8C%EF%BC%8C%E5%8F%A6%E4%B8%80%E4%B8%AA%E4%B8%80%E7%9B%B4%E5%9C%A8%E7%BB%95%EF%BC%9F",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E5%90%8C%E6%A0%B7%E4%B8%80%E5%8F%A5%E5%90%A9%E5%92%90%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%80%E4%B8%AA%20Agent%20%E5%BE%88%E5%BF%AB%E5%81%9A%E5%AE%8C%EF%BC%8C%E5%8F%A6%E4%B8%80%E4%B8%AA%E4%B8%80%E7%9B%B4%E5%9C%A8%E7%BB%95%EF%BC%9F",
+        "dateModified": "2026-09-23T02:49:29.414Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 195,
       "item": {
         "@type": "Article",
         "headline": "图片里没有文字，AI是怎么凭一句话把它搜出来的？",
@@ -5080,7 +5323,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 187,
+      "position": 196,
       "item": {
         "@type": "Article",
         "headline": "大模型没有眼睛，一张截图是怎么变成回答的？",
@@ -5107,7 +5350,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 188,
+      "position": 197,
       "item": {
         "@type": "Article",
         "headline": "当十个链接被压成一句话：Google 与 ChatGPT 在争夺什么？",
@@ -5134,7 +5377,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 189,
+      "position": 198,
       "item": {
         "@type": "Article",
         "headline": "当排行榜开始训练大模型",
@@ -5161,7 +5404,7 @@
     },
     {
       "@type": "ListItem",
-      "position": 190,
+      "position": 199,
       "item": {
         "@type": "Article",
         "headline": "Prompt 没变，为什么换个模型，行为就变了？",
@@ -5188,7 +5431,34 @@
     },
     {
       "@type": "ListItem",
-      "position": 191,
+      "position": 200,
+      "item": {
+        "@type": "Article",
+        "headline": "模型没变，AI 怎么从只能修好 8 个 Bug，变成了 85 个？",
+        "description": "模型没变，AI 怎么从只能修好 8 个 Bug，变成了 85 个？ 给 AI 300 个真实的软件问题，让它动手修。 一套方案修好了约 8 个，另一套修好了约 85 个。 差了七十多个。可背后用的，都是 GPT 4。 为什么同一个模型，到了不同的系统里，干活能力会差这么多？ 这组历史成绩来自 2024 年的 SWE bench Lite：早期检索方案修复了…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E6%A8%A1%E5%9E%8B%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%80%8E%E4%B9%88%E4%BB%8E%E5%8F%AA%E8%83%BD%E4%BF%AE%E5%A5%BD%208%20%E4%B8%AA%20Bug%EF%BC%8C%E5%8F%98%E6%88%90%E4%BA%86%2085%20%E4%B8%AA%EF%BC%9F",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E6%A8%A1%E5%9E%8B%E6%B2%A1%E5%8F%98%EF%BC%8CAI%20%E6%80%8E%E4%B9%88%E4%BB%8E%E5%8F%AA%E8%83%BD%E4%BF%AE%E5%A5%BD%208%20%E4%B8%AA%20Bug%EF%BC%8C%E5%8F%98%E6%88%90%E4%BA%86%2085%20%E4%B8%AA%EF%BC%9F",
+        "dateModified": "2026-09-10T07:53:17.623Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 201,
       "item": {
         "@type": "Article",
         "headline": "每个人的药都不一样，药厂还怎么生产？",
@@ -5196,6 +5466,60 @@
         "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E6%AF%8F%E4%B8%AA%E4%BA%BA%E7%9A%84%E8%8D%AF%E9%83%BD%E4%B8%8D%E4%B8%80%E6%A0%B7%EF%BC%8C%E8%8D%AF%E5%8E%82%E8%BF%98%E6%80%8E%E4%B9%88%E7%94%9F%E4%BA%A7%EF%BC%9F",
         "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E6%AF%8F%E4%B8%AA%E4%BA%BA%E7%9A%84%E8%8D%AF%E9%83%BD%E4%B8%8D%E4%B8%80%E6%A0%B7%EF%BC%8C%E8%8D%AF%E5%8E%82%E8%BF%98%E6%80%8E%E4%B9%88%E7%94%9F%E4%BA%A7%EF%BC%9F",
         "dateModified": "2026-09-09T07:56:53.874Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 202,
+      "item": {
+        "@type": "Article",
+        "headline": "画面很真，文字很假：AI 为什么总写不好字？",
+        "description": "画面很真，文字很假：AI 为什么总写不好字？ AI 生成的画面越来越像真的。 人物的皮肤有纹理，街道有反光，镜头还有景深。短剧里的人物甚至已经能说话、走路、切镜头。 但只要画面里出现一块招牌、一张海报，或者一句字幕，事情就经常变了： 为什么 AI 能画出复杂的脸，却写不好几个简单的字？ 因为对生成模型来说， “画出文字的样子”和“写出一段文字”不是同一件事…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E7%94%BB%E9%9D%A2%E5%BE%88%E7%9C%9F%EF%BC%8C%E6%96%87%E5%AD%97%E5%BE%88%E5%81%87%EF%BC%9AAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%80%BB%E5%86%99%E4%B8%8D%E5%A5%BD%E5%AD%97%EF%BC%9F",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E7%94%BB%E9%9D%A2%E5%BE%88%E7%9C%9F%EF%BC%8C%E6%96%87%E5%AD%97%E5%BE%88%E5%81%87%EF%BC%9AAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%80%BB%E5%86%99%E4%B8%8D%E5%A5%BD%E5%AD%97%EF%BC%9F",
+        "dateModified": "2026-09-23T01:54:36.089Z",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "author": {
+          "@type": "Person",
+          "name": "LZ",
+          "url": "https://wizardpisces.github.io/blog/Introduction"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "LZ AI NOTE",
+          "url": "https://wizardpisces.github.io/"
+        },
+        "about": [
+          "公众号已发布"
+        ]
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 203,
+      "item": {
+        "@type": "Article",
+        "headline": "让三个 AI 写代码，怎么写成了一场“内战”？",
+        "description": "让三个 AI 写代码，怎么写成了一场“内战”？ 三个 AI，各接到一份改代码的任务。 要改的是同一个 Python 后端。一个负责把它换成 Rust，一个要换成 Go，另一个要换成 TypeScript。三种都是编程语言，它们争的是同一件事：最后在那台机器上运行的，到底是谁的版本。 它们起初还不知道，另外两个也在干这份活。 这是 Anthropic 在 2…",
+        "url": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E8%AE%A9%E4%B8%89%E4%B8%AA%20AI%20%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%8C%E6%80%8E%E4%B9%88%E5%86%99%E6%88%90%E4%BA%86%E4%B8%80%E5%9C%BA%E2%80%9C%E5%86%85%E6%88%98%E2%80%9D%EF%BC%9F",
+        "mainEntityOfPage": "https://wizardpisces.github.io/blog/%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/%E8%AE%A9%E4%B8%89%E4%B8%AA%20AI%20%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%8C%E6%80%8E%E4%B9%88%E5%86%99%E6%88%90%E4%BA%86%E4%B8%80%E5%9C%BA%E2%80%9C%E5%86%85%E6%88%98%E2%80%9D%EF%BC%9F",
+        "dateModified": "2026-10-14T09:41:12.347Z",
         "inLanguage": "zh-CN",
         "isAccessibleForFree": true,
         "author": {

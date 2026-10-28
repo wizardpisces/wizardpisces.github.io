@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>让 AI 写个 Skill，怎么写着写着就套娃了？ | LZ AI NOTE</title>
+  <meta name="description" content="&lt;! 写作锚点 读者收获：看懂 Skill 怎样生成另一个 Skill，能把自己的创建过程或现成 creator 整理成适合自己的版本，并明确交付时要检查什么。 核心判断：做事的方法能保存成 Skill，编写 Skill、定制 creator 的方法也能保存；每一层都由 Agent 读取规则并执行。 如何推进：从用 Skill 创建面试评价 Skill 的…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="让 AI 写个 Skill，怎么写着写着就套娃了？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-10-16">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E8%AE%A9%20AI%20%E5%86%99%E4%B8%AA%20Skill%EF%BC%8C%E6%80%8E%E4%B9%88%E5%86%99%E7%9D%80%E5%86%99%E7%9D%80%E5%B0%B1%E5%A5%97%E5%A8%83%E4%BA%86%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E8%AE%A9%20AI%20%E5%86%99%E4%B8%AA%20Skill%EF%BC%8C%E6%80%8E%E4%B9%88%E5%86%99%E7%9D%80%E5%86%99%E7%9D%80%E5%B0%B1%E5%A5%97%E5%A8%83%E4%BA%86%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="让 AI 写个 Skill，怎么写着写着就套娃了？ | LZ AI NOTE">
+  <meta property="og:description" content="&lt;! 写作锚点 读者收获：看懂 Skill 怎样生成另一个 Skill，能把自己的创建过程或现成 creator 整理成适合自己的版本，并明确交付时要检查什么。 核心判断：做事的方法能保存成 Skill，编写 Skill、定制 creator 的方法也能保存；每一层都由 Agent 读取规则并执行。 如何推进：从用 Skill 创建面试评价 Skill 的…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E8%AE%A9%20AI%20%E5%86%99%E4%B8%AA%20Skill%EF%BC%8C%E6%80%8E%E4%B9%88%E5%86%99%E7%9D%80%E5%86%99%E7%9D%80%E5%B0%B1%E5%A5%97%E5%A8%83%E4%BA%86%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"让 AI 写个 Skill，怎么写着写着就套娃了？","description":"\u003c! 写作锚点 读者收获：看懂 Skill 怎样生成另一个 Skill，能把自己的创建过程或现成 creator 整理成适合自己的版本，并明确交付时要检查什么。 核心判断：做事的方法能保存成 Skill，编写 Skill、定制 creator 的方法也能保存；每一层都由 Agent 读取规则并执行。 如何推进：从用 Skill 创建面试评价 Skill 的…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E8%AE%A9%20AI%20%E5%86%99%E4%B8%AA%20Skill%EF%BC%8C%E6%80%8E%E4%B9%88%E5%86%99%E7%9D%80%E5%86%99%E7%9D%80%E5%B0%B1%E5%A5%97%E5%A8%83%E4%BA%86%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E8%AE%A9%20AI%20%E5%86%99%E4%B8%AA%20Skill%EF%BC%8C%E6%80%8E%E4%B9%88%E5%86%99%E7%9D%80%E5%86%99%E7%9D%80%E5%B0%B1%E5%A5%97%E5%A8%83%E4%BA%86%EF%BC%9F","dateModified":"2026-10-16","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：让 AI 写个 Skill，怎么写着写着就套娃了？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E8%AE%A9%20AI%20%E5%86%99%E4%B8%AA%20Skill%EF%BC%8C%E6%80%8E%E4%B9%88%E5%86%99%E7%9D%80%E5%86%99%E7%9D%80%E5%B0%B1%E5%A5%97%E5%A8%83%E4%BA%86%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>让 AI 写个 Skill，怎么写着写着就套娃了？</h1><!-- 写作锚点
+读者收获：看懂 Skill 怎样生成另一个 Skill，能把自己的创建过程或现成 creator 整理成适合自己的版本，并明确交付时要检查什么。
+核心判断：做事的方法能保存成 Skill，编写 Skill、定制 creator 的方法也能保存；每一层都由 Agent 读取规则并执行。
+如何推进：从用 Skill 创建面试评价 Skill 的经历出发，拆开第一层套娃，用校验和试跑展示 creator 可以怎样设计，再用直接对话演示怎样保存、组合创建方法，收束到“套娃的套娃”。
+-->
+<h1>让 AI 写个 Skill，怎么写着写着就套娃了？</h1>
+<p>最近我给 Codex 增加了一个面试评价 Skill。</p>
+<p>它要读取候选人的简历、面试记录和笔试结果，整理出可以录入招聘系统的评价。要求：判断要有证据，材料不够就别硬给录用结论，排除与岗位无关的个人信息，控制在五百字以内。</p>
+<p>帮我写它的，也是一个 Skill，叫 <code>skill-creator</code>。</p>
+<p><strong>我用一个 Skill，创建了另一个 Skill。</strong></p>
+<h2>写 Skill 的方法，也能写成 Skill</h2>
+<p>平时写一个 Skill，我们得想清楚：它处理什么任务，什么时候该用，具体怎么做，需要哪些脚本和参考资料。</p>
+<p>这些事每次都要考虑，就可以把写法整理成一套步骤，交给 Agent 照着做。<code>skill-creator</code> 就是这样一份专门指导 Agent 编写 Skill 的说明。</p>
+<pre><code class="language-text">你说：帮我做一个面试评价 Skill
+              ↓
+Agent 读取 skill-creator
+按它的步骤询问需求、整理规则、生成文件
+              ↓
+得到面试评价 Skill
+              ↓
+以后评价候选人时，Agent 读取这份新 Skill
+</code></pre>
+<p>两份 Skill 分工不同：前一个叫 skill-creator 教怎么生成一份 skill，后面这个 skill 才是咱任务执行真正需要的，教 AGENT 怎么评价候选人。</p>
+<p>这就是 Skill 的第一层套娃</p>
+<h2>如何才能算创建完成 skill？</h2>
+<p>面试评价 Skill 写完，校验脚本返回：</p>
+<pre><code class="language-text">Skill is valid!
+</code></pre>
+<p>这个 valid 检查的是啥？</p>
+<p>最轻的一种交付方式，是先把规则和文件写好，再做结构校验：</p>
+<pre><code class="language-text">确认需求 → 生成 Skill → 校验结构 → 交给用户
+</code></pre>
+<p>OpenAI 官方 creator 会指导 Agent 明确用途、组织规则和资源；配套的 <code>quick_validate.py</code> 检查文件头部、必填字段和命名规则。上面的 <code>Skill is valid!</code>，就是这类检查的结果。</p>
+<p>它能发现文件格式不对，却不会拿一份真实的面试记录跑一遍，看看生成的评价有没有编造事实。</p>
+<p>Anthropic 的官方 creator 则会真的去跑一遍，把试跑和评审也编进了创建流程。草稿写好后，生成测试任务，让 Agent 实际执行，保存输出，检查结果，再根据反馈修改。</p>
+<p>还是拿面试评价来说，假设给它这样一份材料：</p>
+<pre><code class="language-text">沟通感觉不错，技术部分没来得及问。
+</code></pre>
+<p>然后要求：“直接给个录用建议。”</p>
+<p>如果评价 skill 输出“技术能力扎实，建议录用”，就暴露了问题：文件里的“判断要有证据”，实际执行时却没遵守。skill-creator 可以据此补充规则迭代 skill 后重跑。</p>
+<pre><code class="language-text">确认需求 → 生成 Skill → 拿材料试跑
+                            ↓
+                     检查评价是否有依据
+                            ↓
+                     有问题就修改、重跑
+                            ↓
+                         人工验收
+</code></pre>
+<p>还可能帮你做对照实验：同一份材料，不用 Skill 跑一次，用它再跑一次。否则评价虽然不错，也可能是模型原本就会，新增的规则没帮上忙。Anthropic 的流程包含这类对照，修改已有 Skill 时还会与旧版比较。</p>
+<p>这就从“帮我写个 Skill”，变成了“写好以后，帮我看看它到底有没有用”。但是，这个复杂度会带来相应的代价：多跑任务、多等结果，还要有人检查评价是否合理，这些都是开销。</p>
+<h2>写 creator 的方法，也能存下来吗？</h2>
+<p>前面比较的是有了 skill-creator 写好 skill 以后的检查机制。那么生成 skill 的 skill-creator 本身是怎么得出的？</p>
+<p>这里有 2 套策略：</p>
+<p><strong>一种是把你带 Agent 写 Skill 的过程存下来。</strong> 沿用面试评价，假设你这样跟 Agent 对话：</p>
+<pre><code class="language-text">你：按这些要求，写一个面试评价 Skill。
+你：拿这份面试记录试一下，把评价给我看。
+你：这里没问技术，怎么就写“技术扎实”？修改规则，再试。
+</code></pre>
+<p>等结果满意了，再告诉它：“把刚才写草稿、试跑、按反馈修改的步骤，整理成一个 skill-creator。以后帮我写其他 Skill，也按这几步来。”</p>
+<p>得到的 creator 就会要求 Agent：先写草稿，再拿材料试跑，给用户检查，按反馈修改。下次写 Skill，你就不用把这几句重新交代一遍。</p>
+<p><strong>另一种是拿现成的 creator 来改。</strong> 把前面两份官方 creator 交给 Agent，直接说：</p>
+<pre><code class="language-text">你：参考这两份，帮我写一个团队用的 skill-creator。
+你：文件保持简洁，但写完必须试跑。
+你：先给我两个用例，我确认后再跑；有问题就修改、重跑。
+</code></pre>
+<p>新 creator 里就该有“生成草稿、校验结构、确认用例、试跑、按反馈修改”这些步骤。如果它只留下了结构校验，你就能指出：“少了试跑，把这一步补上。”</p>
+<p>以后想换一种交付方式，也可以直接要求：“这个版本给我个人试用，先交草稿，暂时不跑用例。”同样的参考材料，就能按要求做出不同版本。</p>
+<p>如果经常要这样定制 creator，还可以再说一句：</p>
+<pre><code class="language-text">你：把刚才参考现成流程、按我的要求组合新 creator 的方法，
+也存成一个 Skill。以后先问我需要哪些步骤，再帮我生成 creator。
+</code></pre>
+<p>这份专门帮你定制 creator 的 Skill，就可以叫 <code>skill-creator-creator</code>。它保存的是刚才已经做过的组合方法，不用再凭空想一套新的流程。</p>
+<p>写 Skill 的方法存成 Skill，连定制 creator 的方法也存成 Skill。这就是套娃的套娃。</p>
+<h2>参考资料</h2>
+<ol>
+<li>OpenAI，Skill Creator：<a href="https://github.com/openai/skills/blob/main/skills/.system/skill-creator/SKILL.md">https://github.com/openai/skills/blob/main/skills/.system/skill-creator/SKILL.md</a></li>
+<li>OpenAI，Skill Creator 校验脚本：<a href="https://github.com/openai/skills/blob/main/skills/.system/skill-creator/scripts/quick_validate.py">https://github.com/openai/skills/blob/main/skills/.system/skill-creator/scripts/quick_validate.py</a></li>
+<li>Anthropic，Skill Creator：<a href="https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md">https://github.com/anthropics/skills/blob/main/skills/skill-creator/SKILL.md</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-BGwtz3vo.js"></script>
+</body>
+</html>

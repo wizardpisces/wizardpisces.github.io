@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>AI 能自己升级，就能一直变强吗？ | LZ AI NOTE</title>
+  <meta name="description" content="AI 能自己升级，就能一直变强吗？ 让 AI 修代码，它改完了。让它总结经验，它把注意事项存了下来。再让它根据失败记录修改自己的工具，它又升级了自己的运行程序。 顺着想下去，似乎只差最后一步：既然它能给自己升级，升级以后不就更会升级？这样一轮轮下去，还需要人做什么？ 可更会干活，不一定就更会改进干活的方法。 第一次修复，改的是谁？ 假设你让 Agent 修…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="AI 能自己升级，就能一直变强吗？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-10-21">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E8%83%BD%E8%87%AA%E5%B7%B1%E5%8D%87%E7%BA%A7%EF%BC%8C%E5%B0%B1%E8%83%BD%E4%B8%80%E7%9B%B4%E5%8F%98%E5%BC%BA%E5%90%97%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E8%83%BD%E8%87%AA%E5%B7%B1%E5%8D%87%E7%BA%A7%EF%BC%8C%E5%B0%B1%E8%83%BD%E4%B8%80%E7%9B%B4%E5%8F%98%E5%BC%BA%E5%90%97%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="AI 能自己升级，就能一直变强吗？ | LZ AI NOTE">
+  <meta property="og:description" content="AI 能自己升级，就能一直变强吗？ 让 AI 修代码，它改完了。让它总结经验，它把注意事项存了下来。再让它根据失败记录修改自己的工具，它又升级了自己的运行程序。 顺着想下去，似乎只差最后一步：既然它能给自己升级，升级以后不就更会升级？这样一轮轮下去，还需要人做什么？ 可更会干活，不一定就更会改进干活的方法。 第一次修复，改的是谁？ 假设你让 Agent 修…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E8%83%BD%E8%87%AA%E5%B7%B1%E5%8D%87%E7%BA%A7%EF%BC%8C%E5%B0%B1%E8%83%BD%E4%B8%80%E7%9B%B4%E5%8F%98%E5%BC%BA%E5%90%97%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI 能自己升级，就能一直变强吗？","description":"AI 能自己升级，就能一直变强吗？ 让 AI 修代码，它改完了。让它总结经验，它把注意事项存了下来。再让它根据失败记录修改自己的工具，它又升级了自己的运行程序。 顺着想下去，似乎只差最后一步：既然它能给自己升级，升级以后不就更会升级？这样一轮轮下去，还需要人做什么？ 可更会干活，不一定就更会改进干活的方法。 第一次修复，改的是谁？ 假设你让 Agent 修…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E8%83%BD%E8%87%AA%E5%B7%B1%E5%8D%87%E7%BA%A7%EF%BC%8C%E5%B0%B1%E8%83%BD%E4%B8%80%E7%9B%B4%E5%8F%98%E5%BC%BA%E5%90%97%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E8%83%BD%E8%87%AA%E5%B7%B1%E5%8D%87%E7%BA%A7%EF%BC%8C%E5%B0%B1%E8%83%BD%E4%B8%80%E7%9B%B4%E5%8F%98%E5%BC%BA%E5%90%97%EF%BC%9F","dateModified":"2026-10-21","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：AI 能自己升级，就能一直变强吗？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E8%83%BD%E8%87%AA%E5%B7%B1%E5%8D%87%E7%BA%A7%EF%BC%8C%E5%B0%B1%E8%83%BD%E4%B8%80%E7%9B%B4%E5%8F%98%E5%BC%BA%E5%90%97%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>AI 能自己升级，就能一直变强吗？</h1><h1>AI 能自己升级，就能一直变强吗？</h1>
+<p>让 AI 修代码，它改完了。让它总结经验，它把注意事项存了下来。再让它根据失败记录修改自己的工具，它又升级了自己的运行程序。</p>
+<p>顺着想下去，似乎只差最后一步：既然它能给自己升级，升级以后不就更会升级？这样一轮轮下去，还需要人做什么？</p>
+<p>可更会干活，不一定就更会改进干活的方法。</p>
+<h2>第一次修复，改的是谁？</h2>
+<p>假设你让 Agent 修一个订单金额计算错误。它修改函数，运行测试，测试失败。</p>
+<p>构建程序输出了几千行日志，工具却只把开头交给 Agent：</p>
+<pre><code class="language-text">第 1 行：开始构建
+……
+第 200 行：正在加载模块
+── 工具返回到这里 ──
+……
+第 3000 行：错误！缺少依赖
+</code></pre>
+<p>它没看到关键报错，猜测是刚才的修改有问题，于是又改了一遍。</p>
+<p>再跑，还是失败。你把日志末尾的报错贴给它，它才发现：测试环境缺了一个依赖，刚才根本没有运行到金额计算那一步。</p>
+<p>安装依赖后，测试终于跑到了目标函数，它修好金额计算，提交补丁。</p>
+<p>订单系统修好了，Agent 却未必记住了这次教训。下一次遇到长日志，它还可能在同一个地方空转。</p>
+<p>所以，你让它把经验写进下次还能读取的操作说明，也就是 Skill：</p>
+<blockquote>
+<p>修改失败后，先确认测试是否真正执行。日志被截断时，读取完整日志中的错误位置，再判断是否需要改代码。</p>
+</blockquote>
+<p>下次还能读到这条经验，它才有机会少走一次弯路。模型没有重新训练，但它能使用的知识变了。</p>
+<p>这已经是一种自我改进。</p>
+<p>不过，刚才发现失败、判断原因、决定写下哪条规则，都有你参与。</p>
+<h2>把人的提醒，变成它自动化的工作</h2>
+<p>现在，你给 Agent 增加一个任务：每次结束后检查执行记录，找出反复出现的失败，提出改进。</p>
+<p>它检查了几次类似任务，发现自己总是漏看后面的报错。于是，它不再只写“注意读完整”，而是修改负责把日志交给自己的工具：</p>
+<pre><code class="language-text">旧工具：
+3000 行日志 → 只交给 Agent 前 200 行
+剩下 2800 行：看不到，也无法继续读
+
+新工具：
+完整日志 → 保存到 log.txt
+先交前 200 行，并告诉 Agent 文件在哪
+Agent 再读文件末尾 → 看见“缺少依赖”
+</code></pre>
+<p>之后遇到构建失败，它能主动打开日志文件，找到错误，不必等你把那几行贴回来。</p>
+<p>这次连模型获取证据的方式也变了。提示词、工具、上下文和执行流程一起构成 Agent 的运行系统，通常称为 Harness。</p>
+<p>但自动升级有个前提：先约定什么算“更好”，再用实际任务检查。</p>
+<p>写代码适合做这样的循环：改完以后，可以运行程序、用测试检查结果，不必只听 AI 自己说“改好了”。不过，测试只能检查写进去的要求；没有覆盖的业务问题，仍可能被漏掉。</p>
+<pre><code class="language-text">时间和资源相同
+↓
+修好更多问题，原有功能不退步
+↓
+才采用新版本
+</code></pre>
+<p>测试任务可以更新，但不能为了让新版本过关，就删掉难题、降低要求。<strong>只有新版本都能可靠完成给定的标准任务，才算升级成功。</strong></p>
+<p>于是，你原来做的一部分工作，现在可以由程序来做：执行、复盘、修改、评测，再让下一轮用上验证有效的改动。</p>
+<p>这样已经能循环改进了。但再运行一段时间，又会出现新的问题。</p>
+<h2>越来越自动化，也越来越爱乱加规则</h2>
+<p>升级后的 Agent 找报错更熟练了。可它负责复盘时，开始把每次失败都变成一条经验：</p>
+<pre><code class="language-text">错误在末尾 → + 优先看末尾
+错误在中间 → + 检查中间
+缺少依赖 → + 重新安装依赖
+</code></pre>
+<p>规则越来越多，Agent 每次开工都要读。某些任务只需要改一个函数，它却先安装依赖、扫描整份日志。这些规则就<strong>过拟合</strong>了：解决了某一次的问题，放到其他任务里却添了麻烦。</p>
+<p>它找错误更熟练了，怎么写经验还是不行？<strong>一条经验有没有用，要看下次用上以后，工作有没有做得更好。</strong></p>
+<p>找到报错，只要看清这次哪里出了问题。写进 Skill 之前，还得问：别的任务也需要这条规则吗？加上以后，会不会反而更慢？</p>
+<p>新工具让它更会找错误，却没让它更会挑出值得保留的规则。</p>
+<h2>再往里改一层</h2>
+<p>要修复这个问题，就不能继续往 Skill 里补规则了。</p>
+<p>每次复盘时，它只看一份失败记录，就要求模型“生成可复用规则”。难怪失败一次，就多一条规则。</p>
+<p>于是，它提出修改：</p>
+<pre><code class="language-text">旧版：一条失败 → 一条规则
+
+新版：
+找几次类似任务
+↓
+这条规则都需要吗？已有规则够吗？
+↓
+试着改一处
+↓
+是否更准？是否更慢？
+↓
+确实更好 → 保留
+还看不清 → 先记下，不采用
+</code></pre>
+<p>日志工具已经修好了，但“每次重装依赖”的规则还留着。用新方法检查过去的任务，它发现这条规则只解决过一次依赖缺失，对其他任务没有帮助。</p>
+<p>于是，它删掉这条规则，正常任务不再跟着折腾。以后总结其他失败，也先检查经验是否值得保留，而不是一律添进 Skill。</p>
+<p><strong>这次，它改的是自己总结经验、决定怎么升级的方法。</strong></p>
+<p>新版本接着给自己升级，就形成了递归自我改进的循环，简称 RSI（Recursive Self-Improvement）。</p>
+<h2>继续升级，它卡在哪里？</h2>
+<p>再让它改一轮。日志已经能读完整，多余规则也清掉了，可剩下的故障更难：它看到了报错，却分不清是依赖没装，还是版本冲突。</p>
+<p>它试着多读几段日志，又给 Skill 加上更详细的说明。放回任务里检查，结果却是：</p>
+<pre><code class="language-text">多读日志 → 花时更长，仍判断错
+加长说明 → 规则更多，仍没修好
+新版本没有更好 → 保留旧版
+</code></pre>
+<p>这次缺的不是读取工具，而是根据线索判断原因的能力。它能提出修改，却暂时找不到有效的修改。</p>
+<p>它还可以继续一轮轮尝试，只是暂时没有进步。更多尝试、新的案例或外部帮助，可能让它再往前走；光是继续改工具和规则，不保证能解决这个问题。</p>
+<p>卡住时，可以由人核对故障原因、补充缺少的经验，再让它继续尝试。这就是人参与改进循环（Human-in-the-loop）。</p>
+<h2>能不能让模型本身学会？</h2>
+<p>前面的升级，模型参数一直没变。它改了工具、操作说明和复盘程序，变好的是整个 Agent 的工作方式。</p>
+<p>如果还想让模型本身学会判断这些故障，可以进一步训练它，更新模型参数，而不只是每次把经验放进上下文提醒它：</p>
+<pre><code class="language-text">验证过的案例
+↓
+用于训练，更新模型参数
+↓
+检查新模型是否真的更好
+↓
+通过后，再参与下一轮学习
+</code></pre>
+<p>无论改工具、记忆还是模型参数，RSI（Recursive Self-Improvement）都得先说清楚：什么算更好，怎么证明？有了这个依据，才能判断这次升级有没有让下一次升级更有效。</p>
+<p>围棋、象棋有明确的胜负，便于检验每轮改进。但有些现实任务，连“怎样才算更好”都还需要讨论。没有可靠的反馈，反复让 AI 评价自己，也可能只是在重复原来的判断，而不是进步。</p>
+<p>自我升级得有明确的标准。多跑几轮循环，还不能实现“左脚踩右脚”。人仍要参与确定目标、补充证据，并判断结果是否真的值得采用。</p>
+<p>那么问题来了，如果人给出的标准本身就错了，AI 会越改越好，还是越来越擅长满足这个错误标准？</p>
+<p><em>LZ AI Note｜记录现象，追问本质。复杂的事情，简单说。</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-BGwtz3vo.js"></script>
+</body>
+</html>

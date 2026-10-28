@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>MCP Code Mode 是什么：工具超过二十个，为什么该换一种调用方式 | LZ AI NOTE</title>
+  <meta name="description" content="&lt;! 写作锚点 读者收获：理解工具变多时上下文和多步调用的开销，能判断自己的 Agent 是否值得采用 Code Mode。 核心判断：让模型用代码编排工具、在执行环境里处理中间结果，可以减少上下文占用和逐步调用的往返，但需要承担沙箱隔离与代码调试的成本。 如何推进：沿用初稿，从工具多了以后选错、传错和上下文拥挤的体验出发，经过搜索与精简工具的旧办法，用同…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="MCP Code Mode 是什么：工具超过二十个，为什么该换一种调用方式">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-10-21">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Code%20Mode%EF%BC%9A%E5%BD%93%20AI%20%E7%BB%88%E4%BA%8E%E5%AD%A6%E4%BC%9A%E2%80%9C%E5%86%99%E4%BB%A3%E7%A0%81%E8%B0%83%E5%B7%A5%E5%85%B7%E2%80%9D%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF%E2%80%9C%E8%83%8C%E8%8F%9C%E5%8D%95%E7%82%B9%E8%8F%9C%E2%80%9D">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Code%20Mode%EF%BC%9A%E5%BD%93%20AI%20%E7%BB%88%E4%BA%8E%E5%AD%A6%E4%BC%9A%E2%80%9C%E5%86%99%E4%BB%A3%E7%A0%81%E8%B0%83%E5%B7%A5%E5%85%B7%E2%80%9D%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF%E2%80%9C%E8%83%8C%E8%8F%9C%E5%8D%95%E7%82%B9%E8%8F%9C%E2%80%9D">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="MCP Code Mode 是什么：工具超过二十个，为什么该换一种调用方式 | LZ AI NOTE">
+  <meta property="og:description" content="&lt;! 写作锚点 读者收获：理解工具变多时上下文和多步调用的开销，能判断自己的 Agent 是否值得采用 Code Mode。 核心判断：让模型用代码编排工具、在执行环境里处理中间结果，可以减少上下文占用和逐步调用的往返，但需要承担沙箱隔离与代码调试的成本。 如何推进：沿用初稿，从工具多了以后选错、传错和上下文拥挤的体验出发，经过搜索与精简工具的旧办法，用同…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Code%20Mode%EF%BC%9A%E5%BD%93%20AI%20%E7%BB%88%E4%BA%8E%E5%AD%A6%E4%BC%9A%E2%80%9C%E5%86%99%E4%BB%A3%E7%A0%81%E8%B0%83%E5%B7%A5%E5%85%B7%E2%80%9D%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF%E2%80%9C%E8%83%8C%E8%8F%9C%E5%8D%95%E7%82%B9%E8%8F%9C%E2%80%9D">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"MCP Code Mode 是什么：工具超过二十个，为什么该换一种调用方式","description":"\u003c! 写作锚点 读者收获：理解工具变多时上下文和多步调用的开销，能判断自己的 Agent 是否值得采用 Code Mode。 核心判断：让模型用代码编排工具、在执行环境里处理中间结果，可以减少上下文占用和逐步调用的往返，但需要承担沙箱隔离与代码调试的成本。 如何推进：沿用初稿，从工具多了以后选错、传错和上下文拥挤的体验出发，经过搜索与精简工具的旧办法，用同…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Code%20Mode%EF%BC%9A%E5%BD%93%20AI%20%E7%BB%88%E4%BA%8E%E5%AD%A6%E4%BC%9A%E2%80%9C%E5%86%99%E4%BB%A3%E7%A0%81%E8%B0%83%E5%B7%A5%E5%85%B7%E2%80%9D%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF%E2%80%9C%E8%83%8C%E8%8F%9C%E5%8D%95%E7%82%B9%E8%8F%9C%E2%80%9D","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Code%20Mode%EF%BC%9A%E5%BD%93%20AI%20%E7%BB%88%E4%BA%8E%E5%AD%A6%E4%BC%9A%E2%80%9C%E5%86%99%E4%BB%A3%E7%A0%81%E8%B0%83%E5%B7%A5%E5%85%B7%E2%80%9D%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF%E2%80%9C%E8%83%8C%E8%8F%9C%E5%8D%95%E7%82%B9%E8%8F%9C%E2%80%9D","dateModified":"2026-10-21","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：MCP Code Mode 是什么：工具超过二十个，为什么该换一种调用方式，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Code%20Mode%EF%BC%9A%E5%BD%93%20AI%20%E7%BB%88%E4%BA%8E%E5%AD%A6%E4%BC%9A%E2%80%9C%E5%86%99%E4%BB%A3%E7%A0%81%E8%B0%83%E5%B7%A5%E5%85%B7%E2%80%9D%EF%BC%8C%E8%80%8C%E4%B8%8D%E6%98%AF%E2%80%9C%E8%83%8C%E8%8F%9C%E5%8D%95%E7%82%B9%E8%8F%9C%E2%80%9D","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>MCP Code Mode 是什么：工具超过二十个，为什么该换一种调用方式</h1><!-- 写作锚点
+读者收获：理解工具变多时上下文和多步调用的开销，能判断自己的 Agent 是否值得采用 Code Mode。
+核心判断：让模型用代码编排工具、在执行环境里处理中间结果，可以减少上下文占用和逐步调用的往返，但需要承担沙箱隔离与代码调试的成本。
+如何推进：沿用初稿，从工具多了以后选错、传错和上下文拥挤的体验出发，经过搜索与精简工具的旧办法，用同一个 PR 查询例子说明代码编排，再讨论代价和适用场景。
+-->
+<h1>MCP Code Mode 是什么：工具超过二十个，为什么该换一种调用方式</h1>
+<p>如果你用过 Claude Code、Cursor 这类 AI 编程助手，或者自己搭过接了一堆 MCP 工具的 Agent，大概遇到过这种情况：三五个工具时还好，接到几十个，模型就容易选错工具、传错参数，或者在几个无关工具之间来回尝试。</p>
+<p>还有一个不太容易察觉的问题：对话还没开始，工具说明就已经占掉了一大块上下文。留给实际任务的空间，反而少了。</p>
+<p>Code Mode 想解决的就是这些问题。它的策略：<strong>让模型写一段代码，把几个工具串起来执行，不必每调一次工具，都回到模型这里决定下一步。</strong></p>
+<h2>工具多了，说明书也成了负担</h2>
+<p>MCP（Model Context Protocol）的默认工作方式，是由服务器提供所有可用工具的名字、描述和参数 JSON Schema，再放进模型上下文。模型读完这些说明，选择工具、发出调用，拿到结果以后，再决定下一步。</p>
+<p>工具少的时候，这样做很方便。数量多了，麻烦就来了。</p>
+<p>首先，光是工具说明就可能占用大量 token。一个中等规模的 MCP 服务器如果暴露 30 个工具，每个工具的 schema 平均有几百个 token，加起来就可能上万。换成 Cloudflare 那样的规模，2500 个 API 端点全部展开，上下文消耗会超过 200 万 token。此时任务还没开始，模型只是在读说明书。</p>
+<p>接下来是多步任务里的中转。</p>
+<p>比如，你想查 GitHub 上某个 PR 的详情，拉取评论，再生成一份摘要。按传统方式，模型先调用 <code>get_pull_request</code>，把结果读进上下文；再调用 <code>get_comments</code>，把评论读进来；最后整理摘要。每一步的中间结果都要经过模型处理，消耗 token，也多了一次出错的机会。</p>
+<p>工具调用的格式本身，也有学习成本。大语言模型训练时见过大量真实代码，而工具调用使用的是专门的特殊 token 和合成格式，这方面的训练信号远不如代码充分。于是就会出现一种让人纳闷的情况：TypeScript 写得挺顺，填 JSON 参数却犯了低级错误。</p>
+<h2>之前的办法：少给一点，用到再找</h2>
+<p>在 Code Mode 流行之前，社区已经在想办法减少这部分负担，常见的有两种。</p>
+<p>一种是搜索式工具发现，也叫 Search Mode。先不给模型全部工具，只给一个 <code>search_tools</code>，让它用自然语言按需要搜索。找到候选工具，再获取详细 schema，然后调用。FastMCP 的 <code>Search</code> 和 <code>GetSchemas</code> 就是这样的实现。</p>
+<p>它能省下不少 token，但搜索、获取 schema、调用工具需要几轮往返，延迟也跟着增加。模型还有可能没搜到真正需要的工具。</p>
+<p>另一种办法更直接：人工精简工具集。服务器设计者把细粒度接口收起来，只留几个粗粒度的大工具。说明书短了，灵活性也少了。有时模型想做一个精细操作，却找不到对应的工具。</p>
+<p>这两种办法都有用，只是模型的工作流程没有变：读说明，选一个工具，等结果，再选下一个。</p>
+<h2>Code Mode：把几次调用写进同一段代码</h2>
+<p>Code Mode 把每个 MCP 工具的定义转换成 TypeScript 或 JavaScript API 的类型签名，不再把它们作为独立工具暴露给模型，而是只给模型一个 <code>execute_code</code> 或 <code>run_code</code> 工具。</p>
+<p>模型看到的接口大致是这样：</p>
+<pre><code class="language-typescript">async function getPullRequest(input: { owner: string; repo: string; pull_number: number }): Promise&lt;PR&gt;;
+async function getComments(input: { owner: string; repo: string; pull_number: number }): Promise&lt;Comment[]&gt;;
+</code></pre>
+<p>接着，它可以写一段代码，把两次调用和结果整理放在一起，交给沙箱执行：</p>
+<pre><code class="language-typescript">const pr = await getPullRequest({ owner: &quot;cloudflare&quot;, repo: &quot;workers&quot;, pull_number: 42 });
+const comments = await getComments({ owner: &quot;cloudflare&quot;, repo: &quot;workers&quot;, pull_number: 42 });
+const summary = { title: pr.title, state: pr.state, reviewCount: comments.length };
+return summary;
+</code></pre>
+<p>这段代码执行完，只有最后的 <code>summary</code> 返回模型。PR 的完整 JSON、每条评论的内容，都留在沙箱里处理，不必全部进入上下文。</p>
+<p>省下多少，已经有一些测试数字。WasmAgent 的基准测试中，30 个工具的场景，传统 MCP 的启动开销约为 3490 token，Code Mode 约为 474 token，减少了 86%。Cloudflare 给出的例子规模更大：2500 个端点，从 200 万 token 压缩到约 1000 token，下降了三个数量级。</p>
+<p>除了少用 token，编排步骤也更顺手了。循环、条件判断、错误处理，模型都可以直接用代码表达。需要重复操作，就写 <code>for</code>；需要处理失败，就写 <code>try/catch</code>。这些都是它在训练时见过很多次的写法，不用每走一步都重新发起一轮工具调用。</p>
+<h2>省下了往返，也多了执行代码的责任</h2>
+<p>Code Mode 的好处：工具说明和中间结果不必占满上下文，多步任务可以在代码里完成，模型也能用比填写 JSON 更熟悉的编程方式组织调用。</p>
+<p>它还可以把 API 密钥留在工具代理层。模型生成的代码通过代理调用接口，碰不到真实 token。</p>
+<p>不过，要让这套方式安全、好用，还有几件事得处理。</p>
+<p>先是沙箱。模型生成的代码必须在隔离环境中运行，不能随意访问网络和文件系统。Cloudflare 使用 Workers 沙箱，其他实现有的用 QuickJS、V8 isolate，也有的用远程容器。如果没有隔离，就等于允许模型在你的服务器上执行任意代码，这风险就太大了。</p>
+<p>再是调试。传统工具调用失败时，通常能直接看到哪个工具、哪个参数出了问题。Code Mode 多了一段程序逻辑：代码如果有 bug，排查时就得读模型生成的 TypeScript，找出它在哪一步想错了。（这里对不懂代码的人不太友好）</p>
+<p>还要看场景值不值得。如果只有一个 <code>get_weather</code>，让模型专门写段代码去调用，实在没必要。工具多、步骤复杂时，Code Mode 才更能省事；一两个简单工具，直接调用就够了。</p>
+<h2>搭 Agent 时，可以换个角度看接口</h2>
+<p>Code Mode 让人重新想了一下工具接口该怎么设计：除了让模型适应机器的接口，也可以让接口更适合模型使用。</p>
+<p>过去，我们把工具包装成特定的调用格式，再让模型学习怎么使用。Code Mode 则把工具包装成它熟悉的编程接口，让模型通过写代码完成决策和编排。比起具体省下多少 token，这种设计思路更值得留意。</p>
+<p>对于正在搭 Agent 或 MCP 服务器的人，可以从自己的任务看起：如果工具已经超过二十个，或者一个常见任务就要串起三四个工具，值得认真考虑 Code Mode。要是只给模型配了一两个简单能力，现有的工具调用机制依然最直接。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-BGwtz3vo.js"></script>
+</body>
+</html>

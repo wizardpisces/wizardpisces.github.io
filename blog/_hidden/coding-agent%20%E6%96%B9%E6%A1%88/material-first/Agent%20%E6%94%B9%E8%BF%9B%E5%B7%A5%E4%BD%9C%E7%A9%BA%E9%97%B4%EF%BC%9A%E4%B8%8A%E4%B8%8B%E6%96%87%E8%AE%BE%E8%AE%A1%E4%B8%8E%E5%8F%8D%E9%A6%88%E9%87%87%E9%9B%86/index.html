@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Agent 改进工作空间：上下文设计与反馈采集 | LZ AI NOTE</title>
+  <meta name="description" content="围绕真实任务的反馈与修正过程组织上下文，帮助 Skill Creator 定位优化点并提炼可复用经验。">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="Agent 改进工作空间：上下文设计与反馈采集">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-10-22">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/Agent%20%E6%94%B9%E8%BF%9B%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%EF%BC%9A%E4%B8%8A%E4%B8%8B%E6%96%87%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%8F%8D%E9%A6%88%E9%87%87%E9%9B%86">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/Agent%20%E6%94%B9%E8%BF%9B%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%EF%BC%9A%E4%B8%8A%E4%B8%8B%E6%96%87%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%8F%8D%E9%A6%88%E9%87%87%E9%9B%86">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="Agent 改进工作空间：上下文设计与反馈采集 | LZ AI NOTE">
+  <meta property="og:description" content="围绕真实任务的反馈与修正过程组织上下文，帮助 Skill Creator 定位优化点并提炼可复用经验。">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/Agent%20%E6%94%B9%E8%BF%9B%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%EF%BC%9A%E4%B8%8A%E4%B8%8B%E6%96%87%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%8F%8D%E9%A6%88%E9%87%87%E9%9B%86">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Agent 改进工作空间：上下文设计与反馈采集","description":"围绕真实任务的反馈与修正过程组织上下文，帮助 Skill Creator 定位优化点并提炼可复用经验。","url":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/Agent%20%E6%94%B9%E8%BF%9B%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%EF%BC%9A%E4%B8%8A%E4%B8%8B%E6%96%87%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%8F%8D%E9%A6%88%E9%87%87%E9%9B%86","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/Agent%20%E6%94%B9%E8%BF%9B%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%EF%BC%9A%E4%B8%8A%E4%B8%8B%E6%96%87%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%8F%8D%E9%A6%88%E9%87%87%E9%9B%86","dateModified":"2026-10-22","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：Agent 改进工作空间：上下文设计与反馈采集，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/Agent%20%E6%94%B9%E8%BF%9B%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%EF%BC%9A%E4%B8%8A%E4%B8%8B%E6%96%87%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%8F%8D%E9%A6%88%E9%87%87%E9%9B%86","about":["_hidden","coding-agent 方案","material-first"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Agent 改进工作空间：上下文设计与反馈采集</h1><h1>Agent 改进工作空间：上下文设计与反馈采集</h1>
+<h2>核心</h2>
+<p>Skill Creator Workspace 将任务、执行过程、环境反馈和人工修订组织起来，让 Creator 看清哪里失败、如何修正、结果是否改善，再结合工程已有经验生成候选 Skill。</p>
+<p>经验提炼的依据需要从“模型认为自己的选择合理”，转向“这次选择在环境中产生了什么结果”。只记录选择理由和最终总结，很难找到改进方向；保留真实输出、验收依据和反馈驱动的重试，才能看清哪些路径反复失败、哪些调整改善了结果。</p>
+<h2>上下文范围</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">上下文</th>
+<th style="text-align:left">功能</th>
+<th style="text-align:left">帮助回答什么</th>
+<th style="text-align:left">举个例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">原始任务、验收目标与约束</td>
+<td style="text-align:left">还原 Case</td>
+<td style="text-align:left">应该完成什么，什么才算成功，</td>
+<td style="text-align:left">还原 figma ，验证截图对比</td>
+</tr>
+<tr>
+<td style="text-align:left">各轮结果、人工评论和修订</td>
+<td style="text-align:left">做 reward</td>
+<td style="text-align:left">人指出了什么，Agent 实际改变了什么</td>
+<td style="text-align:left">交互节点（比如嵌入的 codex 交互）</td>
+</tr>
+<tr>
+<td style="text-align:left">环境验证与反馈重试摘要</td>
+<td style="text-align:left">核实 reward</td>
+<td style="text-align:left">哪些尝试失败，哪些调整产生了可观察改善，</td>
+<td style="text-align:left">跑 test Case</td>
+</tr>
+<tr>
+<td style="text-align:left">完整轨迹与实际产物</td>
+<td style="text-align:left">溯源</td>
+<td style="text-align:left">摘要是否准确，关键细节能否回查，辅助溯源</td>
+<td style="text-align:left">比如 langfuse.log</td>
+</tr>
+<tr>
+<td style="text-align:left">工程状态与既有 Skills</td>
+<td style="text-align:left">验证 skill</td>
+<td style="text-align:left">当时有什么能力和约束，已有经验为何未覆盖</td>
+<td style="text-align:left">conventions</td>
+</tr>
+</tbody>
+</table>
+<p>上下文按任务和结果版本关联，保留执行时的工程与 Skill 状态。完整轨迹提供事实，验证摘要定位优化点，工程和已有 Skills 提供约束；Creator 按需读取相关材料。</p>
+<h2>两个闭环</h2>
+<p>任务内，通过实际执行和反馈修正结果：</p>
+<pre><code class="language-text">Plan / Coding → 环境结果 → 检查或人工评论 → 修改 → 再次验证
+</code></pre>
+<p>任务后，人工驱动经验提炼：</p>
+<pre><code class="language-text">上述上下文 → Skill Creator Workspace → 候选经验
+→ 人工 Review → 新 Case 验证 → 更新下一次任务可用的 Skill
+</code></pre>
+<p>保留每轮结果、评论、自检和实际修改。人工不只是批准候选，还会指出问题、纠正归因、补充工程约束和修改策略。这些反馈与对应修订同样进入 Workspace，帮助 Creator 理解经验为何被采纳、调整或否定。</p>
+<p>随着这些过程积累，可以进一步提炼 Creator 自身的分析经验：怎样定位问题、选择证据、划定适用范围。由人工指导经验提炼，再从指导过程改进 Creator。</p>
+<h2>如何采集可优化的轨迹</h2>
+<p>通过已有 MCP，重点采集关键环境验证中的上下文：</p>
+<p><strong>当前情况与输入 → 验证目标 → 实际输出与判定 → 具体失败点 → 根据反馈做过的调整 → 再次验证。</strong></p>
+<p>重点关注反复失败、无效重试、人工纠正和最终改善，也保留首次成功作为对照。每次判定保留标准、来源和证据入口，便于回查实际输出与产物。</p>
+<p>验证摘要相当于完整轨迹中的优化点索引：先帮助 Creator 找到值得复盘的失败与修正片段，再回查当时的输入、工具输出、代码变化和评判依据。这样既能聚焦问题，又能核对摘要是否遗漏了影响结果的条件。</p>
+<p>测试、接口运行、Mock、浏览器、Native 观察和人工检查都可以提供反馈。RN Screenshot Perception Layer 提供其中的 Native 运行上下文。</p>
+<h2>Workspace 如何服务 Agent</h2>
+<p>Creator 沿反馈定位相关轨迹，检查代码与产物，比较各轮结果，并结合已有 Skills 自主分析：该改进的是工程信息、工具能力、验证方式，还是可复用的执行策略。</p>
+<p>有可复用经验时，优先更新适用的既有 Skill；候选经过人工 Review，再用新的 Case 验证效果。</p>
+<p>例如，标题栏初版验证失败，调整样式后仍失败，更换组件后通过。摘要定位这三轮尝试，Creator 再查完整轨迹与工程用法，判断问题来自组件能力、布局处理还是信息缺失，并检查验证条件是否一致。由此提炼有依据的选型与验证策略，而不只是把最后一次修改写成经验。</p>
+<h2>验证方式</h2>
+<p>先用真实 Case 检查上下文能否支持失败定位、修正核查和经验提炼，再通过新 Case 的成功率、修正轮数和成本判断效果，持续调整采集重点与 Workspace。</p>
+<h2>参考与关联</h2>
+<ul>
+<li><a href="./%E9%9D%A2%E5%90%91%20RSI%20%E7%9A%84%20Coding%20Agent%EF%BC%9A%E4%BB%8E%E4%BB%BB%E5%8A%A1%E5%8F%8D%E9%A6%88%E5%88%B0%E6%96%B9%E6%B3%95%E8%BF%AD%E4%BB%A3.md">面向 RSI 的 Coding Agent：从任务反馈到方法迭代</a>：工程自改进的范式与机制。</li>
+<li><a href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents">Anthropic Agent Evals</a>：区分执行轨迹与实际结果。</li>
+<li><a href="https://arxiv.org/abs/2510.04618">ACE</a>：利用执行反馈反思并增量整理上下文。</li>
+<li><a href="https://arxiv.org/abs/2502.10325">AgentPRM</a>：过程反馈、策略优化与奖励估计的边界。</li>
+<li><a href="./RN%20Screenshot%20Perception%20Layer%EF%BC%9A%E4%B8%8B%E4%B8%80%E9%98%B6%E6%AE%B5%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88.md">RN Screenshot Perception Layer</a>：Native 环境观察。</li>
+<li><a href="./%E5%B7%A5%E7%A8%8B%E9%A2%84%E6%8F%90%E7%82%BC%EF%BC%9A%E4%BB%8E%E5%B7%B2%E6%9C%89%E5%AE%9E%E7%8E%B0%E7%94%9F%E6%88%90%E5%8F%AF%E9%AA%8C%E8%AF%81%20Skills.md">工程预提炼：从已有实现生成可验证 Skills</a>：任务开始前的工程知识提炼，与任务后经验提炼互补。</li>
+</ul>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-BGwtz3vo.js"></script>
+</body>
+</html>

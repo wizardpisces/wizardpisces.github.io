@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Attention Residuals：Kimi 为什么要重新设计残差连接？ | LZ AI NOTE</title>
+  <meta name="description" content="&lt;! 写作锚点 读者收获：能沿简化代码追踪残差总和与历史列表的变化，用一张图分清标准、Full、Block 三种读取方式，并判断灵活性是否值得额外成本。 核心判断：AttnRes 将固定累加改为按内容读取历史计算结果；Full 保留每次新增结果，Block 合并组内结果，以较粗的读取粒度降低存储和通信负担。 如何推进：从固定残差的访问限制出发，先看普通 f…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="Attention Residuals：Kimi 为什么要重新设计残差连接？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-10-26">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Attention%20Residuals%EF%BC%9AKimi%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E9%87%8D%E6%96%B0%E8%AE%BE%E8%AE%A1%E6%AE%8B%E5%B7%AE%E8%BF%9E%E6%8E%A5%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Attention%20Residuals%EF%BC%9AKimi%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E9%87%8D%E6%96%B0%E8%AE%BE%E8%AE%A1%E6%AE%8B%E5%B7%AE%E8%BF%9E%E6%8E%A5%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="Attention Residuals：Kimi 为什么要重新设计残差连接？ | LZ AI NOTE">
+  <meta property="og:description" content="&lt;! 写作锚点 读者收获：能沿简化代码追踪残差总和与历史列表的变化，用一张图分清标准、Full、Block 三种读取方式，并判断灵活性是否值得额外成本。 核心判断：AttnRes 将固定累加改为按内容读取历史计算结果；Full 保留每次新增结果，Block 合并组内结果，以较粗的读取粒度降低存储和通信负担。 如何推进：从固定残差的访问限制出发，先看普通 f…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Attention%20Residuals%EF%BC%9AKimi%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E9%87%8D%E6%96%B0%E8%AE%BE%E8%AE%A1%E6%AE%8B%E5%B7%AE%E8%BF%9E%E6%8E%A5%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Attention Residuals：Kimi 为什么要重新设计残差连接？","description":"\u003c! 写作锚点 读者收获：能沿简化代码追踪残差总和与历史列表的变化，用一张图分清标准、Full、Block 三种读取方式，并判断灵活性是否值得额外成本。 核心判断：AttnRes 将固定累加改为按内容读取历史计算结果；Full 保留每次新增结果，Block 合并组内结果，以较粗的读取粒度降低存储和通信负担。 如何推进：从固定残差的访问限制出发，先看普通 f…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Attention%20Residuals%EF%BC%9AKimi%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E9%87%8D%E6%96%B0%E8%AE%BE%E8%AE%A1%E6%AE%8B%E5%B7%AE%E8%BF%9E%E6%8E%A5%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Attention%20Residuals%EF%BC%9AKimi%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E9%87%8D%E6%96%B0%E8%AE%BE%E8%AE%A1%E6%AE%8B%E5%B7%AE%E8%BF%9E%E6%8E%A5%EF%BC%9F","dateModified":"2026-10-26","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：Attention Residuals：Kimi 为什么要重新设计残差连接？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Attention%20Residuals%EF%BC%9AKimi%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E9%87%8D%E6%96%B0%E8%AE%BE%E8%AE%A1%E6%AE%8B%E5%B7%AE%E8%BF%9E%E6%8E%A5%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Attention Residuals：Kimi 为什么要重新设计残差连接？</h1><!-- 写作锚点
+读者收获：能沿简化代码追踪残差总和与历史列表的变化，用一张图分清标准、Full、Block 三种读取方式，并判断灵活性是否值得额外成本。
+核心判断：AttnRes 将固定累加改为按内容读取历史计算结果；Full 保留每次新增结果，Block 合并组内结果，以较粗的读取粒度降低存储和通信负担。
+如何推进：从固定残差的访问限制出发，先看普通 forward，再展开 Full 的历史列表、打分和返回结果，继而解释分块，用同一读取时刻的总图收束，最后核对效果与范式判断。
+-->
+<h1>Attention Residuals：Kimi 为什么要重新设计残差连接？</h1>
+<p>Transformer 加深以后，每层新增的计算结果都会进入残差流。后面的层收到的是一路累加的状态，而不是可以单独读取的各层结果。</p>
+<p>Kimi Team 在 2026 年提出的 Attention Residuals（AttnRes），尝试让后面的层按内容选择前面的结果。为此，模型得保存这些历史表示，并在后续计算中读取它们，这也带来了额外成本。</p>
+<h2>一、传统 Residuals：固定累加有什么局限？</h2>
+<p>这里把每个 Attention 或 FFN 子层记作一次 <code>layer</code> 计算，包含子层内部计算，不包含外面的残差加法。</p>
+<pre><code class="language-python">def forward(self, x):
+    for layer in self.layers:
+        new = layer(x)
+        x = x + new
+    return x
+</code></pre>
+<p><code>self</code> 表示这个模型，<code>self.layers</code> 是模型内部按顺序保存的各层。调用时只需提供输入 <code>x</code>，模型就会依次执行这些层的计算。</p>
+<p><code>new</code> 是本层新增的结果，<code>x</code> 是一路传下来的累加状态。每次循环都保留旧的 <code>x</code>，再把 <code>new</code> 加进去。</p>
+<p>例如，假设前两层的新增结果分别是 <code>y1</code> 和 <code>y2</code>：</p>
+<pre><code class="language-text">初始状态：x0
+
+第 1 层：x1 = x0 + y1
+第 2 层：x2 = x1 + y2
+             = x0 + y1 + y2
+
+第 3 层收到：x0 + y1 + y2
+</code></pre>
+<p>这里累加的是每层新增的结果，不是把每层的累计状态反复相加。</p>
+<p>结构示意：</p>
+<pre><code class="language-text">输入 x0
+   │
+   ▼
+ Layer 1 ──[+]──&gt; Layer 2 ──[+]──&gt; Layer 3 ──[+]──&gt; ...
+              ▲               ▲               ▲
+              │               │               │
+             y1              y2              y3
+
+[+]：将本层新增结果加回当前状态
+</code></pre>
+<p>残差连接让信息和梯度有一条直接传递的路，有助于训练深层网络。但这里向后传递的只有累加状态，没有单独保留 <code>y1</code>、<code>y2</code> 供后面的层分别读取。</p>
+<p>模型只能从总和中提取有用信息，连接本身没有提供“多取一点第一层结果、少取一点第二层结果”的更精细化操作。</p>
+<p>这就有个问题：残差流不断累积，状态的数值尺度可能增大，后续新增结果的相对影响就会变小。经过很多层的累加后，无法充分用好了每层的结果。</p>
+<h2>二、Full AttnRes：让后面的层重新读取历史结果</h2>
+<p>Full AttnRes 先把各层新增的结果分别留下，后面的层再通过 Attention 决定怎么读取。Horizontal Attention → Vertical Attention（水平注意力 → 垂直注意力）</p>
+<p>假设初始输入是 <code>x0</code>，前两层新增的结果分别是 <code>y1</code>、<code>y2</code>。历史列表可以写成：</p>
+<pre><code class="language-python">history = [
+    [2, 0],  # 初始输入 x0
+    [0, 4],  # 第一层新增结果 y1
+    [3, 0],  # 第二层新增结果 y2
+]
+</code></pre>
+<p>传统残差会将这些结果合并成 <code>[5, 4]</code>。而 Full AttnRes 则分别保留这三份来源，供第三层读取。</p>
+<h3>1. 历史读取是怎么工作的？</h3>
+<p>每个接收层都有自己的可学习查询向量 <code>query</code>，用它给历史结果打分，再把分数转换成读取比例。</p>
+<pre><code class="language-python">def read_history(history, query):
+    scores = []
+    for value in history:
+        key = rms_norm(value)
+        scores.append(dot(query, key))
+
+    weights = softmax(scores)
+    return weighted_sum(history, weights)
+</code></pre>
+<p>这段伪代码只保留了读取过程：</p>
+<ul>
+<li><code>rms_norm</code>：调整历史表示的数值尺度，避免打分过度受数字大小影响。</li>
+<li><code>dot</code>：计算查询向量与历史表示的匹配分数。</li>
+<li><code>softmax</code>：把分数转换成总和为 1 的权重。</li>
+<li><code>weighted_sum</code>：按权重对原始历史表示加权求和。</li>
+</ul>
+<p>读取时，数据这样流动：</p>
+<pre><code class="language-text">历史表示
+   │
+   ▼
+查询向量与各表示计算匹配分数
+   │
+   ▼
+Softmax 转换为读取权重
+   │
+   ▼
+历史表示 × 对应权重，再求和
+   │
+   ▼
+当前层的输入
+</code></pre>
+<p>还是上面的三个向量。假设某次读取得到以下权重：</p>
+<pre><code class="language-text">x0 = [2, 0]    权重 0.25
+y1 = [0, 4]    权重 0.50
+y2 = [3, 0]    权重 0.25
+</code></pre>
+<p>那么第三层收到的结果就是：</p>
+<pre><code class="language-text">h3 = 0.25 × [2, 0]
+   + 0.50 × [0, 4]
+   + 0.25 × [3, 0]
+   = [1.25, 2]
+</code></pre>
+<p>在这个例子里，第三层读取了更多第一层新增的结果 <code>y1</code>。</p>
+<p>查询向量由训练得到，推理时固定下来。这里的 Attention 选择的是不同深度的层表示。也就是前文提到的垂直注意力</p>
+<h3>2. 把读取机制放回 forward</h3>
+<p>这里的 <code>forward</code> 表示一次走完全部层的过程；<code>for</code> 每循环一次，才处理其中一层。它不是只计算某一层，也不是把整个模型反复运行多次。</p>
+<p>各层和查询参数都已保存在模型内部，不需要每次调用时临时传入：</p>
+<ul>
+<li><code>self.layers</code>：按顺序排列的计算层，和前面的普通残差代码一样。</li>
+<li><code>layer.query</code>：当前这一层自己的查询向量，用来给历史结果打分。它是一组训练得到的数字，不是用户的提问。</li>
+<li><code>self.output_query</code>：所有层计算完后，最后汇总历史结果时使用的查询向量，也是模型保存的参数。</li>
+</ul>
+<p>这样，读取历史和执行当前层的计算，就可以放在同一个循环里：</p>
+<pre><code class="language-python">def forward(self, x):
+    history = [x]
+
+    for layer in self.layers:
+        layer_input = read_history(history, layer.query)
+        new = layer(layer_input)
+        history.append(new)
+
+    return read_history(history, self.output_query)
+</code></pre>
+<p><code>layer_input</code> 就是为当前层准备好的输入，<code>new</code> 是这一层算出的结果。假设模型只有三层，一次调用会这样执行：</p>
+<pre><code class="language-text">开始：history = [x0]
+
+第 1 次循环（第 1 层）：
+  用本层的 query 读取 [x0]，计算 y1
+  history = [x0, y1]
+
+第 2 次循环（第 2 层）：
+  用本层的 query 读取 [x0, y1]，计算 y2
+  history = [x0, y1, y2]
+
+第 3 次循环（第 3 层）：
+  用本层的 query 读取 [x0, y1, y2]，计算 y3
+  history = [x0, y1, y2, y3]
+</code></pre>
+<p>每层都能从列表里分别读取前面的结果，不必只接收一份不断累加的状态。</p>
+<p><code>append(new)</code> 只保存本层新增结果，不是把输入和新增结果先相加再保存。三层都算完后，再用 <code>self.output_query</code> 对整个历史列表做最后一次加权汇总，返回这段层间计算的结果。这段仍是流程示意，具体实现见论文和官方代码。</p>
+<h2>三、Block AttnRes：不必把每一层都单独保存</h2>
+<p>Full AttnRes 保留了全部历史来源，读取更灵活，成本也随之增加。每个位置都需要保存多层结果，后续层要反复读取和打分；分布式训练中，传递这些历史表示也可能增加系统负担。</p>
+<p>Block AttnRes 将若干层划分为一组：</p>
+<ul>
+<li>块内：将各层新增结果累加。</li>
+<li>块间：通过 Attention 读取不同历史块的表示。</li>
+<li>当前块尚未完成时：保留部分累加状态，供后续层读取。</li>
+</ul>
+<p>假设 12 层网络每 4 层划分为一组：</p>
+<pre><code class="language-text">Block 1                  Block 2                  Block 3
+┌────────────────┐      ┌────────────────┐      ┌────────────────┐
+│ L1 → L2 → L3   │      │ L5 → L6 → L7   │      │ L9 → L10 → L11 │
+│          ↓     │      │          ↓     │      │          ↓     │
+│         L4     │      │         L8     │      │        L12     │
+└────────┬───────┘      └────────▲───────┘      └────────▲───────┘
+         │                       │                       │
+         └──────────────┐        │                       │
+                        ▼        │                       │
+                 Block Attention ────────────────────────┘
+</code></pre>
+<p>每个块里保存了哪些结果？</p>
+<p>令：</p>
+<pre><code class="language-text">A = y1 + y2 + y3 + y4
+B = y5 + y6 + y7 + y8
+</code></pre>
+<p><code>A</code>、<code>B</code> 分别是前两个块累计得到的表示。到了第 9 层准备输入时，三种结构的历史来源如下：</p>
+<pre><code class="language-text">标准 Residuals
+
+x0 + A + B
+     │
+     ▼
+   第 9 层
+</code></pre>
+<pre><code class="language-text">Full AttnRes
+
+[x0, y1, y2, y3, y4, y5, y6, y7, y8]
+                     │
+                     ▼
+              Attention 加权读取
+                     │
+                     ▼
+                   第 9 层
+</code></pre>
+<pre><code class="language-text">Block AttnRes
+
+[x0, A, B]
+   │
+   ▼
+Attention 加权读取
+   │
+   ▼
+第 9 层
+</code></pre>
+<p>标准残差只传递累加状态；Full AttnRes 保留每层的新增结果；Block AttnRes 则把每组的新增结果合并成一份，保留块级来源。</p>
+<p>Block AttnRes 在每次子层计算前，都会聚合历史块和当前块的部分状态。例如计算第 10 层时，当前块已经有了第 9 层新增的 <code>y9</code>，它也会参与这次读取。子层计算结束后，再将新增结果加进当前块。Attention 并不只在块结束时执行。</p>
+<p>如果网络有 <code>L</code> 层、分成 <code>N</code> 个块，每个位置需要保留的跨层来源就可以从约 <code>L</code> 份减少到约 <code>N</code> 份，存储规模从 <code>O(L × d)</code> 降至 <code>O(N × d)</code>，其中 <code>d</code> 是隐藏维度。</p>
+<p>块越小，后续层选择历史信息的粒度越细，但存储和读取负担越大；块越大，组内合并越多，后续可选择的来源就越粗。</p>
+<h2>四、三种结构的区别，一张图看清</h2>
+<pre><code class="language-text">标准 Transformer：固定累加
+
+x0 → [+ y1] → [+ y2] → [+ y3] → ... → [+ y8] → 第 9 层
+                 传递一份不断累加的状态
+
+
+Full AttnRes：每层动态读取全部历史来源
+
+[x0, y1, y2, y3, y4, y5, y6, y7, y8]
+                     │
+                     ▼
+              Depth Attention
+                     │
+                     ▼
+                   第 9 层
+
+
+Block AttnRes：块内累加，块间动态读取
+
+[x0, A, B]
+     │
+     ▼
+Block Attention
+     │
+     ▼
+  第 9 层
+
+A = y1 + y2 + y3 + y4
+B = y5 + y6 + y7 + y8
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>结构</th>
+<th>历史信息如何保存</th>
+<th>当前层如何读取</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>标准 Residuals</td>
+<td>一份累加状态</td>
+<td>直接接收累加结果</td>
+</tr>
+<tr>
+<td>Full AttnRes</td>
+<td>每层独立的新增结果</td>
+<td>对全部历史来源动态加权</td>
+</tr>
+<tr>
+<td>Block AttnRes</td>
+<td>每个块的累计结果及当前块状态</td>
+<td>对历史块和当前部分状态动态加权</td>
+</tr>
+</tbody>
+</table>
+<h2>五、回到 Transformer</h2>
+<p>Transformer 的主体结构仍在，调整的是深层网络内部传递信息的方式：</p>
+<ul>
+<li>标准残差：把新增结果固定累加到状态中。</li>
+<li>Full AttnRes：保留各层结果，让后续层动态选择。</li>
+<li>Block AttnRes：在块内累加、块间动态选择，以控制成本。</li>
+</ul>
+<p>这一改动让后面的层能学着选择不同深度的结果，不必总按固定比例接收。</p>
+<p>AttnRes 的洞察是：既然横向的信息交互可以用 Attention 动态选择，为什么纵向的信息传递还要依赖固定累加？</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-BGwtz3vo.js"></script>
+</body>
+</html>

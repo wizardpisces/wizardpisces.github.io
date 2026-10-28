@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>测试造数 Agent 技术方案：从工具森林到可复用业务能力 | LZ AI NOTE</title>
+  <meta name="description" content="按标准生成工具与候选森林，用例试跑和人工确认沉淀可复用业务树，实际造数时按任务选择已验证链路并持续补缺。">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="测试造数 Agent 技术方案：从工具森林到可复用业务能力">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-10-20">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/%E6%B5%8B%E8%AF%95%E9%80%A0%E6%95%B0%20Agent%20%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88%EF%BC%9A%E4%BB%8E%E5%B7%A5%E5%85%B7%E6%A3%AE%E6%9E%97%E5%88%B0%E5%8F%AF%E5%A4%8D%E7%94%A8%E4%B8%9A%E5%8A%A1%E8%83%BD%E5%8A%9B">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/%E6%B5%8B%E8%AF%95%E9%80%A0%E6%95%B0%20Agent%20%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88%EF%BC%9A%E4%BB%8E%E5%B7%A5%E5%85%B7%E6%A3%AE%E6%9E%97%E5%88%B0%E5%8F%AF%E5%A4%8D%E7%94%A8%E4%B8%9A%E5%8A%A1%E8%83%BD%E5%8A%9B">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="测试造数 Agent 技术方案：从工具森林到可复用业务能力 | LZ AI NOTE">
+  <meta property="og:description" content="按标准生成工具与候选森林，用例试跑和人工确认沉淀可复用业务树，实际造数时按任务选择已验证链路并持续补缺。">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/%E6%B5%8B%E8%AF%95%E9%80%A0%E6%95%B0%20Agent%20%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88%EF%BC%9A%E4%BB%8E%E5%B7%A5%E5%85%B7%E6%A3%AE%E6%9E%97%E5%88%B0%E5%8F%AF%E5%A4%8D%E7%94%A8%E4%B8%9A%E5%8A%A1%E8%83%BD%E5%8A%9B">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"测试造数 Agent 技术方案：从工具森林到可复用业务能力","description":"按标准生成工具与候选森林，用例试跑和人工确认沉淀可复用业务树，实际造数时按任务选择已验证链路并持续补缺。","url":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/%E6%B5%8B%E8%AF%95%E9%80%A0%E6%95%B0%20Agent%20%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88%EF%BC%9A%E4%BB%8E%E5%B7%A5%E5%85%B7%E6%A3%AE%E6%9E%97%E5%88%B0%E5%8F%AF%E5%A4%8D%E7%94%A8%E4%B8%9A%E5%8A%A1%E8%83%BD%E5%8A%9B","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/%E6%B5%8B%E8%AF%95%E9%80%A0%E6%95%B0%20Agent%20%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88%EF%BC%9A%E4%BB%8E%E5%B7%A5%E5%85%B7%E6%A3%AE%E6%9E%97%E5%88%B0%E5%8F%AF%E5%A4%8D%E7%94%A8%E4%B8%9A%E5%8A%A1%E8%83%BD%E5%8A%9B","dateModified":"2026-10-20","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：测试造数 Agent 技术方案：从工具森林到可复用业务能力，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/%E6%B5%8B%E8%AF%95%E9%80%A0%E6%95%B0%20Agent%20%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88%EF%BC%9A%E4%BB%8E%E5%B7%A5%E5%85%B7%E6%A3%AE%E6%9E%97%E5%88%B0%E5%8F%AF%E5%A4%8D%E7%94%A8%E4%B8%9A%E5%8A%A1%E8%83%BD%E5%8A%9B","about":["_hidden","coding-agent 方案"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>测试造数 Agent 技术方案：从工具森林到可复用业务能力</h1><!-- 写作锚点
+读者收获：理解测试造数系统如何冷启动、验证和沉淀链路，并在实际任务中复用已有能力、发现与补齐缺口。
+核心判断：工具描述只能生成候选依赖，链路是否可用要由用例、业务验证和人工确认共同决定；确认后的链路可以组合成更高级的业务树。
+如何推进：保留自描述工具、配对验证和局部执行设计，补上冷启动、预训练和实际应用三个阶段，再说明高阶树的形成、失效与反馈路径。
+-->
+<h1>测试造数 Agent 技术方案：从工具森林到可复用业务能力</h1>
+<h2>背景</h2>
+<p>测试造数的主要困难是链路不透明：数据从哪里来、参数被谁消费、上下游是谁、失败应该找谁，都需要人工确认。中间结果看不见，失败原因也难以定位。</p>
+<p>后端又存在周期消费任务，无法简单串行执行。为造数另写同步链路，既需要持续维护，也容易偏离真实业务；即便完成改造，缺少过程记录，仍然是黑盒。</p>
+<h2>核心思路</h2>
+<blockquote>
+<p>按标准生成工具和候选森林，用真实用例筛出可用链路，再让 Agent 按任务复用、组合和补齐。</p>
+</blockquote>
+<p>由 Skill 将核心 API 包装为 MCP Tool，维护工具描述、上游依赖和配对的 validation Tool。已有业务逻辑继续复用，调用后由配对工具验证结果，留下输入、输出和验证记录。</p>
+<p>系统分三步建立和使用这片持久森林：</p>
+<pre><code class="language-text">冷启动：按标准生成 MCP Tools，自动连接候选森林
+    ↓
+预训练：批量跑 Case，验证结果，人工确认可用叶子与链路
+    ↓
+沉淀：把确认过的链路保存为业务能力，组合出更高级的树
+    ↓
+实际应用：按任务选能力造数，发现缺口后补工具、补 Case、重新验证
+    └── 验证与确认后的改进，回到持久森林
+</code></pre>
+<p><code>parents</code> 按数组设计，支持多上游；示例先用简单树说明，多上游汇合时实际是有向无环图，仍沿依赖回溯执行。</p>
+<h2>最小节点描述</h2>
+<p>工具可能来自不同系统的不同 MCP。本方案用 <code>系统名.能力名</code> 作为唯一、稳定的 ID；<code>mcp</code> 和 <code>name</code> 定位实际调用入口，入口调整不改变 ID。以下是项目内的描述示例：</p>
+<pre><code class="language-yaml">id: order.create_order
+mcp: order-mcp
+name: create_order
+description: 创建一笔待支付的测试订单，不负责支付或结算
+owner: order-team
+updated_at: &quot;2026-10-20T10:00:00+08:00&quot;
+
+inputs:
+  user_id: &quot;string，测试用户 ID&quot;
+  amount_cent: &quot;integer，订单金额，人民币分，必须大于 0&quot;
+
+outputs:
+  order_id: &quot;string，创建后的订单 ID&quot;
+  status: &quot;string，成功创建时为 CREATED&quot;
+
+parents:
+  - identity.create_user
+</code></pre>
+<p><code>parents</code> 数组只保存上游 ID，没有上游时为 <code>[]</code>。上游的用途、输入输出从对应 Tool 的当前描述读取，不重复维护描述和字段映射。</p>
+<p><strong>ID 负责确定“连谁”，当前描述负责说明“怎么用”。</strong> Agent 在本次执行中分析参数如何传递；不明确时提出缺口，不猜测映射，也不自动执行写操作。</p>
+<p><code>owner</code> 提供问题追溯入口；<code>updated_at</code> 是节点内容最近变化的时间，由 Skill 自动维护。只有内容变化才更新时间，重复生成或调用工具不刷新。起步时可直接提供已有测试用户，不必先执行创建用户。</p>
+<h2>由配对工具验证结果</h2>
+<p>配对关系采用命名约定：执行工具为 <code>&lt;tool_id&gt;</code>，验证工具默认为 <code>&lt;tool_id&gt;_validation</code>，无需在每个节点重复配置。只有不符合约定时，才通过可选的 <code>validation_tool</code> 显式指定。验证工具由对应业务团队维护：</p>
+<pre><code class="language-yaml">id: order.create_order_validation
+mcp: order-mcp
+name: create_order_validation
+description: 查询实际订单，验证用户、金额与创建状态是否符合预期
+updated_at: &quot;2026-10-20T10:00:00+08:00&quot;
+
+inputs:
+  order_id: &quot;string，创建工具返回的订单 ID&quot;
+  expected_user_id: &quot;string，本次创建时传入的用户 ID&quot;
+  expected_amount_cent: &quot;integer，本次创建时传入的金额，单位为分&quot;
+
+outputs:
+  status: &quot;passed / failed / pending&quot;
+  detail: &quot;实际查询结果与差异说明&quot;
+</code></pre>
+<p>调用创建工具后，按约定查找验证工具，把返回的订单 ID 和原始输入交给它验证。查询与判断封装在工具内部；未找到配对工具就标记验证能力缺失，不视为验证通过。</p>
+<p>工具描述是否完整、依赖 ID 是否存在，是构图前的基础检查；配对 validation Tool 验证的是实际业务结果，两者不混用。</p>
+<h2>森林与任务执行</h2>
+<p>各 MCP 的工具按 ID 汇总，按 <code>parents</code> 连接。初始化后可以得到下面两棵候选树；此时只表示描述中的依赖，尚未证明实际可执行：</p>
+<pre><code class="language-text">订单树
+[A] 创建用户
+└── [B] 创建订单
+    ├── [C] 测试支付
+    │   └── [D] 等待结算
+    │       └── [E] 核对结果
+    └── [F] 导出订单
+
+库存树
+[X] 创建商品
+└── [Y] 设置库存
+    └── [Z] 核对库存
+</code></pre>
+<p>任务要“生成已结算订单”，就选中 E，沿 <code>parents</code> 回溯到 A，再按 <code>A → B → C → D → E</code> 执行；F 和库存树都不参与。只要未支付订单时，选中 B，执行 <code>A → B</code> 即可。</p>
+<p>本文说的“任务叶子”是一次任务选中的结果节点，不要求它在依赖图上没有子节点。所以 B 虽然还能往下走，也能成为“生成未支付订单”这项任务的叶子。确认叶子可用时，要同时确认到达它的依赖链和适用条件，不能只看最后一个工具是否返回成功。</p>
+<p>每一步读取当前工具描述、准备参数、调用执行工具，再调用配对验证工具。必需输入不明确时先补齐，不猜测执行；所需的订单 ID 等结果保留在本次任务记录中，供后续节点使用。</p>
+<p>周期任务保留原有消费逻辑，由配对验证工具查询目标结果；未完成返回 <code>pending</code>，到约定等待时限仍未完成则记录超时。缺少查询或触发入口时，只针对该处补最小能力。</p>
+<h2>三阶段建立可用森林</h2>
+<h3>一、冷启动：按标准生成工具，自动构建候选森林</h3>
+<p>先统一前述节点描述和验证工具约定，再由 Skill 根据已有 API 定义、业务代码和业务团队确认的说明，批量生成 MCP Tools 及描述。生成的包装复用原有业务逻辑；没有现成能力的地方，留下待补项，不生成一个假定可用的入口。</p>
+<p>初始化过程按以下顺序处理：</p>
+<ol>
+<li>按稳定 ID 登记工具，检查输入输出、维护团队和调用入口。</li>
+<li>读取明确声明的 <code>parents</code>，检查缺失上游和循环，再自动连接。</li>
+<li>按约定匹配 validation Tool，标出缺少验证能力的节点。</li>
+<li>保存候选森林。来源不明的依赖只作为待确认建议，不直接接入可执行链路。</li>
+</ol>
+<p>这一阶段可以批量生成工具，不需要先逐个人工跑通；但构图成功只代表描述可连接。执行权限、数据范围和调用配额仍需单独配置，自动构图不自动授权写入。</p>
+<h3>二、预训练：跑 Case、确认叶子，沉淀更高级的树</h3>
+<p>收集现有测试用例和常见造数需求，补充关键边界与失败用例。每个 Case 写明任务目标、输入条件、预期业务结果、等待时限，以及数据隔离和清理方式。例如：</p>
+<table>
+<thead>
+<tr>
+<th>Case</th>
+<th>输入条件</th>
+<th>目标节点与预期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>创建未支付订单</td>
+<td>已有测试用户，金额 100 元</td>
+<td>到 B，验证用户、金额与 CREATED 状态</td>
+</tr>
+<tr>
+<td>创建已结算订单</td>
+<td>测试支付渠道，金额 100 元</td>
+<td>到 E，在规定时间内查询到正确结算结果</td>
+</tr>
+<tr>
+<td>导出订单</td>
+<td>指定测试用户与订单范围</td>
+<td>到 F，核对导出数据属于指定范围</td>
+</tr>
+</tbody>
+</table>
+<p>Agent 在获准的测试环境中分批跑这些 Case，限制并发和写入范围，每一步调用配对验证工具并保存记录。创建、支付等写操作重试前要先核查已有结果，避免重复造数；异步等待中的 <code>pending</code> 也不能当成失败立即重跑。</p>
+<p>跑完后，按“Case + 目标叶子 + 实际执行链”汇总：哪些已验证通过，哪些结果不符，哪些还在等待，哪些因缺工具或参数不明而阻塞。人工结合业务结果和执行记录，标记哪些链路在对应条件下能用。自动验证通过是人工确认的依据，不代替确认。</p>
+<p>例如，<code>A → B → C → D → E</code> 通过已结算订单用例，并经人工确认后，可以沉淀成一个“生成已结算订单”的组合能力：</p>
+<pre><code class="language-text">底层订单树：A → B → C → D → E
+                     ↓ 试跑、验证、人工确认
+组合能力：生成已结算订单
+输入：测试用户条件、金额、测试支付渠道
+输出：order_id、结算结果
+展开执行：仍调用 A、B、C、D、E 及各自验证工具
+</code></pre>
+<p>这就是“学习出更高级的树”的起点：Agent 从执行记录中提炼候选组合，经确认后保存为有输入、输出和适用条件的能力。后续树可以引用组合能力，不必每次从底层工具重新规划。例如，在此基础上组合“生成已结算订单 → 导出该订单”，就得到更高一层的业务树；这条新组合仍要经过自己的 Case 验证，不能因为两个部分分别可用就自动确认。</p>
+<p>组合能力使用独立 ID，记录所引用的工具或组合版本、Case 和人工确认记录，不修改底层工具原有的 <code>parents</code>。展开后仍检查循环，保留每一步日志。所谓可用，也只覆盖确认过的条件；测过 100 元订单，不能据此声称所有金额和支付渠道都已验证。</p>
+<h3>三、实际应用：按任务选叶子造数，查漏补缺</h3>
+<p>实际任务进入后，Agent 先按目标、输入条件和环境，从已确认能力里找匹配的任务叶子或组合树；存在多个候选时，优先选覆盖当前条件、依赖更少的链路。选定后补齐本次参数，展开所需上游，生成新数据并重新验证。复用的是已确认的调用方法，不是上次留下的订单或验证结果。</p>
+<p>未找到匹配能力时，先报告具体缺口：缺工具、缺验证、参数传递不明，还是已有链路尚未覆盖这组条件。经授权可以用底层工具探索新链路，但结果先作为候选保存，不能直接升级为可用能力。</p>
+<p>使用中的发现按缺口回流：</p>
+<ul>
+<li><strong>缺能力</strong>：补执行工具或 validation Tool，再更新候选森林。</li>
+<li><strong>缺覆盖</strong>：补 Case，试跑已有链路，确认新条件能否支持。</li>
+<li><strong>执行失败</strong>：保留失败记录，定位到节点与参数；需要改工具或链路时，修复后跑回归。</li>
+<li><strong>发现可复用组合</strong>：提炼成候选高阶树，经过用例验证和人工确认后再开放复用。</li>
+</ul>
+<p>因此，实际应用既消费已有森林，也持续贡献新的 Case 和候选组合；修改进入可用森林前，仍经过验证与确认。</p>
+<h2>森林如何生长和更新</h2>
+<p>森林持久保存，不随每次任务重建。仍以上面的订单树为例：</p>
+<ul>
+<li><strong>新增</strong>：Skill 登记 F 的新 ID，声明 <code>parents=[B]</code>，它就接到 B 下成为新分支。</li>
+<li><strong>更新</strong>：B 的 ID 不变，<code>updated_at</code> 变化，更新 B 并复核 C、D、E、F 的用法；若 <code>parents</code> 改变，只调整对应连接。</li>
+<li><strong>下线</strong>：Skill 明确停用 C，保留断点，D、E 暂不可执行；F 和库存树不受影响。</li>
+<li><strong>未变</strong>：ID 和 <code>updated_at</code> 均未变化，原节点与关系保持不动。</li>
+</ul>
+<p>应用变更时检查上游是否存在、是否形成循环；连接失败不等于下线。运行中的任务保留本次记录，后续任务使用更新后的森林。业务代码变更需要触发 Skill 同步描述。</p>
+<p>候选与已确认能力分开保存。工具的 <code>updated_at</code> 变化后，引用它的已确认链路和高阶组合标记为待复验；运行中的任务保留选定的描述快照，必要入口已下线时则停止，不混用新旧版本继续执行。回归用例通过并确认后，再恢复这些能力的可用状态。</p>
+<h2>检查点让过程可见</h2>
+<p>每个节点留下实际输入、输出和配对工具的验证结果。例如：</p>
+<pre><code class="language-text">本次造数
+├─ [A] 创建用户：通过，user_id=u_test_01
+├─ [B] 创建订单：通过，order_id=o_test_01，金额=10000 分
+├─ [C] 测试支付：通过，已查询确认支付状态
+├─ [D] 等待周期结算：超时，尚未查询到目标结算记录
+│  └─ 维护团队：settlement-team
+└─ [E] 核对结算结果：未执行，等待 [D]
+</code></pre>
+<p>这样可以直接看到哪里已经完成、哪里仍在等待、应联系谁继续排查。查询不到结果时保留真实状态，不把超时直接解释为业务处理错误。</p>
+<p>输入输出保存为快照，方便复查和复用调用方式。后续调整金额等参数，可以沿用已确认的链路生成新数据集。</p>
+<h2>推进方式</h2>
+<ol>
+<li><strong>校准生成标准</strong>：先用一对执行与验证工具确认描述标准能用，再按同一标准批量生成候选工具和初始化森林。</li>
+<li><strong>离线试跑与人工确认</strong>：从常用 Case 开始分批跑森林，标记可用叶子、依赖链和适用条件，保留失败样本。</li>
+<li><strong>沉淀高阶业务树</strong>：从确认过的链路提炼组合能力，对新组合单独验证，形成可按目标检索的能力目录。</li>
+<li><strong>实际造数与持续补缺</strong>：按任务选择已确认能力局部执行，新增问题回流到工具、Case 和候选组合，复验后更新森林。</li>
+</ol>
+<p>例如，测试提出“生成一笔 100 元的已结算订单”，Agent 组合上述节点；改成 200 元时，复用链路并传入新参数。遇到缺失的依赖或检查能力，则明确指出待补节点。</p>
+<h2>共识</h2>
+<p><strong>按标准生成候选森林，用 Case 和人工确认筛出可用链路，再沉淀更高级的业务树；实际造数按任务选择能力、局部执行，发现的缺口回到下一轮验证。</strong></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-BGwtz3vo.js"></script>
+</body>
+</html>

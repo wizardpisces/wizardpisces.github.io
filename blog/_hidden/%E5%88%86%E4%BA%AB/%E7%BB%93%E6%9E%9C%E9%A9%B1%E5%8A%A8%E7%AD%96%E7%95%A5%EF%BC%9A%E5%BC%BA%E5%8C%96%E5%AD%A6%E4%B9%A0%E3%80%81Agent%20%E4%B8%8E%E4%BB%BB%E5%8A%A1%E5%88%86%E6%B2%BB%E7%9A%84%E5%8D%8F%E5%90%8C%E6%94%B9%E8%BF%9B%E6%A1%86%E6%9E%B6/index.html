@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>结果驱动策略：强化学习、Agent 与任务分治的协同改进框架 | LZ AI NOTE</title>
+  <meta name="description" content="结果驱动策略：强化学习、Agent 与任务分治的协同改进框架 三个名词 三者不是并列的技术名词，而是 一个改进系统的三个位置 ： 1. 强化学习：从模仿到根据结果改进 1.1 例子：一道数学题 正确答案是 3×4+5 = 17。 1.2 SFT 怎么做这道题 SFT 的做法是： 给模型看优质解题示范，让它学习如何解答。 示范长这样： SFT 在这道题上的实…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="结果驱动策略：强化学习、Agent 与任务分治的协同改进框架">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-10-22">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E5%88%86%E4%BA%AB/%E7%BB%93%E6%9E%9C%E9%A9%B1%E5%8A%A8%E7%AD%96%E7%95%A5%EF%BC%9A%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E3%80%81Agent%20%E4%B8%8E%E4%BB%BB%E5%8A%A1%E5%88%86%E6%B2%BB%E7%9A%84%E5%8D%8F%E5%90%8C%E6%94%B9%E8%BF%9B%E6%A1%86%E6%9E%B6">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E5%88%86%E4%BA%AB/%E7%BB%93%E6%9E%9C%E9%A9%B1%E5%8A%A8%E7%AD%96%E7%95%A5%EF%BC%9A%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E3%80%81Agent%20%E4%B8%8E%E4%BB%BB%E5%8A%A1%E5%88%86%E6%B2%BB%E7%9A%84%E5%8D%8F%E5%90%8C%E6%94%B9%E8%BF%9B%E6%A1%86%E6%9E%B6">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="结果驱动策略：强化学习、Agent 与任务分治的协同改进框架 | LZ AI NOTE">
+  <meta property="og:description" content="结果驱动策略：强化学习、Agent 与任务分治的协同改进框架 三个名词 三者不是并列的技术名词，而是 一个改进系统的三个位置 ： 1. 强化学习：从模仿到根据结果改进 1.1 例子：一道数学题 正确答案是 3×4+5 = 17。 1.2 SFT 怎么做这道题 SFT 的做法是： 给模型看优质解题示范，让它学习如何解答。 示范长这样： SFT 在这道题上的实…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E5%88%86%E4%BA%AB/%E7%BB%93%E6%9E%9C%E9%A9%B1%E5%8A%A8%E7%AD%96%E7%95%A5%EF%BC%9A%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E3%80%81Agent%20%E4%B8%8E%E4%BB%BB%E5%8A%A1%E5%88%86%E6%B2%BB%E7%9A%84%E5%8D%8F%E5%90%8C%E6%94%B9%E8%BF%9B%E6%A1%86%E6%9E%B6">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"结果驱动策略：强化学习、Agent 与任务分治的协同改进框架","description":"结果驱动策略：强化学习、Agent 与任务分治的协同改进框架 三个名词 三者不是并列的技术名词，而是 一个改进系统的三个位置 ： 1. 强化学习：从模仿到根据结果改进 1.1 例子：一道数学题 正确答案是 3×4+5 = 17。 1.2 SFT 怎么做这道题 SFT 的做法是： 给模型看优质解题示范，让它学习如何解答。 示范长这样： SFT 在这道题上的实…","url":"https://wizardpisces.github.io/blog/_hidden/%E5%88%86%E4%BA%AB/%E7%BB%93%E6%9E%9C%E9%A9%B1%E5%8A%A8%E7%AD%96%E7%95%A5%EF%BC%9A%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E3%80%81Agent%20%E4%B8%8E%E4%BB%BB%E5%8A%A1%E5%88%86%E6%B2%BB%E7%9A%84%E5%8D%8F%E5%90%8C%E6%94%B9%E8%BF%9B%E6%A1%86%E6%9E%B6","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E5%88%86%E4%BA%AB/%E7%BB%93%E6%9E%9C%E9%A9%B1%E5%8A%A8%E7%AD%96%E7%95%A5%EF%BC%9A%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E3%80%81Agent%20%E4%B8%8E%E4%BB%BB%E5%8A%A1%E5%88%86%E6%B2%BB%E7%9A%84%E5%8D%8F%E5%90%8C%E6%94%B9%E8%BF%9B%E6%A1%86%E6%9E%B6","dateModified":"2026-10-22","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：结果驱动策略：强化学习、Agent 与任务分治的协同改进框架，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E5%88%86%E4%BA%AB/%E7%BB%93%E6%9E%9C%E9%A9%B1%E5%8A%A8%E7%AD%96%E7%95%A5%EF%BC%9A%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E3%80%81Agent%20%E4%B8%8E%E4%BB%BB%E5%8A%A1%E5%88%86%E6%B2%BB%E7%9A%84%E5%8D%8F%E5%90%8C%E6%94%B9%E8%BF%9B%E6%A1%86%E6%9E%B6","about":["_hidden","分享"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>结果驱动策略：强化学习、Agent 与任务分治的协同改进框架</h1><h1>结果驱动策略：强化学习、Agent 与任务分治的协同改进框架</h1>
+<h2>三个名词</h2>
+<pre><code class="language-text">强化学习：让模型根据结果改进，而不只是模仿
+Agent   ：让模型决定下一步做什么，而不只是回答
+任务分治：把问题拆开，让问题能被定位和改好
+</code></pre>
+<p>三者不是并列的技术名词，而是<strong>一个改进系统的三个位置</strong>：</p>
+<pre><code class="language-text">任务分治 → 反馈闭环 → 强化学习 → 更好的任务表现
+（拆开定位） （发现并验证） （在适合处优化策略）
+</code></pre>
+<h2>1. 强化学习：从模仿到根据结果改进</h2>
+<h3>1.1 例子：一道数学题</h3>
+<pre><code class="language-text">小明有 3 盒铅笔，每盒 4 支，又买了 5 支，一共多少支？
+</code></pre>
+<p>正确答案是 3×4+5 = 17。</p>
+<h3>1.2 SFT 怎么做这道题</h3>
+<p>SFT 的做法是：<strong>给模型看优质解题示范，让它学习如何解答。</strong></p>
+<p>示范长这样：</p>
+<pre><code class="language-text">先算 3 盒共多少支：3 × 4 = 12
+再加上又买的 5 支：12 + 5 = 17
+所以一共 17 支。
+</code></pre>
+<pre><code class="language-text">SFT：看示范（上面这段过程）→ 模型学习解题方式 → 用于回答新题目
+</code></pre>
+<p><strong>SFT 在这道题上的实际过程：</strong></p>
+<pre><code class="language-text">输入题目
+   ↓
+模型运用训练中学到的解题方式
+   ↓
+按&quot;先乘后加&quot;的写法生成过程 → 得到 17
+</code></pre>
+<p>它直接学习的是&quot;<strong>示范如何解答</strong>&quot;，也可以从中学到推理、检查和纠错的方法。</p>
+<p><strong>它的局限</strong>：示范学得像，不代表每次结果都对。比如遇到&quot;每盒有 4 支，其中 1 支是坏的，3 盒共多少支能用&quot;，仍可能只算 3 × 4 = 12，漏掉坏的铅笔。SFT 本身不直接根据模型这次尝试的结果好坏来更新策略。</p>
+<h3>1.3 RL 怎么做这道题</h3>
+<p>RL 的做法是：<strong>让模型自己尝试，再用奖励信号调整策略。</strong> 它可以在已有 SFT 模型的基础上继续训练。</p>
+<pre><code class="language-text">RL：尝试行动 → 获得奖励 → 调整策略 → 再次尝试
+</code></pre>
+<p><strong>RL 在这道题上的实际过程：</strong></p>
+<pre><code class="language-text">第 1 次尝试：3 × 4 = 12，12 + 5 = 17   → 结果对 → 高奖励
+第 2 次尝试：只算了 3 × 4 = 12         → 结果错 → 低奖励
+                                          ↓
+                          策略调整：这类题要记得把&quot;又买的&quot;加上
+后续尝试：更倾向把&quot;又买的&quot;加上，得到 17 → 对 → 高奖励
+</code></pre>
+<p>训练不必为每次尝试提供标准过程，而是通过奖励，让模型<strong>更倾向于生成能带来好结果的解答</strong>。</p>
+<h3>1.4 两者的关键差别</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>SFT</th>
+<th>RL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>学习信号</td>
+<td>优质示范如何解答</td>
+<td>这次尝试获得多少奖励</td>
+</tr>
+<tr>
+<td>在这道题上如何学习</td>
+<td>学习示范中的&quot;先乘后加&quot;</td>
+<td>提高完整计算获得高奖励的解答的生成概率</td>
+</tr>
+<tr>
+<td>改进方式</td>
+<td>补充更好的示范继续训练</td>
+<td>根据尝试与奖励继续训练</td>
+</tr>
+</tbody>
+</table>
+<p>一句话：<strong>SFT 学&quot;像不像示范&quot;，RL 学&quot;结果好不好，下次怎么做得更好&quot;。</strong></p>
+<h3>1.5 为什么&quot;根据结果反馈&quot;能优化策略</h3>
+<pre><code class="language-text">同一个问题，模型可以走多条路径
+        ↓
+不同路径得到不同结果（对/错、好/差）
+        ↓
+奖励把&quot;好结果&quot;的信号传回策略
+        ↓
+下次更倾向走能带来好结果的路径
+</code></pre>
+<p>两个前提，缺一不可：</p>
+<ul>
+<li>奖励要<strong>能区分好坏</strong>——奖励错了，RL 会朝错的方向优化。</li>
+<li>要有<strong>多次尝试和比较</strong>的机会——只试一次，无所谓&quot;改进&quot;。</li>
+</ul>
+<blockquote>
+<p>思考题：如果奖励本身错了，会发生什么？</p>
+</blockquote>
+<h3>1.6 以 DeepSeek-R1 为例，简单看下背后的机制</h3>
+<p>DeepSeek-R1 将 SFT 与 RL 组合使用：示范打基础，再通过结果反馈优化推理策略。训练中的 <strong>GRPO</strong> 会比较同一道题多份解答的奖励，调整生成策略；更新裁剪、KL 约束等机制则帮助限制策略变化，改善训练稳定性。</p>
+<p>另外，推理时也可以用<strong>多数投票（自一致性）</strong>，从多次解答中选出最常见的答案。</p>
+<h2>2. Agent：不仅要回答，还要决定下一步做什么</h2>
+<h3>2.1 任务：查出某商品当前价格</h3>
+<pre><code class="language-text">用户提问：这个商品现在多少钱？
+   ↓
+搜索网页
+   ↓
+判断信息是否可靠
+   ↓
+必要时继续搜索
+   ↓
+给出答案
+</code></pre>
+<h3>2.2 纯回答 vs Agent，在这个任务上的实际过程</h3>
+<p><strong>纯回答（不调用工具）：</strong></p>
+<pre><code class="language-text">输入：这个商品现在多少钱？
+   ↓
+模型生成一段文字：&quot;大概在 200 元左右。&quot;
+   ↓
+结束（没有去查，也不知道自己说得对不对）
+</code></pre>
+<p><strong>Agent（会行动、会看结果、会决定下一步）：</strong></p>
+<pre><code class="language-text">输入：这个商品现在多少钱？
+   ↓
+行动 1：搜索&quot;商品名 价格&quot;
+   ↓
+看到结果：某论坛帖子说&quot;去年买的，199 元&quot;
+   ↓
+判断：来源是旧帖子，时间不对，不可靠
+   ↓
+行动 2：换关键词搜&quot;商品名 官方 价格&quot;
+   ↓
+看到结果：官方页面标价 249 元，带当前日期
+   ↓
+判断：来源可靠、时间对得上
+   ↓
+收敛：给出答案 249 元
+</code></pre>
+<p>把两条路径并排看：</p>
+<pre><code class="language-text">纯回答：问题 → 生成文本 → 结束
+
+Agent ：问题 → 选行动 → 调工具 → 看结果 → 决定下一步 → … → 答案
+                  ↑__________________________|
+                       根据结果调整
+</code></pre>
+<p>Agent 的关键不只是&quot;生成文本&quot;，而是三件事：</p>
+<ol>
+<li><strong>行动选择</strong>：下一步做什么（搜索？换关键词？打开详情页？）</li>
+<li><strong>工具调用</strong>：真正去执行行动</li>
+<li><strong>根据结果调整下一步</strong>：结果不可靠就继续查，可靠就收敛</li>
+</ol>
+<p>上面这个例子里，<strong>&quot;看到旧帖子→判断不可靠→换关键词&quot;这一步，就是 Agent 区别于纯回答的地方</strong>。纯回答根本不会走到这一步。</p>
+<h3>2.3 工程规则 vs 强化学习优化策略（还是这个任务）</h3>
+<p><strong>用工程规则写：</strong></p>
+<pre><code class="language-text">if 搜索结果为空: 换更宽的关键词再搜
+if 来源是论坛/二手转述: 再找官方来源
+if 价格没有日期: 追加&quot;更新时间&quot;搜索
+</code></pre>
+<pre><code class="language-text">规则写死，覆盖常见情况，稳定、可解释
+</code></pre>
+<p><strong>用 RL 优化策略：</strong></p>
+<pre><code class="language-text">让模型在大量类似任务上自己尝试
+每次根据&quot;最终答案对不对&quot;给奖励
+        ↓
+模型逐渐学会：什么情况下该继续搜、什么情况下该收敛、
+换什么关键词更容易找到可靠来源
+</code></pre>
+<p>在上面那个例子里，如果出现一种规则没覆盖的组合——比如&quot;官方页面打不开，但有个带日期的电商页面和一条论坛信息互相矛盾&quot;——规则可能不知道怎么办，而经过 RL 优化的策略有可能学会&quot;优先信带日期的电商页面&quot;。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>工程规则</th>
+<th>RL 优化策略</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>适合</td>
+<td>情况明确、可枚举</td>
+<td>情况复杂、组合多、难穷举</td>
+</tr>
+<tr>
+<td>在本例中</td>
+<td>覆盖&quot;空结果、论坛来源、无日期&quot;</td>
+<td>覆盖规则没写到的组合情况</td>
+</tr>
+<tr>
+<td>优点</td>
+<td>稳定、可解释、改动直接</td>
+<td>能泛化到没写过的情形</td>
+</tr>
+<tr>
+<td>代价</td>
+<td>规则越堆越多，覆盖不全</td>
+<td>需要奖励设计、训练成本、验证</td>
+</tr>
+</tbody>
+</table>
+<p>一句话：<strong>规则解决&quot;已知情况&quot;，RL 解决&quot;策略在复杂情况下怎么选更好&quot;。</strong> Agent 不等于 RL——Agent 是&quot;会行动的结构&quot;，RL 是&quot;优化行动策略的一种方法&quot;。</p>
+<h2>3. 任务分治：为什么拆开后更容易改进？</h2>
+<h3>3.1 不拆分：一个黑盒走到底</h3>
+<p>还是查价格这个任务，如果不拆分：</p>
+<pre><code class="language-text">提问 → Agent 自行处理所有步骤（这里有 N 个步骤） → 最终答案错误（说成 199 元）
+                                  ↓
+                               难以定位
+</code></pre>
+<p>199 元是从哪来的？是搜错了商品？是搜到了旧帖子？是看到了可靠来源但整合时用错了？<strong>不知道。</strong> 这就是不拆分最大的问题：不是&quot;它错了&quot;，而是&quot;不知道错在哪一步&quot;。</p>
+<h3>3.2 拆分：每一步有明确输出，可检查</h3>
+<pre><code class="language-text">搜索 → 核验 → 整合
+  ↓      ↓      ↓
+检查来源 检查价格 检查答案
+</code></pre>
+<p>把刚才那个错误的例子放进拆分结构里走一遍：</p>
+<pre><code class="language-text">【搜索】输出：论坛帖&quot;199 元（去年）&quot; + 官方页&quot;249 元（当前）&quot;
+         检查：来源是否相关？→ 相关，但一个是旧帖一个是官方
+
+【核验】输出：采用官方页 249 元
+         检查：价格是否一致？→ 不一致，需判断时效；官方页带当前日期 → 采用
+
+【整合】输出：249 元
+         检查：答案是否与核验结果一致？→ 一致
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>输出</th>
+<th>检查方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>搜索</td>
+<td>候选页面/价格</td>
+<td>来源是否相关、是否官方</td>
+</tr>
+<tr>
+<td>核验</td>
+<td>确认后的价格与时间</td>
+<td>价格是否一致、信息是否过期</td>
+</tr>
+<tr>
+<td>整合</td>
+<td>最终答案</td>
+<td>答案是否与核验结果一致</td>
+</tr>
+</tbody>
+</table>
+<p>好处很直接：</p>
+<pre><code class="language-text">出错 → 看每一步的输出 → 定位到具体步骤 → 针对性修改
+</code></pre>
+<p>比如答案是 199 元，一看【核验】这一步的输出是&quot;采用了旧帖 199 元&quot;，立刻知道错在<strong>核验环节没有做时效判断</strong>，而不是模型&quot;整体不行&quot;。</p>
+<h3>3.3 但不要拆过头</h3>
+<ul>
+<li>拆得太细：步骤间接口变多，整体反而难维护。上面三步已经够定位；再拆成&quot;打开页面/读标题/读正文&quot;反而增加衔接成本。</li>
+<li>拆完仍要<strong>整体检查</strong>：每一步都对，合起来也可能错——比如搜索和核验用了不同商品版本（一个查的是标准版、一个查的是豪华版），每步单看都对，最终答案却错。</li>
+</ul>
+<p>一句话：<strong>分治是为了&quot;可定位、可修改&quot;，不是为了&quot;越细越好&quot;。</strong></p>
+<h2>4. 反馈闭环：如何让系统持续变好？</h2>
+<p>这一节把第 2 节（Agent 的行动策略）和第 3 节（任务分治）合起来看：<strong>分治提供定位，闭环提供改进，RL 是其中一种改进手段。</strong></p>
+<h3>4.1 用同一个错误案例串起来</h3>
+<pre><code class="language-text">Agent 搜索到了过期价格（199 元）→ 给出错误答案
+</code></pre>
+<h3>4.2 闭环过程，落在分治结构上</h3>
+<pre><code class="language-text">执行任务
+   ↓
+发现答案错误（应该是 249，答成了 199）
+   ↓
+定位：在第 3 节的分治结构里，看到【核验】这一步的输出是&quot;采用旧帖 199 元&quot;
+   ↓
+修改：在核验环节增加时效性检查（价格必须带日期，过期则重搜）
+   ↓
+重新测试（同一任务 + 一批类似任务）
+   ↓
+检查是否改善
+   └────→ 下一轮
+</code></pre>
+<p><strong>注意&quot;定位&quot;这一步是靠分治才做得到的</strong>：如果是不拆分的黑盒，只知道&quot;答案错了&quot;，接下来只能瞎猜改哪里。</p>
+<h3>4.3 修改手段要&quot;对症下药&quot;</h3>
+<p>同一个错误，可能出在不同层：</p>
+<pre><code class="language-text">问题出在规则  → 改规则
+  例：核验规则里加一条&quot;无日期的价格不采用&quot;
+
+问题出在工具  → 改工具
+  例：搜索工具加&quot;时间过滤&quot;参数，直接少返回旧帖
+
+问题出在复杂情况下的行动策略，且有合适奖励与训练条件
+              → 考虑强化学习
+  例：规则覆盖不了&quot;官方页打不开、电商页和论坛信息矛盾&quot;这类组合，
+      而有大量任务和可靠的&quot;最终答案对不对&quot;作奖励，
+      可以让模型在策略层面学会怎么权衡
+</code></pre>
+<p>这里要讲清一个容易混淆的点：</p>
+<ul>
+<li><strong>任务分治</strong>负责&quot;把问题拆开，让错误能被定位&quot;。</li>
+<li><strong>反馈闭环</strong>负责&quot;发现问题、验证改进是否有效&quot;。</li>
+<li><strong>强化学习</strong>只是闭环里的一种<strong>改进手段</strong>，而且只在&quot;策略问题 + 有奖励 + 有训练条件&quot;时才合适。</li>
+</ul>
+<h3>4.4 总图</h3>
+<pre><code class="language-text">任务分治：把问题拆开，方便定位
+                 ↓
+反馈闭环：发现问题，验证改进
+                 ↓
+强化学习：在适合的地方优化模型策略
+                 ↓
+           更好的任务表现
+</code></pre>
+<p>反过来读也成立：</p>
+<pre><code class="language-text">没有分治 → 定位不了（只知道 199 错了，不知道错在哪）
+没有闭环 → 改完不知道有没有用（改了核验规则，没重测就上线）
+有闭环但问题在规则/工具 → 先改规则/工具，不必上 RL
+策略问题且有奖励条件 → RL 才有用武之地
+</code></pre>
+<p><strong>强调：这不是说所有系统都必须使用强化学习。</strong> 它只是整个改进过程中的一个位置；查价格这个例子里，改规则和改工具就能解决大部分问题，而且更快、更稳。</p>
+<h2>5. 总结</h2>
+<pre><code class="language-text">1. RL：不只模仿示范，而是根据结果调整策略。
+   （铅笔题：SFT 学写法，RL 从&quot;漏加又买的会错&quot;里学会修正）
+
+2. Agent：不只生成文本，还要选择行动、调用工具、根据结果决定下一步。
+   （查价格：看到旧帖→判断不可靠→换关键词，这一步纯回答不会做）
+
+3. 任务分治 + 反馈闭环：先让问题可定位、改进可验证；
+   RL 是在这个闭环中、适合的地方优化策略的一种手段。
+   （199 元错了→核验环节定位→改规则/工具→重测；策略问题且有奖励时才考虑 RL）
+</code></pre>
+<p>几个思考题</p>
+<blockquote>
+<ol>
+<li>我们当前的项目里，哪些错误其实靠&quot;分治 + 检查&quot;就能定位？</li>
+<li>哪些问题属于规则/工具问题，不该先想着上 RL？</li>
+<li>如果要用 RL，我们的&quot;奖励信号&quot;从哪里来、可靠吗？</li>
+</ol>
+</blockquote>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-BGwtz3vo.js"></script>
+</body>
+</html>
