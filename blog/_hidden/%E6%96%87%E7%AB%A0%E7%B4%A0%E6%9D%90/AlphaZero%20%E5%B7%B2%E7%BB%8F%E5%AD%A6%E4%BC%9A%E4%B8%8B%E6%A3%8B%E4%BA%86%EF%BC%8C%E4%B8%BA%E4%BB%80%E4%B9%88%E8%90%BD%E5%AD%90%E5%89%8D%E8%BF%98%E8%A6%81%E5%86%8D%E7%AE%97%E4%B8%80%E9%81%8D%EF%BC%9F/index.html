@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>AlphaZero 已经学会下棋了，为什么落子前还要再算一遍？ | LZ AI NOTE</title>
+  <meta name="description" content="&lt;! 写作锚点 读者收获：理解搜索结果参与训练后，为何不能替代当前局面的搜索，分清模型预测、在线搜索和完整求解。 核心判断：训练把搜索经验变成可泛化的近似预测，推理时搜索则为当前问题追加计算；两者在有限资源下都不能保证最优。 如何推进：从 AlphaZero 学会下棋却仍需搜索的疑问进入，用训练循环解释近似预测，再比较在线搜索与完整求解。 AlphaZer…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="AlphaZero 已经学会下棋了，为什么落子前还要再算一遍？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-10-29">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AlphaZero%20%E5%B7%B2%E7%BB%8F%E5%AD%A6%E4%BC%9A%E4%B8%8B%E6%A3%8B%E4%BA%86%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%90%BD%E5%AD%90%E5%89%8D%E8%BF%98%E8%A6%81%E5%86%8D%E7%AE%97%E4%B8%80%E9%81%8D%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AlphaZero%20%E5%B7%B2%E7%BB%8F%E5%AD%A6%E4%BC%9A%E4%B8%8B%E6%A3%8B%E4%BA%86%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%90%BD%E5%AD%90%E5%89%8D%E8%BF%98%E8%A6%81%E5%86%8D%E7%AE%97%E4%B8%80%E9%81%8D%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="AlphaZero 已经学会下棋了，为什么落子前还要再算一遍？ | LZ AI NOTE">
+  <meta property="og:description" content="&lt;! 写作锚点 读者收获：理解搜索结果参与训练后，为何不能替代当前局面的搜索，分清模型预测、在线搜索和完整求解。 核心判断：训练把搜索经验变成可泛化的近似预测，推理时搜索则为当前问题追加计算；两者在有限资源下都不能保证最优。 如何推进：从 AlphaZero 学会下棋却仍需搜索的疑问进入，用训练循环解释近似预测，再比较在线搜索与完整求解。 AlphaZer…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AlphaZero%20%E5%B7%B2%E7%BB%8F%E5%AD%A6%E4%BC%9A%E4%B8%8B%E6%A3%8B%E4%BA%86%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%90%BD%E5%AD%90%E5%89%8D%E8%BF%98%E8%A6%81%E5%86%8D%E7%AE%97%E4%B8%80%E9%81%8D%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AlphaZero 已经学会下棋了，为什么落子前还要再算一遍？","description":"\u003c! 写作锚点 读者收获：理解搜索结果参与训练后，为何不能替代当前局面的搜索，分清模型预测、在线搜索和完整求解。 核心判断：训练把搜索经验变成可泛化的近似预测，推理时搜索则为当前问题追加计算；两者在有限资源下都不能保证最优。 如何推进：从 AlphaZero 学会下棋却仍需搜索的疑问进入，用训练循环解释近似预测，再比较在线搜索与完整求解。 AlphaZer…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AlphaZero%20%E5%B7%B2%E7%BB%8F%E5%AD%A6%E4%BC%9A%E4%B8%8B%E6%A3%8B%E4%BA%86%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%90%BD%E5%AD%90%E5%89%8D%E8%BF%98%E8%A6%81%E5%86%8D%E7%AE%97%E4%B8%80%E9%81%8D%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AlphaZero%20%E5%B7%B2%E7%BB%8F%E5%AD%A6%E4%BC%9A%E4%B8%8B%E6%A3%8B%E4%BA%86%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%90%BD%E5%AD%90%E5%89%8D%E8%BF%98%E8%A6%81%E5%86%8D%E7%AE%97%E4%B8%80%E9%81%8D%EF%BC%9F","dateModified":"2026-10-29","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：AlphaZero 已经学会下棋了，为什么落子前还要再算一遍？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AlphaZero%20%E5%B7%B2%E7%BB%8F%E5%AD%A6%E4%BC%9A%E4%B8%8B%E6%A3%8B%E4%BA%86%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%90%BD%E5%AD%90%E5%89%8D%E8%BF%98%E8%A6%81%E5%86%8D%E7%AE%97%E4%B8%80%E9%81%8D%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>AlphaZero 已经学会下棋了，为什么落子前还要再算一遍？</h1><!-- 写作锚点
+读者收获：理解搜索结果参与训练后，为何不能替代当前局面的搜索，分清模型预测、在线搜索和完整求解。
+核心判断：训练把搜索经验变成可泛化的近似预测，推理时搜索则为当前问题追加计算；两者在有限资源下都不能保证最优。
+如何推进：从 AlphaZero 学会下棋却仍需搜索的疑问进入，用训练循环解释近似预测，再比较在线搜索与完整求解。
+-->
+<h1>AlphaZero 已经学会下棋了，为什么落子前还要再算一遍？</h1>
+<p>AlphaZero 训练时，会让神经网络指导 MCTS（蒙特卡洛树搜索），再把搜索结果作为网络的训练目标。这就是<a href="./%E8%AE%AD%E7%BB%83%E6%97%B6%E5%BD%93%E8%80%81%E5%B8%88%EF%BC%8C%E8%90%BD%E5%AD%90%E5%89%8D%E5%BD%93%E5%8F%82%E8%B0%8B%EF%BC%9AAlphaZero%20%E4%B8%AD%E7%9A%84%20MCTS%20%E5%BE%AA%E7%8E%AF.md">上一篇</a>介绍的学习循环。</p>
+<p>既然 MCTS 已经教过模型怎样下棋，为什么真正落子时，还要再搜一遍？</p>
+<p>是不是说明模型始终没有学会正确的落子？</p>
+<p>模型确实有判断落子失败的可能性。</p>
+<p>但搜索留下来，还有一个原因：网络的一次快速预测，与针对当前局面深入计算，承担的是不同工作。</p>
+<h2>1. 训练教会模型的是“搜索经验”，不是所有局面的标准答案</h2>
+<p>假设某个局面有三个候选动作 A、B、C。</p>
+<p>训练时，网络先看好 A，MCTS 搜索后却更支持 B：</p>
+<pre><code class="language-text">旧网络的选择概率
+A：60%
+B：30%
+C：10%
+
+MCTS 搜索后的访问占比
+A：20%
+B：70%
+C：10%
+</code></pre>
+<p>训练会推动网络输出靠近搜索结果：</p>
+<pre><code class="language-text">新网络的训练目标
+A：20%
+B：70%
+C：10%
+</code></pre>
+<p>但网络只是在学习拟合这个目标，并没有把整棵搜索树存进参数。</p>
+<p>而且，AlphaZero 训练时接触到的是自我对弈中访问过的局面，远远没有覆盖所有可能的棋盘。</p>
+<pre><code class="language-text">大量自我对弈局面
+       ↓
+MCTS 搜索，生成训练目标
+       ↓
+神经网络拟合这些目标
+       ↓
+学到可泛化的策略与价值估计
+       ↓
+遇到新局面时仍可能判断不准
+</code></pre>
+<p>模型学到的是：看到一个棋盘，怎样估计动作概率和局面价值。它没有得到一份涵盖所有棋盘的完美落子答案表。</p>
+<p>这不代表训练失败。有限的数据和训练，无法保证网络对所有新局面都判断正确。</p>
+<h2>2. 网络快速估计，MCTS 为当前局面追加计算</h2>
+<p>两者的工作可以这样区分：</p>
+<pre><code class="language-text">神经网络
+把训练经验压缩进参数
+一次前向计算，快速估计动作和价值
+可能忽略当前局面的某个战术细节
+
+MCTS
+针对当前局面重新搜索
+花额外计算，比较候选动作的后续变化
+有机会发现网络遗漏的战术细节
+</code></pre>
+<p>假设网络面对一个新局面，给 A 的选择概率是 70%，给 B 的概率是 25%。</p>
+<p>但深入搜索后，MCTS 发现：</p>
+<pre><code class="language-text">选择 A
+  └─ 对手有强力反击
+       └─ 当前方局面大幅恶化
+
+选择 B
+  └─ 对手没有同样有效的反击
+       └─ 当前方局面较好
+</code></pre>
+<p>网络的一次前向计算没有准确识别这条战术变化，MCTS 则沿着后续落子，把它算了出来。</p>
+<p>这次搜索使用已有网络评估局面，为眼前的问题投入更多计算，不需要更新权重。</p>
+<p>即使模型已经很强，这种额外计算仍然可能有价值。过去学过的经验，不能代替对眼前这条变化的具体分析。</p>
+<h2>3. 那么，MCTS 能不能穷举所有可能性，找到最优解？</h2>
+<p>理论上，如果完整覆盖所有可能的对局变化，并准确求出终局结果，就可以按相应的博弈规则求出最优策略。</p>
+<p>但围棋的搜索空间极其庞大，现实中的 AlphaZero 不会穷举所有变化。</p>
+<p>（围棋可能局面数量的常见估计约为 10^170，而可能对局序列的搜索树复杂度估计可以达到 10^360 量级。而可观测宇宙中的原子数量级也才只有 10^80）</p>
+<p>可以把三种方式放在一起看。</p>
+<p><strong>方式 A：只用神经网络。</strong></p>
+<pre><code class="language-text">当前局面 → 网络预测 → 选择落子
+</code></pre>
+<p>计算成本低，但依赖网络对当前局面的判断。</p>
+<p><strong>方式 B：网络 + MCTS，也就是 AlphaZero 的做法。</strong></p>
+<pre><code class="language-text">当前局面 → 网络预测
+             ↓
+          MCTS 搜索
+             ↓
+          选择落子
+</code></pre>
+<p>网络提供方向，搜索检验候选动作，通常能改善决策，但不保证最优。</p>
+<p><strong>方式 C：完整求解博弈。</strong></p>
+<pre><code class="language-text">完整搜索或严格求解 → 最优落子
+</code></pre>
+<p>理论上可获得最优解，但对围棋这类复杂博弈，通常无法在实际资源限制下完成。</p>
+<p>因此，MCTS 本来就是 AlphaZero 决策架构的一部分。训练让网络积累经验，减少盲目探索；搜索再利用这些经验，检验当前局面的候选动作。</p>
+<p>网络拟合的是搜索给出的策略目标，不必复现搜索树中的每条路径、每次访问统计和所有后续变化。即使把训练目标拟合得很好，到了新局面，继续搜索仍然合理。</p>
+<p>这个区别也对应着一种更一般的计算方式：</p>
+<blockquote>
+<p>训练把过去的经验压缩成模型；推理时的搜索，为当前问题追加计算。</p>
+</blockquote>
+<p>模型越强，搜索通常越有方向；搜索预算越充足，就越有机会发现初始预测遗漏的变化。但在有限资源下，两者都不能保证永远正确。</p>
+<p>那么问题来了：搜索空间大到无法穷举，MCTS 只做有限次模拟，凭什么能给出比较可靠的决策？它到底在多大程度上逼近&quot;最优&quot;？再进一步，怎样的任务才适合 MCTS？</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-DwJw0aNg.js"></script>
+</body>
+</html>

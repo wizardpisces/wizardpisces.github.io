@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>训练时当老师，落子前当参谋：AlphaZero 中的 MCTS 循环 | LZ AI NOTE</title>
+  <meta name="description" content="&lt;! 写作锚点 读者收获：分清网络先验、搜索访问次数和动作价值，理解搜索结果如何参与训练，以及推理时为何仍要搜索。 核心判断：网络指导 MCTS 分配计算，搜索统计形成策略训练目标；训练更新网络参数，推理则用搜索结果选择当前动作。 如何推进：沿同一局面的 A、B、C 三个动作，对照搜索前后的数字，再解释策略与价值训练，最后比较训练和推理。 训练时当老师，落…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="训练时当老师，落子前当参谋：AlphaZero 中的 MCTS 循环">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-10-29">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E8%AE%AD%E7%BB%83%E6%97%B6%E5%BD%93%E8%80%81%E5%B8%88%EF%BC%8C%E8%90%BD%E5%AD%90%E5%89%8D%E5%BD%93%E5%8F%82%E8%B0%8B%EF%BC%9AAlphaZero%20%E4%B8%AD%E7%9A%84%20MCTS%20%E5%BE%AA%E7%8E%AF">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E8%AE%AD%E7%BB%83%E6%97%B6%E5%BD%93%E8%80%81%E5%B8%88%EF%BC%8C%E8%90%BD%E5%AD%90%E5%89%8D%E5%BD%93%E5%8F%82%E8%B0%8B%EF%BC%9AAlphaZero%20%E4%B8%AD%E7%9A%84%20MCTS%20%E5%BE%AA%E7%8E%AF">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="训练时当老师，落子前当参谋：AlphaZero 中的 MCTS 循环 | LZ AI NOTE">
+  <meta property="og:description" content="&lt;! 写作锚点 读者收获：分清网络先验、搜索访问次数和动作价值，理解搜索结果如何参与训练，以及推理时为何仍要搜索。 核心判断：网络指导 MCTS 分配计算，搜索统计形成策略训练目标；训练更新网络参数，推理则用搜索结果选择当前动作。 如何推进：沿同一局面的 A、B、C 三个动作，对照搜索前后的数字，再解释策略与价值训练，最后比较训练和推理。 训练时当老师，落…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E8%AE%AD%E7%BB%83%E6%97%B6%E5%BD%93%E8%80%81%E5%B8%88%EF%BC%8C%E8%90%BD%E5%AD%90%E5%89%8D%E5%BD%93%E5%8F%82%E8%B0%8B%EF%BC%9AAlphaZero%20%E4%B8%AD%E7%9A%84%20MCTS%20%E5%BE%AA%E7%8E%AF">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"训练时当老师，落子前当参谋：AlphaZero 中的 MCTS 循环","description":"\u003c! 写作锚点 读者收获：分清网络先验、搜索访问次数和动作价值，理解搜索结果如何参与训练，以及推理时为何仍要搜索。 核心判断：网络指导 MCTS 分配计算，搜索统计形成策略训练目标；训练更新网络参数，推理则用搜索结果选择当前动作。 如何推进：沿同一局面的 A、B、C 三个动作，对照搜索前后的数字，再解释策略与价值训练，最后比较训练和推理。 训练时当老师，落…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E8%AE%AD%E7%BB%83%E6%97%B6%E5%BD%93%E8%80%81%E5%B8%88%EF%BC%8C%E8%90%BD%E5%AD%90%E5%89%8D%E5%BD%93%E5%8F%82%E8%B0%8B%EF%BC%9AAlphaZero%20%E4%B8%AD%E7%9A%84%20MCTS%20%E5%BE%AA%E7%8E%AF","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E8%AE%AD%E7%BB%83%E6%97%B6%E5%BD%93%E8%80%81%E5%B8%88%EF%BC%8C%E8%90%BD%E5%AD%90%E5%89%8D%E5%BD%93%E5%8F%82%E8%B0%8B%EF%BC%9AAlphaZero%20%E4%B8%AD%E7%9A%84%20MCTS%20%E5%BE%AA%E7%8E%AF","dateModified":"2026-10-29","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：训练时当老师，落子前当参谋：AlphaZero 中的 MCTS 循环，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E8%AE%AD%E7%BB%83%E6%97%B6%E5%BD%93%E8%80%81%E5%B8%88%EF%BC%8C%E8%90%BD%E5%AD%90%E5%89%8D%E5%BD%93%E5%8F%82%E8%B0%8B%EF%BC%9AAlphaZero%20%E4%B8%AD%E7%9A%84%20MCTS%20%E5%BE%AA%E7%8E%AF","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>训练时当老师，落子前当参谋：AlphaZero 中的 MCTS 循环</h1><!-- 写作锚点
+读者收获：分清网络先验、搜索访问次数和动作价值，理解搜索结果如何参与训练，以及推理时为何仍要搜索。
+核心判断：网络指导 MCTS 分配计算，搜索统计形成策略训练目标；训练更新网络参数，推理则用搜索结果选择当前动作。
+如何推进：沿同一局面的 A、B、C 三个动作，对照搜索前后的数字，再解释策略与价值训练，最后比较训练和推理。
+-->
+<h1>训练时当老师，落子前当参谋：AlphaZero 中的 MCTS 循环</h1>
+<h2>一、训练阶段：MCTS 怎样帮助模型变得更好？</h2>
+<p>假设黑棋面对一个局面，有三个候选动作 A、B、C。</p>
+<h3>① 当前模型先做出判断</h3>
+<p>神经网络先给出每个动作的选择概率，下面用 P 表示：</p>
+<pre><code class="language-text">当前局面
+    │
+    ▼
+神经网络
+    │
+    ├── A：60%
+    ├── B：30%
+    └── C：10%
+</code></pre>
+<p>此时，模型最看好 A。</p>
+<p>这里需要分清：</p>
+<ul>
+<li>A 的选择概率为 60%：模型更倾向于选择 A。</li>
+<li>它不代表 A 有 60% 的获胜概率。</li>
+</ul>
+<p>模型根据已经学到的参数，对这个局面作出预测。它可能没学到某个关键的棋型，也可能低估了某种后续变化。</p>
+<p>这就像一个经验丰富的棋手，凭直觉认为 A 最好，但还没有仔细计算每条变化。</p>
+<h3>② MCTS 开始搜索：动态分配计算</h3>
+<p>假设给 MCTS 100 次模拟的预算。</p>
+<pre><code class="language-text">当前局面
+    │
+网络先验 P
+[0.6, 0.3, 0.1]
+    │
+    ▼
+MCTS 搜索
+    ├── A → 后续变化
+    ├── B → 后续变化
+    └── C → 后续变化
+    │
+    ▼
+更新搜索统计
+</code></pre>
+<p>MCTS 每次模拟大致会：</p>
+<ol>
+<li>根据先验概率、已有动作价值和访问次数，选择一条值得探索的路径。</li>
+<li>到达新的局面后，用神经网络评估该局面。</li>
+<li>把评估结果沿路径回传，更新访问次数和平均价值。</li>
+<li>再开始下一次模拟。</li>
+</ol>
+<p>初始时 A 的先验概率最高，所以它很可能先得到较多关注。但随着搜索深入，系统可能发现：</p>
+<ul>
+<li>A：对手有强力应对，后续局面对黑棋不利。</li>
+<li>B：虽然初始概率较低，但后续变化对黑棋更有利。</li>
+<li>C：目前没有发现足够好的变化。</li>
+</ul>
+<p>这时，MCTS 就有机会纠正网络的初始偏好。</p>
+<p>它一开始也不知道 B 更好，要通过反复探索和评估，逐渐积累支持或反对不同动作的证据。</p>
+<h3>③ 搜索统计量发生变化</h3>
+<p>假设搜索完成 100 次模拟，得到下面这组示意数据：</p>
+<pre><code class="language-text">A：先验 60%，访问 20 次
+   平均价值 Q = +0.10
+
+B：先验 30%，访问 70 次
+   平均价值 Q = +0.55
+
+C：先验 10%，访问 10 次
+   平均价值 Q = +0.05
+</code></pre>
+<p>这里假设平均价值 Q 越大，代表从黑棋视角看局面越有利。数字仅用于说明机制。</p>
+<p>把每个动作的访问次数除以总次数，就得到搜索后的选择比例，下面称为“搜索策略”：</p>
+<pre><code class="language-text">搜索策略 = 该动作访问次数 ÷ 总访问次数
+
+A：20 ÷ 100 = 20%
+B：70 ÷ 100 = 70%
+C：10 ÷ 100 = 10%
+</code></pre>
+<p>对照搜索前后的结果：</p>
+<pre><code class="language-text">       初始预测 → 搜索策略
+A：       60% → 20%
+B：       30% → 70%
+C：       10% → 10%
+</code></pre>
+<p>网络给出搜索方向，搜索结果则可能改变动作的相对优先级。</p>
+<p>MCTS 只能在有限预算内尽可能找到更好的动作，不能保证找到理论上的最优解。</p>
+<h3>④ 为什么访问次数能变成训练目标？</h3>
+<p>如果搜索到这里就结束，只能得到一次更好的决策。AlphaZero 还会把搜索结果保存下来，作为神经网络下一轮训练的目标。</p>
+<p>沿用刚才的数字：</p>
+<pre><code class="language-text">网络预测：A 60%，B 30%，C 10%
+训练目标：A 20%，B 70%，C 10%
+</code></pre>
+<p>网络原本认为 A 最好，搜索却更支持 B。</p>
+<p>训练时，用交叉熵损失衡量这两组概率的差距。在这个例子里，计算可以写成：</p>
+<pre><code class="language-text">损失 = -(
+  0.2 × log(网络给 A 的概率)
+  + 0.7 × log(网络给 B 的概率)
+  + 0.1 × log(网络给 C 的概率)
+)
+</code></pre>
+<p>只需看清：20%、70%、10% 来自搜索，网络自己的输出参与计算。训练算法通过降低损失，推动网络输出靠近搜索策略。</p>
+<p>假设经过多轮训练，网络在类似局面中的输出变成：</p>
+<pre><code class="language-text">A：60% → 25%
+B：30% → 65%
+C：10% → 10%
+</code></pre>
+<p>训练算法根据损失计算梯度、更新参数后，网络可能逐渐产生这样的变化。</p>
+<p>假设这盘自我对弈最终黑棋获胜，就把从黑棋视角记录的对局结果记为 +1。价值网络会用这个结果作为训练目标：</p>
+<pre><code class="language-text">最终结果：黑棋获胜，记为 +1
+价值预测的训练目标：靠近 +1
+</code></pre>
+<p>所以 AlphaZero 同时学习两件事：</p>
+<ul>
+<li>策略网络学习：哪些动作值得优先考虑。</li>
+<li>价值网络学习：某个局面最终有多大可能带来有利结果。</li>
+</ul>
+<p>一盘棋结束后，终局结果会用于训练多个记录局面的价值预测，而不是只用于最后一个局面。</p>
+<h3>⑤ 为什么下一轮训练可能更有效？</h3>
+<p>现在模型更新完参数，再次遇到类似局面。</p>
+<pre><code class="language-text">第 1 轮
+
+旧网络：A = 60%
+      ↓
+MCTS 搜索：B 获得更多访问
+      ↓
+搜索策略：B = 70%
+      ↓
+网络参数更新
+      ↓
+第 2 轮
+
+新网络：B 的先验概率提高
+      ↓
+MCTS 从更好的先验开始搜索
+      ↓
+继续生成新的训练数据
+      ↺
+</code></pre>
+<p>下一轮搜索的结果又会用于训练，循环继续。</p>
+<p>每次搜索都可能有误差，训练数据也可能包含不够准确的判断，不能期待搜索一次，模型就变聪明一次。AlphaZero 依靠大量自我对弈、搜索和参数更新的反复迭代，逐渐改善策略和价值估计。</p>
+<h2>二、推理阶段：训练好的模型为什么仍然需要 MCTS？</h2>
+<p>训练完成后，假设我们用模型来下一盘新棋。</p>
+<h3>① 网络给出初始预测</h3>
+<pre><code class="language-text">A：20%
+B：65%
+C：15%
+</code></pre>
+<p>此时模型已经更看好 B。</p>
+<p>但它仍然可能判断失误，所以 AlphaZero 不会仅凭这一次前向计算就结束决策。</p>
+<h3>② MCTS 对当前局面进行搜索</h3>
+<p>假设这次分配 1,000 次模拟：</p>
+<pre><code class="language-text">新局面
+    │
+    ▼
+网络预测 P = [0.20, 0.65, 0.15]
+    │
+    ▼
+MCTS 搜索 1,000 次
+    │
+    ├── 探索 A 的后续变化
+    ├── 深入探索 B 的后续变化
+    └── 保留对 C 的探索
+    │
+    ▼
+更新根节点统计量
+</code></pre>
+<p>假设最后得到：</p>
+<pre><code class="language-text">A：访问 120 次 ÷ 1,000 = 12%
+B：访问 780 次 ÷ 1,000 = 78%
+C：访问 100 次 ÷ 1,000 = 10%
+</code></pre>
+<p>搜索后 B 的访问占比为 78%，高于初始先验的 65%。</p>
+<p>在这个例子中，搜索进一步支持 B，因此系统选择 B 落子。</p>
+<p>但如果搜索发现 B 有一个网络最初没有识别到的弱点，结果也可能反过来支持 A 或 C。推理阶段的 MCTS 会进一步检验当前局面的候选动作。</p>
+<h3>③ 推理与训练的区别</h3>
+<p>两个阶段里，网络都会预测动作概率和局面价值，MCTS 也都会搜索并记录访问次数。差别在于搜索之后做什么：</p>
+<pre><code class="language-text">训练阶段
+搜索策略 → 用作策略训练目标
+对局结果 → 用作价值训练目标
+随后通过训练更新网络权重
+
+推理阶段
+搜索统计 → 用于选择当前落子
+网络权重保持不变
+</code></pre>
+<p>推理阶段利用已有的网络参数指导搜索，再根据搜索统计量选择动作，不会因为这次搜索就更新网络权重。</p>
+<h2>三、最后抓住三个关键点</h2>
+<p>第一，神经网络和 MCTS 分担不同的工作。</p>
+<pre><code class="language-text">神经网络：快速估计
+MCTS：有选择地深入计算
+</code></pre>
+<p>网络不必从零计算所有可能变化；MCTS 不会完全相信网络的一次预测。</p>
+<p>第二，MCTS 在训练和推理中都存在，但用途不同。</p>
+<pre><code class="language-text">训练：网络预测 → 搜索 → 训练目标
+      → 更新参数
+
+推理：网络预测 → 搜索 → 选择落子
+</code></pre>
+<p>第三，AlphaZero 让搜索和模型相互促进。</p>
+<p>搜索产生更好的决策依据，搜索策略和对局结果参与训练，训练后的网络再指导下一轮搜索，让有限计算预算更有效地用于复杂决策。</p>
+<p>MCTS 让模型有机会发现自己初始判断中的错误；神经网络则把过去搜索中学到的经验带到未来的搜索中。</p>
+<p>一个有意思的点：如果训练阶段已经通过 MCTS 教会了神经网络怎么下棋，为什么推理阶段还要再用 MCTS？是不是说明网络始终没有学会真正正确的落子？</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-DwJw0aNg.js"></script>
+</body>
+</html>
