@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>只删一个拒绝方向，为什么也会影响模型的其他能力？ | LZ AI NOTE</title>
+  <meta name="description" content="&lt;! 写作锚点 读者收获：分清 Abliteration 与输入干预、训练的区别，并理解少一个表示方向为何不等于只少一种能力。 核心判断：内部表示可能被多种能力共享，拒绝机制也可能涉及多个方向，减少拒绝必须连同正常能力和风险识别一起评估。 如何推进：沿第一份讨论的第四至六部分，先比较方法，再解释表示空间与共享能力，最后依次展开六项局限。 只删一个拒绝方向，…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="只删一个拒绝方向，为什么也会影响模型的其他能力？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-11-04">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%8F%AA%E5%88%A0%E4%B8%80%E4%B8%AA%E6%8B%92%E7%BB%9D%E6%96%B9%E5%90%91%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E4%BC%9A%E5%BD%B1%E5%93%8D%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%85%B6%E4%BB%96%E8%83%BD%E5%8A%9B%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%8F%AA%E5%88%A0%E4%B8%80%E4%B8%AA%E6%8B%92%E7%BB%9D%E6%96%B9%E5%90%91%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E4%BC%9A%E5%BD%B1%E5%93%8D%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%85%B6%E4%BB%96%E8%83%BD%E5%8A%9B%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="只删一个拒绝方向，为什么也会影响模型的其他能力？ | LZ AI NOTE">
+  <meta property="og:description" content="&lt;! 写作锚点 读者收获：分清 Abliteration 与输入干预、训练的区别，并理解少一个表示方向为何不等于只少一种能力。 核心判断：内部表示可能被多种能力共享，拒绝机制也可能涉及多个方向，减少拒绝必须连同正常能力和风险识别一起评估。 如何推进：沿第一份讨论的第四至六部分，先比较方法，再解释表示空间与共享能力，最后依次展开六项局限。 只删一个拒绝方向，…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%8F%AA%E5%88%A0%E4%B8%80%E4%B8%AA%E6%8B%92%E7%BB%9D%E6%96%B9%E5%90%91%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E4%BC%9A%E5%BD%B1%E5%93%8D%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%85%B6%E4%BB%96%E8%83%BD%E5%8A%9B%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"只删一个拒绝方向，为什么也会影响模型的其他能力？","description":"\u003c! 写作锚点 读者收获：分清 Abliteration 与输入干预、训练的区别，并理解少一个表示方向为何不等于只少一种能力。 核心判断：内部表示可能被多种能力共享，拒绝机制也可能涉及多个方向，减少拒绝必须连同正常能力和风险识别一起评估。 如何推进：沿第一份讨论的第四至六部分，先比较方法，再解释表示空间与共享能力，最后依次展开六项局限。 只删一个拒绝方向，…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%8F%AA%E5%88%A0%E4%B8%80%E4%B8%AA%E6%8B%92%E7%BB%9D%E6%96%B9%E5%90%91%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E4%BC%9A%E5%BD%B1%E5%93%8D%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%85%B6%E4%BB%96%E8%83%BD%E5%8A%9B%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%8F%AA%E5%88%A0%E4%B8%80%E4%B8%AA%E6%8B%92%E7%BB%9D%E6%96%B9%E5%90%91%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E4%BC%9A%E5%BD%B1%E5%93%8D%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%85%B6%E4%BB%96%E8%83%BD%E5%8A%9B%EF%BC%9F","dateModified":"2026-11-04","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：只删一个拒绝方向，为什么也会影响模型的其他能力？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%8F%AA%E5%88%A0%E4%B8%80%E4%B8%AA%E6%8B%92%E7%BB%9D%E6%96%B9%E5%90%91%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E4%BC%9A%E5%BD%B1%E5%93%8D%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%85%B6%E4%BB%96%E8%83%BD%E5%8A%9B%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>只删一个拒绝方向，为什么也会影响模型的其他能力？</h1><!-- 写作锚点
+读者收获：分清 Abliteration 与输入干预、训练的区别，并理解少一个表示方向为何不等于只少一种能力。
+核心判断：内部表示可能被多种能力共享，拒绝机制也可能涉及多个方向，减少拒绝必须连同正常能力和风险识别一起评估。
+如何推进：沿第一份讨论的第四至六部分，先比较方法，再解释表示空间与共享能力，最后依次展开六项局限。
+-->
+<h1>只删一个拒绝方向，为什么也会影响模型的其他能力？</h1>
+<p><a href="./Abliteration%EF%BC%9A%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E6%8B%92%E7%BB%9D%EF%BC%8C%E5%8F%88%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E4%B8%8D%E8%AE%AD%E7%BB%83%E5%B0%B1%E6%94%B9%E5%8F%98%E5%AE%83%EF%BC%9F.md">上一篇</a>讲了如何估计拒绝方向，再用投影修改激活或权重。</p>
+<p>但只改一个方向，究竟改变了什么？它与改 Prompt、重新训练有什么区别？</p>
+<h2>一、它和之前的方法有什么区别？</h2>
+<p>把 Abliteration 与之前的技术放在一起看：</p>
+<table>
+<thead>
+<tr>
+<th>技术</th>
+<th>修改位置</th>
+<th>是否修改模型权重</th>
+<th>主要特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Jailbreak</td>
+<td>输入 Prompt</td>
+<td>否</td>
+<td>尝试绕过模型原有拒绝策略</td>
+</tr>
+<tr>
+<td>SFT</td>
+<td>模型参数</td>
+<td>是</td>
+<td>用示范数据训练新行为</td>
+</tr>
+<tr>
+<td>RLHF / DPO</td>
+<td>模型参数</td>
+<td>是</td>
+<td>通过偏好信号调整行为</td>
+</tr>
+<tr>
+<td>Activation Steering</td>
+<td>推理时隐藏状态</td>
+<td>否</td>
+<td>临时添加或减少特定方向</td>
+</tr>
+<tr>
+<td>Abliteration</td>
+<td>模型参数</td>
+<td>是</td>
+<td>通过投影消除拒绝相关方向</td>
+</tr>
+</tbody>
+</table>
+<p>这里有几个区别。</p>
+<p><strong>第一，和 Jailbreak 的区别。</strong></p>
+<p>Jailbreak 从输入端想办法影响模型。</p>
+<p>它可能利用指令优先级、上下文、角色扮演或对抗性后缀，让模型在某些场景下不再遵守原有拒绝策略。</p>
+<p>但是模型权重没有改变。</p>
+<p>Abliteration 则直接修改模型内部参数。</p>
+<p><strong>第二，和传统安全策略的区别。</strong></p>
+<p>传统安全对齐往往通过数据、奖励模型、偏好训练等方法，让模型形成安全行为。</p>
+<p>Abliteration 则尝试定位并移除其中某些与拒绝相关的内部表示。</p>
+<p>它改变的是模型执行拒绝行为的内部路径，并没有重新定义什么是安全。</p>
+<p>这些方法并不互斥。一个模型可以同时接受过 SFT、RLHF、DPO，也可以再经过 Abliteration。</p>
+<h2>二、为什么这种方法有效？它背后的原理是什么？</h2>
+<p>这里涉及一个机器学习概念：</p>
+<p>神经网络学到的行为，可能编码在高维向量空间的某些方向和结构中，并不一定以人类能够理解的规则形式存在。</p>
+<p>可以从三个角度理解。</p>
+<h3>1. 模型没有在执行一张明确的规则清单</h3>
+<p>人们容易把聊天模型想象成内部有一张规则表：</p>
+<pre><code class="language-text">如果用户询问正常问题：
+    正常回答
+
+如果用户询问危险问题：
+    拒绝回答
+
+如果用户询问医学问题：
+    根据情况判断
+</code></pre>
+<p>但 Transformer 并不是简单地执行这样的程序。</p>
+<p>它通过大量神经网络运算，将输入转换成隐藏状态，再根据这些状态预测下一个 Token。</p>
+<p>所谓拒绝行为，是训练过程中形成的一种模型行为倾向。</p>
+<p>它可能涉及多个层、多个神经元、Attention Head 和 MLP 的共同作用。</p>
+<h3>2. 高维向量空间允许我们对行为进行几何操作</h3>
+<p>这是 Abliteration 的数学基础。</p>
+<p>假设模型隐藏状态空间有 4096 个维度。</p>
+<p>每个隐藏状态都可以理解为这个空间中的一个点。</p>
+<p>某种行为可能与空间中的一个方向存在统计关联。</p>
+<p>举个简化例子：</p>
+<ul>
+<li>某些状态更倾向于正常回答。</li>
+<li>某些状态更倾向于拒绝回答。</li>
+<li>两种状态之间存在一个可以测量的差异方向。</li>
+</ul>
+<p>如果拒绝行为与这个方向高度相关，就可以尝试通过向量投影改变模型行为。</p>
+<p>这与传统编程的区别在于：</p>
+<pre><code class="language-text">传统编程：修改逻辑规则
+Abliteration：修改神经网络内部的表示空间
+</code></pre>
+<h3>3. 为什么去掉一个方向，不会直接毁掉整个模型？</h3>
+<p>这是很多人第一次接触 Abliteration 时最疑惑的地方。</p>
+<p>模型的隐藏空间维度很高。假设：</p>
+<pre><code class="language-text">隐藏维度 d = 4096
+</code></pre>
+<p>如果只移除一个独立方向，理论上剩下的空间仍然有：</p>
+<pre><code class="language-text">4096 - 1 = 4095 个维度
+</code></pre>
+<p>从线性代数角度看，这只移除了一个自由度。</p>
+<p>模型仍然可以在其他维度上保留大量知识和能力。</p>
+<p>这也解释了为什么早期实验中，模型可以在拒绝行为明显减少的同时，保留相当一部分原有的语言生成、知识和推理能力。</p>
+<p>但这里有一个误区：</p>
+<p><strong>隐藏空间的一个维度，不等于模型的一种独立能力。</strong></p>
+<p>多个能力可能共享同一组神经元和表示方向。</p>
+<p>例如，拒绝判断可能与风险识别、意图理解、上下文判断存在联系。</p>
+<p>删除一个方向虽然在数学上只减少一个维度，但不意味着在语义上只删除了一项功能。</p>
+<p>这也是 Abliteration 产生副作用的原因之一。</p>
+<h2>三、Abliteration 有哪些局限性？</h2>
+<p>我认为这是理解这项技术最重要的部分。</p>
+<p>Abliteration 看起来像一种精准的手术，但它距离精准模型编辑还有明显差距。</p>
+<h3>1. 最大的问题：拒绝行为未必只有一个方向</h3>
+<p>2024 年 Arditi 等人的论文提出了 Single Refusal Direction 的发现。</p>
+<p>后续研究对这一结论进行了进一步挑战。</p>
+<p>其中一项研究是 2025 年发表在 ICML 的：</p>
+<p>《The Geometry of Refusal in Large Language Models: Concept Cones and Representational Independence》。</p>
+<p>研究提出，拒绝行为可能涉及多个独立方向，以及更加复杂的多维几何结构。</p>
+<p>假设拒绝行为实际由多个方向共同决定：</p>
+<pre><code class="language-text">拒绝行为 R = f(r1, r2, r3, …, rn)
+</code></pre>
+<p>那么只删除 r1，可能会出现：</p>
+<ul>
+<li>某些拒绝行为消失。</li>
+<li>某些拒绝行为依然存在。</li>
+<li>某些正常回答也受到影响。</li>
+<li>某些模型行为发生意外变化。</li>
+</ul>
+<p>因此，Single Direction 更适合被理解为一种有效的实验发现，而不是所有模型安全机制的完整解释。</p>
+<h3>2. 过度消融可能损害正常能力</h3>
+<p>假设某个内部方向同时参与：</p>
+<ul>
+<li>风险识别。</li>
+<li>拒绝回答。</li>
+<li>对危险意图的判断。</li>
+<li>对敏感上下文的理解。</li>
+</ul>
+<p>删除这个方向，除了减少拒绝，还可能降低模型识别风险的能力。</p>
+<p>例如：</p>
+<pre><code class="language-text">原模型
+
+用户：我正在研究网络攻击，
+      如何防御 SQL Injection？
+模型：可以介绍防御措施。
+
+用户：如何利用 SQL Injection
+      攻击真实网站？
+模型：拒绝提供攻击指导。
+</code></pre>
+<p>经过粗糙的 Abliteration 后：</p>
+<p>两个问题都可能获得回答。</p>
+<p>这看似解决了过度拒绝，但也可能同时破坏了原有的安全边界。</p>
+<h3>3. 不同模型之间不能直接复用同一个拒绝方向</h3>
+<p>这是一个工程限制。</p>
+<p>每个模型的：</p>
+<ul>
+<li>Hidden Size</li>
+<li>Transformer 架构</li>
+<li>训练数据</li>
+<li>指令微调方式</li>
+<li>安全对齐方式</li>
+</ul>
+<p>都可能不同。</p>
+<p>因此，Llama 模型中提取出来的拒绝方向，不能直接拿去修改 Qwen 模型。</p>
+<p>即使两个模型架构类似，向量空间也不一定完全一致。</p>
+<p>一般需要针对具体模型重新提取和验证。</p>
+<h3>4. 它不一定能真正理解用户意图</h3>
+<p>Abliteration 主要处理模型内部的某种表示方向。</p>
+<p>但人类语言中的意图很复杂。</p>
+<p>例如：</p>
+<ul>
+<li>网络安全研究和网络攻击可能使用相同的技术术语。</li>
+<li>医学研究和危险药物使用可能涉及相同的知识。</li>
+<li>小说创作和现实操作可能出现相似的描述。</li>
+</ul>
+<p>安全判断需要结合上下文、用户意图、潜在风险以及回答的具体用途。</p>
+<p>单纯删除拒绝方向，并不能解决这些语义判断问题。</p>
+<h3>5. 它不代表模型彻底没有安全机制了</h3>
+<p>模型的安全行为不只有拒绝方向。</p>
+<p>它还可能来自：</p>
+<ul>
+<li>模型训练形成的行为倾向。</li>
+<li>系统提示词。</li>
+<li>输出审核。</li>
+<li>Harness 层权限管理。</li>
+</ul>
+<p>经过 Abliteration 的模型仍然可能出现拒绝，也可能在其他层面受到限制。</p>
+<p>反过来，即使模型不再说「我不能回答」，也不代表它一定具备回答问题的能力。</p>
+<p>它可能只是直接输出错误、混乱或者不完整的内容。</p>
+<h3>6. 评估标准存在问题</h3>
+<p>一个模型经过 Abliteration 后，如果拒绝率从 80% 降到 10%，是不是说明它变好了？</p>
+<p>不一定。</p>
+<p>拒绝率只是一个指标。</p>
+<p>至少还应该考虑：</p>
+<table>
+<thead>
+<tr>
+<th>评估指标</th>
+<th>要回答的问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Refusal Rate</td>
+<td>是否减少了拒绝？</td>
+</tr>
+<tr>
+<td>False Refusal Rate</td>
+<td>是否减少了不必要的拒绝？</td>
+</tr>
+<tr>
+<td>Harmful Compliance Rate</td>
+<td>是否增加了危险请求的服从率？</td>
+</tr>
+<tr>
+<td>General Capability</td>
+<td>通用能力是否下降？</td>
+</tr>
+<tr>
+<td>Truthfulness</td>
+<td>回答是否仍然准确？</td>
+</tr>
+<tr>
+<td>Robustness</td>
+<td>换一种提问方式是否仍然稳定？</td>
+</tr>
+</tbody>
+</table>
+<p>如果一个模型不再拒绝任何问题，但也不再区分问题是否合理，这不能称为成功的模型编辑。</p>
+<p>如果彻底删除并不是一个足够好的目标，那么行为编辑还能往哪个方向走？</p>
+<h2>参考资料</h2>
+<ol>
+<li>Arditi 等，《Refusal in Language Models Is Mediated by a Single Direction》，NeurIPS，2024：<a href="https://arxiv.org/abs/2406.11717">https://arxiv.org/abs/2406.11717</a></li>
+<li>Wollschläger 等，《The Geometry of Refusal in Large Language Models: Concept Cones and Representational Independence》，ICML，2025：<a href="https://proceedings.mlr.press/v267/wollschlager25a.html">https://proceedings.mlr.press/v267/wollschlager25a.html</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质。复杂的事情，简单说。</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-hrWi8eyo.js"></script>
+</body>
+</html>

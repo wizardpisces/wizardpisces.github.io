@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>WebMCP：用户选好的订单，AI 为什么还要自己找？ | LZ AI NOTE</title>
+  <meta name="description" content="&lt;! 写作锚点 读者收获：理解 WebMCP 把哪些事实留给页面、把哪些信息交给模型，并能据此判断工具边界、状态时序和授权该由谁负责。 核心判断：网页里的应用状态本来就属于应用，WebMCP 让页面保留这份状态并直接执行业务，模型只提供它独有的输入：用户意图和必要参数。 如何推进：从导出选中订单切入，先讲网页自动化与独立接口各自绕不开的缺口，再拆开注册、发…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="WebMCP：用户选好的订单，AI 为什么还要自己找？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-11-06">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/WebMCP%EF%BC%9A%E7%94%A8%E6%88%B7%E9%80%89%E5%A5%BD%E7%9A%84%E8%AE%A2%E5%8D%95%EF%BC%8CAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%A6%81%E8%87%AA%E5%B7%B1%E6%89%BE%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/WebMCP%EF%BC%9A%E7%94%A8%E6%88%B7%E9%80%89%E5%A5%BD%E7%9A%84%E8%AE%A2%E5%8D%95%EF%BC%8CAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%A6%81%E8%87%AA%E5%B7%B1%E6%89%BE%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="WebMCP：用户选好的订单，AI 为什么还要自己找？ | LZ AI NOTE">
+  <meta property="og:description" content="&lt;! 写作锚点 读者收获：理解 WebMCP 把哪些事实留给页面、把哪些信息交给模型，并能据此判断工具边界、状态时序和授权该由谁负责。 核心判断：网页里的应用状态本来就属于应用，WebMCP 让页面保留这份状态并直接执行业务，模型只提供它独有的输入：用户意图和必要参数。 如何推进：从导出选中订单切入，先讲网页自动化与独立接口各自绕不开的缺口，再拆开注册、发…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/WebMCP%EF%BC%9A%E7%94%A8%E6%88%B7%E9%80%89%E5%A5%BD%E7%9A%84%E8%AE%A2%E5%8D%95%EF%BC%8CAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%A6%81%E8%87%AA%E5%B7%B1%E6%89%BE%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"WebMCP：用户选好的订单，AI 为什么还要自己找？","description":"\u003c! 写作锚点 读者收获：理解 WebMCP 把哪些事实留给页面、把哪些信息交给模型，并能据此判断工具边界、状态时序和授权该由谁负责。 核心判断：网页里的应用状态本来就属于应用，WebMCP 让页面保留这份状态并直接执行业务，模型只提供它独有的输入：用户意图和必要参数。 如何推进：从导出选中订单切入，先讲网页自动化与独立接口各自绕不开的缺口，再拆开注册、发…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/WebMCP%EF%BC%9A%E7%94%A8%E6%88%B7%E9%80%89%E5%A5%BD%E7%9A%84%E8%AE%A2%E5%8D%95%EF%BC%8CAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%A6%81%E8%87%AA%E5%B7%B1%E6%89%BE%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/WebMCP%EF%BC%9A%E7%94%A8%E6%88%B7%E9%80%89%E5%A5%BD%E7%9A%84%E8%AE%A2%E5%8D%95%EF%BC%8CAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%A6%81%E8%87%AA%E5%B7%B1%E6%89%BE%EF%BC%9F","dateModified":"2026-11-06","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：WebMCP：用户选好的订单，AI 为什么还要自己找？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/WebMCP%EF%BC%9A%E7%94%A8%E6%88%B7%E9%80%89%E5%A5%BD%E7%9A%84%E8%AE%A2%E5%8D%95%EF%BC%8CAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%A6%81%E8%87%AA%E5%B7%B1%E6%89%BE%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>WebMCP：用户选好的订单，AI 为什么还要自己找？</h1><!-- 写作锚点
+读者收获：理解 WebMCP 把哪些事实留给页面、把哪些信息交给模型，并能据此判断工具边界、状态时序和授权该由谁负责。
+核心判断：网页里的应用状态本来就属于应用，WebMCP 让页面保留这份状态并直接执行业务，模型只提供它独有的输入：用户意图和必要参数。
+如何推进：从导出选中订单切入，先讲网页自动化与独立接口各自绕不开的缺口，再拆开注册、发现、模型选择、浏览器路由与回调执行，最后讨论边界设计与试验阶段。
+-->
+<h1>WebMCP：用户选好的订单，AI 为什么还要自己找？</h1>
+<p>在后台系统里勾选 20 个订单，然后对 AI 说：</p>
+<blockquote>
+<p>把这批订单导成 CSV。</p>
+</blockquote>
+<p>看着很容易的任务，对浏览器 Agent 则是一串必须成功的动作：</p>
+<pre><code class="language-text">扫描订单列表
+        ↓
+判断哪些勾选框处于选中状态
+        ↓
+收集对应的订单编号
+        ↓
+找到导出入口，选择 CSV
+        ↓
+点击，并确认文件生成
+</code></pre>
+<p>最别扭的是前两步。哪些订单被选中，页面上实际很清楚了。</p>
+<p>Agent 却要重新从界面上把它读出来（推理出来），整理成一份列表，再交回去。</p>
+<h2>一、背景：网页有两类使用者，现在多了第三类</h2>
+<p>网页一直是给两类角色用的。</p>
+<p>人打开页面，看布局、找按钮、填表单。
+客户端程序调用 API，传参数、取结果。
+这两条路各有一套明确的约定：人靠视觉和交互反馈理解页面，程序靠接口文档理解参数与返回值。</p>
+<p>浏览器 Agent 出现以后，多了一类使用者。它拿着自然语言要求，却只能走人这条路：用截图、DOM 或无障碍信息理解页面，再模拟点击和输入。</p>
+<p>这条路最大的好处是兼容。网站不用改任何代码，Agent 就能试着操作。</p>
+<h2>二、问题：Agent 得先把业务动作，从界面里反推出来</h2>
+<p>一个输入框只说明“这里可以填字”。它没有说明这个字段属于哪张表单、填完要做什么、做完以后会怎样。</p>
+<p>Agent 要做的第一件事，是把散落的控件重新拼成一个业务动作。这件事在很多场景下可行，并且做得不错。问题出在两类情况上。</p>
+<p>第一类是界面本身不稳定。候选列表还没加载完，日历弹窗遮住了按钮（做 mobile 研发的同学感受最深），页面中途跳转，都会让已经规划好的步骤失效。Agent 只能重新观察、重新纠正。</p>
+<p>第二类是应用状态。哪些记录被选中、当前登录的是谁、草稿保存到哪一步，这些事实一直存在网页里。Agent 必须把它们从界面上读出来，转成一种可以传递的形式，才能交给后端。</p>
+<p>那另一条路呢？直接接后端 API，或者给网站做一个独立的 MCP Server。</p>
+<p>这条路在任务与页面无关时更合适。如果任务就发生在当前页面上，独立集成还要另外衔接登录会话、页面里已经做出的选择，以及应用此刻的状态。它和用户眼前的页面，未必共享同一份事实。</p>
+<p>于是缺口出现了：</p>
+<p><strong>页面已经知道的事，为什么要让模型再推断一遍？</strong></p>
+<p>模型擅长的是理解“用户想干什么”（推理）。至于“当前选中了哪 20 个订单”，页面本来就清楚（事实）。</p>
+<h2>三、方案：WebMCP 让页面把动作注册出来</h2>
+<p>WebMCP 想补的就是这一段。</p>
+<p>网站主动声明页面具备的动作：</p>
+<pre><code class="language-text">工具名：export_selected_orders
+用途：导出当前选中的订单
+参数：导出格式
+执行：读取页面当前选择，调用原有导出逻辑
+返回：导出文件信息
+</code></pre>
+<p>Agent 不用再扫描列表判断哪些被选中。它只需要决定这次调用该传什么格式。</p>
+<p>WebMCP 借用了 MCP 的工具描述与调用方式，但执行入口放在网页里，不要求每个网站额外部署一个独立的 MCP Server。</p>
+<h2>四、核心机制：一次导出，谁负责什么</h2>
+<p>下面按当前社区草案，以同源的页内集成为例。“Agent 宿主”指连接模型与浏览器的程序，模型本身可以运行在远端。</p>
+<h3>1. 注册：把说明和真正的执行函数绑在一起</h3>
+<p>假设页面里已经有两个函数：<code>getSelectedOrders()</code> 读取当前选择，<code>exportOrders()</code> 生成文件。开发者把它们包成一个工具，注册到当前文档：</p>
+<pre><code class="language-js">await document.modelContext.registerTool({
+  name: 'export_selected_orders',
+  description: '导出当前选中的订单',
+  inputSchema: {
+    type: 'object',
+    properties: {
+      format: { type: 'string', enum: ['csv', 'xlsx'] },
+    },
+    required: ['format'],
+  },
+  execute: async ({ format }) =&gt; {
+    const ids = getSelectedOrders(); // 页面自动逻辑封装，省掉 Agent 推理
+    const file = await exportOrders(ids, format);
+    return { count: ids.length, filename: file.name };
+  },
+});
+</code></pre>
+<p>注意参数只有 <code>format</code> 一项。</p>
+<p>选中了哪些订单没有出现在参数里。它不是模型该提供的信息，而是页面自己要读的信息。</p>
+<p>这正是这条路径和“让模型先收集订单号、再调用接口”的区别。</p>
+<h3>2. 发现：把可用工具交给模型</h3>
+<p>宿主取得当前页面里可访问的工具：</p>
+<pre><code class="language-js">const tools = await document.modelContext.getTools();
+</code></pre>
+<p>再把工具名、说明和参数规则放进模型的输入。模型由此知道：这个页面有一个导出动作，需要指定文件格式。</p>
+<h3>3. 选择：模型输出一份调用数据</h3>
+<p>根据用户要求，模型提出调用：</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;export_selected_orders&quot;,
+  &quot;arguments&quot;: { &quot;format&quot;: &quot;csv&quot; }
+}
+</code></pre>
+<p>模型没有读取页面，也没有执行任何函数。它只是把用户的意图通过结构化表达调用；
+宿主接住这份调用，在已经发现的工具里找到对应项，再请求浏览器执行。</p>
+<h3>4. 执行与回传：页面读状态、做业务、给结果</h3>
+<p>执行进入网页注册的回调。回调调用 <code>getSelectedOrders()</code>，拿到此刻选中的订单编号，再交给原有的导出逻辑。</p>
+<p>页面照常更新自己的界面，返回值由浏览器序列化后交回宿主，宿主再交给模型。</p>
+<p>各方职责因此是这样分的：</p>
+<pre><code class="language-text">模型：判断用户想做什么，提供格式参数
+宿主与浏览器：发现工具，路由调用，回传结果
+网页代码：读取应用状态，执行导出，更新页面
+</code></pre>
+<p>这条分工里，模型不需要知道选中的是哪些订单，它只需要知道用户要 CSV。页面也不用把选中状态整理成某种 Agent 能读懂的格式，它直接用内部状态完成工作。</p>
+<h2>五、局限：边界清楚了，任务还不等于可靠</h2>
+<p>WebMCP 把一部分推断交还给页面，同时把新的责任压在工具设计上。</p>
+<p><strong>工具粒度决定了风险。</strong> 如果只注册一个 <code>handle_orders</code>，把查询、导出、删除和付款混在一起，模型依然要猜这次调用会做到哪一步。动作越具体，模型越容易选对，权限也越容易划清。</p>
+<p><strong>状态是活的。</strong> 回到刚才的例子：Agent 提交调用时选中的是 20 个订单，回调真正执行时可能变成 21 个，因为用户又勾了一个。工具读取的是“当前状态”还是“调用时刻的快照”，需要开发者明确。</p>
+<p><strong>参数是外部输入。</strong> 模型给出的 JSON 符合格式，不代表内容可信。<code>format</code> 字段要校验，越权操作要由服务端检查。用户要求导出，不等于同意删除。</p>
+<p><strong>描述和返回值也可能被污染。</strong> 把它们装进结构化接口，不会自动消除提示注入。Agent 仍然要区分“工具返回的数据”和“有权改变任务的指令”。</p>
+<h2>六、未来：这条边界还会继续移动</h2>
+<p>已经能看到的一个方向，是让表单自己变成工具。</p>
+<p>WebMCP 的声明式接口允许用 <code>toolname</code>、<code>tooldescription</code> 等属性描述一个普通表单，字段则成为参数。Agent 调用时，浏览器会把表单带到前台并填入内容，表单仍然对用户可见，提交走的是原来的流程。对已经有清晰表单的网站，这能省掉一层适配代码。</p>
+<p>另一个还在讨论的问题，是页面没打开时怎样发现工具。社区已有通过 Service Worker 按需打开页面并暴露工具的探索，它属于扩展方向，不能与当前页面内执行的能力混为一谈。</p>
+<p>再往后，接口验证会变得更实际：同一组参数是否产生预期结果，用户手动改动状态后工具是否仍然正确，页面切换后旧工具会不会被误用。这些决定了工具能不能参与长任务。</p>
+<p>回到那 20 个订单。</p>
+<p>原来的做法里，Agent 要把页面上的勾选状态翻译成一份订单列表，再交给后端。接入 WebMCP 以后，页面留着这份状态，模型只提供它独有的信息。</p>
+<p>WebMCP 改的是分工：哪些信息该由模型推断，哪些事实该留在应用里。</p>
+<p>这条线画在哪里，决定了 Agent 是在替人操作界面，还是在和软件协作。</p>
+<h2>参考资料</h2>
+<ol>
+<li>Chrome Developers，《WebMCP》，2026-10-07 更新：<a href="https://developer.chrome.com/docs/ai/webmcp">https://developer.chrome.com/docs/ai/webmcp</a></li>
+<li>Chrome Developers，《Imperative API》，2026-10-16 更新：<a href="https://developer.chrome.com/docs/ai/webmcp/imperative-api">https://developer.chrome.com/docs/ai/webmcp/imperative-api</a></li>
+<li>Web Machine Learning Community Group，《WebMCP》，2026-11-02 社区草案：<a href="https://webmachinelearning.github.io/webmcp/">https://webmachinelearning.github.io/webmcp/</a></li>
+<li>Web Machine Learning Community Group，《WebMCP Explainer》：<a href="https://github.com/webmachinelearning/webmcp">https://github.com/webmachinelearning/webmcp</a></li>
+<li>Chrome Developers，《Declarative API》，2026-09-25 更新：<a href="https://developer.chrome.com/docs/ai/webmcp/declarative-api">https://developer.chrome.com/docs/ai/webmcp/declarative-api</a></li>
+<li>Chrome Developers，《WebMCP best practices》：<a href="https://developer.chrome.com/docs/ai/webmcp/best-practices">https://developer.chrome.com/docs/ai/webmcp/best-practices</a></li>
+<li>Chrome Developers，《Build your user’s agentic workflows with WebMCP tools》，2026-10-30 更新：<a href="https://developer.chrome.com/docs/ai/webmcp/build-tools">https://developer.chrome.com/docs/ai/webmcp/build-tools</a></li>
+<li>Chrome Developers，《Agent security considerations for WebMCP》：<a href="https://developer.chrome.com/docs/agents/security">https://developer.chrome.com/docs/agents/security</a></li>
+<li>Web Machine Learning Community Group，《Service Worker Integration》讨论稿：<a href="https://github.com/webmachinelearning/webmcp/blob/main/docs/service-workers.md">https://github.com/webmachinelearning/webmcp/blob/main/docs/service-workers.md</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质。复杂的事情，简单说。</em></p>
+<h2>往期推荐</h2>
+<ul>
+<li><a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E6%93%8D%E4%BD%9C%E7%94%B5%E8%84%91%E6%97%B6%EF%BC%8C%E5%AE%83%E7%9C%8B%E5%88%B0%E7%9A%84%E7%9C%9F%E6%98%AF%E6%88%91%E4%BB%AC%E7%9C%8B%E5%88%B0%E7%9A%84%E7%95%8C%E9%9D%A2%E5%90%97%EF%BC%9F.md">AI 操作电脑时，它看到的真是我们看到的界面吗？</a></li>
+</ul>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-hrWi8eyo.js"></script>
+</body>
+</html>

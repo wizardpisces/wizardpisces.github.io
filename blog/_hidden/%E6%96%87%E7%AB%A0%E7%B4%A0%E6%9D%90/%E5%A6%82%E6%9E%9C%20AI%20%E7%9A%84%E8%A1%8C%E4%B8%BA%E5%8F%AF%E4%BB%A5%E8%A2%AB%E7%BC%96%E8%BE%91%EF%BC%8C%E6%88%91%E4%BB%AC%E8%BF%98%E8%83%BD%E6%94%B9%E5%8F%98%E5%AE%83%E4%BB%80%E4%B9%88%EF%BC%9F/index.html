@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>如果 AI 的行为可以被编辑，我们还能改变它什么？ | LZ AI NOTE</title>
+  <meta name="description" content="&lt;! 写作锚点 读者收获：理解从单方向消融到多方向、部分干预、可逆编辑和更广泛行为控制的研究设想。 核心判断：拒绝移除只是一个具体入口，更细致的行为控制仍需要兼顾能力保留、安全判断与对内部机制的理解。 如何推进：沿第一份讨论的第七至九部分，保留五个发展方向、行为控制方法序列和六问总结，最后转向保护问题。 如果 AI 的行为可以被编辑，我们还能改变它什么？ …">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="如果 AI 的行为可以被编辑，我们还能改变它什么？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-11-04">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%A6%82%E6%9E%9C%20AI%20%E7%9A%84%E8%A1%8C%E4%B8%BA%E5%8F%AF%E4%BB%A5%E8%A2%AB%E7%BC%96%E8%BE%91%EF%BC%8C%E6%88%91%E4%BB%AC%E8%BF%98%E8%83%BD%E6%94%B9%E5%8F%98%E5%AE%83%E4%BB%80%E4%B9%88%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%A6%82%E6%9E%9C%20AI%20%E7%9A%84%E8%A1%8C%E4%B8%BA%E5%8F%AF%E4%BB%A5%E8%A2%AB%E7%BC%96%E8%BE%91%EF%BC%8C%E6%88%91%E4%BB%AC%E8%BF%98%E8%83%BD%E6%94%B9%E5%8F%98%E5%AE%83%E4%BB%80%E4%B9%88%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="如果 AI 的行为可以被编辑，我们还能改变它什么？ | LZ AI NOTE">
+  <meta property="og:description" content="&lt;! 写作锚点 读者收获：理解从单方向消融到多方向、部分干预、可逆编辑和更广泛行为控制的研究设想。 核心判断：拒绝移除只是一个具体入口，更细致的行为控制仍需要兼顾能力保留、安全判断与对内部机制的理解。 如何推进：沿第一份讨论的第七至九部分，保留五个发展方向、行为控制方法序列和六问总结，最后转向保护问题。 如果 AI 的行为可以被编辑，我们还能改变它什么？ …">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%A6%82%E6%9E%9C%20AI%20%E7%9A%84%E8%A1%8C%E4%B8%BA%E5%8F%AF%E4%BB%A5%E8%A2%AB%E7%BC%96%E8%BE%91%EF%BC%8C%E6%88%91%E4%BB%AC%E8%BF%98%E8%83%BD%E6%94%B9%E5%8F%98%E5%AE%83%E4%BB%80%E4%B9%88%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"如果 AI 的行为可以被编辑，我们还能改变它什么？","description":"\u003c! 写作锚点 读者收获：理解从单方向消融到多方向、部分干预、可逆编辑和更广泛行为控制的研究设想。 核心判断：拒绝移除只是一个具体入口，更细致的行为控制仍需要兼顾能力保留、安全判断与对内部机制的理解。 如何推进：沿第一份讨论的第七至九部分，保留五个发展方向、行为控制方法序列和六问总结，最后转向保护问题。 如果 AI 的行为可以被编辑，我们还能改变它什么？ …","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%A6%82%E6%9E%9C%20AI%20%E7%9A%84%E8%A1%8C%E4%B8%BA%E5%8F%AF%E4%BB%A5%E8%A2%AB%E7%BC%96%E8%BE%91%EF%BC%8C%E6%88%91%E4%BB%AC%E8%BF%98%E8%83%BD%E6%94%B9%E5%8F%98%E5%AE%83%E4%BB%80%E4%B9%88%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%A6%82%E6%9E%9C%20AI%20%E7%9A%84%E8%A1%8C%E4%B8%BA%E5%8F%AF%E4%BB%A5%E8%A2%AB%E7%BC%96%E8%BE%91%EF%BC%8C%E6%88%91%E4%BB%AC%E8%BF%98%E8%83%BD%E6%94%B9%E5%8F%98%E5%AE%83%E4%BB%80%E4%B9%88%EF%BC%9F","dateModified":"2026-11-04","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：如果 AI 的行为可以被编辑，我们还能改变它什么？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%A6%82%E6%9E%9C%20AI%20%E7%9A%84%E8%A1%8C%E4%B8%BA%E5%8F%AF%E4%BB%A5%E8%A2%AB%E7%BC%96%E8%BE%91%EF%BC%8C%E6%88%91%E4%BB%AC%E8%BF%98%E8%83%BD%E6%94%B9%E5%8F%98%E5%AE%83%E4%BB%80%E4%B9%88%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>如果 AI 的行为可以被编辑，我们还能改变它什么？</h1><!-- 写作锚点
+读者收获：理解从单方向消融到多方向、部分干预、可逆编辑和更广泛行为控制的研究设想。
+核心判断：拒绝移除只是一个具体入口，更细致的行为控制仍需要兼顾能力保留、安全判断与对内部机制的理解。
+如何推进：沿第一份讨论的第七至九部分，保留五个发展方向、行为控制方法序列和六问总结，最后转向保护问题。
+-->
+<h1>如果 AI 的行为可以被编辑，我们还能改变它什么？</h1>
+<p><a href="./%E5%8F%AA%E5%88%A0%E4%B8%80%E4%B8%AA%E6%8B%92%E7%BB%9D%E6%96%B9%E5%90%91%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B9%9F%E4%BC%9A%E5%BD%B1%E5%93%8D%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%85%B6%E4%BB%96%E8%83%BD%E5%8A%9B%EF%BC%9F.md">上一篇</a>讨论了 Abliteration 的局限：少一个方向，并不等于只少一种能力。</p>
+<p>那么，未来的目标还应该是彻底删除拒绝吗？如果改成更精细的控制，我们还能做什么？</p>
+<h2>一、未来 Abliteration 会怎么发展？</h2>
+<p>我认为可以从五个方向观察。</p>
+<h3>1. 从单方向消融发展到多方向消融</h3>
+<p>这是最直接的技术演进。</p>
+<p>早期研究主要寻找一个拒绝方向：</p>
+<pre><code class="language-text">r
+</code></pre>
+<p>后续可能寻找一组方向：</p>
+<pre><code class="language-text">R = [r1, r2, …, rk]
+</code></pre>
+<p>再通过矩阵投影：</p>
+<pre><code class="language-text">P = I - R × (Rᵀ × R)⁻¹ × Rᵀ
+</code></pre>
+<p>移除这些方向所张成的子空间。</p>
+<p>其中 ᵀ 表示转置，⁻¹ 表示求逆。这里假设 R 的列向量线性独立；实际应用中还需要处理方向相关性和数值稳定性。</p>
+<p>这种方法可以更细致地研究不同类型的拒绝行为。</p>
+<p>例如：</p>
+<ul>
+<li>内容安全拒绝。</li>
+<li>网络安全拒绝。</li>
+<li>隐私相关拒绝。</li>
+<li>医疗风险拒绝。</li>
+<li>特定任务中的过度拒绝。</li>
+</ul>
+<p>但方向越多，误伤其他能力的风险也可能越大。</p>
+<h3>2. 从直接删除发展到精细化模型编辑</h3>
+<p>未来可能采用更精细的控制：</p>
+<ul>
+<li>只在特定层进行修改。</li>
+<li>只在特定 Token 位置进行修改。</li>
+<li>根据输入上下文动态控制。</li>
+<li>只降低某种行为的激活强度，而不是完全删除。</li>
+</ul>
+<p>例如，对前文归一化后的方向 r_unit：</p>
+<pre><code class="language-text">h' = h - α × (h · r_unit) × r_unit
+</code></pre>
+<p>其中：</p>
+<pre><code class="language-text">0 ≤ α ≤ 1
+</code></pre>
+<p>当 α = 1 时，是完整消融。</p>
+<p>当 0 &lt; α &lt; 1 时，只是部分削弱。</p>
+<p>这样就有可能在减少误拒绝的同时，保留部分安全判断能力。</p>
+<h3>3. 从修改模型发展到可逆的模型编辑</h3>
+<p>目前直接修改权重，通常意味着产生一个新的模型文件。</p>
+<p>未来更理想的方式是：</p>
+<ul>
+<li>保存原始模型。</li>
+<li>保存编辑方向。</li>
+<li>保存编辑强度。</li>
+<li>根据任务动态加载不同的行为配置。</li>
+<li>需要时恢复原始模型。</li>
+</ul>
+<p>这有利于企业部署、模型版本管理和安全审计。</p>
+<h3>4. 从移除拒绝发展到更广泛的行为编辑</h3>
+<p>Abliteration 的技术基础并不局限于拒绝行为。</p>
+<p>如果其他行为也能够在模型内部找到相对稳定、可识别的表示方向，那么类似技术就可能应用于：</p>
+<table>
+<thead>
+<tr>
+<th>研究方向</th>
+<th>可能的用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Style Editing</td>
+<td>修改模型语言风格</td>
+</tr>
+<tr>
+<td>Persona Editing</td>
+<td>修改角色或人格倾向</td>
+</tr>
+<tr>
+<td>Bias Editing</td>
+<td>调整某些偏见相关表示</td>
+</tr>
+<tr>
+<td>Honesty Editing</td>
+<td>研究与诚实性相关的内部表示</td>
+</tr>
+<tr>
+<td>Knowledge Editing</td>
+<td>修改特定知识的表达或关联</td>
+</tr>
+<tr>
+<td>Safety Editing</td>
+<td>更精细地控制安全行为</td>
+</tr>
+</tbody>
+</table>
+<p>这些任务的难度并不一样。</p>
+<p>例如，修改语言风格可能相对容易，但修改知识而不破坏相关推理能力就困难得多。</p>
+<h3>5. 从单纯追求移除发展到安全与可控性的平衡</h3>
+<p>我认为这是最重要的长期方向。</p>
+<p>Abliteration 最初吸引人的地方是：模型行为可以通过直接修改内部表示来改变。</p>
+<p>但未来更有价值的目标，可能是让模型更准确地判断：</p>
+<ul>
+<li>什么问题应该回答。</li>
+<li>什么问题不应该回答。</li>
+<li>哪些问题需要补充上下文。</li>
+<li>哪些问题可以提供安全的替代方案。</li>
+</ul>
+<p>目标可能从 Refusal Removal（拒绝移除）转向 Refusal Control（拒绝控制）。</p>
+<p>这会比简单删除拒绝行为更有研究价值。</p>
+<h2>二、Abliteration 和未来大模型研究之间有什么关系？</h2>
+<p>我认为可以把 Abliteration 放在一个更大的技术趋势里理解：</p>
+<p>大模型研究正在从「训练模型，让它表现出某种行为」，逐渐扩展到「理解模型内部如何产生行为，然后直接编辑这种行为」。</p>
+<p>可以把相关技术的发展关系理解为：</p>
+<h3>LLM 行为控制技术演进</h3>
+<ol>
+<li>
+<p><strong>Prompt Engineering</strong></p>
+<p>通过输入指令影响模型行为。</p>
+</li>
+<li>
+<p><strong>SFT / RLHF / DPO</strong></p>
+<p>通过训练和偏好优化改变模型行为。</p>
+</li>
+<li>
+<p><strong>Activation Steering / RepE</strong></p>
+<p>研究模型内部表示，通过干预激活控制行为。</p>
+</li>
+<li>
+<p><strong>Abliteration / Model Editing</strong></p>
+<p>定位内部表示，直接修改模型权重。</p>
+</li>
+<li>
+<p><strong>Fine-grained Behavioral Control（未来方向）</strong></p>
+<p>根据任务、上下文和风险动态控制模型行为，尽量保留其他能力。</p>
+</li>
+</ol>
+<p>这里有一个值得继续想的问题：</p>
+<p>以前我们认为模型的拒绝行为来自复杂的训练过程，想改变它就需要重新训练。</p>
+<p>Abliteration 的研究告诉我们，有些复杂的模型行为可能具有相对简单的内部几何结构。</p>
+<p>但后续关于多方向拒绝机制的研究又提醒我们：找到一个有效的方向，不等于完整理解了模型的行为机制。</p>
+<p>问题由此从「如何改变模型」推进到了「我们究竟在多大程度上理解模型」。</p>
+<h2>三、如何正确理解 Abliteration？</h2>
+<p>我把整件事情归纳成六个问题：</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>核心答案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>它是什么？</td>
+<td>一种通过消除拒绝相关内部方向来改变模型行为的技术</td>
+</tr>
+<tr>
+<td>为什么出现？</td>
+<td>希望解决过度拒绝、模型行为难以精细控制的问题</td>
+</tr>
+<tr>
+<td>它解决了什么？</td>
+<td>提供了一种不需要完整重新训练的拒绝行为编辑方法</td>
+</tr>
+<tr>
+<td>之前怎么解决？</td>
+<td>Prompt、Jailbreak、SFT、RLHF、DPO 等</td>
+</tr>
+<tr>
+<td>它怎么实现？</td>
+<td>提取隐藏状态差异，计算拒绝方向，再进行正交投影和权重修改</td>
+</tr>
+<tr>
+<td>局限性是什么？</td>
+<td>拒绝机制可能是多维的，可能损害其他能力，也无法替代完整的安全判断</td>
+</tr>
+</tbody>
+</table>
+<p>从技术价值上看，我认为 Abliteration 提供了一个有启发性的实验证据：大语言模型的一部分复杂行为，可以通过内部表示空间的几何操作来干预。</p>
+<p>这对模型可解释性（Mechanistic Interpretability）、模型编辑（Model Editing）、行为控制（Behavior Steering）和 AI Alignment 都有研究价值。</p>
+<p>但如果这种编辑也能被用于改变安全行为，问题就会转向另一边：我们应该怎样保护模型？</p>
+<h2>参考资料</h2>
+<ol>
+<li>Arditi 等，《Refusal in Language Models Is Mediated by a Single Direction》，NeurIPS，2024：<a href="https://arxiv.org/abs/2406.11717">https://arxiv.org/abs/2406.11717</a></li>
+<li>Wollschläger 等，《The Geometry of Refusal in Large Language Models: Concept Cones and Representational Independence》，ICML，2025：<a href="https://proceedings.mlr.press/v267/wollschlager25a.html">https://proceedings.mlr.press/v267/wollschlager25a.html</a></li>
+<li>Zou 等，《Representation Engineering: A Top-Down Approach to AI Transparency》，2023：<a href="https://arxiv.org/abs/2310.01405">https://arxiv.org/abs/2310.01405</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质。复杂的事情，简单说。</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-hrWi8eyo.js"></script>
+</body>
+</html>

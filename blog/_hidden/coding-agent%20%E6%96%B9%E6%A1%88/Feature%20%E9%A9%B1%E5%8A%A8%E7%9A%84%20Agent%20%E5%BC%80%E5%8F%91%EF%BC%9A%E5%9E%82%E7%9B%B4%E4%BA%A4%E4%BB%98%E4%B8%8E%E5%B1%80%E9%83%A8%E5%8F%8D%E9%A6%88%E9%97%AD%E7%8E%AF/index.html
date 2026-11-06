@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Feature 驱动的 Agent 开发：垂直交付与局部反馈闭环 | LZ AI NOTE</title>
+  <meta name="description" content="将大需求拆为可验收、可聚焦的 Feature，让人和 Agent 围绕局部成果持续协作，减少等待与无效交接，并通过真实反馈、修订和验证改进执行方法。">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="Feature 驱动的 Agent 开发：垂直交付与局部反馈闭环">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-11-06">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/Feature%20%E9%A9%B1%E5%8A%A8%E7%9A%84%20Agent%20%E5%BC%80%E5%8F%91%EF%BC%9A%E5%9E%82%E7%9B%B4%E4%BA%A4%E4%BB%98%E4%B8%8E%E5%B1%80%E9%83%A8%E5%8F%8D%E9%A6%88%E9%97%AD%E7%8E%AF">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/Feature%20%E9%A9%B1%E5%8A%A8%E7%9A%84%20Agent%20%E5%BC%80%E5%8F%91%EF%BC%9A%E5%9E%82%E7%9B%B4%E4%BA%A4%E4%BB%98%E4%B8%8E%E5%B1%80%E9%83%A8%E5%8F%8D%E9%A6%88%E9%97%AD%E7%8E%AF">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="Feature 驱动的 Agent 开发：垂直交付与局部反馈闭环 | LZ AI NOTE">
+  <meta property="og:description" content="将大需求拆为可验收、可聚焦的 Feature，让人和 Agent 围绕局部成果持续协作，减少等待与无效交接，并通过真实反馈、修订和验证改进执行方法。">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/Feature%20%E9%A9%B1%E5%8A%A8%E7%9A%84%20Agent%20%E5%BC%80%E5%8F%91%EF%BC%9A%E5%9E%82%E7%9B%B4%E4%BA%A4%E4%BB%98%E4%B8%8E%E5%B1%80%E9%83%A8%E5%8F%8D%E9%A6%88%E9%97%AD%E7%8E%AF">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Feature 驱动的 Agent 开发：垂直交付与局部反馈闭环","description":"将大需求拆为可验收、可聚焦的 Feature，让人和 Agent 围绕局部成果持续协作，减少等待与无效交接，并通过真实反馈、修订和验证改进执行方法。","url":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/Feature%20%E9%A9%B1%E5%8A%A8%E7%9A%84%20Agent%20%E5%BC%80%E5%8F%91%EF%BC%9A%E5%9E%82%E7%9B%B4%E4%BA%A4%E4%BB%98%E4%B8%8E%E5%B1%80%E9%83%A8%E5%8F%8D%E9%A6%88%E9%97%AD%E7%8E%AF","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/Feature%20%E9%A9%B1%E5%8A%A8%E7%9A%84%20Agent%20%E5%BC%80%E5%8F%91%EF%BC%9A%E5%9E%82%E7%9B%B4%E4%BA%A4%E4%BB%98%E4%B8%8E%E5%B1%80%E9%83%A8%E5%8F%8D%E9%A6%88%E9%97%AD%E7%8E%AF","dateModified":"2026-11-06","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：Feature 驱动的 Agent 开发：垂直交付与局部反馈闭环，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/Feature%20%E9%A9%B1%E5%8A%A8%E7%9A%84%20Agent%20%E5%BC%80%E5%8F%91%EF%BC%9A%E5%9E%82%E7%9B%B4%E4%BA%A4%E4%BB%98%E4%B8%8E%E5%B1%80%E9%83%A8%E5%8F%8D%E9%A6%88%E9%97%AD%E7%8E%AF","about":["_hidden","coding-agent 方案"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Feature 驱动的 Agent 开发：垂直交付与局部反馈闭环</h1><h1>Feature 驱动的 Agent 开发：垂直交付与局部反馈闭环</h1>
+<h2>一、背景</h2>
+<p>当前 Coding Agent 常按职责和阶段组织工作：</p>
+<pre><code class="language-text">大需求 → 技术设计 → 接口准备 → FE 任务拆分
+       → UI 产物 → 业务实现 → 测试 → 人工验收
+</code></pre>
+<p>整阶段完成成为下游的启动条件。UI 等待接口，测试等待全部实现，人工需要经过长时间执行后才能看到结果；每次交接又重新组织上下文，信息遗漏与错误逐步累积。</p>
+<p>等待期间，人缺少具体的参与对象；结果集中交付后，又要一次理解大量代码、材料和遗留问题，审核容易停留在总结和状态上。错误暴露得晚，修正范围也难以控制。</p>
+<p>实践切入点是将大需求拆成可验收的 Feature，每片持续负责相关理解、实现、验证与人工反馈，尽早产生可检查的结果。</p>
+<h2>二、核心思路</h2>
+<pre><code class="language-text">大需求、共享约束与验收目标
+│
+├─ Feature A：理解 ↔ 实现 ↔ 环境验证 ↔ 人工反馈
+├─ Feature B：理解 ↔ 实现 ↔ 环境验证 ↔ 人工反馈
+└─ Feature C：理解 ↔ 实现 ↔ 环境验证 ↔ 人工反馈
+
+真实依赖明确、输入就绪 → 推进相关 Feature
+局部结果就绪 → 必要的组合验证 → 完整需求交付
+</code></pre>
+<p>Feature 是执行、评审和复盘的主要单元，也是人与 Agent 的共同注意力单元：人聚焦能够判断的结果，Agent 聚焦当前目标与相关上下文。</p>
+<p>人工确认交付边界与重要取舍，执行者在允许范围内持续推进。Agent、工具和 Flow 按需使用，具体组合见<a href="./%E5%8F%AF%E7%BB%84%E5%90%88%20Agent%20%E7%9A%84%E6%B8%90%E8%BF%9B%E5%BC%8F%E8%90%BD%E5%9C%B0%EF%BC%9A%E4%BB%8E%20RN%20%E4%BB%BB%E5%8A%A1%E5%88%B0%E5%85%A8%E5%B1%80%E5%8D%8F%E4%BD%9C.md">可组合 Agent 方案</a>。</p>
+<h2>三、怎样划分 Feature</h2>
+<p>一个 Feature 对应一项可观察、可判断的业务或工程能力，包含完成该结果所需的相关工作。</p>
+<p>例如，“账号详情”可能仍然过大，可以按行为划成“查看基础身份信息”“查看授权照片”“查询历史申请”。各片分别包含相关 UI、数据接入、权限、异常处理和验证。</p>
+<p>划分时检查：</p>
+<table>
+<thead>
+<tr>
+<th>条件</th>
+<th>需要明确什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>结果可验收</td>
+<td>应出现什么行为或产物，依据什么判断</td>
+</tr>
+<tr>
+<td>评审可聚焦</td>
+<td>人能否在可接受的时间内理解结果并给出具体反馈</td>
+</tr>
+<tr>
+<td>范围可控制</td>
+<td>本片包含什么、暂不包含什么</td>
+</tr>
+<tr>
+<td>依赖可说明</td>
+<td>需要哪些共享能力、契约、代码或环境</td>
+</tr>
+<tr>
+<td>修改可管理</td>
+<td>涉及哪些模块，是否与其他 Feature 冲突</td>
+</tr>
+</tbody>
+</table>
+<p>范围过大、长期没有可审核结果时继续拆；多个片段频繁互改、无法分别验收时，重新合并或调整边界。优先选择高不确定、高影响且能够验证的片段，尽早检查实现方向。</p>
+<p>按产物、验收职责或策略实验继续细分的条件，见<a href="./material-first/Agent%20%E7%9A%84%E5%88%86%E6%B2%BB%E5%BC%8F%E6%BC%94%E8%BF%9B%EF%BC%9A%E4%BB%BB%E5%8A%A1%E8%A7%A3%E8%80%A6%E4%B8%8E%E5%B1%80%E9%83%A8%E5%8F%8D%E9%A6%88%E9%97%AD%E7%8E%AF.md">分治式演进方案</a>。</p>
+<h2>四、怎样完成一片垂直交付</h2>
+<h3>共享上下文，局部记录</h3>
+<p>需求、工程、知识与运行入口沿用<a href="./%E4%BB%8E%E4%B8%B2%E8%A1%8C%E4%BA%A4%E6%8E%A5%E5%88%B0%E6%8C%81%E7%BB%AD%E5%8D%8F%E4%BD%9C%EF%BC%9ACoding%20Agent%20%E7%9A%84%E4%BB%BB%E5%8A%A1%E5%B7%A5%E4%BD%9C%E5%8C%BA%E8%AE%BE%E8%AE%A1.md">Agentic 工作区</a>，每片只增加自己的目标和记录：</p>
+<pre><code class="language-text">features/&lt;feature&gt;/
+├── feature.md     目标、边界、验收、依赖及原始来源引用
+├── work/          按需产生的分析、计划与尝试
+├── evidence/      测试、截图、日志与人工验收依据
+└── history/       输入、候选、反馈与重验关系
+</code></pre>
+<p>执行者优先读取当前 Feature 和必要共享约束，仍可回查整体目标与其他片的依赖。每片保留当前候选、已验证部分和待办，支持暂停、恢复或交接。</p>
+<h3>按需执行，局部等待</h3>
+<p>同一执行者持续负责本片，设计理解、接口检查、实现和测试按需要发生。计划帮助执行，成果与证据支持判断，不为每项内部动作生成正式交接包。</p>
+<p>接口未齐时，可在具备隔离入口的工程中用 Fixture 推进 UI，契约补齐后接入真实行为并核对假设。业务规则、权限或不可逆操作不明确时，只暂停受影响部分。</p>
+<p>某片受阻时推进真正独立的工作。同仓库首期顺序写入，确认依赖与资源隔离后再并行。</p>
+<h2>五、人工怎样跟踪与验收</h2>
+<pre><code class="language-text">Feature A 出现可审核成果
+        ├─ 人：查看结果 → 给出反馈 → A 修订与重验
+        └─ Agent：在独立、隔离条件下推进其他工作
+</code></pre>
+<p>人工在执行期间就能参与，界面按 Feature 聚焦四项：</p>
+<pre><code class="language-text">Feature
+├─ 当前成果：可运行结果、代码差异与相关产物
+├─ 验收情况：已验证、待验证与待复核的要求
+├─ 阻塞问题：缺少什么，影响哪部分，需要谁决定
+└─ 修订记录：反馈、实际改动和再次验证
+</code></pre>
+<p>待决、受阻和待审核事项优先展示。需要人判断时，说明问题及影响，并附对应结果和证据；相关问题合并提醒，完整过程按需展开，控制碎片化打扰。</p>
+<p>Review 绑定明确候选，评审期间保持被审版本稳定。反馈回到原 Feature 修订；无人回应仍是待确认，不视为批准。</p>
+<p>UI 预览可以先提供反馈，但目标包含真实数据和权限行为时，业务验收仍待完成。局部成果、Feature 完成与独立发布分别判断，没有证据的要求保持未验证。</p>
+<p>共享接口、组件或决定变化时，定位相关 Feature 修订与复验；各片完成后仍需必要的组合验收。详细输入留存、候选关联和反馈处理见<a href="./material-first/Agent%20%E6%94%B9%E8%BF%9B%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%EF%BC%9A%E4%BB%BB%E5%8A%A1%E4%BF%AE%E8%AE%A2%E4%B8%8E%E7%9F%A5%E8%AF%86%E6%BC%94%E8%BF%9B%E6%9C%BA%E5%88%B6.md">任务修订与知识演进机制</a>。</p>
+<h2>六、从交付反馈到方法迭代</h2>
+<p>执行中的修正改善当前 Feature；方法提炼改善后续同类任务：</p>
+<pre><code class="language-text">Feature 的失败、反馈与修订
+  → 提炼候选策略 / Skill / 局部 Flow
+  → 人工 Review → 新 Feature 验证
+  → 保留、修订或撤回
+</code></pre>
+<p>复盘以 Feature 为入口，回查实际采用的方法与环境结果。一次成功不直接证明方法有效，多因素混杂时保留未知；采集口径和知识效果判断沿用前述改进工作空间方案。</p>
+<p>沉淀的是适用条件明确、可以调整的交付方法，后续任务仍需产生自己的验证结果。</p>
+<h2>七、首轮怎样落地</h2>
+<pre><code class="language-text">一片闭环 → 第二片检查共享与组合 → 隔离后并行 → 后续任务复用方法
+</code></pre>
+<p>先从真实需求选一片，用可用的 Agent、工程环境和一轮人工反馈跑通，再增加第二片。切片越小，边界、评审和集成管理也可能越多；根据实际反馈调整粒度，再扩展自动化。</p>
+<p>观察人等待可判断成果的时间、评审投入、反馈生效时间和重做范围，同时核对整体需求的验收、漏验与总成本。未完成项始终可见，避免以局部高通过率掩盖遗漏或组合问题。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-hrWi8eyo.js"></script>
+</body>
+</html>

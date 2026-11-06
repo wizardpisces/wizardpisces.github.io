@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Abliteration：大模型的安全边界，真的可以被一次数学运算改变吗？ | LZ AI NOTE</title>
+  <meta name="description" content="&lt;! 写作锚点 读者收获：理解如何估计与拒绝行为相关的方向、用投影移除该方向，以及为何拒绝减少不等于完整安全机制消失。 核心判断：对部分模型内部表示的直接干预可以改变拒绝行为，但干预范围、因果解释和其他能力的变化仍需实验验证。 如何推进：从安全训练后的拒绝行为可被改变切入，依次解释方向估计、正交投影、权重合并、安全边界与 RepE，再追问模型保护。 Abl…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="Abliteration：大模型的安全边界，真的可以被一次数学运算改变吗？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-11-04">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Abliteration%EF%BC%9A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AE%89%E5%85%A8%E8%BE%B9%E7%95%8C%EF%BC%8C%E7%9C%9F%E7%9A%84%E5%8F%AF%E4%BB%A5%E8%A2%AB%E4%B8%80%E6%AC%A1%E6%95%B0%E5%AD%A6%E8%BF%90%E7%AE%97%E6%94%B9%E5%8F%98%E5%90%97%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Abliteration%EF%BC%9A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AE%89%E5%85%A8%E8%BE%B9%E7%95%8C%EF%BC%8C%E7%9C%9F%E7%9A%84%E5%8F%AF%E4%BB%A5%E8%A2%AB%E4%B8%80%E6%AC%A1%E6%95%B0%E5%AD%A6%E8%BF%90%E7%AE%97%E6%94%B9%E5%8F%98%E5%90%97%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="Abliteration：大模型的安全边界，真的可以被一次数学运算改变吗？ | LZ AI NOTE">
+  <meta property="og:description" content="&lt;! 写作锚点 读者收获：理解如何估计与拒绝行为相关的方向、用投影移除该方向，以及为何拒绝减少不等于完整安全机制消失。 核心判断：对部分模型内部表示的直接干预可以改变拒绝行为，但干预范围、因果解释和其他能力的变化仍需实验验证。 如何推进：从安全训练后的拒绝行为可被改变切入，依次解释方向估计、正交投影、权重合并、安全边界与 RepE，再追问模型保护。 Abl…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Abliteration%EF%BC%9A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AE%89%E5%85%A8%E8%BE%B9%E7%95%8C%EF%BC%8C%E7%9C%9F%E7%9A%84%E5%8F%AF%E4%BB%A5%E8%A2%AB%E4%B8%80%E6%AC%A1%E6%95%B0%E5%AD%A6%E8%BF%90%E7%AE%97%E6%94%B9%E5%8F%98%E5%90%97%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Abliteration：大模型的安全边界，真的可以被一次数学运算改变吗？","description":"\u003c! 写作锚点 读者收获：理解如何估计与拒绝行为相关的方向、用投影移除该方向，以及为何拒绝减少不等于完整安全机制消失。 核心判断：对部分模型内部表示的直接干预可以改变拒绝行为，但干预范围、因果解释和其他能力的变化仍需实验验证。 如何推进：从安全训练后的拒绝行为可被改变切入，依次解释方向估计、正交投影、权重合并、安全边界与 RepE，再追问模型保护。 Abl…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Abliteration%EF%BC%9A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AE%89%E5%85%A8%E8%BE%B9%E7%95%8C%EF%BC%8C%E7%9C%9F%E7%9A%84%E5%8F%AF%E4%BB%A5%E8%A2%AB%E4%B8%80%E6%AC%A1%E6%95%B0%E5%AD%A6%E8%BF%90%E7%AE%97%E6%94%B9%E5%8F%98%E5%90%97%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Abliteration%EF%BC%9A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AE%89%E5%85%A8%E8%BE%B9%E7%95%8C%EF%BC%8C%E7%9C%9F%E7%9A%84%E5%8F%AF%E4%BB%A5%E8%A2%AB%E4%B8%80%E6%AC%A1%E6%95%B0%E5%AD%A6%E8%BF%90%E7%AE%97%E6%94%B9%E5%8F%98%E5%90%97%EF%BC%9F","dateModified":"2026-11-04","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：Abliteration：大模型的安全边界，真的可以被一次数学运算改变吗？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Abliteration%EF%BC%9A%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AE%89%E5%85%A8%E8%BE%B9%E7%95%8C%EF%BC%8C%E7%9C%9F%E7%9A%84%E5%8F%AF%E4%BB%A5%E8%A2%AB%E4%B8%80%E6%AC%A1%E6%95%B0%E5%AD%A6%E8%BF%90%E7%AE%97%E6%94%B9%E5%8F%98%E5%90%97%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Abliteration：大模型的安全边界，真的可以被一次数学运算改变吗？</h1><!-- 写作锚点
+读者收获：理解如何估计与拒绝行为相关的方向、用投影移除该方向，以及为何拒绝减少不等于完整安全机制消失。
+核心判断：对部分模型内部表示的直接干预可以改变拒绝行为，但干预范围、因果解释和其他能力的变化仍需实验验证。
+如何推进：从安全训练后的拒绝行为可被改变切入，依次解释方向估计、正交投影、权重合并、安全边界与 RepE，再追问模型保护。
+-->
+<h1>Abliteration：大模型的安全边界，真的可以被一次数学运算改变吗？</h1>
+<p>我们通常认为，一个经过安全训练的大语言模型，应该具备相对稳定的安全边界。</p>
+<p>它知道哪些问题可以回答，哪些问题应该拒绝。为了获得这种能力，模型经历了大量安全数据训练、监督微调和人类反馈对齐。</p>
+<p>但有一个有意思的技术现象：</p>
+<p>研究者发现，对于一些开源大语言模型，可以通过分析其内部隐藏状态，找到一个与拒绝行为相关的方向，再通过简单的数学运算修改模型权重，从而显著改变模型原本的拒绝行为。</p>
+<p>不需要重新训练，不需要重新学习知识，甚至不需要改变模型的主体架构。</p>
+<p>这项技术被称为 <strong>Abliteration</strong>。</p>
+<p>除了减少拒绝，它还揭示了一种可能性：</p>
+<p><strong>模型经过训练形成的行为，或许可以通过直接干预内部表示来改变。</strong></p>
+<p>这究竟是怎么做到的？</p>
+<h2>01. 找到模型内部的「拒绝方向」</h2>
+<p>早在 2024 年，Andy Arditi 等人在论文《Refusal in Language Models Is Mediated by a Single Direction》中研究了一个问题：</p>
+<p>大语言模型在拒绝有害请求时，内部究竟发生了什么？</p>
+<p>研究者发现，在他们研究的模型和实验条件下，模型的拒绝行为与隐藏状态空间中的一个特定方向存在显著关联。</p>
+<p>这里需要简单理解一下隐藏状态（Hidden States）。</p>
+<p>大语言模型处理输入时，会将文本转换成高维向量，并经过多层神经网络进行计算。每一层都会形成新的内部表示，这些表示承载着模型对输入内容的编码。</p>
+<p>研究者分别收集模型面对拒绝请求和正常请求时的隐藏状态，计算两组状态的平均差异：</p>
+<pre><code class="language-text">拒绝方向 v =
+  拒绝请求的平均隐藏状态
+  - 正常请求的平均隐藏状态
+</code></pre>
+<p>这里的“平均隐藏状态”，就是分别对两类样本的隐藏状态求均值。</p>
+<p>得到的向量 v，就是一个与拒绝行为相关的方向估计。（一个拒绝向量）</p>
+<p>直观地说，模型处理拒绝请求时，其内部表示相对于正常请求，沿着这个方向产生了某种偏移。</p>
+<p>这并不意味着模型内部真的存在一个独立的「拒绝开关」。但在某些模型中，复杂的拒绝行为可能具有相对简单、可识别的几何结构。</p>
+<p>那么，如果找到这个方向，能不能把它移除？</p>
+<h2>02. 用一次正交投影，移除拒绝方向</h2>
+<p>可以尝试。</p>
+<p>在线性代数中，如果我们希望从一个向量中移除沿某个方向的分量，可以使用正交投影。</p>
+<p>假设已经得到拒绝方向 v，那么沿着这个方向的投影矩阵为：</p>
+<pre><code class="language-text">沿 v 的投影 = (v × vᵀ) ÷ (vᵀ × v)
+</code></pre>
+<p>这里的 vᵀ 表示 v 的转置，× 表示矩阵乘法，分母 vᵀ × v 是一个数。</p>
+<p>如果希望移除这个分量，就可以构造：</p>
+<pre><code class="language-text">P = I - (v × vᵀ) ÷ (vᵀ × v)
+</code></pre>
+<p>其中，I 是单位矩阵，P 是移除该方向分量的正交投影矩阵。</p>
+<p>对于模型中的某个隐藏状态 h，执行：</p>
+<pre><code class="language-text">h' = P × h
+</code></pre>
+<p>就可以移除它在方向 v 上的分量。</p>
+<p>更直观地说，原本的向量可以分解成两个部分：一个沿着拒绝方向，另一个与拒绝方向正交。</p>
+<p>经过投影之后，前者被移除，后者被保留。</p>
+<p>这个矩阵有一个关键性质：</p>
+<pre><code class="language-text">P × v = 0
+</code></pre>
+<p>也就是说，经过这个变换，目标方向被直接映射为零。</p>
+<p>Abliteration 就利用正交投影，从模型内部表示中移除与拒绝行为相关的特定方向。</p>
+<h2>03. 为什么不重新训练，也能改变模型行为？</h2>
+<p>这种操作还可以进一步合并到模型的权重矩阵中。</p>
+<p>假设模型中的某个线性变换为：</p>
+<pre><code class="language-text">y = W × h
+</code></pre>
+<p>其中 W 是权重矩阵，h 是输入隐藏状态。</p>
+<p>如果我们希望先对隐藏状态执行投影，再进行原来的线性变换：</p>
+<pre><code class="language-text">y = W × (P × h)
+</code></pre>
+<p>根据矩阵乘法的结合律：</p>
+<pre><code class="language-text">y = (W × P) × h
+</code></pre>
+<p>因此，可以定义一个新的权重矩阵：</p>
+<pre><code class="language-text">W' = W × P
+</code></pre>
+<p>于是：</p>
+<pre><code class="language-text">y = W' × h
+</code></pre>
+<p>原本需要单独执行的投影操作，在满足相应维度和架构条件时，就可以直接合并到权重矩阵中。</p>
+<p>模型不需要在推理过程中额外执行一次投影，也不需要通过训练重新学习这种变化。</p>
+<p>实际实现需要根据模型架构、干预层和权重矩阵的具体形式进行调整，不能把所有层的权重都直接右乘同一个矩阵。</p>
+<p>但原理是一样的：</p>
+<p><strong>Abliteration 直接改变模型内部的计算，干预它原本的行为，不必重新训练模型。</strong></p>
+<p>这也解释了它为什么能够在不进行传统训练的情况下改变模型的拒绝表现。</p>
+<h2>04. 移除拒绝方向，就等于移除安全机制吗？</h2>
+<p>这里很容易产生一个误解。</p>
+<p>既然我们找到了拒绝方向，并且可以通过投影移除它，是不是意味着模型的安全机制实际上非常简单？</p>
+<p>并不是。</p>
+<p>首先，拒绝行为不等于完整的安全能力。</p>
+<p>模型拒绝一个请求，可能涉及风险识别、上下文理解、意图判断和拒绝表达等多个环节。</p>
+<p>我们找到的方向，可能参与其中某些环节，也可能只是与最终的拒绝行为高度相关。</p>
+<p>其次，单一方向的发现并不能推广到所有模型。不同模型的训练方式、网络结构和内部表示都可能不同，拒绝机制也可能涉及多个方向和更复杂的计算过程。</p>
+<p>移除一个相关方向，也不意味着我们已经理解了它的因果作用。</p>
+<p>这里需要区分两个概念：</p>
+<ul>
+<li><strong>相关性：</strong> 某个内部方向与拒绝行为存在统计关联。</li>
+<li><strong>因果性：</strong> 对这个方向进行干预，是否真正改变了产生拒绝行为的机制？</li>
+</ul>
+<p>Abliteration 通过干预观察模型行为变化，为进一步研究因果关系提供了切入点。但要判断它究竟移除了拒绝表达，还是损害了风险识别能力，还需要更系统的实验。</p>
+<p>例如，除了观察拒绝率，还应该评估模型对危险请求的识别能力、正常请求的误拒绝率，以及推理、知识问答等通用能力是否受到影响。</p>
+<p>因此，拒绝行为减少，不等于模型变得更好，也不等于模型的全部安全机制已经消失。</p>
+<h2>05. Abliteration 背后更值得关注的方向</h2>
+<p>Abliteration 与一个更广泛的研究方向有关：Representation Engineering（RepE）。</p>
+<p>传统的模型研究通常关注输入、输出、训练数据和权重参数。</p>
+<p>Representation Engineering 则进一步关注模型内部如何表示某些高层概念和行为特征，并尝试对这些表示进行识别、监测和干预。</p>
+<p>例如：</p>
+<p>模型内部是否存在与诚实、偏见、情绪或风险判断相关的表示？</p>
+<p>这些表示能否被提取出来？</p>
+<p>如果对它们进行干预，模型的行为是否会发生可预测的变化？</p>
+<p>Abliteration 可以看作 RepE 思路在模型拒绝行为控制上的一个具体应用。</p>
+<p>改变模型行为，除了重新训练或调整提示词，也可以从模型内部表示入手。</p>
+<p>它提供了一个新的研究角度：</p>
+<p><strong>在研究模型学会了什么的同时，也尝试理解模型内部是什么结构支撑了这些行为。</strong></p>
+<p>但这也带来一个更现实的问题：</p>
+<p>如果模型经过安全训练后形成的行为，仍然可能被直接修改，那么我们应该如何保护它？</p>
+<p>仅仅依靠训练阶段的安全对齐是否足够？对于可以自由修改权重的开源模型，我们又应该建立怎样的安全防线？</p>
+<p><em>LZ AI Note｜记录现象，追问本质</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-hrWi8eyo.js"></script>
+</body>
+</html>

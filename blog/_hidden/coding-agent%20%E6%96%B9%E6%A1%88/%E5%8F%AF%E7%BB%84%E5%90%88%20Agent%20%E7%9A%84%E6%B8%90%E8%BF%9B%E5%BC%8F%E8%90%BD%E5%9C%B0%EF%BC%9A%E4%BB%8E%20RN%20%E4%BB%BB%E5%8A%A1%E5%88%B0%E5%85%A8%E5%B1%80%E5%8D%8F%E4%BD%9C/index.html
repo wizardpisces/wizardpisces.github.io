@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>可组合 Agent 的渐进式落地：从 RN 任务到全局协作 | LZ AI NOTE</title>
+  <meta name="description" content="以 Agentic 工作区承载上下文，以自描述能力生成可审核的任务图，从 RN 局部执行逐步扩展到 FE 协作与全局能力组合，并通过真实结果改进节点和沉淀 Flow。">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="可组合 Agent 的渐进式落地：从 RN 任务到全局协作">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-11-05">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/%E5%8F%AF%E7%BB%84%E5%90%88%20Agent%20%E7%9A%84%E6%B8%90%E8%BF%9B%E5%BC%8F%E8%90%BD%E5%9C%B0%EF%BC%9A%E4%BB%8E%20RN%20%E4%BB%BB%E5%8A%A1%E5%88%B0%E5%85%A8%E5%B1%80%E5%8D%8F%E4%BD%9C">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/%E5%8F%AF%E7%BB%84%E5%90%88%20Agent%20%E7%9A%84%E6%B8%90%E8%BF%9B%E5%BC%8F%E8%90%BD%E5%9C%B0%EF%BC%9A%E4%BB%8E%20RN%20%E4%BB%BB%E5%8A%A1%E5%88%B0%E5%85%A8%E5%B1%80%E5%8D%8F%E4%BD%9C">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="可组合 Agent 的渐进式落地：从 RN 任务到全局协作 | LZ AI NOTE">
+  <meta property="og:description" content="以 Agentic 工作区承载上下文，以自描述能力生成可审核的任务图，从 RN 局部执行逐步扩展到 FE 协作与全局能力组合，并通过真实结果改进节点和沉淀 Flow。">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/%E5%8F%AF%E7%BB%84%E5%90%88%20Agent%20%E7%9A%84%E6%B8%90%E8%BF%9B%E5%BC%8F%E8%90%BD%E5%9C%B0%EF%BC%9A%E4%BB%8E%20RN%20%E4%BB%BB%E5%8A%A1%E5%88%B0%E5%85%A8%E5%B1%80%E5%8D%8F%E4%BD%9C">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"可组合 Agent 的渐进式落地：从 RN 任务到全局协作","description":"以 Agentic 工作区承载上下文，以自描述能力生成可审核的任务图，从 RN 局部执行逐步扩展到 FE 协作与全局能力组合，并通过真实结果改进节点和沉淀 Flow。","url":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/%E5%8F%AF%E7%BB%84%E5%90%88%20Agent%20%E7%9A%84%E6%B8%90%E8%BF%9B%E5%BC%8F%E8%90%BD%E5%9C%B0%EF%BC%9A%E4%BB%8E%20RN%20%E4%BB%BB%E5%8A%A1%E5%88%B0%E5%85%A8%E5%B1%80%E5%8D%8F%E4%BD%9C","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/%E5%8F%AF%E7%BB%84%E5%90%88%20Agent%20%E7%9A%84%E6%B8%90%E8%BF%9B%E5%BC%8F%E8%90%BD%E5%9C%B0%EF%BC%9A%E4%BB%8E%20RN%20%E4%BB%BB%E5%8A%A1%E5%88%B0%E5%85%A8%E5%B1%80%E5%8D%8F%E4%BD%9C","dateModified":"2026-11-05","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：可组合 Agent 的渐进式落地：从 RN 任务到全局协作，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/%E5%8F%AF%E7%BB%84%E5%90%88%20Agent%20%E7%9A%84%E6%B8%90%E8%BF%9B%E5%BC%8F%E8%90%BD%E5%9C%B0%EF%BC%9A%E4%BB%8E%20RN%20%E4%BB%BB%E5%8A%A1%E5%88%B0%E5%85%A8%E5%B1%80%E5%8D%8F%E4%BD%9C","about":["_hidden","coding-agent 方案"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>可组合 Agent 的渐进式落地：从 RN 任务到全局协作</h1><h1>可组合 Agent 的渐进式落地：从 RN 任务到全局协作</h1>
+<h2>一、背景</h2>
+<p>当前 Coding Agent 将需求拆成阶段链，每个阶段生成交接物，下游读取后继续执行。流程明确，但容易把非必要等待固化进去；上下文逐级加工，错误累积，上游变化又带来大范围重跑。</p>
+<p>完全交给自由对话，可以灵活调整步骤；但缺少显式执行结构时，依赖、状态、责任和变化影响难以确认，运行经验也不容易复用。</p>
+<p>需要同时具备两种能力：</p>
+<pre><code class="language-text">按任务组织工作：选择能力、整理依赖、允许并行与修订
+让过程能够检查：来源、输入输出、操作、验证与人工决定可回查
+</code></pre>
+<p>方案从 RN 局部任务开始，逐步扩展到 FE Code Agent，再支持跨场景的全局能力协作。每次扩展都保留同一套组合与验证原则。</p>
+<h2>二、核心思路</h2>
+<pre><code class="language-text">共享能力目录：Tool / Agent / 已验证 Flow
+                         ↓ 按需求查询
+需求 + 工程现状与约束 → 候选任务图
+                         ↓ 人工确认
+                在 Agentic 工作区中执行
+                         ↓
+             实际结果、局部验证与整体验收
+                         ↓
+       节点改进 / 编排改进 / 候选 Flow → 后续验证
+                         └──────────→ 能力目录
+</code></pre>
+<p>Agentic 工作区提供可发现、可操作、可验证的工程环境。任务 Agent 在其中查询能力与原始上下文，提出并修订协作图；宿主校验可确定的约束并执行调度；人工确认关键范围、取舍与授权。</p>
+<h3>三种对象分别维护</h3>
+<table>
+<thead>
+<tr>
+<th>对象</th>
+<th>保存什么</th>
+<th>如何变化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>能力目录</td>
+<td>可调用的工具、Agent 与组合能力，其输入输出、边界和验证方式</td>
+<td>随能力实现与验证覆盖更新</td>
+</tr>
+<tr>
+<td>任务图</td>
+<td>本次目标对应的能力实例、输入绑定、依赖与汇合关系</td>
+<td>随信息补齐和执行反馈修订</td>
+</tr>
+<tr>
+<td>Flow 模板</td>
+<td>可复用的组织方法、适用条件、参数和验证依据</td>
+<td>经多次使用、反例与人工 Review 修订</td>
+</tr>
+</tbody>
+</table>
+<p>同一 Agent 可以在任务图中有多个调用实例。确定性操作直接使用工具；已验证 Flow 也能作为一个能力被选择，执行时仍可展开内部结构。</p>
+<p>逻辑呈现可以是树，多上游汇合时使用依赖图。重试与返修作为执行中的反馈关系保留。</p>
+<h2>三、关键机制</h2>
+<h3>1. 用元数据描述能力，按本次任务建立依赖</h3>
+<p>能力最小描述包括：</p>
+<pre><code class="language-text">身份与入口：稳定 ID、调用位置、维护责任
+适用范围：解决什么问题，需要什么输入和环境
+输出约定：产生什么结果，什么情况属于未完成
+操作边界：读写对象、权限、外部副作用与资源占用
+验证方式：如何检查结果，已有证据覆盖哪些条件
+</code></pre>
+<p>Skill 提供执行策略，Tool 承担可确定的操作，Agent 处理需要推理的工作。它们按实际职责组合，不要求每一步都创建一个 Agent。</p>
+<p>依赖从本次调用需要什么推导：</p>
+<pre><code class="language-text">所需信息或结果尚缺 → 查找能够提供它的能力
+输入已有且可核查   → 直接使用，不重复执行上游
+资源写入可能冲突   → 串行或隔离
+存在多个可行组合   → 比较适用性、风险与成本
+</code></pre>
+<p>例如，RN UI 使用 Fixture 时，不必等待真实接口；但两个工作同时修改同一 worktree，即使没有数据依赖，也不能直接并行。</p>
+<p>元数据支持生成候选关系。参数含义、单位、业务前提或资源隔离不明确时，需要调查或确认，不能只凭字段同名判定可组合。</p>
+<h3>2. 候选图允许局部可执行</h3>
+<pre><code class="language-text">任务目标
+├─ 已明确、可验证部分 → 形成可执行子图
+└─ 信息不足部分       → 保留目标与等待条件
+
+新信息到达 → 补齐或修订相关子图
+</code></pre>
+<p>人工先确认目标覆盖、关键依赖、写入与权限范围、风险和主要取舍。节点可以保持适度粒度，避免为“完整规划”先制造一轮长篇阶段产物。</p>
+<p>宿主检查调用入口、输入结构、循环依赖、资源冲突和执行授权。图结构合法与人工批准都不证明实现正确，实际结果仍需验证。</p>
+<p>执行中，范围内的普通修复可以继续；改变目标、扩大权限或调整重要方案时，只提交相关变化重新确认。</p>
+<h3>3. 全过程可查询，按需要展开</h3>
+<pre><code class="language-text">主任务视图：目标、图状态、结果、阻塞与变化
+                            ↓ 查询
+节点记录：原始输入、采用能力、操作、diff、输出、验证与反馈
+                            ↓ 回查
+工作区：实际工程、原始来源、知识与环境
+</code></pre>
+<p>主 Agent 能查到授权范围内的全过程，不必每轮加载全部日志。子 Agent 同样能回查全局目标与相关原始来源，避免只获得一段多次加工的指令。</p>
+<p>初期可使用本地文件承载：</p>
+<pre><code class="language-text">agent-space/
+├── capabilities/                 自描述能力与调用入口
+├── flows/                        候选与已确认的组合能力
+└── tasks/&lt;task&gt;/
+    ├── AGENTS.md                 工作区导航与操作规则
+    ├── task.md                   本次目标、验收、决定与未知项
+    ├── graph.json                当前任务图，确认与修订留存
+    ├── sources/                  原始需求、设计、契约与反馈
+    ├── repos/                    真实工程与隔离工作树
+    ├── knowledge/                相关约定、索引与 Skills
+    ├── evidence/                 命令、测试、截图和人工验收
+    └── history/                  输入、执行状态、变化与结果关联
+</code></pre>
+<p>这些是组织关系，已有来源和工程可以引用或挂载。执行状态与可读视图由记录统一更新，避免多个参与者各自维护一份相互矛盾的流程真相。</p>
+<h3>4. 节点验证与整体验收分开</h3>
+<pre><code class="language-text">节点约定 → 实际执行 → 局部验证
+                         ↓
+            上下游组合检查与目标验收
+</code></pre>
+<p>节点输出通过结构检查，只说明格式可消费；局部测试通过，只覆盖对应状态；整张图还要检查是否满足原始需求及组合行为。</p>
+<p>生成能力可以提出测试，但不能通过改写验收要求证明自身正确。验证器也不是天然可靠：保留检查来源、实际输出、人工纠正和已知覆盖边界。</p>
+<p>复用 Flow 时重新执行本次验证，复用的是方法与组织方式，不是历史结果。</p>
+<h3>5. 反馈同时改进节点与编排</h3>
+<pre><code class="language-text">结果或人工反馈
+├─ 节点没有完成约定工作 → 改 Agent、Skill、工具或环境
+├─ 输入不充分、依赖错误 → 改编排与上下文供给
+├─ 局部通过、组合失败   → 检查接口、共享假设与集成验证
+└─ 无法区分原因         → 保留未知，补证或做局部对照
+</code></pre>
+<p>每次记录实际采用的能力内容、输入条件、行为和验收结果。成功、失败、无效重试与人工纠正都进入分析，最终成功不能直接归功于全部节点。</p>
+<p>单次记录先描述观测；跨多次使用再总结适用条件、收益与反例。多项变化无法隔离时保留无法归因，不自动修改所有参与 Agent。</p>
+<p>候选图、人工改图理由和执行中的重规划也保留，后续用于改进任务 Agent 的能力选择与编排方法，避免只留下最后成功的路径。</p>
+<h3>6. 从任务图沉淀高阶能力</h3>
+<pre><code class="language-text">实际任务图
+  → 提炼可复用部分
+  → 明确参数、适用条件、依赖和验证
+  → 人工 Review + 后续 Case 检查
+  → 可复用 Flow
+  → 被更高层任务继续组合
+</code></pre>
+<p>高阶 Flow 与底层能力使用相同的对外描述，保留可展开的内部图、来源节点和证据。组合后的权限与副作用也要显式呈现，不能藏在一个名称后面。</p>
+<p>Flow 支持参数、条件分支和可替换节点。匹配条件不足时可以局部展开、修订，或重新规划，避免把一次成功路径固化成所有需求的必经链。</p>
+<p>能力实现或描述改变后，相关 Flow 标为待复验；已有独立能力仍可使用。运行中的任务保留本次采用依据，关键入口撤销或权限失效时停止受影响执行。</p>
+<h2>四、从 RN 到 FE，再到全局</h2>
+<p>推进的是能力覆盖与协作规模，新体系独立建立。旧工程提供真实代码、知识、命令与试验条件，不把原阶段图整体包装为不可展开的大节点。</p>
+<p>从 RN 起就保留共同的能力描述、调用结果和证据引用约定。后续增加能力与环境适配，沿用这些边界；暂时用人工或本地脚本实现的部分，可以在验证后替换为自动服务。</p>
+<h3>第一阶段：RN 局部任务</h3>
+<p><strong>目标：证明一个能力组合能执行、能验证、能接收反馈。</strong></p>
+<pre><code class="language-text">RN 目标 + 工程
+     ↓
+查询少量能力，生成候选图
+     ↓
+人工确认范围
+     ↓
+RN 实现能力 → 验证能力 → 当前候选 Review
+     ↑             │
+     └──── 修复反馈 ┘
+</code></pre>
+<p>起步只需一个实现 Agent 和一个可真实执行的验证入口。实现内部允许自主调查、修改和自检，验证可以是确定性工具，不必另建一个 Agent。</p>
+<p>能力描述先人工校准；任务图由 Agent 提出，人工确认。宿主可以先顺序执行，保留输入、工程状态、结果与反馈，无需先建完整注册平台和通用调度引擎。</p>
+<p>首批任务选择已有测试可以检查的局部修改。RN 运行与视觉能力尚未提供时，明确验收边界，不能把代码检查视为视觉还原通过。</p>
+<p>**扩展条件：**普通修复和人工反馈能在原任务中继续；失败、未知与通过有实际依据；能够解释组合结果，并在后续任务复用至少一种已验证方法。</p>
+<h3>第二阶段：FE Code Agent 协作</h3>
+<p><strong>目标：验证多种能力之间的真实依赖、资源隔离和局部更新。</strong></p>
+<p>逐步加入设计理解、UI 实现、契约检查、数据适配和集成验证等能力，不要求每项都先拆成独立 Agent：</p>
+<pre><code class="language-text">需求 + FE 工程环境
+├─ 设计与组件 → UI + Fixture → UI 验证 ──────┐
+├─ 契约就绪 → 数据适配 → 接口检查 ──────────┼→ 集成验收
+└─ 验收要求 → 对应测试与检查 ───────────────┘
+</code></pre>
+<p>任务 Agent 根据当前信息构图，UI 无需等待所有后端材料。新增契约或人工评论进入原任务，只修订受影响部分；必要条件缺失时保留等待，不猜测真实接口。</p>
+<p>同仓库先串行写入，确认独立性后再用隔离 worktree 或资源锁安排并行。后续工作依赖的是明确结果或代码状态，不自动把“前一个 MR 合并”作为所有工作的共同前置。</p>
+<p>阶段内可以提炼“Fixture 下页面实现”“契约到展示映射”等局部 Flow，分别注明交付范围。完整需求的整体验收仍独立检查。</p>
+<p>**扩展条件：**上游变化能够定位消费者并正确复验；独立分支不会因无关阻塞停滞；节省的等待与重复工作没有换来更多冲突和漏验。</p>
+<h3>第三阶段：全局能力协作</h3>
+<p><strong>目标：跨工程与业务场景复用能力和组合，而非重新建立一条全局流水线。</strong></p>
+<pre><code class="language-text">全局能力目录
+├─ RN 能力与 Flow
+├─ Web / BFF / 测试能力与 Flow
+└─ 测试造数等业务能力与 Flow
+              ↓ 按目标查询、展开和组合
+         跨场景任务图
+              ↓
+       各自工作区执行与验证
+              ↓
+       组合结果与全局目标验收
+</code></pre>
+<p>这一阶段再补充跨服务身份、环境、数据语义、维护责任和访问策略。目录先返回相关能力摘要，主 Agent 按需要读取详细契约与内部图。</p>
+<p>不同系统中的“用户 ID”“环境”“金额”等不能因名称相同就直接传递；必要时使用明确适配。创建数据、推送代码或发布等副作用分别授权，组合能力不自动扩大调用方权限。</p>
+<p>已有 Flow 可以成为高层任务的一片叶子，主 Agent 仍可展开查看输入、节点、证据和失败位置。高阶组合有自己的验收和适用条件，不能因各部分分别可用就自动确认。</p>
+<p>**扩展条件：**跨环境和权限边界明确，组合失败能找到责任与证据，能力变化可以传播到引用它的组合；满足这些条件后再扩大自动执行范围。</p>
+<h2>五、避免推进过程中重新变复杂</h2>
+<table>
+<thead>
+<tr>
+<th>风险</th>
+<th>起步策略</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>为每个步骤都创建一个 Agent</td>
+<td>按是否需要独立推理与上下文决定，机械步骤使用工具</td>
+</tr>
+<tr>
+<td>必须先完整构图才能开始</td>
+<td>允许确认并执行已明确子图，未知目标后续展开</td>
+</tr>
+<tr>
+<td>元数据很多却不可信</td>
+<td>从少量真实能力校准，描述与实现、验证关联维护</td>
+</tr>
+<tr>
+<td>图越长，归因越模糊</td>
+<td>保留节点、边和整体三层证据，按明确问题做局部验证</td>
+</tr>
+<tr>
+<td>成功一次就沉淀固定流水线</td>
+<td>先作候选，补充适用条件、反例和后续验证</td>
+</tr>
+<tr>
+<td>一开始就建多层 Creator</td>
+<td>人工先完成提炼与 Review，稳定操作再固化为 Skill</td>
+</tr>
+</tbody>
+</table>
+<p>上下文组织、编排策略、验证方式和能力描述都随使用逐步长出来。优先增加能够解决实际缺口的最小机制，保留撤回无收益改动的空间。</p>
+<h2>六、怎样判断推进有效</h2>
+<p>每阶段既检查最终结果，也观察过程：</p>
+<pre><code class="language-text">任务效果：验收结果、返工、未验证项与成本
+能力效果：实际采用、行为变化、结果及证据
+编排效果：等待、无效调用、依赖错误、冲突与重做范围
+复用效果：后续任务的规划与执行成本、收益和退化
+</code></pre>
+<p>早期以有证据的使用记录和人工 Review 为主。具备可恢复场景后，再做局部对照与回归；不要求为评价一次改动反复重跑完整小时级任务。</p>
+<p>Flow、Agent 和生成组合的方法分别接受反馈。真正稳定的组合留下来，暂时没有收益或引入退化的部分收窄、修订或撤回。</p>
+<h2>关联方案</h2>
+<ul>
+<li><a href="./%E4%BB%8E%E4%B8%B2%E8%A1%8C%E4%BA%A4%E6%8E%A5%E5%88%B0%E6%8C%81%E7%BB%AD%E5%8D%8F%E4%BD%9C%EF%BC%9ACoding%20Agent%20%E7%9A%84%E4%BB%BB%E5%8A%A1%E5%B7%A5%E4%BD%9C%E5%8C%BA%E8%AE%BE%E8%AE%A1.md">开发工作区的 Agentic 化</a>：为能力与任务图提供共同工程环境。</li>
+<li><a href="./%E6%B5%8B%E8%AF%95%E9%80%A0%E6%95%B0%20Agent%20%E6%8A%80%E6%9C%AF%E6%96%B9%E6%A1%88%EF%BC%9A%E4%BB%8E%E5%B7%A5%E5%85%B7%E6%A3%AE%E6%9E%97%E5%88%B0%E5%8F%AF%E5%A4%8D%E7%94%A8%E4%B8%9A%E5%8A%A1%E8%83%BD%E5%8A%9B.md">测试造数 Agent 技术方案：从工具森林到可复用业务能力</a>：工具描述、验证配对与组合能力生长。</li>
+<li><a href="./material-first/Agent%20%E6%94%B9%E8%BF%9B%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%EF%BC%9A%E4%BB%BB%E5%8A%A1%E4%BF%AE%E8%AE%A2%E4%B8%8E%E7%9F%A5%E8%AF%86%E6%BC%94%E8%BF%9B%E6%9C%BA%E5%88%B6.md">Agent 改进工作空间：任务修订与知识演进机制</a>：节点、知识和提炼方法的反馈积累。</li>
+<li><a href="./material-first/%E8%AF%84%E4%BC%B0%E4%B8%96%E7%95%8C%E8%90%83%E5%8F%96%EF%BC%9A%E4%B8%8E%20Skill%20%E5%8D%8F%E5%90%8C%E6%BC%94%E8%BF%9B%E7%9A%84%E9%AA%8C%E8%AF%81%E6%9C%BA%E5%88%B6.md">评估世界萃取：与 Skill 协同演进的验证机制</a>：后续从任务中选择可恢复的评估场景。</li>
+</ul>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-hrWi8eyo.js"></script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>自己写一个 Computer Use MCP：像素、无障碍、API 三条路怎么配合？ | LZ AI NOTE</title>
+  <meta name="description" content="&lt;! 写作锚点 读者收获：能自己写出一个带三条通道的 Computer Use MCP，并说清每条通道的信息单位、依赖、失败模式，知道什么场景该走哪条。 核心判断：Computer Use 不是“用截图模拟人”，而是给同一份世界状态的三层不同表示——像素给广度，无障碍给精度，应用 API 给语义。真实实现是三者的组合，工程判断在于选路。 如何推进：先搭最小…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="自己写一个 Computer Use MCP：像素、无障碍、API 三条路怎么配合？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-11-06">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E8%87%AA%E5%B7%B1%E5%86%99%E4%B8%80%E4%B8%AA%20Computer%20Use%20MCP%EF%BC%9A%E5%83%8F%E7%B4%A0%E3%80%81%E6%97%A0%E9%9A%9C%E7%A2%8D%E3%80%81API%20%E4%B8%89%E6%9D%A1%E8%B7%AF%E6%80%8E%E4%B9%88%E9%85%8D%E5%90%88%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E8%87%AA%E5%B7%B1%E5%86%99%E4%B8%80%E4%B8%AA%20Computer%20Use%20MCP%EF%BC%9A%E5%83%8F%E7%B4%A0%E3%80%81%E6%97%A0%E9%9A%9C%E7%A2%8D%E3%80%81API%20%E4%B8%89%E6%9D%A1%E8%B7%AF%E6%80%8E%E4%B9%88%E9%85%8D%E5%90%88%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="自己写一个 Computer Use MCP：像素、无障碍、API 三条路怎么配合？ | LZ AI NOTE">
+  <meta property="og:description" content="&lt;! 写作锚点 读者收获：能自己写出一个带三条通道的 Computer Use MCP，并说清每条通道的信息单位、依赖、失败模式，知道什么场景该走哪条。 核心判断：Computer Use 不是“用截图模拟人”，而是给同一份世界状态的三层不同表示——像素给广度，无障碍给精度，应用 API 给语义。真实实现是三者的组合，工程判断在于选路。 如何推进：先搭最小…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E8%87%AA%E5%B7%B1%E5%86%99%E4%B8%80%E4%B8%AA%20Computer%20Use%20MCP%EF%BC%9A%E5%83%8F%E7%B4%A0%E3%80%81%E6%97%A0%E9%9A%9C%E7%A2%8D%E3%80%81API%20%E4%B8%89%E6%9D%A1%E8%B7%AF%E6%80%8E%E4%B9%88%E9%85%8D%E5%90%88%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"自己写一个 Computer Use MCP：像素、无障碍、API 三条路怎么配合？","description":"\u003c! 写作锚点 读者收获：能自己写出一个带三条通道的 Computer Use MCP，并说清每条通道的信息单位、依赖、失败模式，知道什么场景该走哪条。 核心判断：Computer Use 不是“用截图模拟人”，而是给同一份世界状态的三层不同表示——像素给广度，无障碍给精度，应用 API 给语义。真实实现是三者的组合，工程判断在于选路。 如何推进：先搭最小…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E8%87%AA%E5%B7%B1%E5%86%99%E4%B8%80%E4%B8%AA%20Computer%20Use%20MCP%EF%BC%9A%E5%83%8F%E7%B4%A0%E3%80%81%E6%97%A0%E9%9A%9C%E7%A2%8D%E3%80%81API%20%E4%B8%89%E6%9D%A1%E8%B7%AF%E6%80%8E%E4%B9%88%E9%85%8D%E5%90%88%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E8%87%AA%E5%B7%B1%E5%86%99%E4%B8%80%E4%B8%AA%20Computer%20Use%20MCP%EF%BC%9A%E5%83%8F%E7%B4%A0%E3%80%81%E6%97%A0%E9%9A%9C%E7%A2%8D%E3%80%81API%20%E4%B8%89%E6%9D%A1%E8%B7%AF%E6%80%8E%E4%B9%88%E9%85%8D%E5%90%88%EF%BC%9F","dateModified":"2026-11-06","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：自己写一个 Computer Use MCP：像素、无障碍、API 三条路怎么配合？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E8%87%AA%E5%B7%B1%E5%86%99%E4%B8%80%E4%B8%AA%20Computer%20Use%20MCP%EF%BC%9A%E5%83%8F%E7%B4%A0%E3%80%81%E6%97%A0%E9%9A%9C%E7%A2%8D%E3%80%81API%20%E4%B8%89%E6%9D%A1%E8%B7%AF%E6%80%8E%E4%B9%88%E9%85%8D%E5%90%88%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>自己写一个 Computer Use MCP：像素、无障碍、API 三条路怎么配合？</h1><!-- 写作锚点
+读者收获：能自己写出一个带三条通道的 Computer Use MCP，并说清每条通道的信息单位、依赖、失败模式，知道什么场景该走哪条。
+核心判断：Computer Use 不是“用截图模拟人”，而是给同一份世界状态的三层不同表示——像素给广度，无障碍给精度，应用 API 给语义。真实实现是三者的组合，工程判断在于选路。
+如何推进：先搭最小 MCP 与假桌面，把三条通道都实现出来并跑通；用真机切换暴露两条权限边界（屏幕录制、辅助功能），其中包括“事件提交成功但被丢弃”；最后收在通道选择与三段式结构上。
+-->
+<h1>自己写一个 Computer Use MCP：像素、无障碍、API 三条路怎么配合？</h1>
+<p>很多人对 Computer Use 的印象是&quot;截图 + 让模型点坐标&quot;。</p>
+<p>这只说对了一条路。真实的 Computer Use 是一个综合体，至少有三条通道：</p>
+<pre><code class="language-text">像素通道      截图 + 点击坐标
+无障碍通道    系统暴露的元素树 + 按名称触发
+API / 脚本    应用自己暴露的语义动作
+</code></pre>
+<p>三者不是三个不同的世界，而是同一份状态暴露给模型的三层不同表示：像素最通用，无障碍最精确，API 最有语义。</p>
+<p>这篇文章直接从零把这套东西写出来。读完你会有一个能跑的 Computer Use MCP，也会知道三条路各自在哪、什么时候不该用。</p>
+<h2>一、先定契约：MCP 只规定怎么说话</h2>
+<p>MCP 解决的是传输与描述：工具名、参数 schema、返回结构。它不关心&quot;点哪里&quot;。</p>
+<p>所以契约得我们自己定。把三个通道都摆出来，工具清单是这样的：</p>
+<pre><code class="language-text">screenshot                像素通道：把屏幕编码成图片
+click(x, y)               像素通道：坐标 → 点击事件
+
+ax_tree()                 无障碍通道：读出元素树
+press_element(name)       无障碍通道：名称 → 触发元素
+
+api_increment(n)          API 通道：语义动作，没有坐标、没有按钮
+compare_channels()        自查：列出三条通道在本场景下的可用性
+</code></pre>
+<p>宽度也重要。三条通道同时暴露给模型，它才有得选——这是&quot;能组合&quot;的前提。</p>
+<p>还有一条容易漏的：<strong>观察工具必须把坐标系一起返回</strong>。<code>(167, 328)</code> 离开坐标系就不是动作，只是两个数。</p>
+<h2>二、假桌面：让三种粒度可以被直接看见</h2>
+<p>真机截图需要权限，写文章时我试了一下：</p>
+<pre><code class="language-text">$ screencapture -x -t png /private/tmp/probe.png
+could not create image from display
+</code></pre>
+<p>没有屏幕录制授权，连&quot;看一眼&quot;都不行。这会干扰学习，所以先做一个确定性的假桌面，但必须保住真实世界的三个结构特征：</p>
+<pre><code class="language-text">状态只在服务端   模型看不到，只能通过工具拿
+动作改状态       改完必须重新观察才知道结果
+坐标与图同源     算出来的坐标要能落到真实像素
+</code></pre>
+<p>画一个 800x480 的计数器，目标 3、当前 0。关键设计是：<strong>同一个状态，用三种方式都能读、都能改。</strong></p>
+<pre><code class="language-js">// 通道一：像素。坐标进，状态出
+clickPixel(x, y) { ... }
+
+// 通道二：无障碍。系统给出角色、名称、frame 和可执行动作
+accessibilityTree() {
+  return { role: 'window', name: 'Counter', children: [
+    { role: 'staticText', name: 'current', value: String(state.value) },
+    { role: 'button', name: '+1', frame: {...}, actions: ['press'] },
+  ]};
+}
+
+// 通道三：API。没有坐标，没有按钮，只有领域动作
+apiIncrement(n) { state.value += n; ... }
+</code></pre>
+<p>注意无障碍树里的 <code>frame</code>。它和像素通道的坐标数值可以一样，来源却完全不同：<strong>那里是系统给的事实，这里是模型猜的估计。</strong> 这个区别就是第二条通道存在的全部理由。</p>
+<h2>三、服务端：三个观察者，三种动作</h2>
+<h3>像素通道</h3>
+<p>截图工具的关键在返回结构——图片必须作为 MCP 的 <code>image</code> content 回去：</p>
+<pre><code class="language-js">server.registerTool('screenshot', {
+  description: '截取当前屏幕。返回 width/height，之后的 click 坐标必须落在这个范围内。',
+  annotations: { readOnlyHint: true },
+}, async () =&gt; {
+  const buf = desk.render();
+  return {
+    content: [
+      { type: 'text', text: `截图：${W}x${H}。` },
+      // 这一行是分水岭：内容一旦以 content 进入本轮上下文，模型才算真的&quot;看见&quot;。
+      { type: 'image', data: buf.toString('base64'), mimeType: 'image/png' },
+    ],
+    structuredContent: { width: W, height: H, ...desk.snapshot() },
+  };
+});
+</code></pre>
+<p>动作侧，坐标校验是闸门：</p>
+<pre><code class="language-js">if (x &lt; 0 || y &lt; 0 || x &gt;= W || y &gt;= H) {
+  return { content: [{ type: 'text', text: `坐标 (${x}, ${y}) 超出画面，动作被拒绝。` }], isError: true };
+}
+</code></pre>
+<h3>无障碍通道</h3>
+<p>无障碍树返回的是结构，不是图片。模型按名字找元素，不用算坐标：</p>
+<pre><code class="language-js">server.registerTool('ax_tree', {
+  description: '读取无障碍树：带角色、名称、当前值和可执行动作。比截图精确，但自绘控件可能是空的。',
+  annotations: { readOnlyHint: true },
+}, async () =&gt; {
+  const nodes = flatten(desk.accessibilityTree());
+  return { content: [{ type: 'text', text: renderAsLines(nodes) }], structuredContent: { nodes } };
+});
+</code></pre>
+<p>触发也不需要坐标：</p>
+<pre><code class="language-js">server.registerTool('press_element', {
+  inputSchema: { name: z.string().describe('无障碍元素名称，如 +1') },
+}, async ({ name }) =&gt; {
+  const res = desk.pressElement(name);
+  // 名字不存在时明确失败，而不是&quot;点了个空的&quot;
+  return { isError: !res.ok, content: [{ type: 'text', text: res.ok ? `已触发 &quot;${name}&quot;` : `失败：${res.reason}。没有发出任何动作。` }] };
+});
+</code></pre>
+<h3>API 通道</h3>
+<p>这条最有意思：模型完全不接触界面。</p>
+<pre><code class="language-js">server.registerTool('api_increment', {
+  description: '应用暴露的领域动作：把计数器加 n。没有坐标、没有按钮，只有一个业务操作。',
+  inputSchema: { n: z.number().int().positive() },
+}, async ({ n }) =&gt; {
+  const res = desk.apiIncrement(n);
+  ...
+});
+</code></pre>
+<p><code>n</code> 必须是正整数这件事，由 schema 在模型之外强制。这就是窄参数的价值：<strong>能被校验的意图，才是可执行的意图。</strong></p>
+<h2>四、三条通道各走一遍</h2>
+<p>客户端把&quot;模型该做的判断&quot;写成固定策略，只为了证明闭环成立：</p>
+<pre><code class="language-js">await client.callTool({ name: 'screenshot', arguments: {} });
+await client.callTool({ name: 'click', arguments: { x: 167, y: 328 } });   // 像素
+await client.callTool({ name: 'press_element', arguments: { name: '+1' } }); // 无障碍
+await client.callTool({ name: 'api_increment', arguments: { n: 1 } });     // API
+</code></pre>
+<p>实测输出，可以看到同一个计数器被三条不同的路推到了 3：</p>
+<pre><code class="language-text">[1] 截图 1：800x480
+   像素通道 click → 点击落在 inc 上，当前值 1/3。
+   无障碍树 → window &quot;Counter&quot; | staticText &quot;current&quot; 值=1 | button &quot;+1&quot; 动作=[press]
+   无障碍通道 → 已通过无障碍通道触发 &quot;+1&quot;，当前值 2/3。
+   API 通道 → +1 已生效，当前值 3/3。
+[4] 截图 4：800x480
+</code></pre>
+<p>四条通道都可用时，这张自查表可以交给模型自己判断：</p>
+<pre><code class="language-text">pixel  可用=true  单位=坐标 (x, y)        依赖=从图中估算位置        失败=图看不清 / 点空 / 算错坐标
+ax     可用=true  单位=元素名称 + 动作     依赖=系统暴露无障碍信息     失败=自绘控件查不到元素
+api    可用=true  单位=业务动作 + 参数     依赖=应用主动暴露接口       失败=接口不覆盖该操作
+</code></pre>
+<h2>五、三条通道的失败，都不能静默</h2>
+<p>每条通道的失败模式都不一样，但有一条共同要求：<strong>失败必须说清是哪种失败。</strong></p>
+<pre><code class="language-text">无障碍找不到元素 → 无障碍通道失败：没有名为 &quot;不存在&quot; 的可操作元素。没有发出任何动作。
+API 参数非法     → MCP error -32602: Too small: expected number to be &gt;0 at n
+点空白           → 点击落在空白处 (600, 430)，没有命中任何控件，当前值 3/3。
+坐标越界         → 坐标 (9999, 10) 超出画面 800x480，动作被拒绝。坐标没有发出。
+</code></pre>
+<p>四条里有三条 <code>isError=true</code>，一条不是——点空白时点击确实发出了，只是没命中。</p>
+<p>把这个区分讲透，就是闭环的验收标准：<strong>每一次动作之后，模型都要能分清&quot;做到了&quot;“没做到”“根本没发出去”。</strong> 三种状态混在一起，它就会开始瞎猜。</p>
+<h2>六、切到真机：两条权限，两种沉默</h2>
+<p>假桌面跑通之后，换真机后端。截图用系统 <code>screencapture</code>，无障碍用 <code>AXUIElement</code>，点击用 CoreGraphics 事件。然后立刻撞墙，而且是两种不同的墙。</p>
+<p><strong>第一种墙：截图失败，但失败得很诚实。</strong></p>
+<pre><code class="language-text">[1] 截图失败（exit=1）。这是观察通道断了，不是屏幕为空。
+stderr: could not create image from display
+这类失败通常是系统权限未授予：终端或宿主进程需要在&quot;屏幕录制&quot;里被勾选。
+</code></pre>
+<p><strong>第二种墙：无障碍通道整体被关掉。</strong></p>
+<pre><code class="language-text">AXIsProcessTrusted = False
+读取返回 -25204（ax_api_disabled — 进程未获得辅助功能授权，整棵无障碍树都读不到）
+这不是界面为空，是这条通道整体被关掉了。
+</code></pre>
+<p>注意 <code>-25204</code> 和&quot;界面没有元素&quot;是完全不同的两件事。如果把&quot;通道被关&quot;和&quot;这里没东西&quot;混为一谈，模型会得出一个错误结论：我看到了一个空界面。</p>
+<p><strong>第三种墙最阴险：点击成功，但什么都没发生。</strong></p>
+<p>这一条我没有预料到。<code>CGEventPost</code> 提交事件后返回成功，可是光标纹丝不动：</p>
+<pre><code class="language-json">{
+  &quot;ok&quot;: true,
+  &quot;posted&quot;: true,
+  &quot;cursorAfter&quot;: { &quot;x&quot;: 0, &quot;y&quot;: 0 },
+  &quot;landed&quot;: false,
+  &quot;note&quot;: &quot;事件提交成功，但光标没有移动——通常是辅助功能未授权，事件被系统丢弃。&quot;
+}
+</code></pre>
+<p>没有异常，没有错误码，只有一个 <code>posted: true</code>。</p>
+<p>如果工具在这里返回&quot;已点击&quot;，模型就会基于一个假事实继续往下走——它以为点了，其实什么都没点。这和我们平时说的&quot;模型幻觉&quot;是两回事：<strong>幻觉是模型编的，这一条是我们给的。</strong></p>
+<p>所以真机后端里加了唯一能做的一步自查：提交后回读光标位置，比对目标坐标，把 <code>landed</code> 一起返回。修好之后，工具在没权限时明确报错，而不是撒谎。</p>
+<p>三条墙合起来就是 Computer Use 的第一原理：<strong>它的能力上限由操作系统给不给权限决定，不由模型多聪明决定。</strong> 而两条通道是两套独立权限——屏幕录制和辅助功能，经常只给了一半，于是&quot;能看不能动&quot;或&quot;能读不能点&quot;。</p>
+<h2>七、回头看：为什么一定是这三条</h2>
+<p>写到这儿可以收口了。三条通道不是设计出来的巧合，是三种不同信息源的必然结果。</p>
+<pre><code class="language-text">像素通道    信息单位是坐标        最通用的兼容层：只要有屏幕就能用
+无障碍通道  信息单位是元素和动作   系统替你回答&quot;这是什么、能做什么&quot;
+API 通道    信息单位是业务动作     应用直接回答&quot;这意味着什么&quot;
+</code></pre>
+<p>越往下，信息越接近语义，也越稳：坐标会算错，元素可能查不到，但 <code>+1</code> 这个动作不会理解错。</p>
+<p>代价同样清楚：<strong>越语义化，覆盖面越窄。</strong> API 通道只在应用愿意暴露时存在；无障碍通道只在界面有结构时存在；只有像素通道什么都能点，也什么都可能点错。</p>
+<p>所以真实实现从不是三选一。工程判断就在于选路：</p>
+<pre><code class="language-text">有 API        优先 API，最稳、最省 token
+有结构界面     用无障碍，按名称操作，避免坐标误差
+都没有         退到像素，接受它的不确定，靠截图回环纠正
+</code></pre>
+<p>对照三家官方实现，主干完全一致，差别只在坐标表示、工具集数量和记忆放在哪：</p>
+<pre><code class="language-text">OpenAI CUA        截图观察，动作走 computer_call，坐标先归一化再映射回真实分辨率
+Anthropic         一个 client 工具集（screenshot / left_click / type / zoom…），宿主机执行每次调用
+Gemini            应用带截图请求，模型返回动作，应用执行后再截图
+</code></pre>
+<p>至于&quot;应用主动暴露动作&quot;这条路，你其实已经很熟了——MCP 工具本身就是 API 通道的标准化形态。WebMCP 那一类探索，则是在把浏览器页面也变成可以注册动作的地方。</p>
+<h2>最后，一张图记住</h2>
+<pre><code class="language-text">像素     截图 + 坐标      最通用，最不确定，靠回环纠错
+无障碍   元素 + 动作      最精确，依赖系统暴露，自绘控件会失效
+API      动作 + 参数      最有语义，只在应用愿意暴露时存在
+
+三者共同点：
+  观察要带坐标系
+  动作要窄到可校验
+  失败要说清是哪一种失败
+</code></pre>
+<p>一个 Computer Use MCP 的代码量比想象中小。真正花时间的从来不是写完这些工具，而是后面这些不性感的部分：三条通道各自失败时的报错语义、截图缩放后的坐标映射、长任务里的状态压缩，以及一开始就撞上的那两道权限边界。</p>
+<p>可运行代码在仓库 <code>sub-project/computer-use-mcp/</code>：<code>src/server.mjs</code> 是服务端（三条通道都在里面），<code>src/simulator.mjs</code> 是假桌面，<code>src/smoke.mjs</code> 是一次跑通三条通道的自测，<code>src/screen.mjs</code>、<code>src/actions.mjs</code> 是真机驱动。<code>npm run smoke</code> 直接复现上面那段输出，<code>CU_TARGET=real</code> 复现权限那三段。</p>
+<h2>参考资料</h2>
+<ol>
+<li>Model Context Protocol，官方文档（工具、content 类型与传输）：<a href="https://modelcontextprotocol.io">https://modelcontextprotocol.io</a></li>
+<li>Apple，AXUIElement（无障碍元素与可执行动作）：<a href="https://developer.apple.com/documentation/applicationservices/axuielement_h">https://developer.apple.com/documentation/applicationservices/axuielement_h</a></li>
+<li>Apple，Quartz Event Services（CGEvent 与事件发送）：<a href="https://developer.apple.com/documentation/coregraphics/quartz-event-services">https://developer.apple.com/documentation/coregraphics/quartz-event-services</a></li>
+<li>OpenAI，Computer use 指南（坐标映射与 <code>computer_call</code>）：<a href="https://developers.openai.com/api/docs/guides/tools-computer-use">https://developers.openai.com/api/docs/guides/tools-computer-use</a></li>
+<li>Anthropic，Computer use tool（client 工具集与执行循环）：<a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool">https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool</a></li>
+<li>Google，Computer use（Gemini API）：<a href="https://ai.google.dev/gemini-api/docs/computer-use">https://ai.google.dev/gemini-api/docs/computer-use</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质。复杂的事情，简单说。</em></p>
+<h2>往期推荐</h2>
+<ul>
+<li><a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E6%93%8D%E4%BD%9C%E7%94%B5%E8%84%91%E6%97%B6%EF%BC%8C%E5%AE%83%E7%9C%8B%E5%88%B0%E7%9A%84%E7%9C%9F%E6%98%AF%E6%88%91%E4%BB%AC%E7%9C%8B%E5%88%B0%E7%9A%84%E7%95%8C%E9%9D%A2%E5%90%97%EF%BC%9F.md">AI 操作电脑时，它看到的真是我们看到的界面吗？</a></li>
+<li><a href="./AI%20%E5%8F%AA%E4%BC%9A%E8%BE%93%E5%87%BA%E6%96%87%E5%AD%97%EF%BC%8C%E6%80%8E%E4%B9%88%E5%B0%B1%E8%83%BD%E8%87%AA%E5%B7%B1%E6%93%8D%E4%BD%9C%E7%94%B5%E8%84%91%EF%BC%9F.md">AI 只会输出文字，怎么就能自己操作电脑？</a></li>
+<li><a href="./WebMCP%EF%BC%9A%E7%94%A8%E6%88%B7%E9%80%89%E5%A5%BD%E7%9A%84%E8%AE%A2%E5%8D%95%EF%BC%8CAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%A6%81%E8%87%AA%E5%B7%B1%E6%89%BE%EF%BC%9F.md">WebMCP：用户选好的订单，AI 为什么还要自己找？</a></li>
+</ul>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-hrWi8eyo.js"></script>
+</body>
+</html>

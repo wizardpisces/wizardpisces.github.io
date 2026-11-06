@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>AI 只会输出文字，怎么就能自己操作电脑？ | LZ AI NOTE</title>
+  <meta name="description" content="&lt;! 写作锚点 读者收获：能说清 Computer Use 的四个部件——会看图的模型、动作协议、观察—行动—再观察的循环、隔离的执行环境，并理解难点为什么落在定位、延迟和安全上，而不是循环本身。 核心判断：AI 操作电脑不是模型长出了一只手，而是外界替它搭了一套手眼。模型只负责理解与决策，精确位置、状态记录和权限控制被交给了更合适的部件。 如何推进：从“…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="AI 只会输出文字，怎么就能自己操作电脑？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-11-06">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E5%8F%AA%E4%BC%9A%E8%BE%93%E5%87%BA%E6%96%87%E5%AD%97%EF%BC%8C%E6%80%8E%E4%B9%88%E5%B0%B1%E8%83%BD%E8%87%AA%E5%B7%B1%E6%93%8D%E4%BD%9C%E7%94%B5%E8%84%91%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E5%8F%AA%E4%BC%9A%E8%BE%93%E5%87%BA%E6%96%87%E5%AD%97%EF%BC%8C%E6%80%8E%E4%B9%88%E5%B0%B1%E8%83%BD%E8%87%AA%E5%B7%B1%E6%93%8D%E4%BD%9C%E7%94%B5%E8%84%91%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="AI 只会输出文字，怎么就能自己操作电脑？ | LZ AI NOTE">
+  <meta property="og:description" content="&lt;! 写作锚点 读者收获：能说清 Computer Use 的四个部件——会看图的模型、动作协议、观察—行动—再观察的循环、隔离的执行环境，并理解难点为什么落在定位、延迟和安全上，而不是循环本身。 核心判断：AI 操作电脑不是模型长出了一只手，而是外界替它搭了一套手眼。模型只负责理解与决策，精确位置、状态记录和权限控制被交给了更合适的部件。 如何推进：从“…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E5%8F%AA%E4%BC%9A%E8%BE%93%E5%87%BA%E6%96%87%E5%AD%97%EF%BC%8C%E6%80%8E%E4%B9%88%E5%B0%B1%E8%83%BD%E8%87%AA%E5%B7%B1%E6%93%8D%E4%BD%9C%E7%94%B5%E8%84%91%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"AI 只会输出文字，怎么就能自己操作电脑？","description":"\u003c! 写作锚点 读者收获：能说清 Computer Use 的四个部件——会看图的模型、动作协议、观察—行动—再观察的循环、隔离的执行环境，并理解难点为什么落在定位、延迟和安全上，而不是循环本身。 核心判断：AI 操作电脑不是模型长出了一只手，而是外界替它搭了一套手眼。模型只负责理解与决策，精确位置、状态记录和权限控制被交给了更合适的部件。 如何推进：从“…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E5%8F%AA%E4%BC%9A%E8%BE%93%E5%87%BA%E6%96%87%E5%AD%97%EF%BC%8C%E6%80%8E%E4%B9%88%E5%B0%B1%E8%83%BD%E8%87%AA%E5%B7%B1%E6%93%8D%E4%BD%9C%E7%94%B5%E8%84%91%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E5%8F%AA%E4%BC%9A%E8%BE%93%E5%87%BA%E6%96%87%E5%AD%97%EF%BC%8C%E6%80%8E%E4%B9%88%E5%B0%B1%E8%83%BD%E8%87%AA%E5%B7%B1%E6%93%8D%E4%BD%9C%E7%94%B5%E8%84%91%EF%BC%9F","dateModified":"2026-11-06","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：AI 只会输出文字，怎么就能自己操作电脑？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/AI%20%E5%8F%AA%E4%BC%9A%E8%BE%93%E5%87%BA%E6%96%87%E5%AD%97%EF%BC%8C%E6%80%8E%E4%B9%88%E5%B0%B1%E8%83%BD%E8%87%AA%E5%B7%B1%E6%93%8D%E4%BD%9C%E7%94%B5%E8%84%91%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>AI 只会输出文字，怎么就能自己操作电脑？</h1><!-- 写作锚点
+读者收获：能说清 Computer Use 的四个部件——会看图的模型、动作协议、观察—行动—再观察的循环、隔离的执行环境，并理解难点为什么落在定位、延迟和安全上，而不是循环本身。
+核心判断：AI 操作电脑不是模型长出了一只手，而是外界替它搭了一套手眼。模型只负责理解与决策，精确位置、状态记录和权限控制被交给了更合适的部件。
+如何推进：从“点一个按钮”这一次操作进入，先解决输入（截图）与输出（动作协议），再把它放进循环；然后依次追问长任务状态、执行环境与表示层，最后收回四部件分工。
+-->
+<h1>AI 只会输出文字，怎么就能自己操作电脑？</h1>
+<p>你让 AI 帮你买一样东西。</p>
+<p>它打开网页，找到“立即购买”，点了下去。对你来说这是两秒的事。</p>
+<p>可模型没有手。它接受的输入是文字，吐出来的也是文字，甚至不知道鼠标长什么样。</p>
+<p>那最后，屏幕上那个按钮为什么真的被点中了？</p>
+<p>答案不是“AI 有了自己的电脑”。是有一整套东西，把模型输出的文字翻译成屏幕上的动作，再把屏幕的变化翻译回文字交给它看。这套东西通常被称作 Computer Use。</p>
+<p>这一篇，就从这一次点击开始，把它一层一层拆开。</p>
+<h2>一、模型没有手，只能把动作说出来</h2>
+<p>模型处理的是 token。要让它操作电脑，第一步就绕不开：怎么把屏幕变成它能读的东西。</p>
+<p>答案朴素得有点意外——截图。</p>
+<p>一张截图就是一张图片，而现在的多模态模型恰好能直接看图。屏幕上的按钮、输入框、弹窗，于是全都变成模型输入里的一块像素。</p>
+<p>这里有个容易被忽略的限制：模型看到的是一帧，不是一段视频。它没有实时的眼睛，只有一张张独立的画面。所以每做一步，都得重新截一张图递过去，让它知道现在屏幕上是什么样子。</p>
+<p>截图也只是它能看到的表示之一，并不等于“它看到了我们看到的界面”。这一点在<a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E6%93%8D%E4%BD%9C%E7%94%B5%E8%84%91%E6%97%B6%EF%BC%8C%E5%AE%83%E7%9C%8B%E5%88%B0%E7%9A%84%E7%9C%9F%E6%98%AF%E6%88%91%E4%BB%AC%E7%9C%8B%E5%88%B0%E7%9A%84%E7%95%8C%E9%9D%A2%E5%90%97%EF%BC%9F.md">《AI 操作电脑时，它看到的真是我们看到的界面吗？》</a>里单独展开过。</p>
+<p>输出这一侧同样受限。模型不能说“我点了”，只能输出“请点击某个位置”。换句话说，它把动作“说”出来，交给外面的程序去执行。</p>
+<p>于是有了一套约定俗成的动作协议。常见的不外乎这几个：</p>
+<pre><code class="language-text">点击    输入    按键    滚动
+拖拽    等待    截图    ……
+</code></pre>
+<p>不同平台的清单和命名不完全一样，但都在做同一件事：把一次操作描述成一条可以执行的数据。</p>
+<p>以 OpenAI 的接口为例，一次调用大概是这个形状：</p>
+<pre><code class="language-json">{
+  &quot;type&quot;: &quot;computer_call&quot;,
+  &quot;action&quot;: { &quot;type&quot;: &quot;click&quot;, &quot;x&quot;: 523, &quot;y&quot;: 318 }
+}
+</code></pre>
+<p>注意，这条消息里没有任何东西被执行。模型只是产生了一份“我希望点这里”的说明。真正按下鼠标的，是它之外的程序。</p>
+<h2>二、坐标不是随便写的两个数字</h2>
+<p>模型说 <code>(523, 318)</code>，程序要把它变成一个真实的屏幕坐标，中间还有一步换算。</p>
+<p>不同平台的做法不一样。有的直接给截图上的像素坐标；有的先归一化成相对坐标——例如把宽和高都映射到 0 到 1000 的整数，再由执行器按真实分辨率换算回去。OpenAI 的文档就专门提醒：如果你把截图缩小过，执行动作前要把模型给出的坐标映射回环境本身的坐标系。</p>
+<p>真正难的不是这套换算，而是模型要指得准。</p>
+<pre><code class="language-text">模型认出：
+“最下面是登录按钮。”            ← 容易
+
+模型指出：
+“按钮的左边界在第 90 列，
+  上边界在第 500 行……”           ← 容易偏
+</code></pre>
+<p>认出“这是什么”，允许位置、大小和样式变化；指出“它在哪里”，却必须保留精确边界。小图标、密集列表、长得几乎一样的按钮，都会让这一步漂移。这个缺口在<a href="./%E6%A8%A1%E5%9E%8B%E8%83%BD%E5%8F%AB%E5%87%BA%E6%8C%89%E9%92%AE%E7%9A%84%E5%90%8D%E5%AD%97%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8C%87%E4%B8%8D%E5%87%86%E5%AE%83%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.md">《模型能叫出按钮的名字，为什么指不准它在哪里？》</a>里展开过。</p>
+<p>一种常见的补法是：把“报坐标”换成“选编号”。系统先用检测器把可操作区域框出来，画上编号，模型只需要回答点哪个编号，再由程序查表得到坐标。精确位置来自前面的检测器，模型只负责在有限候选里做选择。这套做法见<a href="./%E7%BB%99%E6%8C%89%E9%92%AE%E7%94%BB%E4%B8%8A%E6%A1%86%E5%92%8C%E7%BC%96%E5%8F%B7%EF%BC%8C%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E7%AA%81%E7%84%B6%E6%8C%87%E5%BE%97%E6%9B%B4%E5%87%86%E4%BA%86%EF%BC%9F.md">《给按钮画上框和编号，模型为什么突然指得更准了？》</a>。</p>
+<p>定位问题没有被消灭，只是被挪到了更适合的部件上。</p>
+<h2>三、一次动作不算任务，要把它变成循环</h2>
+<p>到这里，模型有了眼睛（一张截图），也能产出一条可执行的动作。但这只是一个回合。</p>
+<p>真正让它变成“能干活”的，是把这个回合放进一个循环：</p>
+<pre><code class="language-text">截取当前屏幕
+      ↓
+模型看懂界面、决定下一步
+      ↓
+环境执行动作
+      ↓
+重新截图  ←──────────┐
+      ↓               │
+  回到第一步 ─────────┘
+</code></pre>
+<p>为什么非要闭环？因为模型看不到自己动作的后果。它点了按钮，页面会不会跳转、会不会弹窗、内容加载完了没有——这些只有下一张截图才能回答。</p>
+<p>这也是它和“一次问答”最本质的区别：问答说完就结束，循环会一直转，直到任务完成，或者步数耗尽。各家平台的文档几乎都会写同一句提醒：把 computer use 放在一个循环里运行。</p>
+<h2>四、从一步到几十步，它凭什么不迷路</h2>
+<p>一个真实任务很少只有一步。订一张票、填一份表，动辄几十步。</p>
+<p>每一步都要重新截图、重新推理，所以模型必须记住三件事：原本要做什么、已经走到了哪一步、之前哪条路走不通。</p>
+<p>这份记忆，说到底就是它的上下文窗口。任务目标、已完成步骤、失败的尝试，都塞在里面。</p>
+<p>于是长任务最怕两件事：一是越走越偏却浑然不觉，二是反复踩进同一个坑。工程上的对策也很朴素——把大任务拆成可确认的子目标，设置最大步数及时止损，失败时退回上一个稳定状态重来。</p>
+<p>OSWorld 这类基准衡量的正是这一段：在 Ubuntu、Windows、macOS 的真实网页与桌面应用里完成开放式任务，而不是回答一个问题。</p>
+<h2>五、模型之外还有一层：谁来真正动手</h2>
+<p>再说清楚一次：模型自己碰不到你的电脑。</p>
+<p>它全程只输出“点这里”“输入这些字”这样的文字。真正动手的是另一层，一个跑着浏览器和桌面的虚拟机或容器，也就是它的手。</p>
+<pre><code class="language-text">模型  →  动作  →  环境执行  →  新截图  →  回到模型
+        （一次网络往返）
+</code></pre>
+<p>这条链路是串行的，每转一圈都要一次网络往返。这也解释了它为什么慢：人点一下是一瞬间，Agent 点一下是一次推理加一次往返。</p>
+<p>把这层单独隔离出来，首要目的是安全。哪怕模型真的乱点，破坏也被关在一个与真实设备隔开的沙箱里。</p>
+<h2>六、不是所有 Agent 都靠“看”</h2>
+<p>“截图加坐标”只是其中一条路。</p>
+<p>另一条路绕开画面，直接读网页的 DOM 树或无障碍树，拿到一份元素清单，然后说，点第 12 个元素。它更准、更快，但只在有结构可读的场景里成立——主要是网页。</p>
+<p>这也不是万能的。无障碍树和 DOM 只暴露了系统愿意暴露的那一层；很多桌面软件和画布应用根本没有这样一层结构。所以现实中更常见的是混合：截图负责看清样子，结构信息负责精确定位。</p>
+<p>Agent 看见的，始终是系统暴露给它的那层表示，而不是我们眼里那块屏幕。</p>
+<h2>七、所以它今天还是很难</h2>
+<p>原理讲完，难点全在细节里。</p>
+<pre><code class="language-text">定位   小图标、密集布局、低清截图，误差都会被放大
+延迟   每一步一次推理加一次往返，几十步叠起来是分钟级
+幻觉   模型可能“以为”自己点了，其实什么也没发生
+安全   网页里的诱导性文字可能骗它做危险操作；
+       涉及登录、支付的动作，通常必须停下来等人确认
+</code></pre>
+<p>Anthropic 的文档也在显眼位置提醒：当前 computer use 的延迟，和人类直接操作相比仍然偏慢。这四条里，任何一条没处理好，用户看到的结果都一样——它又卡住了。</p>
+<h2>最后，回到那个按钮</h2>
+<p>把这一次点击拆开，能看到四个角色：</p>
+<pre><code class="language-text">模型      看懂界面、决定下一步
+动作协议  把决定变成可执行的数据
+循环      执行、再观察、再纠正
+执行环境  真正动手，并把破坏关起来
+</code></pre>
+<p>模型只做它擅长的那部分：理解用户想干什么，然后在有限选项里做选择。精确位置、状态记录、权限控制，都被交给了更合适的部件。</p>
+<p>所以“AI 会操作电脑”不是模型突然长出了一只手。是有人替它搭了一套手眼，再让它在一个循环里一点点逼近目标。</p>
+<p>原理可以压成一句话：会看图的模型，加一套动作协议，放进观察、行动、再观察的循环，跑在一层隔离的执行环境里。循环本身并不复杂，难的是让循环里的每一步都足够准、足够快、足够安全。</p>
+<h2>参考资料</h2>
+<ol>
+<li>OpenAI，Computer-Using Agent（CUA）：<a href="https://openai.com/index/computer-using-agent/">https://openai.com/index/computer-using-agent/</a></li>
+<li>OpenAI，Computer use 指南（API 文档）：<a href="https://developers.openai.com/api/docs/guides/tools-computer-use">https://developers.openai.com/api/docs/guides/tools-computer-use</a></li>
+<li>Anthropic，Developing a computer use model：<a href="https://www.anthropic.com/research/developing-computer-use">https://www.anthropic.com/research/developing-computer-use</a></li>
+<li>Anthropic，Computer use tool（Claude 平台文档）：<a href="https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool">https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool</a></li>
+<li>Google，Computer use（Gemini API 文档）：<a href="https://ai.google.dev/gemini-api/docs/computer-use">https://ai.google.dev/gemini-api/docs/computer-use</a></li>
+<li>Xie 等，OSWorld: Benchmarking Multimodal Agents for Open-Ended Tasks in Real Computer Environments（NeurIPS 2024）：<a href="https://arxiv.org/abs/2404.07972">https://arxiv.org/abs/2404.07972</a></li>
+<li>Yang 等，Set-of-Mark Prompting Unleashes Extraordinary Visual Grounding in GPT-4V（2023）：<a href="https://arxiv.org/abs/2310.11441">https://arxiv.org/abs/2310.11441</a></li>
+<li>Lu 等，OmniParser for Pure Vision Based GUI Agent（2024）：<a href="https://arxiv.org/abs/2408.00203">https://arxiv.org/abs/2408.00203</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质。复杂的事情，简单说。</em></p>
+<h2>往期推荐</h2>
+<ul>
+<li><a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E6%93%8D%E4%BD%9C%E7%94%B5%E8%84%91%E6%97%B6%EF%BC%8C%E5%AE%83%E7%9C%8B%E5%88%B0%E7%9A%84%E7%9C%9F%E6%98%AF%E6%88%91%E4%BB%AC%E7%9C%8B%E5%88%B0%E7%9A%84%E7%95%8C%E9%9D%A2%E5%90%97%EF%BC%9F.md">AI 操作电脑时，它看到的真是我们看到的界面吗？</a></li>
+<li><a href="./%E6%A8%A1%E5%9E%8B%E8%83%BD%E5%8F%AB%E5%87%BA%E6%8C%89%E9%92%AE%E7%9A%84%E5%90%8D%E5%AD%97%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E6%8C%87%E4%B8%8D%E5%87%86%E5%AE%83%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F.md">模型能叫出按钮的名字，为什么指不准它在哪里？</a></li>
+<li><a href="./%E7%BB%99%E6%8C%89%E9%92%AE%E7%94%BB%E4%B8%8A%E6%A1%86%E5%92%8C%E7%BC%96%E5%8F%B7%EF%BC%8C%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E7%AA%81%E7%84%B6%E6%8C%87%E5%BE%97%E6%9B%B4%E5%87%86%E4%BA%86%EF%BC%9F.md">给按钮画上框和编号，模型为什么突然指得更准了？</a></li>
+<li><a href="./WebMCP%EF%BC%9A%E7%94%A8%E6%88%B7%E9%80%89%E5%A5%BD%E7%9A%84%E8%AE%A2%E5%8D%95%EF%BC%8CAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%A6%81%E8%87%AA%E5%B7%B1%E6%89%BE%EF%BC%9F.md">WebMCP：用户选好的订单，AI 为什么还要自己找？</a></li>
+</ul>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-hrWi8eyo.js"></script>
+</body>
+</html>

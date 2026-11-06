@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Abliteration：模型为什么会拒绝，又为什么能不训练就改变它？ | LZ AI NOTE</title>
+  <meta name="description" content="&lt;! 写作锚点 读者收获：理解拒绝行为的训练背景，以及从隐藏状态差异到投影、权重修改的完整过程。 核心判断：在相关实验条件下，可以估计拒绝相关方向，再通过内部表示或权重干预改变拒绝行为。 如何推进：沿第一份讨论的导语及第一至三部分，先讲过度拒绝与技术来源，再依次解释方向估计、激活消融和权重正交化。 Abliteration：模型为什么会拒绝，又为什么能不训…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="Abliteration：模型为什么会拒绝，又为什么能不训练就改变它？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-11-04">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Abliteration%EF%BC%9A%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E6%8B%92%E7%BB%9D%EF%BC%8C%E5%8F%88%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E4%B8%8D%E8%AE%AD%E7%BB%83%E5%B0%B1%E6%94%B9%E5%8F%98%E5%AE%83%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Abliteration%EF%BC%9A%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E6%8B%92%E7%BB%9D%EF%BC%8C%E5%8F%88%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E4%B8%8D%E8%AE%AD%E7%BB%83%E5%B0%B1%E6%94%B9%E5%8F%98%E5%AE%83%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="Abliteration：模型为什么会拒绝，又为什么能不训练就改变它？ | LZ AI NOTE">
+  <meta property="og:description" content="&lt;! 写作锚点 读者收获：理解拒绝行为的训练背景，以及从隐藏状态差异到投影、权重修改的完整过程。 核心判断：在相关实验条件下，可以估计拒绝相关方向，再通过内部表示或权重干预改变拒绝行为。 如何推进：沿第一份讨论的导语及第一至三部分，先讲过度拒绝与技术来源，再依次解释方向估计、激活消融和权重正交化。 Abliteration：模型为什么会拒绝，又为什么能不训…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Abliteration%EF%BC%9A%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E6%8B%92%E7%BB%9D%EF%BC%8C%E5%8F%88%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E4%B8%8D%E8%AE%AD%E7%BB%83%E5%B0%B1%E6%94%B9%E5%8F%98%E5%AE%83%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Abliteration：模型为什么会拒绝，又为什么能不训练就改变它？","description":"\u003c! 写作锚点 读者收获：理解拒绝行为的训练背景，以及从隐藏状态差异到投影、权重修改的完整过程。 核心判断：在相关实验条件下，可以估计拒绝相关方向，再通过内部表示或权重干预改变拒绝行为。 如何推进：沿第一份讨论的导语及第一至三部分，先讲过度拒绝与技术来源，再依次解释方向估计、激活消融和权重正交化。 Abliteration：模型为什么会拒绝，又为什么能不训…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Abliteration%EF%BC%9A%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E6%8B%92%E7%BB%9D%EF%BC%8C%E5%8F%88%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E4%B8%8D%E8%AE%AD%E7%BB%83%E5%B0%B1%E6%94%B9%E5%8F%98%E5%AE%83%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Abliteration%EF%BC%9A%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E6%8B%92%E7%BB%9D%EF%BC%8C%E5%8F%88%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E4%B8%8D%E8%AE%AD%E7%BB%83%E5%B0%B1%E6%94%B9%E5%8F%98%E5%AE%83%EF%BC%9F","dateModified":"2026-11-04","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：Abliteration：模型为什么会拒绝，又为什么能不训练就改变它？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Abliteration%EF%BC%9A%E6%A8%A1%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BC%9A%E6%8B%92%E7%BB%9D%EF%BC%8C%E5%8F%88%E4%B8%BA%E4%BB%80%E4%B9%88%E8%83%BD%E4%B8%8D%E8%AE%AD%E7%BB%83%E5%B0%B1%E6%94%B9%E5%8F%98%E5%AE%83%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Abliteration：模型为什么会拒绝，又为什么能不训练就改变它？</h1><!-- 写作锚点
+读者收获：理解拒绝行为的训练背景，以及从隐藏状态差异到投影、权重修改的完整过程。
+核心判断：在相关实验条件下，可以估计拒绝相关方向，再通过内部表示或权重干预改变拒绝行为。
+如何推进：沿第一份讨论的导语及第一至三部分，先讲过度拒绝与技术来源，再依次解释方向估计、激活消融和权重正交化。
+-->
+<h1>Abliteration：模型为什么会拒绝，又为什么能不训练就改变它？</h1>
+<p>**Abliteration（消融式去拒绝 / 拒绝机制消除）**是开源大语言模型领域的一种模型编辑技术。它希望做到的是：</p>
+<blockquote>
+<p>在不重新训练整个模型、尽量不破坏模型原有知识和能力的前提下，修改模型内部的参数，使它减少或不再触发某一类拒绝回答的行为。</p>
+</blockquote>
+<p>例如，一个模型原本会拒绝回答某些涉及敏感主题的问题。经过 Abliteration 后，它可能不再拒绝，而是直接生成回答。</p>
+<p>这会引出一个问题：</p>
+<p>模型为什么会拒绝回答？这种拒绝行为究竟是模型天然学出来的，还是可以被定位到模型内部的一组特定方向，并通过数学操作移除？</p>
+<p>Abliteration 展示了一种可能性：模型的部分行为可以通过分析内部表示、直接修改权重来改变，而不需要完整的微调训练。</p>
+<h2>一、为什么会出现 Abliteration？它要解决什么问题？</h2>
+<p>要理解 Abliteration，首先需要理解大语言模型是怎么获得「拒绝能力」的。</p>
+<h3>1. 预训练模型与对齐模型之间的区别</h3>
+<p>一个大语言模型通常经历几个阶段：</p>
+<pre><code class="language-text">阶段 1：预训练（Pre-training）
+从大量文本中学习语言、知识、代码、
+推理模式和文本生成规律
+        ↓
+阶段 2：监督微调（SFT）
+通过指令和示范回答，
+学会按照用户要求回答问题
+        ↓
+阶段 3：偏好对齐（RLHF、DPO 等）
+通过人类偏好、安全数据和奖励信号，
+倾向于产生符合预期的回答，
+并在某些情况下拒绝回答
+        ↓
+最终产品：Chat / Instruct Model
+既能理解和执行指令，
+也具有一定的安全拒绝行为
+</code></pre>
+<p>预训练模型本身并没有一套明确的、独立运行的安全规则引擎。它主要通过学习文本和后续训练，逐渐形成不同的行为倾向。</p>
+<p>比如：</p>
+<ul>
+<li>用户问如何制作蛋糕，模型倾向于给出制作方法。</li>
+<li>用户询问某些危险行为的具体操作，模型可能会拒绝。</li>
+<li>用户询问医学、化学、网络安全等双用途知识，模型可能因为判断不确定而拒绝。</li>
+</ul>
+<p>最后一种情况就产生了一个实际问题。</p>
+<h3>2. 原来的安全机制存在什么问题？</h3>
+<p>这涉及 AI Alignment（人工智能对齐）中的一个矛盾：</p>
+<p>模型既要有能力回答问题，又要有能力判断哪些问题不应该回答。</p>
+<p>现实中，这两种目标并不总是容易兼顾。</p>
+<p>例如：</p>
+<table>
+<thead>
+<tr>
+<th>用户需求</th>
+<th>可能出现的问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>网络安全研究</td>
+<td>把合法的漏洞研究误判为攻击行为</td>
+</tr>
+<tr>
+<td>化学知识学习</td>
+<td>把普通化学知识误判为危险操作</td>
+</tr>
+<tr>
+<td>医学研究</td>
+<td>对正常的医学讨论过度拒绝</td>
+</tr>
+<tr>
+<td>历史与政治研究</td>
+<td>因敏感内容而拒绝正常分析</td>
+</tr>
+<tr>
+<td>小说创作</td>
+<td>把虚构情节误判为现实危险行为</td>
+</tr>
+</tbody>
+</table>
+<p>这被称为 Over-refusal，即过度拒绝。</p>
+<p>它与 Under-refusal（拒绝不足）构成两个方向的问题：</p>
+<ul>
+<li>过度拒绝：应该回答的内容不回答。</li>
+<li>拒绝不足：不应该提供的内容却提供了。</li>
+</ul>
+<p>传统安全训练需要在这两个方向之间寻找平衡。</p>
+<p>不同模型的安全策略、训练数据和目标又不完全相同，这种平衡并不容易控制。</p>
+<h3>3. 为什么不能简单地重新训练模型？</h3>
+<p>假设一个开源模型已经具备很强的代码、数学、推理和专业知识能力，但它的拒绝策略过于激进。</p>
+<p>开发者可能希望：</p>
+<ul>
+<li>保留原模型的知识。</li>
+<li>保留原模型的推理能力。</li>
+<li>减少不必要的拒绝。</li>
+<li>不需要花费大量 GPU 资源重新训练。</li>
+</ul>
+<p>传统微调虽然可以调整模型行为，但有几个问题：</p>
+<ol>
+<li>需要准备高质量训练数据。</li>
+<li>需要训练计算资源和时间。</li>
+<li>可能引入灾难性遗忘（Catastrophic Forgetting）。</li>
+<li>可能改变模型原有的能力分布。</li>
+<li>调整某一种行为时，可能意外影响其他行为。</li>
+</ol>
+<p>因此，研究者开始思考：</p>
+<p>如果拒绝行为只是模型内部某种可以定位的表示，那么能不能只修改这一部分，而不重新训练整个模型？</p>
+<p>这就是 Abliteration 产生的研究背景。</p>
+<h2>二、Abliteration 的技术来源是什么？</h2>
+<p>它建立在三个研究方向之上。</p>
+<h3>1. Mechanistic Interpretability：机制可解释性</h3>
+<p>机制可解释性研究希望回答：</p>
+<p>模型内部到底发生了什么？</p>
+<p>传统深度学习通常把神经网络看成一个黑盒：</p>
+<pre><code class="language-text">输入文本 → 神经网络计算 → 输出文本
+</code></pre>
+<p>但 Transformer 内部包含大量可以分析的中间表示和组件：</p>
+<ul>
+<li>Embedding</li>
+<li>Attention</li>
+<li>MLP</li>
+<li>Residual Stream</li>
+<li>Hidden States</li>
+<li>各层权重矩阵</li>
+</ul>
+<p>研究人员发现，模型内部的一些概念和行为可以在向量空间中表现出来。</p>
+<p>例如，某些内部方向可能与：</p>
+<ul>
+<li>情绪</li>
+<li>语言风格</li>
+<li>特定概念</li>
+<li>角色身份</li>
+<li>拒绝行为</li>
+</ul>
+<p>存在关联。</p>
+<p>于是，研究开始从模型输出，进一步追到它为什么会输出这些内容。</p>
+<h3>2. Activation Steering：激活引导</h3>
+<p>这是另一个基础。</p>
+<p>假设模型内部有一个向量 v，它与某种特定行为有关。</p>
+<p>我们可以在推理过程中人为修改隐藏状态：</p>
+<pre><code class="language-text">h' = h + α × v
+</code></pre>
+<p>其中：</p>
+<ul>
+<li>h：原始隐藏状态。</li>
+<li>v：目标行为对应的方向。</li>
+<li>α：干预强度。</li>
+<li>h’：修改后的隐藏状态。</li>
+</ul>
+<p>如果 v 与某种行为有关，加入它可能让模型更倾向于表现出这种行为。</p>
+<p>这种技术叫 Activation Steering，也叫 Activation Addition。</p>
+<p>它说明：模型行为有可能通过直接操作内部激活来控制。</p>
+<h3>3. Refusal Direction：拒绝方向</h3>
+<p>让 Abliteration 成为一种可重复技术的关键研究，是 2024 年 Andy Arditi 等人发表的论文：</p>
+<p>《Refusal in Language Models Is Mediated by a Single Direction》。</p>
+<p>研究人员在 13 个开源聊天模型上进行实验，模型规模最高达到 72B 参数。</p>
+<p>他们发现：</p>
+<p>在所测试的模型中，拒绝行为可以被一个特定的内部方向显著介导。</p>
+<p>也就是说，模型在面对某些需要拒绝的请求时，内部隐藏状态会沿着特定方向发生变化。</p>
+<p>如果把这个方向从模型内部表示中移除，模型的拒绝行为就会明显减少。</p>
+<p>反过来，如果人为添加这个方向，甚至可以让模型对正常问题也产生拒绝行为。</p>
+<h2>三、Abliteration 究竟是怎么做的？</h2>
+<p>可以把它拆成三个步骤：</p>
+<ol>
+<li>找到模型内部与拒绝行为有关的方向。</li>
+<li>通过数学运算消除这个方向。</li>
+<li>修改模型权重，使这种消除不需要每次推理时额外执行。</li>
+</ol>
+<h3>1. 第一步：找到拒绝方向</h3>
+<p>首先准备两组 Prompt。</p>
+<p><strong>A 组：需要拒绝的请求（Harmful Prompts）</strong></p>
+<p>例如：</p>
+<ul>
+<li>一组明确要求模型协助危险行为的请求。</li>
+<li>一组要求模型生成违规操作指导的请求。</li>
+<li>一组经过整理的、能够稳定触发拒绝行为的测试输入。</li>
+</ul>
+<p><strong>B 组：正常请求（Harmless Prompts）</strong></p>
+<p>例如：</p>
+<ul>
+<li>写一段 Python 程序。</li>
+<li>解释线性代数。</li>
+<li>总结一篇论文。</li>
+<li>解释普通化学知识。</li>
+</ul>
+<p>然后，把两组 Prompt 分别输入同一个模型。</p>
+<p>研究人员除了记录最终生成的文本，还会提取模型内部的 Hidden States（隐藏状态）。</p>
+<p>假设某一层的隐藏状态是：</p>
+<pre><code class="language-text">h：一个包含 d 个数的向量
+</code></pre>
+<p>这里的 d 是模型隐藏维度。</p>
+<p>例如，一个模型的隐藏维度可能是 4096，那么每个 Token 在某一层就可以对应一个 4096 维的向量。</p>
+<p>研究人员分别计算两组 Prompt 的平均隐藏状态：</p>
+<pre><code class="language-text">μH = 拒绝请求隐藏状态之和 ÷ 拒绝样本数
+μS = 正常请求隐藏状态之和 ÷ 正常样本数
+</code></pre>
+<p>其中：</p>
+<ul>
+<li>μH：触发拒绝的 Prompt 的平均表示。</li>
+<li>μS：正常 Prompt 的平均表示。</li>
+</ul>
+<p>然后做差：</p>
+<pre><code class="language-text">r = μH - μS
+</code></pre>
+<p>再进行归一化：</p>
+<pre><code class="language-text">r_unit = r ÷ r 的长度
+</code></pre>
+<p>这个 r_unit，就是研究人员估计出来的拒绝方向（Refusal Direction）。</p>
+<p>可以用二维空间理解这个过程，但实际模型空间通常有数千维，而不是二维。</p>
+<p>正常请求和触发拒绝的请求，在内部表示空间中呈现统计差异。两组平均值的差，可以用来估计与拒绝行为相关的方向。</p>
+<p>这里有个细节：</p>
+<p>研究人员没有让模型学习新的知识，也没有通过反向传播训练模型。</p>
+<p>他们只需要：</p>
+<ul>
+<li>运行模型。</li>
+<li>收集内部激活。</li>
+<li>计算平均值。</li>
+<li>做向量减法。</li>
+</ul>
+<p>所以它的计算成本远低于重新微调一个大模型。</p>
+<h3>2. 第二步：把拒绝方向从隐藏状态中移除</h3>
+<p>现在已经找到了拒绝方向 r_unit。</p>
+<p>接下来要做的是：把隐藏状态中沿着这个方向的分量去掉。</p>
+<p>假设模型某一层的隐藏状态为 h。</p>
+<p>它在拒绝方向上的投影为：</p>
+<pre><code class="language-text">沿拒绝方向的分量 = (h · r_unit) × r_unit
+</code></pre>
+<p>于是，我们可以得到：</p>
+<pre><code class="language-text">h' = h - (h · r_unit) × r_unit
+</code></pre>
+<p>这里的“·”表示向量点积。这就是正交投影（Orthogonal Projection）。</p>
+<p>它的意思是，把向量 h 分解成两部分：</p>
+<ul>
+<li>沿着拒绝方向的部分。</li>
+<li>与拒绝方向垂直的部分。</li>
+</ul>
+<p>然后只保留第二部分。</p>
+<p>从数学角度看：</p>
+<pre><code class="language-text">h' · r_unit = 0
+</code></pre>
+<p>修改后的隐藏状态不再包含沿着这个拒绝方向的分量。</p>
+<p>这就是 Ablation（消融）的基本思想。</p>
+<p>如果在模型推理过程中，对相关层持续进行这种操作，模型就很难再通过这个方向表达原来的拒绝行为。</p>
+<h3>3. 第三步：从修改激活到直接修改模型权重</h3>
+<p>上面讲的是 Activation Ablation，即推理过程中动态修改激活。</p>
+<p>Weight Orthogonalization（权重正交化）则可以把这种操作提前写进模型权重中。</p>
+<p>假设 Transformer 某一层有一个线性映射：</p>
+<pre><code class="language-text">y = W × x
+</code></pre>
+<p>其中：</p>
+<ul>
+<li>x：输入隐藏状态。</li>
+<li>W：权重矩阵。</li>
+<li>y：输出隐藏状态。</li>
+</ul>
+<p>我们希望这个矩阵输出的结果，不再包含拒绝方向。</p>
+<p>可以构造一个投影矩阵：</p>
+<pre><code class="language-text">P = I - r_unit × r_unitᵀ
+</code></pre>
+<p>这里 I 是单位矩阵，ᵀ 表示转置，× 表示矩阵或标量乘法，具体取决于参与运算的对象。</p>
+<p>然后修改权重：</p>
+<pre><code class="language-text">W' = P × W
+</code></pre>
+<p>这样：</p>
+<pre><code class="language-text">y' = W' × x = P × W × x
+</code></pre>
+<p>也就是：</p>
+<pre><code class="language-text">y' = y - (y · r_unit) × r_unit
+</code></pre>
+<p>新的权重矩阵不再输出沿着拒绝方向的分量。</p>
+<p>如果将这个操作应用到相关层中负责写入 Residual Stream 的权重矩阵，就可以将激活层面的干预转化为模型权重层面的修改。</p>
+<p>这意味着：</p>
+<ul>
+<li>不需要每次运行模型时再额外计算拒绝方向。</li>
+<li>不需要重新执行训练。</li>
+<li>修改后的模型文件本身就包含了这种变化。</li>
+<li>加载修改后的模型，就可以直接使用。</li>
+</ul>
+<p>这就是为什么 Abliteration 常被称为一种 Training-free Model Editing 技术。</p>
+<p>不过，实际实现比这个单一矩阵公式更复杂：不同 Transformer 架构的权重布局、残差连接、归一化方式以及各层写入路径，都需要分别处理。</p>
+<p>那么问题来了：它与改提示词、微调有什么区别？只移除一个方向，为什么还可能影响其他能力？</p>
+<h2>参考资料</h2>
+<ol>
+<li>Arditi 等，《Refusal in Language Models Is Mediated by a Single Direction》，NeurIPS，2024：<a href="https://arxiv.org/abs/2406.11717">https://arxiv.org/abs/2406.11717</a></li>
+<li>University of Illinois，《Abliteration: Removing Refusal Behavior from an LLM》：<a href="https://appliedllms.web.illinois.edu/72_Students_Choice/20_abliteration/">https://appliedllms.web.illinois.edu/72_Students_Choice/20_abliteration/</a></li>
+<li>Zou 等，《Representation Engineering: A Top-Down Approach to AI Transparency》，2023：<a href="https://arxiv.org/abs/2310.01405">https://arxiv.org/abs/2310.01405</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质。复杂的事情，简单说。</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-hrWi8eyo.js"></script>
+</body>
+</html>
