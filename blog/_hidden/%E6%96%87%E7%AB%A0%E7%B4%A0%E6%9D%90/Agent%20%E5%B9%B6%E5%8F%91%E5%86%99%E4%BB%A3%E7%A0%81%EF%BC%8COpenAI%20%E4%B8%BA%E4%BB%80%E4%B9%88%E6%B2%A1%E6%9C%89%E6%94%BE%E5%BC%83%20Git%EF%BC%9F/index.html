@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Pando：OpenAI 如何重新设计 Git，让大量 Agent 并发开发 | LZ AI NOTE</title>
+  <meta name="description" content="&lt;! 写作锚点 读者收获：区分固定提交的代码完整性与跨分支的同一时刻视图，理解 Pando 如何通过共享对象包和按 Ref 协调减少重复工作。 核心判断：Pando 保留 Git 的提交模型，减少全仓库协调与逐客户端打包的成本，代价是放宽跨分支快照保证并接受部分冗余传输。 如何推进：先展示完整副本与共享日志的协调成本，再沿一次 Push 说明数据与状态如何…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="Pando：OpenAI 如何重新设计 Git，让大量 Agent 并发开发">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-11-12">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Agent%20%E5%B9%B6%E5%8F%91%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%8COpenAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%9C%89%E6%94%BE%E5%BC%83%20Git%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Agent%20%E5%B9%B6%E5%8F%91%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%8COpenAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%9C%89%E6%94%BE%E5%BC%83%20Git%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="Pando：OpenAI 如何重新设计 Git，让大量 Agent 并发开发 | LZ AI NOTE">
+  <meta property="og:description" content="&lt;! 写作锚点 读者收获：区分固定提交的代码完整性与跨分支的同一时刻视图，理解 Pando 如何通过共享对象包和按 Ref 协调减少重复工作。 核心判断：Pando 保留 Git 的提交模型，减少全仓库协调与逐客户端打包的成本，代价是放宽跨分支快照保证并接受部分冗余传输。 如何推进：先展示完整副本与共享日志的协调成本，再沿一次 Push 说明数据与状态如何…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Agent%20%E5%B9%B6%E5%8F%91%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%8COpenAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%9C%89%E6%94%BE%E5%BC%83%20Git%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Pando：OpenAI 如何重新设计 Git，让大量 Agent 并发开发","description":"\u003c! 写作锚点 读者收获：区分固定提交的代码完整性与跨分支的同一时刻视图，理解 Pando 如何通过共享对象包和按 Ref 协调减少重复工作。 核心判断：Pando 保留 Git 的提交模型，减少全仓库协调与逐客户端打包的成本，代价是放宽跨分支快照保证并接受部分冗余传输。 如何推进：先展示完整副本与共享日志的协调成本，再沿一次 Push 说明数据与状态如何…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Agent%20%E5%B9%B6%E5%8F%91%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%8COpenAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%9C%89%E6%94%BE%E5%BC%83%20Git%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Agent%20%E5%B9%B6%E5%8F%91%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%8COpenAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%9C%89%E6%94%BE%E5%BC%83%20Git%EF%BC%9F","dateModified":"2026-11-12","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：Pando：OpenAI 如何重新设计 Git，让大量 Agent 并发开发，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/Agent%20%E5%B9%B6%E5%8F%91%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%8COpenAI%20%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B2%A1%E6%9C%89%E6%94%BE%E5%BC%83%20Git%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Pando：OpenAI 如何重新设计 Git，让大量 Agent 并发开发</h1><!-- 写作锚点
+读者收获：区分固定提交的代码完整性与跨分支的同一时刻视图，理解 Pando 如何通过共享对象包和按 Ref 协调减少重复工作。
+核心判断：Pando 保留 Git 的提交模型，减少全仓库协调与逐客户端打包的成本，代价是放宽跨分支快照保证并接受部分冗余传输。
+如何推进：先展示完整副本与共享日志的协调成本，再沿一次 Push 说明数据与状态如何拆开，最后通过主干与功能分支的依赖解释一致性取舍，接续包复用和后台整理。
+-->
+<h1>Pando：OpenAI 如何重新设计 Git，让大量 Agent 并发开发</h1>
+<p>OpenAI 的 Pando 项目，解决的是一个看似矛盾的问题：</p>
+<p>Git 本来就支持多个分支并行开发，为什么当大量 Agent 同时操作一个仓库时，Git 服务端反而会成为瓶颈？</p>
+<p>问题不在 Git 的分支模型，而在传统服务端为了维护整个仓库的一致性，引入了过多协调；同时，读取代码时又重复进行了大量计算。</p>
+<p>Pando 主要改了两处：</p>
+<ol>
+<li>写入：从仓库级协调，改为分支级协调。</li>
+<li>读取：从每次重新生成数据包，改为复用已有数据包。</li>
+</ol>
+<p>理解这两个变化，只需要先明确三个概念。</p>
+<h2>一、三个必要概念</h2>
+<p><strong>Commit 是不可变的提交记录</strong>；Branch（例如 <code>main</code>）本质上是一个指向 Commit 的可变指针。</p>
+<pre><code>C1 ← C2 ← C3
+           ↑
+          main
+</code></pre>
+<p>新提交 C4 产生后，Git 不修改 C3，而是创建 C4，再把 <code>main</code> 从 C3 移到 C4。</p>
+<p>因此，多个 Agent 可以同时创建不同的 Commit。真正需要协调的是：它们如何更新共享的分支指针。</p>
+<p><strong>CAS 是一种带条件的原子更新</strong>。</p>
+<p>假设 <code>main</code> 当前指向 C3，两个请求分别想把它更新为 C4、C5。</p>
+<p>CAS 的含义是：只有当前值仍然是 C3，才允许更新。</p>
+<p><strong>Packfile 是 Git 用来打包、压缩多个对象的数据文件。</strong></p>
+<p>Push 时客户端上传 packfile，Fetch 时服务器向客户端传输 packfile。传统服务器通常需要根据每个客户端已有的对象，重新计算并生成适合它的数据包。</p>
+<p>咱现在通过这三个概念支撑下面的架构推导。</p>
+<h2>二、创新一：为什么不同分支需要相互等待？</h2>
+<h3>1. 旧架构的问题：不同分支共享了协调入口</h3>
+<p>假设 H1、H2、H3 各自保存完整仓库，多个 Agent 向不同分支 Push。服务端不能只更新指针，否则 H2 可能知道 <code>main</code> 指向了 <code>C4</code>，却没有相应数据可供 Fetch。</p>
+<p>OpenAI 评估的 3PC（三阶段提交）方案，会复制新增数据、经过多轮协调，并等待多数副本接受更新后再发布。好处是副本可以从本地提供读取，但每次写入也承担了复制、磁盘和通信成本。</p>
+<p>另一种方案使用共享 WAL（预写日志）：先把更新登记到同一个 manifest，再由副本跟进。它减少了发布时与各副本的直接协调，却让所有分支争用同一份清单。一个写入者先更新清单，另一个基于旧清单的写入就得检查并重试。</p>
+<p>即使两个 Agent 更新不同分支，也可能在副本资源或共同发布入口上互相等待。</p>
+<h3>2. Pando 的改法：共享数据，分别更新分支状态</h3>
+<p>Pando 将数据和状态分开保存，服务节点无须各自维护完整仓库：</p>
+<ul>
+<li>Blob Storage：保存客户端上传的 packfile。</li>
+<li>Metadata Store：保存分支指针、分支版本，以及版本对应的数据包和历史依赖。</li>
+</ul>
+<p>Agent A 向 <code>feature-A</code> Push 新提交 <code>A1</code> 时，Pando：</p>
+<ol>
+<li>接收并校验 packfile，把它保存到 Blob Storage。</li>
+<li>在元数据事务中记录新的分支版本，包含 <code>A1</code>、包的位置和历史依赖。</li>
+<li>在同一事务中原子更新 <code>feature-A</code> 的指针。</li>
+</ol>
+<p>对应关系可以简化为：</p>
+<pre><code class="language-text">feature-A → Version 12 → Commit A1
+Version 12 → Packfile P12 + 历史依赖
+</code></pre>
+<p>另一个节点处理 Fetch 时，查询元数据，找到所需包及其依赖，让客户端从共享存储或缓存下载。完整代码由共享存储保存，服务节点无须先同步一整份本地仓库。</p>
+<p>Agent B 更新 <code>feature-B</code>，修改的是另一条分支记录，不必与 Agent A 争抢全局 manifest。同一 Ref 的竞争仍用 CAS 保护；共享的 Metadata Store 和 Blob Storage 也必须能够水平扩展，避免成为新的集中瓶颈。</p>
+<h3>3. 放弃了什么，为什么通常可以接受？</h3>
+<p>Pando 放宽的是跨分支的同一时刻视图，不是代码完整性。假设 <code>feature-A</code> 从主干 <code>C1</code> 分出，推进到 <code>A2</code>，而主干已经走到 <code>C3</code>：</p>
+<pre><code class="language-text">C1 -- C2 -- C3  main
+  \-- A1 -- A2  feature-A
+</code></pre>
+<p>获取 <code>A2</code> 时，Pando 根据依赖记录，帮助客户端取齐 <code>A1</code> 和基础 <code>C1</code> 等所需历史，但不要求同时把 <code>main</code> 更新到 <code>C3</code>。两个客户端在 Fetch 协商过程中可能看到：</p>
+<pre><code class="language-text">甲：main = C2，feature-A = A2
+乙：main = C3，feature-A = A1
+</code></pre>
+<p>对测试固定提交 <code>A2</code> 的 Agent 和 CI，通常只需保证这个版本及其历史完整，不需要所有分支共享同一个观察时间。Pando 的因果一致性模型保留了单个 Ref 的更新顺序和版本依赖，以放宽整体视图换取更少的协调；确实需要全仓库一致快照的工具则要另作适配。</p>
+<h2>三、创新二：为什么 Fetch 不再重新生成 packfile？</h2>
+<p>解决写入问题后，还有一个更大的读取问题。</p>
+<p>假设 1000 个 CI 任务同时 Fetch 同一个分支。</p>
+<p>传统 Git 服务需要根据每个客户端的 <code>have</code>（已经拥有的提交）和 <code>want</code>（需要的提交），计算两者之间缺少哪些对象，再生成 packfile。</p>
+<p>不同客户端已有的历史可能不同，所以服务器可能要反复执行相似的计算和打包工作。</p>
+<p>但这些客户端需要的数据高度重叠。</p>
+<p>Pando 从已经上传的数据包入手：</p>
+<p>既然 Push 时已经收到 packfile，为什么 Fetch 时不能直接复用？</p>
+<p>于是它把 Push 上传的 packfile 存入 Blob Storage。Fetch 时，服务器根据客户端的 <code>have</code> 和 <code>want</code>，查询元数据，找到能够覆盖所需历史的已有 packfile，再把下载地址交给客户端。</p>
+<p>数据由 Express 服务分发，并通过区域缓存加速。</p>
+<p>这就把读取过程从：</p>
+<pre><code>计算差集 → 重新打包 → 传输
+</code></pre>
+<p>变成：</p>
+<pre><code>查询元数据 → 选择已有 packfile → 下载
+</code></pre>
+<p>不同客户端的历史不同，Push 时产生的 packfile 又该怎么供其他客户端直接复用？</p>
+<p>Pando 会控制 Push 时向客户端公布哪些已有分支。</p>
+<p>传统 Git 服务通常公布较多 Ref，让客户端知道服务器已经有哪些对象，从而尽可能减少上传数据。</p>
+<p>但 Pando 默认主要公布一个指定的 trunk 分支作为基础。</p>
+<p>这意味着客户端创建 feature 分支的 packfile 时，会把 trunk 之外的相关历史也包含进去。</p>
+<p>结果是：packfile 可能有一些重复对象，但它对其他拥有相同 trunk 历史的客户端更容易复用。</p>
+<p>两种做法的取舍是：</p>
+<ul>
+<li>传统方式：尽量减少上传数据，但服务器可能需要为每个客户端重新生成 packfile。</li>
+<li>Pando：允许上传一些重复对象，换取 packfile 能被更多客户端共享。</li>
+</ul>
+<p>OpenAI 披露，在其 monorepo 中，这种方式产生的 packfile 中位数小于 20 KiB，99 分位小于 3 MiB。对他们的工作负载来说，这个额外成本可以接受。</p>
+<h2>四、为什么还需要 Compaction？</h2>
+<p>每次 Push 都产生一个 packfile。如果客户端几天没有 Fetch，可能需要下载成千上万个小文件。</p>
+<p>因此 Pando 引入后台 Compaction：把多个小 packfile 合并成更大的覆盖范围，减少 Fetch 时需要处理的文件数量，同时改善压缩效率。</p>
+<p>它借鉴了 LSM Tree 的分层合并思路，在这里的作用是：</p>
+<p>写入阶段快速追加，读取阶段复用，后台再负责整理。</p>
+<p>这也意味着 Pando 不必为了让每次读取都高效，而在 Push 的同步路径上执行大量整理工作。</p>
+<p>（对 LSM Tree 细节感兴趣的可以查看之前文章《数据库为什么不直接修改旧数据？从 LSM Tree 到 Agent 的 Git 服务》）</p>
+<h2>五、这套架构的核心取舍</h2>
+<table>
+<thead>
+<tr>
+<th>传统方案的瓶颈</th>
+<th>Pando 的改变</th>
+<th>代价</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>不同分支共享协调过程</td>
+<td>每个 Ref 独立更新</td>
+<td>放弃仓库级全局快照</td>
+</tr>
+<tr>
+<td>每个客户端重新生成 packfile</td>
+<td>复用已有 packfile</td>
+<td>可能上传、下载重复对象</td>
+</tr>
+<tr>
+<td>历史 packfile 越来越多</td>
+<td>后台 Compaction</td>
+<td>增加后台整理和索引复杂度</td>
+</tr>
+</tbody>
+</table>
+<p>OpenAI 公布的结果是：Push 中位延迟降低近 5 倍，每天传输接近 1 PB Git 数据，高峰一小时超过 57 TB，超过 99% 的数据传输字节来自本地磁盘缓存。</p>
+<p>Pando 最值得借鉴的思想，是重新判断系统究竟需要保证什么。</p>
+<p>传统架构倾向于让整个仓库保持全局一致，并为每个客户端实时生成专属数据。</p>
+<p>Pando 的选择是：</p>
+<ul>
+<li>不同分支不需要共享一个更新顺序。</li>
+<li>单个分支的历史完整，比整个仓库的全局快照更重要。</li>
+<li>已经生成的数据包可以重复利用，不必为每个客户端重新计算。</li>
+</ul>
+<p>它让 Git 服务提速的办法，是减少系统为提供传统保证而承担的工作。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-CbCUy5N4.js"></script>
+</body>
+</html>

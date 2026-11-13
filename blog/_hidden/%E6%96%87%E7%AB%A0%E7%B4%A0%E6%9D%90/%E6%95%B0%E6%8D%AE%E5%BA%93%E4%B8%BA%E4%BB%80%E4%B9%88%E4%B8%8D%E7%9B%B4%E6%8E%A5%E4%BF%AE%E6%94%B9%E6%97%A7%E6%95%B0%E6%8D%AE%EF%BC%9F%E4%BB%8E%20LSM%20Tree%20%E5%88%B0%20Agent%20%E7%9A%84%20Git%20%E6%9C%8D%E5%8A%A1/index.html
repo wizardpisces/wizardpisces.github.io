@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>数据库为什么不直接修改旧数据？从 LSM Tree 到 Agent 的 Git 服务 | LZ AI NOTE</title>
+  <meta name="description" content="&lt;! 写作锚点 读者收获：能沿用户积分的写入、查询与合并过程理解 LSM Tree，并看出快速写入背后增加了哪些成本。 核心判断：LSM Tree 将零散更新先记录下来，再用有序文件批量整理，把维护磁盘布局的工作从每次写入转移到后台。 如何推进：从直接修改积分出发，依次遇到零散写入、内存写满、多文件查询的问题，用同一个例子推导后台合并，最后简述 Pando…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="数据库为什么不直接修改旧数据？从 LSM Tree 到 Agent 的 Git 服务">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-11-12">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%9B%B4%E6%8E%A5%E4%BF%AE%E6%94%B9%E6%97%A7%E6%95%B0%E6%8D%AE%EF%BC%9F%E4%BB%8E%20LSM%20Tree%20%E5%88%B0%20Agent%20%E7%9A%84%20Git%20%E6%9C%8D%E5%8A%A1">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%9B%B4%E6%8E%A5%E4%BF%AE%E6%94%B9%E6%97%A7%E6%95%B0%E6%8D%AE%EF%BC%9F%E4%BB%8E%20LSM%20Tree%20%E5%88%B0%20Agent%20%E7%9A%84%20Git%20%E6%9C%8D%E5%8A%A1">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="数据库为什么不直接修改旧数据？从 LSM Tree 到 Agent 的 Git 服务 | LZ AI NOTE">
+  <meta property="og:description" content="&lt;! 写作锚点 读者收获：能沿用户积分的写入、查询与合并过程理解 LSM Tree，并看出快速写入背后增加了哪些成本。 核心判断：LSM Tree 将零散更新先记录下来，再用有序文件批量整理，把维护磁盘布局的工作从每次写入转移到后台。 如何推进：从直接修改积分出发，依次遇到零散写入、内存写满、多文件查询的问题，用同一个例子推导后台合并，最后简述 Pando…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%9B%B4%E6%8E%A5%E4%BF%AE%E6%94%B9%E6%97%A7%E6%95%B0%E6%8D%AE%EF%BC%9F%E4%BB%8E%20LSM%20Tree%20%E5%88%B0%20Agent%20%E7%9A%84%20Git%20%E6%9C%8D%E5%8A%A1">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"数据库为什么不直接修改旧数据？从 LSM Tree 到 Agent 的 Git 服务","description":"\u003c! 写作锚点 读者收获：能沿用户积分的写入、查询与合并过程理解 LSM Tree，并看出快速写入背后增加了哪些成本。 核心判断：LSM Tree 将零散更新先记录下来，再用有序文件批量整理，把维护磁盘布局的工作从每次写入转移到后台。 如何推进：从直接修改积分出发，依次遇到零散写入、内存写满、多文件查询的问题，用同一个例子推导后台合并，最后简述 Pando…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%9B%B4%E6%8E%A5%E4%BF%AE%E6%94%B9%E6%97%A7%E6%95%B0%E6%8D%AE%EF%BC%9F%E4%BB%8E%20LSM%20Tree%20%E5%88%B0%20Agent%20%E7%9A%84%20Git%20%E6%9C%8D%E5%8A%A1","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%9B%B4%E6%8E%A5%E4%BF%AE%E6%94%B9%E6%97%A7%E6%95%B0%E6%8D%AE%EF%BC%9F%E4%BB%8E%20LSM%20Tree%20%E5%88%B0%20Agent%20%E7%9A%84%20Git%20%E6%9C%8D%E5%8A%A1","dateModified":"2026-11-12","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：数据库为什么不直接修改旧数据？从 LSM Tree 到 Agent 的 Git 服务，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%9B%B4%E6%8E%A5%E4%BF%AE%E6%94%B9%E6%97%A7%E6%95%B0%E6%8D%AE%EF%BC%9F%E4%BB%8E%20LSM%20Tree%20%E5%88%B0%20Agent%20%E7%9A%84%20Git%20%E6%9C%8D%E5%8A%A1","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>数据库为什么不直接修改旧数据？从 LSM Tree 到 Agent 的 Git 服务</h1><!-- 写作锚点
+读者收获：能沿用户积分的写入、查询与合并过程理解 LSM Tree，并看出快速写入背后增加了哪些成本。
+核心判断：LSM Tree 将零散更新先记录下来，再用有序文件批量整理，把维护磁盘布局的工作从每次写入转移到后台。
+如何推进：从直接修改积分出发，依次遇到零散写入、内存写满、多文件查询的问题，用同一个例子推导后台合并，最后简述 Pando 的应用并引出下一篇。
+-->
+<h1>数据库为什么不直接修改旧数据？从 LSM Tree 到 Agent 的 Git 服务</h1>
+<p>更新一条数据，最自然的想法是：找到旧记录，把它改掉。</p>
+<p>但在一些数据库里，新值写进去了，旧值却还留在磁盘上。过一阵子，后台才把它们整理掉。</p>
+<p>为什么要绕这一步？</p>
+<p>从一个保存用户积分的数据库开始，就能逐步推导出 LSM Tree。</p>
+<h2>一、先从“直接修改”开始</h2>
+<p>假设有一亿个用户，数据放不进内存，主要保存在磁盘上：</p>
+<pre><code class="language-text">用户编号 → 积分
+1001 → 80
+1002 → 60
+1003 → 90
+……
+</code></pre>
+<p>现在不断收到更新：</p>
+<pre><code class="language-text">把 1002 的积分设为 65
+把 8000 的积分设为 120
+把 1002 的积分设为 70
+</code></pre>
+<p>每次找到原位置修改，就要访问这些用户所在的数据页。它们可能分布在磁盘的不同位置，持续的零散更新会带来大量分散的磁盘读写。</p>
+<p><strong>能不能先收下更新，攒成一批，再集中写出去？</strong></p>
+<h2>二、先记下来，暂时不改旧数据</h2>
+<p>每来一条更新，先追加到磁盘日志末尾：</p>
+<pre><code class="language-text">1002 → 65
+8000 → 120
+1002 → 70
+</code></pre>
+<p>这样不用每次去找旧位置。</p>
+<p>但查询时怎么办？为了知道 1002 的最新积分，总不能每次都读完整份日志。</p>
+<p>可以同时在内存里维护一张能按编号查找的有序表。先忽略历史快照，只看当前值：</p>
+<pre><code class="language-text">1002 → 70
+8000 → 120
+</code></pre>
+<p>磁盘日志记录发生过的更新，内存表方便快速查询。（典型实现中，前者叫 WAL，也就是预写日志；后者叫 MemTable。）</p>
+<h2>三、内存写满怎么办？</h2>
+<p>假设内存只能容纳三个用户的数据。</p>
+<p>接着收到 <code>1001 → 80</code>，内存表写满了。把表里的数据按编号顺序写成一个磁盘文件：</p>
+<pre><code class="language-text">文件 A：
+1001 → 80
+1002 → 70
+8000 → 120
+</code></pre>
+<p>这种按 key 排序的文件，通常叫 SST 文件。</p>
+<p>接下来，换一张空内存表接收更新。<strong>后续更新不回头修改 A。</strong></p>
+<p>又收到三条数据：</p>
+<pre><code class="language-text">1002 → 75
+3000 → 50
+8000 → 130
+</code></pre>
+<p>内存再次写满，生成较新的文件 B：</p>
+<pre><code class="language-text">文件 B：
+1002 → 75
+3000 → 50
+8000 → 130
+</code></pre>
+<p>现在 1002 有两个版本：A 里是 70，B 里是 75。</p>
+<p>写入容易了，查询时却得判断哪一份才是最新值。</p>
+<h2>四、查询时，从较新的数据找起</h2>
+<p>在这个简化例子里，查询 1002：</p>
+<pre><code class="language-text">先查当前内存：没有
+再查较新的 B：找到 75
+返回 75
+</code></pre>
+<p>查询 1001：</p>
+<pre><code class="language-text">先查当前内存：没有
+再查 B：没有
+再查 A：找到 80
+</code></pre>
+<p>真实系统会利用文件的编号范围、索引等信息跳过不相关的数据，不会每次逐个扫描所有文件。但文件越来越多，查找和处理版本的负担仍会增加。</p>
+<p>写入时不用找旧记录，读取时就得在多个文件里找最新值。</p>
+<p>所以不能只生成新文件，还得有人整理它们。</p>
+<h2>五、后台把有序文件合起来</h2>
+<p>把 A、B 合并，重复用户保留较新的积分：</p>
+<pre><code class="language-text">输入 A：
+1001 → 80
+1002 → 70
+8000 → 120
+
+输入 B：
+1002 → 75
+3000 → 50
+8000 → 130
+
+合并生成 C：
+1001 → 80
+1002 → 75
+3000 → 50
+8000 → 130
+</code></pre>
+<p>这里不需要保留历史快照。新文件生效、旧文件不再被读取使用后，A、B 就可以回收。</p>
+<p>这个后台合并整理过程，叫 <strong>Compaction</strong>。</p>
+<p>那为啥单个文件最好整理排序？看第一步：</p>
+<pre><code class="language-text">A 当前编号：1001
+B 当前编号：1002
+</code></pre>
+<p>先输出较小的 1001，再把 A 的读取位置向后移动：</p>
+<pre><code class="language-text">A 当前记录：1002 → 70
+B 当前记录：1002 → 75
+</code></pre>
+<p>编号相同，输出较新的 75，两边一起向后移动。</p>
+<p>继续这样比较，输入只需向前读，输出不断向后写，像归并排序一样完成批量整理。</p>
+<p><strong>文件有了顺序，就能通过批量读写来整理原本零散的更新。</strong></p>
+<p>如果要删除用户，也不急着修改旧文件，而是先写一条删除标记，挡住旧积分。等合并时能够安全清理，再回收相关记录。</p>
+<h2>六、这就是 LSM Tree 的核心</h2>
+<p>我们一步步得到了这样的结构：</p>
+<pre><code class="language-text">更新到来
+    ↓
+追加日志，更新内存有序表
+    ↓ 内存表写满
+生成磁盘有序文件
+    ↓ 文件逐渐积累
+后台合并，清理失效版本
+</code></pre>
+<p>这就是典型 LSM Tree 的工作方式。全称是 Log-Structured Merge-Tree，通常译为“日志结构合并树”。</p>
+<p>实际系统还会把磁盘文件分层组织，限制每层的规模，逐步向下合并。不同合并策略会在读取、写入和空间成本之间做不同取舍。</p>
+<p>它没有消除维护数据的成本。回头看这个例子：</p>
+<ul>
+<li>查 1001 可能检查多个文件，这叫读放大。</li>
+<li>1002 的旧积分暂时留在 A 中，增加空间占用。</li>
+<li>1001 没有更新，合并时却又写进 C，这叫写放大。</li>
+</ul>
+<p>合并还会与前台读写争抢资源。如果新文件产生得比后台整理更快，文件就会积压，系统甚至需要降低写入速度。</p>
+<p><strong>写入快了，数据会暂时分散在多个文件里，后台得持续整理。</strong></p>
+<h2>七、同一个思路，为什么会出现在 Git 服务里？</h2>
+<p>OpenAI 为了应对 Agent 的大量提交，扩展的 Git 服务后端 Pando，也遇到了“小文件越攒越多”的问题。</p>
+<p>它复用 Push 上传的 packfile，也就是装着 Git 对象的数据包，来服务后续 Fetch。但主干不断更新，落后一天的客户端可能要下载数万个小包。</p>
+<p>Pando 于是借鉴 LSM Tree：先接收小包，后台再按层组织、重打包成覆盖更多版本的大包，减少下载文件数，也改善压缩。</p>
+<p>假设主干从 v0 连续更新到 v16，每次 Push 收到一个小包。用每四个包合成一个更大的包来示意：</p>
+<pre><code class="language-text">L0：P1～P16，共 16 个小包
+    ↓ 每 4 个合成一个包
+L1：Q1～Q4，共 4 个中包
+    ↓ 再合成一个包
+L2：R1，覆盖 v0 → v16
+</code></pre>
+<p>生成大包以后，小包仍然保留。为什么？</p>
+<pre><code class="language-text">客户端 A：已有 v0，想更新到 v16
+    → 可以下载大包 R1
+
+客户端 B：已有 v15，想更新到 v16
+    → 只需小包 P16
+</code></pre>
+<p>如果只留下 R1，B 为了一点新增内容，也得下载覆盖整段历史的大包。</p>
+<p>**大包照顾落后很多的客户端，小包照顾只差少量更新的客户端。**Pando 整理的是历史的包装方式，不会像积分例子那样，因有了新值就淘汰旧提交。</p>
+<p>从数据库到 Git 服务，共同的问题都是：每次新数据到来时，要不要立刻把所有东西整理好？</p>
+<p>LSM Tree 给出的办法是先记录，再批量维护。Pando 借用了这部分思路，但它如何让大量 Agent 并行 Push、又让许多客户端复用已有包，还需要另外的设计。</p>
+<p>下一篇，我们再看 Pando 如何把这些设计组合起来。</p>
+<h2>参考资料</h2>
+<ol>
+<li>Google，LevelDB Implementation：<a href="https://github.com/google/leveldb/blob/main/doc/impl.md">https://github.com/google/leveldb/blob/main/doc/impl.md</a></li>
+<li>Meta，RocksDB Overview：<a href="https://github.com/facebook/rocksdb/wiki/RocksDB-Overview">https://github.com/facebook/rocksdb/wiki/RocksDB-Overview</a></li>
+<li>Meta，Compaction：<a href="https://github.com/facebook/rocksdb/wiki/Compaction">https://github.com/facebook/rocksdb/wiki/Compaction</a></li>
+<li>OpenAI，Scaling Git at OpenAI：<a href="https://openai.com/index/scaling-git-at-openai/">https://openai.com/index/scaling-git-at-openai/</a></li>
+</ol>
+<p><em>LZ AI Note｜记录现象，追问本质。复杂的事情，简单说。</em></p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-CbCUy5N4.js"></script>
+</body>
+</html>

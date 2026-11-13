@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Coding Agent 的反馈闭环：编码与验证解耦 | LZ AI NOTE</title>
+  <meta name="description" content="从整体任务的截图反馈闭环起步，逐步按验证检查点异步发布任务、消费反馈，以验证清单驱动持续迭代与收敛。">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="Coding Agent 的反馈闭环：编码与验证解耦">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-11-09">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN%20%E7%9C%9F%E6%9C%BA%E9%AA%8C%E8%AF%81%E9%97%AD%E7%8E%AF%EF%BC%9A%E8%BF%9C%E7%AB%AF%E7%BC%96%E7%A0%81%E4%B8%8E%E6%9C%AC%E5%9C%B0%E6%89%A7%E8%A1%8C%E8%A7%A3%E8%80%A6">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN%20%E7%9C%9F%E6%9C%BA%E9%AA%8C%E8%AF%81%E9%97%AD%E7%8E%AF%EF%BC%9A%E8%BF%9C%E7%AB%AF%E7%BC%96%E7%A0%81%E4%B8%8E%E6%9C%AC%E5%9C%B0%E6%89%A7%E8%A1%8C%E8%A7%A3%E8%80%A6">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="Coding Agent 的反馈闭环：编码与验证解耦 | LZ AI NOTE">
+  <meta property="og:description" content="从整体任务的截图反馈闭环起步，逐步按验证检查点异步发布任务、消费反馈，以验证清单驱动持续迭代与收敛。">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN%20%E7%9C%9F%E6%9C%BA%E9%AA%8C%E8%AF%81%E9%97%AD%E7%8E%AF%EF%BC%9A%E8%BF%9C%E7%AB%AF%E7%BC%96%E7%A0%81%E4%B8%8E%E6%9C%AC%E5%9C%B0%E6%89%A7%E8%A1%8C%E8%A7%A3%E8%80%A6">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Coding Agent 的反馈闭环：编码与验证解耦","description":"从整体任务的截图反馈闭环起步，逐步按验证检查点异步发布任务、消费反馈，以验证清单驱动持续迭代与收敛。","url":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN%20%E7%9C%9F%E6%9C%BA%E9%AA%8C%E8%AF%81%E9%97%AD%E7%8E%AF%EF%BC%9A%E8%BF%9C%E7%AB%AF%E7%BC%96%E7%A0%81%E4%B8%8E%E6%9C%AC%E5%9C%B0%E6%89%A7%E8%A1%8C%E8%A7%A3%E8%80%A6","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN%20%E7%9C%9F%E6%9C%BA%E9%AA%8C%E8%AF%81%E9%97%AD%E7%8E%AF%EF%BC%9A%E8%BF%9C%E7%AB%AF%E7%BC%96%E7%A0%81%E4%B8%8E%E6%9C%AC%E5%9C%B0%E6%89%A7%E8%A1%8C%E8%A7%A3%E8%80%A6","dateModified":"2026-11-09","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：Coding Agent 的反馈闭环：编码与验证解耦，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/material-first/RN%20%E7%9C%9F%E6%9C%BA%E9%AA%8C%E8%AF%81%E9%97%AD%E7%8E%AF%EF%BC%9A%E8%BF%9C%E7%AB%AF%E7%BC%96%E7%A0%81%E4%B8%8E%E6%9C%AC%E5%9C%B0%E6%89%A7%E8%A1%8C%E8%A7%A3%E8%80%A6","about":["_hidden","coding-agent 方案","material-first"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>Coding Agent 的反馈闭环：编码与验证解耦</h1><h1>Coding Agent 的反馈闭环：编码与验证解耦</h1>
+<h2>背景与难点</h2>
+<p>远端可以集中提供编码算力与任务存储，但 RN 验证依赖 App 安装、签名、设备权限、测试账号和运行网络。把这些环境一并集中部署，会让自动反馈闭环被设备与环境管理拖住。</p>
+<p>核心问题不是如何远程点击屏幕，而是：<strong>代码在远端生产，运行环境在本地，如何持续交换验证任务与证据，驱动自动修改？</strong></p>
+<h2>解决思路</h2>
+<p><strong>解耦代码生产与运行验证：远端 Coding Agent 负责编码与验收，本地执行器负责运行与取证，通过消息队列异步协作。</strong> 复用本地已有环境，不要求远端复制整套设备环境；部署与运行成本仍存在，但不再与远端编码绑定。</p>
+<p>不仅解耦执行位置，也解耦推进时机：<strong>验证检查点就绪即可发布，独立编码继续推进，反馈在合适节点消费。</strong> 第一版先以整体任务跑通闭环，再逐步引入检查点，不要求一开始就解决任务拆分粒度。</p>
+<h3>任务生成、消费与反馈</h3>
+<pre><code class="language-mermaid">flowchart LR
+    R[&quot;远端 Coding Agent&lt;br/&gt;编码、维护清单、审阅&quot;] --&gt;|验证就绪即发布| T[&quot;验证任务队列&quot;]
+    T --&gt;|消费| L[&quot;本地执行器&lt;br/&gt;运行页面、采集证据&quot;]
+    L --&gt;|生产| E[&quot;验证结果队列&quot;]
+    E --&gt;|消费反馈，修正或补验| R
+</code></pre>
+<h2>协同状态：验证清单</h2>
+<p>远端 Coding Agent 维护需要验证的页面、状态和验收条件，据此持续生成验证任务，并根据回传证据更新进度。代码版本、验证任务与审阅结果的关联保存在远端，本地只消费具体请求。当前交付版本的必需验证项全部通过，才结束验收。</p>
+<h3>发布粒度：验证检查点</h3>
+<p><strong>编码任务不等于验证任务。</strong> 组件、素材、布局等多个编码任务，可以共同组成一个验证检查点；不按每次提交或每个小任务完成机械触发。</p>
+<p>后续优先以“页面 + 指定状态”为验证单元，例如默认态、空态、弹窗。发布条件是：<strong>能运行、预期可判断、版本与状态可复现</strong>。可验证不等于已经通过，不必等页面完美才请求反馈。</p>
+<h2>协作协议：Agent RPC</h2>
+<p>把验证理解为“由 Agent 执行的异步远程函数调用”：Agent RPC 描述调用契约，消息队列承载请求与结果。执行器处理操作过程，返回可审阅的产物；具体启动和恢复经验是执行端的辅助能力，不进入主协议。</p>
+<p>保留最小 RPC 雏形，具体字段可在落地时调整。</p>
+<p><strong>请求：远端生产，本地消费</strong></p>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;capture-001&quot;,
+  &quot;method&quot;: &quot;rn.capturePage&quot;,
+  &quot;environment&quot;: {
+    &quot;commitSha&quot;: &quot;&lt;目标代码版本&gt;&quot;,
+    &quot;runtimeProfile&quot;: &quot;&lt;本地运行配置引用&gt;&quot;
+  },
+  &quot;params&quot;: {
+    &quot;page&quot;: &quot;&lt;目标页面&gt;&quot;,
+    &quot;state&quot;: &quot;&lt;目标状态&gt;&quot;
+  }
+}
+</code></pre>
+<p><strong>响应：本地生产，远端消费</strong></p>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;capture-001&quot;,
+  &quot;result&quot;: {
+    &quot;screenshot&quot;: &quot;&lt;截图制品引用&gt;&quot;
+  }
+}
+</code></pre>
+<p><code>id</code> 关联请求与响应，<code>method</code> 表达能力，<code>environment</code> 指定环境与版本，<code>params/result</code> 承载实际输入输出。失败时用 <code>error</code> 替代 <code>result</code>，说明无法完成的原因。</p>
+<p>请求与结果分别扩展，进度与验收结论分离。远端保存任务及会话关联，消费结果后继续决策；</p>
+<h2>推进方式</h2>
+<ol>
+<li><strong>整体任务闭环</strong>：先选一个页面需求，整体作为一个编码任务；完成后发布截图验证，消费反馈并修正复验。不拆子任务，不引入自动拆分算法。</li>
+<li><strong>检查点流水推进</strong>：从验证清单中识别可独立验证的页面状态，就绪即发布，同时推进其他独立编码。</li>
+<li><strong>按需扩展</strong>：再探索交互证据、多设备并行与任务聚合，沿用协议思路扩展执行及调度能力。</li>
+</ol>
+<p>第一阶段验证跨端闭环，第二阶段再验证编码与验证的重叠执行；异步机制从一开始保留，但不把细粒度拆分作为首版前提。</p>
+<h2>横向迁移</h2>
+<p>迁移到 Web 等场景，只需替换环境适配与执行方法；“发布验证任务 → 消费执行 → 回传证据 → 续跑迭代”的机制不变。</p>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-CbCUy5N4.js"></script>
+</body>
+</html>

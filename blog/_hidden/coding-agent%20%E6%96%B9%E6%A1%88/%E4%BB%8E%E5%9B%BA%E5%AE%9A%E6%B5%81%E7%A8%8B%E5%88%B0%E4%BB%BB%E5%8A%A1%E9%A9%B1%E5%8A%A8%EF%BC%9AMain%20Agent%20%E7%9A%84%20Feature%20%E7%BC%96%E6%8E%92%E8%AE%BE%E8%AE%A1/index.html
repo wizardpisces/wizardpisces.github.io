@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>从固定流程到任务驱动：Main Agent 的 Feature 编排设计 | LZ AI NOTE</title>
+  <meta name="description" content="以最小的 Feature、任务与依赖结构实现 Main 编排，支持人工修正、已有成果续跑，并从实际反馈中积累协作经验。">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="从固定流程到任务驱动：Main Agent 的 Feature 编排设计">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-11-12">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/%E4%BB%8E%E5%9B%BA%E5%AE%9A%E6%B5%81%E7%A8%8B%E5%88%B0%E4%BB%BB%E5%8A%A1%E9%A9%B1%E5%8A%A8%EF%BC%9AMain%20Agent%20%E7%9A%84%20Feature%20%E7%BC%96%E6%8E%92%E8%AE%BE%E8%AE%A1">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/%E4%BB%8E%E5%9B%BA%E5%AE%9A%E6%B5%81%E7%A8%8B%E5%88%B0%E4%BB%BB%E5%8A%A1%E9%A9%B1%E5%8A%A8%EF%BC%9AMain%20Agent%20%E7%9A%84%20Feature%20%E7%BC%96%E6%8E%92%E8%AE%BE%E8%AE%A1">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="从固定流程到任务驱动：Main Agent 的 Feature 编排设计 | LZ AI NOTE">
+  <meta property="og:description" content="以最小的 Feature、任务与依赖结构实现 Main 编排，支持人工修正、已有成果续跑，并从实际反馈中积累协作经验。">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/%E4%BB%8E%E5%9B%BA%E5%AE%9A%E6%B5%81%E7%A8%8B%E5%88%B0%E4%BB%BB%E5%8A%A1%E9%A9%B1%E5%8A%A8%EF%BC%9AMain%20Agent%20%E7%9A%84%20Feature%20%E7%BC%96%E6%8E%92%E8%AE%BE%E8%AE%A1">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"从固定流程到任务驱动：Main Agent 的 Feature 编排设计","description":"以最小的 Feature、任务与依赖结构实现 Main 编排，支持人工修正、已有成果续跑，并从实际反馈中积累协作经验。","url":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/%E4%BB%8E%E5%9B%BA%E5%AE%9A%E6%B5%81%E7%A8%8B%E5%88%B0%E4%BB%BB%E5%8A%A1%E9%A9%B1%E5%8A%A8%EF%BC%9AMain%20Agent%20%E7%9A%84%20Feature%20%E7%BC%96%E6%8E%92%E8%AE%BE%E8%AE%A1","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/%E4%BB%8E%E5%9B%BA%E5%AE%9A%E6%B5%81%E7%A8%8B%E5%88%B0%E4%BB%BB%E5%8A%A1%E9%A9%B1%E5%8A%A8%EF%BC%9AMain%20Agent%20%E7%9A%84%20Feature%20%E7%BC%96%E6%8E%92%E8%AE%BE%E8%AE%A1","dateModified":"2026-11-12","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：从固定流程到任务驱动：Main Agent 的 Feature 编排设计，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/coding-agent%20%E6%96%B9%E6%A1%88/%E4%BB%8E%E5%9B%BA%E5%AE%9A%E6%B5%81%E7%A8%8B%E5%88%B0%E4%BB%BB%E5%8A%A1%E9%A9%B1%E5%8A%A8%EF%BC%9AMain%20Agent%20%E7%9A%84%20Feature%20%E7%BC%96%E6%8E%92%E8%AE%BE%E8%AE%A1","about":["_hidden","coding-agent 方案"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>从固定流程到任务驱动：Main Agent 的 Feature 编排设计</h1><h1>从固定流程到任务驱动：Main Agent 的 Feature 编排设计</h1>
+<h2>一、背景</h2>
+<p>当前 FE 开发将大需求投入固定阶段链：技术设计、接口准备、任务拆分、页面实现、审核与交付。无实际依赖的工作被强制串行，人工到最后才看到结果；Website、RN 共用的 BFF 变化后，下游又容易从入口重跑。</p>
+<p>Main 基于<a href="./Feature%20%E9%A9%B1%E5%8A%A8%E7%9A%84%20Agent%20%E5%BC%80%E5%8F%91%EF%BC%9A%E5%9E%82%E7%9B%B4%E4%BA%A4%E4%BB%98%E4%B8%8E%E5%B1%80%E9%83%A8%E5%8F%8D%E9%A6%88%E9%97%AD%E7%8E%AF.md">Feature 垂直交付</a>拆分和指派任务。首期从 FE 的简单协作开始，例如 BFF 提供协议、Website 与 RN 消费协议；具体通信内容保留在工作区中。</p>
+<h2>二、核心架构</h2>
+<pre><code class="language-text">任务来源 + 工程 + 可用 Agent + 已有经验
+                  ↓
+           Main → Feature 与子任务
+                  ↕ 人工修正与确认
+                执行器
+                  ↕ 调用与续跑
+           Website / RN / BFF
+                  ↓
+           任务结果与验证依据
+                  └→ Main：继续 / 调整 / 请人判断 / 交付
+
+共享任务工作区：原始来源、代码、编排、执行记录、反馈与证据
+</code></pre>
+<p>Main 决定做什么、交给谁和依赖关系；子 Agent 自主调查、实现和验证。工作区提供共享上下文，编排结构只描述任务关系。</p>
+<h2>三、核心结构</h2>
+<h3>Main 输入</h3>
+<pre><code class="language-text">MainInput
+├─ goal：本次目标与范围
+├─ sources：PRD、Figma、已有协议等来源入口
+├─ agents[]：身份、能力说明、工程入口、调用入口
+└─ knowledge：已有经验入口〔可缺省〕
+</code></pre>
+<p>Main 查阅工程后规划。子 Agent 从工作区读取当前 Feature 和自己的任务，按需回查 PRD、Figma；全局要求仍有约束作用，写入权限由运行宿主控制。</p>
+<h3>Main 输出</h3>
+<pre><code class="language-text">Plan
+└─ features[]
+    ├─ id、goal：本片目标与边界
+    ├─ acceptance：验收条件
+    └─ tasks[]
+        ├─ id：本次需求内唯一标识
+        ├─ agent：执行者
+        ├─ goal：本次需要完成的工作
+        ├─ dependsOn[]：前置任务 ID〔可为空〕
+        └─ review：结果交给后续任务前，是否需要人工确认
+</code></pre>
+<p>Feature 列表给出建议交付顺序，任务的 <code>dependsOn</code> 表达真实依赖。共享工作只定义一次，多个任务可以引用它；已有结果可直接读取，不为已经满足的输入重复创建任务。</p>
+<p>同一个 Agent 可以在不同节点继续工作：</p>
+<pre><code class="language-text">T1：Agent A，完成可独立推进的部分 ─┐
+                                 ├→ T3：Agent A，结合两项结果继续
+T2：Agent B，提供所需结果 ─────────┘
+
+T1.dependsOn = []
+T2.dependsOn = []
+T3.dependsOn = [T1, T2]
+</code></pre>
+<p>图由任务引用生成。T1、T2 在资源隔离时可并行，T3 等前置结果就绪后继续；先串行执行也不需要改变图。</p>
+<p>切片仍以较早形成可验收行为为准，原始要求均需有归属；详细条件见<a href="./Feature%20%E9%A9%B1%E5%8A%A8%E7%9A%84%20Agent%20%E5%BC%80%E5%8F%91%EF%BC%9A%E5%9E%82%E7%9B%B4%E4%BA%A4%E4%BB%98%E4%B8%8E%E5%B1%80%E9%83%A8%E5%8F%8D%E9%A6%88%E9%97%AD%E7%8E%AF.md">Feature 划分原则</a>。</p>
+<h3>子 Agent 返回</h3>
+<pre><code class="language-text">Result
+├─ taskId、status：完成 / 受阻 / 失败
+└─ record：实际成果、验证证据与剩余问题的记录入口
+
+run(workspace, taskId) → Result
+resume(workspace, taskId, 反馈或输入变化) → Result
+</code></pre>
+<p>成果可以是代码、协议或其他材料，消费者从记录入口按需读取。宿主保存任务与会话关联；被确认和采用的内容保留依据，后续可以核对变化。</p>
+<h2>四、执行与人工介入</h2>
+<pre><code class="language-text">plan = Main.plan(MainInput)
+人工确认或修正：Feature、执行者、顺序与依赖
+检查：要求有归属，Agent 入口存在，任务引用有效且无循环依赖
+
+循环：
+  从前置结果已就绪的待执行任务中选择 → run 或 resume
+  保存 Result；review 为真 → 等待人工确认再供下游使用
+  失败、受阻或人工反馈 → Main 决定修订、调整安排或等待补充
+  本片满足 acceptance → 人工验收 → 推进下一片
+  全部完成 → 必要的组合验收 → 交付
+</code></pre>
+<p>独立且资源隔离的任务可并行，同一工作树保持串行；初版可以并发 1 起步。未改变条件的受阻任务等待补充，不反复启动。人工评审时固定被审内容。</p>
+<h2>五、局部续跑与经验复利</h2>
+<pre><code class="language-text">人工反馈 / 输入或上游结果变化
+    → Main 结合依赖与执行记录定位相关工作
+    → 对应 Agent 检查实际影响
+    → resume(原任务, 差异与反馈)
+    → 受影响验收重开并复验，无关成果保留
+</code></pre>
+<p>依赖辅助定位，实际影响由 Agent 结合工程判断。会话不可恢复时，依据现有代码、记录和待办继续；修正切片或指派时更新 Plan。</p>
+<pre><code class="language-text">人工修正记录：原安排 → 新安排 → 原因 → 执行后的实际效果
+                                ↓
+候选经验 → 后续 Main 参考 → 新任务验证 → 保留 / 修订 / 撤回
+</code></pre>
+<p>复利来自切片和协作安排逐步改善。先保留修正与结果，再按<a href="./material-first/Agent%20%E6%94%B9%E8%BF%9B%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4%EF%BC%9A%E4%BB%BB%E5%8A%A1%E4%BF%AE%E8%AE%A2%E4%B8%8E%E7%9F%A5%E8%AF%86%E6%BC%94%E8%BF%9B%E6%9C%BA%E5%88%B6.md">任务修订与知识演进机制</a>提炼适用条件明确的经验。</p>
+<h2>六、落地顺序</h2>
+<p>沿用<a href="./%E4%BB%8E%E4%B8%B2%E8%A1%8C%E4%BA%A4%E6%8E%A5%E5%88%B0%E6%8C%81%E7%BB%AD%E5%8D%8F%E4%BD%9C%EF%BC%9ACoding%20Agent%20%E7%9A%84%E4%BB%BB%E5%8A%A1%E5%B7%A5%E4%BD%9C%E5%8C%BA%E8%AE%BE%E8%AE%A1.md">Agentic 工作区</a>，最小持久化入口：</p>
+<pre><code class="language-text">workspace/
+├─ task.md、sources/      目标与原始来源
+├─ agents/               子 Agent 能力说明与调用入口
+├─ plan.json             Feature、任务与依赖
+├─ repos/                实际工程
+└─ runs/                 执行结果、输入依据、人工修正与历史安排
+</code></pre>
+<ol>
+<li>适配现有 Agent 的局部执行和续跑入口，实现 MainInput、Plan、Result，先跑通一片与人工反馈。</li>
+<li>选择一个简单的上游提供结果、下游消费结果的任务，改变一次输入，检查局部续跑和成果保留；BFF 与端的协议协作可作为首个实例。</li>
+<li>根据实际缺口演化结构，观察首个可验收成果耗时、返工范围和总成本。</li>
+</ol>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-CbCUy5N4.js"></script>
+</body>
+</html>

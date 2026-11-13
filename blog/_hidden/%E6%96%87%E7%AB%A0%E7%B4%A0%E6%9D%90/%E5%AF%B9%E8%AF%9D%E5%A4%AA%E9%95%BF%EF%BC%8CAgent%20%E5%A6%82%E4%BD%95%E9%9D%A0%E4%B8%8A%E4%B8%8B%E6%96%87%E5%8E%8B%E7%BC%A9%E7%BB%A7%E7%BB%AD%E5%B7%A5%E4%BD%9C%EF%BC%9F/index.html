@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>对话太长，Agent 如何靠上下文压缩继续工作？ | LZ AI NOTE</title>
+  <meta name="description" content="&lt;! 写作锚点 读者收获：能区分交接摘要、原始日志与索引的作用，理解记录仍在时 Agent 为什么会遗忘，以及何时需要回查原文。 核心判断：上下文压缩用较少的输入维持任务连续性，原始日志与按需回查帮助弥补摘要遗漏，但保存历史不等于模型已经读到历史。 如何推进：沿一次 401 排查，从上下文放不下引出交接摘要，再由缺失的环境信息引出日志与索引，最后说明适用边…">
+  <meta name="author" content="LZ">
+  <meta name="DC.title" content="对话太长，Agent 如何靠上下文压缩继续工作？">
+  <meta name="DC.creator" content="LZ">
+  <meta name="DC.date" content="2026-11-11">
+  <meta name="DC.identifier" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%AF%B9%E8%AF%9D%E5%A4%AA%E9%95%BF%EF%BC%8CAgent%20%E5%A6%82%E4%BD%95%E9%9D%A0%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8E%8B%E7%BC%A9%E7%BB%A7%E7%BB%AD%E5%B7%A5%E4%BD%9C%EF%BC%9F">
+  <meta name="DC.publisher" content="LZ AI NOTE">
+  <meta name="DC.language" content="zh-CN">
+  <link rel="canonical" href="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%AF%B9%E8%AF%9D%E5%A4%AA%E9%95%BF%EF%BC%8CAgent%20%E5%A6%82%E4%BD%95%E9%9D%A0%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8E%8B%E7%BC%A9%E7%BB%A7%E7%BB%AD%E5%B7%A5%E4%BD%9C%EF%BC%9F">
+  <link rel="alternate" type="application/ld+json" href="https://wizardpisces.github.io/ai-index.json" title="LZ AI NOTE 文章索引">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="LZ AI NOTE">
+  <meta property="og:title" content="对话太长，Agent 如何靠上下文压缩继续工作？ | LZ AI NOTE">
+  <meta property="og:description" content="&lt;! 写作锚点 读者收获：能区分交接摘要、原始日志与索引的作用，理解记录仍在时 Agent 为什么会遗忘，以及何时需要回查原文。 核心判断：上下文压缩用较少的输入维持任务连续性，原始日志与按需回查帮助弥补摘要遗漏，但保存历史不等于模型已经读到历史。 如何推进：沿一次 401 排查，从上下文放不下引出交接摘要，再由缺失的环境信息引出日志与索引，最后说明适用边…">
+  <meta property="og:url" content="https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%AF%B9%E8%AF%9D%E5%A4%AA%E9%95%BF%EF%BC%8CAgent%20%E5%A6%82%E4%BD%95%E9%9D%A0%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8E%8B%E7%BC%A9%E7%BB%A7%E7%BB%AD%E5%B7%A5%E4%BD%9C%EF%BC%9F">
+  
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"对话太长，Agent 如何靠上下文压缩继续工作？","description":"\u003c! 写作锚点 读者收获：能区分交接摘要、原始日志与索引的作用，理解记录仍在时 Agent 为什么会遗忘，以及何时需要回查原文。 核心判断：上下文压缩用较少的输入维持任务连续性，原始日志与按需回查帮助弥补摘要遗漏，但保存历史不等于模型已经读到历史。 如何推进：沿一次 401 排查，从上下文放不下引出交接摘要，再由缺失的环境信息引出日志与索引，最后说明适用边…","url":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%AF%B9%E8%AF%9D%E5%A4%AA%E9%95%BF%EF%BC%8CAgent%20%E5%A6%82%E4%BD%95%E9%9D%A0%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8E%8B%E7%BC%A9%E7%BB%A7%E7%BB%AD%E5%B7%A5%E4%BD%9C%EF%BC%9F","mainEntityOfPage":"https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%AF%B9%E8%AF%9D%E5%A4%AA%E9%95%BF%EF%BC%8CAgent%20%E5%A6%82%E4%BD%95%E9%9D%A0%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8E%8B%E7%BC%A9%E7%BB%A7%E7%BB%AD%E5%B7%A5%E4%BD%9C%EF%BC%9F","dateModified":"2026-11-11","inLanguage":"zh-CN","isAccessibleForFree":true,"author":{"@type":"Person","name":"LZ","url":"https://wizardpisces.github.io/blog/Introduction"},"publisher":{"@type":"Organization","name":"LZ AI NOTE","url":"https://wizardpisces.github.io"},"copyrightHolder":{"@type":"Organization","name":"LZ AI NOTE"},"creditText":"引用：对话太长，Agent 如何靠上下文压缩继续工作？，LZ AI NOTE，https://wizardpisces.github.io/blog/_hidden/%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90/%E5%AF%B9%E8%AF%9D%E5%A4%AA%E9%95%BF%EF%BC%8CAgent%20%E5%A6%82%E4%BD%95%E9%9D%A0%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8E%8B%E7%BC%A9%E7%BB%A7%E7%BB%AD%E5%B7%A5%E4%BD%9C%EF%BC%9F","about":["_hidden","文章素材"]}</script>
+</head>
+<body>
+  <div id="app"><main><article><p>LZ AI NOTE · AI 公众号与知识站</p><h1>对话太长，Agent 如何靠上下文压缩继续工作？</h1><!-- 写作锚点
+读者收获：能区分交接摘要、原始日志与索引的作用，理解记录仍在时 Agent 为什么会遗忘，以及何时需要回查原文。
+核心判断：上下文压缩用较少的输入维持任务连续性，原始日志与按需回查帮助弥补摘要遗漏，但保存历史不等于模型已经读到历史。
+如何推进：沿一次 401 排查，从上下文放不下引出交接摘要，再由缺失的环境信息引出日志与索引，最后说明适用边界和补救办法。
+-->
+<h1>对话太长，Agent 如何靠上下文压缩继续工作？</h1>
+<p>上下文压缩要解决的是：<strong>历史太长时，怎样让任务继续。</strong></p>
+<p>先看一个例子。</p>
+<h2>一个持续返回 401 的排查任务</h2>
+<p>假设用户让 Agent 排查一个持续返回 401 的接口。双方已经讨论、执行了很久：</p>
+<pre><code class="language-text">用户：排查 401，但不要修改鉴权逻辑。
+
+Agent：怀疑令牌过期。
+       查刷新代码、改测试、运行测试……
+       仍然 401。
+
+用户：先检查环境变量。
+
+Agent：发现 AUTH_SECRET 为空。
+       临时补齐后，请求成功。
+</code></pre>
+<p>这些过程产生了大量代码、报错和工具输出。现在，用户接着说：</p>
+<blockquote>
+<p>找到配置为什么没加载，修好后补一个测试。</p>
+</blockquote>
+<p>问题来了：<strong>如果每次调用模型都要带上之前全部内容，迟早会放不进模型的上下文窗口。</strong></p>
+<p>聊天界面能展示多少历史，和模型这一次能看到多少内容，是两回事。模型本轮依据什么工作，取决于宿主程序给它提供了什么。</p>
+<p>但直接删掉旧对话也不行——Agent 可能忘记用户说过“不要修改鉴权逻辑”，或者再次排查已经尝试过、却没解决问题的令牌刷新逻辑。</p>
+<p>压缩就是为了解决这个矛盾。</p>
+<h2>核心动作：把“完整过程”换成“接下来需要知道的状态”</h2>
+<p>系统让模型写一份交接记录：</p>
+<pre><code class="language-text">任务：修复持续出现的 401。
+
+约束：用户要求不要修改鉴权逻辑。
+
+已经观察到：
+- 排查令牌刷新，未解决问题。
+- AUTH_SECRET 为空。
+- 临时补齐后，本次请求成功。
+
+下一步：
+定位配置加载失败的原因，修复并补测试。
+</code></pre>
+<p>这份记录怎么来？</p>
+<p>在一种摘要式实现中，宿主程序会把当前历史和总结要求交给模型，让它整理出进展、约束、关键发现和剩余工作，再用摘要与保留的部分消息重建上下文。</p>
+<pre><code class="language-text">旧历史 + 总结要求
+        ↓
+模型生成交接摘要
+        ↓
+必要上下文 + 部分原消息 + 摘要
+        ↓
+继续执行任务
+</code></pre>
+<p>后续模型主要根据这份交接记录，以及保留的部分消息继续工作，不必再逐条阅读之前全部过程。</p>
+<p><strong>为什么这样做有用？</strong></p>
+<p>因为继续任务通常不需要重新经历所有过程，却需要知道：</p>
+<ul>
+<li>正在解决什么；</li>
+<li>已经观察到了什么；</li>
+<li>哪些尝试没有解决问题；</li>
+<li>有什么限制；</li>
+<li>下一步做什么。</li>
+</ul>
+<p>这不是为了把聊天保存得更小，而是为了<strong>用较小的上下文，维持任务连续性</strong>。</p>
+<h2>那为什么还要保存原始日志？</h2>
+<p>因为交接记录可能漏东西。</p>
+<p>假设 Agent 接下来需要确认：</p>
+<blockquote>
+<p>当时临时补齐的是哪个环境里的 <code>AUTH_SECRET</code>？开发环境，还是测试环境？</p>
+</blockquote>
+<p>摘要没写。</p>
+<p>这时，摘要本身无法给出答案。如果旧记录还在，并且有读取入口，就可以回查当时的操作：</p>
+<pre><code class="language-text">摘要：告诉 Agent 目前进行到哪里
+原始日志：供 Agent 核对当时究竟发生了什么
+索引：帮助系统定位那段记录
+</code></pre>
+<p>索引不一定是什么复杂的 AI 技术。记下这条记录属于哪个会话、哪一轮、哪次工具调用，以及它在日志中的位置，就能帮助程序定位原文。</p>
+<p>找到后，还要把相关内容重新放进模型的上下文，模型才真正读到了它。</p>
+<p>因此，“有损摘要”和“保留原文”可以同时存在。<strong>两者承担不同工作，不是两种互相矛盾的压缩方式。</strong></p>
+<p>但这里还有个限制：</p>
+<blockquote>
+<p><strong>日志存着，不代表模型会读到；索引存在，也不一定会被调用。</strong></p>
+</blockquote>
+<p>如果 Agent 根本没意识到“环境不同”很重要，就可能不去回查，直接沿着错误理解继续工作（之前提到的《Agent 为什么一条路走到黑》讲的就是这个现象）。</p>
+<h2>一些局限性</h2>
+<p>上面这套<strong>适合长时间、目标相对连续的任务。</strong></p>
+<p>例如排查故障、实现功能。过程很长，但可以提炼成“目标、约束、已有发现、剩余工作”。丢掉部分过程，通常仍能继续。</p>
+<p>但<strong>不适合只靠摘要处理依赖精确细节的工作。</strong></p>
+<p>例如用户要求：</p>
+<blockquote>
+<p>只改这篇文章中的 AI 化措辞，其他句子、顺序和节奏都不要动。</p>
+</blockquote>
+<p>如果压缩后的上下文里只剩“用户希望文章更自然”，根本看不见原文，那根本不可能完成任务</p>
+<p>这种应该重新读取原文和明确约束，再逐处修改；不能拿摘要代替原文。</p>
+<p>还有一个更隐蔽的问题：摘要可能把“怀疑”写成“确认”。之后的模型就会继承这个错误，并继续沿着它推理。</p>
+<h2>总结</h2>
+<p>这套机制不是让模型永远记得，而是让它在长任务中，即便是忘掉部分过程，仍有较大的机会把任务准确地推进下去。</p>
+<p>可以把压缩策略理解为长任务中的一次换班：</p>
+<blockquote>
+<p><strong>交接记录帮助下一班快速接手，原始工作记录供必要时核对。过程中不可能保留所有细节，能否准确索引原始日志并回查，决定后续任务的稳定性。</strong></p>
+</blockquote>
+</article></main></div>
+  <script type="module" crossorigin src="/assets/index-CbCUy5N4.js"></script>
+</body>
+</html>

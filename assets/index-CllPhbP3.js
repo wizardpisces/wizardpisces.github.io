@@ -1,4 +1,4 @@
-import{N as Zr,O as Jr}from"./index-hrWi8eyo.js";const nO=`# AI 明明看见四根手指，为什么还会回答“五根”？
+import{N as Zr,O as Jr}from"./index-CbCUy5N4.js";const nO=`# AI 明明看见四根手指，为什么还会回答“五根”？
 
 给模型看一张手的照片。大拇指藏在手掌后面，画面里只能看到四根。
 

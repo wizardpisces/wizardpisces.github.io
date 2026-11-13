@@ -111,32 +111,34 @@
   &quot;arguments&quot;: { &quot;format&quot;: &quot;csv&quot; }
 }
 </code></pre>
-<p>模型没有读取页面，也没有执行任何函数。它只是把用户的意图通过结构化表达调用；
+<p>模型没有读取页面，也没有执行任何函数。它只是把用户的意图转化成了结构化调用；
 宿主接住这份调用，在已经发现的工具里找到对应项，再请求浏览器执行。</p>
 <h3>4. 执行与回传：页面读状态、做业务、给结果</h3>
 <p>执行进入网页注册的回调。回调调用 <code>getSelectedOrders()</code>，拿到此刻选中的订单编号，再交给原有的导出逻辑。</p>
 <p>页面照常更新自己的界面，返回值由浏览器序列化后交回宿主，宿主再交给模型。</p>
 <p>各方职责因此是这样分的：</p>
-<pre><code class="language-text">模型：判断用户想做什么，提供格式参数
-宿主与浏览器：发现工具，路由调用，回传结果
-网页代码：读取应用状态，执行导出，更新页面
+<pre><code class="language-text">模型（根据工具描述做推理）：判断用户想做什么，提供格式参数
+宿主与浏览器（根据协议写逻辑代码）：发现工具，路由调用，回传结果
+网页代码（执行逻辑代码）：读取应用状态，执行导出，更新页面
 </code></pre>
 <p>这条分工里，模型不需要知道选中的是哪些订单，它只需要知道用户要 CSV。页面也不用把选中状态整理成某种 Agent 能读懂的格式，它直接用内部状态完成工作。</p>
 <h2>五、局限：边界清楚了，任务还不等于可靠</h2>
 <p>WebMCP 把一部分推断交还给页面，同时把新的责任压在工具设计上。</p>
 <p><strong>工具粒度决定了风险。</strong> 如果只注册一个 <code>handle_orders</code>，把查询、导出、删除和付款混在一起，模型依然要猜这次调用会做到哪一步。动作越具体，模型越容易选对，权限也越容易划清。</p>
-<p><strong>状态是活的。</strong> 回到刚才的例子：Agent 提交调用时选中的是 20 个订单，回调真正执行时可能变成 21 个，因为用户又勾了一个。工具读取的是“当前状态”还是“调用时刻的快照”，需要开发者明确。</p>
-<p><strong>参数是外部输入。</strong> 模型给出的 JSON 符合格式，不代表内容可信。<code>format</code> 字段要校验，越权操作要由服务端检查。用户要求导出，不等于同意删除。</p>
+<p><strong>状态是活的（一致性风险）。</strong> 回到刚才的例子：Agent 提交调用时选中的是 20 个订单，回调真正执行时可能变成 21 个，因为用户又勾了一个。工具读取的是“当前状态”还是“调用时刻的快照”，需要开发者明确。</p>
+<p><strong>参数是外部输入。</strong> 模型给出的 JSON 符合格式，不代表内容可信。<code>format</code> 字段要校验，越权操作要由服务端检查。</p>
 <p><strong>描述和返回值也可能被污染。</strong> 把它们装进结构化接口，不会自动消除提示注入。Agent 仍然要区分“工具返回的数据”和“有权改变任务的指令”。</p>
-<h2>六、未来：这条边界还会继续移动</h2>
+<h2>六、简单总结</h2>
 <p>已经能看到的一个方向，是让表单自己变成工具。</p>
-<p>WebMCP 的声明式接口允许用 <code>toolname</code>、<code>tooldescription</code> 等属性描述一个普通表单，字段则成为参数。Agent 调用时，浏览器会把表单带到前台并填入内容，表单仍然对用户可见，提交走的是原来的流程。对已经有清晰表单的网站，这能省掉一层适配代码。</p>
-<p>另一个还在讨论的问题，是页面没打开时怎样发现工具。社区已有通过 Service Worker 按需打开页面并暴露工具的探索，它属于扩展方向，不能与当前页面内执行的能力混为一谈。</p>
-<p>再往后，接口验证会变得更实际：同一组参数是否产生预期结果，用户手动改动状态后工具是否仍然正确，页面切换后旧工具会不会被误用。这些决定了工具能不能参与长任务。</p>
-<p>回到那 20 个订单。</p>
-<p>原来的做法里，Agent 要把页面上的勾选状态翻译成一份订单列表，再交给后端。接入 WebMCP 以后，页面留着这份状态，模型只提供它独有的信息。</p>
-<p>WebMCP 改的是分工：哪些信息该由模型推断，哪些事实该留在应用里。</p>
-<p>这条线画在哪里，决定了 Agent 是在替人操作界面，还是在和软件协作。</p>
+<p>WebMCP 的声明式接口允许用 <code>toolname</code>、<code>tooldescription</code> 等属性描述一个普通表单，字段则成为参数。Agent 调用时，浏览器会把表单带到前台并填入内容，提交走的依旧是原来的流程。对已经有清晰表单的网站，这能省掉一层适配代码。</p>
+<pre><code class="language-html">&lt;form toolname=&quot;search_orders&quot; tooldescription=&quot;按条件搜索订单&quot;&gt;
+  &lt;input name=&quot;keyword&quot; type=&quot;text&quot;&gt;
+  &lt;input name=&quot;status&quot; type=&quot;text&quot;&gt;
+  &lt;button type=&quot;submit&quot;&gt;搜索&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
+<p>另一个还在讨论的问题，是页面没打开时怎样发现工具。社区已有通过 Service Worker 按需打开页面并暴露工具的探索，它属于扩展方向。</p>
+<p>WebMCP 改的是分工：哪些信息该由模型推断，哪些事实该留在应用里。这条线画在哪里，决定了 Agent 是在替人操作界面，还是在和软件协作。</p>
 <h2>参考资料</h2>
 <ol>
 <li>Chrome Developers，《WebMCP》，2026-10-07 更新：<a href="https://developer.chrome.com/docs/ai/webmcp">https://developer.chrome.com/docs/ai/webmcp</a></li>
@@ -155,6 +157,6 @@
 <li><a href="../../%E5%85%AC%E4%BC%97%E5%8F%B7%E5%B7%B2%E5%8F%91%E5%B8%83/AI%20%E6%93%8D%E4%BD%9C%E7%94%B5%E8%84%91%E6%97%B6%EF%BC%8C%E5%AE%83%E7%9C%8B%E5%88%B0%E7%9A%84%E7%9C%9F%E6%98%AF%E6%88%91%E4%BB%AC%E7%9C%8B%E5%88%B0%E7%9A%84%E7%95%8C%E9%9D%A2%E5%90%97%EF%BC%9F.md">AI 操作电脑时，它看到的真是我们看到的界面吗？</a></li>
 </ul>
 </article></main></div>
-  <script type="module" crossorigin src="/assets/index-hrWi8eyo.js"></script>
+  <script type="module" crossorigin src="/assets/index-CbCUy5N4.js"></script>
 </body>
 </html>
